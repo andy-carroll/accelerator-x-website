@@ -955,13 +955,13 @@
                   Company Website <span class="text-accent">*</span>
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   id="website"
                   name="website"
                   required
-                  pattern="https?://.*"
+                  minlength="3"
                   class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-                  placeholder="https://company.com"
+                  placeholder="accelerator.com or https://accelerator.com"
                 />
               </div>
 
@@ -1053,10 +1053,18 @@
           <script>
             // Inline form success handler
             // Prevents page redirect, shows success message immediately
+            // Auto-adds https:// to website field if missing
             document.getElementById('lead-form').addEventListener('submit', function(e) {
               e.preventDefault();
               const form = this;
               const successDiv = document.getElementById('form-success');
+              
+              // Auto-prepend https:// to website if user entered just domain
+              const websiteField = document.getElementById('website');
+              let websiteValue = websiteField.value.trim();
+              if (websiteValue && !websiteValue.match(/^https?:\/\//)) {
+                websiteField.value = 'https://' + websiteValue;
+              }
               
               // Submit to Netlify via fetch API
               fetch('/', {
