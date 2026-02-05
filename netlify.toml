@@ -1,9 +1,17 @@
 # Netlify configuration for Accelerator X website
-# Basic static site deployment - no build required
+# Configures build, functions, form notifications, and security headers
 
 [build]
   publish = "."
   command = "echo 'Static site ready'"
+
+# Functions directory for serverless functions
+[functions]
+  directory = "netlify/functions"
+
+# Form notification: Trigger function on submission
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
 
 # Headers for security and performance
 [[headers]]
