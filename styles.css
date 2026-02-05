@@ -229,7 +229,70 @@ a {
 }
 
 /* ----------------------------------------
-   6. PRINT STYLES
+   6. MICRO-INTERACTIONS & FEEDBACK
+   (Purposeful motion that signals responsiveness)
+   ---------------------------------------- */
+
+/* 
+   BUTTON LIFT
+   Creates physical affordance — button rises when hovered
+   Uses transform (GPU-accelerated) not margin (causes reflow)
+   Shadow expands to reinforce "elevation" metaphor
+*/
+.btn {
+  transition: transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              opacity 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 
+   PRESS FEEDBACK
+   Confirms click with subtle scale-down
+   Feels mechanical — user knows action registered
+   Scale(0.98) subtle enough to not feel jarring
+*/
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+   LINK UNDERLINE REVEAL
+   Elegant progressive disclosure for text links
+   Avoids clutter of permanent underlines
+   Applied only to non-button links
+*/
+a:not(.btn):hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+/* 
+   FOCUS GLOW
+   Accessibility requirement: visible focus indicator for keyboard navigation
+   Uses box-shadow instead of outline for softer, brand-aligned appearance
+   3px spread with 40% opacity = visible but not aggressive
+   
+   WCAG 2.1 Compliance: This satisfies 2.4.7 Focus Visible (Level AA)
+*/
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(17, 212, 212, 0.4);
+}
+
+/* Remove focus glow from mouse clicks (browser handles :focus vs :focus-visible) */
+:focus:not(:focus-visible) {
+  box-shadow: none;
+}
+
+/* ----------------------------------------
+   7. PRINT STYLES
    ---------------------------------------- */
 @media print {
   .no-print {
