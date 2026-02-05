@@ -1,33 +1,314 @@
 <!doctype html>
+<!--
+  ACCELERATOR X — Landing Page
+  
+  ARCHITECTURE OVERVIEW:
+  - Single-page static site with semantic HTML structure
+  - Tailwind CSS for layout utilities (flex, grid, spacing)
+  - Custom CSS (styles.css) for all colors, typography, components
+  - Mobile-first responsive design
+  - Anchor-based navigation (#section-id)
+  
+  DESIGN SYSTEM:
+  All visual styling comes from styles.css using CSS custom properties.
+  To change colors/fonts: edit styles.css, changes apply site-wide.
+  
+  SEO STRATEGY:
+  - Semantic HTML5 sections with proper heading hierarchy (h1 → h2 → h3)
+  - Open Graph tags for social sharing
+  - JSON-LD structured data for search engines (AEO optimization)
+  - Canonical URL to prevent duplicate content
+  - Meta description optimized for click-through rate
+  - Preconnect hints for faster font loading
+  
+  ACCESSIBILITY:
+  - WCAG 2.1 AA compliant color contrast
+  - Focus-visible outlines for keyboard navigation
+  - Alt text for images (when added)
+  - Semantic landmark elements (header, main, section, footer)
+  - Reduced motion support via CSS media query
+-->
 <html lang="en">
   <head>
+    <!-- 
+      CHARACTER ENCODING & VIEWPORT
+      UTF-8: Standard character encoding for international text
+      Viewport: Mobile-responsive scaling (1.0 = no zoom, width=device-width)
+    -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- 
+      PAGE TITLE
+      Primary SEO element. Format: [Primary Keyword] — [Value Proposition]
+      Length: 50-60 characters for optimal display in search results
+      Current: 14 chars — room to expand for keywords if needed
+    -->
     <title>Accelerator X</title>
 
+    <!-- 
+      META DESCRIPTION
+      Appears in search results below title. Max 160 characters.
+      Should include: primary keyword, value prop, call to action
+      Current: 115 characters — optimized for "AI transformation" keyword
+    -->
     <meta
       name="description"
       content="AI transformation for leaders who are done waiting. Tools, skills, and systems that make AI work in the real world."
     />
-
+    
+    <!-- 
+      CANONICAL URL
+      Tells search engines this is the authoritative version of the page.
+      Prevents SEO dilution from duplicate content (www vs non-www, http vs https).
+      UPDATE THIS when deploying to production domain.
+    -->
+    <link rel="canonical" href="https://accelerator-x.ai/" />
+    
+    <!-- 
+      ROBOTS META
+      index,follow = Allow search engines to index and follow links
+      Change to noindex during development if needed
+    -->
+    <meta name="robots" content="index, follow" />
+    
+    <!-- 
+      PERFORMANCE: PRECONNECT HINTS
+      Tells browser to establish early connection to Google Fonts servers
+      Reduces perceived load time by ~100-200ms on first visit
+    -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- 
+      GOOGLE FONTS: Space Grotesk
+      Weights: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
+      display=swap: Use fallback font immediately, swap when loaded (FOUT)
+    -->
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
+    <!-- 
+      DESIGN SYSTEM CSS
+      Single source of truth for all visual styling:
+      - CSS custom properties (variables) for colors, spacing, fonts
+      - Semantic utility classes (.bg-primary, .text-accent, etc.)
+      - Component patterns (.card, .btn, .section)
+      - Accessibility improvements (focus styles, reduced motion)
+      
+      EDIT THIS FILE to rebrand: change --color-primary, --color-accent, etc.
+    -->
     <link rel="stylesheet" href="./styles.css" />
 
+    <!-- 
+      TAILWIND CSS (CDN)
+      Used ONLY for layout utilities:
+      - Spacing: px-4, py-8, gap-4, etc.
+      - Layout: flex, grid, items-center, justify-between
+      - Responsive: lg:, md: prefixes
+      - Sizing: max-w-6xl, w-full, etc.
+      
+      NOT used for: colors (use .bg-primary from styles.css)
+    -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- 
+      MATERIAL SYMBOLS (Google Icons)
+      Icons via font ligatures. Usage: <span class="material-symbols-outlined">icon_name</span>
+      Benefits: Scalable, color inherits from text, no additional HTTP requests per icon
+    -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    
+    <!-- 
+      ========================================
+      OPEN GRAPH (OG) TAGS — Social Sharing SEO
+      ========================================
+      These control how the page appears when shared on:
+      - LinkedIn, Twitter/X, Facebook, Slack, WhatsApp
+      
+      og:title:        Headline shown in the card (can differ from <title>)
+      og:description:  Subtext under the title
+      og:image:        Preview image (RECOMMENDED: create 1200x630px branded image)
+      og:url:          Canonical URL for this page
+      og:type:         "website" for landing pages, "article" for blog posts
+      og:site_name:   Brand name shown above title
+      
+      TODO: Create and upload og:image to assets/images/og-image.jpg
+    -->
+    <meta property="og:title" content="Accelerator X — AI Transformation for Leaders" />
+    <meta property="og:description" content="Done waiting for AI results? We build tools, skills, and systems that make AI work in the real world." />
+    <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image.jpg" />
+    <meta property="og:url" content="https://accelerator-x.ai/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Accelerator X" />
+    
+    <!-- 
+      TWITTER/X SPECIFIC CARDS
+      twitter:card:    "summary_large_image" = big image with text overlay
+      Other values: "summary" (small image), "app", "player"
+    -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Accelerator X — AI Transformation for Leaders" />
+    <meta name="twitter:description" content="Done waiting for AI results? We build tools, skills, and systems that make AI work." />
+    <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image.jpg" />
+    
+    <!-- 
+      ========================================
+      JSON-LD STRUCTURED DATA — Answer Engine Optimization (AEO)
+      ========================================
+      This helps Google understand the page context and enables rich results:
+      - Knowledge panels, rich snippets, voice search answers
+      - "People also ask" featured answers
+      - Local business listings (when applicable)
+      
+      Schema.org types used:
+      - Organization: Brand identity, logo, contact info
+      - WebSite: Site name and search URL (for Sitelinks Searchbox)
+      - ProfessionalService: What Accelerator X does (enables service rich results)
+      
+      FUTURE ENHANCEMENTS:
+      - Add @id references for entity consolidation
+      - Add Review schema when testimonials have ratings
+      - Add FAQPage schema for the "Who this is for" section
+      - Add Course schema if offering training programs
+    -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://accelerator-x.ai/#organization",
+          "name": "Accelerator X",
+          "url": "https://accelerator-x.ai",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://accelerator-x.ai/assets/images/logo.png"
+          },
+          "description": "AI transformation consultancy for business leaders. Tools, skills, and systems that make AI work in the real world.",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Toby Henry",
+              "jobTitle": "Co-founder",
+              "description": "20 years tier-one management consulting, transformation programmes"
+            },
+            {
+              "@type": "Person",
+              "name": "Andy Carroll",
+              "jobTitle": "Co-founder",
+              "description": "17+ years product and AI specialist across startups and banking"
+            }
+          ],
+          "sameAs": [
+            "https://linkedin.com/company/accelerator-x"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://accelerator-x.ai/#website",
+          "name": "Accelerator X",
+          "url": "https://accelerator-x.ai",
+          "publisher": {
+            "@id": "https://accelerator-x.ai/#organization"
+          }
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": "https://accelerator-x.ai/#service",
+          "name": "AI Transformation Services",
+          "provider": {
+            "@id": "https://accelerator-x.ai/#organization"
+          },
+          "serviceType": "AI Consulting",
+          "areaServed": {
+            "@type": "Country",
+            "name": "United Kingdom"
+          },
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "AI Transformation Packages",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "One-Day Discovery Workshop",
+                  "description": "Full-day leadership workshop with real discovery, prioritisation, and roadmap. Risk-free: if not valuable, you don't pay."
+                },
+                "price": "4000.00",
+                "priceCurrency": "GBP"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "8-Week Transformation Cycle",
+                  "description": "Focused sprint with clear scope and measurable outcomes. Delivers 10x value on investment."
+                },
+                "price": "25000.00",
+                "priceCurrency": "GBP"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://accelerator-x.ai/#webpage",
+          "url": "https://accelerator-x.ai/",
+          "name": "Accelerator X — AI Transformation for Leaders",
+          "description": "AI transformation for leaders who are done waiting. Tools, skills, and systems that make AI work in the real world.",
+          "isPartOf": {
+            "@id": "https://accelerator-x.ai/#website"
+          },
+          "about": {
+            "@id": "https://accelerator-x.ai/#organization"
+          },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://accelerator-x.ai/assets/images/og-image.jpg"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- 
+      FAVICON & TOUCH ICONS
+      Placeholder paths — create these images:
+      - favicon.ico: 32x32, multi-resolution (for legacy browsers)
+      - favicon.svg: Vector version (modern browsers, scalable)
+      - apple-touch-icon.png: 180x180 (iOS home screen)
+      
+      TOOL: Use https://realfavicongenerator.net/ to generate all variants
+    -->
+    <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+    <link rel="alternate icon" href="/assets/icons/favicon.ico" />
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+    
+    <!-- 
+      THEME COLOR
+      Controls browser chrome color on mobile (address bar, etc.)
+      Should match the primary brand color or page background
+    -->
+    <meta name="theme-color" content="#11d4d4" />
   </head>
   <body class="bg-background text-navy">
-    <!-- === HEADER === -->
+    <!-- 
+      ========================================
+      HEADER: Sticky navigation bar
+      ========================================
+      - Sticky positioning: stays visible on scroll (z-50 to stay above content)
+      - Backdrop blur: modern glass-morphism effect (requires bg-white/95 for opacity)
+      - Border: subtle separator from content
+      - Max-width container: content aligns with page sections
+      - CTA links to #apply anchor (smooth scroll handled by CSS)
+    -->
     <header
       class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur"
     >
@@ -46,9 +327,37 @@
       </div>
     </header>
 
-    <!-- === MAIN CONTENT === -->
+    <!-- 
+      ========================================
+      MAIN CONTENT: Landing page sections
+      ========================================
+      Section order follows the customer journey:
+      1. Hero (problem awareness) → 2. Problem (agitate pain) → 3. Differentiators (solution) 
+      4. Process (how it works) → 5. Qualification (filter) → 6. Testimonials (social proof)
+      7. About (trust) → 8. Trust bar (credibility) → 9. CTA (conversion)
+      
+      Each section has semantic ID for anchor navigation and analytics tracking.
+    -->
     <main>
-      <!-- === HERO SECTION === -->
+      <!-- 
+        ========================================
+        SECTION: Hero (Above the fold)
+        ========================================
+        PURPOSE: Immediately communicate value proposition and CTA
+        
+        STRUCTURE:
+        - Headline: Primary benefit + emotional hook ("done waiting")
+        - Subhead: Problem acknowledgment + differentiation
+        - CTA: Primary conversion action
+        - Risk reversal: Reduce friction ("If it doesn't deliver value, you don't pay")
+        - Video placeholder: Visual interest + future VSL location
+        
+        LAYOUT:
+        - Mobile: Stacked (text first, video below)
+        - Desktop: Side-by-side (lg:flex-row, lg:items-center)
+        
+        HEADING HIERARCHY: h1 (only one per page) for primary headline
+      -->
       <section
         id="hero"
         class="mx-auto flex max-w-6xl flex-col items-center px-4 py-16 lg:flex-row lg:items-center lg:gap-12 lg:py-24"
@@ -107,7 +416,23 @@
         </div>
       </section>
 
-      <!-- === PROBLEM SECTION === -->
+      <!-- 
+        ========================================
+        SECTION: Problem (Pain agitation)
+        ========================================
+        PURPOSE: Name the pain, validate visitor's frustration, build empathy
+        
+        STRUCTURE:
+        - Headline: Emotional hook ("You've tried. It hasn't worked.")
+        - Body: 3 paragraphs that mirror visitor's likely experience
+        - Closing statement: Pivot to solution mindset
+        
+        SEO/AEO BENEFIT: 
+        - Targets long-tail keywords around AI implementation failures
+        - Paragraph content can be featured in "People also ask" snippets
+        
+        HEADING HIERARCHY: h2 (section level)
+      -->
       <section id="problem" class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
         <div class="mx-auto max-w-3xl">
           <!-- PROBLEM HEADLINE -->
