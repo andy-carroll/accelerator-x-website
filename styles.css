@@ -1,32 +1,75 @@
+/* ========================================
+   ACCELERATOR X — Design System
+   ========================================
+   
+   EDIT THIS FILE to change colors, fonts, spacing globally.
+   No need to touch HTML or JavaScript.
+   
+   Usage in HTML:
+   - Layout: Use Tailwind classes (flex, grid, px-4, etc.)
+   - Colors: Use classes below (.bg-primary, .text-accent, etc.)
+   - Typography: Use Tailwind + .font-display
+   
+   ======================================== */
+
+/* ----------------------------------------
+   1. COLOR TOKENS (change these to rebrand)
+   ---------------------------------------- */
 :root {
-  --color-primary: #11d4d4;
-  --color-accent: #E85A4F;
-  --color-navy: #0f172a;
-  --color-background: #ffffff;
-  --color-muted: #64748b;
-  --font-display: "Space Grotesk", sans-serif;
+  /* Primary brand color — used for highlights, CTAs, accents */
+  --color-primary: #11d4d4;      /* Teal */
+  
+  /* Accent color — used for primary CTAs, important actions */
+  --color-accent: #E85A4F;       /* Coral — easily changeable */
+  
+  /* Text colors */
+  --color-navy: #0f172a;         /* Primary text — dark navy */
+  --color-muted: #64748b;        /* Secondary text — slate */
+  --color-background: #ffffff;   /* Page background */
+  
+  /* Surface colors */
+  --color-surface: #f8fafc;      /* Card backgrounds — light slate */
+  --color-border: #e2e8f0;       /* Borders — light grey */
+  
+  /* Semantic colors */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  
+  /* Typography */
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Space Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Spacing scale (Tailwind-compatible) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  
+  /* Border radius */
+  --radius-sm: 0.375rem;  /* 6px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 0.75rem;   /* 12px */
+  --radius-xl: 1rem;      /* 16px */
+  --radius-2xl: 1.5rem;   /* 24px */
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
 
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-
-  --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+/* ----------------------------------------
+   2. BASE STYLES
+   ---------------------------------------- */
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -36,18 +79,165 @@ body {
 
 body {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   background: var(--color-background);
   color: var(--color-navy);
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
-a {
-  color: inherit;
-}
-
+/* Selection color */
 ::selection {
   background: rgba(17, 212, 212, 0.25);
+}
+
+/* Link reset */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------------------------------------
+   3. SEMANTIC COLOR UTILITY CLASSES
+   (Use these in HTML instead of Tailwind color classes)
+   ---------------------------------------- */
+
+/* Background colors */
+.bg-primary { background-color: var(--color-primary); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-navy { background-color: var(--color-navy); }
+.bg-background { background-color: var(--color-background); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-muted { background-color: var(--color-muted); }
+
+/* Text colors */
+.text-primary { color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+.text-navy { color: var(--color-navy); }
+.text-muted { color: var(--color-muted); }
+.text-background { color: var(--color-background); }
+
+/* Border colors */
+.border-primary { border-color: var(--color-primary); }
+.border-accent { border-color: var(--color-accent); }
+.border-navy { border-color: var(--color-navy); }
+.border-muted { border-color: var(--color-muted); }
+.border-surface { border-color: var(--color-border); }
+
+/* ----------------------------------------
+   4. TYPOGRAPHY UTILITY CLASSES
+   ---------------------------------------- */
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+/* ----------------------------------------
+   5. COMPONENT PATTERNS
+   (Reusable design patterns)
+   ---------------------------------------- */
+
+/* Card component */
+.card {
+  background: var(--color-background);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-8);
+}
+
+/* Section spacing */
+.section {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+}
+
+.section-sm {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 72rem; /* 1152px */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+  }
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Button variants */
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-background);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-navy);
+}
+
+/* ----------------------------------------
+   6. PRINT STYLES
+   ---------------------------------------- */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
 }
