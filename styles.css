@@ -289,6 +289,25 @@ a {
 }
 
 /* 
+   CARD HOVER ELEVATION
+   Creates sense of depth and interactivity
+   4px lift with expanded shadow — noticeable but not dramatic
+   Uses will-change for GPU optimization on frequently animated elements
+*/
+.card-hoverable {
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1),
+              box-shadow 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  will-change: transform, box-shadow;
+}
+
+.card-hoverable:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
    Avoids clutter of permanent underlines
