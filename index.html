@@ -366,20 +366,20 @@
         <div class="flex-1 text-center lg:text-left">
           <!-- HERO HEADLINE -->
           <h1
-            class="font-display text-4xl font-bold leading-tight text-navy lg:text-5xl"
+            class="reveal font-display text-4xl font-bold leading-tight text-navy lg:text-5xl"
           >
             AI transformation for leaders who are done waiting.
           </h1>
 
           <!-- HERO SUBHEAD -->
-          <p class="mt-6 text-lg leading-relaxed text-muted">
+          <p class="reveal reveal-delay-1 mt-6 text-lg leading-relaxed text-muted">
             You know AI matters. You're tired of the hype. You want a partner
             who'll actually get it done—not an agency that disappears or a
             consultancy that leaves you with slides.
           </p>
 
           <!-- HERO CTA -->
-          <div class="mt-8">
+          <div class="reveal reveal-delay-2 mt-8">
             <a
               href="#apply"
               class="btn btn-accent btn-lg"
@@ -436,15 +436,13 @@
       <section id="problem" class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
         <div class="mx-auto max-w-3xl">
           <!-- PROBLEM HEADLINE -->
-          <h2
-            class="font-display text-3xl font-bold leading-tight text-navy lg:text-4xl"
-          >
+          <h2 class="reveal font-display text-3xl font-bold leading-tight text-navy lg:text-4xl">
             You've tried. It hasn't worked.
           </h2>
 
           <!-- PROBLEM BODY -->
           <div class="mt-8 space-y-6 text-lg leading-relaxed text-muted">
-            <p>
+            <p class="reveal reveal-delay-1">
               You've heard the pitches. You've probably paid for AI
               subscriptions your team barely uses. Maybe you hired an agency
               that built something and vanished. Or a consultancy that left you
@@ -452,13 +450,13 @@
               start.
             </p>
 
-            <p>
+            <p class="reveal reveal-delay-2">
               Meanwhile, your competitors are moving. Your team is overwhelmed.
               And every month that passes is a month you could have been
               building real capability.
             </p>
 
-            <p class="font-medium text-navy">
+            <p class="reveal reveal-delay-3 font-medium text-navy">
               You don't need another tool. You don't need another deck. You need
               someone who'll work alongside you until it's actually working.
             </p>
@@ -932,5 +930,83 @@
         </div>
       </div>
     </footer>
+
+    <!--
+      ========================================
+      SCROLL REVEAL ANIMATION SYSTEM
+      ========================================
+      Uses Intersection Observer API for performant scroll-triggered reveals.
+      Respects prefers-reduced-motion for accessibility.
+      
+      Timing strategy (per plan):
+      - Hero: Headline immediate, subhead/CTA 200ms stagger
+      - Problem: Headline → Para 1 → Para 2 → Para 3 (0, 100, 200, 300ms)
+      - Differentiators: 3 cards (0, 100, 200ms)
+      - How it works: 3 steps (0, 150, 300ms)
+      - Testimonials: 3 cards (0, 100, 200ms)
+      - About us: Toby → Andy (0, 150ms)
+      - Final CTA: Entire section 600ms (slower = weight)
+    -->
+    <script>
+      // Check for reduced motion preference - if set, skip animations entirely
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        // CSS for reveal animations - injected dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+          .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1),
+                        transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            will-change: opacity, transform;
+          }
+          
+          .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          
+          /* Stagger delays for grouped elements */
+          .reveal-delay-1 { transition-delay: 100ms; }
+          .reveal-delay-2 { transition-delay: 200ms; }
+          .reveal-delay-3 { transition-delay: 300ms; }
+          .reveal-delay-4 { transition-delay: 400ms; }
+          
+          /* Slower reveal for final CTA (weight/importance) */
+          .reveal-slow {
+            transition-duration: 0.8s;
+          }
+        `;
+        document.head.appendChild(style);
+        
+        // Intersection Observer configuration
+        const observerOptions = {
+          root: null, // viewport
+          rootMargin: '0px 0px -50px 0px', // trigger when 50px from bottom
+          threshold: 0.1 // 10% of element must be visible
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              // Stop observing once revealed (one-time animation)
+              observer.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+        
+        // Observe all elements with .reveal class
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+      } else {
+        // Reduced motion: make all reveals visible immediately, no animation
+        document.querySelectorAll('.reveal').forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        });
+      }
+    </script>
   </body>
 </html>

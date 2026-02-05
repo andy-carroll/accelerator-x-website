@@ -1,0 +1,14 @@
+# Netlify configuration for Accelerator X website
+# Basic static site deployment - no build required
+
+[build]
+  publish = "."
+  command = "echo 'Static site ready'"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
