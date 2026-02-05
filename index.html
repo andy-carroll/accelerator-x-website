@@ -65,12 +65,65 @@
     </header>
 
     <!-- === MAIN CONTENT === -->
-    <main class="mx-auto max-w-6xl px-4 py-10">
-      <h1 class="font-display text-3xl font-bold">Accelerator X</h1>
-      <p class="mt-2 text-muted">
-        MVP scaffold is in place. Next step: implement Phase 1 sections from
-        <code class="rounded bg-slate-100 px-1 py-0.5">docs/landing-page-spec.md</code>.
-      </p>
+    <main>
+      <!-- === HERO SECTION === -->
+      <section
+        id="hero"
+        class="mx-auto flex max-w-6xl flex-col items-center px-4 py-16 lg:flex-row lg:items-center lg:gap-12 lg:py-24"
+      >
+        <!-- HERO COPY -->
+        <div class="flex-1 text-center lg:text-left">
+          <!-- HERO HEADLINE -->
+          <h1
+            class="font-display text-4xl font-bold leading-tight text-navy lg:text-5xl"
+          >
+            AI transformation for leaders who are done waiting.
+          </h1>
+
+          <!-- HERO SUBHEAD -->
+          <p class="mt-6 text-lg leading-relaxed text-muted">
+            You know AI matters. You're tired of the hype. You want a partner
+            who'll actually get it done—not an agency that disappears or a
+            consultancy that leaves you with slides.
+          </p>
+
+          <!-- HERO CTA -->
+          <div class="mt-8">
+            <a
+              href="#apply"
+              class="inline-block rounded-md bg-accent px-8 py-4 text-lg font-semibold text-white transition hover:opacity-90"
+            >
+              Apply to work with us
+            </a>
+          </div>
+
+          <!-- RISK REVERSAL -->
+          <p class="mt-4 text-sm text-muted">
+            We start with a one-day workshop. If it doesn't deliver value, you
+            don't pay.
+          </p>
+        </div>
+
+        <!-- VIDEO PLACEHOLDER -->
+        <div class="mt-12 w-full flex-1 lg:mt-0">
+          <div
+            class="relative aspect-video rounded-xl bg-slate-100 flex items-center justify-center"
+          >
+            <div
+              class="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg"
+            >
+              <span class="material-symbols-outlined text-4xl text-navy">
+                play_arrow
+              </span>
+            </div>
+            <p
+              class="absolute bottom-4 left-0 right-0 text-center text-sm text-muted"
+            >
+              Video coming soon
+            </p>
+          </div>
+        </div>
+      </section>
     </main>
   </body>
 </html>
