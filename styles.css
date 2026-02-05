@@ -1,0 +1,20 @@
+:root {
+  --color-primary: #11d4d4;
+  --color-accent: #E85A4F;
+  --color-navy: #0f172a;
+  --color-background: #ffffff;
+  --color-muted: #64748b;
+  --font-display: "Space Grotesk", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-display);
+  background: var(--color-background);
+  color: var(--color-navy);
+}
