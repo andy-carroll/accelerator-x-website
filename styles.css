@@ -228,6 +228,22 @@ a {
   color: var(--color-navy);
 }
 
+/* 
+   BUTTON SIZE VARIANTS
+   Design system handles all button sizing — no Tailwind padding classes needed
+   Usage: .btn .btn-accent .btn-lg (size + color variant)
+*/
+.btn-sm {
+  padding: var(--space-2) var(--space-4);  /* 8px 16px — header CTA */
+  font-size: var(--text-sm, 0.875rem);
+}
+
+.btn-lg {
+  padding: var(--space-4) var(--space-8);  /* 16px 32px — hero/final CTA */
+  font-size: var(--text-lg, 1.125rem);
+  font-weight: 600;
+}
+
 /* ----------------------------------------
    6. MICRO-INTERACTIONS & FEEDBACK
    (Purposeful motion that signals responsiveness)
@@ -259,6 +275,17 @@ a {
 .btn:active {
   transform: translateY(0) scale(0.98);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 
+   BUTTON BORDER TREATMENT (hover)
+   Thin outline stroke on hover for subtle emphasis
+   Uses box-shadow inset for sharp 1px border without layout shift
+*/
+.btn-accent:hover {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);  /* Subtle inner glow */
 }
 
 /* 
