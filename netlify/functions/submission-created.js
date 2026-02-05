@@ -12,8 +12,14 @@ exports.handler = async (event, context) => {
 
   try {
     // Parse form data from Netlify submission
+    // Netlify webhook sends form fields directly at root of payload
     const payload = JSON.parse(event.body);
-    const data = payload.data || {};
+    
+    // Log payload structure for debugging
+    console.log('Payload received:', JSON.stringify(payload, null, 2));
+    
+    // Netlify form submissions have data at payload.data or directly on payload
+    const data = payload.data || payload;
     
     // Format timeline for readability
     const timelineLabels = {
