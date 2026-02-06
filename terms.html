@@ -67,6 +67,8 @@
       const lines = md.split(/\r?\n/);
       let html = '';
       let inList = false;
+      let skippedHeading = false;
+      let skippedLastUpdated = false;
 
       for (const raw of lines) {
         const line = raw.trimEnd();
@@ -82,6 +84,16 @@
         }
 
         if (inList) { html += '</ul>'; inList = false; }
+
+        if (/^#\s+/.test(line) && !skippedHeading) {
+          skippedHeading = true; // drop top-level heading; already present in page chrome
+          continue;
+        }
+
+        if (!skippedLastUpdated && /^_?Last updated:/i.test(line)) {
+          skippedLastUpdated = true; // drop inline last-updated; already present in page chrome
+          continue;
+        }
 
         if (/^###\s+/.test(line)) {
           html += `<h3>${escapeHtml(line.replace(/^###\s+/, ''))}</h3>`;

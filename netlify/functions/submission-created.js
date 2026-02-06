@@ -150,8 +150,7 @@ exports.handler = async (event, context) => {
           'Primary Contact Role': role,
           Timeline: timeline,
           Notes: message || '',
-          Source: 'Accelerator-X Website',
-          'Submitted At': new Date().toISOString()
+          Source: 'Accelerator-X Website'
         }
       };
 
