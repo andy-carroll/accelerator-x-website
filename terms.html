@@ -16,16 +16,44 @@
       </header>
 
       <section id="terms-content" class="leading-relaxed text-muted">
-        <p class="text-muted">Loading…</p>
+        <!-- Fallback snapshot rendered immediately; replaced when markdown fetch succeeds. -->
+        <p>These Terms govern your access to and use of the Accelerator X website and any services, content, or materials provided through it.</p>
+        <h2>1. Who we are</h2>
+        <p>Accelerator X provides AI transformation consulting services. Contact: hello@accelerator-x.ai.</p>
+        <h2>2. Acceptable use</h2>
+        <p>Do not misuse the site, attempt unauthorized access, disrupt operation, or violate applicable laws.</p>
+        <h2>3. Intellectual property</h2>
+        <p>All content is owned by Accelerator X or our licensors and protected by law. Do not copy, modify, or distribute without consent.</p>
+        <h2>4. No warranties</h2>
+        <p>The site is provided "as is" without warranties, including fitness for a particular purpose or non-infringement.</p>
+        <h2>5. Limitation of liability</h2>
+        <p>To the maximum extent permitted by law, Accelerator X is not liable for indirect, incidental, special, consequential, or punitive damages, or loss of profits/revenues arising from your use of the site.</p>
+        <h2>6. Links to third parties</h2>
+        <p>We are not responsible for third-party sites, content, or practices.</p>
+        <h2>7. Changes to these Terms</h2>
+        <p>We may update these Terms; the “Last updated” date reflects the latest version. Continued use constitutes acceptance.</p>
+        <h2>8. Governing law</h2>
+        <p>These Terms are governed by the laws of England and Wales. Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+        <h2>9. Contact</h2>
+        <p>For questions about these Terms, contact hello@accelerator-x.ai.</p>
       </section>
     </div>
   </main>
 
   <script>
+    // Lightweight, client-side Markdown loader for this standalone legal page.
+    // It fetches /legal/terms.md on each page load, escapes HTML to avoid script injection,
+    // and supports a narrow Markdown subset (H1/H2/H3, paragraphs, unordered lists).
+    // Update /legal/terms.md and the page will reflect changes on next load—no rebuild needed.
     async function loadMarkdown(url, targetId) {
-      const res = await fetch(url);
-      const md = await res.text();
-      document.getElementById(targetId).innerHTML = markdownToHtml(md);
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        const md = await res.text();
+        document.getElementById(targetId).innerHTML = markdownToHtml(md);
+      } catch (err) {
+        console.warn('Using fallback snapshot; markdown fetch failed.', err);
+      }
     }
 
     function escapeHtml(str) {

@@ -16,16 +16,46 @@
       </header>
 
       <section id="privacy-content" class="leading-relaxed text-muted">
-        <p class="text-muted">Loading…</p>
+        <!-- Fallback snapshot rendered immediately; replaced when markdown fetch succeeds. -->
+        <p>This Privacy Policy explains how Accelerator X collects, uses, and protects information when you use our website or submit forms.</p>
+        <h2>1. Information we collect</h2>
+        <p>Information you provide via forms (e.g., name, email, company, website, role, timeline, message), and any other information you choose to share.</p>
+        <h2>2. How we use your information</h2>
+        <p>To review and respond to your inquiry, provide services, improve the site, and communicate with you.</p>
+        <h2>3. Sharing</h2>
+        <p>We do not sell your information. We may share it with service providers who assist our operations, and as required by law.</p>
+        <h2>4. Data retention</h2>
+        <p>We retain information as long as necessary to fulfill the purposes described in this policy or as required by law.</p>
+        <h2>5. Security</h2>
+        <p>We implement reasonable safeguards, but no method of transmission or storage is 100% secure. You use the site at your own risk.</p>
+        <h2>6. Your choices</h2>
+        <p>Contact us to access, correct, or request deletion of your information, subject to legal and operational constraints.</p>
+        <h2>7. Cookies and tracking</h2>
+        <p>We may use basic analytics and cookies to understand site usage. You can adjust your browser settings to manage cookies.</p>
+        <h2>8. International transfers</h2>
+        <p>Your information may be transferred to and processed in countries outside your own. We take reasonable steps to ensure appropriate safeguards are in place.</p>
+        <h2>9. Changes to this policy</h2>
+        <p>We may update this policy. The “Last updated” date reflects the latest version. Continued use constitutes acceptance of changes.</p>
+        <h2>10. Contact</h2>
+        <p>For privacy questions or requests, contact hello@accelerator-x.ai.</p>
       </section>
     </div>
   </main>
 
   <script>
+    // Lightweight, client-side Markdown loader for this standalone legal page.
+    // It fetches /legal/privacy.md on each page load, escapes HTML to avoid script injection,
+    // and supports a narrow Markdown subset (H1/H2/H3, paragraphs, unordered lists).
+    // Update /legal/privacy.md and the page will reflect changes on next load—no rebuild needed.
     async function loadMarkdown(url, targetId) {
-      const res = await fetch(url);
-      const md = await res.text();
-      document.getElementById(targetId).innerHTML = markdownToHtml(md);
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        const md = await res.text();
+        document.getElementById(targetId).innerHTML = markdownToHtml(md);
+      } catch (err) {
+        console.warn('Using fallback snapshot; markdown fetch failed.', err);
+      }
     }
 
     function escapeHtml(str) {
