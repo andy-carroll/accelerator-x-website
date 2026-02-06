@@ -4,6 +4,15 @@
 
 const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
 
+// Airtable configuration via environment variables
+const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
+const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
+const AIRTABLE_TABLE = process.env.AIRTABLE_TABLE;
+
+const AIRTABLE_API_URL = AIRTABLE_BASE_ID && AIRTABLE_TABLE
+  ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`
+  : null;
+
 exports.handler = async (event, context) => {
   // Only accept POST requests
   if (event.httpMethod !== 'POST') {
@@ -118,20 +127,60 @@ exports.handler = async (event, context) => {
       }
     );
     
-    // Send to Slack
-    const response = await fetch(SLACK_WEBHOOK_URL, {
+    // Send to Slack first (preserve existing behaviour)
+    const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(slackMessage)
     });
     
-    if (!response.ok) {
-      throw new Error(`Slack webhook error: ${response.status}`);
+    if (!slackResponse.ok) {
+      throw new Error(`Slack webhook error: ${slackResponse.status}`);
+    }
+
+    // Attempt Airtable insert; do not fail the whole request if Airtable is down
+    let airtableStatus = 'skipped';
+    if (AIRTABLE_API_URL && AIRTABLE_TOKEN) {
+      const airtablePayload = {
+        fields: {
+          Name: name,
+          Email: email,
+          Company: company,
+          Website: website,
+          Role: role,
+          Timeline: timeline,
+          Message: message || '',
+          Source: 'Accelerator-X Website',
+          'Submitted At': new Date().toISOString()
+        }
+      };
+
+      try {
+        const airtableResponse = await fetch(AIRTABLE_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${AIRTABLE_TOKEN}`
+          },
+          body: JSON.stringify(airtablePayload)
+        });
+
+        if (!airtableResponse.ok) {
+          const text = await airtableResponse.text();
+          throw new Error(`Airtable error: ${airtableResponse.status} ${text}`);
+        }
+        airtableStatus = 'created';
+      } catch (airtableError) {
+        airtableStatus = 'failed';
+        console.error('Airtable insert error:', airtableError.message);
+      }
+    } else {
+      console.warn('Airtable env vars missing; skipping Airtable insert');
     }
     
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Notification sent to Slack' })
+      body: JSON.stringify({ message: 'Notification sent to Slack', airtable: airtableStatus })
     };
     
   } catch (error) {
