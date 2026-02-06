@@ -1114,7 +1114,7 @@
                 body: new URLSearchParams(new FormData(form)).toString()
               })
               .then(() => {
-                // Hide form, show success
+                // Hide form, show success with a brief icon pop
                 form.style.display = 'none';
                 successDiv.style.display = 'block';
                 successDiv.classList.add('is-visible');

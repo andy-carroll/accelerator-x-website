@@ -51,7 +51,7 @@ exports.handler = async (event, context) => {
       return { statusCode: 200, body: JSON.stringify({ skipped: 'missing required fields' }) };
     }
 
-    // Basic domain validation post-normalization
+    // Basic domain validation post-normalization (allows bare domains once https:// is added)
     const domainPattern = /^https?:\/\/[\w.-]+\.[A-Za-z]{2,}.*$/;
     if (!domainPattern.test(website)) {
       return { statusCode: 200, body: JSON.stringify({ skipped: 'invalid website' }) };
