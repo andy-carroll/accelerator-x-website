@@ -307,6 +307,16 @@ a {
     0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Testimonial stars */
+.stars-5 {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  color: #f5c542;
+  opacity: 0.9;
+}
+
 /* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
