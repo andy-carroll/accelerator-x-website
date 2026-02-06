@@ -143,13 +143,13 @@ exports.handler = async (event, context) => {
     if (AIRTABLE_API_URL && AIRTABLE_TOKEN) {
       const airtablePayload = {
         fields: {
-          Name: name,
+          'Primary Contact Name': name,
           Email: email,
           Company: company,
           Website: website,
-          Role: role,
+          'Primary Contact Role': role,
           Timeline: timeline,
-          Message: message || '',
+          Notes: message || '',
           Source: 'Accelerator-X Website',
           'Submitted At': new Date().toISOString()
         }
