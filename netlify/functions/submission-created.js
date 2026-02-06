@@ -17,9 +17,46 @@ exports.handler = async (event, context) => {
     const submission = body.payload || body;
     const data = submission.data || submission;
 
-    // Log payload structure for debugging
-    console.log('Payload received:', JSON.stringify(body, null, 2));
-    
+    // Basic spam/validity checks
+    if (data['form-name'] && data['form-name'] !== 'lead-capture-form') {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
+    }
+    if (data.form_name && data.form_name !== 'lead-capture-form') {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
+    }
+    if (data._honeypot) {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'spam' }) };
+    }
+
+    const safeTrim = (val = '') => String(val).trim();
+
+    // Normalize website: prepend https:// if missing
+    const normalizeWebsite = (val = '') => {
+      const v = safeTrim(val);
+      if (!v) return '';
+      if (/^https?:\/\//i.test(v)) return v;
+      return `https://${v}`;
+    };
+
+    const name = safeTrim(data.name);
+    const email = safeTrim(data.email);
+    const company = safeTrim(data.company);
+    const website = normalizeWebsite(data.website);
+    const role = safeTrim(data.role);
+    const timelineRaw = safeTrim(data.timeline);
+    const message = safeTrim(data.message || '');
+
+    // Required fields guard
+    if (!name || !email || !company || !website || !role) {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'missing required fields' }) };
+    }
+
+    // Basic domain validation post-normalization
+    const domainPattern = /^https?:\/\/[\w.-]+\.[A-Za-z]{2,}.*$/;
+    if (!domainPattern.test(website)) {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'invalid website' }) };
+    }
+
     // Format timeline for readability
     const timelineLabels = {
       'immediately': 'Immediately',
@@ -27,7 +64,7 @@ exports.handler = async (event, context) => {
       '1-3-months': '1-3 months',
       'exploring': 'Just exploring'
     };
-    const timeline = timelineLabels[data.timeline] || data.timeline || 'Not specified';
+    const timeline = timelineLabels[timelineRaw] || timelineRaw || 'Not specified';
     
     // Build Slack Block Kit message
     const slackMessage = {
@@ -44,11 +81,11 @@ exports.handler = async (event, context) => {
         {
           type: 'section',
           fields: [
-            { type: 'mrkdwn', text: `*Name:*\n${data.name || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Email:*\n${data.email || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Company:*\n${data.company || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Website:*\n${data.website || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Role:*\n${data.role || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Name:*\n${name || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Email:*\n${email || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Company:*\n${company || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Website:*\n${website || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Role:*\n${role || 'N/A'}` },
             { type: 'mrkdwn', text: `*Timeline:*\n${timeline}` }
           ]
         }
@@ -56,12 +93,12 @@ exports.handler = async (event, context) => {
     };
     
     // Add message block if present
-    if (data.message && data.message.trim()) {
+    if (message) {
       slackMessage.blocks.push({
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Message:*\n>${data.message.replace(/\n/g, '\n>')}`
+          text: `*Message:*\n>${message.replace(/\n/g, '\n>')}`
         }
       });
     }
@@ -98,7 +135,7 @@ exports.handler = async (event, context) => {
     };
     
   } catch (error) {
-    console.error('Function error:', error);
+    console.error('submission-created error:', error.message);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message })
