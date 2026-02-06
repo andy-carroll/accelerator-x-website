@@ -355,6 +355,95 @@ a {
   color: var(--color-muted);
 }
 
+/* ----------------------------------------
+   MOMENTUM PATH / PROCESS CARDS
+   Glassmorphic 3-column card layout for "How it works" section
+   ---------------------------------------- */
+
+/* 
+   PROCESS SECTION CONTAINER
+   Max-width constraint with centered alignment
+   Relative positioning for energy line SVG layering
+*/
+.process-section {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 
+   PROCESS CARD GRID
+   3-column layout on desktop, stacks to single column on mobile
+   32px gap maintains breathing room between cards
+*/
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .process-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablet: maintain 3 columns if space allows, otherwise stack */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .process-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Stack if cards become cramped (<280px each) */
+  @supports (width: min(280px, 100%)) {
+    .process-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    }
+  }
+}
+
+/* 
+   GLASSMORPHIC CARD STYLING
+   Semi-transparent background with backdrop blur creates depth
+   Fallback: solid white for browsers without backdrop-filter support
+*/
+.process-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari support */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  padding: 40px 32px;
+  overflow: hidden;
+  
+  /* Fallback for browsers without backdrop-filter */
+  @supports not (backdrop-filter: blur(10px)) {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* 
+   BACKGROUND NUMBER
+   Large decorative number in top-right corner
+   Purely visual (pointer-events: none) — doesn't interfere with interaction
+   5% opacity ensures it doesn't compete with content
+*/
+.process-card::before {
+  content: attr(data-step);
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  font-size: 120px;
+  font-weight: 700;
+  color: var(--color-navy);
+  opacity: 0.05;
+  line-height: 1;
+  pointer-events: none;
+  font-family: var(--font-display);
+}
+
 /* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
