@@ -678,9 +678,6 @@ a {
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 0;
-}
-
-.apply-underline {
   bottom: -12px;
   width: 90%;
   height: 46px;

@@ -296,7 +296,7 @@
       Controls browser chrome color on mobile (address bar, etc.)
       Should match the primary brand color or page background
     -->
-    <meta name="theme-color" content="#00D9FF" />
+    <meta name="theme-color" content="#00C4CC" />
   </head>
   <body class="bg-background text-navy">
     <!-- 
@@ -749,12 +749,12 @@
               <span class="sr-only">5 out of 5 stars</span>
             </div>
             <p class="flex-1 italic leading-relaxed text-slate-600">
-              "We'd been paying for AI tools for a year and getting nowhere.
-              Within one workshop, we had a clear roadmap and our team finally
-              understood what was possible. Three months later, we've automated
-              processes that used to take days."
+              "They helped us get clarity on where AI could actually move the
+              needle — then built the first workflows alongside our team.
+              Six weeks later we had working internal copilots and a backlog
+              of high-impact automations to roll out."
             </p>
-            <div class="mt-6">
+            <div class="mt-6 hidden" aria-hidden="true">
               <p class="font-bold text-navy">[Name]</p>
               <p class="text-sm text-muted">[Title], [Company]</p>
             </div>
@@ -773,11 +773,12 @@
               <span class="sr-only">5 out of 5 stars</span>
             </div>
             <p class="flex-1 italic leading-relaxed text-slate-600">
-              "What sets them apart is they actually do the work with you.
-              They're not just advisors—they're in the trenches alongside your
-              team, building real capability."
+              "It's rare to find people who can bridge strategy and delivery.
+              They gave our leadership team confidence, then got in the weeds
+              with us to make it real. We're running faster decision cycles
+              and the business is fundamentally different."
             </p>
-            <div class="mt-6">
+            <div class="mt-6 hidden" aria-hidden="true">
               <p class="font-bold text-navy">[Name]</p>
               <p class="text-sm text-muted">[Title], [Company]</p>
             </div>
@@ -799,7 +800,7 @@
               "The ROI was obvious within the first cycle. We've now run three
               cycles with them and the business is fundamentally different."
             </p>
-            <div class="mt-6">
+            <div class="mt-6 hidden" aria-hidden="true">
               <p class="font-bold text-navy">[Name]</p>
               <p class="text-sm text-muted">[Title], [Company]</p>
             </div>
@@ -899,7 +900,7 @@
             <img class="trust-logo" src="/assets/logos/mercurylogo-white.svg" alt="Mercury" loading="lazy" decoding="async" />
           </li>
           <li>
-            <img class="trust-logo" src="/assets/logos/premium car parks logo.png" alt="Premium Car Parks" loading="lazy" decoding="async" />
+            <img class="trust-logo" src="/assets/logos/premium-car-parks-logo.png" alt="Premium Car Parks" loading="lazy" decoding="async" />
           </li>
         </ul>
       </section>
@@ -947,7 +948,7 @@
               <input
                 type="text"
                 name="_honeypot"
-                style="display: none;"
+                class="hidden"
                 tabindex="-1"
                 autocomplete="off"
               />
@@ -1086,8 +1087,7 @@
             <!-- Success State (hidden by default, shown after submission) -->
             <div
               id="form-success"
-              class="reveal mx-auto max-w-xl rounded-xl bg-white p-8 text-center shadow-lg"
-              style="display: none;"
+              class="reveal mx-auto hidden max-w-xl rounded-xl bg-white p-8 text-center shadow-lg"
               role="status"
               aria-live="polite"
             >
@@ -1135,8 +1135,8 @@
               })
               .then(() => {
                 // Hide form, show success with a brief icon pop
-                form.style.display = 'none';
-                successDiv.style.display = 'block';
+                form.classList.add('hidden');
+                successDiv.classList.remove('hidden');
                 successDiv.classList.add('is-visible');
                 const icon = successDiv.querySelector('.material-symbols-outlined');
                 if (icon) {
@@ -1282,7 +1282,6 @@
         // Apply section hand-drawn accents
         const applySection = document.querySelector('#apply');
         const applyShell = document.querySelector('.apply-shell');
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (applySection && applyShell && !prefersReducedMotion) {
           const applyObserver = new IntersectionObserver(
