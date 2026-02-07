@@ -798,6 +798,7 @@ a {
 
 .problem-headline.visible .problem-underline path {
   stroke-dashoffset: 0;
+  transition-delay: 0.3s;
 }
 
 @media (max-width: 639px) {
