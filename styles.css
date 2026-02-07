@@ -75,12 +75,17 @@
 .trust-logo-premium {
   mix-blend-mode: multiply;
   filter: contrast(1.12) saturate(1.05);
+  height: 36px;
 }
 
 @media (max-width: 639px) {
   .trust-logo {
     height: 28px;
     max-width: 140px;
+  }
+
+  .trust-logo-premium {
+    height: 32px;
   }
 }
 
