@@ -635,15 +635,167 @@ a {
    Disables all animations and shows final state immediately
 */
 @media (prefers-reduced-motion: reduce) {
-  .process-card {
-    opacity: 1;
-    transform: none;
+  .process-card,
+  .energy-line {
     transition: none;
+    animation: none;
   }
-  
-  .energy-line path {
-    stroke-dashoffset: 0;
+}
+
+/* ----------------------------------------
+   APPLY SECTION HAND-DRAWN ACCENTS
+   Underline/halo and pointer arrow into the form
+   ---------------------------------------- */
+
+.apply-shell {
+  position: relative;
+}
+
+.apply-heading-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.apply-halo,
+.apply-underline {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.apply-halo {
+  top: -8px;
+  width: 110%;
+  height: 120px;
+}
+
+.apply-underline {
+  bottom: -18px;
+  width: 95%;
+  height: 60px;
+}
+
+.apply-halo path,
+.apply-underline path {
+  stroke: var(--color-accent);
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  transition: stroke-dashoffset 0.8s ease-out;
+}
+
+.apply-underline path {
+  stroke-width: 5;
+}
+
+.apply-form-wrap {
+  position: relative;
+}
+
+.apply-pointer {
+  position: absolute;
+  left: 50%;
+  top: -80px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.apply-pointer svg {
+  width: 80px;
+  height: 120px;
+}
+
+.apply-pointer path {
+  stroke: var(--color-accent);
+  stroke-width: 4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 0.7s ease-out;
+}
+
+.apply-pointer-label {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Visible state triggers draw animations */
+.apply-visible .apply-halo path,
+.apply-visible .apply-underline path,
+.apply-visible .apply-pointer path {
+  stroke-dashoffset: 0;
+}
+
+/* Gentle idle loop after initial draw */
+.apply-animate-loop .apply-halo path {
+  animation: apply-wiggle 6s ease-in-out infinite;
+}
+
+.apply-animate-loop .apply-underline path {
+  animation: apply-wiggle-small 6s ease-in-out infinite;
+}
+
+.apply-animate-loop .apply-pointer {
+  animation: apply-bob 3s ease-in-out infinite;
+}
+
+@keyframes apply-wiggle {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(2px) rotate(0.2deg); }
+}
+
+@keyframes apply-wiggle-small {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(1px); }
+}
+
+@keyframes apply-bob {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 4px); }
+}
+
+/* Mobile tuning */
+@media (max-width: 639px) {
+  .apply-halo {
+    width: 120%;
+    height: 110px;
+  }
+  .apply-underline {
+    width: 105%;
+  }
+  .apply-pointer {
+    top: -70px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .apply-halo path,
+  .apply-underline path,
+  .apply-pointer path {
     transition: none;
+    stroke-dashoffset: 0;
+  }
+  .apply-pointer,
+  .apply-animate-loop .apply-halo path,
+  .apply-animate-loop .apply-underline path,
+  .apply-animate-loop .apply-pointer {
+    animation: none;
   }
 }
 
