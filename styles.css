@@ -755,6 +755,67 @@ a {
 }
 
 /* ----------------------------------------
+   TESTIMONIALS HEADLINE HAND-DRAWN CIRCLE
+   Slower animation (1.5s) with 0.4s delay
+   ---------------------------------------- */
+
+.testimonials-headline {
+  position: relative;
+  display: block;
+}
+
+.testimonials-circle {
+  position: relative;
+  display: inline-block;
+}
+
+.testimonials-circle svg {
+  position: absolute;
+  left: -20px;
+  top: -10px;
+  width: calc(100% + 40px);
+  height: 80px;
+  pointer-events: none;
+}
+
+.testimonials-circle ellipse {
+  stroke: var(--color-primary);
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.testimonials-headline.visible .testimonials-circle ellipse {
+  stroke-dashoffset: 0;
+  transition-delay: 0.4s;
+}
+
+@media (max-width: 639px) {
+  .testimonials-circle svg {
+    left: -15px;
+    width: calc(100% + 30px);
+    height: 60px;
+    top: -5px;
+  }
+  
+  .testimonials-circle ellipse {
+    stroke-dasharray: 750;
+    stroke-dashoffset: 750;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-circle ellipse {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ----------------------------------------
    PROBLEM HEADLINE HAND-DRAWN UNDERLINE
    Animates on scroll when section enters view
    ---------------------------------------- */
