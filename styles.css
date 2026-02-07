@@ -772,24 +772,24 @@ a {
 .testimonials-circle svg {
   position: absolute;
   left: -20px;
-  top: -10px;
+  top: -18px;
   width: calc(100% + 40px);
-  height: 80px;
+  height: 90px;
   pointer-events: none;
 }
 
-.testimonials-circle ellipse {
+.testimonials-circle path {
   stroke: var(--color-primary);
   stroke-width: 5;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
   transition: stroke-dashoffset 1.5s ease-out;
 }
 
-.testimonials-headline.visible .testimonials-circle ellipse {
+.testimonials-headline.visible .testimonials-circle path {
   stroke-dashoffset: 0;
   transition-delay: 0.4s;
 }
@@ -798,18 +798,18 @@ a {
   .testimonials-circle svg {
     left: -15px;
     width: calc(100% + 30px);
-    height: 60px;
-    top: -5px;
+    height: 70px;
+    top: -10px;
   }
   
-  .testimonials-circle ellipse {
-    stroke-dasharray: 750;
-    stroke-dashoffset: 750;
+  .testimonials-circle path {
+    stroke-dasharray: 850;
+    stroke-dashoffset: 850;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .testimonials-circle ellipse {
+  .testimonials-circle path {
     transition: none;
     stroke-dashoffset: 0;
   }
