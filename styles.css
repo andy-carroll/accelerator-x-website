@@ -17,7 +17,7 @@
    ---------------------------------------- */
 :root {
   /* Primary brand color — used for highlights, CTAs, accents */
-  --color-primary: #00A8A8;      /* Deep Teal - richer, less baby blue */
+  --color-primary: #00C4CC;      /* Electric teal-blue, less green */
   
   /* Accent color — used for primary CTAs, important actions */
   --color-accent: #FF006E;       /* Electric Pink/Magenta */
