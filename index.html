@@ -313,13 +313,13 @@
       HEADER: Sticky navigation bar
       ========================================
       - Sticky positioning: stays visible on scroll (z-50 to stay above content)
-      - Backdrop blur: modern glass-morphism effect (requires bg-white/95 for opacity)
+      - Backdrop blur: modern glass-morphism effect (requires bg-background-95 for opacity)
       - Border: subtle separator from content
       - Max-width container: content aligns with page sections
       - CTA links to #apply anchor (smooth scroll handled by CSS)
     -->
     <header
-      class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur"
+      class="sticky top-0 z-50 border-b border-surface bg-background-95 backdrop-blur"
     >
       <div
         class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
@@ -408,10 +408,10 @@
         <!-- VIDEO PLACEHOLDER -->
         <div class="mt-12 w-full flex-1 lg:mt-0">
           <div
-            class="relative aspect-video rounded-xl bg-slate-100 flex items-center justify-center"
+            class="relative aspect-video rounded-xl bg-surface-2 flex items-center justify-center"
           >
             <div
-              class="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-lg"
+              class="flex h-20 w-20 items-center justify-center rounded-full bg-background shadow-lg"
             >
               <span class="material-symbols-outlined text-4xl text-navy">
                 play_arrow
@@ -443,7 +443,7 @@
         
         HEADING HIERARCHY: h2 (section level)
       -->
-      <section id="problem" class="bg-slate-50">
+      <section id="problem" class="bg-surface">
         <div class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
         <div class="mx-auto max-w-3xl">
           <!-- PROBLEM HEADLINE -->
@@ -484,7 +484,7 @@
         <div class="mx-auto max-w-6xl px-4">
           <!-- SECTION HEADLINE -->
           <h2
-            class="different-headline mx-auto max-w-3xl text-center font-display text-3xl font-bold leading-tight text-white lg:text-4xl"
+            class="different-headline mx-auto max-w-3xl text-center font-display text-3xl font-bold leading-tight text-background lg:text-4xl"
           >
             We're not an agency. We're not a consultancy. <span class="different-underline">We're your partner.
               <svg viewBox="0 0 280 44" preserveAspectRatio="none" aria-hidden="true">
@@ -496,7 +496,7 @@
           <!-- THREE DIFFERENTIATORS -->
           <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
             <!-- Card 1 -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <h3 class="font-display text-xl font-bold text-navy">
                 We build capability, not dependency.
               </h3>
@@ -509,7 +509,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <h3 class="font-display text-xl font-bold text-navy">
                 We deliver results, not recommendations.
               </h3>
@@ -521,7 +521,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <h3 class="font-display text-xl font-bold text-navy">
                 We stay until the job is done.
               </h3>
@@ -630,7 +630,7 @@
       </section>
 
       <!-- === WHO THIS IS FOR === -->
-      <section id="who" class="bg-slate-50 py-20 lg:py-28">
+      <section id="who" class="bg-surface py-20 lg:py-28">
         <div class="mx-auto max-w-6xl px-4">
           <!-- SECTION HEADLINE -->
           <h2
@@ -642,10 +642,10 @@
           <!-- TWO COLUMNS -->
           <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-2">
             <!-- This is for you -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-3">
                 <span
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white"
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-background"
                 >
                   <span class="material-symbols-outlined">check</span>
                 </span>
@@ -690,10 +690,10 @@
             </div>
 
             <!-- This is not for you -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-3">
                 <span
-                  class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white"
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-background"
                 >
                   <span class="material-symbols-outlined">close</span>
                 </span>
@@ -740,7 +740,7 @@
         <div class="mx-auto max-w-6xl px-4">
         <!-- SECTION HEADLINE -->
         <h2
-          class="testimonials-headline mx-auto text-center font-display text-3xl font-bold leading-tight text-white lg:text-4xl"
+          class="testimonials-headline mx-auto text-center font-display text-3xl font-bold leading-tight text-background lg:text-4xl"
         >
           <span class="testimonials-circle">What our clients say
             <svg viewBox="0 0 320 92" preserveAspectRatio="none" aria-hidden="true">
@@ -752,7 +752,7 @@
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
           <!-- Testimonial 1 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-white p-8">
+          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
                 <span aria-hidden="true">★</span>
@@ -763,7 +763,7 @@
               </div>
               <span class="sr-only">5 out of 5 stars</span>
             </div>
-            <p class="flex-1 italic leading-relaxed text-slate-600">
+            <p class="flex-1 italic leading-relaxed text-body">
               "They helped us get clarity on where AI could actually move the
               needle — then built the first workflows alongside our team.
               Six weeks later we had working internal copilots and a backlog
@@ -776,7 +776,7 @@
           </div>
 
           <!-- Testimonial 2 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-white p-8">
+          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
                 <span aria-hidden="true">★</span>
@@ -787,7 +787,7 @@
               </div>
               <span class="sr-only">5 out of 5 stars</span>
             </div>
-            <p class="flex-1 italic leading-relaxed text-slate-600">
+            <p class="flex-1 italic leading-relaxed text-body">
               "It's rare to find people who can bridge strategy and delivery.
               They gave our leadership team confidence, then got in the weeds
               with us to make it real. We're running faster decision cycles
@@ -800,7 +800,7 @@
           </div>
 
           <!-- Testimonial 3 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-white p-8">
+          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
                 <span aria-hidden="true">★</span>
@@ -811,7 +811,7 @@
               </div>
               <span class="sr-only">5 out of 5 stars</span>
             </div>
-            <p class="flex-1 italic leading-relaxed text-slate-600">
+            <p class="flex-1 italic leading-relaxed text-body">
               "The ROI was obvious within the first cycle. We've now run three
               cycles with them and the business is fundamentally different."
             </p>
@@ -825,7 +825,7 @@
       </section>
 
       <!-- === ABOUT US === -->
-      <section id="about" class="bg-slate-50 py-20 lg:py-28">
+      <section id="about" class="bg-surface py-20 lg:py-28">
         <div class="mx-auto max-w-6xl px-4">
           <!-- SECTION HEADLINE -->
           <h2
@@ -844,10 +844,10 @@
           <!-- TWO BIOS -->
           <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-2">
             <!-- Toby -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
                 <div
-                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-white"
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-background"
                 >
                   TH
                 </div>
@@ -867,10 +867,10 @@
             </div>
 
             <!-- Andy -->
-            <div class="card-hoverable rounded-xl bg-white p-8 shadow-sm">
+            <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
                 <div
-                  class="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-xl font-bold text-white"
+                  class="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-background text-xl font-bold"
                 >
                   AC
                 </div>
@@ -924,21 +924,21 @@
       <section id="apply" class="bg-navy py-20 lg:py-28">
         <div class="apply-shell mx-auto max-w-3xl px-4 text-center">
           <div class="apply-heading-wrap">
-            <h2 class="font-display text-3xl font-bold leading-tight text-white lg:text-4xl">
+            <h2 class="font-display text-3xl font-bold leading-tight text-background lg:text-4xl">
               Ready to stop waiting?
             </h2>
             <svg class="apply-underline" viewBox="0 0 320 60" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M10 35 C110 60, 220 18, 310 36" />
+              <path d="M10 40 C80 10, 240 10, 310 40" />
             </svg>
           </div>
 
-          <p class="mt-6 text-lg leading-relaxed text-slate-300">
+          <p class="mt-6 text-lg leading-relaxed text-muted-on-dark">
             We work with a small number of clients at any time. If you're serious
             about AI transformation and ready to invest in the process, we'd like
             to hear from you.
           </p>
 
-          <p class="mt-4 text-slate-300">
+          <p class="mt-4 text-muted-on-dark">
             Apply below. We'll review your application, and if it looks like a fit,
             we'll send you a link to book a call.
           </p>
@@ -956,7 +956,7 @@
               name="lead-capture-form"
               method="POST"
               netlify
-              class="reveal mx-auto max-w-xl rounded-xl bg-white p-8 text-left shadow-lg"
+              class="reveal mx-auto max-w-xl rounded-xl bg-background p-8 text-left shadow-lg"
               id="lead-form"
             >
               <!-- Honeypot field: invisible to humans, catches bots -->
@@ -982,7 +982,7 @@
                   name="name"
                   required
                   minlength="2"
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="Your full name"
                 />
               </div>
@@ -997,7 +997,7 @@
                   id="email"
                   name="email"
                   required
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="you@company.com"
                 />
               </div>
@@ -1013,7 +1013,7 @@
                   name="company"
                   required
                   minlength="2"
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="Company name"
                 />
               </div>
@@ -1024,13 +1024,13 @@
                   Company Website <span class="text-accent">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="url"
                   id="website"
                   name="website"
                   required
                   minlength="3"
                   pattern="^(https?:\/\/)?[\w.-]+\.[A-Za-z]{2,}.*$"
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="accelerator.com or https://accelerator.com"
                 />
               </div>
@@ -1046,7 +1046,7 @@
                   name="role"
                   required
                   minlength="2"
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="e.g. CEO, CTO, Managing Director"
                 />
               </div>
@@ -1060,7 +1060,7 @@
                   id="timeline"
                   name="timeline"
                   required
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                 >
                   <option value="" disabled selected>Select your timeline</option>
                   <option value="immediately">Immediately</option>
@@ -1073,17 +1073,17 @@
               <!-- Message -->
               <div class="mb-6">
                 <label for="message" class="block text-sm font-medium text-navy">
-                  Message <span class="text-slate-400">(optional)</span>
+                  Message <span class="text-muted">(optional)</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows="4"
                   maxlength="500"
-                  class="mt-1 w-full rounded-md border border-slate-300 px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
                   placeholder="Tell us about your situation and what you're hoping to achieve..."
                 ></textarea>
-                <p class="mt-1 text-xs text-slate-400">Maximum 500 characters</p>
+                <p class="mt-1 text-xs text-muted">Maximum 500 characters</p>
               </div>
 
               <!-- Submit Button -->
@@ -1094,7 +1094,7 @@
                 Apply to work with us
               </button>
 
-              <p class="mt-4 text-center text-sm text-slate-500">
+              <p class="mt-4 text-center text-sm text-muted">
                 No obligation. No hard sell. We review every application personally.
               </p>
             </form>
@@ -1102,7 +1102,7 @@
             <!-- Success State (hidden by default, shown after submission) -->
             <div
               id="form-success"
-              class="reveal mx-auto hidden max-w-xl rounded-xl bg-white p-8 text-center shadow-lg"
+              class="reveal mx-auto hidden max-w-xl rounded-xl bg-background p-8 text-center shadow-lg"
               role="status"
               aria-live="polite"
             >
@@ -1114,14 +1114,14 @@
               <h3 class="font-display text-xl font-bold text-navy">
                 Application received
               </h3>
-              <p class="mt-3 text-slate-600">
+              <p class="mt-3 text-body">
                 We review every submission personally and will respond within 2 business days.
                 Check your inbox (and spam folder) for next steps.
               </p>
             </div>
           </div>
 
-          <p class="mt-4 text-sm text-slate-400">
+          <p class="mt-4 text-sm text-muted">
             No obligation. No hard sell. Just a conversation to see if we're right for each other.
           </p>
         </div>
@@ -1129,7 +1129,7 @@
     </main>
 
     <!-- === FOOTER === -->
-    <footer class="border-t border-slate-200 bg-white py-12">
+    <footer class="border-t border-surface bg-background py-12">
       <div class="mx-auto max-w-6xl px-4">
         <div class="flex flex-col items-center justify-between gap-6 lg:flex-row">
           <!-- Logo -->

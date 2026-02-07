@@ -25,11 +25,15 @@
   /* Text colors */
   --color-navy: #0f172a;         /* Primary text — dark navy */
   --color-muted: #64748b;        /* Secondary text — slate */
+  --color-body: #475569;         /* Body text — slate-600 */
+  --color-muted-on-dark: #cbd5e1; /* Muted-on-dark — slate-300 */
   --color-background: #ffffff;   /* Page background */
   
   /* Surface colors */
   --color-surface: #f8fafc;      /* Card backgrounds — light slate */
+  --color-surface-2: #f1f5f9;    /* Secondary surface — slate-100 */
   --color-border: #e2e8f0;       /* Borders — light grey */
+  --color-border-strong: #cbd5e1; /* Form field borders — slate-300 */
   
   /* Semantic colors */
   --color-success: #22c55e;
@@ -207,13 +211,17 @@ a {
 .bg-navy { background-color: var(--color-navy); }
 .bg-background { background-color: var(--color-background); }
 .bg-surface { background-color: var(--color-surface); }
+.bg-surface-2 { background-color: var(--color-surface-2); }
+.bg-background-95 { background-color: rgba(255, 255, 255, 0.95); }
 .bg-muted { background-color: var(--color-muted); }
 
 /* Text colors */
 .text-primary { color: var(--color-primary); }
 .text-accent { color: var(--color-accent); }
 .text-navy { color: var(--color-navy); }
+.text-body { color: var(--color-body); }
 .text-muted { color: var(--color-muted); }
+.text-muted-on-dark { color: var(--color-muted-on-dark); }
 .text-background { color: var(--color-background); }
 
 /* Border colors */
@@ -222,6 +230,7 @@ a {
 .border-navy { border-color: var(--color-navy); }
 .border-muted { border-color: var(--color-muted); }
 .border-surface { border-color: var(--color-border); }
+.border-strong { border-color: var(--color-border-strong); }
 
 /* ----------------------------------------
    4. TYPOGRAPHY UTILITY CLASSES
