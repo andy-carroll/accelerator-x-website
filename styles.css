@@ -740,6 +740,13 @@ a {
   pointer-events: none;
 }
 
+@media (min-width: 640px) {
+  .problem-underline svg {
+    bottom: -24px;
+    height: 72px;
+  }
+}
+
 .problem-underline path {
   stroke: var(--color-accent);
   stroke-width: 5;
