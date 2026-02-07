@@ -771,10 +771,11 @@ a {
 
 .testimonials-circle svg {
   position: absolute;
-  left: -20px;
-  top: -18px;
-  width: calc(100% + 40px);
-  height: 90px;
+  left: -40px;
+  top: -30px;
+  width: calc(100% + 80px);
+  height: calc(100% + 60px);
+  min-height: 90px;
   pointer-events: none;
 }
 
@@ -784,8 +785,8 @@ a {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
+  stroke-dasharray: 1500;
+  stroke-dashoffset: 1500;
   transition: stroke-dashoffset 1.5s ease-out;
 }
 
@@ -796,15 +797,15 @@ a {
 
 @media (max-width: 639px) {
   .testimonials-circle svg {
-    left: -15px;
-    width: calc(100% + 30px);
-    height: 70px;
-    top: -10px;
+    left: -30px;
+    width: calc(100% + 60px);
+    height: 80px;
+    top: -20px;
   }
   
   .testimonials-circle path {
-    stroke-dasharray: 850;
-    stroke-dashoffset: 850;
+    stroke-dasharray: 1200;
+    stroke-dashoffset: 1200;
   }
 }
 
