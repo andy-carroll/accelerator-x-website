@@ -72,12 +72,22 @@
   max-width: 160px;
 }
 
+/*
+  Trust Bar logo normalisation:
+  Prefer fixing assets at source (cropped + transparent). This per-logo override
+  exists only because the Premium Car Parks logo is currently a screenshot PNG.
+*/
 .trust-logo-premium {
   mix-blend-mode: multiply;
   filter: contrast(1.12) saturate(1.05);
   height: 36px;
 }
 
+/*
+  Scroll reveals:
+  - Markup uses `.reveal` plus optional delay utilities
+  - JS toggles `is-visible` (see assets/js/main.js)
+*/
 .reveal {
   opacity: 0;
   transform: translateY(20px);
