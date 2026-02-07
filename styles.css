@@ -502,7 +502,8 @@ a {
 /* Apply stroke color and opacity via CSS (design token) */
 .energy-line path {
   stroke: var(--color-accent);
-  opacity: 0.7;
+  opacity: 0.9; /* Increased from 0.7 for better visibility */
+  stroke-width: 6; /* Increased from 4 for prominence */
 }
 
 /* Desktop: horizontal line behind cards */
