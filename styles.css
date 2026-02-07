@@ -574,6 +574,19 @@ a {
 }
 
 /* 
+   ACCESSIBILITY: REDUCED MOTION
+   Respects user preference for reduced motion
+   Future animations (Phase 3) will be disabled when this preference is set
+*/
+@media (prefers-reduced-motion: reduce) {
+  .process-card,
+  .energy-line {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
    Avoids clutter of permanent underlines
