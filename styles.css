@@ -680,7 +680,7 @@ a {
   stroke-linejoin: round;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  transition: stroke-dashoffset 0.8s ease-out;
+  transition: stroke-dashoffset 1.3s ease-out;
 }
 
 /* Visible state triggers draw animations */
