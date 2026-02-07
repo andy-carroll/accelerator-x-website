@@ -488,6 +488,60 @@ a {
 }
 
 /* 
+   ENERGY LINE SVG
+   Visual connector representing the journey from overwhelmed to operational
+   More visible/prominent design feature (not subtle background)
+   Horizontal on desktop, vertical spine on mobile
+*/
+.energy-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Desktop: horizontal line behind cards */
+@media (min-width: 1024px) {
+  .energy-line {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 100px;
+    transform: translateY(-50%);
+  }
+  
+  .energy-line svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Mobile: vertical spine on left side */
+@media (max-width: 1023px) {
+  .energy-line {
+    top: 0;
+    left: 20px;
+    bottom: 0;
+    width: 20px;
+  }
+  
+  .energy-line svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Add left margin to cards for spine clearance */
+  .process-card {
+    margin-left: 48px;
+  }
+}
+
+/* Ensure cards layer above energy line */
+.process-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
    Avoids clutter of permanent underlines
