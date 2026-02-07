@@ -654,11 +654,10 @@ a {
 .apply-heading-wrap {
   position: relative;
   display: inline-block;
-  padding: 14px 18px;
+  padding: 10px 12px;
   z-index: 1;
 }
 
-.apply-halo,
 .apply-underline {
   position: absolute;
   left: 50%;
@@ -667,32 +666,21 @@ a {
   z-index: 0;
 }
 
-.apply-halo {
-  top: -4px;
-  width: 115%;
-  height: 110px;
-}
-
 .apply-underline {
-  bottom: -10px;
-  width: 95%;
-  height: 60px;
+  bottom: -12px;
+  width: 90%;
+  height: 46px;
 }
 
-.apply-halo path,
 .apply-underline path {
   stroke: var(--color-accent);
-  stroke-width: 5.5;
+  stroke-width: 5;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
   transition: stroke-dashoffset 0.8s ease-out;
-}
-
-.apply-underline path {
-  stroke-width: 5;
 }
 
 .apply-form-wrap {
@@ -738,28 +726,18 @@ a {
 }
 
 /* Visible state triggers draw animations */
-.apply-visible .apply-halo path,
 .apply-visible .apply-underline path,
 .apply-visible .apply-pointer path {
   stroke-dashoffset: 0;
 }
 
 /* Gentle idle loop after initial draw */
-.apply-animate-loop .apply-halo path {
-  animation: apply-wiggle 6s ease-in-out infinite;
-}
-
 .apply-animate-loop .apply-underline path {
   animation: apply-wiggle-small 6s ease-in-out infinite;
 }
 
 .apply-animate-loop .apply-pointer {
   animation: apply-bob 3s ease-in-out infinite;
-}
-
-@keyframes apply-wiggle {
-  0%, 100% { transform: translateX(0) rotate(0deg); }
-  50% { transform: translateX(2px) rotate(0.2deg); }
 }
 
 @keyframes apply-wiggle-small {
@@ -774,12 +752,8 @@ a {
 
 /* Mobile tuning */
 @media (max-width: 639px) {
-  .apply-halo {
-    width: 120%;
-    height: 110px;
-  }
   .apply-underline {
-    width: 105%;
+    width: 100%;
   }
   .apply-pointer {
     top: -70px;
@@ -788,14 +762,12 @@ a {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .apply-halo path,
   .apply-underline path,
   .apply-pointer path {
     transition: none;
     stroke-dashoffset: 0;
   }
   .apply-pointer,
-  .apply-animate-loop .apply-halo path,
   .apply-animate-loop .apply-underline path,
   .apply-animate-loop .apply-pointer {
     animation: none;
