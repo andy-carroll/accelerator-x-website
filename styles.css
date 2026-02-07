@@ -379,7 +379,7 @@ a {
 .process-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px;
+  gap: var(--space-8); /* 32px */
   margin-top: 3rem;
 }
 
@@ -414,8 +414,8 @@ a {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); /* Safari support */
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 24px;
-  padding: 40px 32px;
+  border-radius: var(--radius-2xl); /* 24px */
+  padding: var(--space-10) var(--space-8); /* 40px 32px */
   overflow: hidden;
   
   /* Fallback for browsers without backdrop-filter */
@@ -497,6 +497,12 @@ a {
   position: absolute;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Apply stroke color and opacity via CSS (design token) */
+.energy-line path {
+  stroke: var(--color-accent);
+  opacity: 0.7;
 }
 
 /* Desktop: horizontal line behind cards */
@@ -610,6 +616,7 @@ a {
    Energy line draw animation
    Uses stroke-dasharray/dashoffset technique for path reveal
    Starts 0.2s after cards begin animating
+   Note: stroke color and opacity defined above
 */
 .energy-line path {
   stroke-dasharray: 2000;
