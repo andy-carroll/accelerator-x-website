@@ -705,14 +705,51 @@ a {
   }
 }
 
-/* Reduced motion support */
+.different-headline {
+  position: relative;
+  display: block;
+}
+
+.different-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.different-underline svg {
+  position: absolute;
+  left: 0;
+  bottom: -14px;
+  width: 100%;
+  height: 44px;
+  pointer-events: none;
+}
+
+.different-underline path {
+  stroke: var(--color-primary);
+  stroke-width: 5;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  transition: stroke-dashoffset 1.1s ease-out;
+}
+
+.different-headline.visible .different-underline path {
+  stroke-dashoffset: 0;
+}
+
+@media (max-width: 639px) {
+  .different-underline svg {
+    height: 36px;
+    bottom: -10px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .apply-underline path {
+  .different-underline path {
     transition: none;
     stroke-dashoffset: 0;
-  }
-  .apply-animate-loop .apply-underline path {
-    animation: none;
   }
 }
 
