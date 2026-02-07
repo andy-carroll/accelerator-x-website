@@ -438,8 +438,12 @@
         <div class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
         <div class="mx-auto max-w-3xl">
           <!-- PROBLEM HEADLINE -->
-          <h2 class="reveal font-display text-3xl font-bold leading-tight text-navy lg:text-4xl">
-            You've tried. It hasn't worked.
+          <h2 class="reveal problem-headline font-display text-3xl font-bold leading-tight text-navy lg:text-4xl">
+            You've tried. <span class="problem-underline">It hasn't worked.
+              <svg viewBox="0 0 240 40" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M6 24 C70 36, 170 8, 234 18" />
+              </svg>
+            </span>
           </h2>
 
           <!-- PROBLEM BODY -->
@@ -1286,6 +1290,25 @@
         // Process section animations: cards + energy line
         // Triggers when section enters viewport (20% threshold)
         // Adds 'visible' class to trigger CSS transitions
+        const problemHeadline = document.querySelector('#problem .problem-headline');
+        if (problemHeadline && !prefersReducedMotion) {
+          const problemObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  problemHeadline.classList.add('visible');
+                  problemObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+
+          problemObserver.observe(problemHeadline);
+        } else if (problemHeadline && prefersReducedMotion) {
+          problemHeadline.classList.add('visible');
+        }
+
         const processSection = document.querySelector('#process');
         const processCards = document.querySelectorAll('.process-card');
         const energyLine = document.querySelector('.energy-line');
