@@ -574,15 +574,68 @@ a {
 }
 
 /* 
+   SCROLL-TRIGGERED ANIMATIONS (Phase 3)
+   Cards fade in and slide up when section enters viewport
+   Energy line draws from left to right (desktop) or top to bottom (mobile)
+   Staggered delays create cascading effect
+*/
+
+/* Card entrance animation - initial hidden state */
+.process-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+/* Card visible state - triggered by Intersection Observer */
+.process-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for cascading effect */
+.process-card:nth-child(1) {
+  transition-delay: 0s;
+}
+
+.process-card:nth-child(2) {
+  transition-delay: 0.1s;
+}
+
+.process-card:nth-child(3) {
+  transition-delay: 0.2s;
+}
+
+/* 
+   Energy line draw animation
+   Uses stroke-dasharray/dashoffset technique for path reveal
+   Starts 0.2s after cards begin animating
+*/
+.energy-line path {
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  transition: stroke-dashoffset 1.2s ease-in-out 0.2s;
+}
+
+.energy-line.visible path {
+  stroke-dashoffset: 0;
+}
+
+/* 
    ACCESSIBILITY: REDUCED MOTION
    Respects user preference for reduced motion
-   Future animations (Phase 3) will be disabled when this preference is set
+   Disables all animations and shows final state immediately
 */
 @media (prefers-reduced-motion: reduce) {
-  .process-card,
-  .energy-line {
+  .process-card {
+    opacity: 1;
+    transform: none;
     transition: none;
-    animation: none;
+  }
+  
+  .energy-line path {
+    stroke-dashoffset: 0;
+    transition: none;
   }
 }
 

@@ -1245,7 +1245,49 @@
           rootMargin: '0px 0px -50px 0px', // trigger when 50px from bottom
           threshold: 0.1 // 10% of element must be visible
         };
-        
+
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+
+        // Process section animations: cards + energy line
+        // Triggers when section enters viewport (20% threshold)
+        // Adds 'visible' class to trigger CSS transitions
+        const processSection = document.querySelector('#process');
+        const processCards = document.querySelectorAll('.process-card');
+        const energyLine = document.querySelector('.energy-line');
+
+        if (processSection && processCards.length > 0 && energyLine) {
+          const processObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  // Trigger card animations (staggered via CSS)
+                  processCards.forEach((card) => card.classList.add('visible'));
+                  // Trigger energy line draw animation
+                  energyLine.classList.add('visible');
+                  // Unobserve after triggering (animate once)
+                  processObserver.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.2 }
+          );
+
+          processObserver.observe(processSection);
+        }
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
