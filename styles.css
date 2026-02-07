@@ -542,6 +542,38 @@ a {
 }
 
 /* 
+   HAND-DRAWN CALLOUT
+   Organic, irregular border for money-back guarantee (Step 1 only)
+   Truly hand-sketched appearance - not geometric or corporate
+   Uses pseudo-element for decorative border layer
+*/
+.callout {
+  display: inline-block;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 18px;
+  margin: 16px 0;
+  position: relative;
+}
+
+/* 
+   Hand-drawn circle border
+   Irregular border-radius creates organic, sketched appearance
+   Each corner has different radius values for natural imperfection
+   70% opacity softens the effect, feels less mechanical
+*/
+.callout::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--color-accent);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
    Avoids clutter of permanent underlines
