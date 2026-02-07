@@ -438,10 +438,10 @@
         <div class="mx-auto max-w-6xl px-4 py-20 lg:py-28">
         <div class="mx-auto max-w-3xl">
           <!-- PROBLEM HEADLINE -->
-          <h2 class="reveal problem-headline font-display text-3xl font-bold leading-tight text-navy lg:text-4xl">
+          <h2 class="problem-headline font-display text-3xl font-bold leading-tight text-navy lg:text-4xl">
             You've tried. <span class="problem-underline">It hasn't worked.
-              <svg viewBox="0 0 240 40" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M6 24 C70 36, 170 8, 234 18" />
+              <svg viewBox="0 0 240 90" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M8 72 C110 86, 190 46, 232 70" pathLength="100" />
               </svg>
             </span>
           </h2>
@@ -1291,22 +1291,21 @@
         // Triggers when section enters viewport (20% threshold)
         // Adds 'visible' class to trigger CSS transitions
         const problemHeadline = document.querySelector('#problem .problem-headline');
-        if (problemHeadline && !prefersReducedMotion) {
-          const problemObserver = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  problemHeadline.classList.add('visible');
-                  problemObserver.unobserve(entry.target);
-                }
-              });
-            },
-            { threshold: 0.2 }
-          );
+        if (problemHeadline) {
+          const revealProblem = () => {
+            problemHeadline.classList.add('visible');
+            window.removeEventListener('scroll', onScrollTrigger);
+          };
 
-          problemObserver.observe(problemHeadline);
-        } else if (problemHeadline && prefersReducedMotion) {
-          problemHeadline.classList.add('visible');
+          const onScrollTrigger = () => {
+            if (window.scrollY > 80) revealProblem();
+          };
+
+          if (prefersReducedMotion) {
+            revealProblem();
+          } else {
+            window.addEventListener('scroll', onScrollTrigger, { passive: true });
+          }
         }
 
         const processSection = document.querySelector('#process');
