@@ -445,6 +445,49 @@ a {
 }
 
 /* 
+   STEP INDICATOR
+   Smaller 40px circles (down from 64px) for cleaner card layout
+   Teal background with white text maintains brand consistency
+*/
+.process-card .step-indicator {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* 
+   ACCENT HIGHLIGHTS
+   Coral color on action words ("Start", "keep going", "stay")
+   Draws eye to key verbs, reinforces momentum theme
+*/
+.accent {
+  color: var(--color-accent);
+}
+
+/* 
+   PRICE BADGE
+   Teal pill-style badge for pricing information
+   Inline-block allows natural text flow
+*/
+.price-badge {
+  display: inline-block;
+  background: var(--color-primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 100px;
+  margin-top: 1.5rem;
+}
+
+/* 
    LINK UNDERLINE REVEAL
    Elegant progressive disclosure for text links
    Avoids clutter of permanent underlines
