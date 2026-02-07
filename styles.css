@@ -683,51 +683,8 @@ a {
   transition: stroke-dashoffset 0.8s ease-out;
 }
 
-.apply-form-wrap {
-  position: relative;
-}
-
-.apply-pointer {
-  position: absolute;
-  left: 50%;
-  top: -70px;
-  transform: translateX(-50%);
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  pointer-events: none;
-}
-
-.apply-pointer svg {
-  width: 80px;
-  height: 120px;
-}
-
-.apply-pointer path {
-  stroke: var(--color-accent);
-  stroke-width: 4;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 600;
-  stroke-dashoffset: 600;
-  transition: stroke-dashoffset 0.7s ease-out;
-}
-
-.apply-pointer-label {
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-}
-
 /* Visible state triggers draw animations */
-.apply-visible .apply-underline path,
-.apply-visible .apply-pointer path {
+.apply-visible .apply-underline path {
   stroke-dashoffset: 0;
 }
 
@@ -736,18 +693,9 @@ a {
   animation: apply-wiggle-small 6s ease-in-out infinite;
 }
 
-.apply-animate-loop .apply-pointer {
-  animation: apply-bob 3s ease-in-out infinite;
-}
-
 @keyframes apply-wiggle-small {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(1px); }
-}
-
-@keyframes apply-bob {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 4px); }
 }
 
 /* Mobile tuning */
@@ -755,21 +703,15 @@ a {
   .apply-underline {
     width: 100%;
   }
-  .apply-pointer {
-    top: -70px;
-  }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .apply-underline path,
-  .apply-pointer path {
+  .apply-underline path {
     transition: none;
     stroke-dashoffset: 0;
   }
-  .apply-pointer,
-  .apply-animate-loop .apply-underline path,
-  .apply-animate-loop .apply-pointer {
+  .apply-animate-loop .apply-underline path {
     animation: none;
   }
 }
