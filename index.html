@@ -28,7 +28,7 @@
   - Semantic landmark elements (header, main, section, footer)
   - Reduced motion support via CSS media query
 -->
-<html lang="en">
+<html lang="en-GB">
   <head>
     <!-- 
       CHARACTER ENCODING & VIEWPORT
@@ -85,10 +85,19 @@
       Weights: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
       display=swap: Use fallback font immediately, swap when loaded (FOUT)
     -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- 
       DESIGN SYSTEM CSS
@@ -142,7 +151,7 @@
     -->
     <meta property="og:title" content="Accelerator X — AI Transformation for Leaders" />
     <meta property="og:description" content="Done waiting for AI results? We build tools, skills, and systems that make AI work in the real world." />
-    <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image.jpg" />
+    <meta property="og:image" content="https://accelerator-x.ai/assets/icons/ax-logo.svg" />
     <meta property="og:url" content="https://accelerator-x.ai/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Accelerator X" />
@@ -155,7 +164,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Accelerator X — AI Transformation for Leaders" />
     <meta name="twitter:description" content="Done waiting for AI results? We build tools, skills, and systems that make AI work." />
-    <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image.jpg" />
+    <meta name="twitter:image" content="https://accelerator-x.ai/assets/icons/ax-logo.svg" />
     
     <!-- 
       ========================================
@@ -188,7 +197,7 @@
           "url": "https://accelerator-x.ai",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://accelerator-x.ai/assets/images/logo.png"
+            "url": "https://accelerator-x.ai/assets/icons/ax-logo.svg"
           },
           "description": "AI transformation consultancy for business leaders. Tools, skills, and systems that make AI work in the real world.",
           "founders": [
