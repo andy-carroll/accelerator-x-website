@@ -1271,8 +1271,6 @@
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                   applyShell.classList.add('apply-visible');
-                  // Start idle loop after initial draw
-                  setTimeout(() => applyShell.classList.add('apply-animate-loop'), 5000);
                   applyObserver.unobserve(entry.target);
                 }
               });
