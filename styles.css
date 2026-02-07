@@ -771,11 +771,12 @@ a {
 
 .testimonials-circle svg {
   position: absolute;
-  left: -24px;
+  left: -30px;
   top: -24px;
-  width: calc(100% + 48px);
+  width: calc(100% + 60px);
   height: 92px;
   pointer-events: none;
+  overflow: visible;
 }
 
 .testimonials-circle path {
@@ -796,8 +797,8 @@ a {
 
 @media (max-width: 639px) {
   .testimonials-circle svg {
-    left: -18px;
-    width: calc(100% + 36px);
+    left: -22px;
+    width: calc(100% + 44px);
     height: 84px;
     top: -22px;
   }
