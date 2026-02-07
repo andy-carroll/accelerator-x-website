@@ -1,4 +1,16 @@
 (() => {
+  // ========================================
+  // NETLIFY FORMS (LEAD CAPTURE)
+  // ========================================
+  // Purpose:
+  // - Submit the form via fetch (no redirect) and swap to an inline success state.
+  // - Keep index.html declarative by avoiding inline scripts.
+  //
+  // Conventions:
+  // - `#lead-form` is the source of truth for field names used by Netlify.
+  // - `#form-success` stays in the DOM (a11y-friendly) and is toggled via `hidden`.
+  // - Website field is normalised to include a scheme (https://) to prevent partial URLs.
+
   const form = document.getElementById('lead-form');
   if (!form) return;
 
