@@ -15,6 +15,8 @@
   if (!form) return;
 
   const successDiv = document.getElementById('form-success');
+  const errorDiv = document.getElementById('form-error');
+  let isSubmitting = false;
 
   const normaliseWebsiteField = () => {
     const websiteField = document.getElementById('website');
@@ -32,6 +34,22 @@
     submitBtn.disabled = disabled;
     submitBtn.classList.toggle('opacity-70', disabled);
     if (label) submitBtn.textContent = label;
+  };
+
+  const showErrorState = (message) => {
+    if (!errorDiv) return;
+
+    errorDiv.textContent =
+      message ||
+      "There was an error submitting your application. Please try again or email us directly at hello@accelerator-x.ai";
+    errorDiv.classList.remove('hidden');
+  };
+
+  const clearErrorState = () => {
+    if (!errorDiv) return;
+
+    errorDiv.textContent = '';
+    errorDiv.classList.add('hidden');
   };
 
   const showSuccessState = () => {
@@ -57,7 +75,12 @@
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+    isSubmitting = true;
+
     normaliseWebsiteField();
+
+    clearErrorState();
 
     const submitBtn = form.querySelector('button[type="submit"]');
     setSubmitState(submitBtn, {
@@ -70,19 +93,24 @@
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams(new FormData(form)).toString(),
     })
-      .then(() => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Unexpected response status: ${response.status}`);
+        }
+
         showSuccessState();
       })
       .catch((error) => {
         console.error('Form submission error:', error);
-        alert(
-          "There was an error submitting your application. Please try again or email us directly at hello@accelerator-x.ai"
-        );
+        showErrorState();
 
         setSubmitState(submitBtn, {
           disabled: false,
           label: 'Apply to work with us',
         });
+      })
+      .finally(() => {
+        isSubmitting = false;
       });
   });
 })();
