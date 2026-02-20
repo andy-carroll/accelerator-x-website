@@ -87,8 +87,36 @@ On the website side, Phase 2 will:
 We build section-by-section, banking value and committing regularly.
 
 If you’re working through the plan, the intended commit cadence is:
+
 - scaffold
 - tokens/base
 - header
 - hero
 - …and so on
+
+## AI instruction architecture (decision record)
+
+### Decision
+
+Use a single-source, tool-agnostic instruction system:
+
+- Canonical rules: `AI-RULES.md`
+- Thin adapters: `AGENTS.md` and `CLAUDE.md`
+
+### Why this decision was made
+
+- We use multiple AI coding tools and want one place to maintain operating rules.
+- Duplicating instructions across tool-specific files creates drift and ambiguity.
+- Thin adapters keep compatibility while preserving a single source of truth.
+
+### Operating rule
+
+- Update `AI-RULES.md` first when workflow/policy changes.
+- Keep `AGENTS.md` and `CLAUDE.md` minimal and referential.
+- If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
+
+### Related files
+
+- `AI-RULES.md`
+- `AGENTS.md`
+- `CLAUDE.md`
