@@ -120,3 +120,8 @@ Pause and ask human before:
 
 Keep this file concise and operational.
 If project workflow changes, update this file first, then adapters.
+
+## 10) Decision log
+
+- 2026-02-14: adopted single-source AI instructions (`AI-RULES.md`) with thin adapter files (`AGENTS.md`, `CLAUDE.md`) to avoid rule drift across tools.
+- Rationale and context: see `README.md` -> "AI instruction architecture (decision record)".
