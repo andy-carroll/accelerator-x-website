@@ -284,6 +284,10 @@ a {
 .text-muted { color: var(--color-muted); }
 .text-muted-on-dark { color: var(--color-muted-on-dark); }
 .text-background { color: var(--color-background); }
+.text-amber  { color: var(--color-amber); }
+.text-purple { color: var(--color-purple); }
+.text-green  { color: var(--color-green); }
+.text-blue   { color: var(--color-blue); }
 
 /* Border colors */
 .border-primary { border-color: var(--color-primary); }
@@ -453,9 +457,47 @@ a {
 
 .card-hoverable:hover {
   transform: translateY(-4px);
-  box-shadow: 
+  box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.04),
     0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* ----------------------------------------
+   Differentiator cards with overlapping illustrations
+   ---------------------------------------- */
+.diff-card {
+  position: relative;
+  overflow: visible;
+  padding-top: 5rem; /* space for illustration overlap inside card */
+}
+
+.diff-card-illustration {
+  position: absolute;
+  top: 0;
+  left: var(--space-8);
+  transform: translateY(-66%); /* 2/3 above card top edge */
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius-lg);
+  object-fit: cover;
+}
+
+/* Navy border for illustrations with white/transparent backgrounds */
+.diff-card-illustration--bordered {
+  border: 3px solid var(--color-navy);
+}
+
+.diff-card h3 {
+  margin-top: var(--space-6); /* breathing room below illustration */
+  font-size: 1.75rem;         /* between text-2xl and text-3xl */
+  line-height: 1.0;
+  font-weight: 900;
+  letter-spacing: -0.05em;   /* tighter tracking to match brand pack */
+}
+
+.diff-card p {
+  color: var(--color-body);
+  letter-spacing: -0.01em;
 }
 
 /* Testimonial stars */
