@@ -72,13 +72,19 @@
    ---------------------------------------- */
 :root {
   /* Primary brand color — used for highlights, CTAs, accents */
-  --color-primary: #00C4CC;      /* Electric teal-blue, less green */
-  
+  --color-primary: #0AADCE;      /* Brand teal/cyan */
+
   /* Accent color — used for primary CTAs, important actions */
-  --color-accent: #FF006E;       /* Electric Pink/Magenta */
-  
+  --color-accent: #E93F8E;       /* Brand pink/magenta */
+
+  /* Extended brand palette (pixel-sampled from brand pack) */
+  --color-amber: #FEA700;
+  --color-blue: #3477F5;
+  --color-green: #1FBD53;
+  --color-purple: #882DE7;
+
   /* Text colors */
-  --color-navy: #0f172a;         /* Primary text — dark navy */
+  --color-navy: #1B2A4A;         /* Primary text — brand navy */
   --color-muted: #64748b;        /* Secondary text — slate */
   --color-body: #475569;         /* Body text — slate-600 */
   --color-muted-on-dark: #cbd5e1; /* Muted-on-dark — slate-300 */
@@ -365,7 +371,12 @@ a {
 
 .btn-primary {
   background: var(--color-primary);
-  color: var(--color-navy);
+  color: var(--color-background);
+}
+
+.btn-blue {
+  background: var(--color-blue);
+  color: var(--color-background);
 }
 
 /* 
