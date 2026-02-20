@@ -202,16 +202,19 @@ Our approach is simpler: **semantic class names** that describe purpose, not pre
 
 ### Scenario 3: Change Font
 
+Font is self-hosted — no Google Fonts dependency.
+
+1. Add `woff2` files to `assets/fonts/`
+2. Add `@font-face` declarations at the top of `styles.css` (see Section 0)
+3. Update font variables in `:root`:
+
 ```css
-/* styles.css line 39-40 */
---font-display: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
---font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+/* styles.css — :root */
+--font-display: "NewFont", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+--font-body: "NewFont", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 ```
 
-Also update Google Fonts in `index.html`:
-```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-```
+4. Update `<link rel="preload">` hints in `index.html` to point to the new font files.
 
 ### Scenario 4: Adjust Spacing Scale
 
@@ -376,7 +379,7 @@ Use in HTML:
 |------|--------------|---------------|
 | Change primary color | styles.css | :root --color-primary |
 | Change accent/CTA color | styles.css | :root --color-accent |
-| Change font | styles.css | :root --font-display | 
+| Change font | styles.css + assets/fonts/ | Section 0 @font-face + :root --font-display |
 | Change spacing | styles.css | :root --space-* |
 | Add component | styles.css | Component Patterns section |
 | Update page title | index.html | `<title>` tag |

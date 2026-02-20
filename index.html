@@ -72,32 +72,15 @@
     -->
     <meta name="robots" content="index, follow" />
     
-    <!-- 
-      PERFORMANCE: PRECONNECT HINTS
-      Tells browser to establish early connection to Google Fonts servers
-      Reduces perceived load time by ~100-200ms on first visit
+    <!--
+      PERFORMANCE: FONT PRELOADS
+      Self-hosted Aptos — aligns with Accelerator Solutions brand.
+      Preloading the two most-used weights (400 regular + 700 bold) ensures
+      above-the-fold text renders with the correct font on first paint.
+      Remaining weights (600 semibold + italics) load without blocking.
     -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    
-    <!-- 
-      GOOGLE FONTS: Space Grotesk
-      Weights: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
-      display=swap: Use fallback font immediately, swap when loaded (FOUT)
-    -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos-Bold.woff2" crossorigin />
 
     <!-- 
       DESIGN SYSTEM CSS
