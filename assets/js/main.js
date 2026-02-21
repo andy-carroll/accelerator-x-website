@@ -56,9 +56,11 @@
   const revealProcessSection = () => {
     const processCards = document.querySelectorAll('.process-card');
     const energyLine = document.querySelector('.energy-line');
+    const connector = document.querySelector('.step-connector');
 
     processCards.forEach((card) => card.classList.add('visible'));
     if (energyLine) energyLine.classList.add('visible');
+    if (connector) connector.classList.add('visible');
   };
 
   const revealApplySection = () => {
