@@ -657,10 +657,10 @@ a {
 
 /*
    STEP INDICATOR
-   64px circles overlapping card top edge
-   Per-card colours, light-weight number for clean look
+   64px circle overlapping card top edge with white halo
+   Positioned inside cards — simple, works on all screen sizes
 */
-.process-card .step-indicator {
+.step-indicator {
   position: absolute;
   top: 0;
   left: var(--space-8);
@@ -676,6 +676,7 @@ a {
   color: white;
   font-weight: 400;
   font-size: 28px;
+  box-shadow: 0 0 0 6px white;
 }
 
 /* Per-card step indicator colours */
@@ -720,50 +721,6 @@ a {
   margin-top: 1.5rem;
 }
 
-/*
-   DOTTED CONNECTOR LINE
-   Animated dotted path connecting the three step indicators
-   Desktop only — hidden on mobile (single-column stack)
-   Draws slowly (3s) after cards appear
-*/
-.energy-line {
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-  display: none;
-}
-
-/* Desktop: horizontal dotted line at step-indicator height */
-@media (min-width: 1024px) {
-  .energy-line {
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 40px; /* matches step-indicator height */
-    transform: translateY(-50%); /* align with indicator centres */
-  }
-
-  .energy-line svg {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.energy-line path {
-  stroke: var(--color-primary);
-  stroke-width: 3;
-  stroke-dasharray: 8 8;        /* dotted pattern */
-  stroke-linecap: round;
-  opacity: 0.5;
-  fill: none;
-}
-
-/* Ensure cards layer above connector line */
-.process-card {
-  position: relative;
-  z-index: 1;
-}
 
 /* 
    HAND-DRAWN CALLOUT
@@ -798,9 +755,8 @@ a {
 }
 
 /*
-   SCROLL-TRIGGERED ANIMATIONS (Phase 3)
+   SCROLL-TRIGGERED ANIMATIONS
    Cards fade in and slide up when section enters viewport
-   Dotted connector draws between step indicators (desktop only)
    Staggered delays create cascading effect
 */
 
@@ -831,27 +787,12 @@ a {
 }
 
 /*
-   Dotted connector draw animation
-   Uses stroke-dashoffset technique layered on the dotted pattern
-   Slow 3s reveal starts 0.4s after cards begin appearing
-*/
-.energy-line path {
-  stroke-dashoffset: 2000;
-  transition: stroke-dashoffset 3s ease-in-out 0.4s;
-}
-
-.energy-line.visible path {
-  stroke-dashoffset: 0;
-}
-
-/* 
    ACCESSIBILITY: REDUCED MOTION
    Respects user preference for reduced motion
    Disables all animations and shows final state immediately
 */
 @media (prefers-reduced-motion: reduce) {
-  .process-card,
-  .energy-line {
+  .process-card {
     transition: none;
     animation: none;
   }
