@@ -83,6 +83,11 @@
   --color-green: #1FBD53;
   --color-purple: #882DE7;
 
+  /* Pastel/light variants (pixel-sampled from brand pack) */
+  --color-primary-light: #C8F9FE;  /* teal wash */
+  --color-accent-light: #FCE3F1;   /* pink wash */
+  --color-purple-light: #F1E5FF;   /* purple wash */
+
   /* Text colors */
   --color-navy: #1B2A4A;         /* Primary text — brand navy */
   --color-muted: #64748b;        /* Secondary text — slate */
@@ -275,6 +280,9 @@ a {
 .bg-surface-2 { background-color: var(--color-surface-2); }
 .bg-background-95 { background-color: rgba(255, 255, 255, 0.95); }
 .bg-muted { background-color: var(--color-muted); }
+.bg-primary-light { background-color: var(--color-primary-light); }
+.bg-accent-light  { background-color: var(--color-accent-light); }
+.bg-purple-light  { background-color: var(--color-purple-light); }
 
 /* Text colors */
 .text-primary { color: var(--color-primary); }
@@ -583,10 +591,11 @@ a {
    32px gap maintains breathing room between cards
 */
 .process-grid {
+  position: relative; /* anchor for .energy-line absolute positioning */
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-8); /* 32px */
-  margin-top: 3rem;
+  margin-top: 4rem; /* extra room for step indicators that overflow card top */
 }
 
 @media (min-width: 1024px) {
@@ -616,19 +625,15 @@ a {
 */
 .process-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: var(--radius-2xl); /* 24px */
-  padding: var(--space-10) var(--space-8); /* 40px 32px */
-  overflow: hidden;
-  
-  /* Fallback for browsers without backdrop-filter */
-  @supports not (backdrop-filter: blur(10px)) {
-    background: rgba(255, 255, 255, 0.95);
-  }
+  padding: var(--space-12) var(--space-8) var(--space-10); /* extra top for overlapping indicator */
+  overflow: visible; /* allow step indicator to escape card bounds */
 }
+
+/* Per-card pastel backgrounds */
+.process-card--primary { background-color: var(--color-primary-light); }
+.process-card--purple  { background-color: var(--color-purple-light); }
+.process-card--accent  { background-color: var(--color-accent-light); }
 
 /* 
    BACKGROUND NUMBER
@@ -650,32 +655,54 @@ a {
   font-family: var(--font-display);
 }
 
-/* 
+/*
    STEP INDICATOR
-   Smaller 40px circles (down from 64px) for cleaner card layout
-   Teal background with white text maintains brand consistency
+   64px circles overlapping card top edge
+   Per-card colours, light-weight number for clean look
 */
 .process-card .step-indicator {
-  width: 40px;
-  height: 40px;
+  position: absolute;
+  top: 0;
+  left: var(--space-8);
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 64px;
+  height: 64px;
   background: var(--color-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 28px;
 }
 
-/* 
+/* Per-card step indicator colours */
+.process-card--purple .step-indicator { background: var(--color-purple); }
+.process-card--accent .step-indicator { background: var(--color-accent); }
+
+/* Process card heading typography — big, bold, tight */
+.process-card h3 {
+  font-size: 2.25rem;
+  line-height: 1.0;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+/*
    ACCENT HIGHLIGHTS
-   Coral color on action words ("Start", "keep going", "stay")
-   Draws eye to key verbs, reinforces momentum theme
+   Bold coloured key verbs — per-card colours
+   Card 1 (primary): teal, Card 2 (purple): purple, Card 3 (accent): pink
 */
 .accent {
   color: var(--color-accent);
+  font-weight: inherit;
 }
+
+.process-card--primary .accent { color: var(--color-primary); }
+.process-card--purple .accent  { color: var(--color-purple); }
+.process-card--accent .accent  { color: var(--color-accent); }
 
 /* 
    PRICE BADGE
@@ -693,62 +720,46 @@ a {
   margin-top: 1.5rem;
 }
 
-/* 
-   ENERGY LINE SVG
-   Visual connector representing the journey from overwhelmed to operational
-   More visible/prominent design feature (not subtle background)
-   Horizontal on desktop, vertical spine on mobile
+/*
+   DOTTED CONNECTOR LINE
+   Animated dotted path connecting the three step indicators
+   Desktop only — hidden on mobile (single-column stack)
+   Draws slowly (3s) after cards appear
 */
 .energy-line {
   position: absolute;
   pointer-events: none;
   z-index: 0;
+  display: none;
 }
 
-/* Apply stroke color and opacity via CSS (design token) */
-.energy-line path {
-  stroke: var(--color-accent);
-  opacity: 0.9; /* Increased from 0.7 for better visibility */
-  stroke-width: 6; /* Increased from 4 for prominence */
-}
-
-/* Desktop: horizontal line behind cards */
+/* Desktop: horizontal dotted line at step-indicator height */
 @media (min-width: 1024px) {
   .energy-line {
-    top: 50%;
+    display: block;
+    top: 0;
     left: 0;
     right: 0;
-    height: 100px;
-    transform: translateY(-50%);
+    height: 40px; /* matches step-indicator height */
+    transform: translateY(-50%); /* align with indicator centres */
   }
-  
+
   .energy-line svg {
     width: 100%;
     height: 100%;
   }
 }
 
-/* Mobile: vertical spine on left side */
-@media (max-width: 1023px) {
-  .energy-line {
-    top: 0;
-    left: 20px;
-    bottom: 0;
-    width: 20px;
-  }
-  
-  .energy-line svg {
-    width: 100%;
-    height: 100%;
-  }
-  
-  /* Add left margin to cards for spine clearance */
-  .process-card {
-    margin-left: 48px;
-  }
+.energy-line path {
+  stroke: var(--color-primary);
+  stroke-width: 3;
+  stroke-dasharray: 8 8;        /* dotted pattern */
+  stroke-linecap: round;
+  opacity: 0.5;
+  fill: none;
 }
 
-/* Ensure cards layer above energy line */
+/* Ensure cards layer above connector line */
 .process-card {
   position: relative;
   z-index: 1;
@@ -762,7 +773,7 @@ a {
 */
 .callout {
   display: inline-block;
-  color: var(--color-accent);
+  color: var(--color-primary);
   font-weight: 600;
   font-size: 15px;
   padding: 10px 18px;
@@ -780,16 +791,16 @@ a {
   content: '';
   position: absolute;
   inset: -4px;
-  border: 2px solid var(--color-accent);
+  border: 2px solid var(--color-primary);
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   opacity: 0.7;
   pointer-events: none;
 }
 
-/* 
+/*
    SCROLL-TRIGGERED ANIMATIONS (Phase 3)
    Cards fade in and slide up when section enters viewport
-   Energy line draws from left to right (desktop) or top to bottom (mobile)
+   Dotted connector draws between step indicators (desktop only)
    Staggered delays create cascading effect
 */
 
@@ -819,16 +830,14 @@ a {
   transition-delay: 0.2s;
 }
 
-/* 
-   Energy line draw animation
-   Uses stroke-dasharray/dashoffset technique for path reveal
-   Starts 0.2s after cards begin animating
-   Note: stroke color and opacity defined above
+/*
+   Dotted connector draw animation
+   Uses stroke-dashoffset technique layered on the dotted pattern
+   Slow 3s reveal starts 0.4s after cards begin appearing
 */
 .energy-line path {
-  stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
-  transition: stroke-dashoffset 1.2s ease-in-out 0.2s;
+  transition: stroke-dashoffset 3s ease-in-out 0.4s;
 }
 
 .energy-line.visible path {
