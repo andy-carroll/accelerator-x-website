@@ -471,6 +471,19 @@ a {
   padding-top: 5rem; /* space for illustration overlap inside card */
 }
 
+/* On mobile, stacked cards need extra top margin to clear the
+   illustration of the card above (96px × 66% overhang ≈ 64px).
+   Reset to 0 at desktop where cards sit side-by-side in a grid. */
+.diff-card + .diff-card {
+  margin-top: 4rem;
+}
+
+@media (min-width: 1024px) {
+  .diff-card + .diff-card {
+    margin-top: 0;
+  }
+}
+
 .diff-card-illustration {
   position: absolute;
   top: 0;
