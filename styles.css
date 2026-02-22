@@ -545,11 +545,11 @@ a {
 }
 
 .legal-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   border-radius: 1.25rem;
   padding: 2rem;
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+  box-shadow: var(--shadow-lg);
 }
 
 .legal-card h1 {
