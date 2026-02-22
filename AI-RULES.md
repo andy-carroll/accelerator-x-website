@@ -30,6 +30,8 @@ Allowed by default:
 - Edit `index.html`, `styles.css`, `assets/`, and `docs/`.
 - Improve clarity, UX, accessibility, and conversion copy/structure.
 - Small, focused refactors that reduce risk.
+- Process new images with `bash scripts/img-process.sh` before committing them.
+- Run `bash scripts/img-audit.sh` as a pre-publish check.
 
 Do not do unless explicitly asked:
 
@@ -55,6 +57,14 @@ Before proposing completion, verify:
 - page loads without console-breaking issues
 - links and key sections render correctly
 - mobile + desktop layout remain usable
+- run `bash scripts/img-audit.sh` — must exit 0 with no issues
+
+When adding new images:
+
+- run `bash scripts/img-process.sh <source.png> 800 400` to generate optimised variants
+- commit the generated `-800`/`-400` PNG and WebP files, not the raw source
+- use `<picture>` with WebP `<source>` + PNG `<img>` fallback for illustrations over 150 KB
+- see `docs/design-system.md` §7 for full image standards
 
 ## 5) Git workflow (required)
 
@@ -125,3 +135,4 @@ If project workflow changes, update this file first, then adapters.
 
 - 2026-02-14: adopted single-source AI instructions (`AI-RULES.md`) with thin adapter files (`AGENTS.md`, `CLAUDE.md`) to avoid rule drift across tools.
 - Rationale and context: see `README.md` -> "AI instruction architecture (decision record)".
+- 2026-02-22: adopted image optimisation pipeline — `scripts/img-process.sh` (resize + WebP conversion) and `scripts/img-audit.sh` (pre-publish checks). Full standards in `docs/design-system.md` §7.

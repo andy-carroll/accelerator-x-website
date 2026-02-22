@@ -348,7 +348,101 @@ Use in HTML:
 
 ---
 
-## 7. Future Enhancements
+## 7. Image Standards
+
+### Formats
+
+| Asset type | Primary format | Fallback |
+|---|---|---|
+| Illustrations / photos | WebP | PNG |
+| Logos / icons | SVG | — |
+| Photographic images | WebP | JPEG |
+
+Never use unoptimised PNGs or JPEGs as final deployed assets.
+
+### Size targets
+
+| Variant | Max file size |
+|---|---|
+| WebP 800w illustration | 150 KB |
+| WebP 400w illustration | 75 KB |
+| Logo / icon (any format) | 100 KB |
+
+### Required `<img>` attributes
+
+Every `<img>` tag must have:
+
+```html
+<img
+  src="..."
+  alt="descriptive text (or empty + aria-hidden for decorative images)"
+  width="NNN"     <!-- intrinsic width of the largest src you serve -->
+  height="NNN"    <!-- intrinsic height (preserves aspect ratio, prevents CLS) -->
+  loading="lazy"  <!-- or "eager" for above-fold / LCP images -->
+  decoding="async"
+>
+```
+
+### When to use `<picture>`
+
+Use `<picture>` for any illustration that:
+- Has a file over 150 KB, **or**
+- Needs different sizes at different breakpoints
+
+Standard pattern:
+
+```html
+<picture>
+  <source
+    type="image/webp"
+    srcset="/assets/illustrations/my-image-400.webp 400w,
+            /assets/illustrations/my-image-800.webp 800w"
+    sizes="(min-width: 1024px) 40vw, 100vw">
+  <img
+    src="/assets/illustrations/my-image-800.png"
+    srcset="/assets/illustrations/my-image-400.png 400w,
+            /assets/illustrations/my-image-800.png 800w"
+    sizes="(min-width: 1024px) 40vw, 100vw"
+    alt="..."
+    width="800" height="800"
+    loading="lazy"
+    decoding="async">
+</picture>
+```
+
+### Responsive variant naming convention
+
+```
+assets/illustrations/my-image.png          ← source archive (do not deploy alone)
+assets/illustrations/my-image-800.png      ← resized PNG fallback
+assets/illustrations/my-image-400.png      ← resized PNG fallback (mobile)
+assets/illustrations/my-image-800.webp     ← WebP primary
+assets/illustrations/my-image-400.webp     ← WebP primary (mobile)
+```
+
+### Toolchain
+
+**Adding a new illustration:**
+
+```bash
+# 1. Process (requires cwebp — brew install webp)
+bash scripts/img-process.sh assets/illustrations/my-image.png 800 400
+
+# 2. Commit the four generated variants (not the source)
+git add assets/illustrations/my-image-{800,400}.{png,webp}
+```
+
+**Before publishing / raising a PR:**
+
+```bash
+bash scripts/img-audit.sh   # must exit 0
+```
+
+The audit checks: file sizes, `<img>` attribute completeness, large images without `srcset`.
+
+---
+
+## 8. Future Enhancements
 
 ### Phase 2: Conversion Optimization
 - Add A/B testing CSS hooks (`.variant-a`, `.variant-b`)
@@ -387,6 +481,8 @@ Use in HTML:
 | Update social image | index.html | og:image meta tag |
 | Add section | index.html | Before closing `</main>` |
 | Update copy | index.html | Within section comments |
+| Add new illustration | scripts/img-process.sh + index.html | See §7 Image Standards |
+| Audit images before publish | scripts/img-audit.sh | Run from repo root |
 
 ---
 
