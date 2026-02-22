@@ -308,7 +308,7 @@
         class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
       >
         <a href="#">
-          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-7" />
+          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-7" width="1125" height="195" loading="eager" decoding="async" />
         </a>
         <a
           href="#apply"
@@ -431,7 +431,23 @@
 
             <!-- LEFT: illustration -->
             <div class="w-full flex-shrink-0 lg:w-2/5">
-              <img src="/assets/illustrations/AX-image-04-rounded.png" alt="Stop buying tools. Start building capability." class="w-full" />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/assets/illustrations/AX-image-04-rounded-400.webp 400w,
+                          /assets/illustrations/AX-image-04-rounded-800.webp 800w"
+                  sizes="(min-width: 1024px) 40vw, 100vw">
+                <img
+                  src="/assets/illustrations/AX-image-04-rounded-800.png"
+                  srcset="/assets/illustrations/AX-image-04-rounded-400.png 400w,
+                          /assets/illustrations/AX-image-04-rounded-800.png 800w"
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  alt="Stop buying tools. Start building capability."
+                  width="800" height="800"
+                  loading="eager"
+                  decoding="async"
+                  class="w-full">
+              </picture>
             </div>
 
             <!-- RIGHT: copy -->
@@ -490,7 +506,7 @@
           <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3" style="padding-top: 4rem;">
             <!-- Card 1 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-01-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" />
+              <img src="/assets/illustrations/AX-image-01-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" width="444" height="443" loading="lazy" decoding="async" />
               <h3 class="font-display text-2xl font-extrabold text-primary">
                 We build capability, not dependency.
               </h3>
@@ -504,7 +520,7 @@
 
             <!-- Card 2 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-02-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration diff-card-illustration--bordered" />
+              <img src="/assets/illustrations/AX-image-02-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration diff-card-illustration--bordered" width="444" height="443" loading="lazy" decoding="async" />
               <h3 class="font-display text-2xl font-extrabold text-amber">
                 We deliver results, not recommendations.
               </h3>
@@ -517,7 +533,7 @@
 
             <!-- Card 3 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-03-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" />
+              <img src="/assets/illustrations/AX-image-03-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" width="444" height="443" loading="lazy" decoding="async" />
               <h3 class="font-display text-2xl font-extrabold text-accent">
                 We stay until the job is done.
               </h3>
@@ -874,16 +890,16 @@
         </p>
         <ul class="mx-auto mt-8 grid max-w-3xl grid-cols-2 items-center justify-items-center gap-x-6 gap-y-6 opacity-50 sm:grid-cols-4">
           <li>
-            <img class="trust-logo" src="/assets/logos/AcceleratorWhiteLogo.svg" alt="Accelerator" loading="lazy" decoding="async" />
+            <img class="trust-logo" src="/assets/logos/AcceleratorWhiteLogo.svg" alt="Accelerator" width="1126" height="278" loading="lazy" decoding="async" />
           </li>
           <li>
-            <img class="trust-logo" src="/assets/logos/conductor-logo.svg" alt="Conductor" loading="lazy" decoding="async" />
+            <img class="trust-logo" src="/assets/logos/conductor-logo.svg" alt="Conductor" width="200" height="20" loading="lazy" decoding="async" />
           </li>
           <li>
-            <img class="trust-logo" src="/assets/logos/mercurylogo-white.svg" alt="Mercury" loading="lazy" decoding="async" />
+            <img class="trust-logo" src="/assets/logos/mercurylogo-white.svg" alt="Mercury" width="200" height="49" loading="lazy" decoding="async" />
           </li>
           <li>
-            <img class="trust-logo trust-logo-premium" src="/assets/logos/premium-car-parks-logo.png" alt="Premium Car Parks" loading="lazy" decoding="async" />
+            <img class="trust-logo trust-logo-premium" src="/assets/logos/premium-car-parks-logo.png" alt="Premium Car Parks" width="892" height="350" loading="lazy" decoding="async" />
           </li>
         </ul>
       </section>

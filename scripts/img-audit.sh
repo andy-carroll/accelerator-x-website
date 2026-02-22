@@ -53,11 +53,19 @@ echo ""
 
 SIZE_ISSUES=0
 while IFS= read -r -d '' FILE; do
-  # Skip -800 / -400 variants (they're the outputs; source files may intentionally be large)
-  BASENAME=$(basename "$FILE" | sed 's/\.[^.]*$//')
+  BASENAME="${FILE%.*}"
+  EXT="${FILE##*.}"
+
+  # Skip generated variants (e.g. image-800.png, image-400.webp)
   if [[ "$BASENAME" =~ -[0-9]+$ ]]; then
     continue
   fi
+
+  # Skip source archives that have already been processed (a -800 variant exists)
+  if [[ -f "${BASENAME}-800.${EXT}" || -f "${BASENAME}-800.webp" ]]; then
+    continue
+  fi
+
   SIZE_KB=$(du -k "$FILE" | cut -f1)
   if [[ "$SIZE_KB" -gt "$SIZE_WARN_KB" ]]; then
     error "LARGE FILE: $FILE — ${SIZE_KB} KB (>${SIZE_WARN_KB} KB)"
