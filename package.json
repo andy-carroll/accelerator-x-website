@@ -1,0 +1,30 @@
+{
+  "name": "accelerator-x-website",
+  "version": "1.0.0",
+  "description": "This repo contains the public landing page for Accelerator X.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "node scripts/build-hub.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy-carroll/accelerator-x-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/andy-carroll/accelerator-x-website/issues"
+  },
+  "homepage": "https://github.com/andy-carroll/accelerator-x-website#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.3"
+  }
+}

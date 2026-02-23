@@ -9,3 +9,6 @@
 
 # Brand assets (keep locally, don't commit large binaries)
 docs/Accelerator-X-brand-pack.pdf
+
+# Dependencies
+node_modules/
