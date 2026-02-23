@@ -10,15 +10,18 @@ The goal is to ship a clean, credible Phase 1 MVP fast, then iterate into conver
 - **Phase 2 (Conversion):** GoHighLevel embed form + VSL + real testimonials
 - **Phase 3 (Polish):** animations, analytics, A/B testing, SEO refinements
 
-The source-of-truth spec is:
+The source-of-truth specs/plans are:
 
-- `docs/landing-page-spec.md`
+- `ROADMAP.md` (The active priorities to maintain strategic momentum)
+- `docs/landing-page-spec.md` (Landing page phased delivery)
+- `docs/content-hub-plan.md` (Content Hub Delivery)
 
 ## Tech stack (Phase 1)
 
 **Default choice:** Static HTML + Tailwind CSS (CDN).
 
 Why:
+
 - Fastest path to production (ship today)
 - Minimal moving parts (no Node build, no framework lock-in)
 - Easy to hand off and edit
@@ -29,6 +32,7 @@ Why:
 We can adopt Astro later if/when it becomes valuable (e.g. blog, content collections, nicer DX, componentisation).
 
 For Phase 1, Next.js/React are **overkill** unless we need:
+
 - routing
 - server-side functionality
 - heavy interactivity
@@ -63,12 +67,15 @@ Then visit:
 ## Deployment
 
 Target domain:
+
 - `accelerator-x.ai`
 
 Recommended Phase 1 deployment:
+
 - **Netlify** (no build command, publish from repo root)
 
 Vercel is also fine:
+
 - import project
 - framework preset: “Other”
 - output: static
@@ -78,6 +85,7 @@ Vercel is also fine:
 We will build the “bot under the hood” in GoHighLevel.
 
 On the website side, Phase 2 will:
+
 - create the application form in GoHighLevel
 - embed the form into this page (iframe or JS embed)
 - style it to match the site (likely custom CSS)

@@ -12,8 +12,8 @@ If any adapter conflicts with this file, follow `AI-RULES.md`.
 ## 1) Project context
 
 - Project: Accelerator X public website
-- Current scope: Phase 1 static landing page MVP
-- Primary spec: `docs/landing-page-spec.md`
+- Strategic roadmap: `ROADMAP.md` (Always check this to align with active sprint priorities)
+- Primary specs: `docs/landing-page-spec.md` and `docs/content-hub-plan.md`
 - Stack: static HTML + Tailwind CDN + small custom CSS
 - Build system: none
 
