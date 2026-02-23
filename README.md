@@ -39,6 +39,7 @@ We have intentionally **disqualified** client-side rendering frameworks and heav
 - `assets/` — images/icons
 - `docs/` — specification, copy, notes
 - `content/articles/` — Raw Markdown files for the Content Hub
+- `_templates/` — HTML templates injected by the generator (`index.html`, `article.html`)
 - `insights/` — Generated static HTML output for the Content Hub
 - `scripts/` — Custom build scripts (e.g., Markdown to HTML parser)
 

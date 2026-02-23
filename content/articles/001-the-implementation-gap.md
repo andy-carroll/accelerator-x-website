@@ -6,6 +6,10 @@ category: "The Implementation Gap"
 tags: ["Operations", "Scaling", "Change Management"]
 excerpt: "You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it?"
 slug: "the-implementation-gap"
+bluf: "The problem with AI implementation isn't the technology; it's treating it like an IT deployment rather than operational transformation. Success requires embedding models directly into existing friction points and focusing on capability over tools."
+lead_magnet_cta: "We build systems like this every week. Join 5,000+ Founders and CTOs receiving the Accelerator X dispatch."
+next_article_url: "#"
+next_article_title: "The 5-Stage Build Sequence"
 ---
 
 ## The Honeymoon is Over

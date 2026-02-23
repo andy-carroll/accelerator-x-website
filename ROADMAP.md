@@ -32,10 +32,10 @@ _What we are actively building right now. These initiatives have active spec doc
 - `[-]` In Flight (Active right now)
 - `[x]` Done
 
-- [-] **Content Hub Architecture (The Authority Engine):** Building the infrastructure to deliver our content philosophy. Setting up the blog/insights structure, category taxonomy (Frameworks, Dispatches, etc.), and ensuring technical SEO fundamentals.
-  → _Execute against:_ `docs/content-hub-plan.md`
-- [ ] **Landing Page Phase 2 (Conversion & Polish):** Transitioning the page to drive action. Embedding GoHighLevel forms, integrating real testimonials, adding client logos, and finalizing script/video embeds.
-      → _Execute against:_ `docs/landing-page-spec.md` (specifically Phase 2 & 3 tasks)
+- [x] **Content Hub Architecture (The Authority Engine):** Building the infrastructure to deliver our content philosophy. Setting up the blog/insights structure, category taxonomy (Frameworks, Dispatches, etc.), and ensuring technical SEO fundamentals.
+      → _Execute against:_ `docs/content-hub-plan.md`
+- [-] **Landing Page Phase 2 (Conversion & Polish):** Transitioning the page to drive action. Embedding GoHighLevel forms, integrating real testimonials, adding client logos, and finalizing script/video embeds.
+  → _Execute against:_ `docs/landing-page-spec.md` (specifically Phase 2 & 3 tasks)
 
 ---
 
