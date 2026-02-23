@@ -167,67 +167,6 @@
         ) {
           document.querySelector(".momentum-footer").classList.remove("hidden");
         }
-
-        // Add Tailwind Typography classes manually to the raw HTML output by Marked
-        const prose = document.querySelector(".prose");
-        if (prose) {
-          prose
-            .querySelectorAll("h2")
-            .forEach((el) =>
-              el.classList.add(
-                "font-display",
-                "text-2xl",
-                "font-bold",
-                "mt-12",
-                "mb-6",
-                "text-navy",
-              ),
-            );
-          prose
-            .querySelectorAll("h3")
-            .forEach((el) =>
-              el.classList.add(
-                "font-display",
-                "text-xl",
-                "font-bold",
-                "mt-8",
-                "mb-4",
-                "text-navy",
-              ),
-            );
-          prose
-            .querySelectorAll("p")
-            .forEach((el) =>
-              el.classList.add(
-                "text-lg",
-                "leading-relaxed",
-                "mb-6",
-                "text-muted",
-              ),
-            );
-          prose
-            .querySelectorAll("ul")
-            .forEach((el) =>
-              el.classList.add(
-                "list-disc",
-                "list-outside",
-                "pl-6",
-                "mb-6",
-                "text-lg",
-                "text-muted",
-                "space-y-2",
-              ),
-            );
-          prose
-            .querySelectorAll("li")
-            .forEach((el) => el.classList.add("pl-2"));
-          prose
-            .querySelectorAll("strong")
-            .forEach((el) => el.classList.add("text-navy", "font-semibold"));
-          prose
-            .querySelectorAll("hr")
-            .forEach((el) => el.classList.add("my-12", "border-surface-2"));
-        }
       });
     </script>
   </body>
