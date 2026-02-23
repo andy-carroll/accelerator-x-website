@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Implementation Gap: Why AI Pilots Stall | Accelerator X Insights</title>
-    <meta name="description" content="You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it?" />
+    <title>{{title}} | Accelerator X Insights</title>
+    <meta name="description" content="{{excerpt}}" />
 
     <link
       rel="canonical"
@@ -20,8 +20,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
     <!-- Open Graph SEO -->
-    <meta property="og:title" content="The Implementation Gap: Why AI Pilots Stall" />
-    <meta property="og:description" content="You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it?" />
+    <meta property="og:title" content="{{title}}" />
+    <meta property="og:description" content="{{excerpt}}" />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="Accelerator X" />
   </head>
@@ -48,25 +48,25 @@
         <header class="mb-12">
           <span
             class="text-sm font-bold uppercase tracking-wider text-primary mb-4 block"
-            >The Implementation Gap</span
+            >{{category}}</span
           >
           <h1
             class="font-display text-4xl font-bold leading-tight lg:text-5xl mb-6"
           >
-            The Implementation Gap: Why AI Pilots Stall
+            {{title}}
           </h1>
 
           <div
             class="flex items-center gap-4 text-muted border-b border-surface pb-8"
           >
-            <span class="font-medium text-navy">Toby Henry</span>
+            <span class="font-medium text-navy">{{author}}</span>
             <span class="w-1 h-1 rounded-full bg-surface-2"></span>
-            <time>2026-02-24</time>
+            <time>{{date}}</time>
           </div>
         </header>
 
         <!-- The BLUF Box (Bottom Line Up Front) -->
-        <!-- Only injected via JS if The problem with AI implementation isn't the technology; it's treating it like an IT deployment rather than operational transformation. Success requires embedding models directly into existing friction points and focusing on capability over tools. exists -->
+        <!-- Only injected via JS if {{bluf}} exists -->
         <div class="bluf-container mb-12 hidden">
           <div
             class="bg-surface-2 border-l-4 border-primary p-6 lg:p-8 rounded-r-xl"
@@ -77,33 +77,12 @@
                 Executive Summary
               </h2>
             </div>
-            <p class="text-navy font-medium leading-relaxed m-0">The problem with AI implementation isn't the technology; it's treating it like an IT deployment rather than operational transformation. Success requires embedding models directly into existing friction points and focusing on capability over tools.</p>
+            <p class="text-navy font-medium leading-relaxed m-0">{{bluf}}</p>
           </div>
         </div>
 
         <!-- Article Content -->
-        <div class="prose prose-lg prose-navy max-w-none"><h2>The Honeymoon is Over</h2>
-<p>Every AI transformation starts the same way. The board gets excited. You buy Microsoft Copilot licenses for the whole team. A small group of power users builds a slick proof-of-concept using an open-source model.</p>
-<p>For three weeks, everyone thinks they&#39;re living in the future.</p>
-<p>And then... nothing.</p>
-<p>The licenses sit idle. The proof-of-concept breaks when someone changes a column name in a spreadsheet. The team goes back to doing things the way they always have, complaining that the AI &quot;just isn&#39;t ready yet.&quot;</p>
-<p>This is the <strong>Implementation Gap</strong>.</p>
-<hr>
-<h2>Why Pilots Fail To Scale</h2>
-<p>The problem isn&#39;t the technology. The models are more than capable. The problem is that most organisations treat AI as an IT deployment rather than an operational transformation.</p>
-<p>Here are the three reasons your pilot hasn&#39;t scaled:</p>
-<h3>1. You Deployed Tools, Not Workflows</h3>
-<p>Handing someone an LLM chat interface is like handing them a blank piece of paper. If they don&#39;t know what to ask, it&#39;s useless. Successful AI implementation means baking the model directly into a specific workflow (e.g., standardising the weekly reporting process) so the user doesn&#39;t even have to prompt it.</p>
-<h3>2. You Ignored the Data Architecture</h3>
-<p>Your AI is only as good as the context it receives. If your internal documentation is a mess of outdated SharePoint folders, the model will hallucinate confidently. You must structure your data before you deploy your agents.</p>
-<h3>3. Capability Theatre</h3>
-<p>Sending your team to a one-hour &quot;Prompt Engineering Masterclass&quot; is change management theatre. People learn by building. You need a dedicated cycle to map their processes, identify the friction, and build the solution <em>with</em> them, not <em>for</em> them.</p>
-<hr>
-<h2>The Fix: Slow is Smooth, Smooth is Fast</h2>
-<p>Stop trying to transform the entire company at once. Stop buying enterprise licenses you aren&#39;t using.</p>
-<p>Identify one high-friction, low-complexity process. Map it meticulously. Build a targeted AI solution to automate it. Measure the returned time.</p>
-<p>Then, use that win to fund the next one. That is how you cross the gap.</p>
-</div>
+        <div class="prose prose-lg prose-navy max-w-none">{{content}}</div>
 
         <!-- Contextual Capture (The Nurture Trap) -->
         <div class="nurture-trap my-16 hidden">
@@ -117,7 +96,7 @@
 
             <div class="relative z-10 max-w-md">
               <h3 class="font-display text-2xl font-bold mb-4">The AI Signal, Without The Noise.</h3>
-              <p class="text-background opacity-80 mb-6 leading-relaxed">We build systems like this every week. Join 5,000+ Founders and CTOs receiving the Accelerator X dispatch.</p>
+              <p class="text-background opacity-80 mb-6 leading-relaxed">{{lead_magnet_cta}}</p>
 
               <!-- Placeholder for GoHighLevel form. Hardcoded input for UI design temporarily -->
               <form class="flex gap-2" onsubmit="event.preventDefault()">
@@ -136,8 +115,8 @@
       >
         <div class="mx-auto max-w-[70ch] px-4 text-center">
           <h4 class="text-sm font-bold uppercase tracking-wider text-muted mb-4">The Next Step</h4>
-          <a href="#" class="block">
-            <h3 class="font-display text-2xl lg:text-3xl font-bold text-navy transition-colors">The 5-Stage Build Sequence</h3>
+          <a href="{{next_article_url}}" class="block">
+            <h3 class="font-display text-2xl lg:text-3xl font-bold text-navy transition-colors">{{next_article_title}}</h3>
             <span class="inline-flex items-center gap-1 mt-6 text-primary font-medium transition-all">
               Read Framework <span class="material-symbols-outlined text-lg">arrow_forward</span>
             </span>
@@ -149,9 +128,9 @@
     <!-- JS Hack to hide dynamic blocks if the token was empty in the frontmatter -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const bluf = "The problem with AI implementation isn't the technology; it's treating it like an IT deployment rather than operational transformation. Success requires embedding models directly into existing friction points and focusing on capability over tools.";
-        const cta = "We build systems like this every week. Join 5,000+ Founders and CTOs receiving the Accelerator X dispatch.";
-        const nextTarget = "#";
+        const bluf = "{{bluf}}";
+        const cta = "{{lead_magnet_cta}}";
+        const nextTarget = "{{next_article_url}}";
 
         if (bluf && bluf.trim().length > 0 && !bluf.includes("bluf}}")) {
           document.querySelector(".bluf-container").classList.remove("hidden");

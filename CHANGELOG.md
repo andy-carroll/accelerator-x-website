@@ -11,6 +11,19 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 - `ROADMAP.md` — Now/Next/Later horizon roadmap to track strategic momentum and active priorities.
 - Checkboxes/status markers added to the Roadmap to track "In Flight" (`[-]`) and "To Do" (`[ ]`) execution states.
+- `_templates/article.html` and `_templates/index.html` — Extracted HTML into separate templates for the Content Hub generator.
+- Dynamic tokens parsed in Markdown (`bluf`, `lead_magnet_cta`, `next_article_url`, etc.) to map content to 10/10 UX conversion principles.
+- Global navigation header shared across main site and Content Hub for seamless UX.
+- Sleek `← Back to Hub` navigation links integrated into the article layout.
+
+### Changed
+
+- `scripts/build-hub.js` completely rewritten to act as a dynamic external template loader rather than hardcoding HTML strings.
+- Removed inline Tailwind stylings from Content Hub cards and replaced them with `docs/design-system.md` CSS utility variables.
+
+### Fixed
+
+- Fixed non-target `<a>` links across the site inheriting a forced hover underline by removing the overly broad `a:not(.btn):hover` global rule in `styles.css`.
 
 ---
 
