@@ -16,53 +16,55 @@ The source-of-truth specs/plans are:
 - `docs/landing-page-spec.md` (Landing page phased delivery)
 - `docs/content-hub-plan.md` (Content Hub Delivery)
 
-## Tech stack (Phase 1)
+## Tech stack (Phase 1 & Content Hub)
 
-**Default choice:** Static HTML + Tailwind CSS (CDN).
+**Landing Page:** Static HTML + Tailwind CSS (CDN).
+**Content Hub (`/insights`):** Markdown + Custom Node.js Static Generator (`scripts/build-hub.js`).
 
 Why:
 
 - Fastest path to production (ship today)
-- Minimal moving parts (no Node build, no framework lock-in)
-- Easy to hand off and edit
-- Compatible with embedding GoHighLevel forms (Phase 2)
+- Minimal moving parts (zero-framework static generation)
+- Content is perfectly structured for SEO/AEO
+- Integrates seamlessly with AI Slack Publisher agents (via GitHub)
 
 ### Frameworks (Astro / Next.js / React)
 
-We can adopt Astro later if/when it becomes valuable (e.g. blog, content collections, nicer DX, componentisation).
-
-For Phase 1, Next.js/React are **overkill** unless we need:
-
-- routing
-- server-side functionality
-- heavy interactivity
-
-### Alpine.js / HTMX
-
-We’ll only add these if a concrete requirement appears (e.g. modal behaviour, sticky CTA state, simple interactive FAQ).
+We have intentionally **disqualified** client-side rendering frameworks and heavy SSG frameworks (Next.js) to keep the pipeline ultra-lean and brutally fast. All HTML is served completely statically for instantaneous load times and perfect Lighthouse scores.
 
 ## Repo layout
 
-- `index.html` — single-page site
+- `index.html` — single-page landing site
 - `styles.css` — design tokens + any small custom styles
 - `assets/` — images/icons
 - `docs/` — specification, copy, notes
+- `content/articles/` — Raw Markdown files for the Content Hub
+- `insights/` — Generated static HTML output for the Content Hub
+- `scripts/` — Custom build scripts (e.g., Markdown to HTML parser)
 
 ## Local development
 
-This is a static site. The simplest dev loop is:
-
-1. Open `index.html` directly in a browser
-
-Or, run a tiny static server (recommended so relative paths behave consistently):
+### 1. Install dependencies (First time only)
 
 ```bash
-python3 -m http.server 8080
+npm install
 ```
 
-Then visit:
+### 2. Build the Content Hub
 
-- http://localhost:8080
+If you have added or edited Markdown files in `content/articles/`, rebuild the static HTML:
+
+```bash
+npm run build
+```
+
+### 3. Serve the site locally
+
+```bash
+npm run dev
+```
+
+This serves the repository locally (usually at `http://localhost:5000`), allowing you to view both the root `index.html` and the generated `/insights/` pages.
 
 ## Deployment
 
