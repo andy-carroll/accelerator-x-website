@@ -1,7 +1,7 @@
 # Accelerator X Landing Page — Product Specification & Development Plan
 
 *Version 1.0 — February 2026*
-*Status: Ready for development*
+*Status: Phase 1 complete ✅ — Phase 2 pending*
 
 ---
 
@@ -76,13 +76,13 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-01: Project setup
 **Description:** Create project structure and base files
 **Acceptance criteria:**
-- [ ] Create project folder structure
-- [ ] Create `index.html` with HTML5 boilerplate
-- [ ] Create `styles.css` with CSS variables (design tokens)
-- [ ] Add Tailwind CSS via CDN
-- [ ] Add Google Fonts (Space Grotesk)
-- [ ] Add Material Symbols for icons
-- [ ] Test renders correctly in browser
+- [x] Create project folder structure
+- [x] Create `index.html` with HTML5 boilerplate
+- [x] Create `styles.css` with CSS variables (design tokens)
+- [x] Add Tailwind CSS via CDN
+- [x] Add Google Fonts (Space Grotesk)
+- [x] Add Material Symbols for icons
+- [x] Test renders correctly in browser
 
 **Files to create:**
 ```
@@ -101,13 +101,13 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-02: Design tokens and base styles
 **Description:** Define the design system as CSS variables and base Tailwind config
 **Acceptance criteria:**
-- [ ] Define colour palette as CSS variables
-- [ ] Define typography scale
-- [ ] Define spacing scale
-- [ ] Define border radius values
-- [ ] Set up Tailwind config in `<script>` tag
-- [ ] Create base body styles (font, background, text colour)
-- [ ] Test dark text on light background renders correctly
+- [x] Define colour palette as CSS variables
+- [x] Define typography scale
+- [x] Define spacing scale
+- [x] Define border radius values
+- [x] Set up Tailwind config in `<script>` tag
+- [x] Create base body styles (font, background, text colour)
+- [x] Test dark text on light background renders correctly
 
 **Code reference:**
 ```html
@@ -136,12 +136,12 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-03: Header/navigation
 **Description:** Build sticky header with logo and CTA button
 **Acceptance criteria:**
-- [ ] Sticky header that stays at top on scroll
-- [ ] Logo/wordmark on left ("Accelerator X")
-- [ ] Single CTA button on right ("Get in touch" or "Apply")
-- [ ] Subtle border or shadow to separate from content
-- [ ] Mobile responsive (logo + button, no hamburger needed for single page)
-- [ ] CTA links to `#apply` anchor (or mailto: as interim)
+- [x] Sticky header that stays at top on scroll
+- [x] Logo/wordmark on left ("Accelerator X")
+- [x] Single CTA button on right ("Get in touch" or "Apply")
+- [x] Subtle border or shadow to separate from content
+- [x] Mobile responsive (logo + button, no hamburger needed for single page)
+- [x] CTA links to `#apply` anchor (or mailto: as interim)
 
 **Copy:**
 - Logo text: "Accelerator X"
@@ -154,13 +154,13 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-04: Hero section
 **Description:** Build hero with headline, subhead, CTA, and video placeholder
 **Acceptance criteria:**
-- [ ] Large headline, prominent
-- [ ] Subhead in muted colour
-- [ ] Primary CTA button
-- [ ] Supporting text below CTA (risk reversal)
-- [ ] Video placeholder (grey box with play icon, or static image)
-- [ ] Responsive: stacks on mobile, can be side-by-side on desktop
-- [ ] Adequate white space
+- [x] Large headline, prominent
+- [x] Subhead in muted colour
+- [x] Primary CTA button
+- [x] Supporting text below CTA (risk reversal)
+- [x] Video placeholder (grey box with play icon, or static image)
+- [x] Responsive: stacks on mobile, can be side-by-side on desktop
+- [x] Adequate white space
 
 **Copy:**
 - Headline: "AI transformation for leaders who are done waiting."
@@ -175,11 +175,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-05: Problem section
 **Description:** Build section that names the pain points
 **Acceptance criteria:**
-- [ ] Section headline
-- [ ] Body copy (2-3 paragraphs)
-- [ ] Good readability (max-width on text, adequate line height)
-- [ ] Subtle background differentiation (light grey or white)
-- [ ] Responsive
+- [x] Section headline
+- [x] Body copy (2-3 paragraphs)
+- [x] Good readability (max-width on text, adequate line height)
+- [x] Subtle background differentiation (light grey or white)
+- [x] Responsive
 
 **Copy:**
 - Headline: "You've tried. It hasn't worked."
@@ -192,11 +192,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-06: How we're different section
 **Description:** Build section with three differentiators
 **Acceptance criteria:**
-- [ ] Section headline
-- [ ] Three content blocks (can be cards or simple stacked sections)
-- [ ] Each block has: sub-headline + paragraph
-- [ ] Visual distinction between blocks (cards, borders, or spacing)
-- [ ] Responsive: stack on mobile, can be 3-column on desktop
+- [x] Section headline
+- [x] Three content blocks (can be cards or simple stacked sections)
+- [x] Each block has: sub-headline + paragraph
+- [x] Visual distinction between blocks (cards, borders, or spacing)
+- [x] Responsive: stack on mobile, can be 3-column on desktop
 
 **Copy:**
 - Headline: "We're not an agency. We're not a consultancy. We're your partner."
@@ -209,11 +209,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-07: How it works section
 **Description:** Build three-step process section
 **Acceptance criteria:**
-- [ ] Section headline
-- [ ] Three steps clearly delineated (numbered or with icons)
-- [ ] Each step has: title, description, price indicator
-- [ ] Visual progression (1 → 2 → 3)
-- [ ] Responsive: stack on mobile
+- [x] Section headline
+- [x] Three steps clearly delineated (numbered or with icons)
+- [x] Each step has: title, description, price indicator
+- [x] Visual progression (1 → 2 → 3)
+- [x] Responsive: stack on mobile
 
 **Copy:**
 - Headline: "A clear path from overwhelmed to operational."
@@ -226,10 +226,10 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-08: Who this is for section
 **Description:** Build qualification/disqualification section
 **Acceptance criteria:**
-- [ ] Two blocks: "This is for you if" and "This is not for you if"
-- [ ] Bullet points for each
-- [ ] Visual contrast between the two (green/red icons, or different backgrounds)
-- [ ] Responsive
+- [x] Two blocks: "This is for you if" and "This is not for you if"
+- [x] Bullet points for each
+- [x] Visual contrast between the two (green/red icons, or different backgrounds)
+- [x] Responsive
 
 **Copy:**
 - [As per landing page copy document]
@@ -241,12 +241,12 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-09: Testimonials section (placeholder)
 **Description:** Build testimonial section structure with placeholders
 **Acceptance criteria:**
-- [ ] Section headline ("What our clients say" or similar)
-- [ ] Three testimonial cards
-- [ ] Each card: quote, name, title, company
-- [ ] Placeholder text or greyed out "Testimonials coming soon"
-- [ ] Structure ready to receive real testimonials
-- [ ] Responsive: stack on mobile, row on desktop
+- [x] Section headline ("What our clients say" or similar)
+- [x] Three testimonial cards
+- [x] Each card: quote, name, title, company
+- [x] Placeholder text or greyed out "Testimonials coming soon"
+- [x] Structure ready to receive real testimonials
+- [x] Responsive: stack on mobile, row on desktop
 
 **Copy:**
 - Placeholder quotes or real if available
@@ -258,12 +258,12 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-10: About us section
 **Description:** Build section introducing Toby and Andy
 **Acceptance criteria:**
-- [ ] Section headline
-- [ ] Brief intro paragraph
-- [ ] Two "cards" or blocks for Toby and Andy
-- [ ] Each block: name, brief bio (2-3 sentences)
-- [ ] Placeholder for headshots (grey circle or initials)
-- [ ] Responsive
+- [x] Section headline
+- [x] Brief intro paragraph
+- [x] Two "cards" or blocks for Toby and Andy
+- [x] Each block: name, brief bio (2-3 sentences)
+- [x] Placeholder for headshots (grey circle or initials)
+- [x] Responsive
 
 **Copy:**
 - [As per landing page copy document]
@@ -275,11 +275,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-11: Logo/trust bar
 **Description:** Build client logo display section
 **Acceptance criteria:**
-- [ ] Simple headline ("Trusted by forward-thinking leaders")
-- [ ] Row of logos (greyscale, subtle)
-- [ ] 4-6 logo slots
-- [ ] Placeholder images if real logos not ready
-- [ ] Responsive: wrap on mobile
+- [x] Simple headline ("Trusted by forward-thinking leaders")
+- [x] Row of logos (greyscale, subtle)
+- [x] 4-6 logo slots
+- [x] Placeholder images if real logos not ready
+- [x] Responsive: wrap on mobile
 
 **Estimated time:** 15 minutes
 
@@ -288,11 +288,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-12: Final CTA section
 **Description:** Build bottom CTA block
 **Acceptance criteria:**
-- [ ] Contrasting background (navy or accent colour)
-- [ ] Headline
-- [ ] Supporting text
-- [ ] CTA button (prominent)
-- [ ] Anchor id="apply" for navigation
+- [x] Contrasting background (navy or accent colour)
+- [x] Headline
+- [x] Supporting text
+- [x] CTA button (prominent)
+- [x] Anchor id="apply" for navigation
 
 **Copy:**
 - Headline: "Ready to stop waiting?"
@@ -306,11 +306,11 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-13: Footer
 **Description:** Build minimal footer
 **Acceptance criteria:**
-- [ ] Logo/wordmark
-- [ ] Social links (LinkedIn at minimum)
-- [ ] Copyright notice
-- [ ] Privacy/Terms links (can be placeholder)
-- [ ] Responsive
+- [x] Logo/wordmark
+- [x] Social links (LinkedIn at minimum)
+- [x] Copyright notice
+- [x] Privacy/Terms links (can be placeholder)
+- [x] Responsive
 
 **Estimated time:** 15 minutes
 
@@ -319,13 +319,13 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-14: Responsive testing and fixes
 **Description:** Test all breakpoints and fix issues
 **Acceptance criteria:**
-- [ ] Test on mobile (375px)
-- [ ] Test on tablet (768px)
-- [ ] Test on desktop (1280px+)
-- [ ] Fix any layout breaks
-- [ ] Check typography scales appropriately
-- [ ] Check spacing is consistent
-- [ ] Test all links work
+- [x] Test on mobile (375px)
+- [x] Test on tablet (768px)
+- [x] Test on desktop (1280px+)
+- [x] Fix any layout breaks
+- [x] Check typography scales appropriately
+- [x] Check spacing is consistent
+- [x] Test all links work
 
 **Estimated time:** 30 minutes
 
@@ -334,10 +334,10 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-15: Interim CTA behaviour
 **Description:** Set up temporary CTA behaviour before form is ready
 **Acceptance criteria:**
-- [ ] All CTA buttons link to same action
-- [ ] Options: mailto: link, Calendly embed, or simple "email us" message
-- [ ] Decide and implement one approach
-- [ ] Test on mobile and desktop
+- [x] All CTA buttons link to same action
+- [x] Options: mailto: link, Calendly embed, or simple "email us" message
+- [x] Decide and implement one approach
+- [x] Test on mobile and desktop
 
 **Recommendation:** Use mailto:hello@accelerator-x.com as simplest interim
 
@@ -348,12 +348,12 @@ Get a professional, readable page live on your domain that tells people who you 
 ### P1-16: Deployment
 **Description:** Deploy to live domain
 **Acceptance criteria:**
-- [ ] Choose hosting (Netlify recommended for simplicity)
-- [ ] Connect to domain
-- [ ] Deploy files
-- [ ] Test live URL works
-- [ ] Test on mobile device (real device, not just emulator)
-- [ ] SSL certificate active (https)
+- [x] Choose hosting (Netlify recommended for simplicity)
+- [x] Connect to domain
+- [x] Deploy files
+- [x] Test live URL works
+- [x] Test on mobile device (real device, not just emulator)
+- [x] SSL certificate active (https)
 
 **Estimated time:** 20 minutes
 
@@ -498,11 +498,11 @@ Refine the experience with animations, performance optimisation, and A/B testing
 ### P3-02: Performance optimisation
 **Description:** Optimise loading speed
 **Acceptance criteria:**
-- [ ] Compress and optimise all images
-- [ ] Lazy load images below fold
+- [x] Compress and optimise all images
+- [x] Lazy load images below fold
 - [ ] Minimise CSS (remove unused Tailwind classes if using build step)
 - [ ] Test with Lighthouse, target 90+ performance score
-- [ ] Add appropriate caching headers
+- [x] Add appropriate caching headers
 
 **Estimated time:** 1 hour
 
