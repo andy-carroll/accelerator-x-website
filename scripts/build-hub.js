@@ -123,8 +123,8 @@ async function build() {
         <span class="text-sm font-bold uppercase tracking-wider ${catInfo.color}">${article.category || 'Focus'}</span>
         <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">${typeLabel}</span>
       </div>
-      <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">${article.title}</h3>
-      <p class="text-muted leading-relaxed line-clamp-2 text-sm">${article.excerpt}</p>
+      <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3 h-14 line-clamp-2">${article.title}</h3>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm h-10">${article.excerpt}</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>${article.date}</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">${typeIcon}</span></span>
