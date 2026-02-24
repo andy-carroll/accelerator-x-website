@@ -4,7 +4,7 @@ date: "2026-02-18"
 author: "Toby Henry"
 category: "AI Strategy"
 tags: ["Leadership", "Strategy", "C-Suite"]
-excerpt: "If your CEO thinks AI is magic and your CFO thinks it's a security threat, your transformation will fail. Here's how to align the board."
+excerpt: "If your CEO thinks AI is magic and your CTO thinks it's a security threat, your transformation will fail. Here's how to align the board."
 slug: "leadership-alignment-on-ai"
 bluf: "Executive misalignment is the single biggest point of failure for enterprise AI initiatives. Without a shared thesis on where AI creates operational leverage, projects devolve into isolated experiments with no path to scale."
 lead_magnet_cta: "Need executive alignment? Get our free Boardroom Briefing template when you join the Accelerator X dispatch."

@@ -1,7 +1,7 @@
 ---
 title: "The End of Prompt Engineering"
 date: "2026-01-29"
-author: "Nick Sanders"
+author: "Andy Carroll"
 category: "Capability Building"
 type: "Podcast"
 tags: ["Future", "Agents", "Workflows"]

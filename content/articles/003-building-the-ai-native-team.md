@@ -1,7 +1,7 @@
 ---
 title: "Building the AI-Native Team: Stop Hiring and Start Upskilling"
 date: "2026-02-12"
-author: "Nick Sanders"
+author: "Andy Carroll"
 category: "Capability Building"
 type: "Video"
 tags: ["Teams", "Reskilling", "Culture"]
