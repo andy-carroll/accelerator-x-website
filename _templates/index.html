@@ -46,17 +46,17 @@
           
           <!-- Guided Pathways (Start Here Constraint) -->
           <div class="flex flex-col md:flex-row justify-center gap-4 mt-8">
-            <a href="#strategy" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#strategy" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-primary mb-1">C-Suite</span>
-              <span class="font-display font-bold text-lg">AI Strategy</span>
+              <span class="pathway-label font-display font-bold text-lg">AI Strategy</span>
             </a>
-            <a href="#implementation" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#implementation" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-amber mb-1">Operations</span>
-              <span class="font-display font-bold text-lg">The Implementation Gap</span>
+              <span class="pathway-label font-display font-bold text-lg">The Implementation Gap</span>
             </a>
-            <a href="#capability" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#capability" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-accent mb-1">Teams</span>
-              <span class="font-display font-bold text-lg">Capability Building</span>
+              <span class="pathway-label font-display font-bold text-lg">Capability Building</span>
             </a>
           </div>
         </div>
@@ -66,12 +66,12 @@
       <section class="py-16 lg:py-24 px-4 bg-surface">
         <div class="mx-auto max-w-6xl">
           <div class="flex items-center justify-between mb-8 border-b border-surface-2 pb-4">
-            <h2 class="font-display text-3xl font-bold text-navy">Latest Frameworks & Dispatches</h2>
-            <span class="text-sm text-muted hidden sm:block">Building the Authority Engine</span>
+            <h2 id="feed-title" class="font-display text-3xl font-bold text-navy">Latest Frameworks & Dispatches</h2>
+            <button id="show-all" class="text-sm font-bold uppercase tracking-widest text-primary hidden hover:underline">Show All</button>
           </div>
           
           <!-- Automatically populated list of content cards parsed from Markdown frontmatter -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div id="article-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300">
             {{articlesList}}
           </div>
         </div>
@@ -83,8 +83,14 @@
           <h2 class="font-display text-3xl lg:text-4xl font-bold text-navy mb-6">The AI signal, without the noise.</h2>
           <p class="text-lg text-muted mb-8">Join 5,000+ Founders, Directors, and CTOs getting our weekly dispatch on real AI implementation.</p>
           
-          <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault();">
-            <input type="email" placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
+          <form 
+            name="insights-subscribe" 
+            method="POST" 
+            data-netlify="true"
+            class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
+          >
+            <input type="hidden" name="form-name" value="insights-subscribe" />
+            <input type="email" name="email" required placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
             <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
           </form>
           <p class="text-sm text-muted mt-4">One email a week. Unsubscribe anytime.</p>
@@ -93,5 +99,59 @@
 
     </main>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tiles = document.querySelectorAll('.pathway-tile');
+        const cards = document.querySelectorAll('.article-card');
+        const showAllBtn = document.getElementById('show-all');
+        const feedTitle = document.getElementById('feed-title');
+
+        function filterContent(categoryId) {
+          // Update active states
+          tiles.forEach(tile => {
+            if (tile.getAttribute('href') === `#${categoryId}`) {
+              tile.classList.remove('opacity-60');
+              tile.classList.add('ring-2', 'ring-primary', 'ring-offset-4');
+            } else {
+              tile.classList.add('opacity-60');
+              tile.classList.remove('ring-2', 'ring-primary', 'ring-offset-4');
+            }
+          });
+
+          // Filter cards
+          cards.forEach(card => {
+            if (categoryId === 'all' || card.getAttribute('data-category') === categoryId) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Update header
+          if (categoryId !== 'all') {
+            showAllBtn.classList.remove('hidden');
+            const activeLabel = document.querySelector(`[href="#${categoryId}"] .pathway-label`).textContent;
+            feedTitle.textContent = `${activeLabel} Frameworks`;
+          } else {
+            showAllBtn.classList.add('hidden');
+            feedTitle.textContent = 'Latest Frameworks & Dispatches';
+            tiles.forEach(tile => tile.classList.remove('opacity-60', 'ring-2', 'ring-primary', 'ring-offset-4'));
+          }
+          
+          // Smooth scroll to feed
+          document.querySelector('#feed-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        tiles.forEach(tile => {
+          tile.addEventListener('click', (e) => {
+            e.preventDefault();
+            const categoryId = tile.getAttribute('href').replace('#', '');
+            filterContent(categoryId);
+          });
+        });
+
+        showAllBtn.addEventListener('click', () => filterContent('all'));
+      });
+    </script>
   </body>
 </html>

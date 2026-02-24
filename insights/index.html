@@ -46,17 +46,17 @@
           
           <!-- Guided Pathways (Start Here Constraint) -->
           <div class="flex flex-col md:flex-row justify-center gap-4 mt-8">
-            <a href="#strategy" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#strategy" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-primary mb-1">C-Suite</span>
-              <span class="font-display font-bold text-lg">AI Strategy</span>
+              <span class="pathway-label font-display font-bold text-lg">AI Strategy</span>
             </a>
-            <a href="#implementation" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#implementation" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-amber mb-1">Operations</span>
-              <span class="font-display font-bold text-lg">The Implementation Gap</span>
+              <span class="pathway-label font-display font-bold text-lg">The Implementation Gap</span>
             </a>
-            <a href="#capability" class="card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center">
+            <a href="#capability" class="pathway-tile card-hoverable bg-background text-navy px-6 py-6 rounded-xl flex flex-col items-center transition-all duration-300">
               <span class="text-sm font-bold uppercase tracking-wider text-accent mb-1">Teams</span>
-              <span class="font-display font-bold text-lg">Capability Building</span>
+              <span class="pathway-label font-display font-bold text-lg">Capability Building</span>
             </a>
           </div>
         </div>
@@ -66,63 +66,78 @@
       <section class="py-16 lg:py-24 px-4 bg-surface">
         <div class="mx-auto max-w-6xl">
           <div class="flex items-center justify-between mb-8 border-b border-surface-2 pb-4">
-            <h2 class="font-display text-3xl font-bold text-navy">Latest Frameworks & Dispatches</h2>
-            <span class="text-sm text-muted hidden sm:block">Building the Authority Engine</span>
+            <h2 id="feed-title" class="font-display text-3xl font-bold text-navy">Latest Frameworks & Dispatches</h2>
+            <button id="show-all" class="text-sm font-bold uppercase tracking-widest text-primary hidden hover:underline">Show All</button>
           </div>
           
           <!-- Automatically populated list of content cards parsed from Markdown frontmatter -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div id="article-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300">
             
-    <a href="/insights/articles/the-implementation-gap.html" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">The Implementation Gap</span>
+    <a href="/insights/articles/the-implementation-gap.html" data-category="implementation" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider text-amber">The Implementation Gap</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">Dispatch</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">The Implementation Gap: Why AI Pilots Stall</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it?</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it?</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>2026-02-24</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
       </div>
     </a>
-  
-    <a href="/insights/articles/leadership-alignment-on-ai.html" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">AI Strategy</span>
+    
+    <a href="/insights/articles/leadership-alignment-on-ai.html" data-category="strategy" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider text-primary">AI Strategy</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">Dispatch</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">Leadership Alignment: Why Your Exec Team is Blocking AI ROI</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">If your CEO thinks AI is magic and your CFO thinks it's a security threat, your transformation will fail. Here's how to align the board.</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">If your CEO thinks AI is magic and your CFO thinks it's a security threat, your transformation will fail. Here's how to align the board.</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>2026-02-18</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
       </div>
     </a>
-  
-    <a href="/insights/articles/building-the-ai-native-team.html" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">Capability Building</span>
+    
+    <a href="/insights/articles/building-the-ai-native-team.html" data-category="capability" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider text-accent">Capability Building</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">Dispatch</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">Building the AI-Native Team: Stop Hiring and Start Upskilling</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">You don't need a team of expensive 'prompt engineers'. You need your current business experts to become AI fluent.</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">You don't need a team of expensive 'prompt engineers'. You need your current business experts to become AI fluent.</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>2026-02-12</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
       </div>
     </a>
-  
-    <a href="/insights/articles/the-5-stage-build-sequence.html" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">The Implementation Gap</span>
+    
+    <a href="/insights/articles/the-5-stage-build-sequence.html" data-category="implementation" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider text-amber">The Implementation Gap</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">Dispatch</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">The 5-Stage Build Sequence: From Pilot to Production</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">A proven, step-by-step framework to take your AI initiatives out of the sandbox and into the core of your operations.</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">A proven, step-by-step framework to take your AI initiatives out of the sandbox and into the core of your operations.</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>2026-02-05</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
       </div>
     </a>
-  
-    <a href="/insights/articles/the-end-of-prompt-engineering.html" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">Capability Building</span>
+    
+    <a href="/insights/articles/the-end-of-prompt-engineering.html" data-category="capability" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider text-accent">Capability Building</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">Dispatch</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">The End of Prompt Engineering</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">Why teaching your team to write complex prompts is a temporary fix. The future is workflow orchestration.</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">Why teaching your team to write complex prompts is a temporary fix. The future is workflow orchestration.</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>2026-01-29</span>
         <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
       </div>
     </a>
-  
+    
           </div>
         </div>
       </section>
@@ -133,8 +148,14 @@
           <h2 class="font-display text-3xl lg:text-4xl font-bold text-navy mb-6">The AI signal, without the noise.</h2>
           <p class="text-lg text-muted mb-8">Join 5,000+ Founders, Directors, and CTOs getting our weekly dispatch on real AI implementation.</p>
           
-          <form class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto" onsubmit="event.preventDefault();">
-            <input type="email" placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
+          <form 
+            name="insights-subscribe" 
+            method="POST" 
+            data-netlify="true"
+            class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
+          >
+            <input type="hidden" name="form-name" value="insights-subscribe" />
+            <input type="email" name="email" required placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
             <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
           </form>
           <p class="text-sm text-muted mt-4">One email a week. Unsubscribe anytime.</p>
@@ -143,5 +164,59 @@
 
     </main>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const tiles = document.querySelectorAll('.pathway-tile');
+        const cards = document.querySelectorAll('.article-card');
+        const showAllBtn = document.getElementById('show-all');
+        const feedTitle = document.getElementById('feed-title');
+
+        function filterContent(categoryId) {
+          // Update active states
+          tiles.forEach(tile => {
+            if (tile.getAttribute('href') === `#${categoryId}`) {
+              tile.classList.remove('opacity-60');
+              tile.classList.add('ring-2', 'ring-primary', 'ring-offset-4');
+            } else {
+              tile.classList.add('opacity-60');
+              tile.classList.remove('ring-2', 'ring-primary', 'ring-offset-4');
+            }
+          });
+
+          // Filter cards
+          cards.forEach(card => {
+            if (categoryId === 'all' || card.getAttribute('data-category') === categoryId) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Update header
+          if (categoryId !== 'all') {
+            showAllBtn.classList.remove('hidden');
+            const activeLabel = document.querySelector(`[href="#${categoryId}"] .pathway-label`).textContent;
+            feedTitle.textContent = `${activeLabel} Frameworks`;
+          } else {
+            showAllBtn.classList.add('hidden');
+            feedTitle.textContent = 'Latest Frameworks & Dispatches';
+            tiles.forEach(tile => tile.classList.remove('opacity-60', 'ring-2', 'ring-primary', 'ring-offset-4'));
+          }
+          
+          // Smooth scroll to feed
+          document.querySelector('#feed-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        tiles.forEach(tile => {
+          tile.addEventListener('click', (e) => {
+            e.preventDefault();
+            const categoryId = tile.getAttribute('href').replace('#', '');
+            filterContent(categoryId);
+          });
+        });
+
+        showAllBtn.addEventListener('click', () => filterContent('all'));
+      });
+    </script>
   </body>
 </html>

@@ -101,18 +101,37 @@ async function build() {
   
   let indexHtml = loadTemplate('index.html');
   
-  // VERY basic templating for the article feed (can be moved into the template engine proper later, this is fine for static MVP)
-  const articlesListHtml = articles.map(article => `
-    <a href="${article.url}" class="card card-hoverable block transition-colors overflow-hidden">
-      <span class="text-sm font-bold uppercase tracking-wider text-primary mb-2 block">${article.category || 'Dispatch'}</span>
+  // Enhanced category mapping for filtering/visuals
+  const categoryMap = {
+    'AI Strategy': { id: 'strategy', label: 'C-Suite', color: 'text-primary' },
+    'The Implementation Gap': { id: 'implementation', label: 'Operations', color: 'text-amber' },
+    'Capability Building': { id: 'capability', label: 'Teams', color: 'text-accent' },
+    'Default': { id: 'all', label: 'Framework', color: 'text-primary' }
+  };
+
+  const articlesListHtml = articles.map(article => {
+    const catInfo = categoryMap[article.category] || categoryMap['Default'];
+    const typeLabel = article.type || 'Dispatch';
+    const typeIcon = article.type === 'Video' ? 'play_circle' : 
+                     article.type === 'Podcast' ? 'mic' : 
+                     article.type === 'Webinar' ? 'videocam' : 
+                     article.type === 'Case Study' ? 'assignment' : 'arrow_forward';
+    
+    return `
+    <a href="${article.url}" data-category="${catInfo.id}" class="article-card card card-hoverable block transition-all overflow-hidden">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-bold uppercase tracking-wider ${catInfo.color}">${article.category || 'Focus'}</span>
+        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">${typeLabel}</span>
+      </div>
       <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3">${article.title}</h3>
-      <p class="text-muted leading-relaxed line-clamp-2">${article.excerpt}</p>
+      <p class="text-muted leading-relaxed line-clamp-2 text-sm">${article.excerpt}</p>
       <div class="mt-6 flex items-center justify-between text-sm text-muted">
         <span>${article.date}</span>
-        <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">arrow_forward</span></span>
+        <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">${typeIcon}</span></span>
       </div>
     </a>
-  `).join('');
+    `;
+  }).join('');
   
   indexHtml = indexHtml.replace(/{{articlesList}}/g, articlesListHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml);
