@@ -3,6 +3,7 @@ title: "Building the AI-Native Team: Stop Hiring and Start Upskilling"
 date: "2026-02-12"
 author: "Nick Sanders"
 category: "Capability Building"
+type: "Video"
 tags: ["Teams", "Reskilling", "Culture"]
 excerpt: "You don't need a team of expensive 'prompt engineers'. You need your current business experts to become AI fluent."
 slug: "building-the-ai-native-team"

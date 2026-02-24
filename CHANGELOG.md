@@ -15,15 +15,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 - Dynamic tokens parsed in Markdown (`bluf`, `lead_magnet_cta`, `next_article_url`, etc.) to map content to 10/10 UX conversion principles.
 - Global navigation header shared across main site and Content Hub for seamless UX.
 - Sleek `← Back to Hub` navigation links integrated into the article layout.
+- **Interactive Filtering:** Implemented client-side category filtering on the Hub Index (`/insights`) with active tile states and dynamic grid updates.
+- **Multi-Format Support:** Added native support for `Video`, `Podcast`, `Webinar`, and `Case Study` content types with dynamic icons and labels.
+- **Capture Engine:** Integrated Netlify Forms into the Insights footer for immediate, zero-JS email capture.
 
 ### Changed
 
-- `scripts/build-hub.js` completely rewritten to act as a dynamic external template loader rather than hardcoding HTML strings.
+- `scripts/build-hub.js` completely rewritten to act as a dynamic external template loader.
+- **CSS Refactor:** Replaced dirty JS class injection with a global `.prose` utility in `styles.css` for bulletproof Markdown typography across all devices.
 - Removed inline Tailwind stylings from Content Hub cards and replaced them with `docs/design-system.md` CSS utility variables.
 
 ### Fixed
 
 - Fixed non-target `<a>` links across the site inheriting a forced hover underline by removing the overly broad `a:not(.btn):hover` global rule in `styles.css`.
+- Fixed bullet alignment and ordered list numbering in long-form articles.
 
 ---
 

@@ -67,6 +67,36 @@ npm run dev
 
 This serves the repository locally (usually at `http://localhost:5000`), allowing you to view both the root `index.html` and the generated `/insights/` pages.
 
+## Content Publishing Pipeline
+
+The Content Hub is powered by a static Markdown-to-HTML pipeline. To publish or update content:
+
+1.  **Add/Edit Markdown:** Create/modify a `.md` file in `content/articles/`.
+2.  **Verify Frontmatter:** Ensure the YAML header contains the required fields:
+    ```yaml
+    ---
+    title: "Article Title"
+    date: "YYYY-MM-DD"
+    author: "Toby Henry"
+    category: "AI Strategy" # AI Strategy, The Implementation Gap, or Capability Building
+    type: "Dispatch" # Dispatch, Video, Podcast, Webinar, or Case Study
+    excerpt: "Short SEO summary"
+    slug: "article-slug"
+    bluf: "Bottom Line Up Front - 1-2 sentence summary"
+    lead_magnet_cta: "Optional CTA text for the nurture trap"
+    next_article_url: "/insights/articles/next-slug.html"
+    next_article_title: "Next Article Title"
+    ---
+    ```
+3.  **Run Build:** Run `npm run build` to generate the HTML.
+4.  **Content Types:** The system automatically handles icons and labels for different formats:
+    - `Dispatch` (Default/Standard)
+    - `Video` (Play icon)
+    - `Podcast` (Mic icon)
+    - `Webinar` (Camera icon)
+    - `Case Study` (Assignment icon)
+5.  **Interactive Filtering:** The `/insights` index automatically sorts by date and provides interactive filtering based on the `category` field.
+
 ## Deployment
 
 Target domain:

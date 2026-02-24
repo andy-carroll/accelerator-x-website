@@ -108,10 +108,11 @@ To maintain high velocity without eating into deep-work hours, publishing operat
 
 _Establishing the core pipeline and rendering engine._
 
-- [ ] **T-1.1: Build Native MD-to-HTML Generator.** Create a simple local script (`scripts/build-hub.js`) that reads `content/articles/*.md`, parses frontmatter, and outputs static HTML into `/insights/`.
-- [ ] **T-1.2: Design Article Template.** Create the base HTML wrapper (`_templates/article.html`) adhering to the existing design system, implementing the "BLUF Box" header and "Infinite Momentum" footer.
-- [ ] **T-1.3: Design Hub Index Page.** Build `/insights/index.html` to dynamically list generated articles, featuring the "Guided Pathways" routing layer above the feed matrix.
-- [ ] **T-1.4: Seed Content.** Author and publish the first 2 "Dispatch" articles to validate the pipeline.
+- [x] **T-1.1: Build Native MD-to-HTML Generator.** Create a simple local script (`scripts/build-hub.js`) that reads `content/articles/*.md`, parses frontmatter, and outputs static HTML into `/insights/`.
+- [x] **T-1.2: Design Article Template.** Create the base HTML wrapper (`_templates/article.html`) adhering to the existing design system, implementing the "BLUF Box" header and "Infinite Momentum" footer.
+- [x] **T-1.3: Design Hub Index Page.** Build `/insights/index.html` to dynamically list generated articles, featuring the "Guided Pathways" routing layer above the feed matrix.
+- [x] **T-1.4: Seed Content.** Author and publish the first 2 "Dispatch" articles to validate the pipeline.
+- [x] **T-1.5: Content-Type Support.** Implemented generic multi-format support for Videos, Podcasts, and Webinars.
 
 ### Phase 2: Capture Engine & Automation
 

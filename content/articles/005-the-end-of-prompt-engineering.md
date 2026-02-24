@@ -3,6 +3,7 @@ title: "The End of Prompt Engineering"
 date: "2026-01-29"
 author: "Nick Sanders"
 category: "Capability Building"
+type: "Podcast"
 tags: ["Future", "Agents", "Workflows"]
 excerpt: "Why teaching your team to write complex prompts is a temporary fix. The future is workflow orchestration."
 slug: "the-end-of-prompt-engineering"
