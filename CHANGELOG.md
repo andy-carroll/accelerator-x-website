@@ -1,0 +1,80 @@
+# Changelog
+
+All notable changes to this project are documented here.
+Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
+
+---
+
+## [Unreleased]
+
+### Added
+
+- `ROADMAP.md` — Now/Next/Later horizon roadmap to track strategic momentum and active priorities.
+- Checkboxes/status markers added to the Roadmap to track "In Flight" (`[-]`) and "To Do" (`[ ]`) execution states.
+- `_templates/article.html` and `_templates/index.html` — Extracted HTML into separate templates for the Content Hub generator.
+- Dynamic tokens parsed in Markdown (`bluf`, `lead_magnet_cta`, `next_article_url`, etc.) to map content to 10/10 UX conversion principles.
+- Global navigation header shared across main site and Content Hub for seamless UX.
+- Sleek `← Back to Hub` navigation links integrated into the article layout.
+- **Interactive Filtering:** Implemented client-side category filtering on the Hub Index (`/insights`) with active tile states and dynamic grid updates.
+- **Multi-Format Support:** Added native support for `Video`, `Podcast`, `Webinar`, and `Case Study` content types with dynamic icons and labels.
+- **Capture Engine:** Integrated Netlify Forms into the Insights footer for immediate, zero-JS email capture.
+
+### Changed
+
+- `scripts/build-hub.js` completely rewritten to act as a dynamic external template loader.
+- **CSS Refactor:** Replaced dirty JS class injection with a global `.prose` utility in `styles.css` for bulletproof Markdown typography across all devices.
+- Removed inline Tailwind stylings from Content Hub cards and replaced them with `docs/design-system.md` CSS utility variables.
+
+### Fixed
+
+- Fixed non-target `<a>` links across the site inheriting a forced hover underline by removing the overly broad `a:not(.btn):hover` global rule in `styles.css`.
+- Fixed bullet alignment and ordered list numbering in long-form articles.
+
+---
+
+## [0.2.0] — 2026-02-23 · Image pipeline, design system clean-up
+
+### Added
+
+- `scripts/img-process.sh` — resize source PNG to 800w/400w + WebP conversion via `cwebp`
+- `scripts/img-audit.sh` — pre-publish audit; exits 1 on oversized images, missing `<img>` attributes, or large unresponsive sources
+- Optimised responsive variants of `AX-image-04-rounded` (800w/400w · WebP + PNG fallback)
+- §7 Image Standards added to `docs/design-system.md`
+- Image pipeline guidance added to `AI-RULES.md` (§3 Allowed, §4 Verification, §10 Decision log)
+
+### Changed
+
+- Section 2 hero image converted to `<picture>` element with WebP source, PNG fallback, `srcset`, `sizes`, intrinsic dimensions, and `loading="eager"`
+- All `<img>` tags across `index.html` given intrinsic `width`/`height`, `loading`, and `decoding` attributes (CLS prevention)
+- `.legal-card` hardcoded hex values replaced with CSS design tokens (`var(--color-*)`)
+- Diff-card grid `style="padding-top: 4rem;"` inline style replaced with Tailwind `pt-16`
+
+### Fixed
+
+- `AX-image-04-rounded.png` (5.8 MB) failed to load on mobile cellular — now served as 45.9 KB WebP
+- Header logo HTML `width` attribute without `w-auto` class caused full-width stretch — fixed
+
+---
+
+## [0.1.0] — 2026-02-22 · Brand pack, typography, section styling
+
+### Added
+
+- Self-hosted Aptos font (brand alignment)
+- Brand pack assets applied across site
+- Differentiators section with brand illustrations
+- Process section with pastel cards and step indicators
+- Problem section with two-column layout and illustration
+- `docs/design-system.md` — design system reference
+- `AI-RULES.md` — AI agent rules and decision log
+- `netlify.toml` — cache headers and security headers
+- `docs/landing-page-spec.md` — phased product spec (Phases 1–3)
+
+### Changed
+
+- Apply section underline restyled to hand-drawn pattern
+- Diff-cards: mobile top margin added to clear illustration overlap
+
+---
+
+_Project started: February 2026_
