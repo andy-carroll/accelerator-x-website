@@ -11,12 +11,16 @@
   // - `#form-success` stays in the DOM (a11y-friendly) and is toggled via `hidden`.
   // - Website field is normalised to include a scheme (https://) to prevent partial URLs.
 
-  const form = document.getElementById('lead-form');
-  if (!form) return;
+  const leadForm = document.getElementById('lead-form');
+  const leadSuccessDiv = document.getElementById('form-success');
+  const leadErrorDiv = document.getElementById('form-error');
 
-  const successDiv = document.getElementById('form-success');
-  const errorDiv = document.getElementById('form-error');
-  let isSubmitting = false;
+  const newsletterForm = document.getElementById('newsletter-form');
+  const newsletterSuccessDiv = document.getElementById('newsletter-success');
+
+  if (!leadForm && !newsletterForm) return;
+
+  const isSubmittingByForm = new WeakMap();
 
   const normaliseWebsiteField = () => {
     const websiteField = document.getElementById('website');
@@ -36,30 +40,30 @@
     if (label) submitBtn.textContent = label;
   };
 
-  const showErrorState = (message) => {
-    if (!errorDiv) return;
+  const showErrorState = (targetErrorDiv, message) => {
+    if (!targetErrorDiv) return;
 
-    errorDiv.textContent =
+    targetErrorDiv.textContent =
       message ||
       "There was an error submitting your application. Please try again or email us directly at hello@accelerator-x.ai";
-    errorDiv.classList.remove('hidden');
+    targetErrorDiv.classList.remove('hidden');
   };
 
-  const clearErrorState = () => {
-    if (!errorDiv) return;
+  const clearErrorState = (targetErrorDiv) => {
+    if (!targetErrorDiv) return;
 
-    errorDiv.textContent = '';
-    errorDiv.classList.add('hidden');
+    targetErrorDiv.textContent = '';
+    targetErrorDiv.classList.add('hidden');
   };
 
-  const showSuccessState = () => {
-    if (!successDiv) return;
+  const showLeadSuccessState = () => {
+    if (!leadForm || !leadSuccessDiv) return;
 
-    form.classList.add('hidden');
-    successDiv.classList.remove('hidden');
-    successDiv.classList.add('is-visible');
+    leadForm.classList.add('hidden');
+    leadSuccessDiv.classList.remove('hidden');
+    leadSuccessDiv.classList.add('is-visible');
 
-    const icon = successDiv.querySelector('.material-symbols-outlined');
+    const icon = leadSuccessDiv.querySelector('.material-symbols-outlined');
     if (!icon) return;
 
     icon.animate(
@@ -72,20 +76,29 @@
     );
   };
 
-  form.addEventListener('submit', (e) => {
+  const showNewsletterSuccessState = () => {
+    if (!newsletterForm || !newsletterSuccessDiv) return;
+
+    newsletterForm.classList.add('hidden');
+    newsletterSuccessDiv.classList.remove('hidden');
+  };
+
+  const handleSubmit = ({ form, onBeforeSubmit, onSuccess, onErrorDiv }) => (e) => {
     e.preventDefault();
 
-    if (isSubmitting) return;
-    isSubmitting = true;
+    if (isSubmittingByForm.get(form)) return;
+    isSubmittingByForm.set(form, true);
 
-    normaliseWebsiteField();
+    if (onBeforeSubmit) onBeforeSubmit();
 
-    clearErrorState();
+    clearErrorState(onErrorDiv);
 
     const submitBtn = form.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn ? submitBtn.textContent : '';
+
     setSubmitState(submitBtn, {
       disabled: true,
-      label: 'Submitting your application...',
+      label: 'Submitting...',
     });
 
     fetch('/', {
@@ -98,19 +111,44 @@
           throw new Error(`Unexpected response status: ${response.status}`);
         }
 
-        showSuccessState();
+        if (onSuccess) onSuccess();
       })
       .catch((error) => {
         console.error('Form submission error:', error);
-        showErrorState();
+
+        if (onErrorDiv) {
+          showErrorState(onErrorDiv);
+        }
 
         setSubmitState(submitBtn, {
           disabled: false,
-          label: 'Apply to work with us',
+          label: originalLabel,
         });
       })
       .finally(() => {
-        isSubmitting = false;
+        isSubmittingByForm.set(form, false);
       });
-  });
+  };
+
+  if (leadForm) {
+    leadForm.addEventListener(
+      'submit',
+      handleSubmit({
+        form: leadForm,
+        onBeforeSubmit: normaliseWebsiteField,
+        onSuccess: showLeadSuccessState,
+        onErrorDiv: leadErrorDiv,
+      })
+    );
+  }
+
+  if (newsletterForm) {
+    newsletterForm.addEventListener(
+      'submit',
+      handleSubmit({
+        form: newsletterForm,
+        onSuccess: showNewsletterSuccessState,
+      })
+    );
+  }
 })();

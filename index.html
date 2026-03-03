@@ -289,6 +289,8 @@
       Should match the primary brand color or page background
     -->
     <meta name="theme-color" content="#00C4CC" />
+
+    <script defer data-domain="accelerator-x.ai" src="https://plausible.io/js/script.js"></script>
   </head>
   <body class="bg-background text-navy">
     <!-- 
@@ -310,12 +312,15 @@
         <a href="#">
           <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
         </a>
-        <a
-          href="#apply"
-          class="btn btn-primary btn-sm"
-        >
-          Apply to work with us
-        </a>
+        <div class="flex items-center gap-4">
+          <a href="/insights/" class="text-sm font-medium text-navy transition hover:opacity-80">Insights</a>
+          <a
+            href="#apply"
+            class="btn btn-primary btn-sm"
+          >
+            Apply to work with us
+          </a>
+        </div>
       </div>
     </header>
 
@@ -389,22 +394,16 @@
 
         <!-- VIDEO PLACEHOLDER -->
         <div class="mt-12 w-full flex-1 lg:mt-0">
-          <div
-            class="relative aspect-video rounded-xl bg-surface-2 flex items-center justify-center"
-          >
-            <div
-              class="flex h-20 w-20 items-center justify-center rounded-full bg-background shadow-lg"
-            >
-              <span class="material-symbols-outlined text-4xl text-navy">
-                play_arrow
-              </span>
-            </div>
-            <p
-              class="absolute bottom-4 left-0 right-0 text-center text-sm text-muted"
-            >
-              Video coming soon
-            </p>
-          </div>
+          <picture>
+            <img
+              src="/assets/illustrations/AX-image-02-rounded.png"
+              alt="Accelerator X — AI transformation"
+              width="1069" height="1069"
+              loading="eager"
+              decoding="async"
+              class="w-full rounded-xl"
+            />
+          </picture>
         </div>
       </section>
 
@@ -735,7 +734,7 @@
 
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
-          <!-- Testimonial 1 -->
+                                        <!-- Testimonial 1 -->
           <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
@@ -748,14 +747,11 @@
               <span class="sr-only">5 out of 5 stars</span>
             </div>
             <p class="flex-1 italic leading-relaxed text-body">
-              "They helped us get clarity on where AI could actually move the
-              needle — then built the first workflows alongside our team.
-              Six weeks later we had working internal copilots and a backlog
-              of high-impact automations to roll out."
+              "They helped us get clarity on where AI could actually move the needle — then built the first workflows alongside our team. Six weeks later we had working internal copilots and a backlog of high-impact automations to roll out."
             </p>
-            <div class="mt-6 hidden" aria-hidden="true">
-              <p class="font-bold text-navy">[Name]</p>
-              <p class="text-sm text-muted">[Title], [Company]</p>
+            <div class="mt-6">
+              <p class="font-bold text-navy">Toby Henry</p>
+              <p class="text-sm text-muted">CEO, Accelerator Solutions</p>
             </div>
           </div>
 
@@ -772,14 +768,11 @@
               <span class="sr-only">5 out of 5 stars</span>
             </div>
             <p class="flex-1 italic leading-relaxed text-body">
-              "It's rare to find people who can bridge strategy and delivery.
-              They gave our leadership team confidence, then got in the weeds
-              with us to make it real. We're running faster decision cycles
-              and the business is fundamentally different."
+              "It&#39;s rare to find people who can bridge strategy and delivery. They gave our leadership team confidence, then got in the weeds with the rest of our team to make it real. Our business is already fundamentally different, just a few months in - and we now know that we have only just scratched the surface."
             </p>
-            <div class="mt-6 hidden" aria-hidden="true">
-              <p class="font-bold text-navy">[Name]</p>
-              <p class="text-sm text-muted">[Title], [Company]</p>
+            <div class="mt-6">
+              <p class="font-bold text-navy">Mark Bennett</p>
+              <p class="text-sm text-muted">CEO, W R Bennett / Premium Car Parks</p>
             </div>
           </div>
 
@@ -796,14 +789,14 @@
               <span class="sr-only">5 out of 5 stars</span>
             </div>
             <p class="flex-1 italic leading-relaxed text-body">
-              "The ROI was obvious within the first cycle. We've now run three
-              cycles with them and the business is fundamentally different."
+              "The ROI was obvious within the first cycle. We&#39;ve now run three cycles with them and the business is fundamentally different."
             </p>
-            <div class="mt-6 hidden" aria-hidden="true">
-              <p class="font-bold text-navy">[Name]</p>
-              <p class="text-sm text-muted">[Title], [Company]</p>
+            <div class="mt-6">
+              <p class="font-bold text-navy">David Carry</p>
+              <p class="text-sm text-muted">Founder, CEO, Track Record Coaching</p>
             </div>
           </div>
+
         </div>
         </div>
       </section>
@@ -830,11 +823,7 @@
             <!-- Toby -->
             <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
-                <div
-                  class="flex h-16 w-16 items-center justify-center rounded-full bg-primary text-xl font-bold text-background"
-                >
-                  TH
-                </div>
+                <img src="/assets/illustrations/AX-image-01-rounded.png" alt="Toby Henry" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
                 <div>
                   <h3 class="font-display text-xl font-bold text-navy">
                     Toby Henry
@@ -853,11 +842,7 @@
             <!-- Andy -->
             <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
-                <div
-                  class="flex h-16 w-16 items-center justify-center rounded-full bg-accent text-background text-xl font-bold"
-                >
-                  AC
-                </div>
+                <img src="/assets/illustrations/AX-image-03-rounded.png" alt="Andy Carroll" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
                 <div>
                   <h3 class="font-display text-xl font-bold text-navy">
                     Andy Carroll
@@ -1116,6 +1101,35 @@
           <p class="mt-4 text-sm text-muted">
             No obligation. No hard sell. Just a conversation to see if we're right for each other.
           </p>
+        </div>
+      </section>
+
+      <section id="newsletter" class="bg-surface py-16">
+        <div class="mx-auto max-w-6xl px-4">
+          <div class="mx-auto max-w-3xl rounded-xl bg-background p-8 shadow-sm">
+            <h2 class="font-display text-2xl font-bold text-navy">Get the weekly dispatch</h2>
+            <p class="mt-3 text-body">High-signal notes for leaders building real AI capability. No hype.</p>
+
+            <form name="newsletter-signup" method="POST" netlify class="mt-6" id="newsletter-form">
+              <input type="hidden" name="form-name" value="newsletter-signup" />
+              <div class="flex flex-col gap-3 sm:flex-row">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  class="w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
+                  placeholder="you@company.com"
+                />
+                <button type="submit" class="btn btn-primary btn-lg sm:w-auto">Subscribe</button>
+              </div>
+              <p class="mt-3 text-sm text-muted">We’ll send a short confirmation and add you to the list.</p>
+            </form>
+
+            <div id="newsletter-success" class="hidden mt-6 rounded-xl bg-surface p-6" role="status" aria-live="polite">
+              <p class="font-medium text-navy">Thanks — you’re subscribed.</p>
+              <p class="mt-1 text-body">Check your inbox for a confirmation email.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>

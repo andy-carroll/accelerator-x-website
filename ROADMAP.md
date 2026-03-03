@@ -37,6 +37,13 @@ _What we are actively building right now. These initiatives have active spec doc
 - [-] **Landing Page Phase 2 (Conversion & Polish):** Transitioning the page to drive action. Embedding GoHighLevel forms, integrating real testimonials, adding client logos, and finalizing script/video embeds.
   → _Execute against:_ `docs/landing-page-spec.md` (specifically Phase 2 & 3 tasks)
 
+  Recent progress:
+
+  - [x] Insights nav link + hero image placeholder
+  - [x] Testimonials now generated from data (`content/data/testimonials.json`) via build step
+  - [x] Newsletter capture form wired to Netlify Forms (automation to GHL still pending)
+  - [x] Privacy-friendly analytics (Plausible) added
+
 ---
 
 ## 🟡 NEXT (In Discovery & Design)
@@ -44,6 +51,7 @@ _What we are actively building right now. These initiatives have active spec doc
 _The immediate next priorities. We know we need these to unlock the £10M vision, but we are currently scoping them or waiting on dependencies._
 
 - [ ] **Newsletter Integration & Capture:** Converting Hub traffic into owned audience (Layer 1 Enablement). Finding the right integration point with our GoHighLevel/Airtable stack.
+- [ ] **Newsletter Automation (GoHighLevel):** Trigger thank-you email + add-to-list workflow for Netlify-captured signups.
 - [ ] **Events Page / High-Ticket Offering:** Scoping the landing page addition for the 2-3 times per year exclusive leadership "away days."
 - [ ] **Workshop Sales Integration:** Refining the path-to-purchase for the £4k-£8k strategic workshop entry point.
 

@@ -20,17 +20,44 @@ The goal is to get something live immediately, then iterate.
 ## Technical approach
 
 ### Stack
-- **Framework:** Static HTML + Tailwind CSS (no build step required)
+
+- **Framework:** Static HTML + Tailwind CSS (build is optional, but used for content generation)
 - **Hosting:** Can be served from anywhere (Netlify, Vercel, or direct to GoHighLevel)
 - **Form handling:** GoHighLevel embedded form (Phase 2)
 - **Video:** YouTube/Vimeo embed or self-hosted (Phase 2)
 
 ### Why static HTML?
-- Zero build complexity
+
+- Minimal build complexity
 - Can be deployed anywhere in minutes
 - Easy to hand off or modify
 - GoHighLevel compatible
 - Fast loading, good SEO
+
+### Testimonials publishing (build-time injection)
+
+Testimonials are authored as data and injected into the landing page at build time.
+
+- **Source of truth:** `content/data/testimonials.json`
+- **Build script:** `scripts/build-testimonials.js`
+- **Build command:** `npm run build`
+
+Behaviour:
+
+- The build script generates the testimonial card HTML and replaces the testimonials card region in `index.html`.
+- To add/update testimonials, edit the JSON file and re-run `npm run build`.
+- This supports scaling to 6-10+ testimonials without hand-editing HTML.
+
+Schema (per testimonial):
+
+```json
+{
+  "quote": "...",
+  "name": "...",
+  "title": "...",
+  "company": "..."
+}
+```
 
 ### Design system setup
 All colours and fonts defined as CSS variables for easy modification:
@@ -242,7 +269,7 @@ Get a professional, readable page live on your domain that tells people who you 
 **Description:** Build testimonial section structure with placeholders
 **Acceptance criteria:**
 - [x] Section headline ("What our clients say" or similar)
-- [x] Three testimonial cards
+- [x] Testimonial cards generated in build step (3+ supported)
 - [x] Each card: quote, name, title, company
 - [x] Placeholder text or greyed out "Testimonials coming soon"
 - [x] Structure ready to receive real testimonials
@@ -420,7 +447,7 @@ Add the conversion elements: working VSL, application form, real testimonials.
 **Acceptance criteria:**
 - [ ] Collect 3 testimonials from clients
 - [ ] Get approval to use names/companies
-- [ ] Update copy in testimonial section
+- [ ] Update `content/data/testimonials.json` with approved quotes + attribution
 - [ ] Add headshots if available
 - [ ] Test renders correctly
 
@@ -459,7 +486,7 @@ Add the conversion elements: working VSL, application form, real testimonials.
 ### P2-06: Basic analytics
 **Description:** Add tracking to understand visitor behaviour
 **Acceptance criteria:**
-- [ ] Add Google Analytics 4 or Plausible
+- [x] Add Google Analytics 4 or Plausible
 - [ ] Track page views
 - [ ] Track CTA clicks (events)
 - [ ] Track form submissions (events)

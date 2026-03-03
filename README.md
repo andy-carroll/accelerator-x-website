@@ -19,6 +19,7 @@ The source-of-truth specs/plans are:
 ## Tech stack (Phase 1 & Content Hub)
 
 **Landing Page:** Static HTML + Tailwind CSS (CDN).
+**Testimonials:** Authored as JSON and injected into `index.html` at build time (`content/data/testimonials.json` → `scripts/build-testimonials.js`).
 **Content Hub (`/insights`):** Markdown + Custom Node.js Static Generator (`scripts/build-hub.js`).
 
 Why:
