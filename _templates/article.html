@@ -31,17 +31,21 @@
     <header class="sticky top-0 z-50 border-b border-surface bg-background-95 backdrop-blur">
       <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
         <a href="/">
-          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
+          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-6 sm:h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
         </a>
-        <a href="/#apply" class="btn btn-primary btn-sm">
-          Apply to work with us
-        </a>
+        <div class="flex items-center gap-2 sm:gap-4">
+          <a href="/insights/" class="text-sm font-medium text-navy transition hover:opacity-80">Insights</a>
+          <a href="/#apply" class="btn btn-primary btn-sm whitespace-nowrap">
+            <span class="sm:hidden">Work with us</span>
+            <span class="hidden sm:inline">Apply to work with us</span>
+          </a>
+        </div>
       </div>
     </header>
 
     <main class="flex-grow">
       <article class="mx-auto max-w-[70ch] px-4 py-12 lg:py-20">
-        <a href="/insights/index.html" class="text-sm font-medium text-muted transition-colors flex items-center gap-1 mb-8 inline-flex hover:text-primary">
+        <a href="/insights/" class="text-sm font-medium text-muted transition-colors flex items-center gap-1 mb-8 inline-flex hover:text-primary">
           <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Hub
         </a>
         <!-- Article Header -->
