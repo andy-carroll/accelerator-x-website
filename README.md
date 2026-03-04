@@ -21,6 +21,7 @@ The source-of-truth specs/plans are:
 **Landing Page:** Static HTML + Tailwind CSS (CDN).
 **Testimonials:** Authored as JSON and injected into `index.html` at build time (`content/data/testimonials.json` → `scripts/build-testimonials.js`).
 **Content Hub (`/insights`):** Markdown + Custom Node.js Static Generator (`scripts/build-hub.js`).
+**Deploy notifications:** Netlify → n8n workflow (`Netlify Deploy → Slack (Prod)`) → Slack channel, posting commit-aware deploy summaries (what changed + why it matters + links).
 
 Why:
 
