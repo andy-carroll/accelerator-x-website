@@ -48,7 +48,9 @@ And that's understandable. That's where people start. The interface looks simila
 
 The problem is that this approach produces exactly the outcomes they describe. Generic responses that don't sound like them. Outputs that technically answer the question but miss the point. Results that require so much editing they've saved no time at all. The experience reinforces the scepticism, the scepticism reduces engagement, and the gap between usage and competence widens rather than narrows.
 
-What most people haven't been shown is that AI rewards a fundamentally different kind of interaction. It's not a vending machine. It's closer to a highly capable colleague who doesn't know you yet — one who needs context, who benefits from challenge, who responds well to being pushed, and who gets significantly better the more you invest in the working relationship. The people who get real value from AI are, almost without exception, the people who've figured out how to have that different kind of conversation. Not because they're more technically capable, but because someone, at some point, showed them how — or because they had the patience and curiosity to figure it out themselves.
+What most people haven't been shown is that AI rewards a fundamentally different kind of interaction. It's not a vending machine. It's closer to a highly capable colleague who doesn't know you yet — one who needs context, who benefits from challenge, who responds well to being pushed, and who gets significantly better the more you invest in the working relationship.
+
+The people who get real value from AI are, almost without exception, the people who've figured out how to have that different kind of conversation. Not because they're more technically capable, but because someone, at some point, showed them how — or because they had the patience and curiosity to figure it out themselves.
 
 That's a skills problem. Not a technology problem.
 
@@ -56,11 +58,22 @@ That's a skills problem. Not a technology problem.
 
 ## What's below the surface
 
-The government research introduced a useful concept they call the "iceberg effect." The surface concerns people express about AI — worries about accuracy, about privacy, about misinformation — are real, but they're driven by something deeper. Underneath the stated concerns is discomfort. Powerlessness. A feeling that this is something happening *to* them rather than something they have agency over.
+The government research introduced a useful concept they call the "iceberg effect." The surface concerns people express about AI — worries about accuracy, about privacy, about misinformation — are real, but they're driven by something deeper.
 
-That resonates with what we see. The person who says "it would have been faster to do it myself" isn't just frustrated with a tool. They're frustrated with a situation in which they feel they should be able to use something that everyone else seems to be finding useful, and they can't work out why it's not working for them. That experience doesn't make people more curious about AI. It makes them more defensive. And defensive people don't build new skills.
+Underneath the stated concerns is discomfort. Powerlessness. A feeling that this is something happening *to* them rather than something they have agency over.
 
-The report also gave us a useful framework for thinking about the workforce. It describes four types of worker: AI experts (researchers, engineers — a small minority), AI specialists (technical roles), AI implementers (business analysts, project managers), and general AI users — the majority of the workforce. Most people will never need to understand how a large language model works. But they do need to understand how to use one effectively. And they need the confidence, not just the access, to do it.
+That resonates with what we see. The person who says "it would have been faster to do it myself" isn't just frustrated with a tool. They're frustrated with a situation in which they feel they should be able to use something that everyone else seems to be finding useful, and they can't work out why it's not working for them. That experience doesn't make people more curious about AI.
+
+It makes them more defensive. And defensive people don't build new skills.
+
+The report also gave us a useful framework for thinking about the workforce. It describes four types of worker:
+
+- AI experts (researchers, engineers — a small minority)
+- AI specialists (technical roles)
+- AI implementers (business analysts, project managers)
+- general AI users — the majority of the workforce.
+
+Most people will never need to understand how a large language model works. But they do need to understand how to use one effectively. And they need the confidence, not just the access, to do it.
 
 Access is not the problem. The government's new AI Skills Boost programme — launching with Google, Microsoft, IBM, Accenture and others — aims to upskill ten million workers by 2030. Free courses, digital badges, industry-approved benchmarks. It's a serious intervention and it's more than the market has had before.
 
@@ -72,11 +85,15 @@ But course completion is not capability. A badge is not confidence. And the iceb
 
 There's a version of the AI story that goes like this: the technology is the solution. Install the right tools, automate the right processes, and the business problem solves itself. The AI saves the time, captures the value, and the people adapt around it.
 
-This version is being sold aggressively by a significant portion of the AI industry. It's appealing because it's fast, it's measurable, and it requires almost no investment in the hardest and least glamorous part of business change: the human part.
+This version is being sold aggressively by a significant portion of the AI industry. It's appealing because it's fast, it's measurable, and it requires almost no investment in the hardest and least glamorous part of business change: **the human part**.
 
-We've seen it. A workflow gets automated. The people who were supposed to benefit from the automation didn't understand it, weren't involved in designing it, and don't trust it. So they work around it, or they use it minimally, or they wait for it to fail — and when it does, they feel vindicated. The technology gets replaced or abandoned. The problem it was supposed to solve remains.
+We've seen it. A workflow gets automated. The people who were supposed to benefit from the automation didn't understand it, weren't involved in designing it, and don't trust it. So they work around it, or they use it minimally, or they wait for it to fail — and when it does, they feel vindicated.
 
-Installing n8n — or any automation tool — does not change a business. Using AI tools occasionally does not build AI capability. Technology is an accelerant. It amplifies what's already there. If what's already there is a team that doesn't understand the tools, doesn't have a framework for using them, and doesn't feel confident enough to experiment, the technology will accelerate very little.
+The technology gets replaced or abandoned. The problem it was supposed to solve remains.
+
+Installing n8n — or any automation tool — does not change a business. Using AI tools occasionally does not build AI capability.
+
+Technology is an accelerant. It amplifies what's already there. If what's already there is a team that doesn't understand the tools, doesn't have a framework for using them, and doesn't feel confident enough to experiment, the technology will accelerate very little.
 
 The businesses that are going to get this right are not the ones that move fastest to automate. They're the ones that invest, deliberately and patiently, in building the human capabilities that make the technology worth having.
 
@@ -84,35 +101,45 @@ The businesses that are going to get this right are not the ones that move faste
 
 ## Why the next 12 to 24 months are different
 
-The government research projects that by 2035, 3.9 million people — 12% of the UK workforce — will be in roles where AI is a core activity. Another 9.7 million will be in roles where AI is at least adjacent to their work. And crucially, most of this growth will not come from new AI-specific jobs being created. It will come from AI responsibilities being added to existing roles. Your finance team, your operations team, your account managers — they will need to be able to use AI tools competently as part of their current jobs, not as a specialist skill on the side.
+The government research projects that by 2035, 3.9 million people — 12% of the UK workforce — will be in roles where AI is a core activity. Another 9.7 million will be in roles where AI is at least adjacent to their work.
 
-That's not a 2035 problem. The capability gap that will determine whether businesses are on the right side of that shift is being established now, in the choices organisations make in the next twelve to twenty-four months. The compounding effect of building habits, skills, and systems early is significant. A team that starts building real capability this year will be in a structurally different position in three years than a team that waits.
+And crucially, most of this growth will not come from new AI-specific jobs being created. It will come from AI responsibilities being added to existing roles. Your finance team, your operations team, your account managers — they will need to be able to use AI tools competently as part of their current jobs, not as a specialist skill on the side.
 
-This is, if you'll allow a brief moment of directness, why the "let's install a tool and see what happens" approach concerns us. Not because tools are bad. They're essential. But tools without capability are infrastructure without inhabitants. And the window for building that capability at a pace that creates genuine competitive advantage is not indefinitely open.
+That's not a 2035 problem. The capability gap that will determine whether businesses are on the right side of that shift is being established now, in the choices organisations make in the next twelve to twenty-four months.
+
+The compounding effect of building habits, skills, and systems early is significant. A team that starts building real capability this year will be in a structurally different position in three years than a team that waits.
+
+This is exactly why the "let's install a tool and see what happens" approach concerns us.
+
+Not because tools are bad (they're essential). But tools without capability are infrastructure without inhabitants.
+
+And the window for building that capability at a pace that creates genuine competitive advantage is not indefinitely open.
 
 ---
 
 ## What genuine transformation actually looks like
 
-It looks like this: a senior team that understands what AI can and can't do, has a realistic view of where value actually lies in their specific business, and has made deliberate choices about where to focus. Not a maturity model. Not a framework borrowed from a conference. A clear-eyed assessment of their own operations, with a plan that they own.
+It looks like this: a senior team that understands what AI can and can't do, has a realistic view of where value actually lies in their specific business, and has made deliberate choices about where to focus.
 
-It looks like people who have been shown — not told, shown — how to work with AI tools in ways that are relevant to their actual jobs. Who have had the chance to experiment in a safe environment, to make mistakes, to develop their own working methods. Who have moved from occasional, tentative use to habitual, confident use because the investment was made in helping them get there.
+Not a maturity model. Not a framework borrowed from a conference. **A clear-eyed assessment of their own operations, with a plan that they own.**
+
+It looks like people who have been shown — not told, **shown** — how to work with AI tools in ways that are relevant to their actual jobs. Who have had the chance to experiment in a safe environment, to make mistakes, to develop their own working methods. Who have moved from occasional, tentative use to habitual, confident use because the investment was made in helping them get there.
 
 It looks like systems and workflows that were designed with the humans in the loop, not around them. Automation that people understand and therefore trust. Processes that have been rebuilt, not just digitised.
 
 And it looks like ongoing support. Not a one-day workshop and a good luck. Not a twelve-week sprint that ends and leaves people to figure out the rest alone. A working relationship with someone who understands your context, who knows your people, who is invested in whether this actually works.
 
-None of that happens quickly. None of it happens without real investment — of time, of attention, of money, of leadership. Anyone who tells you otherwise is selling you something. And the price of believing them is usually paid six to twelve months later, when the automation project has stalled, the tools are sitting unused, and the team is back where it started, only with less appetite for trying again.
+None of that happens quickly. None of it happens without real investment — of time, of attention, of money, of leadership. Anyone who tells you otherwise is selling you something (and it's not the thing you actually need).
+
+And the price of believing them is usually paid six to twelve months later, when the automation project has stalled, the tools are sitting unused, and the team is back where it started, only with less appetite for trying again.
 
 ---
 
 ## The SME advantage hiding in plain sight
 
-Here’s what the government report doesn’t fully capture — and what we think matters most if you’re leading a small or mid-sized business:
-
 The research confirms that AI expertise is concentrated in London and the South East. Salary premiums and educational requirements make it hard for smaller businesses to compete for specialist talent. SMEs face structural disadvantages in accessing AI skills.
 
-All of that is true. And it misses the bigger picture.
+All of that is true. And it still doesn’t capture the most important part of the picture if you’re leading a small or mid-sized business.
 
 Large organisations move slowly. Not because they're badly managed — because of how they're structured. Meaningful decisions happen quarterly. Change programmes take years. The feedback loop between "we tried something new" and "we adjusted based on what we learned" can be eighteen months long. For large organisations, that loop is now their primary competitive liability.
 

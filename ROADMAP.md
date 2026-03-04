@@ -43,7 +43,7 @@ _What we are actively building right now. These initiatives have active spec doc
   - [x] Insights nav link + hero image placeholder
   - [x] Testimonials now generated from data (`content/data/testimonials.json`) via build step
   - [x] Newsletter capture form wired to Netlify Forms (automation to GHL still pending)
-  - [x] Privacy-friendly analytics (Plausible) added
+  - [x] Privacy-friendly analytics (Plausible) added (no cookies, no cross-site tracking)
 
 ---
 
