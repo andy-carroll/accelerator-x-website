@@ -32,8 +32,15 @@ function loadTemplate(filename) {
   return fs.readFileSync(templatePath, 'utf-8');
 }
 
+function resolveSiteUrl() {
+  const raw = process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://accelerator-x.ai';
+  return String(raw).replace(/\/$/, '');
+}
+
 async function build() {
   console.log('🚀 Starting Content Hub Build Engine...');
+
+  const siteUrl = resolveSiteUrl();
   
   if (!fs.existsSync(CONTENT_DIR)) {
     console.warn(`⚠️ Content directory not found: ${CONTENT_DIR}. Creating it...`);
@@ -73,6 +80,8 @@ async function build() {
     safeReplace('date', frontmatter.date);
     safeReplace('category', frontmatter.category);
     safeReplace('excerpt', frontmatter.excerpt);
+    safeReplace('slug', slug);
+    safeReplace('site_url', siteUrl);
     safeReplace('content', htmlContent);
     
     // Inject Dynamic Conversion Tokens (10/10 UX elements)
@@ -100,6 +109,8 @@ async function build() {
   articles.sort((a, b) => new Date(b.date) - new Date(a.date));
   
   let indexHtml = loadTemplate('index.html');
+
+  indexHtml = indexHtml.replace(/{{site_url}}/g, siteUrl);
   
   // Enhanced category mapping for filtering/visuals
   const categoryMap = {

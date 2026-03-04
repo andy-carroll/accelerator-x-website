@@ -60,6 +60,12 @@ If you have added or edited Markdown files in `content/articles/`, rebuild the s
 npm run build
 ```
 
+Canonical URLs for `/insights` pages are generated at build time from a base site URL:
+
+- **Override (local/dev):** `SITE_URL` (e.g. `SITE_URL="https://accelerator-x.netlify.app" npm run build`)
+- **Netlify (automatic):** `URL` (production) or `DEPLOY_PRIME_URL` (deploy previews)
+- **Fallback:** `https://accelerator-x.ai`
+
 ### 3. Serve the site locally
 
 ```bash
@@ -107,6 +113,8 @@ Target domain:
 Recommended Phase 1 deployment:
 
 - **Netlify** (no build command, publish from repo root)
+
+Note: Netlify sets `URL` / `DEPLOY_PRIME_URL` automatically, so canonical URLs will match the active Netlify domain until the custom domain (`accelerator-x.ai`) is attached.
 
 Vercel is also fine:
 
