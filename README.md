@@ -15,13 +15,18 @@ The source-of-truth specs/plans are:
 - `ROADMAP.md` (The active priorities to maintain strategic momentum)
 - `docs/landing-page-spec.md` (Landing page phased delivery)
 - `docs/content-hub-plan.md` (Content Hub Delivery)
+- `docs/notification-workflows-prd.md` (Netlify + Airtable notification architecture and delivery logic)
 
 ## Tech stack (Phase 1 & Content Hub)
 
 **Landing Page:** Static HTML + Tailwind CSS (CDN).
 **Testimonials:** Authored as JSON and injected into `index.html` at build time (`content/data/testimonials.json` → `scripts/build-testimonials.js`).
 **Content Hub (`/insights`):** Markdown + Custom Node.js Static Generator (`scripts/build-hub.js`).
+**Product analytics:** PostHog via shared loader (`assets/js/analytics.js`) included on landing + Insights templates.
 **Deploy notifications:** Netlify → n8n workflow (`Netlify Deploy → Slack (Prod)`) → Slack channel, posting commit-aware deploy summaries (what changed + why it matters + links).
+**Business-building notifications:** Airtable → n8n workflow (`Airtable Action List → Slack (Business Building)`) → Slack channel, scoped to AX Build & Ops base (`app6OluErWOw8UZVI`).
+
+Notification implementation details and future extension path are documented in `docs/notification-workflows-prd.md`.
 
 Why:
 
@@ -74,6 +79,26 @@ npm run dev
 ```
 
 This serves the repository locally (usually at `http://localhost:5000`), allowing you to view both the root `index.html` and the generated `/insights/` pages.
+
+## Analytics (PostHog)
+
+PostHog is configured with the official web snippet in:
+
+- `assets/js/analytics.js`
+
+The loader is included in:
+
+- `index.html` (landing page)
+- `_templates/index.html` (Insights hub)
+- `_templates/article.html` (Insights articles)
+
+Current project settings:
+
+- API key: configured directly in `assets/js/analytics.js`
+- API host: `https://eu.i.posthog.com`
+- Defaults: `2026-01-30`
+
+To change projects/environments later, update key + host in `assets/js/analytics.js` once and all pages inherit it.
 
 ## Content Publishing Pipeline
 

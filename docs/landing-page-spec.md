@@ -486,7 +486,7 @@ Add the conversion elements: working VSL, application form, real testimonials.
 ### P2-06: Basic analytics
 **Description:** Add tracking to understand visitor behaviour
 **Acceptance criteria:**
-- [x] Add Google Analytics 4 or Plausible
+- [x] Add Google Analytics 4 or PostHog
 - [ ] Track page views
 - [ ] Track CTA clicks (events)
 - [ ] Track form submissions (events)
