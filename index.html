@@ -396,8 +396,19 @@
         <!-- VIDEO PLACEHOLDER -->
         <div class="mt-12 w-full flex-1 lg:mt-0">
           <picture>
+            <source
+              type="image/webp"
+              srcset="/assets/illustrations/AX-image-02-rounded-400.webp 400w,
+                      /assets/illustrations/AX-image-02-rounded-800.webp 800w,
+                      /assets/illustrations/AX-image-02-rounded-1069.webp 1069w"
+              sizes="(min-width: 1024px) 45vw, 100vw"
+            />
             <img
               src="/assets/illustrations/AX-image-02-rounded.png"
+              srcset="/assets/illustrations/AX-image-02-rounded-400.png 400w,
+                      /assets/illustrations/AX-image-02-rounded-800.png 800w,
+                      /assets/illustrations/AX-image-02-rounded.png 1069w"
+              sizes="(min-width: 1024px) 45vw, 100vw"
               alt="Accelerator X — AI transformation"
               width="1069" height="1069"
               loading="eager"
@@ -506,7 +517,16 @@
           <div class="mt-12 grid gap-8 pt-16 lg:mt-16 lg:grid-cols-3">
             <!-- Card 1 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-01-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" width="444" height="443" loading="lazy" decoding="async" />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/assets/illustrations/AX-image-01-rounded-96.webp 96w,
+                          /assets/illustrations/AX-image-01-rounded-222.webp 222w"
+                  sizes="96px"
+                />
+                <img src="/assets/illustrations/AX-image-01-rounded-96.png" srcset="/assets/illustrations/AX-image-01-rounded-96.png 96w,
+                          /assets/illustrations/AX-image-01-rounded-222.png 222w" sizes="96px" alt="" aria-hidden="true" class="diff-card-illustration" width="96" height="96" loading="lazy" decoding="async" />
+              </picture>
               <h3 class="font-display text-2xl font-extrabold text-primary">
                 We build capability, not dependency.
               </h3>
@@ -520,7 +540,16 @@
 
             <!-- Card 2 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-02-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration diff-card-illustration--bordered" width="444" height="443" loading="lazy" decoding="async" />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/assets/illustrations/AX-image-02-rounded-96.webp 96w,
+                          /assets/illustrations/AX-image-02-rounded-222.webp 222w"
+                  sizes="96px"
+                />
+                <img src="/assets/illustrations/AX-image-02-rounded-96.png" srcset="/assets/illustrations/AX-image-02-rounded-96.png 96w,
+                          /assets/illustrations/AX-image-02-rounded-222.png 222w" sizes="96px" alt="" aria-hidden="true" class="diff-card-illustration diff-card-illustration--bordered" width="96" height="96" loading="lazy" decoding="async" />
+              </picture>
               <h3 class="font-display text-2xl font-extrabold text-amber">
                 We deliver results, not recommendations.
               </h3>
@@ -533,7 +562,16 @@
 
             <!-- Card 3 -->
             <div class="diff-card card-hoverable rounded-xl bg-background p-8 shadow-sm">
-              <img src="/assets/illustrations/AX-image-03-rounded.png" alt="" aria-hidden="true" class="diff-card-illustration" width="444" height="443" loading="lazy" decoding="async" />
+              <picture>
+                <source
+                  type="image/webp"
+                  srcset="/assets/illustrations/AX-image-03-rounded-96.webp 96w,
+                          /assets/illustrations/AX-image-03-rounded-222.webp 222w"
+                  sizes="96px"
+                />
+                <img src="/assets/illustrations/AX-image-03-rounded-96.png" srcset="/assets/illustrations/AX-image-03-rounded-96.png 96w,
+                          /assets/illustrations/AX-image-03-rounded-222.png 222w" sizes="96px" alt="" aria-hidden="true" class="diff-card-illustration" width="96" height="96" loading="lazy" decoding="async" />
+              </picture>
               <h3 class="font-display text-2xl font-extrabold text-accent">
                 We stay until the job is done.
               </h3>
@@ -735,7 +773,7 @@
 
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
-                                                                                                                                                                                    <!-- Testimonial 1 -->
+                                                                                                                                                                                              <!-- Testimonial 1 -->
           <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
@@ -824,7 +862,16 @@
             <!-- Toby -->
             <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
-                <img src="/assets/illustrations/AX-image-01-rounded.png" alt="Toby Henry" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/illustrations/AX-image-01-rounded-64.webp 64w,
+                            /assets/illustrations/AX-image-01-rounded-96.webp 96w"
+                    sizes="64px"
+                  />
+                  <img src="/assets/illustrations/AX-image-01-rounded-64.png" srcset="/assets/illustrations/AX-image-01-rounded-64.png 64w,
+                            /assets/illustrations/AX-image-01-rounded-96.png 96w" sizes="64px" alt="Toby Henry" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
+                </picture>
                 <div>
                   <h3 class="font-display text-xl font-bold text-navy">
                     Toby Henry
@@ -843,7 +890,16 @@
             <!-- Andy -->
             <div class="card-hoverable rounded-xl bg-background p-8 shadow-sm">
               <div class="flex items-center gap-4">
-                <img src="/assets/illustrations/AX-image-03-rounded.png" alt="Andy Carroll" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcset="/assets/illustrations/AX-image-03-rounded-64.webp 64w,
+                            /assets/illustrations/AX-image-03-rounded-96.webp 96w"
+                    sizes="64px"
+                  />
+                  <img src="/assets/illustrations/AX-image-03-rounded-64.png" srcset="/assets/illustrations/AX-image-03-rounded-64.png 64w,
+                            /assets/illustrations/AX-image-03-rounded-96.png 96w" sizes="64px" alt="Andy Carroll" width="64" height="64" loading="lazy" decoding="async" class="h-16 w-16 rounded-full object-cover" />
+                </picture>
                 <div>
                   <h3 class="font-display text-xl font-bold text-navy">
                     Andy Carroll
