@@ -63,7 +63,24 @@ const POSTHOG_HOST = "https://eu.i.posthog.com";
   e.__SV = 1;
 }(document, window.posthog || []);
 
-posthog.init(POSTHOG_PROJECT_API_KEY, {
-  api_host: POSTHOG_HOST,
-  defaults: "2026-01-30"
-});
+const initPostHog = () => {
+  posthog.init(POSTHOG_PROJECT_API_KEY, {
+    api_host: POSTHOG_HOST,
+    defaults: "2026-01-30"
+  });
+};
+
+const schedulePostHogInit = () => {
+  if (typeof window.requestIdleCallback === "function") {
+    window.requestIdleCallback(initPostHog, { timeout: 3000 });
+    return;
+  }
+
+  window.setTimeout(initPostHog, 1500);
+};
+
+if (document.readyState === "complete") {
+  schedulePostHogInit();
+} else {
+  window.addEventListener("load", schedulePostHogInit, { once: true });
+}
