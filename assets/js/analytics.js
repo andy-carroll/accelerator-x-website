@@ -66,21 +66,23 @@ const POSTHOG_HOST = "https://eu.i.posthog.com";
 const initPostHog = () => {
   posthog.init(POSTHOG_PROJECT_API_KEY, {
     api_host: POSTHOG_HOST,
-    defaults: "2026-01-30"
+    defaults: "2026-01-30",
+    autocapture: false,
+    disable_session_recording: true,
+    disable_surveys: true,
   });
 };
 
-const schedulePostHogInit = () => {
-  if (typeof window.requestIdleCallback === "function") {
-    window.requestIdleCallback(initPostHog, { timeout: 3000 });
-    return;
-  }
-
-  window.setTimeout(initPostHog, 1500);
+let hasInitializedPostHog = false;
+const initPostHogOnce = () => {
+  if (hasInitializedPostHog) return;
+  hasInitializedPostHog = true;
+  initPostHog();
 };
 
-if (document.readyState === "complete") {
-  schedulePostHogInit();
-} else {
-  window.addEventListener("load", schedulePostHogInit, { once: true });
-}
+const interactionEvents = ["pointerdown", "keydown", "touchstart", "scroll"];
+interactionEvents.forEach((eventName) => {
+  window.addEventListener(eventName, initPostHogOnce, { once: true, passive: true });
+});
+
+window.setTimeout(initPostHogOnce, 15000);

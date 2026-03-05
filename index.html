@@ -111,10 +111,20 @@
       Icons via font ligatures. Usage: <span class="material-symbols-outlined">icon_name</span>
       Benefits: Scalable, color inherits from text, no additional HTTP requests per icon
     -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+      />
+    </noscript>
     
     <!-- 
       ========================================
@@ -773,7 +783,7 @@
 
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
-                                                                                                                                                                                                                  <!-- Testimonial 1 -->
+                                                                                                                                                                                                                            <!-- Testimonial 1 -->
           <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
