@@ -640,6 +640,80 @@ a {
   color: var(--color-muted);
 }
 
+.article-author-card__inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.article-author-card__picture {
+  flex: 0 0 auto;
+}
+
+.article-author-card__image {
+  display: block;
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  object-fit: cover;
+  box-shadow: var(--shadow-sm);
+}
+
+.article-author-card__body {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.article-author-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.article-author-card__name,
+.article-author-card__role,
+.article-author-card__bio {
+  margin: 0;
+}
+
+.article-author-card__name {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.article-author-card__role,
+.article-author-card__date,
+.article-author-card__bio {
+  color: var(--color-muted);
+}
+
+.article-author-card__role {
+  margin-top: 0.125rem;
+  font-size: 0.875rem;
+}
+
+.article-author-card__date {
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.article-author-card__bio {
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .article-author-card__header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .article-author-card__date {
+    white-space: normal;
+  }
+}
+
 /* ----------------------------------------
    MOMENTUM PATH / PROCESS CARDS
    Glassmorphic 3-column card layout for "How it works" section

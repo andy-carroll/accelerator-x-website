@@ -62,6 +62,56 @@ function resolveAuthorProfile(authorName, authors) {
   return authors.find((author) => author.name === authorName) || null;
 }
 
+function escapeHtml(str) {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function renderAuthorMeta(authorName, authorProfile, articleDate) {
+  if (!authorProfile) {
+    return `
+      <div class="article-author-meta flex items-center gap-4 text-muted border-b border-surface pb-8">
+        <span class="font-medium text-navy">${escapeHtml(authorName)}</span>
+        <span class="w-1 h-1 rounded-full bg-surface-2"></span>
+        <time>${escapeHtml(articleDate)}</time>
+      </div>
+    `;
+  }
+
+  const image = authorProfile.headshot?.png || authorProfile.headshot?.jpg || null;
+  const webpSrcset = authorProfile.headshot?.webp?.srcset || '';
+  const imageSrc = image?.src || '';
+  const imageSrcset = image?.srcset || '';
+  const imageAlt = authorProfile.headshot?.alt || authorProfile.name || authorName;
+  const role = authorProfile.role || '';
+  const bio = authorProfile.shortBio || '';
+
+  return `
+    <div class="article-author-card border-b border-surface pb-8">
+      <div class="article-author-card__inner">
+        <picture class="article-author-card__picture">
+          ${webpSrcset ? `<source type="image/webp" srcset="${escapeHtml(webpSrcset)}" sizes="56px" />` : ''}
+          ${imageSrc ? `<img src="${escapeHtml(imageSrc)}" srcset="${escapeHtml(imageSrcset)}" sizes="56px" alt="${escapeHtml(imageAlt)}" width="56" height="56" loading="lazy" decoding="async" class="article-author-card__image" />` : ''}
+        </picture>
+        <div class="article-author-card__body">
+          <div class="article-author-card__header">
+            <div>
+              <p class="article-author-card__name">${escapeHtml(authorProfile.name || authorName)}</p>
+              ${role ? `<p class="article-author-card__role">${escapeHtml(role)}</p>` : ''}
+            </div>
+            <time class="article-author-card__date">${escapeHtml(articleDate)}</time>
+          </div>
+          ${bio ? `<p class="article-author-card__bio">${escapeHtml(bio)}</p>` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 async function build() {
   console.log('🚀 Starting Content Hub Build Engine...');
 
@@ -110,6 +160,7 @@ async function build() {
     safeReplace('slug', slug);
     safeReplace('site_url', siteUrl);
     safeReplace('content', htmlContent);
+    safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.date));
     
     // Inject Dynamic Conversion Tokens (10/10 UX elements)
     safeReplace('bluf', frontmatter.bluf);
