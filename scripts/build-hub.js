@@ -5,6 +5,7 @@ const { marked } = require('marked');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, '../content/articles');
+const AUTHORS_PATH = path.join(__dirname, '../content/data/authors.json');
 const OUTPUT_DIR = path.join(__dirname, '../insights');
 const TEMPLATES_DIR = path.join(__dirname, '../_templates');
 
@@ -37,10 +38,35 @@ function resolveSiteUrl() {
   return String(raw).replace(/\/$/, '');
 }
 
+function loadAuthors() {
+  if (!fs.existsSync(AUTHORS_PATH)) {
+    console.warn(`⚠️ Authors data not found: ${AUTHORS_PATH}. Continuing without author profiles.`);
+    return [];
+  }
+
+  try {
+    const raw = fs.readFileSync(AUTHORS_PATH, 'utf-8');
+    const authors = JSON.parse(raw);
+    return Array.isArray(authors) ? authors : [];
+  } catch (error) {
+    console.warn(`⚠️ Failed to parse authors data at ${AUTHORS_PATH}. Continuing without author profiles.`);
+    return [];
+  }
+}
+
+function resolveAuthorProfile(authorName, authors) {
+  if (!authorName) {
+    return null;
+  }
+
+  return authors.find((author) => author.name === authorName) || null;
+}
+
 async function build() {
   console.log('🚀 Starting Content Hub Build Engine...');
 
   const siteUrl = resolveSiteUrl();
+  const authors = loadAuthors();
   
   if (!fs.existsSync(CONTENT_DIR)) {
     console.warn(`⚠️ Content directory not found: ${CONTENT_DIR}. Creating it...`);
@@ -57,6 +83,7 @@ async function build() {
     // Parse frontmatter and content
     const { data: frontmatter, content } = matter(rawContent);
     const slug = frontmatter.slug || file.replace('.md', '');
+    const authorProfile = resolveAuthorProfile(frontmatter.author, authors);
     
     console.log(`- Building: ${frontmatter.title || file}`);
     
@@ -97,6 +124,7 @@ async function build() {
     // Store metadata for the index page
     articles.push({
       ...frontmatter,
+      authorProfile,
       slug,
       url: `/insights/articles/${slug}.html`
     });
