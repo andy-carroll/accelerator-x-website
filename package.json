@@ -10,7 +10,8 @@
     "dev": "npx serve .",
     "build:css": "tailwindcss -i ./scripts/tailwind.input.css -o ./assets/css/tailwind.generated.css --minify",
     "build": "npm run build:css && node scripts/build-footer.js && node scripts/build-testimonials.js && node scripts/build-hub.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:site": "node scripts/test-site.js",
+    "session-end": "node scripts/session-end.js"
   },
   "repository": {
     "type": "git",
