@@ -44,6 +44,8 @@ _What we are actively building right now. These initiatives have active spec doc
   - [x] Testimonials now generated from data (`content/data/testimonials.json`) via build step
   - [x] Newsletter capture form wired to Netlify Forms (automation to GHL still pending)
   - [x] Product analytics switched to PostHog (better free-tier headroom and event-level analysis)
+  - [x] PostHog behavior insights PRD documented (movement, linger, abandonment, and performance-safe rollout)
+    → _Execute against:_ `docs/posthog-behavior-insights-prd.md`
 
 ---
 
@@ -53,6 +55,8 @@ _The immediate next priorities. We know we need these to unlock the £10M vision
 
 - [ ] **Newsletter Integration & Capture:** Converting Hub traffic into owned audience (Layer 1 Enablement). Finding the right integration point with our GoHighLevel/Airtable stack.
 - [ ] **Newsletter Automation (GoHighLevel):** Trigger thank-you email + add-to-list workflow for Netlify-captured signups.
+- [ ] **Behavior Analytics Rollout (PostHog):** Implement staged session replay and funnel diagnostics to identify drop-off and friction hotspots.
+  → _Execute against:_ `docs/posthog-behavior-insights-prd.md`
 - [ ] **Events Page / High-Ticket Offering:** Scoping the landing page addition for the 2-3 times per year exclusive leadership "away days."
 - [ ] **Workshop Sales Integration:** Refining the path-to-purchase for the £4k-£8k strategic workshop entry point.
 

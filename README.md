@@ -16,6 +16,7 @@ The source-of-truth specs/plans are:
 - `docs/landing-page-spec.md` (Landing page phased delivery)
 - `docs/content-hub-plan.md` (Content Hub Delivery)
 - `docs/notification-workflows-prd.md` (Netlify + Airtable notification architecture and delivery logic)
+- `docs/posthog-behavior-insights-prd.md` (Behavior analytics rollout plan for movement, linger, and abandonment insights)
 
 ## Tech stack (Phase 1 & Content Hub)
 
@@ -99,6 +100,8 @@ Current project settings:
 - Defaults: `2026-01-30`
 
 To change projects/environments later, update key + host in `assets/js/analytics.js` once and all pages inherit it.
+
+Behavior analytics operating model (sampling, staged loading, and insight cadence) is documented in `docs/posthog-behavior-insights-prd.md`.
 
 ## Content Publishing Pipeline
 
