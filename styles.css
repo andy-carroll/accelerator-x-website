@@ -680,7 +680,6 @@ a {
 }
 
 .article-author-card__role,
-.article-author-card__date,
 .article-author-card__bio {
   color: var(--color-muted);
 }
@@ -690,15 +689,15 @@ a {
   font-size: 0.875rem;
 }
 
-.article-author-card__date {
-  display: inline-block;
-  margin-top: 0.35rem;
-  font-size: 0.875rem;
-}
-
 .article-author-card__bio {
   margin-top: 0.75rem;
   line-height: 1.6;
+}
+
+.article-date-meta {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
 }
 
 .source-preference-card {

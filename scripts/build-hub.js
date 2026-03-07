@@ -90,14 +90,10 @@ function formatArticleDate(value) {
 }
 
 function renderAuthorMeta(authorName, authorProfile, articleDate) {
-  const formattedDate = formatArticleDate(articleDate);
-
   if (!authorProfile) {
     return `
       <div class="article-author-meta flex items-center gap-4 text-muted border-b border-surface pb-8">
         <span class="font-medium text-navy">${escapeHtml(authorName)}</span>
-        <span class="w-1 h-1 rounded-full bg-surface-2"></span>
-        <time>${escapeHtml(formattedDate)}</time>
       </div>
     `;
   }
@@ -122,7 +118,6 @@ function renderAuthorMeta(authorName, authorProfile, articleDate) {
             <div>
               <p class="article-author-card__name">${escapeHtml(authorProfile.name || authorName)}</p>
               ${role ? `<p class="article-author-card__role">${escapeHtml(role)}</p>` : ''}
-              <time class="article-author-card__date">${escapeHtml(formattedDate)}</time>
             </div>
           </div>
           ${bio ? `<p class="article-author-card__bio">${escapeHtml(bio)}</p>` : ''}
@@ -130,6 +125,16 @@ function renderAuthorMeta(authorName, authorProfile, articleDate) {
       </div>
     </div>
   `;
+}
+
+function renderArticleDate(articleDate) {
+  const formattedDate = formatArticleDate(articleDate);
+
+  if (!formattedDate) {
+    return '';
+  }
+
+  return `<p class="article-date-meta">${escapeHtml(formattedDate)}</p>`;
 }
 
 function renderSharePanel(article, siteUrl) {
@@ -197,6 +202,7 @@ async function build() {
     safeReplace('site_url', siteUrl);
     safeReplace('content', htmlContent);
     safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.date));
+    safeReplace('article_date', renderArticleDate(frontmatter.date));
     safeReplace('share_panel', renderSharePanel({ ...frontmatter, slug }, siteUrl));
     
     // Inject Dynamic Conversion Tokens (10/10 UX elements)
