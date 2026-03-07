@@ -24,8 +24,8 @@ function run() {
   assertIncludes(article, 'article-author-card__image', 'Insights article author card did not render.');
   assertIncludes(article, 'Andy Carroll', 'Insights article author name missing.');
   assertIncludes(article, 'Co-founder', 'Insights article author role missing.');
-  assertIncludes(homepage, 'https://www.google.com/preferences/interests/yourresults?tab=source_preferences&hl=en-GB#source=accelerator-x.ai', 'Homepage preferred source CTA missing.');
   assertIncludes(insightsIndex, 'Add Accelerator X as a preferred Google source.', 'Insights index preferred source CTA missing.');
+  assertIncludes(article, 'Add Accelerator X as a preferred source on Google.', 'Insights article preferred source CTA missing.');
   assertIncludes(privacy, 'Accelerator X Ltd is a company registered in England and Wales under company number 16974247.', 'Privacy fallback legal identity missing.');
   assertIncludes(terms, 'The website is operated by Accelerator X Ltd, a company registered in England and Wales under company number 16974247.', 'Terms fallback legal identity missing.');
 
