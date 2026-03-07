@@ -71,13 +71,33 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+function formatArticleDate(value) {
+  if (!value) {
+    return '';
+  }
+
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return String(value);
+  }
+
+  return new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(parsed);
+}
+
 function renderAuthorMeta(authorName, authorProfile, articleDate) {
+  const formattedDate = formatArticleDate(articleDate);
+
   if (!authorProfile) {
     return `
       <div class="article-author-meta flex items-center gap-4 text-muted border-b border-surface pb-8">
         <span class="font-medium text-navy">${escapeHtml(authorName)}</span>
         <span class="w-1 h-1 rounded-full bg-surface-2"></span>
-        <time>${escapeHtml(articleDate)}</time>
+        <time>${escapeHtml(formattedDate)}</time>
       </div>
     `;
   }
@@ -102,8 +122,8 @@ function renderAuthorMeta(authorName, authorProfile, articleDate) {
             <div>
               <p class="article-author-card__name">${escapeHtml(authorProfile.name || authorName)}</p>
               ${role ? `<p class="article-author-card__role">${escapeHtml(role)}</p>` : ''}
+              <time class="article-author-card__date">${escapeHtml(formattedDate)}</time>
             </div>
-            <time class="article-author-card__date">${escapeHtml(articleDate)}</time>
           </div>
           ${bio ? `<p class="article-author-card__bio">${escapeHtml(bio)}</p>` : ''}
         </div>

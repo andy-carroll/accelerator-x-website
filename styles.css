@@ -665,10 +665,7 @@ a {
 }
 
 .article-author-card__header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
+  display: block;
 }
 
 .article-author-card__name,
@@ -694,24 +691,14 @@ a {
 }
 
 .article-author-card__date {
+  display: inline-block;
+  margin-top: 0.35rem;
   font-size: 0.875rem;
-  white-space: nowrap;
 }
 
 .article-author-card__bio {
   margin-top: 0.75rem;
   line-height: 1.6;
-}
-
-@media (max-width: 640px) {
-  .article-author-card__header {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .article-author-card__date {
-    white-space: normal;
-  }
 }
 
 .source-preference-card {
