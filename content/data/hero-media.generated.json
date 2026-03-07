@@ -1,0 +1,42 @@
+[
+  {
+    "id": "ax-workshop-01",
+    "alt": "AX-workshop-01",
+    "basePath": "/assets/hero/generated/ax-workshop-01",
+    "fallbackExt": "jpg",
+    "width": 5355,
+    "height": 4016,
+    "variants": [480, 768, 1200],
+    "active": true
+  },
+  {
+    "id": "ax-workshop-02",
+    "alt": "AX-workshop-02",
+    "basePath": "/assets/hero/generated/ax-workshop-02",
+    "fallbackExt": "jpg",
+    "width": 6016,
+    "height": 4016,
+    "variants": [480, 768, 1200],
+    "active": true
+  },
+  {
+    "id": "ax-workshop-03",
+    "alt": "AX-workshop-03",
+    "basePath": "/assets/hero/generated/ax-workshop-03",
+    "fallbackExt": "jpg",
+    "width": 6000,
+    "height": 4000,
+    "variants": [480, 768, 1200],
+    "active": true
+  },
+  {
+    "id": "ax-workshop-04",
+    "alt": "AX-workshop-04",
+    "basePath": "/assets/hero/generated/ax-workshop-04",
+    "fallbackExt": "jpg",
+    "width": 5472,
+    "height": 3648,
+    "variants": [480, 768, 1200],
+    "active": true
+  }
+]

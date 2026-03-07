@@ -1,0 +1,8 @@
+{
+  "badge": "Boardroom clarity. Hands-on build support.",
+  "noteEyebrow": "How we work",
+  "noteBody": "Senior operators in the room with your team — from workshop design through implementation support.",
+  "intervalMs": 6500,
+  "sizes": "(min-width: 1024px) 42vw, 100vw",
+  "maxSlides": 5
+}

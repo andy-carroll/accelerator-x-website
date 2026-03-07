@@ -46,6 +46,8 @@ _What we are actively building right now. These initiatives have active spec doc
   - [x] Product analytics switched to PostHog (better free-tier headroom and event-level analysis)
   - [x] PostHog behavior insights PRD documented (movement, linger, abandonment, and performance-safe rollout)
     → _Execute against:_ `docs/posthog-behavior-insights-prd.md`
+  - [x] Homepage founder headshots regression check: Toby and Andy profile images are present in source (`index.html` + `assets/illustrations`) and render correctly across breakpoints.
+  - [x] **Hero Media Library System:** Config-driven hero image cycling with drop-in source folder workflow. Supports responsive variants, performance-safe lazy loading, and generated metadata. Workflow: `content/hero-source/` → `npm run process:hero-images` → `npm run build`. See PRD `docs/PRD-hero-media-library.md`.
 
 ---
 
@@ -57,6 +59,9 @@ _The immediate next priorities. We know we need these to unlock the £10M vision
 - [ ] **Newsletter Automation (GoHighLevel):** Trigger thank-you email + add-to-list workflow for Netlify-captured signups.
 - [ ] **Behavior Analytics Rollout (PostHog):** Implement staged session replay and funnel diagnostics to identify drop-off and friction hotspots.
   → _Execute against:_ `docs/posthog-behavior-insights-prd.md`
+- [ ] **Author Profile System (Homepage + Insights):** Create reusable author profiles for Toby, Andy, and future contributors, including headshots, role, bio, and shared metadata that can be rendered on the homepage and article templates.
+- [ ] **Insights Author Identity UX:** Add small headshots beside article authors and surface author profile metadata consistently across article pages and future content formats.
+- [ ] **Google Preferred Source CTA:** Explore and implement a homepage/content CTA that opens Google source preferences in a new tab with Accelerator X pre-filled as a preferred source, following the Axios interaction pattern.
 - [ ] **Events Page / High-Ticket Offering:** Scoping the landing page addition for the 2-3 times per year exclusive leadership "away days."
 - [ ] **Workshop Sales Integration:** Refining the path-to-purchase for the £4k-£8k strategic workshop entry point.
 
@@ -70,3 +75,4 @@ _Good ideas aligned with the strategy, but not actively being planned yet. No sp
 - [ ] Automated Email Nurture Sequences
 - [ ] Multi-channel content syndication (e.g., automated LinkedIn/Twitter asset generation from Hub articles)
 - [ ] Remotion Programmatic Video Ads infrastructure
+- [ ] Legal/compliance hardening: replace the current boilerplate privacy and terms pages with robust Accelerator X-specific documents tailored to `Accelerator X Ltd` (company number `16974247`), using accelerator solutions material as reference but rewriting for the new business.

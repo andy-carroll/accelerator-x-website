@@ -15,6 +15,7 @@ The source-of-truth specs/plans are:
 - `ROADMAP.md` (The active priorities to maintain strategic momentum)
 - `docs/landing-page-spec.md` (Landing page phased delivery)
 - `docs/content-hub-plan.md` (Content Hub Delivery)
+- `docs/PRD-hero-media-library.md` (Hero media library system)
 - `docs/notification-workflows-prd.md` (Netlify + Airtable notification architecture and delivery logic)
 - `docs/posthog-behavior-insights-prd.md` (Behavior analytics rollout plan for movement, linger, and abandonment insights)
 
@@ -103,13 +104,71 @@ To change projects/environments later, update key + host in `assets/js/analytics
 
 Behavior analytics operating model (sampling, staged loading, and insight cadence) is documented in `docs/posthog-behavior-insights-prd.md`.
 
+## Hero Media Library
+
+The homepage hero supports a **config-driven image library** that can gently cycle through curated stills. This system is designed for:
+
+- Drop-in workshop/client photos
+- Automatic responsive image processing
+- Performance-safe lazy loading
+- No-JS static fallback
+
+### Workflow
+
+1. **Add source photos** to:
+   - `content/hero-source/`
+
+2. **Optional sidecar metadata** (per image):
+   - `content/hero-source/my-workshop-shot.json`
+
+   ```json
+   {
+     "alt": "Running an AI workshop with a client leadership team",
+     "active": true
+   }
+   ```
+
+3. **Process images**:
+
+   ```bash
+   npm run process:hero-images
+   ```
+
+   Outputs:
+   - Responsive variants to `assets/hero/generated/`
+   - Generated library metadata to `content/data/hero-media.generated.json`
+
+4. **Build the site**:
+
+   ```bash
+   npm run build
+   ```
+
+   Homepage hero is rendered automatically from:
+   - `content/data/hero-media.config.json`
+   - Generated library (or manual fallback)
+
+### Performance
+
+- First hero image loads eagerly
+- Secondary slides load lazily on demand
+- Reduced motion support
+- Max 5 active slides (configurable via `maxSlides`)
+
+### Commands
+
+- `npm run build:hero-media` — render hero markup from config/library
+- `npm run process:hero-images` — process source photos into responsive assets
+- `npm run build` — includes hero media build by default
+
 ## Content Publishing Pipeline
 
 The Content Hub is powered by a static Markdown-to-HTML pipeline. To publish or update content:
 
-1.  **Add/Edit Markdown:** Create/modify a `.md` file in `content/articles/`.
-2.  **Verify Frontmatter:** Ensure the YAML header contains the required fields:
-    ```yaml
+1. **Add/Edit Markdown:** Create/modify a `.md` file in `content/articles/`.
+2. **Verify Frontmatter:** Ensure the YAML header contains the required fields:
+
+```yaml
     ---
     title: "Article Title"
     date: "YYYY-MM-DD"
@@ -124,14 +183,17 @@ The Content Hub is powered by a static Markdown-to-HTML pipeline. To publish or 
     next_article_title: "Next Article Title"
     ---
     ```
-3.  **Run Build:** Run `npm run build` to generate the HTML.
-4.  **Content Types:** The system automatically handles icons and labels for different formats:
-    - `Dispatch` (Default/Standard)
-    - `Video` (Play icon)
-    - `Podcast` (Mic icon)
-    - `Webinar` (Camera icon)
-    - `Case Study` (Assignment icon)
-5.  **Interactive Filtering:** The `/insights` index automatically sorts by date and provides interactive filtering based on the `category` field.
+
+3. **Run Build:** Run `npm run build` to generate the HTML.
+4. **Content Types:** The system automatically handles icons and labels for different formats:
+
+- `Dispatch` (Default/Standard)
+- `Video` (Play icon)
+- `Podcast` (Mic icon)
+- `Webinar` (Camera icon)
+- `Case Study` (Assignment icon)
+
+5. **Interactive Filtering:** The `/insights` index automatically sorts by date and provides interactive filtering based on the `category` field.
 
 ## Deployment
 
@@ -161,7 +223,23 @@ On the website side, Phase 2 will:
 - embed the form into this page (iframe or JS embed)
 - style it to match the site (likely custom CSS)
 
-## Working style
+## Session End Automation
+
+The repository now includes a helper script to run the mandatory Session‑End protocol without posting to Slack.
+
+- **Script:** `scripts/session-end.js`
+- **NPM shortcut:** `npm run session-end`
+
+Running the command will:
+1. Create a session log under `.claude/sessions/`.
+2. Ensure `CLAUDE.md` contains an up‑to‑date **Next Session Priorities** block.
+3. Commit and push the changes.
+4. Run the quality gate (`npm run build`).
+5. Append a comment to `ROADMAP.md`, `README.md`, `CHANGELOG.md`, and `AI-RULES.md` noting the session timestamp.
+6. Echo reminders to manually update those docs if further edits are required.
+
+> **Note:** The Slack notification step has been intentionally omitted; you can add it back later if needed.
+
 
 We build section-by-section, banking value and committing regularly.
 

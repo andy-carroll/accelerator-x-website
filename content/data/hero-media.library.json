@@ -1,0 +1,29 @@
+[
+  {
+    "id": "implementation-sequence",
+    "alt": "Accelerator X implementation sequence",
+    "basePath": "/assets/illustrations/AX-image-04-rounded",
+    "fallbackExt": "png",
+    "width": 800,
+    "height": 800,
+    "variants": [400, 800]
+  },
+  {
+    "id": "strategic-transformation-view",
+    "alt": "Accelerator X strategic transformation view",
+    "basePath": "/assets/illustrations/AX-image-02-rounded",
+    "fallbackExt": "png",
+    "width": 1069,
+    "height": 1069,
+    "variants": [400, 800, 1069]
+  },
+  {
+    "id": "delivery-implementation-support",
+    "alt": "Accelerator X delivery and implementation support",
+    "basePath": "/assets/illustrations/AX-image-03-rounded",
+    "fallbackExt": "png",
+    "width": 444,
+    "height": 444,
+    "variants": [222, 444]
+  }
+]

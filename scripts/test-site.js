@@ -21,6 +21,8 @@ function run() {
 
   assertIncludes(homepage, '/assets/images/toby-green-shirt-400.png', 'Homepage founder headshot regression check failed for Toby.');
   assertIncludes(homepage, '/assets/images/andy-black-t-400.jpg', 'Homepage founder headshot regression check failed for Andy.');
+  assertIncludes(homepage, 'data-hero-library', 'Homepage hero media library did not render.');
+  assertIncludes(homepage, 'hero-media-slide', 'Homepage hero media slides missing.');
   assertIncludes(article, 'article-author-card__image', 'Insights article author card did not render.');
   assertIncludes(article, 'Andy Carroll', 'Insights article author name missing.');
   assertIncludes(article, 'Co-founder', 'Insights article author role missing.');
