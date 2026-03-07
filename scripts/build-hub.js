@@ -132,6 +132,22 @@ function renderAuthorMeta(authorName, authorProfile, articleDate) {
   `;
 }
 
+function renderSharePanel(article, siteUrl) {
+  const articleUrl = `${siteUrl}/insights/articles/${article.slug}.html`;
+  const encodedUrl = encodeURIComponent(articleUrl);
+  const encodedTitle = encodeURIComponent(article.title || 'Accelerator X Insight');
+
+  return `
+    <div class="article-share-panel" aria-label="Share this article">
+      <div class="article-share-panel__icons">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}" target="_blank" rel="noopener noreferrer" class="article-share-panel__link" aria-label="Share on LinkedIn">LI</a>
+        <a href="https://x.com/intent/post?url=${encodedUrl}&text=${encodedTitle}" target="_blank" rel="noopener noreferrer" class="article-share-panel__link" aria-label="Share on X">X</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}" target="_blank" rel="noopener noreferrer" class="article-share-panel__link" aria-label="Share on Facebook">FB</a>
+      </div>
+    </div>
+  `;
+}
+
 async function build() {
   console.log('🚀 Starting Content Hub Build Engine...');
 
@@ -181,6 +197,7 @@ async function build() {
     safeReplace('site_url', siteUrl);
     safeReplace('content', htmlContent);
     safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.date));
+    safeReplace('share_panel', renderSharePanel({ ...frontmatter, slug }, siteUrl));
     
     // Inject Dynamic Conversion Tokens (10/10 UX elements)
     safeReplace('bluf', frontmatter.bluf);
