@@ -943,6 +943,20 @@ a {
   min-width: 0;
 }
 
+.founder-profile-image {
+  width: 112px;
+  height: 112px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .founder-profile-image {
+    width: 136px;
+    height: 136px;
+  }
+}
+
 .article-author-card__header {
   display: block;
 }
