@@ -100,6 +100,33 @@ Use a two-phase analytics model:
 - Increase gradually (e.g., 30-50%) only after performance validation
 - Use short 100% windows only for incident/debug sessions
 
+### Current loader configuration (v1 implementation)
+
+Reference implementation: `assets/js/analytics.js`
+
+- **API host:** `https://eu.i.posthog.com`
+- **Project key:** browser key stored inline (public)
+- **Triggers:**
+  - Lazy init on first user interaction (`pointerdown`, `keydown`, `touchstart`, `scroll`)
+  - Fallback init after 15 seconds if no interaction occurs
+- **Features:**
+  - `autocapture: false`
+  - `disable_session_recording: true`
+  - `disable_surveys: true`
+- **Defaults:** `defaults: "2026-01-30"` ensures consistent property metadata
+
+Verification steps before launch:
+
+1. Load the site locally or via Netlify preview.
+2. Open browser console and run `posthog.capture('test_event')` after interacting with the page.
+3. Confirm event arrives in the PostHog project (Events stream) with correct host.
+4. Ensure `posthog.__loaded` is `true` after interaction or 15s timeout.
+
+Next upgrade:
+
+- Wire environment variables so preview/prod can use different PostHog projects without code edits.
+- Decide when to enable autocapture or session recording per sampling rules above.
+
 ---
 
 ## 7) Guardrails and operating thresholds
