@@ -28,3 +28,27 @@
   for = "/*.html"
   [headers.values]
     Cache-Control = "public, max-age=300"
+
+# ── ScoreKit quiz deployments ─────────────────────────────────────────────────
+# Each quiz is a separate Vercel project proxied under /quiz/<slug>.
+# status = 200 means Netlify rewrites the request (browser URL stays the same).
+# force = true ensures this rule fires even if a matching file exists locally.
+#
+# To add a new quiz:
+# 1. Deploy a new Vercel project with NEXT_PUBLIC_BASE_PATH=/quiz/<slug>
+# 2. Copy this block, update `from` and `to` with the new slug + Vercel URL
+# ─────────────────────────────────────────────────────────────────────────────
+
+# AI Readiness Assessment — Accelerator-X
+# Replace YOUR_VERCEL_DEPLOYMENT_URL with the actual .vercel.app URL after deploying
+[[redirects]]
+  from = "/quiz/aireadiness"
+  to = "https://YOUR_VERCEL_DEPLOYMENT_URL/quiz/aireadiness"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/quiz/aireadiness/*"
+  to = "https://YOUR_VERCEL_DEPLOYMENT_URL/quiz/aireadiness/:splat"
+  status = 200
+  force = true
