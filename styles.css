@@ -72,7 +72,7 @@
    ---------------------------------------- */
 :root {
   /* Primary brand color — used for highlights, CTAs, accents */
-  --color-primary: #0aadce; /* Brand teal/cyan */
+  --color-primary: #088abf; /* Brand teal/cyan (darkened for contrast) */
 
   /* Accent color — used for primary CTAs, important actions */
   --color-accent: #e93f8e; /* Brand pink/magenta */
@@ -288,6 +288,14 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   box-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+}
+
+@media (max-width: 480px) {
+  .hero-media-pill {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.01em;
+  }
 }
 
 .hero-media-slides {
@@ -716,7 +724,7 @@ a {
 
 .btn-primary {
   background: var(--color-primary);
-  color: var(--color-navy);
+  color: var(--color-background);
 }
 
 .btn-blue {
