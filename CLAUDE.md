@@ -12,6 +12,6 @@ Claude-specific note:
 
 ## Next Session Priorities
 
-1. _Priority 1_
-2. _Priority 2_
-3. _Priority 3_
+1. Review and clean automated session-end artefacts so canonical docs stay noise-free.
+2. Decide the next Phase 2 website priority from `ROADMAP.md` and execute against the relevant spec.
+3. Add real hero image metadata and alt text so the homepage media library is production-ready.
