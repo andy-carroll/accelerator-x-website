@@ -1,5 +1,7 @@
 # Accelerator X Go-Live Checklist
 
+Friday 13 March 2026
+
 _Use this checklist to get the marketing site production-ready. Each section must be green-lit before launch._
 
 ## 1. Project hygiene

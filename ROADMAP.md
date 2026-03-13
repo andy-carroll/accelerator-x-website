@@ -32,6 +32,13 @@ _What we are actively building right now. These initiatives have active spec doc
 - `[-]` In Flight (Active right now)
 - `[x]` Done
 
+- [-] **Phase 2 Go-Live Readiness (Top Priority):** Execute the end-to-end launch checklist (`docs/go-live-checklist.md`) so the marketing site can ship publicly.
+  - [ ] Replace hero imagery with final production stills + alt text tweaks (current library still interim)
+  - [ ] Refresh homepage copy (hero + proof statements) ready for launch positioning
+  - [ ] Hit Lighthouse targets (≥95 mobile / ≥98 desktop) on latest Netlify preview; capture reports in `docs/analytics/`
+  - [ ] Marketing Ops — connect Brevo form, build confirmation email, design newsletter template, and draft starter automation sequence driving to conversation CTA
+  - [ ] Document PostHog loader configuration & verification in `docs/posthog-behavior-insights-prd.md`
+
 - [x] **Content Hub Architecture (The Authority Engine):** Building the infrastructure to deliver our content philosophy. Setting up the blog/insights structure, category taxonomy (Frameworks, Dispatches, etc.), and ensuring technical SEO fundamentals.
       → _Execute against:_ `docs/content-hub-plan.md`
       → Canonicals are environment-aware via Netlify `URL` / `DEPLOY_PRIME_URL` (or local `SITE_URL` override) to avoid publishing the future custom domain before cutover.
