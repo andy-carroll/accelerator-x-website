@@ -39,6 +39,18 @@ _What we are actively building right now. These initiatives have active spec doc
   - [ ] Marketing Ops — connect Brevo form, build confirmation email, design newsletter template, and draft starter automation sequence driving to conversation CTA
   - [ ] Document PostHog loader configuration & verification in `docs/posthog-behavior-insights-prd.md`
 
+- [ ] **World-Class Landing Pages Architecture (Pressing Priority):** Execute the comprehensive landing page strategy outlined in `docs/world-class-landing-pages-thesis.md`. This is foundational to scaling our multi-product ecosystem and maintaining anti-agency differentiation.
+  - [ ] **URGENT: Get first version of website live** – Deploy current MVP to production domain immediately to establish market presence
+  - [ ] Implement "Clarity Engine" framework for sophisticated B2B buyers
+  - [ ] Build diagnostic architecture (Recognition → Contextualization → Approach → Invitation)
+  - [ ] Develop journey-based navigation for multi-product ecosystem
+  - [ ] Create pricing psychology framework for £500-£200,000 offerings
+  - [ ] Implement evidence-based video strategy (not entertainment)
+  - [ ] Establish clarity metrics measurement system (beyond conversion rate)
+  - [ ] Build risk mitigation protocols for positioning drift and complexity creep
+  - [ ] Design technical architecture for static-first performance and credibility
+  → _Execute against:_ `docs/world-class-landing-pages-thesis.md`
+
 - [x] **Content Hub Architecture (The Authority Engine):** Building the infrastructure to deliver our content philosophy. Setting up the blog/insights structure, category taxonomy (Frameworks, Dispatches, etc.), and ensuring technical SEO fundamentals.
       → _Execute against:_ `docs/content-hub-plan.md`
       → Canonicals are environment-aware via Netlify `URL` / `DEPLOY_PRIME_URL` (or local `SITE_URL` override) to avoid publishing the future custom domain before cutover.
