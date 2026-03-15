@@ -12,6 +12,6 @@ Claude-specific note:
 
 ## Next Session Priorities
 
-1. Review and clean automated session-end artefacts so canonical docs stay noise-free.
-2. Decide the next Phase 2 website priority from `ROADMAP.md` and execute against the relevant spec.
-3. Add real hero image metadata and alt text so the homepage media library is production-ready.
+1. Review go-live checklist (`docs/go-live-checklist.md`) and execute remaining launch tasks
+2. Replace hero imagery with final production stills + alt text refinements
+3. Hit Lighthouse performance targets (≥95 mobile / ≥98 desktop) and capture reports
