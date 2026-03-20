@@ -269,7 +269,46 @@ async function build() {
   indexHtml = indexHtml.replace(/{{articlesList}}/g, articlesListHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), indexHtml);
 
+  // Generate sitemap.xml
+  generateSitemap(articles, siteUrl);
+
   console.log('\n✅ Build complete! Assets generated in /insights');
+}
+
+function generateSitemap(articles, siteUrl) {
+  const REPO_ROOT = path.join(__dirname, '..');
+  const today = new Date().toISOString().split('T')[0];
+
+  const staticPages = [
+    { loc: `${siteUrl}/`, changefreq: 'weekly', priority: '1.0', lastmod: today },
+    { loc: `${siteUrl}/insights/`, changefreq: 'weekly', priority: '0.8', lastmod: today },
+  ];
+
+  const articlePages = articles.map(article => ({
+    loc: `${siteUrl}/insights/articles/${article.slug}.html`,
+    changefreq: 'monthly',
+    priority: '0.7',
+    lastmod: article.date ? String(article.date).slice(0, 10) : today,
+  }));
+
+  const allPages = [...staticPages, ...articlePages];
+
+  const urlEntries = allPages.map(p => `  <url>
+    <loc>${p.loc}</loc>
+    <lastmod>${p.lastmod}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlEntries}
+</urlset>
+`;
+
+  const outPath = path.join(REPO_ROOT, 'sitemap.xml');
+  fs.writeFileSync(outPath, xml);
+  console.log(`  Sitemap: ${allPages.length} URL(s) written to sitemap.xml`);
 }
 
 build();

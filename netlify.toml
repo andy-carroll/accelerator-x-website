@@ -3,7 +3,9 @@
 
 [build]
   publish = "."
-  command = "echo 'Static site ready'"
+  # Build artefacts (index.html, insights/, sitemap.xml) are pre-built locally and committed.
+  # Netlify serves the repo root as-is. Run `npm run build` locally before every push.
+  command = "echo 'Static site ready — pre-built artefacts committed to repo'"
 
 # Functions directory for serverless functions
 [functions]

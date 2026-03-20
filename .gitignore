@@ -13,5 +13,8 @@
 # Brand assets (keep locally, don't commit large binaries)
 docs/Accelerator-X-brand-pack.pdf
 
+# Image source staging area — processed variants only (-800, -400, -1200) are committed
+assets/images/src/
+
 # Dependencies
 node_modules/
