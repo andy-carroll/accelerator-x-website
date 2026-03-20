@@ -136,3 +136,5 @@ If project workflow changes, update this file first, then adapters.
 - 2026-02-14: adopted single-source AI instructions (`AI-RULES.md`) with thin adapter files (`AGENTS.md`, `CLAUDE.md`) to avoid rule drift across tools.
 - Rationale and context: see `README.md` -> "AI instruction architecture (decision record)".
 - 2026-02-22: adopted image optimisation pipeline — `scripts/img-process.sh` (resize + WebP conversion) and `scripts/img-audit.sh` (pre-publish checks). Full standards in `docs/design-system.md` §7.
+
+<!-- Session 20260315-233957 logged -->

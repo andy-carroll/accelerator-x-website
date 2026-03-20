@@ -277,3 +277,5 @@ Use a single-source, tool-agnostic instruction system:
 - `AI-RULES.md`
 - `AGENTS.md`
 - `CLAUDE.md`
+
+<!-- Session 20260315-233957 logged -->

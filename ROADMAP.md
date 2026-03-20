@@ -95,3 +95,5 @@ _Good ideas aligned with the strategy, but not actively being planned yet. No sp
 - [ ] Multi-channel content syndication (e.g., automated LinkedIn/Twitter asset generation from Hub articles)
 - [ ] Remotion Programmatic Video Ads infrastructure
 - [ ] Legal/compliance hardening: replace the current boilerplate privacy and terms pages with robust Accelerator X-specific documents tailored to `Accelerator X Ltd` (company number `16974247`), using accelerator solutions material as reference but rewriting for the new business.
+
+<!-- Session 20260315-233957 logged -->
