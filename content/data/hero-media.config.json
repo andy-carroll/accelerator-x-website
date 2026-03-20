@@ -1,5 +1,5 @@
 {
-  "badge": "Boardroom clarity. Hands-on build support.",
+  "badge": ["Boardroom clarity.", "Hands-on support."],
   "noteEyebrow": "How we work",
   "noteBody": "Senior operators in the room with your team — from workshop design through implementation support.",
   "intervalMs": 6500,

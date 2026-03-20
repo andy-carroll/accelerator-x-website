@@ -94,7 +94,7 @@ function buildHeroMarkup(config, library) {
     '            <!-- HERO_MEDIA_LIBRARY_START -->',
     '            <div class="hero-media-frame">',
     `              <div class="hero-media-stage hero-media-library" aria-label="Accelerator X hero media" data-hero-library data-hero-interval="${escapeHtml(config.intervalMs || 6500)}">`,
-    `                <div class="hero-media-badge">${escapeHtml(config.badge || '')}</div>`,
+    `                <div class="hero-media-badge">${(Array.isArray(config.badge) ? config.badge : [config.badge]).filter(Boolean).map(t => `<span class="hero-media-pill">${escapeHtml(t)}</span>`).join('')}</div>`,
     '                <div class="hero-media-slides">',
     slidesHtml,
     '                </div>',
