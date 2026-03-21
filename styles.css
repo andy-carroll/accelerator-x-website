@@ -104,6 +104,7 @@
   /* Semantic colors */
   --color-success: #22c55e;
   --color-error: #ef4444;
+  --color-star: #f5c542; /* Testimonial star rating gold */
 
   /* Typography — Aptos (self-hosted, aligns with Accelerator Solutions brand) */
   --font-display:
@@ -243,7 +244,7 @@
   border-radius: 28px;
   background:
     radial-gradient(circle at top left, rgba(10, 173, 206, 0.12), transparent 38%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    linear-gradient(180deg, var(--color-background) 0%, var(--color-surface) 100%);
   box-shadow:
     0 10px 30px rgba(15, 23, 42, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -304,7 +305,7 @@
   overflow: hidden;
   border: 1px solid rgba(27, 42, 74, 0.08);
   border-radius: 24px;
-  background: #e2e8f0;
+  background: var(--color-border);
   box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
 }
 
@@ -876,7 +877,7 @@ a {
   gap: 6px;
   align-items: center;
   justify-content: center;
-  color: #f5c542;
+  color: var(--color-star);
   opacity: 0.9;
 }
 

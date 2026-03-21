@@ -1,0 +1,12 @@
+#!/bin/sh
+# Pre-commit hook — runs standards check before every commit.
+# Blocks the commit if any violation is found.
+#
+# This file lives in .githooks/ and is committed to the repo so every
+# environment gets enforcement automatically. Activated by the `prepare`
+# script in package.json, which runs after every `npm install`.
+#
+# See scripts/check.js for the full check list and the real incident
+# behind each rule. See AI-RULES.md §Philosophy for the principles.
+
+npm run check

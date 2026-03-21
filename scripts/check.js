@@ -224,6 +224,100 @@ function checkWeNeverRulesAreClassified() {
   if (clean) pass('All "We never" rules are classified');
 }
 
+// ── Check 7: No hardcoded hex colours outside CSS design token definitions ─────
+// Rule: AI-RULES.md §Philosophy "We never use hardcoded colour values outside
+//   CSS design token definitions"
+// Incident: three hex colours found in styles.css outside :root — gradient,
+//   hero background, and testimonial star colour — all bypassing the token system.
+// How it works: tracks whether each line is inside a :root { } block. Flags any
+//   hex colour pattern on a line that is NOT a CSS variable definition (--color-*)
+//   and NOT inside :root. Skips comments and SVG data URIs.
+
+function checkNoCssTokenDrift() {
+  console.log('\n[7] No hardcoded hex colours outside CSS design token definitions');
+
+  const content = readFile('styles.css');
+  const lines   = content.split('\n');
+
+  const HEX_COLOUR = /#[0-9a-fA-F]{3,8}\b/;
+  const CSS_VAR_DEF = /^\s*--[\w-]+\s*:/;  // a CSS custom property definition
+  const COMMENT     = /^\s*\/\*/;           // a CSS comment line
+
+  let inRoot = false;
+  let depth  = 0;
+  let clean  = true;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Track :root block entry/exit via brace depth
+    if (/^\s*:root\s*\{/.test(line)) { inRoot = true; depth = 1; continue; }
+    if (inRoot) {
+      depth += (line.match(/\{/g) || []).length;
+      depth -= (line.match(/\}/g) || []).length;
+      if (depth <= 0) { inRoot = false; depth = 0; }
+      continue; // inside :root — all hex values here are valid token definitions
+    }
+
+    // Outside :root — flag any hex colour that isn't a variable definition or comment
+    if (!HEX_COLOUR.test(line))   continue;
+    if (COMMENT.test(line))        continue;
+    if (CSS_VAR_DEF.test(line))    continue; // shouldn't happen outside :root but be safe
+    if (line.includes('data:image')) continue; // SVG data URIs in CSS
+
+    fail(`styles.css:${i + 1} — hardcoded hex colour outside design tokens: ${line.trim().slice(0, 80)}`);
+    fail(`  Replace with var(--color-*). See :root block for available tokens.`);
+    clean = false;
+  }
+
+  if (clean) pass('No hardcoded hex colours outside design tokens');
+}
+
+// ── Check 8: HTML validation on build output ──────────────────────────────────
+// Rule: AI-RULES.md §Philosophy — build output must be structurally valid
+// Rationale: malformed HTML ships silently. Catches build script regressions
+//   before they reach production. Zero dependencies — regex-based spot checks
+//   for the most impactful classes of error.
+// Checks: <img> without alt (a11y + SEO critical), duplicate id= values per file
+
+function checkBuiltHtml() {
+  console.log('\n[8] Built HTML validation (alt attributes, duplicate IDs)');
+
+  const IMG_NO_ALT  = /<img(?![^>]*\balt=)[^>]*>/gi;
+  const ID_ATTR     = /\bid="([^"]+)"/g;
+
+  let clean = true;
+
+  for (const file of filesIn('insights/articles', '.html')) {
+    const content = readFile(file);
+
+    // Check 8a: <img> tags missing alt attribute
+    const imgViolations = [...content.matchAll(IMG_NO_ALT)];
+    for (const match of imgViolations) {
+      // Skip tracking pixels and decorative patterns that intentionally omit alt
+      const tag = match[0];
+      if (tag.includes('role="presentation"') || tag.includes('aria-hidden')) continue;
+      fail(`${file} — <img> missing alt attribute: ${tag.slice(0, 100)}`);
+      clean = false;
+    }
+
+    // Check 8b: duplicate id= values within a single file
+    const ids   = [];
+    const dupes = new Set();
+    for (const match of content.matchAll(ID_ATTR)) {
+      const id = match[1];
+      if (ids.includes(id)) dupes.add(id);
+      else ids.push(id);
+    }
+    for (const id of dupes) {
+      fail(`${file} — duplicate id="${id}"`);
+      clean = false;
+    }
+  }
+
+  if (clean) pass('Built HTML: no missing alt attributes or duplicate IDs');
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -238,6 +332,8 @@ function main() {
   checkScriptReferencesExist();
   checkChangelogHasContent();
   checkWeNeverRulesAreClassified();
+  checkNoCssTokenDrift();
+  checkBuiltHtml();
 
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 

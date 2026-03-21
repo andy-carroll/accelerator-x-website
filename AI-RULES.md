@@ -77,6 +77,10 @@ causes `npm run check` to fail. A rule without enforcement is a wish, not a rule
   <!-- not-automatable: requires human judgment; enforced by agent behaviour contract §6 -->
 - Write a comment that describes *what* code does — only *why* it does it that way
   <!-- not-automatable: requires human judgment about comment content -->
+- Use hardcoded colour values outside CSS design token definitions in `styles.css`
+  <!-- check: scripts/check.js#7 -->
+- Ship built HTML with missing `alt` attributes or duplicate `id` values
+  <!-- check: scripts/check.js#8 -->
 
 ### Core goals
 
@@ -165,6 +169,20 @@ the following become true:
 - Risky or irreversible operations (DB migrations, payment flows) require a review gate
 
 Document the switch in §10 Decision log when it happens.
+
+### Branch protection (GitHub)
+
+When the migration to PRs happens, enable branch protection on `main` immediately:
+
+- GitHub → repo Settings → Branches → Add rule → Branch name: `main`
+- Require status checks to pass: `Standards / Build passes`,
+  `Standards / Standards check passes`, `Doc Freshness / CHANGELOG updated`
+- Require branches to be up to date before merging
+- Do not allow bypassing the above settings
+
+This is a GitHub UI setting — not enforceable from the repo itself.
+Until PRs are adopted, CI runs on push to `main` and the pre-commit hook
+provides local enforcement.
 
 ## 6) Agent behaviour contract
 

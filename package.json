@@ -12,6 +12,7 @@
     "build:hero-media": "node scripts/build-hero-media.js",
     "process:hero-images": "bash scripts/process-hero-images.sh",
     "build": "npm run build:css && node scripts/build-footer.js && node scripts/build-testimonials.js && npm run build:hero-media && node scripts/build-hub.js",
+    "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
     "test:site": "node scripts/test-site.js",
     "session-end": "node scripts/session-end.js"

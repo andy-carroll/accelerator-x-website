@@ -11,6 +11,36 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Added
 
+- **`.githooks/pre-commit`** — pre-commit hook committed to source control in `.githooks/`.
+  Activated automatically by `npm install` via the new `prepare` script in `package.json`.
+  Every environment (fresh clone, new worktree, AI agent) now gets enforcement without
+  any manual setup step.
+- **`.env.example`** — canonical documentation of all five required environment variables
+  with one-line explanations, where to obtain each value, and which function uses it.
+  Closes the gap that contributed to the hardcoded `SLACK_WEBHOOK_URL` incident.
+- **Check 7 in `scripts/check.js`** — CSS design token drift detection. Scans `styles.css`
+  line by line, tracking `:root` block boundaries. Flags any hex colour used outside the
+  token definitions. Found and fixed three pre-existing violations on first run.
+- **Check 8 in `scripts/check.js`** — built HTML validation. Checks `insights/articles/*.html`
+  for `<img>` tags missing `alt` attributes (a11y + SEO) and duplicate `id=` values per file.
+- **`npm audit --audit-level=high`** in `.github/workflows/standards.yml` — dependency
+  security scanning on every push. Fails CI on high or critical vulnerabilities.
+- **Branch protection guide** in `AI-RULES.md §5` — documents the exact GitHub settings
+  to enable (required status checks, up-to-date branches) for when PRs are adopted.
+
+### Changed
+
+- **`package.json`** — added `prepare` script: `git config core.hooksPath .githooks`.
+  Runs after every `npm install` to activate committed hooks. No manual setup required.
+- **`styles.css`** — fixed 3 hardcoded hex colours found by check 7: gradient in hero card
+  (`#ffffff`, `#f8fafc` → `var(--color-background/surface)`), hero media background
+  (`#e2e8f0` → `var(--color-border)`), testimonial stars (`#f5c542` → `var(--color-star)`).
+  Added `--color-star: #f5c542` to `:root` design tokens.
+- **`AI-RULES.md §Philosophy "We never"`** — two new classified rules: hardcoded hex colours
+  outside design tokens (`check.js#7`), and built HTML with missing alt/duplicate IDs (`check.js#8`).
+
+### Added
+
 - **`scripts/check.js`** — codebase standards enforcement script (`npm run check`).
   Five checks derived from AI-RULES.md §Philosophy: no inline scripts in templates,
   no hardcoded secrets in functions, no unsubstituted build tokens in articles,
