@@ -7,10 +7,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
-_Next items: share panel SVG icons, hero imagery swap, Brevo welcome email._
+_Next items: hero imagery swap, insights-subscribe form audit, Lighthouse targets._
 
 ### Added
 
+- **Brevo email infrastructure** — `mail.accelerator-x.ai` subdomain authenticated (SPF/DKIM);
+  sender identity `newsletter@mail.accelerator-x.ai` / Accelerator-X Team configured
+- **Welcome email automation** — Brevo list #9 trigger: contact added → send welcome email.
+  Subject: "You're in — here's what to expect from Accelerator X". Single opt-in.
 - `docs/navigation-architecture-thesis.md` — new strategic thesis: arrival states framework,
   competitive nav analysis (Stripe, Intercom, Notion, Linear), organising schemes, mobile
   patterns, search integration, measurement framework (First-Click Success Rate), PostHog

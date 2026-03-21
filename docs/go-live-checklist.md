@@ -23,8 +23,9 @@ _Priority order reflects a live site that real visitors are landing on right now
 - [ ] **Hero imagery** — interim stills still shipping to real visitors. Replace with final
       production photography + update alt text in `content/data/hero-media.config.json`.
 
-- [ ] **Brevo welcome email** — subscribers signing up right now receive nothing. Set up a
-      single welcome email automation on list #9 in Brevo. Copy to be drafted.
+- [x] **Brevo welcome email** — automation live on list #9. Trigger: contact added to list.
+      Sender: `newsletter@mail.accelerator-x.ai` / Accelerator-X Team.
+      Subject: "You're in — here's what to expect from Accelerator X" — 2026-03-21
 
 ---
 
@@ -75,6 +76,9 @@ _Priority order reflects a live site that real visitors are landing on right now
 - [x] Newsletter form (`newsletter-signup`) wired → Netlify → Brevo list #9 (Main AX Newsletter)
 - [x] Slack notification on signup → `#website-leads` (chipmunk bot)
 - [x] Lead capture form → Slack `#website-leads` + Airtable
+- [x] `mail.accelerator-x.ai` subdomain authenticated in Brevo (SPF/DKIM) — 2026-03-21
+- [x] Sender identity: `newsletter@mail.accelerator-x.ai` / Accelerator-X Team — 2026-03-21
+- [ ] `insights-subscribe` form (4 submissions) — confirm destination; likely not reaching Brevo
 
 ---
 

@@ -27,9 +27,10 @@ transparent, anti-agency positioning.
 - [x] **Share panel** — SVG icons (LinkedIn + X) + "Share" heading — fixed in prior session
 - [ ] **Hero imagery** — swap interim stills for final production photos; update alt text in
       `content/data/hero-media.config.json`. Run `npm run process:hero-images && npm run build`.
-- [ ] **Brevo welcome email** — configure single welcome automation on list #9. Draft copy,
-      set up in Brevo automation editor. Also confirm `insights-subscribe` form destination
-      (4 submissions — Brevo or nowhere?).
+- [x] **Brevo email infra** — `mail.accelerator-x.ai` subdomain authenticated (SPF/DKIM);
+      sender `newsletter@mail.accelerator-x.ai` / Accelerator-X Team — 2026-03-21
+- [x] **Brevo welcome email** — automation live on list #9; trigger: contact added to list — 2026-03-21
+- [ ] **insights-subscribe form** — 4 Netlify submissions unaccounted for; confirm Brevo destination.
 - [ ] **Lighthouse targets** — ≥95 mobile / ≥98 desktop. Capture HTML reports to
       `docs/analytics/`. Fix any blocking issues before driving paid traffic.
 

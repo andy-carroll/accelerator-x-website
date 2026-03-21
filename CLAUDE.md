@@ -15,14 +15,12 @@
 
 ## Current State
 
-**Last session:** 2026-03-21 — doc hardening sprint; AI-RULES DoD, GitHub Actions CI,
-CHANGELOG v1.0.0, ROADMAP rebuilt, README rewritten, git policy formalised
+**Last session:** 2026-03-21 — Brevo email infra; welcome automation live; doc hardening
 
 **Build:** ✅ passing | **Git:** ✅ clean | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 - LinkedIn Post Inspector "No author found" — JSON-LD is correct, likely cache. Low priority.
-- Share panel uses plain "LI" text — no SVG icon, no "Share" heading. Visitors see this now.
 - Hero imagery still interim stills — production photos not yet swapped in
 
 ---
@@ -32,8 +30,8 @@ CHANGELOG v1.0.0, ROADMAP rebuilt, README rewritten, git policy formalised
 1. **Hero imagery** — swap interim stills for production photos + update alt text
    → `content/data/hero-media.config.json` + `npm run process:hero-images`
 
-2. **Brevo welcome email** — single automation on list #9; also confirm `insights-subscribe`
-   form destination (4 submissions, unknown if reaching Brevo)
+2. **insights-subscribe form** — 4 submissions unaccounted for; confirm if reaching Brevo
+   → Netlify dashboard → Forms → insights-subscribe → notifications
 
 3. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
 
@@ -41,6 +39,7 @@ CHANGELOG v1.0.0, ROADMAP rebuilt, README rewritten, git policy formalised
 
 ## Decisions (never reverse without discussion)
 
+- **Sending domain:** `mail.accelerator-x.ai` — authenticated in Brevo; sender `newsletter@mail.accelerator-x.ai`
 - **Direct commits to `main`** — no PRs until a second collaborator (human or AI agent) joins
 - **Brevo, not GoHighLevel** — email capture switched at launch
 - **Pre-built artefacts committed** — no build command on Netlify, serves repo root as-is
