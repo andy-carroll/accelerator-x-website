@@ -46,6 +46,20 @@ Do not do unless explicitly asked:
 - Change deployment platform strategy.
 - Commit secrets or modify environment credentials.
 
+### No inline scripts
+
+**Never add `<script>` blocks directly in HTML files or templates.**
+
+All JavaScript belongs in `assets/js/`. The pattern is:
+
+- Form handling → `assets/js/forms.js`
+- Analytics → `assets/js/analytics.js`
+- New behaviour → create `assets/js/<name>.js`, reference with `<script defer src="...">`
+
+Inline scripts break the separation of concerns, are harder to test and review,
+and have caused real bugs (competing event listeners, build scripts overwriting edits).
+This rule has no exceptions — if you find yourself adding a `<script>` block to HTML, stop and externalise it.
+
 ## 4) Local run + verification
 
 Primary build + preview:

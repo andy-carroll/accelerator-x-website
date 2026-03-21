@@ -886,7 +886,7 @@
 
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <!-- Testimonial 1 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <!-- Testimonial 1 -->
           <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
@@ -1355,31 +1355,6 @@
 <!-- FOOTER_COMPONENT_END -->
 
     <script defer src="/assets/js/forms.js"></script>
-    <script>
-      // Newsletter signup — posts directly to Brevo via Netlify Function (bypasses Netlify Forms)
-      (function () {
-        var form = document.getElementById('newsletter-form');
-        var successDiv = document.getElementById('newsletter-success');
-        if (!form) return;
-        form.addEventListener('submit', function (e) {
-          e.preventDefault();
-          var email = (form.querySelector('input[type="email"]') || {}).value || '';
-          if (!email) return;
-          var btn = form.querySelector('button[type="submit"]');
-          if (btn) { btn.disabled = true; btn.textContent = 'Subscribing…'; }
-          fetch('/.netlify/functions/newsletter-subscribe', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, source: 'homepage_footer' })
-          }).then(function () {
-            if (form) form.classList.add('hidden');
-            if (successDiv) successDiv.classList.remove('hidden');
-          }).catch(function () {
-            if (btn) { btn.disabled = false; btn.textContent = 'Subscribe'; }
-          });
-        });
-      })();
-    </script>
     <script defer src="/assets/js/main.js"></script>
   </body>
 </html>

@@ -96,7 +96,6 @@
           <p class="text-lg text-muted mb-8">Join 5,000+ Founders, Directors, and CTOs getting our weekly dispatch on real AI implementation.</p>
           
           <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input type="hidden" name="_honey" style="display:none" />
             <input type="email" name="email" required placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
             <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
           </form>
@@ -108,40 +107,6 @@
           <div id="newsletter-error" class="hidden mt-4 rounded-lg bg-surface p-4 max-w-md mx-auto" role="alert">
             <p class="text-sm text-muted">Something went wrong — please try again.</p>
           </div>
-          <script>
-            (function () {
-              var form = document.getElementById('newsletter-form');
-              var success = document.getElementById('newsletter-success');
-              var error = document.getElementById('newsletter-error');
-              if (!form) return;
-              form.addEventListener('submit', function (e) {
-                e.preventDefault();
-                var email = form.querySelector('input[type="email"]').value.trim();
-                var btn = form.querySelector('button[type="submit"]');
-                btn.disabled = true;
-                btn.textContent = 'Subscribing…';
-                fetch('/.netlify/functions/newsletter-subscribe', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email: email, source: 'insights_hub' })
-                })
-                .then(function (res) { return res.json(); })
-                .then(function (data) {
-                  if (data.success) {
-                    form.classList.add('hidden');
-                    success.classList.remove('hidden');
-                  } else {
-                    throw new Error(data.error || 'unknown');
-                  }
-                })
-                .catch(function () {
-                  btn.disabled = false;
-                  btn.textContent = 'Subscribe';
-                  error.classList.remove('hidden');
-                });
-              });
-            })();
-          </script>
 
           <div class="source-preference-card source-preference-card--compact mt-10 text-left">
             <div>
