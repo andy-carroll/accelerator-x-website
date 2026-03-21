@@ -1042,6 +1042,15 @@ a {
   margin: 3rem 0 1.5rem;
 }
 
+.article-share-panel__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.75rem;
+}
+
 .article-share-panel__icons {
   display: flex;
   align-items: center;
