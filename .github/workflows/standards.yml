@@ -1,0 +1,58 @@
+name: Standards
+
+# Enforces AI-RULES.md §Philosophy on every push to main.
+# Two jobs, both required:
+#   build   — npm run build must exit 0 (no broken artefacts reach Netlify)
+#   check   — npm run check must exit 0 (no standards violations in the codebase)
+#
+# These run in parallel. Either failure blocks the push from being considered clean.
+# The doc-freshness.yml workflow enforces CHANGELOG + ROADMAP update requirements.
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build passes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Confirm build artefacts generated
+        run: |
+          # Spot-check that key artefacts were produced
+          test -f insights/index.html          || (echo "❌ insights/index.html missing" && exit 1)
+          test -f assets/css/tailwind.generated.css || (echo "❌ tailwind.generated.css missing" && exit 1)
+          echo "✅ Build artefacts present"
+
+  check:
+    name: Standards check passes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (required for token substitution check)
+        run: npm run build
+
+      - name: Run standards check
+        run: npm run check

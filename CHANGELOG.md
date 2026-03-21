@@ -9,6 +9,29 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
+### Added
+
+- **`scripts/check.js`** — codebase standards enforcement script (`npm run check`).
+  Five checks derived from AI-RULES.md §Philosophy: no inline scripts in templates,
+  no hardcoded secrets in functions, no unsubstituted build tokens in articles,
+  no dead `<script src>` references, CHANGELOG [Unreleased] has content.
+  Each check documents which rule it enforces and the real incident that prompted it.
+- **`.git/hooks/pre-commit`** — local gate: runs `npm run check` before every commit.
+  Blocks commits that violate codebase standards. Zero-dependency shell script.
+- **`.github/workflows/standards.yml`** — CI gate: runs `npm run build` + `npm run check`
+  on every push to `main`. Parallel jobs — either failure marks the push as failing.
+- **`assets/js/hub-filter.js`** — extracted from inline script in `_templates/index.html`.
+  Hub pathway tile filter and feed heading logic. `npm run check` caught this violation
+  immediately on first run, demonstrating the gate working as intended.
+
+### Changed
+
+- **`_templates/index.html`** — inline `<script>` block replaced with
+  `<script defer src="/assets/js/hub-filter.js">`. Codebase now has zero inline scripts.
+- **`AI-RULES.md §2`** — Philosophy section added. Core principle: move fast by not
+  making messes. Standards enforced by automation. Comments co-located, proportional,
+  and pointing. Full "We never" list with six hard rules.
+
 ### Security
 
 - **Slack webhook URL moved to env var** — removed hardcoded URL from `netlify/functions/submission-created.js`

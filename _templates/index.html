@@ -121,59 +121,6 @@
 
     </main>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const tiles = document.querySelectorAll('.pathway-tile');
-        const cards = document.querySelectorAll('.article-card');
-        const showAllBtn = document.getElementById('show-all');
-        const feedTitle = document.getElementById('feed-title');
-
-        function filterContent(categoryId) {
-          // Update active states
-          tiles.forEach(tile => {
-            if (tile.getAttribute('href') === `#${categoryId}`) {
-              tile.classList.remove('opacity-60');
-              tile.classList.add('ring-2', 'ring-primary', 'ring-offset-4');
-            } else {
-              tile.classList.add('opacity-60');
-              tile.classList.remove('ring-2', 'ring-primary', 'ring-offset-4');
-            }
-          });
-
-          // Filter cards
-          cards.forEach(card => {
-            if (categoryId === 'all' || card.getAttribute('data-category') === categoryId) {
-              card.style.display = 'block';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-
-          // Update header
-          if (categoryId !== 'all') {
-            showAllBtn.classList.remove('hidden');
-            const activeLabel = document.querySelector(`[href="#${categoryId}"] .pathway-label`).textContent;
-            feedTitle.textContent = `${activeLabel} Frameworks`;
-          } else {
-            showAllBtn.classList.add('hidden');
-            feedTitle.textContent = 'Latest Frameworks & Dispatches';
-            tiles.forEach(tile => tile.classList.remove('opacity-60', 'ring-2', 'ring-primary', 'ring-offset-4'));
-          }
-          
-          // Smooth scroll to feed
-          document.querySelector('#feed-title').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        tiles.forEach(tile => {
-          tile.addEventListener('click', (e) => {
-            e.preventDefault();
-            const categoryId = tile.getAttribute('href').replace('#', '');
-            filterContent(categoryId);
-          });
-        });
-
-        showAllBtn.addEventListener('click', () => filterContent('all'));
-      });
-    </script>
+    <script defer src="/assets/js/hub-filter.js"></script>
   </body>
 </html>
