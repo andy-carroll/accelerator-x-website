@@ -13,6 +13,60 @@ const AIRTABLE_API_URL = AIRTABLE_BASE_ID && AIRTABLE_TABLE
   ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`
   : null;
 
+// Handle newsletter signup: add to Brevo list #9 + notify Slack
+async function handleNewsletterSignup(data) {
+  const email = String(data.email || '').trim();
+  if (!email) return { statusCode: 200, body: JSON.stringify({ skipped: 'no email' }) };
+
+  const BREVO_API_KEY = process.env.BREVO_API_KEY;
+
+  // Add to Brevo list #9 via API (single opt-in — bypasses Brevo default confirmation email)
+  if (BREVO_API_KEY) {
+    try {
+      const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
+        method: 'POST',
+        headers: {
+          'api-key': BREVO_API_KEY,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          listIds: [9],
+          updateEnabled: true  // updates contact if they already exist in Brevo
+        })
+      });
+      if (!brevoRes.ok) {
+        const text = await brevoRes.text();
+        console.error('Brevo error:', brevoRes.status, text);
+      }
+    } catch (brevoError) {
+      console.error('Brevo fetch error:', brevoError.message);
+    }
+  } else {
+    console.warn('BREVO_API_KEY not set; skipping Brevo insert');
+  }
+
+  // Notify Slack
+  await fetch(SLACK_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text: `📬 New newsletter subscriber: ${email}`,
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: `📬 *New newsletter subscriber*\n${email}\n_via accelerator-x.ai — consider sending a personal welcome_`
+          }
+        }
+      ]
+    })
+  });
+
+  return { statusCode: 200, body: JSON.stringify({ message: 'subscriber added' }) };
+}
+
 exports.handler = async (event, context) => {
   // Only accept POST requests
   if (event.httpMethod !== 'POST') {
@@ -26,15 +80,18 @@ exports.handler = async (event, context) => {
     const submission = body.payload || body;
     const data = submission.data || submission;
 
-    // Basic spam/validity checks
-    if (data['form-name'] && data['form-name'] !== 'lead-capture-form') {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
-    }
-    if (data.form_name && data.form_name !== 'lead-capture-form') {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
-    }
+    // Honeypot / spam check
     if (data._honeypot) {
       return { statusCode: 200, body: JSON.stringify({ skipped: 'spam' }) };
+    }
+
+    // Route by form name
+    const formName = data['form-name'] || data.form_name || '';
+    if (formName === 'newsletter-signup') {
+      return handleNewsletterSignup(data);
+    }
+    if (formName !== 'lead-capture-form') {
+      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
     }
 
     const safeTrim = (val = '') => String(val).trim();
