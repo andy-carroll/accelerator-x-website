@@ -23,11 +23,57 @@ If any adapter conflicts with this file, follow `AI-RULES.md`.
 - Email capture: Brevo (list #9 — Main AX Newsletter). Netlify Forms → `submission-created`
   function → Brevo API + Slack `#website-leads`.
 
-## 2) Core goals
+## 2) Philosophy
 
-- Ship clean, credible, conversion-ready page updates quickly.
-- Keep implementation simple and maintainable.
-- Avoid framework/tooling complexity unless explicitly requested.
+**We move fast by not making messes.**
+
+Speed comes from clarity, not shortcuts. A hardcoded secret takes 30 seconds to write and
+hours to find later. An inline script takes 2 minutes to add and creates a debugging session
+months later. The mess is what slows you down — not the care.
+
+### What this means
+
+- Every decision has a rationale, recorded at the point of decision — not in a separate doc,
+  not "I'll add it later"
+- Standards are enforced by automation, not memory or discipline — if a rule can be violated
+  without being caught, it will be
+- The codebase explains itself — no tribal knowledge, no verbal walkthroughs required
+- Reflection is built in — every session ends with the system in a better, more coherent state
+  than it started
+
+### Comments: co-located, proportional, and pointing
+
+Inline comments exist for things that could be misread or where a future reader might ask
+"why is it done this way?". The answer goes right there — one clear line of *why*, not *what*.
+If a comment needs more than two lines, the code probably needs restructuring, not annotation.
+
+When deeper context exists — a spec, a design decision, a longer rationale — the comment
+points to it directly. The reader never hunts. Either the comment is sufficient, or it tells
+you exactly where to go.
+
+```js
+// Single opt-in — no Brevo confirmation email. Decision: docs/email-strategy.md
+// Webhook URL from env — never hardcode. See §Philosophy "We never" below.
+```
+
+The gold standard: reading a file is sufficient to understand every decision in it.
+No external context required — but if it exists, the pointer is always there.
+
+### We never
+
+- Commit without updating `CHANGELOG.md`
+- Add inline `<script>` blocks to HTML files or templates
+- Hardcode secrets, URLs, or credentials that belong in environment variables
+- Leave dead code, dead files, or dead references — remove them, or comment exactly why they
+  must stay
+- Make a change without first understanding why the thing being changed exists
+- Write a comment that describes *what* code does — only *why* it does it that way
+
+### Core goals
+
+- Ship clean, credible, conversion-ready updates quickly
+- Keep implementation simple and maintainable
+- Avoid framework or tooling complexity unless explicitly required
 
 ## 3) Allowed / disallowed changes
 
@@ -170,3 +216,6 @@ If project workflow changes, update this file first, then adapters (`CLAUDE.md`,
   second collaborator (human or autonomous AI agent) joins. Migrate trigger documented in §5.
 - 2026-03-21: Definition of Done added to §7. CHANGELOG + ROADMAP + README updates are now
   mandatory gates, enforced by GitHub Actions CI on every push to `main`.
+- 2026-03-21: Philosophy section added to §2. Core principle: move fast by not making messes.
+  Standards enforced by automation. Comments co-located, proportional, and pointing — the code
+  is the document; external context is reachable but never required.
