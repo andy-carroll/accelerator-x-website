@@ -180,6 +180,12 @@ async function build() {
     const authorProfile = resolveAuthorProfile(frontmatter.author, authors);
     
     console.log(`- Building: ${frontmatter.title || file}`);
+
+    // Validate OG description length (LinkedIn/Facebook minimum = 100 chars)
+    const excerptLen = (frontmatter.excerpt || '').replace(/^"|"$/g, '').length;
+    if (excerptLen < 100) {
+      console.warn(`  ⚠️  OG description too short (${excerptLen} chars, min 100): ${file}`);
+    }
     
     // Convert markdown to HTML
     const htmlContent = marked.parse(content);
