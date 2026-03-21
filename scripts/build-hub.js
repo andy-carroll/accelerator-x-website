@@ -214,6 +214,8 @@ async function build() {
     safeReplace('article_date', renderArticleDate(frontmatter.date));
     safeReplace('share_panel', renderSharePanel({ ...frontmatter, slug }, siteUrl));
     safeReplace('og_image', `${siteUrl}/assets/images/og-image-1200.png`);
+    safeReplace('og_url', `${siteUrl}/insights/articles/${slug}.html`);
+    safeReplace('author_linkedin', authorProfile ? authorProfile.linkedin || frontmatter.author : frontmatter.author);
     
     // Inject Dynamic Conversion Tokens (10/10 UX elements)
     safeReplace('bluf', frontmatter.bluf);
