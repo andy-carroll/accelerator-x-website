@@ -185,23 +185,54 @@
               <h3 class="font-display text-2xl font-bold mb-4">The AI Signal, Without The Noise.</h3>
               <p class="text-background opacity-80 mb-6 leading-relaxed">Get the complete technical blueprints for the 5-Stage Sequence when you subscribe to our implementation newsletter.</p>
 
-              <form
-                name="insights-subscribe"
-                method="POST"
-                action="/newsletter-thanks.html"
-                data-netlify="true"
-                class="flex flex-wrap gap-2"
-                id="newsletter-form"
-              >
-                <input type="hidden" name="form-name" value="insights-subscribe" />
+              <form class="flex flex-wrap gap-2" id="newsletter-form">
+                <input type="hidden" name="_honey" style="display:none" />
                 <input type="email" name="email" required placeholder="Email address" class="flex-1 min-w-0 px-4 py-3 rounded-md bg-background border border-strong text-navy focus:outline-none focus:border-primary transition-colors" />
                 <button type="submit" class="btn btn-accent whitespace-nowrap w-full sm:w-auto">Send it to me</button>
               </form>
 
               <div id="newsletter-success" class="hidden mt-6 rounded-xl bg-background/10 p-4" role="status" aria-live="polite">
                 <p class="font-medium">Thanks — you’re subscribed.</p>
-                <p class="mt-1 text-sm opacity-80">Check your inbox for a confirmation email.</p>
+                <p class="mt-1 text-sm opacity-80">Welcome email on its way.</p>
               </div>
+              <div id="newsletter-error" class="hidden mt-6 rounded-xl bg-background/10 p-4" role="alert">
+                <p class="text-sm opacity-80">Something went wrong — please try again.</p>
+              </div>
+
+              <script>
+                (function () {
+                  var form = document.getElementById(‘newsletter-form’);
+                  var success = document.getElementById(‘newsletter-success’);
+                  var error = document.getElementById(‘newsletter-error’);
+                  if (!form) return;
+                  form.addEventListener(‘submit’, function (e) {
+                    e.preventDefault();
+                    var email = form.querySelector(‘input[type="email"]’).value.trim();
+                    var btn = form.querySelector(‘button[type="submit"]’);
+                    btn.disabled = true;
+                    btn.textContent = ‘Subscribing…’;
+                    fetch(‘/.netlify/functions/newsletter-subscribe’, {
+                      method: ‘POST’,
+                      headers: { ‘Content-Type’: ‘application/json’ },
+                      body: JSON.stringify({ email: email, source: ‘insights_article’ })
+                    })
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
+                      if (data.success) {
+                        form.classList.add(‘hidden’);
+                        success.classList.remove(‘hidden’);
+                      } else {
+                        throw new Error(data.error || ‘unknown’);
+                      }
+                    })
+                    .catch(function () {
+                      btn.disabled = false;
+                      btn.textContent = ‘Send it to me’;
+                      error.classList.remove(‘hidden’);
+                    });
+                  });
+                })();
+              </script>
               <p class="text-xs text-background opacity-50 mt-4">No spam. Pure implementation frameworks.</p>
             </div>
           </div>

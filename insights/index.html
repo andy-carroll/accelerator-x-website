@@ -173,18 +173,53 @@
           <h2 class="font-display text-3xl lg:text-4xl font-bold text-navy mb-6">The AI signal, without the noise.</h2>
           <p class="text-lg text-muted mb-8">Join 5,000+ Founders, Directors, and CTOs getting our weekly dispatch on real AI implementation.</p>
           
-          <form 
-            name="insights-subscribe" 
-            method="POST" 
-            action="/newsletter-thanks.html"
-            data-netlify="true"
-            class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto"
-          >
-            <input type="hidden" name="form-name" value="insights-subscribe" />
+          <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+            <input type="hidden" name="_honey" style="display:none" />
             <input type="email" name="email" required placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
             <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
           </form>
           <p class="text-sm text-muted mt-4">One email a week. Unsubscribe anytime.</p>
+          <div id="newsletter-success" class="hidden mt-4 rounded-lg bg-surface p-4 max-w-md mx-auto" role="status" aria-live="polite">
+            <p class="font-medium text-navy">Thanks — you're subscribed.</p>
+            <p class="mt-1 text-sm text-muted">Welcome email on its way.</p>
+          </div>
+          <div id="newsletter-error" class="hidden mt-4 rounded-lg bg-surface p-4 max-w-md mx-auto" role="alert">
+            <p class="text-sm text-muted">Something went wrong — please try again.</p>
+          </div>
+          <script>
+            (function () {
+              var form = document.getElementById('newsletter-form');
+              var success = document.getElementById('newsletter-success');
+              var error = document.getElementById('newsletter-error');
+              if (!form) return;
+              form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var email = form.querySelector('input[type="email"]').value.trim();
+                var btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.textContent = 'Subscribing…';
+                fetch('/.netlify/functions/newsletter-subscribe', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email: email, source: 'insights_hub' })
+                })
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                  if (data.success) {
+                    form.classList.add('hidden');
+                    success.classList.remove('hidden');
+                  } else {
+                    throw new Error(data.error || 'unknown');
+                  }
+                })
+                .catch(function () {
+                  btn.disabled = false;
+                  btn.textContent = 'Subscribe';
+                  error.classList.remove('hidden');
+                });
+              });
+            })();
+          </script>
 
           <div class="source-preference-card source-preference-card--compact mt-10 text-left">
             <div>
