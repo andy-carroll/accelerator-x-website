@@ -1,0 +1,74 @@
+name: Doc Freshness
+
+# Enforces the Definition of Done from AI-RULES.md §7:
+# If code files change, CHANGELOG.md must also be updated in the same push.
+#
+# Covers: scripts/, _templates/, netlify/, assets/js/, styles.css, index.html
+# Excludes: docs-only changes, content/articles/ (managed separately)
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  changelog-updated:
+    name: CHANGELOG updated with code changes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2   # need parent commit to diff against
+
+      - name: Check if code files changed
+        id: code_changed
+        run: |
+          CODE_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E \
+            '^(scripts/|_templates/|netlify/|assets/js/|styles\.css|index\.html)' \
+            | grep -v '\.md$' || true)
+          if [ -n "$CODE_CHANGED" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Files changed:"
+            echo "$CODE_CHANGED"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No tracked code files changed — skipping check."
+          fi
+
+      - name: Check CHANGELOG.md was updated
+        if: steps.code_changed.outputs.changed == 'true'
+        run: |
+          CHANGELOG_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^CHANGELOG\.md$' || true)
+          if [ -z "$CHANGELOG_CHANGED" ]; then
+            echo ""
+            echo "❌ CHANGELOG.md was not updated."
+            echo ""
+            echo "Code files changed in this push but CHANGELOG.md was not touched."
+            echo "Per AI-RULES.md §7 (Definition of Done), every meaningful code change"
+            echo "requires a CHANGELOG.md entry under [Unreleased]."
+            echo ""
+            echo "Add an entry and push again."
+            exit 1
+          else
+            echo "✅ CHANGELOG.md updated — Definition of Done satisfied."
+          fi
+
+  roadmap-sanity:
+    name: ROADMAP has no stale [x] items in NOW section
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for completed items still in NOW section
+        run: |
+          # Extract the NOW section and check for [x] items
+          # Warn (don't fail) — this is advisory
+          NOW_DONE=$(awk '/^## 🟢 NOW/,/^## 🟡 NEXT/' ROADMAP.md | grep '^\- \[x\]' || true)
+          if [ -n "$NOW_DONE" ]; then
+            echo "⚠️  Warning: completed items found in the NOW section of ROADMAP.md:"
+            echo "$NOW_DONE"
+            echo ""
+            echo "Consider moving these to the Done section."
+            echo "(This is a warning, not a failure — update ROADMAP.md when convenient.)"
+          else
+            echo "✅ ROADMAP NOW section looks clean."
+          fi

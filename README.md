@@ -1,281 +1,183 @@
 # Accelerator X Website
 
-This repo contains the public landing page for Accelerator X.
+Public marketing site for Accelerator X — live at **https://accelerator-x.ai**
 
-The goal is to ship a clean, credible Phase 1 MVP fast, then iterate into conversion (GoHighLevel form + VSL) and polish.
+---
 
 ## What this is
 
-- **Phase 1 (MVP):** Static landing page (no build step)
-- **Phase 2 (Conversion):** GoHighLevel embed form + VSL + real testimonials
-- **Phase 3 (Polish):** animations, analytics, A/B testing, SEO refinements
+A static HTML site with a lightweight Node.js build pipeline. No frameworks. No client-side
+rendering. Every page is pre-built HTML served directly from the repo root via Netlify.
 
-The source-of-truth specs/plans are:
+### Phase history
 
-- `ROADMAP.md` (The active priorities to maintain strategic momentum)
-- `docs/landing-page-spec.md` (Landing page phased delivery)
-- `docs/content-hub-plan.md` (Content Hub Delivery)
-- `docs/PRD-hero-media-library.md` (Hero media library system)
-- `docs/notification-workflows-prd.md` (Netlify + Airtable notification architecture and delivery logic)
-- `docs/posthog-behavior-insights-prd.md` (Behavior analytics rollout plan for movement, linger, and abandonment insights)
+- **Phase 1 (MVP):** Static landing page + design system — shipped Feb 2026
+- **Phase 2 (Launch):** Content Hub, hero media library, PostHog analytics, Brevo email
+  capture, Netlify Functions, SEO/JSON-LD — shipped Mar 2026
+- **Phase 3 (Growth):** Lighthouse optimisation, Brevo automation sequences, autonomous
+  AI agent fleet, events page, workshop sales path — _in progress_
 
-## Tech stack (Phase 1 & Content Hub)
+---
 
-**Landing Page:** Static HTML + Tailwind CSS (CDN).
-**Testimonials:** Authored as JSON and injected into `index.html` at build time (`content/data/testimonials.json` → `scripts/build-testimonials.js`).
-**Content Hub (`/insights`):** Markdown + Custom Node.js Static Generator (`scripts/build-hub.js`).
-**Product analytics:** PostHog via shared loader (`assets/js/analytics.js`) included on landing + Insights templates.
-**Deploy notifications:** Netlify → n8n workflow (`Netlify Deploy → Slack (Prod)`) → Slack channel, posting commit-aware deploy summaries (what changed + why it matters + links).
-**Business-building notifications:** Airtable → n8n workflow (`Airtable Action List → Slack (Business Building)`) → Slack channel, scoped to AX Build & Ops base (`app6OluErWOw8UZVI`).
+## Tech stack
 
-Notification implementation details and future extension path are documented in `docs/notification-workflows-prd.md`.
+| Layer | What |
+|---|---|
+| Landing page | Static HTML + Tailwind CSS (CDN) + `styles.css` design tokens |
+| Content Hub | Markdown → static HTML via `scripts/build-hub.js` |
+| Testimonials | JSON → HTML via `scripts/build-testimonials.js` |
+| Hero media | Config-driven cycling via `scripts/build-hero-media.js` |
+| Email capture | Netlify Forms → `netlify/functions/submission-created.js` → Brevo list #9 |
+| Analytics | PostHog (`assets/js/analytics.js`) — landing page + all Hub pages |
+| Deploy notifications | Netlify → n8n → Slack `#ax-operations` |
+| Hosting | Netlify — auto-deploys from `main`; pre-built artefacts committed |
 
-Why:
+**Why no framework:** Zero framework = instantaneous loads, perfect Lighthouse baseline,
+no build complexity on Netlify, and full HTML control for SEO/AEO. Deliberate choice —
+see decision record below.
 
-- Fastest path to production (ship today)
-- Minimal moving parts (zero-framework static generation)
-- Content is perfectly structured for SEO/AEO
-- Integrates seamlessly with AI Slack Publisher agents (via GitHub)
-
-### Frameworks (Astro / Next.js / React)
-
-We have intentionally **disqualified** client-side rendering frameworks and heavy SSG frameworks (Next.js) to keep the pipeline ultra-lean and brutally fast. All HTML is served completely statically for instantaneous load times and perfect Lighthouse scores.
+---
 
 ## Repo layout
 
-- `index.html` — single-page landing site
-- `styles.css` — design tokens + any small custom styles
-- `assets/` — images/icons
-- `docs/` — specification, copy, notes
-- `content/articles/` — Raw Markdown files for the Content Hub
-- `_templates/` — HTML templates injected by the generator (`index.html`, `article.html`)
-- `insights/` — Generated static HTML output for the Content Hub
-- `scripts/` — Custom build scripts (e.g., Markdown to HTML parser)
+```
+index.html                  Landing page
+styles.css                  Design tokens + custom styles
+assets/                     Images, icons, JS (analytics.js)
+_templates/                 HTML templates (index.html, article.html)
+content/
+  articles/                 Raw Markdown source for Content Hub
+  data/                     JSON config (testimonials, hero, authors)
+  hero-source/              Raw workshop photos (not committed — .gitignore)
+insights/                   Generated static HTML for Content Hub
+netlify/functions/          Netlify serverless functions
+scripts/                    Build scripts
+docs/                       Specs, PRDs, design system, go-live checklist
+```
+
+---
 
 ## Local development
 
-### 1. Install dependencies (First time only)
+### Install dependencies (first time)
 
 ```bash
 npm install
 ```
 
-### 2. Build the Content Hub
-
-If you have added or edited Markdown files in `content/articles/`, rebuild the static HTML:
+### Build everything
 
 ```bash
 npm run build
 ```
 
-Canonical URLs for `/insights` pages are generated at build time from a base site URL:
+Generates: article HTML, hub index, sitemap.xml, testimonials, hero markup.
 
-- **Override (local/dev):** `SITE_URL` (e.g. `SITE_URL="https://accelerator-x.netlify.app" npm run build`)
-- **Netlify (automatic):** `URL` (production) or `DEPLOY_PRIME_URL` (deploy previews)
-- **Fallback:** `https://accelerator-x.ai`
-
-### 3. Serve the site locally
+### Serve locally
 
 ```bash
 npm run dev
+# → http://localhost:5000
 ```
 
-This serves the repository locally (usually at `http://localhost:5000`), allowing you to view both the root `index.html` and the generated `/insights/` pages.
+### Process new hero images
 
-## Analytics (PostHog)
+```bash
+npm run process:hero-images
+# Then:
+npm run build
+```
 
-PostHog is configured with the official web snippet in:
+---
 
-- `assets/js/analytics.js`
+## Content publishing
 
-The loader is included in:
+1. Create/edit a `.md` file in `content/articles/`
+2. Ensure frontmatter has required fields (see below)
+3. Run `npm run build`
+4. Commit and push
 
-- `index.html` (landing page)
-- `_templates/index.html` (Insights hub)
-- `_templates/article.html` (Insights articles)
-
-Current project settings:
-
-- API key: configured directly in `assets/js/analytics.js`
-- API host: `https://eu.i.posthog.com`
-- Defaults: `2026-01-30`
-
-To change projects/environments later, update key + host in `assets/js/analytics.js` once and all pages inherit it.
-
-Behavior analytics operating model (sampling, staged loading, and insight cadence) is documented in `docs/posthog-behavior-insights-prd.md`.
-
-## Hero Media Library
-
-The homepage hero supports a **config-driven image library** that can gently cycle through curated stills. This system is designed for:
-
-- Drop-in workshop/client photos
-- Automatic responsive image processing
-- Performance-safe lazy loading
-- No-JS static fallback
-
-### Workflow
-
-1. **Add source photos** to:
-   - `content/hero-source/`
-
-2. **Optional sidecar metadata** (per image):
-   - `content/hero-source/my-workshop-shot.json`
-
-   ```json
-   {
-     "alt": "Running an AI workshop with a client leadership team",
-     "active": true
-   }
-   ```
-
-3. **Process images**:
-
-   ```bash
-   npm run process:hero-images
-   ```
-
-   Outputs:
-   - Responsive variants to `assets/hero/generated/`
-   - Generated library metadata to `content/data/hero-media.generated.json`
-
-4. **Build the site**:
-
-   ```bash
-   npm run build
-   ```
-
-   Homepage hero is rendered automatically from:
-   - `content/data/hero-media.config.json`
-   - Generated library (or manual fallback)
-
-### Performance
-
-- First hero image loads eagerly
-- Secondary slides load lazily on demand
-- Reduced motion support
-- Max 5 active slides (configurable via `maxSlides`)
-
-### Commands
-
-- `npm run build:hero-media` — render hero markup from config/library
-- `npm run process:hero-images` — process source photos into responsive assets
-- `npm run build` — includes hero media build by default
-
-## Content Publishing Pipeline
-
-The Content Hub is powered by a static Markdown-to-HTML pipeline. To publish or update content:
-
-1. **Add/Edit Markdown:** Create/modify a `.md` file in `content/articles/`.
-2. **Verify Frontmatter:** Ensure the YAML header contains the required fields:
+### Required frontmatter
 
 ```yaml
-    ---
-    title: "Article Title"
-    date: "YYYY-MM-DD"
-    author: "Toby Henry"
-    category: "AI Strategy" # AI Strategy, The Implementation Gap, or Capability Building
-    type: "Dispatch" # Dispatch, Video, Podcast, Webinar, or Case Study
-    excerpt: "Short SEO summary"
-    slug: "article-slug"
-    bluf: "Bottom Line Up Front - 1-2 sentence summary"
-    lead_magnet_cta: "Optional CTA text for the nurture trap"
-    next_article_url: "/insights/articles/next-slug.html"
-    next_article_title: "Next Article Title"
-    ---
-    ```
+---
+title: "Article Title"
+date: "YYYY-MM-DD"
+author: "Andy Carroll"          # must match key in content/data/authors.json
+category: "AI Strategy"         # AI Strategy | The Implementation Gap | Capability Building
+type: "Dispatch"                 # Dispatch | Video | Podcast | Webinar | Case Study
+excerpt: "≥100 chars for OG"    # build warns if shorter
+slug: "article-slug"
+bluf: "Bottom Line Up Front — 1-2 sentences"
+lead_magnet_cta: "Optional CTA"
+next_article_url: "/insights/articles/next-slug.html"
+next_article_title: "Next Article Title"
+---
+```
 
-3. **Run Build:** Run `npm run build` to generate the HTML.
-4. **Content Types:** The system automatically handles icons and labels for different formats:
-
-- `Dispatch` (Default/Standard)
-- `Video` (Play icon)
-- `Podcast` (Mic icon)
-- `Webinar` (Camera icon)
-- `Case Study` (Assignment icon)
-
-5. **Interactive Filtering:** The `/insights` index automatically sorts by date and provides interactive filtering based on the `category` field.
+---
 
 ## Deployment
 
-Target domain:
+- **Platform:** Netlify
+- **Trigger:** push to `main` → auto-deploy (~30s)
+- **Build command on Netlify:** none — pre-built artefacts are committed
+- **Publish directory:** `.` (repo root)
+- **Custom domain:** `accelerator-x.ai`
 
-- `accelerator-x.ai`
+Canonical URLs for `/insights` pages are built from:
+- `SITE_URL` env var (local override)
+- `URL` (Netlify production) or `DEPLOY_PRIME_URL` (deploy previews)
+- Fallback: `https://accelerator-x.ai`
 
-Recommended Phase 1 deployment:
+---
 
-- **Netlify** (no build command, publish from repo root)
+## Analytics (PostHog)
 
-Note: Netlify sets `URL` / `DEPLOY_PRIME_URL` automatically, so canonical URLs will match the active Netlify domain until the custom domain (`accelerator-x.ai`) is attached.
+Configured in `assets/js/analytics.js` — included on all pages via templates.
 
-Vercel is also fine:
+- API host: `https://eu.i.posthog.com`
+- Behaviour analytics operating model: `docs/posthog-behavior-insights-prd.md`
 
-- import project
-- framework preset: “Other”
-- output: static
+---
 
-## GoHighLevel (Phase 2)
+## Email capture (Brevo)
 
-We will build the “bot under the hood” in GoHighLevel.
+Newsletter signups flow: Netlify Form → `submission-created` function → Brevo API (list #9)
++ Slack `#website-leads` notification.
 
-On the website side, Phase 2 will:
+Lead applications flow: Netlify Form → `submission-created` function → Slack `#website-leads`
++ Airtable CRM.
 
-- create the application form in GoHighLevel
-- embed the form into this page (iframe or JS embed)
-- style it to match the site (likely custom CSS)
+---
 
-## Session End Automation
-
-The repository now includes a helper script to run the mandatory Session‑End protocol without posting to Slack.
-
-- **Script:** `scripts/session-end.js`
-- **NPM shortcut:** `npm run session-end`
-
-Running the command will:
-1. Create a session log under `.claude/sessions/`.
-2. Ensure `CLAUDE.md` contains an up‑to‑date **Next Session Priorities** block.
-3. Commit and push the changes.
-4. Run the quality gate (`npm run build`).
-5. Append a comment to `ROADMAP.md`, `README.md`, `CHANGELOG.md`, and `AI-RULES.md` noting the session timestamp.
-6. Echo reminders to manually update those docs if further edits are required.
-
-> **Note:** The Slack notification step has been intentionally omitted; you can add it back later if needed.
-
-
-We build section-by-section, banking value and committing regularly.
-
-If you’re working through the plan, the intended commit cadence is:
-
-- scaffold
-- tokens/base
-- header
-- hero
-- …and so on
-
-## AI instruction architecture (decision record)
+## AI instruction architecture
 
 ### Decision
 
-Use a single-source, tool-agnostic instruction system:
+Single-source, tool-agnostic instruction system:
 
-- Canonical rules: `AI-RULES.md`
-- Thin adapters: `AGENTS.md` and `CLAUDE.md`
-
-### Why this decision was made
-
-- We use multiple AI coding tools and want one place to maintain operating rules.
-- Duplicating instructions across tool-specific files creates drift and ambiguity.
-- Thin adapters keep compatibility while preserving a single source of truth.
+- **Canonical rules:** `AI-RULES.md` ← always wins
+- **Thin adapters:** `AGENTS.md` (Codex/OpenAI agents), `CLAUDE.md` (Claude Code)
 
 ### Operating rule
 
-- Update `AI-RULES.md` first when workflow/policy changes.
-- Keep `AGENTS.md` and `CLAUDE.md` minimal and referential.
-- If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
+Update `AI-RULES.md` first when workflow or policy changes. Adapters stay minimal
+and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 
-### Related files
+---
 
-- `AI-RULES.md`
-- `AGENTS.md`
-- `CLAUDE.md`
+## Source-of-truth documents
 
-<!-- Session 20260315-233957 logged -->
+| Document | Purpose |
+|---|---|
+| `ROADMAP.md` | Strategic priorities — Now / Next / Later |
+| `docs/go-live-checklist.md` | Colour-coded launch checklist (live site) |
+| `CHANGELOG.md` | Version history — updated on every meaningful change |
+| `AI-RULES.md` | Agent operating rules + Definition of Done |
+| `docs/landing-page-spec.md` | Landing page phased delivery spec |
+| `docs/content-hub-plan.md` | Content Hub architecture |
+| `docs/design-system.md` | Typography, colour tokens, image standards |
+| `docs/notification-workflows-prd.md` | Netlify + Slack notification architecture |
+| `docs/posthog-behavior-insights-prd.md` | Behaviour analytics rollout plan |
+| `docs/PRD-hero-media-library.md` | Hero media library system |
