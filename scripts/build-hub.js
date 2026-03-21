@@ -20,7 +20,11 @@ if (!fs.existsSync(TEMPLATES_DIR)) {
   fs.mkdirSync(TEMPLATES_DIR, { recursive: true });
 }
 
-// Helper: load template from file system
+/**
+ * Load a template file from the _templates directory.
+ * @param {string} filename - Template filename (e.g. 'article.html')
+ * @returns {string} Template file contents, or a minimal fallback if not found
+ */
 function loadTemplate(filename) {
   const templatePath = path.join(TEMPLATES_DIR, filename);
   if (!fs.existsSync(templatePath)) {
@@ -33,11 +37,19 @@ function loadTemplate(filename) {
   return fs.readFileSync(templatePath, 'utf-8');
 }
 
+/**
+ * Resolve the canonical site URL from environment variables, falling back to production.
+ * @returns {string} Site URL with no trailing slash (e.g. 'https://accelerator-x.ai')
+ */
 function resolveSiteUrl() {
   const raw = process.env.SITE_URL || process.env.URL || process.env.DEPLOY_PRIME_URL || 'https://accelerator-x.ai';
   return String(raw).replace(/\/$/, '');
 }
 
+/**
+ * Load the authors data file from content/data/authors.json.
+ * @returns {Object[]} Array of author objects, or empty array if file is missing/invalid
+ */
 function loadAuthors() {
   if (!fs.existsSync(AUTHORS_PATH)) {
     console.warn(`⚠️ Authors data not found: ${AUTHORS_PATH}. Continuing without author profiles.`);
@@ -54,6 +66,12 @@ function loadAuthors() {
   }
 }
 
+/**
+ * Find an author's profile by name from the authors array.
+ * @param {string} authorName - Author name as it appears in article frontmatter
+ * @param {Object[]} authors - Authors array from loadAuthors()
+ * @returns {Object|null} Matching author object, or null if not found
+ */
 function resolveAuthorProfile(authorName, authors) {
   if (!authorName) {
     return null;
@@ -137,6 +155,12 @@ function renderArticleDate(articleDate) {
   return `<p class="article-date-meta">${escapeHtml(formattedDate)}</p>`;
 }
 
+/**
+ * Render the LinkedIn + X share panel HTML for an article.
+ * @param {Object} article - Article object with slug and title fields
+ * @param {string} siteUrl - Canonical site URL (no trailing slash)
+ * @returns {string} HTML string for the share panel
+ */
 function renderSharePanel(article, siteUrl) {
   const articleUrl = `${siteUrl}/insights/articles/${article.slug}.html`;
   const encodedUrl = encodeURIComponent(articleUrl);
@@ -156,6 +180,11 @@ function renderSharePanel(article, siteUrl) {
   `;
 }
 
+/**
+ * Main build entry point. Reads all Markdown articles, renders them via the article
+ * template, generates the hub index page, and writes sitemap.xml.
+ * @returns {Promise<void>}
+ */
 async function build() {
   console.log('🚀 Starting Content Hub Build Engine...');
 
@@ -287,6 +316,12 @@ async function build() {
   console.log('\n✅ Build complete! Assets generated in /insights');
 }
 
+/**
+ * Generate and write sitemap.xml to the repo root.
+ * @param {Object[]} articles - Array of article metadata objects with slug and date
+ * @param {string} siteUrl - Canonical site URL (no trailing slash)
+ * @returns {void}
+ */
 function generateSitemap(articles, siteUrl) {
   const REPO_ROOT = path.join(__dirname, '..');
   const today = new Date().toISOString().split('T')[0];

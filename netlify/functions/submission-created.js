@@ -1,8 +1,10 @@
-// Netlify Function: Triggered on form submission
-// Forwards lead data to Slack #website-leads channel
-// Form name must match: lead-capture-form
+// Netlify Function: submission-created
+// Triggered by: Netlify Forms webhook on every form submission
+// Handles: lead-capture-form only → Slack #website-leads + Airtable CRM
+// NOT responsible for: newsletter signups (handled by newsletter-subscribe.js directly)
+// Env vars required: SLACK_WEBHOOK_URL, AIRTABLE_TOKEN, AIRTABLE_BASE_ID, AIRTABLE_TABLE
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 
 // Airtable configuration via environment variables
 const AIRTABLE_TOKEN = process.env.AIRTABLE_TOKEN;
@@ -12,60 +14,6 @@ const AIRTABLE_TABLE = process.env.AIRTABLE_TABLE;
 const AIRTABLE_API_URL = AIRTABLE_BASE_ID && AIRTABLE_TABLE
   ? `https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`
   : null;
-
-// Handle newsletter signup: add to Brevo list #9 + notify Slack
-async function handleNewsletterSignup(data) {
-  const email = String(data.email || '').trim();
-  if (!email) return { statusCode: 200, body: JSON.stringify({ skipped: 'no email' }) };
-
-  const BREVO_API_KEY = process.env.BREVO_API_KEY;
-
-  // Add to Brevo list #9 via API (single opt-in — bypasses Brevo default confirmation email)
-  if (BREVO_API_KEY) {
-    try {
-      const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
-        method: 'POST',
-        headers: {
-          'api-key': BREVO_API_KEY,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email,
-          listIds: [9],
-          updateEnabled: true  // updates contact if they already exist in Brevo
-        })
-      });
-      if (!brevoRes.ok) {
-        const text = await brevoRes.text();
-        console.error('Brevo error:', brevoRes.status, text);
-      }
-    } catch (brevoError) {
-      console.error('Brevo fetch error:', brevoError.message);
-    }
-  } else {
-    console.warn('BREVO_API_KEY not set; skipping Brevo insert');
-  }
-
-  // Notify Slack
-  await fetch(SLACK_WEBHOOK_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      text: `📬 New newsletter subscriber: ${email}`,
-      blocks: [
-        {
-          type: 'section',
-          text: {
-            type: 'mrkdwn',
-            text: `📬 *New newsletter subscriber*\n${email}\n_via accelerator-x.ai — consider sending a personal welcome_`
-          }
-        }
-      ]
-    })
-  });
-
-  return { statusCode: 200, body: JSON.stringify({ message: 'subscriber added' }) };
-}
 
 exports.handler = async (event, context) => {
   // Only accept POST requests
@@ -85,11 +33,8 @@ exports.handler = async (event, context) => {
       return { statusCode: 200, body: JSON.stringify({ skipped: 'spam' }) };
     }
 
-    // Route by form name
+    // Route by form name — only handle lead-capture-form
     const formName = data['form-name'] || data.form_name || '';
-    if (formName === 'newsletter-signup') {
-      return handleNewsletterSignup(data);
-    }
     if (formName !== 'lead-capture-form') {
       return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
     }

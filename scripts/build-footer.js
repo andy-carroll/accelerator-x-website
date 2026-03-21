@@ -7,7 +7,6 @@ const END_MARKER = '<!-- FOOTER_COMPONENT_END -->';
 
 const targets = [
   { file: 'index.html', variant: 'subscribe' },
-  { file: 'newsletter-thanks.html', variant: 'subscribed' },
 ];
 
 const socialSlots = [
@@ -58,8 +57,7 @@ function renderCard(variant) {
             <h3 class="font-display text-xl font-bold text-navy">Get the weekly dispatch</h3>
             <p class="mt-2 text-sm text-muted">High-signal notes for leaders building real AI capability. No hype.</p>
 
-            <form name="newsletter-signup" method="POST" action="/newsletter-thanks.html" netlify class="mt-5" id="newsletter-form">
-              <input type="hidden" name="form-name" value="newsletter-signup" />
+            <form class="mt-5" id="newsletter-form">
               <label for="footer-newsletter-email" class="sr-only">Work email</label>
               <div class="footer-subscribe-row">
                 <input
@@ -77,7 +75,10 @@ function renderCard(variant) {
 
             <div id="newsletter-success" class="hidden mt-4 rounded-lg bg-surface p-4" role="status" aria-live="polite">
               <p class="font-medium text-navy">Thanks — you’re subscribed.</p>
-              <p class="mt-1 text-sm text-muted">Check your inbox for a confirmation email.</p>
+              <p class="mt-1 text-sm text-muted">Welcome email on its way.</p>
+            </div>
+            <div id="newsletter-error" class="hidden mt-4 rounded-lg bg-surface p-4" role="alert">
+              <p class="text-sm text-muted">Something went wrong — please try again.</p>
             </div>
           </div>`;
 }

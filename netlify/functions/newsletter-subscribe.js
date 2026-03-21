@@ -1,9 +1,11 @@
 // Netlify Function: newsletter-subscribe
-// Accepts direct JSON POST from newsletter forms (bypasses Netlify Forms — no submission limits)
-// Routes: homepage newsletter-signup + insights-subscribe article CTA
+// Triggered by: direct JSON POST from all newsletter forms (homepage, insights hub, article CTAs)
+// Bypasses Netlify Forms — no submission limits, no Netlify dashboard noise
 // Actions: add contact to Brevo list #9 + notify Slack #website-leads
+// Env vars required: SLACK_WEBHOOK_URL, BREVO_API_KEY
+// Contract: returns { success: true } on success — forms.js depends on this shape
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const BREVO_LIST_ID = 9;
 
 exports.handler = async (event) => {
@@ -71,32 +73,36 @@ exports.handler = async (event) => {
     }
 
     // --- Slack: notify #website-leads ---
-    try {
-      await fetch(SLACK_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          blocks: [
-            {
-              type: 'rich_text',
-              elements: [
-                {
-                  type: 'rich_text_section',
-                  elements: [
-                    { type: 'emoji', name: 'chipmunk' },
-                    { type: 'text', text: ' New newsletter signup just scurried in\n' },
-                    { type: 'text', text: 'Email: ' },
-                    { type: 'link', url: `mailto:${email}`, text: email },
-                    { type: 'text', text: `\nSource: ${source}\nTime: ${new Date().toISOString()}` }
-                  ]
-                }
-              ]
-            }
-          ]
-        })
-      });
-    } catch (err) {
-      console.error('Slack notify error:', err.message);
+    if (!SLACK_WEBHOOK_URL) {
+      console.warn('SLACK_WEBHOOK_URL not set — skipping Slack notification');
+    } else {
+      try {
+        await fetch(SLACK_WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            blocks: [
+              {
+                type: 'rich_text',
+                elements: [
+                  {
+                    type: 'rich_text_section',
+                    elements: [
+                      { type: 'emoji', name: 'chipmunk' },
+                      { type: 'text', text: ' New newsletter signup just scurried in\n' },
+                      { type: 'text', text: 'Email: ' },
+                      { type: 'link', url: `mailto:${email}`, text: email },
+                      { type: 'text', text: `\nSource: ${source}\nTime: ${new Date().toISOString()}` }
+                    ]
+                  }
+                ]
+              }
+            ]
+          })
+        });
+      } catch (err) {
+        console.error('Slack notify error:', err.message);
+      }
     }
 
     return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };

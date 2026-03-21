@@ -66,6 +66,15 @@ transparent, anti-agency positioning.
 
 ---
 
+## 🟤 DEFERRED (Tech Debt)
+
+- [ ] Split `styles.css` (1800+ lines) into logical partials — typography, components, layout, utilities
+- [ ] Refactor `index.html` monolith into template partials driven by build scripts
+- [ ] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js`
+- [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
+
+---
+
 ## 🔵 LATER (Strategic Backlog)
 
 - [ ] Multi-channel content syndication — automated LinkedIn/X asset generation from Hub articles

@@ -132,8 +132,8 @@
         </header>
 
         <!-- The BLUF Box (Bottom Line Up Front) -->
-        <!-- Only injected via JS if Executive misalignment is the single biggest point of failure for enterprise AI initiatives. Without a shared thesis on where AI creates operational leverage, projects devolve into isolated experiments with no path to scale. exists -->
-        <div class="bluf-container mb-12 hidden">
+        <!-- article-init.js reveals this if data-bluf is non-empty after build substitution -->
+        <div class="bluf-container mb-12 hidden" data-bluf="Executive misalignment is the single biggest point of failure for enterprise AI initiatives. Without a shared thesis on where AI creates operational leverage, projects devolve into isolated experiments with no path to scale.">
           <div
             class="bg-surface-2 border-l-4 border-primary p-6 lg:p-8 rounded-r-xl"
           >
@@ -178,7 +178,7 @@
 </div>
 
         <!-- Contextual Capture (The Nurture Trap) -->
-        <div class="nurture-trap my-16 hidden">
+        <div class="nurture-trap my-16 hidden" data-cta="Need executive alignment? Get our free Boardroom Briefing template when you join the Accelerator X dispatch.">
           <div
             class="bg-navy text-background rounded-xl p-8 lg:p-12 relative overflow-hidden"
           >
@@ -231,6 +231,7 @@
       <!-- Infinite Momentum Footer -->
       <div
         class="momentum-footer bg-background border-t border-surface py-16 hidden"
+        data-next="/insights/articles/the-implementation-gap.html"
       >
         <div class="mx-auto max-w-[70ch] px-4 text-center">
           <h4 class="text-sm font-bold uppercase tracking-wider text-muted mb-4">The Next Step</h4>
@@ -244,32 +245,7 @@
       </div>
     </main>
 
-    <!-- JS Hack to hide dynamic blocks if the token was empty in the frontmatter -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const bluf = "Executive misalignment is the single biggest point of failure for enterprise AI initiatives. Without a shared thesis on where AI creates operational leverage, projects devolve into isolated experiments with no path to scale.";
-        const cta = "Need executive alignment? Get our free Boardroom Briefing template when you join the Accelerator X dispatch.";
-        const nextTarget = "/insights/articles/the-implementation-gap.html";
-
-        if (bluf && bluf.trim().length > 0 && !bluf.includes("bluf}}")) {
-          document.querySelector(".bluf-container").classList.remove("hidden");
-        }
-        if (
-          cta &&
-          cta.trim().length > 0 &&
-          !cta.includes("lead_magnet_cta}}")
-        ) {
-          document.querySelector(".nurture-trap").classList.remove("hidden");
-        }
-        if (
-          nextTarget &&
-          nextTarget.trim().length > 0 &&
-          !nextTarget.includes("next_article_url}}")
-        ) {
-          document.querySelector(".momentum-footer").classList.remove("hidden");
-        }
-      });
-    </script>
+    <script defer src="/assets/js/article-init.js"></script>
     <script src="/assets/js/forms.js" defer></script>
   </body>
 </html>

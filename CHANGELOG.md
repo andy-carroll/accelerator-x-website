@@ -9,6 +9,37 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
+### Security
+
+- **Slack webhook URL moved to env var** — removed hardcoded URL from `netlify/functions/submission-created.js`
+  and `netlify/functions/newsletter-subscribe.js`; both now read `process.env.SLACK_WEBHOOK_URL`.
+  Env var must be set in Netlify dashboard.
+
+### Removed
+
+- **Ghost `handleNewsletterSignup()`** — deleted from `submission-created.js`; newsletter signups are
+  handled exclusively by `newsletter-subscribe.js` via direct JSON POST. Removes dead code and
+  eliminates the stale Netlify Forms → Brevo path.
+- **`newsletter-thanks.html`** — dead redirect page; no form points to it since switching to
+  direct-function posting.
+
+### Changed
+
+- **`_templates/article.html`** — inline `<script>` block replaced with `<script defer src="/assets/js/article-init.js">`.
+  Block reveal logic (BLUF box, nurture-trap, momentum footer) now lives in the external file.
+  Token values moved to `data-bluf`, `data-cta`, `data-next` attributes on the container divs.
+- **Contract comments** — both Netlify functions now have clear header comments documenting
+  triggers, responsibilities, env var requirements, and the `{ success: true }` contract.
+
+### Added
+
+- **`assets/js/article-init.js`** — new file; reads `data-*` attributes on article page containers
+  and removes `hidden` class where build-time token substitution produced a non-empty value.
+- **JSDoc** on 7 public functions in `scripts/build-hub.js`: `loadTemplate`, `resolveSiteUrl`,
+  `loadAuthors`, `resolveAuthorProfile`, `renderSharePanel`, `generateSitemap`, `build`.
+- **ROADMAP tech debt section** — 4 deferred items added: styles.css split, index.html partials,
+  hub-filter.js extraction, Netlify function tests.
+
 ### Added
 
 - **Brevo email infrastructure** — `mail.accelerator-x.ai` subdomain authenticated (SPF/DKIM);
