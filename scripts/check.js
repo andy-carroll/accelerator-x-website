@@ -177,6 +177,53 @@ function checkChangelogHasContent() {
   }
 }
 
+// ── Check 6: Every "We never" rule in AI-RULES.md is classified ──────────────
+// Rule: AI-RULES.md §Philosophy — a rule without enforcement is a wish, not a rule.
+// How it works: every bullet under "### We never" must have an inline HTML comment
+//   on the same or following line containing either:
+//     <!-- check: <location> -->       — automated, enforced at <location>
+//     <!-- not-automatable: <reason> --> — deliberately not automated, reason stated
+// Adding a new rule without classifying it causes this check to fail, which blocks
+// the commit via the pre-commit hook. The classification is part of the definition
+// of done for any new rule.
+
+function checkWeNeverRulesAreClassified() {
+  console.log('\n[6] Every "We never" rule in AI-RULES.md is classified');
+
+  const content = readFile('AI-RULES.md');
+
+  // Extract the "We never" section
+  const section = content.match(/### We never([\s\S]*?)(?=\n###|\n##|$)/);
+  if (!section) {
+    warn('AI-RULES.md — could not find "### We never" section');
+    return;
+  }
+
+  const body  = section[1];
+  const lines = body.split('\n');
+
+  // Find bullet lines (start with "- ")
+  let clean = true;
+  for (let i = 0; i < lines.length; i++) {
+    if (!lines[i].trimStart().startsWith('- ')) continue;
+
+    // A rule is classified if its line or the immediately following line(s)
+    // contain a <!-- check: ... --> or <!-- not-automatable: ... --> annotation
+    const window = lines.slice(i, i + 3).join(' ');
+    const hasCheck          = /<!--\s*check:/i.test(window);
+    const hasNotAutomatable = /<!--\s*not-automatable:/i.test(window);
+
+    if (!hasCheck && !hasNotAutomatable) {
+      const rule = lines[i].trim().slice(0, 80);
+      fail(`AI-RULES.md — unclassified "We never" rule: ${rule}`);
+      fail(`  Add <!-- check: <location> --> or <!-- not-automatable: <reason> --> to classify it`);
+      clean = false;
+    }
+  }
+
+  if (clean) pass('All "We never" rules are classified');
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -190,6 +237,7 @@ function main() {
   checkNoUnsubstitutedTokens();
   checkScriptReferencesExist();
   checkChangelogHasContent();
+  checkWeNeverRulesAreClassified();
 
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 

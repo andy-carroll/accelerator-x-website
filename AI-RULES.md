@@ -61,13 +61,22 @@ No external context required — but if it exists, the pointer is always there.
 
 ### We never
 
+Each rule is either automated (enforced by `scripts/check.js` or CI) or explicitly
+classified as not-automatable with a stated reason. Adding a rule without classifying it
+causes `npm run check` to fail. A rule without enforcement is a wish, not a rule.
+
 - Commit without updating `CHANGELOG.md`
+  <!-- check: .github/workflows/doc-freshness.yml -->
 - Add inline `<script>` blocks to HTML files or templates
+  <!-- check: scripts/check.js#1 -->
 - Hardcode secrets, URLs, or credentials that belong in environment variables
+  <!-- check: scripts/check.js#2 -->
 - Leave dead code, dead files, or dead references — remove them, or comment exactly why they
-  must stay
+  must stay <!-- not-automatable: requires human judgment about intent and context -->
 - Make a change without first understanding why the thing being changed exists
+  <!-- not-automatable: requires human judgment; enforced by agent behaviour contract §6 -->
 - Write a comment that describes *what* code does — only *why* it does it that way
+  <!-- not-automatable: requires human judgment about comment content -->
 
 ### Core goals
 

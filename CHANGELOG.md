@@ -20,6 +20,9 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
   Blocks commits that violate codebase standards. Zero-dependency shell script.
 - **`.github/workflows/standards.yml`** — CI gate: runs `npm run build` + `npm run check`
   on every push to `main`. Parallel jobs — either failure marks the push as failing.
+- **Check 6 in `scripts/check.js`** — every "We never" rule in `AI-RULES.md` must be
+  classified with `<!-- check: ... -->` or `<!-- not-automatable: reason -->`. Adding a
+  rule without classifying it blocks the commit. A rule without enforcement is a wish.
 - **`assets/js/hub-filter.js`** — extracted from inline script in `_templates/index.html`.
   Hub pathway tile filter and feed heading logic. `npm run check` caught this violation
   immediately on first run, demonstrating the gate working as intended.
