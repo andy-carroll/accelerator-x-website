@@ -9,6 +9,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 _Next items: share panel SVG icons, hero imagery swap, Brevo welcome email._
 
+### Added
+
+- `docs/navigation-architecture-thesis.md` — new strategic thesis: arrival states framework,
+  competitive nav analysis (Stripe, Intercom, Notion, Linear), organising schemes, mobile
+  patterns, search integration, measurement framework (First-Click Success Rate), PostHog
+  navigation tracking snippets, phased evolution path
+- `docs/world-class-landing-pages-thesis.md` — expanded with: Arrival States Framework,
+  One-Click Clarity Principle, Navigation as Diagnostic Tool, Search Integration Challenge,
+  Mobile Navigation Challenge, First-Click Success Rate metric added to success metrics
+
 ---
 
 ## [1.0.0] — 2026-03-17 · Public launch

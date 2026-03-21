@@ -57,7 +57,8 @@ transparent, anti-agency positioning.
 - [ ] **Workshop sales path** — refine path-to-purchase for the £4k entry-point workshop
 - [ ] **World-class landing page architecture** — execute `docs/world-class-landing-pages-thesis.md`:
       Clarity Engine, diagnostic architecture, journey-based navigation, pricing psychology
-      framework for £4k–£200k offerings, evidence-based video strategy
+      framework for £4k–£200k offerings, evidence-based video strategy.
+      Navigation architecture spec now in `docs/navigation-architecture-thesis.md`.
 - [ ] **LinkedIn Post Inspector — "No author found"** — investigate further after cache clears.
       JSON-LD is correct and validates in Google Rich Results Test. Low urgency.
 
