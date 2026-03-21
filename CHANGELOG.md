@@ -7,7 +7,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
-_Next items: hero imagery swap, insights-subscribe form audit, Lighthouse targets._
+_Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Added
 
@@ -15,6 +15,17 @@ _Next items: hero imagery swap, insights-subscribe form audit, Lighthouse target
   sender identity `newsletter@mail.accelerator-x.ai` / Accelerator-X Team configured
 - **Welcome email automation** — Brevo list #9 trigger: contact added → send welcome email.
   Subject: "You're in — here's what to expect from Accelerator X". Single opt-in.
+- **`netlify/functions/newsletter-subscribe.js`** — new standalone function; accepts direct
+  JSON POST from newsletter forms; adds contact to Brevo list #9; notifies Slack `#website-leads`.
+  Source field distinguishes origin: `landing_newsletter` / `insights_article` / `insights_hub`.
+- **`BREVO_API_KEY`** — added to Netlify env vars; end-to-end tested ✅
+
+### Changed
+
+- **Newsletter forms bypass Netlify Forms** — `newsletter-signup` (homepage),
+  `insights-subscribe` (article pages + hub index) now POST directly to
+  `/.netlify/functions/newsletter-subscribe`. Eliminates 100/month Netlify Forms limit.
+  Honeypot spam field retained.
 - `docs/navigation-architecture-thesis.md` — new strategic thesis: arrival states framework,
   competitive nav analysis (Stripe, Intercom, Notion, Linear), organising schemes, mobile
   patterns, search integration, measurement framework (First-Click Success Rate), PostHog

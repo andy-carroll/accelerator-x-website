@@ -30,7 +30,9 @@ transparent, anti-agency positioning.
 - [x] **Brevo email infra** — `mail.accelerator-x.ai` subdomain authenticated (SPF/DKIM);
       sender `newsletter@mail.accelerator-x.ai` / Accelerator-X Team — 2026-03-21
 - [x] **Brevo welcome email** — automation live on list #9; trigger: contact added to list — 2026-03-21
-- [ ] **insights-subscribe form** — 4 Netlify submissions unaccounted for; confirm Brevo destination.
+- [x] **insights-subscribe form** — confirmed: all 4 submissions were Andy's own tests. No real contacts lost.
+- [x] **Newsletter forms bypass Netlify Forms** — both forms now POST direct to Brevo via
+      `netlify/functions/newsletter-subscribe.js`. 100/month limit no longer applies. — 2026-03-21
 - [ ] **Lighthouse targets** — ≥95 mobile / ≥98 desktop. Capture HTML reports to
       `docs/analytics/`. Fix any blocking issues before driving paid traffic.
 
