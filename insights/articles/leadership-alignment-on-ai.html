@@ -194,7 +194,7 @@
               <form class="flex flex-wrap gap-2" id="newsletter-form">
                 <input type="hidden" name="_honey" style="display:none" />
                 <input type="email" name="email" required placeholder="Email address" class="flex-1 min-w-0 px-4 py-3 rounded-md bg-background border border-strong text-navy focus:outline-none focus:border-primary transition-colors" />
-                <button type="submit" class="btn btn-accent whitespace-nowrap w-full sm:w-auto">Send it to me</button>
+                <button type="submit" class="btn btn-accent whitespace-nowrap w-full sm:w-auto">Join the dispatch</button>
               </form>
 
               <div id="newsletter-success" class="hidden mt-6 rounded-xl bg-background/10 p-4" role="status" aria-live="polite">
@@ -233,7 +233,7 @@
                     })
                     .catch(function () {
                       btn.disabled = false;
-                      btn.textContent = ‘Send it to me’;
+                      btn.textContent = ‘Join the dispatch’;
                       error.classList.remove(‘hidden’);
                     });
                   });

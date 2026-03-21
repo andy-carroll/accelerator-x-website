@@ -1,10 +1,13 @@
 (() => {
   // ========================================
-  // NETLIFY FORMS (LEAD CAPTURE)
+  // NETLIFY FORMS (LEAD CAPTURE ONLY)
   // ========================================
   // Purpose:
-  // - Submit the form via fetch (no redirect) and swap to an inline success state.
+  // - Submit the lead capture form via fetch (no redirect) and swap to an inline success state.
   // - Keep index.html declarative by avoiding inline scripts.
+  //
+  // Newsletter signup is handled separately by inline scripts on each page
+  // that post directly to /.netlify/functions/newsletter-subscribe.
   //
   // Conventions:
   // - `#lead-form` is the source of truth for field names used by Netlify.
@@ -15,10 +18,7 @@
   const leadSuccessDiv = document.getElementById('form-success');
   const leadErrorDiv = document.getElementById('form-error');
 
-  const newsletterForm = document.getElementById('newsletter-form');
-  const newsletterSuccessDiv = document.getElementById('newsletter-success');
-
-  if (!leadForm && !newsletterForm) return;
+  if (!leadForm) return;
 
   const isSubmittingByForm = new WeakMap();
 
@@ -76,13 +76,6 @@
     );
   };
 
-  const showNewsletterSuccessState = () => {
-    if (!newsletterForm || !newsletterSuccessDiv) return;
-
-    newsletterForm.classList.add('hidden');
-    newsletterSuccessDiv.classList.remove('hidden');
-  };
-
   const handleSubmit = ({ form, onBeforeSubmit, onSuccess, onErrorDiv }) => (e) => {
     e.preventDefault();
 
@@ -130,25 +123,13 @@
       });
   };
 
-  if (leadForm) {
-    leadForm.addEventListener(
-      'submit',
-      handleSubmit({
-        form: leadForm,
-        onBeforeSubmit: normaliseWebsiteField,
-        onSuccess: showLeadSuccessState,
-        onErrorDiv: leadErrorDiv,
-      })
-    );
-  }
-
-  if (newsletterForm) {
-    newsletterForm.addEventListener(
-      'submit',
-      handleSubmit({
-        form: newsletterForm,
-        onSuccess: showNewsletterSuccessState,
-      })
-    );
-  }
+  leadForm.addEventListener(
+    'submit',
+    handleSubmit({
+      form: leadForm,
+      onBeforeSubmit: normaliseWebsiteField,
+      onSuccess: showLeadSuccessState,
+      onErrorDiv: leadErrorDiv,
+    })
+  );
 })();
