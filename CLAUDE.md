@@ -29,14 +29,13 @@ CHANGELOG v1.0.0, ROADMAP rebuilt, README rewritten, git policy formalised
 
 ## Next (do in this order)
 
-1. **Share panel** — SVG LinkedIn icon + "Share" heading
-   → `_templates/article.html` + share panel render fn in `scripts/build-hub.js`
-
-2. **Hero imagery** — swap interim stills for production photos + update alt text
+1. **Hero imagery** — swap interim stills for production photos + update alt text
    → `content/data/hero-media.config.json` + `npm run process:hero-images`
 
-3. **Brevo welcome email** — single automation on list #9; also confirm `insights-subscribe`
+2. **Brevo welcome email** — single automation on list #9; also confirm `insights-subscribe`
    form destination (4 submissions, unknown if reaching Brevo)
+
+3. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
 
 ---
 

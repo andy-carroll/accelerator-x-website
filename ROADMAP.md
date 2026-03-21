@@ -24,8 +24,7 @@ transparent, anti-agency positioning.
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 
-- [ ] **Share panel** — replace "LI" text with proper SVG LinkedIn icon; add "Share" heading.
-      Files: `_templates/article.html` + share panel render in `scripts/build-hub.js`
+- [x] **Share panel** — SVG icons (LinkedIn + X) + "Share" heading — fixed in prior session
 - [ ] **Hero imagery** — swap interim stills for final production photos; update alt text in
       `content/data/hero-media.config.json`. Run `npm run process:hero-images && npm run build`.
 - [ ] **Brevo welcome email** — configure single welcome automation on list #9. Draft copy,
