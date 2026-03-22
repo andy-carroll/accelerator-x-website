@@ -5,8 +5,7 @@
   // All form submissions on the site go through this file.
   // No inline scripts. No exceptions.
   //
-  // Lead capture  (#lead-form)         → POST /  (Netlify Forms)
-  //                                    → submission-created.js
+  // Lead capture  (#lead-form)         → POST /.netlify/functions/submission-created
   //                                    → Airtable + Slack #website-leads
   //
   // Newsletter    (#newsletter-form)   → POST /.netlify/functions/newsletter-subscribe
@@ -80,13 +79,27 @@
       const originalLabel = btn ? btn.textContent : '';
       setSubmitState(btn, { disabled: true, label: 'Submitting...' });
 
-      fetch('/', {
+      const formData = new FormData(leadForm);
+      const payload = {
+        'form-name': 'lead-capture-form',
+        name: formData.get('name'),
+        email: formData.get('email'),
+        company: formData.get('company'),
+        website: formData.get('website'),
+        role: formData.get('role'),
+        timeline: formData.get('timeline'),
+        message: formData.get('message') || '',
+        _honeypot: formData.get('_honeypot') || ''
+      };
+
+      fetch('/.netlify/functions/submission-created', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(leadForm)).toString(),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
       })
-        .then((res) => {
-          if (!res.ok) throw new Error(`Status ${res.status}`);
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) throw new Error(data.error);
           showLeadSuccess();
         })
         .catch((err) => {

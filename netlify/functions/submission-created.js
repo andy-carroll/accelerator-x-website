@@ -21,22 +21,32 @@ exports.handler = async (event, context) => {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
 
+  // CORS headers for direct browser POSTs
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Content-Type': 'application/json'
+  };
+
+  // Handle CORS preflight
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 204, headers, body: '' };
+  }
+
   try {
-    // Parse form data from Netlify submission
-    // Netlify outgoing webhooks wrap submission data under payload.data
+    // Parse form data - accept both direct JSON and Netlify webhook format
     const body = JSON.parse(event.body);
-    const submission = body.payload || body;
-    const data = submission.data || submission;
+    const data = body.payload?.data || body;
 
     // Honeypot / spam check
     if (data._honeypot) {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'spam' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'spam' }) };
     }
 
     // Route by form name — only handle lead-capture-form
     const formName = data['form-name'] || data.form_name || '';
     if (formName !== 'lead-capture-form') {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'different form' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'different form' }) };
     }
 
     const safeTrim = (val = '') => String(val).trim();
@@ -59,13 +69,13 @@ exports.handler = async (event, context) => {
 
     // Required fields guard
     if (!name || !email || !company || !website || !role) {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'missing required fields' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'missing required fields' }) };
     }
 
     // Basic domain validation post-normalization (allows bare domains once https:// is added)
     const domainPattern = /^https?:\/\/[\w.-]+\.[A-Za-z]{2,}.*$/;
     if (!domainPattern.test(website)) {
-      return { statusCode: 200, body: JSON.stringify({ skipped: 'invalid website' }) };
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'invalid website' }) };
     }
 
     // Format timeline for readability
@@ -134,6 +144,7 @@ exports.handler = async (event, context) => {
       console.warn('SLACK_WEBHOOK_URL not set — skipping Slack notification');
       return {
         statusCode: 200,
+        headers,
         body: JSON.stringify({ message: 'Skipped — Slack webhook not configured', airtable: 'skipped' })
       };
     }
@@ -189,13 +200,15 @@ exports.handler = async (event, context) => {
     
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Notification sent to Slack', airtable: airtableStatus })
+      headers,
+      body: JSON.stringify({ success: true, message: 'Notification sent to Slack', airtable: airtableStatus })
     };
-    
+
   } catch (error) {
     console.error('submission-created error:', error.message);
     return {
       statusCode: 500,
+      headers,
       body: JSON.stringify({ error: error.message })
     };
   }
