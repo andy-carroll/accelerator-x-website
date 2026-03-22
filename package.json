@@ -15,6 +15,7 @@
     "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
     "test:site": "node scripts/test-site.js",
+    "session-start": "node scripts/session-start.js",
     "session-end": "node scripts/session-end.js"
   },
   "repository": {
