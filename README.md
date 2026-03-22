@@ -212,3 +212,5 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 | `docs/PRD-hero-media-library.md` | Hero media library system |
 
 <!-- Session 20260322-211525 logged -->
+
+<!-- Session 20260322-234000 logged -->
