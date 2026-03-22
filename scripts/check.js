@@ -65,7 +65,7 @@ function checkNoInlineScripts() {
 
 // ── Check 2: No hardcoded secrets in Netlify functions ────────────────────────
 // Rule: AI-RULES.md §Philosophy "We never hardcode secrets"
-// Incident: SLACK_WEBHOOK_URL hardcoded in submission-created.js and
+// Incident: SLACK_WEBHOOK_URL hardcoded in lead-capture.js and
 //   newsletter-subscribe.js — exposed in public GitHub repo for weeks.
 
 function checkNoHardcodedSecrets() {
