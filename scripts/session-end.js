@@ -64,13 +64,25 @@ if (!/## Next Session Priorities/.test(claudeContent)) {
 // 3. Placeholder Airtable update
 console.log('🔧 Airtable update placeholder – replace with real MCP call if needed');
 
-// 4. Git commit & push
+// 4. Append session notes to docs BEFORE committing
+function appendDoc(file) {
+  try {
+    const fullPath = path.join(file);
+    fs.appendFileSync(fullPath, `\n<!-- Session ${ts} logged -->\n`);
+    console.log(`✅ Appended session note to ${file}`);
+  } catch (e) {
+    console.warn(`⚠️ Could not append to ${file}: ${e.message}`);
+  }
+}
+['ROADMAP.md','README.md','CHANGELOG.md','AI-RULES.md'].forEach(appendDoc);
+
+// 5. Git commit & push (after all file modifications)
 run('git add -A');
 run(`git commit -m "docs(session): ${new Date().toISOString().split("T")[0]} session wrap – automated"`);
 run('git push');
 console.log('✅ Changes committed and pushed');
 
-// 5. Run quality gate (npm run build)
+// 6. Run quality gate (npm run build)
 let buildSuccess = true;
 try {
   run('npm run build');
@@ -85,24 +97,8 @@ let logUpdate = fs.readFileSync(logPath, 'utf8');
 logUpdate = logUpdate.replace('(will be filled after build)', buildSuccess ? '✅ succeeded' : '❌ failed');
 fs.writeFileSync(logPath, logUpdate);
 
-// 6. Reminders for docs
-console.log('\n📝 Remember to manually update the following docs if applicable:');
-console.log('- ROADMAP.md (strategic priorities)');
-console.log('- README.md (project overview / usage)');
-console.log('- CHANGELOG.md (record this session’s changes)');
-console.log('- AI-RULES.md (if any workflow/policy changed)');
-
-// Optional auto‑append a note to each doc (non‑critical, just a log entry)
-function appendDoc(file) {
-  try {
-    const fullPath = path.join(file);
-    fs.appendFileSync(fullPath, `\n<!-- Session ${ts} logged -->\n`);
-    console.log(`✅ Appended session note to ${file}`);
-  } catch (e) {
-    console.warn(`⚠️ Could not append to ${file}: ${e.message}`);
-  }
-}
-['ROADMAP.md','README.md','CHANGELOG.md','AI-RULES.md'].forEach(appendDoc);
+// 7. Reminders for docs (informational only — notes already appended above)
+console.log('\n📝 Session notes appended to: ROADMAP.md, README.md, CHANGELOG.md, AI-RULES.md');
 
 
 process.exit(buildSuccess ? 0 : 1);
