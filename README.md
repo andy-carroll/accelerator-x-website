@@ -143,8 +143,8 @@ Configured in `assets/js/analytics.js` — included on all pages via templates.
 
 ## Email capture (Brevo)
 
-Newsletter signups flow: Netlify Form → `submission-created` function → Brevo API (list #9)
-+ Slack `#website-leads` notification.
+Newsletter signups flow: direct JSON POST → `newsletter-subscribe` function → Brevo API (list #9)
++ Slack `#website-leads` notification. Netlify Forms bypassed — no 100/month limit.
 
 Lead applications flow: Netlify Form → `submission-created` function → Slack `#website-leads`
 + Airtable CRM.

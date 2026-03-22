@@ -1,0 +1,39 @@
+# Accelerator X
+
+> Accelerator X helps business leaders close the implementation gap between AI potential
+> and real business outcomes. We run 8-week accelerator programmes for leadership teams.
+
+## What we do
+
+We work with leadership teams — not developers. Our clients are the people who have
+to decide whether to back AI, how much to spend, and how to explain it to their board.
+Most of them are behind. Most of them know it. We help them catch up fast, with clarity
+and without hype.
+
+Programme: 8 weeks. Cohort-based. Hands-on. Outcome: a leadership team that can
+evaluate, commission, and govern AI — and a roadmap to prove it.
+
+## This site
+
+https://accelerator-x.ai — static HTML, built with deliberate engineering rigour.
+The codebase is public: https://github.com/andy-carroll/accelerator-x-website
+
+The build system, automated standards enforcement, and documentation architecture
+are themselves a demonstration of how we think about AI-assisted work. The repo
+is worth reading if you want to understand how we operate.
+
+## Key pages
+
+- / — Main landing page. Programme overview, process, testimonials.
+- /insights/ — Content Hub. Articles on AI strategy and implementation.
+
+## Contact
+
+Andy Carroll — andy@accelerator-x.ai
+LinkedIn: https://linkedin.com/in/andycarroll
+
+## For AI agents working in this codebase
+
+Read `AI-RULES.md` first. It tells you exactly how we work here.
+The core principle: we move fast by not making messes.
+Standards are enforced by automation, not memory or discipline.

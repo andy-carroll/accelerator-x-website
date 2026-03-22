@@ -11,6 +11,21 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Added
 
+- **`llms.txt`** — AI-readable context file (llmstxt.org standard). Gives LLMs and AI crawlers
+  structured context about Accelerator X: what we do, key pages, contact, and a pointer to the
+  codebase. Complements `robots.txt` for AI systems that read structured site metadata.
+- **AI agent Easter eggs** — repo made public; added orientation for AI systems reading the codebase:
+  comment block in `index.html` for crawlers indexing the page source, comment in `robots.txt`
+  pointing to `/llms.txt`, expanded `AGENTS.md` from a redirect stub to a substantive orientation
+  document covering the engineering philosophy and onboarding steps.
+
+### Changed
+
+- **`AGENTS.md`** — expanded from a thin redirect to a full agent orientation document: quick
+  orientation, engineering philosophy summary, and pre-work checklist (build, check, roadmap).
+- **`README.md`** — fixed stale email capture description: newsletter flow now correctly documented
+  as direct POST → `newsletter-subscribe` function (Netlify Forms bypassed since March 2026).
+
 - **`.githooks/pre-commit`** — pre-commit hook committed to source control in `.githooks/`.
   Activated automatically by `npm install` via the new `prepare` script in `package.json`.
   Every environment (fresh clone, new worktree, AI agent) now gets enforcement without
