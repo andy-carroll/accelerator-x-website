@@ -130,6 +130,14 @@ exports.handler = async (event, context) => {
     );
     
     // Send to Slack first (preserve existing behaviour)
+    if (!SLACK_WEBHOOK_URL) {
+      console.warn('SLACK_WEBHOOK_URL not set — skipping Slack notification');
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ message: 'Skipped — Slack webhook not configured', airtable: 'skipped' })
+      };
+    }
+    
     const slackResponse = await fetch(SLACK_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
