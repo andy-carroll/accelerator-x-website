@@ -151,6 +151,35 @@ Lead applications flow: Netlify Form → `submission-created` function → Slack
 
 ---
 
+## Engineering philosophy
+
+This repo is a working example of how Accelerator X approaches any technical build.
+
+The instinct when adopting AI tooling is to attack the task — give the tool a prompt,
+iterate on the output, ship it. That works until it doesn't: the codebase drifts,
+the agent makes a confident mistake nobody catches, the system accrues debt faster
+than it accrues value.
+
+The alternative is to think first about the system that builds the thing, not the thing
+itself. What are the failure modes? Where does quality degrade silently? What would a
+new agent — or a new human — need to know to work here without a briefing?
+
+Concretely, that means:
+
+- **Standards enforced by automation, not memory** — `scripts/check.js` runs 8 checks
+  on every commit. A violation is caught locally, not in production six months later.
+- **Every decision recorded at the point of decision** — `CHANGELOG.md`, `AI-RULES.md`,
+  session logs in `.claude/sessions/`. The codebase explains itself; no verbal handoff required.
+- **Session hygiene as a first-class concern** — every session starts with a structured
+  brief and ends with an atomic close. The cockpit (`CLAUDE.md`) is always current.
+  A cold-start agent can be productive in under a minute.
+- **Leverage over effort** — a pre-commit hook that catches a broken build takes 10 minutes
+  to write and saves hours across every future session. That trade is always worth making.
+
+This is the thought and care we bring to client engagements. The repo is the proof of concept.
+
+---
+
 ## AI instruction architecture
 
 ### Decision
