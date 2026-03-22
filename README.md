@@ -214,3 +214,5 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 <!-- Session 20260322-211525 logged -->
 
 <!-- Session 20260322-234000 logged -->
+
+<!-- Session 20260322-235352 logged -->

@@ -250,3 +250,5 @@ If project workflow changes, update this file first, then adapters (`CLAUDE.md`,
 <!-- Session 20260322-211525 logged -->
 
 <!-- Session 20260322-234000 logged -->
+
+<!-- Session 20260322-235352 logged -->
