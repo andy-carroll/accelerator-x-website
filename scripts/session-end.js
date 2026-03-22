@@ -64,7 +64,7 @@ if (!/## Next Session Priorities/.test(claudeContent)) {
 // 3. Placeholder Airtable update
 console.log('🔧 Airtable update placeholder – replace with real MCP call if needed');
 
-// 4. Append session notes to docs BEFORE committing
+// 4. Append session notes to docs
 function appendDoc(file) {
   try {
     const fullPath = path.join(file);
@@ -76,13 +76,7 @@ function appendDoc(file) {
 }
 ['ROADMAP.md','README.md','CHANGELOG.md','AI-RULES.md'].forEach(appendDoc);
 
-// 5. Git commit & push (after all file modifications)
-run('git add -A');
-run(`git commit -m "docs(session): ${new Date().toISOString().split("T")[0]} session wrap – automated"`);
-run('git push');
-console.log('✅ Changes committed and pushed');
-
-// 6. Run quality gate (npm run build)
+// 5. Run quality gate (npm run build) BEFORE committing
 let buildSuccess = true;
 try {
   run('npm run build');
@@ -97,7 +91,13 @@ let logUpdate = fs.readFileSync(logPath, 'utf8');
 logUpdate = logUpdate.replace('(will be filled after build)', buildSuccess ? '✅ succeeded' : '❌ failed');
 fs.writeFileSync(logPath, logUpdate);
 
-// 7. Reminders for docs (informational only — notes already appended above)
+// 6. Git commit & push (after ALL file modifications including build)
+run('git add -A');
+run(`git commit -m "docs(session): ${new Date().toISOString().split("T")[0]} session wrap – automated"`);
+run('git push');
+console.log('✅ Changes committed and pushed');
+
+// 7. Summary
 console.log('\n📝 Session notes appended to: ROADMAP.md, README.md, CHANGELOG.md, AI-RULES.md');
 
 
