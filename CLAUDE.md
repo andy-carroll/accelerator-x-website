@@ -67,3 +67,9 @@ Full procedures: `.claude/rules/session.md`
 3. `npm run build` → commit → push
 4. Write log to `.claude/sessions/YYYYMMDD-HHMMSS.md`
 5. Post to Slack `#ax-operations` via `slack-ops` MCP
+
+## Next Session Priorities
+
+1. _Priority 1_
+2. _Priority 2_
+3. _Priority 3_
