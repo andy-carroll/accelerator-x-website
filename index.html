@@ -893,7 +893,7 @@
 
         <!-- THREE TESTIMONIAL CARDS -->
         <div class="mt-12 grid gap-8 lg:mt-16 lg:grid-cols-3">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- Testimonial 1 -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <!-- Testimonial 1 -->
           <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
             <div class="mb-4 flex justify-center">
               <div class="stars-5" aria-hidden="true">
@@ -1178,14 +1178,14 @@
                   Company Website <span class="text-accent">*</span>
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   id="website"
                   name="website"
                   required
                   minlength="3"
-                  pattern="^(https?:\/\/)?[\w.-]+\.[A-Za-z]{2,}.*$"
+                  pattern="^(https?:\/\/)?(www\.)?[\w.-]+\.[A-Za-z]{2,}.*$"
                   class="mt-1 w-full rounded-md border border-strong px-4 py-3 text-navy focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-                  placeholder="accelerator.com or https://accelerator.com"
+                  placeholder="accelerator.com, www.accelerator.com, or https://accelerator.com"
                 />
               </div>
 
