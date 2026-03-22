@@ -246,3 +246,5 @@ If project workflow changes, update this file first, then adapters (`CLAUDE.md`,
 - 2026-03-21: Philosophy section added to §2. Core principle: move fast by not making messes.
   Standards enforced by automation. Comments co-located, proportional, and pointing — the code
   is the document; external context is reachable but never required.
+
+<!-- Session 20260322-211525 logged -->

@@ -210,3 +210,5 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 | `docs/notification-workflows-prd.md` | Netlify + Slack notification architecture |
 | `docs/posthog-behavior-insights-prd.md` | Behaviour analytics rollout plan |
 | `docs/PRD-hero-media-library.md` | Hero media library system |
+
+<!-- Session 20260322-211525 logged -->
