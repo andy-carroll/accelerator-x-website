@@ -15,7 +15,7 @@
 
 ## Current State
 
-**Last session:** 2026-03-21 — newsletter infra complete; Netlify Forms bypassed; Brevo end-to-end verified
+**Last session:** 2026-03-22 — three-layer enforcement system live; repo made public; GitHub branch protection active; AI agent Easter eggs shipped
 
 **Build:** ✅ passing | **Git:** ✅ clean | **Deployed:** ✅ auto on push to `main`
 
@@ -41,6 +41,8 @@
 
 - **Newsletter sending domain:** `mail.accelerator-x.ai` — authenticated; sender `newsletter@mail.accelerator-x.ai`
 - **Newsletter forms:** bypass Netlify Forms → `/.netlify/functions/newsletter-subscribe` → Brevo API direct
+- **Repo is public** — no secrets in codebase; all credentials in Netlify env vars
+- **GitHub branch protection** — classic branch protection on `main`; 3 required status checks: Build passes, Standards check passes, CHANGELOG updated
 - **Direct commits to `main`** — no PRs until a second collaborator (human or AI agent) joins
 - **Brevo, not GoHighLevel** — email capture switched at launch
 - **Pre-built artefacts committed** — no build command on Netlify, serves repo root as-is

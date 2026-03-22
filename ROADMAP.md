@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-03-21_
+_Last updated: 2026-03-22_
 
 ---
 
@@ -70,7 +70,7 @@ transparent, anti-agency positioning.
 
 - [ ] Split `styles.css` (1800+ lines) into logical partials — typography, components, layout, utilities
 - [ ] Refactor `index.html` monolith into template partials driven by build scripts
-- [ ] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js`
+- [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
 - [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
 
 ---
@@ -110,3 +110,10 @@ transparent, anti-agency positioning.
 - [x] Image pipeline (`scripts/img-process.sh` + `scripts/img-audit.sh`)
 - [x] AI instruction architecture (`AI-RULES.md` + thin adapters)
 - [x] Direct-to-main git policy formalised; DoD added to `AI-RULES.md`
+- [x] Three-layer automated enforcement: `scripts/check.js` (8 checks) + `.githooks/pre-commit` (committed) + GitHub Actions CI — 2026-03-22
+- [x] `.env.example` — all 5 required env vars documented — 2026-03-22
+- [x] CSS design token drift check (check 7) + HTML validation check (check 8) — 2026-03-22
+- [x] Philosophy section in `AI-RULES.md` — "We move fast by not making messes" + self-classifying "We never" rules — 2026-03-22
+- [x] Repo made public — no secrets in codebase; credentials in Netlify env vars — 2026-03-22
+- [x] GitHub branch protection on `main` — 3 required status checks (Build, Standards, CHANGELOG) — 2026-03-22
+- [x] `llms.txt` + AI agent Easter eggs (index.html, robots.txt, AGENTS.md) — 2026-03-22
