@@ -81,6 +81,17 @@ transparent, anti-agency positioning.
 - [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
 - [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
 
+### Session protocol hardening backlog (deferred, trigger-based)
+
+- [ ] Add profile JSON schema validation and fail-fast diagnostics for malformed protocol configs
+- [ ] Add end-to-end protocol test matrix (mode toggles, staged-path policy, branch policy edge cases)
+- [ ] Add explicit CI status-check verification step before optional push path in team mode
+- [ ] Add issue severity conventions in `CLAUDE.md` (`[blocking]`, `[non-blocking]`) with lint/check enforcement
+- [ ] Add scripted `solo` ↔ `team` mode switch helper (single command wrapper)
+
+**Activation triggers:** second collaborator joins, protocol incident occurs, or release cadence increases
+enough that manual protocol overhead becomes measurable.
+
 ---
 
 ## 🔵 LATER (Strategic Backlog)
@@ -135,7 +146,7 @@ transparent, anti-agency positioning.
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260329-200722
-- Updated: 2026-03-29T19:07:24.154Z
+- Session ID: 20260329-202824
+- Updated: 2026-03-29T19:28:25.587Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
