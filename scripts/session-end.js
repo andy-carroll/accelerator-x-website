@@ -74,6 +74,19 @@ function formatDate(date) {
   return date.toISOString().split('T')[0];
 }
 
+function upsertClaudeLastSession(content, date, summary) {
+  const line = `**Last session:** ${date} — ${summary}`;
+  if (/\*\*Last session:\*\*/i.test(content)) {
+    return content.replace(/\*\*Last session:\*\*.*(?:\n|$)/i, `${line}\n`);
+  }
+
+  if (/## Current State/i.test(content)) {
+    return content.replace(/## Current State\n+/i, `## Current State\n\n${line}\n\n`);
+  }
+
+  return `${content}${content.endsWith('\n') ? '' : '\n'}\n## Current State\n\n${line}\n`;
+}
+
 function loadProfile(profilePath) {
   if (!fs.existsSync(profilePath)) {
     return { error: `Missing protocol profile at ${profilePath}` };
@@ -258,8 +271,10 @@ if (writeModeEnabled) {
 
   const claudePath = 'CLAUDE.md';
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
-  const claudeUpdate = ensureNextSessionBlock(claudeContent);
-  if (claudeUpdate.changed) {
+  const sessionSummary = 'session protocol wrap completed; quality gates passing; handoff ready';
+  const withFreshLastSession = upsertClaudeLastSession(claudeContent, today, sessionSummary);
+  const claudeUpdate = ensureNextSessionBlock(withFreshLastSession);
+  if (claudeUpdate.changed || claudeUpdate.content !== claudeContent) {
     fs.writeFileSync(claudePath, claudeUpdate.content);
     operations.push({ step: 'claude_priorities', status: 'updated' });
   } else {

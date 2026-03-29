@@ -78,7 +78,8 @@ function loadProfile(profilePath) {
 
 function parseClaudeState(claudeContent) {
   const lastSession = { date: null, summary: 'No session recorded' };
-  let knownIssues = [];
+  let blockingIssues = [];
+  let nonBlockingIssues = [];
   let nextPriorities = [];
 
   const lastSessionMatch = claudeContent.match(/\*\*Last session:\*\*\s*(\d{4}-\d{2}-\d{2})\s*[—–-]\s*(.+?)(?:\n|$)/i);
@@ -89,10 +90,20 @@ function parseClaudeState(claudeContent) {
 
   const issuesMatch = claudeContent.match(/\*\*Known issues:\*\*\s*\n((?:[-•]\s*.+\n?)+)/i);
   if (issuesMatch) {
-    knownIssues = issuesMatch[1]
+    const knownIssues = issuesMatch[1]
       .split('\n')
       .map(line => line.replace(/^[-•]\s*/, '').trim())
       .filter(Boolean);
+
+    for (const issue of knownIssues) {
+      if (/^\[(blocking|blocker)\]/i.test(issue) || /^blocking\s*:/i.test(issue)) {
+        blockingIssues.push(issue.replace(/^\[(blocking|blocker)\]\s*/i, '').replace(/^blocking\s*:\s*/i, '').trim());
+      } else if (/^\[(non-blocking|nonblocking|info)\]/i.test(issue) || /^(non-blocking|nonblocking|info)\s*:/i.test(issue)) {
+        nonBlockingIssues.push(issue.replace(/^\[(non-blocking|nonblocking|info)\]\s*/i, '').replace(/^(non-blocking|nonblocking|info)\s*:\s*/i, '').trim());
+      } else {
+        nonBlockingIssues.push(issue);
+      }
+    }
   }
 
   const prioritiesMatch = claudeContent.match(/## Next[^\n]*\n\n?((?:\d+\.\s*\*\*[^*]+\*\*[^\n]*(?:\n\s+→[^\n]*)*\n?)+)/i);
@@ -106,7 +117,7 @@ function parseClaudeState(claudeContent) {
       .filter(Boolean);
   }
 
-  return { lastSession, knownIssues, nextPriorities };
+  return { lastSession, blockingIssues, nonBlockingIssues, nextPriorities };
 }
 
 const { args, unknown } = parseArgs(process.argv.slice(2));
@@ -150,7 +161,8 @@ const sessionRulePath = path.join('.claude', 'rules', 'session.md');
 let claudeContent = '';
 let claudeState = {
   lastSession: { date: null, summary: 'No session recorded' },
-  knownIssues: [],
+  blockingIssues: [],
+  nonBlockingIssues: [],
   nextPriorities: []
 };
 
@@ -232,8 +244,8 @@ const nextPriorities = claudeState.nextPriorities.length > 0
   ? claudeState.nextPriorities
   : ['Define priorities in CLAUDE.md'];
 
-if (claudeState.knownIssues.length > 0) {
-  warnings.push(...claudeState.knownIssues);
+if (claudeState.blockingIssues.length > 0) {
+  warnings.push(...claudeState.blockingIssues);
 }
 
 const allErrors = errors.slice();
@@ -254,6 +266,10 @@ const output = {
     : claudeState.lastSession.summary,
   suggestedFocus,
   nextPriorities,
+  knownIssues: {
+    blocking: claudeState.blockingIssues,
+    nonBlocking: claudeState.nonBlockingIssues
+  },
   git: gitState,
   airtable: airtableStatus,
   warnings,
