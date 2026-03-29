@@ -110,78 +110,44 @@
   <body class="flex min-h-screen flex-col bg-background font-sans text-body antialiased">
     
     <!-- HEADER / NAVIGATION -->
-    <header class="site-header sticky top-0 z-50 border-b border-surface bg-background/95 backdrop-blur-sm">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <a href="/" class="inline-flex items-center" aria-label="Accelerator X home">
-          <img
-            src="/assets/icons/AX-wordmark-and-logo.png"
-            alt="Accelerator X"
-            class="h-5 w-auto sm:h-6"
-            width="1125"
-            height="195"
-            loading="eager"
-            decoding="async"
-          />
+    <header
+      class="sticky top-0 z-50 border-b border-surface bg-background-95 backdrop-blur"
+    >
+      <div
+        class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4"
+      >
+        <a href="/">
+          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-6 sm:h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
         </a>
+        <div class="hidden items-center gap-6 md:flex">
+          <a href="/" class="text-sm font-medium text-navy transition hover:opacity-80">Home</a>
+          <a href="/workshops.html" class="text-sm font-medium text-navy transition hover:opacity-80">Workshops</a>
+          <a href="/cohort.html" class="text-sm font-medium text-navy transition hover:opacity-80">Programs</a>
+          <a href="/insights/" class="text-sm font-medium text-navy transition hover:opacity-80">Insights</a>
+          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-navy transition hover:opacity-80">Quiz</a>
+          <a href="#apply" class="btn btn-primary btn-sm whitespace-nowrap">Apply to work with us</a>
+        </div>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden items-center gap-6 md:flex" aria-label="Main navigation">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/insights/" class="nav-link">Insights</a>
-          <a href="/workshops.html" class="nav-link">Workshops</a>
-          <a href="/cohort.html" class="nav-link nav-link-active">Programs</a>
-          <a href="#apply" class="btn btn-accent btn-sm">Apply now</a>
-        </nav>
-
-        <!-- Mobile Menu Button -->
         <button
           type="button"
-          class="mobile-menu-toggle md:hidden"
-          aria-label="Toggle navigation menu"
+          class="inline-flex items-center justify-center rounded-md border border-surface px-3 py-2 text-navy md:hidden"
+          data-mobile-nav-toggle
           aria-expanded="false"
-          aria-controls="mobile-menu"
+          aria-controls="mobile-nav-home"
+          aria-label="Open menu"
         >
-          <span class="material-symbols-outlined">menu</span>
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
         </button>
       </div>
 
-      <!-- Mobile Navigation Drawer -->
-      <div
-        id="mobile-menu"
-        class="mobile-menu"
-        role="dialog"
-        aria-label="Mobile navigation"
-        aria-hidden="true"
-      >
-        <div class="mobile-menu-backdrop"></div>
-        <nav class="mobile-menu-panel">
-          <div class="mobile-menu-header">
-            <a href="/" class="inline-flex items-center">
-              <img
-                src="/assets/icons/AX-wordmark-and-logo.png"
-                alt="Accelerator X"
-                class="h-5 w-auto"
-                width="1125"
-                height="195"
-              />
-            </a>
-            <button
-              type="button"
-              class="mobile-menu-close"
-              aria-label="Close navigation menu"
-            >
-              <span class="material-symbols-outlined">close</span>
-            </button>
-          </div>
-          <div class="mobile-menu-links">
-            <a href="/" class="mobile-menu-link">Home</a>
-            <a href="/insights/" class="mobile-menu-link">Insights</a>
-            <a href="/workshops.html" class="mobile-menu-link">Workshops</a>
-            <a href="/cohort.html" class="mobile-menu-link mobile-menu-link-active">Programs</a>
-          </div>
-          <div class="mobile-menu-footer">
-            <a href="#apply" class="btn btn-accent w-full">Apply now</a>
-          </div>
+      <div id="mobile-nav-home" class="hidden border-t border-surface bg-background md:hidden">
+        <nav class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4" aria-label="Mobile">
+          <a href="/" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Home</a>
+          <a href="/workshops.html" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Workshops</a>
+          <a href="/cohort.html" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Programs</a>
+          <a href="/insights/" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Insights</a>
+          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">AI readiness quiz</a>
+          <a href="#apply" class="btn btn-primary btn-sm mt-2 w-full">Apply to work with us</a>
         </nav>
       </div>
     </header>
@@ -846,7 +812,6 @@
     </footer>
 <!-- FOOTER_COMPONENT_END -->
 
-    <script defer src="/assets/js/nav.js"></script>
     <script defer src="/assets/js/forms.js"></script>
     <script defer src="/assets/js/main.js"></script>
   </body>
