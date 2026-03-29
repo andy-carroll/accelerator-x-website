@@ -79,6 +79,13 @@ Write mode performs:
 
 Session cannot close in write mode if required quality gates fail. Fix first, then rerun.
 
+### Operating mode (pragmatic toggle)
+
+Set `operatingMode` in `.session-protocol.json` to switch behavior without editing scripts:
+
+- `solo` = lower-friction defaults for a single maintainer.
+- `team` = stricter defaults (`strictMode=true`, required `build+check`, tighter staged-path policy).
+
 ---
 
 ## Airtable references

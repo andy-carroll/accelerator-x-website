@@ -97,6 +97,15 @@ npm run test:session-protocols # protocol utility regression checks
 Protocol policy/config is stored in `.session-protocol.json` (branch allowlist,
 quality gate commands, managed docs, and session-end push policy).
 
+**Operating mode toggle (one edit):** set `operatingMode` in `.session-protocol.json`.
+
+```json
+"operatingMode": "solo"
+```
+
+- `solo`: low-friction defaults for a single maintainer.
+- `team`: stricter guardrails (`strictMode=true`, `build+check` required, tighter staged-path scope).
+
 ### Serve locally
 
 ```bash
@@ -245,7 +254,7 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260329-194908
-- Updated: 2026-03-29T18:49:10.040Z
+- Session ID: 20260329-200313
+- Updated: 2026-03-29T19:03:15.303Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

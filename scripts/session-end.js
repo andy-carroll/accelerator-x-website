@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const {
   matchesAnyPattern,
+  resolveProfileOperatingMode,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 } = require('./session-protocol-utils');
@@ -80,10 +81,17 @@ function loadProfile(profilePath) {
 
   try {
     const parsed = JSON.parse(fs.readFileSync(profilePath, 'utf8'));
-    if (!parsed.version || !parsed.git || !Array.isArray(parsed.git.allowedBranchPatterns)) {
+    const resolved = resolveProfileOperatingMode(parsed);
+
+    if (resolved.error) {
+      return { error: resolved.error };
+    }
+
+    const profile = resolved.profile;
+    if (!profile.version || !profile.git || !Array.isArray(profile.git.allowedBranchPatterns)) {
       return { error: 'Invalid protocol profile: missing required git policy fields.' };
     }
-    return { profile: parsed };
+    return { profile, activeMode: resolved.activeMode };
   } catch (error) {
     return { error: `Failed to parse protocol profile: ${error.message}` };
   }
@@ -140,6 +148,8 @@ if (profileResult.error) {
   process.exit(EXIT.CRITICAL_FAILURE);
 }
 const profile = profileResult.profile;
+const activeMode = profileResult.activeMode || 'default';
+operations.push({ step: 'operating_mode', status: 'ok', detail: activeMode });
 
 const branchResult = run('git rev-parse --abbrev-ref HEAD');
 if (!branchResult.ok) {

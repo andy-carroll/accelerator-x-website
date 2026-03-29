@@ -3,6 +3,7 @@ const {
   SESSION_BLOCK_START,
   SESSION_BLOCK_END,
   matchesAnyPattern,
+  resolveProfileOperatingMode,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 } = require('./session-protocol-utils');
@@ -52,10 +53,51 @@ function testUpsertSessionProtocolBlock() {
   assert.ok(!second.content.includes('Session ID: 20260329-200000'), 'old session id should be replaced');
 }
 
+function testResolveProfileOperatingMode() {
+  const baseProfile = {
+    version: 1,
+    operatingMode: 'team',
+    strictMode: false,
+    git: { allowedBranchPatterns: ['main'] },
+    quality: { requiredCommands: ['npm run build'], optionalCommands: ['npm run check'] },
+    sessionEnd: { autoPushAllowed: false, allowedChangedPathPatterns: ['scripts/*'] },
+    operatingModes: {
+      team: {
+        strictMode: true,
+        quality: { requiredCommands: ['npm run build', 'npm run check'], optionalCommands: [] },
+        sessionEnd: { allowedChangedPathPatterns: ['.claude/sessions/*.md'] }
+      }
+    }
+  };
+
+  const resolved = resolveProfileOperatingMode(baseProfile);
+  assert.ok(!resolved.error, 'mode resolution should not error for valid mode override');
+  assert.strictEqual(resolved.activeMode, 'team', 'active mode should be reported');
+  assert.strictEqual(resolved.profile.strictMode, true, 'team override should apply strictMode');
+  assert.deepStrictEqual(
+    resolved.profile.quality.requiredCommands,
+    ['npm run build', 'npm run check'],
+    'team override should replace requiredCommands'
+  );
+  assert.deepStrictEqual(
+    resolved.profile.sessionEnd.allowedChangedPathPatterns,
+    ['.claude/sessions/*.md'],
+    'team override should replace allowlist patterns'
+  );
+
+  const invalid = resolveProfileOperatingMode({
+    version: 1,
+    operatingMode: 'team',
+    operatingModes: { team: 'invalid' }
+  });
+  assert.ok(invalid.error, 'invalid mode override shape should return error');
+}
+
 function runAllTests() {
   testMatchesAnyPattern();
   testEnsureNextSessionBlock();
   testUpsertSessionProtocolBlock();
+  testResolveProfileOperatingMode();
   console.log('✅ session protocol tests passed');
 }
 

@@ -19,6 +19,56 @@ function matchesAnyPattern(value, patterns) {
   return patterns.some(pattern => patternToRegExp(pattern).test(value));
 }
 
+function isPlainObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function mergeObjects(base, override) {
+  if (!isPlainObject(base)) return override;
+  if (!isPlainObject(override)) return override;
+
+  const next = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    if (Array.isArray(value)) {
+      next[key] = value.slice();
+      continue;
+    }
+
+    if (isPlainObject(value) && isPlainObject(base[key])) {
+      next[key] = mergeObjects(base[key], value);
+      continue;
+    }
+
+    if (isPlainObject(value)) {
+      next[key] = mergeObjects({}, value);
+      continue;
+    }
+
+    next[key] = value;
+  }
+
+  return next;
+}
+
+function resolveProfileOperatingMode(profile) {
+  const operatingMode = profile.operatingMode;
+  const operatingModes = profile.operatingModes;
+
+  if (!operatingMode || !isPlainObject(operatingModes)) {
+    return { profile, activeMode: operatingMode || 'default' };
+  }
+
+  const modeOverrides = operatingModes[operatingMode];
+  if (!isPlainObject(modeOverrides)) {
+    return { error: `Invalid protocol profile: operatingMode '${operatingMode}' has no valid override object.` };
+  }
+
+  return {
+    profile: mergeObjects(profile, modeOverrides),
+    activeMode: operatingMode
+  };
+}
+
 function ensureNextSessionBlock(content) {
   if (/## Next Session Priorities/.test(content)) {
     return { content, changed: false };
@@ -65,6 +115,7 @@ module.exports = {
   SESSION_BLOCK_END,
   patternToRegExp,
   matchesAnyPattern,
+  resolveProfileOperatingMode,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 };

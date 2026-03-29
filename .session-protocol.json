@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "operatingMode": "solo",
   "strictMode": false,
   "git": {
     "allowedBranchPatterns": [
@@ -60,5 +61,25 @@
       "scripts/test-session-protocols.js",
       ".session-protocol.json"
     ]
+  },
+  "operatingModes": {
+    "solo": {},
+    "team": {
+      "strictMode": true,
+      "quality": {
+        "requiredCommands": [
+          "npm run build",
+          "npm run check"
+        ],
+        "optionalCommands": []
+      },
+      "sessionEnd": {
+        "allowedChangedPathPatterns": [
+          ".claude/rules/session.md",
+          "claude/rules/session.md",
+          ".claude/sessions/*.md"
+        ]
+      }
+    }
   }
 }

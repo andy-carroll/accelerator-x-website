@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { matchesAnyPattern } = require('./session-protocol-utils');
+const { matchesAnyPattern, resolveProfileOperatingMode } = require('./session-protocol-utils');
 
 const EXIT = {
   SUCCESS: 0,
@@ -58,12 +58,19 @@ function loadProfile(profilePath) {
 
   try {
     const parsed = JSON.parse(fs.readFileSync(profilePath, 'utf8'));
+    const resolved = resolveProfileOperatingMode(parsed);
 
-    if (!parsed.version || !parsed.git || !Array.isArray(parsed.git.allowedBranchPatterns)) {
+    if (resolved.error) {
+      return { error: resolved.error };
+    }
+
+    const profile = resolved.profile;
+
+    if (!profile.version || !profile.git || !Array.isArray(profile.git.allowedBranchPatterns)) {
       return { error: 'Invalid protocol profile: missing required git policy fields.' };
     }
 
-    return { profile: parsed };
+    return { profile, activeMode: resolved.activeMode };
   } catch (error) {
     return { error: `Failed to parse protocol profile: ${error.message}` };
   }
@@ -121,7 +128,9 @@ if (profileResult.error) {
 }
 
 const profile = profileResult.profile;
+const activeMode = profileResult.activeMode || 'default';
 const strictMode = Boolean(profile.strictMode);
+operations.push({ step: 'operating_mode', status: 'ok', detail: activeMode });
 const currentBranchResult = run('git rev-parse --abbrev-ref HEAD');
 if (!currentBranchResult.ok) {
   console.error('Unable to detect current git branch.');
