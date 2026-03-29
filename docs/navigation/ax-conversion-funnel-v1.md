@@ -13,7 +13,7 @@ Define the minimum complete funnel needed now to:
 2. enable qualified users to sign up/apply
 3. notify AX team immediately after submission
 
-This is the launch architecture for urgent demand capture (workshops + next cohort).
+This is the launch architecture for urgent demand capture (cohort + future workshops).
 
 ---
 
@@ -55,9 +55,9 @@ Out of scope for Step 1:
 
 ## Priority destinations
 
-1. Workshop page (Leadership Activation)
-2. Cohort page (next intake)
-3. Quiz destination (`https://quiz.accelerator-x.ai`)
+1. Cohort page (next intake) - LIVE
+2. Quiz destination (`https://quiz.accelerator-x.ai`)
+3. Workshop page (Leadership Activation) - TO BE CREATED
 
 ## Conversion actions
 

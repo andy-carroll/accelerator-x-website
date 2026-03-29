@@ -24,13 +24,18 @@ transparent, anti-agency positioning.
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 
-- [-] **Urgent: Offer clarity + cohort conversion sprint (supersedes prior ordering)** —
-      launch decision-led pages and routes that let prospects understand AX, sign up, and
-      trigger team notifications. Scope for this sprint:
-      1) Leadership Activation page (`From £2,000 + VAT`),
-      2) [x] Next Cohort page (VSL + apply/waitlist) — `cohort.html` live, £2k+VAT, April 2026 start,
-      3) discoverability paths to `quiz.accelerator-x.ai` (nav, banner, contextual links),
-      4) end-to-end form submission + notification reliability.
+- [-] **P1: Cohort page completion** — current cohort.html is incomplete draft requiring substantial revisions:
+      1) Content refinement and copy adjustments
+      2) Add actual video (replace VSL placeholder)
+      3) Add real images and testimonials
+      4) Fix UI/UX inconsistencies with homepage styling
+      5) Ensure complete visual parity with design system
+- [ ] **P1: Navigation structure overhaul** — critical infrastructure fix to prevent hardcoded duplication:
+      1) Create reusable navigation component (single source of truth)
+      2) Eliminate hardcoded navigation in every page/template
+      3) Ensure consistent mobile hamburger behavior across all pages
+      4) Fix mobile nav ID inconsistencies permanently
+      5) Update all templates to use shared component
 - [x] **Share panel** — SVG icons (LinkedIn + X) + "Share" heading — fixed in prior session
 - [ ] **Hero imagery** — swap interim stills for final production photos; update alt text in
       `content/data/hero-media.config.json`. Run `npm run process:hero-images && npm run build`.
