@@ -81,19 +81,40 @@
         <a href="/">
           <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-6 sm:h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
         </a>
-        <div class="flex items-center gap-2 sm:gap-4">
+        <div class="hidden items-center gap-6 md:flex">
+          <a href="/workshops.html" class="text-sm font-medium text-navy transition hover:opacity-80">Workshops</a>
+          <a href="/cohort.html" class="text-sm font-medium text-navy transition hover:opacity-80">Programs</a>
           <a href="/insights/" class="text-sm font-medium text-navy transition hover:opacity-80">Insights</a>
-          <a href="/#apply" class="btn btn-primary btn-sm whitespace-nowrap">
-            <span class="sm:hidden">Work with us</span>
-            <span class="hidden sm:inline">Apply to work with us</span>
-          </a>
+          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-navy transition hover:opacity-80">Quiz</a>
+          <a href="/#apply" class="btn btn-primary btn-sm whitespace-nowrap">Apply to work with us</a>
         </div>
+
+        <button
+          type="button"
+          class="inline-flex items-center justify-center rounded-md border border-surface px-3 py-2 text-navy md:hidden"
+          data-mobile-nav-toggle
+          aria-expanded="false"
+          aria-controls="mobile-nav-insights-article"
+          aria-label="Open menu"
+        >
+          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+        </button>
+      </div>
+
+      <div id="mobile-nav-insights-article" class="hidden border-t border-surface bg-background md:hidden">
+        <nav class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4" aria-label="Mobile">
+          <a href="/workshops.html" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Workshops</a>
+          <a href="/cohort.html" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Programs</a>
+          <a href="/insights/" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Insights</a>
+          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">AI readiness quiz</a>
+          <a href="/#apply" class="btn btn-primary btn-sm mt-2 w-full">Apply to work with us</a>
+        </nav>
       </div>
     </header>
 
     <main class="flex-grow">
       <article class="mx-auto max-w-[70ch] px-4 py-12 lg:py-20">
-        <a href="/insights/" class="text-sm font-medium text-muted transition-colors flex items-center gap-1 mb-8 inline-flex hover:text-primary">
+        <a href="/insights/" class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-primary">
           <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Hub
         </a>
         <!-- Article Header -->
@@ -192,6 +213,7 @@
       </div>
     </main>
 
+    <script defer src="/assets/js/nav.js"></script>
     <script defer src="/assets/js/article-init.js"></script>
     <script src="/assets/js/forms.js" defer></script>
   </body>

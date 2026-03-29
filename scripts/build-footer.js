@@ -108,7 +108,10 @@ function renderFooter(variant) {
           <div>
             <h3 class="footer-heading">Explore</h3>
             <div class="mt-4 flex flex-col gap-2 text-sm">
+              <a href="/workshops.html" class="footer-link">Workshops</a>
+              <a href="/cohort.html" class="footer-link">Programs & cohorts</a>
               <a href="/insights/" class="footer-link">Insights</a>
+              <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="footer-link">AI readiness quiz</a>
               <a href="/#apply" class="footer-link">Apply to work with us</a>
             </div>
 

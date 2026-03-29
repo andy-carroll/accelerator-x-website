@@ -17,6 +17,7 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 ### Removed
 
 - **Campaign banner from `index.html`** — removed unapproved full-width promotional banner (lines 365-375) that was added without explicit approval in previous session.
+- **`workshops.html`** — deleted entire file. Leadership Activation page will be created separately following proper planning workflow.
 - **`.session-protocol.json`** — repo-level protocol profile for session lifecycle automation.
   Defines branch allowlist, quality-gate commands, managed documentation files, session log path,
   and session-end write/push policy for portable cross-repo adoption.

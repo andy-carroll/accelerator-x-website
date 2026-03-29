@@ -66,6 +66,8 @@ exports.handler = async (event, context) => {
     const role = safeTrim(data.role);
     const timelineRaw = safeTrim(data.timeline);
     const message = safeTrim(data.message || '');
+    const interest = safeTrim(data.interest || '');
+    const source = safeTrim(data.source || '');
 
     // Required fields guard
     if (!name || !email || !company || !website || !role) {
@@ -112,6 +114,16 @@ exports.handler = async (event, context) => {
         }
       ]
     };
+
+    if (interest || source) {
+      slackMessage.blocks.push({
+        type: 'section',
+        fields: [
+          { type: 'mrkdwn', text: `*Interest:*\n${interest || 'Not specified'}` },
+          { type: 'mrkdwn', text: `*Source:*\n${source || 'Website'}` }
+        ]
+      });
+    }
     
     // Add message block if present
     if (message) {
@@ -170,7 +182,11 @@ exports.handler = async (event, context) => {
           Website: website,
           'Primary Contact Role': role,
           Timeline: timeline,
-          Notes: message || '',
+          Notes: [
+            interest ? `Interest: ${interest}` : '',
+            source ? `Source detail: ${source}` : '',
+            message || ''
+          ].filter(Boolean).join('\n\n'),
           Source: 'Accelerator-X Website'
         }
       };

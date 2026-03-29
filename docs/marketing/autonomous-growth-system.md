@@ -50,12 +50,14 @@ connect to at least one of these.
 **Current baseline:** A few small clients. Sub-£20k ARR.
 **Target:** £100k ARR by end of June 2026.
 **What it requires:**
+
 - Consistent pipeline of qualified meetings (outbound + inbound)
 - Conversion of meetings to Discovery Workshops (£4k entry point)
 - Conversion of workshops to 8-week cycles (from £12k)
 - Retention and expansion of existing clients
 
 **The math:**
+
 - 8 × 8-week cycles at £12k average = £96k
 - Or 4 cycles + a handful of workshops = same
 - At 40% meeting-to-workshop conversion: need ~20 qualified meetings
@@ -66,6 +68,7 @@ connect to at least one of these.
 **Current baseline:** Inbound only. Unpredictable. Volume too low.
 **Target:** 10 qualified meetings/week by end of May 2026.
 **What it requires:**
+
 - Outbound engine running (Instantly + AI personalisation)
 - Compelling free offer (AI opportunity map, delivered before the meeting)
 - Booking automation (calendar link in the email sequence)
@@ -76,6 +79,7 @@ connect to at least one of these.
 **Current baseline:** Occasional. No cadence. No system.
 **Target:** 3 LinkedIn posts/week + 1 newsletter issue/week, every week.
 **What it requires:**
+
 - Marketing Luminary agent drafting from article content and AI news
 - Andy approving/editing, not writing from scratch
 - Typefully for LinkedIn scheduling
@@ -87,6 +91,7 @@ connect to at least one of these.
 **Target:** Every active client gets a weekly status update. Every deliverable has a
 logged owner and due date. No surprises.
 **What it requires:**
+
 - Ops Legend agent managing Airtable delivery board
 - Automated weekly update drafts for Andy to approve + send
 - Slack notifications when deliverables go overdue
@@ -109,6 +114,7 @@ All accessible by Andy and Toby via @mention.
 **Role:** Content, brand, outbound, growth
 **Slack bot:** AX Marketing Luminary (`slack-marketing` MCP)
 **Owns:**
+
 - LinkedIn post drafts (from articles, news, insights)
 - Newsletter drafts (weekly dispatch)
 - Outbound email copy (Instantly sequences)
@@ -118,6 +124,7 @@ All accessible by Andy and Toby via @mention.
 **Tools:** Typefully, Brevo, web search, Instantly (future), filesystem (articles)
 
 **Triggers (agent-initiated):**
+
 - New article committed → drafts 3 LinkedIn post options → posts to `#ax-content-engine`
 - Monday 8am → drafts weekly newsletter from recent articles + AI news
 - New subscriber → confirms Brevo receipt, flags for personal outreach if ICP match
@@ -129,6 +136,7 @@ All accessible by Andy and Toby via @mention.
 **Role:** Website, codebase, specs, roadmap
 **Slack bot:** AX Product Unicorn (to be connected)
 **Owns:**
+
 - Roadmap spec writing (given a ROADMAP item → produces `docs/specs/[feature].md`)
 - Code review summaries (on push to main)
 - Build status monitoring
@@ -138,6 +146,7 @@ All accessible by Andy and Toby via @mention.
 **Tools:** GitHub, Netlify API, filesystem, Claude Code (as a tool)
 
 **Triggers (agent-initiated):**
+
 - Push to main → summarises changes, flags anything needing doc update
 - "End session" → runs full session-end protocol (CLAUDE.md, CHANGELOG, session log, Slack post)
 - ROADMAP item flagged "In Flight" → writes spec, posts to `#ai-driven-development`
@@ -149,6 +158,7 @@ All accessible by Andy and Toby via @mention.
 **Role:** CRM, leads, client delivery, operations
 **Slack bot:** AX Ops Legend (`slack-ops` MCP)
 **Owns:**
+
 - Lead enrichment (new lead → company research brief posted to `#website-leads`)
 - Delivery board hygiene (overdue items → Slack alerts)
 - Morning briefing (daily digest to Andy: overdue items, new leads, key metrics)
@@ -158,6 +168,7 @@ All accessible by Andy and Toby via @mention.
 **Tools:** Airtable, Gmail (draft only), GCal, web search/scrape, Slack
 
 **Triggers (agent-initiated):**
+
 - New lead in Airtable → enriches company, scores intent, posts brief to `#website-leads`
 - Daily 8am → posts morning briefing to Andy's DM
 - Deliverable due date passes → escalates to `#ax-client-deliverables`
@@ -175,6 +186,7 @@ Andy or Toby triggers a complex task. One agent picks it up, completes its part,
 and explicitly hands to the next.
 
 Example:
+
 ```
 Andy: "@AX publish the new article"
   → Product Unicorn: builds + deploys
@@ -188,6 +200,7 @@ An agent completes a task. That completion automatically triggers another agent.
 No human in the loop unless a decision is needed.
 
 Example:
+
 ```
 New lead form submitted (automatic)
   → Ops Legend: enriches company, posts to #website-leads
@@ -206,6 +219,7 @@ One page. Their industry. Their specific bottlenecks. Where AI would actually mo
 the needle. Delivered before the sales call. Costs us 10 minutes of agent time.
 
 **The machine:**
+
 ```
 ICP-filtered prospect list (from Apollo/LinkedIn)
     ↓
@@ -229,9 +243,11 @@ This isn't cold email. It's personalised intelligence at scale.
 ## Build Phases
 
 ### Phase 1 — Prove the concept (weeks 1–2)
+
 *One agent. One workflow. One real outcome.*
 
 **Build:** Marketing Luminary in n8n
+
 - Trigger: new article committed to main
 - Action: Claude drafts 3 LinkedIn post options in Andy's voice
 - Output: posts to `#ax-content-engine` for approval
@@ -245,9 +261,11 @@ visible output. Toby can see it happen. Proves the interaction model.
 ---
 
 ### Phase 2 — Build the fleet (weeks 3–6)
+
 *Three agents connected. Basic agent-to-agent handoff working.*
 
 **Build:**
+
 - Marketing Luminary → full Slack integration (not just n8n trigger)
 - Ops Legend → lead enrichment live (new lead → rich brief in Slack)
 - Product Unicorn → session-end automation (replaces manual protocol)
@@ -262,9 +280,11 @@ Lead enrichment firing on every new lead. Session-end takes < 2 minutes.
 ---
 
 ### Phase 3 — The outbound machine (weeks 6–10)
+
 *Pipeline generation running. Agents generating meetings.*
 
 **Build:**
+
 - Instantly connected and running sequences
 - Marketing Luminary generating personalised AI Opportunity Maps
 - Ops Legend managing the reply-to-meeting pipeline
@@ -275,6 +295,7 @@ Lead enrichment firing on every new lead. Session-end takes < 2 minutes.
 ---
 
 ### Phase 4 — Scale and compound (months 3+)
+
 *Agents improving. New agents added as new bottlenecks emerge.*
 
 - Multi-agent orchestration for complex client delivery
@@ -303,6 +324,7 @@ Typefully        → LinkedIn scheduling + approval queue
 ## Guardrails
 
 Agents can do autonomously:
+
 - Draft content (never publish without human approval)
 - Enrich leads and research companies
 - Create and update Airtable records
@@ -311,6 +333,7 @@ Agents can do autonomously:
 - Run builds and report results
 
 Agents must ask a human before:
+
 - Sending any external communication (email, LinkedIn)
 - Publishing anything publicly (website, social)
 - Deleting or modifying existing records
@@ -318,6 +341,7 @@ Agents must ask a human before:
 - Accessing client-confidential information
 
 Agents can never:
+
 - Send emails autonomously to clients or prospects
 - Make financial transactions
 - Access systems not explicitly provisioned
@@ -333,7 +357,7 @@ That's not the end state. That's the launchpad.
 
 ---
 
-_This document lives at `docs/autonomous-growth-system.md`.
+*This document lives at `docs/autonomous-growth-system.md`.
 Update it when strategy shifts or new outcomes are added.
 It is the strategic parent of `ROADMAP.md` — if something is on the roadmap,
-it should trace back to an outcome in this document._
+it should trace back to an outcome in this document.*

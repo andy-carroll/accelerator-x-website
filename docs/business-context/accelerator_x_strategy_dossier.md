@@ -32,17 +32,20 @@ We rejected demographic targeting (e.g., "mid-market manufacturing companies, £
 ### The ideal client profile
 
 **Mindset and readiness:**
+
 - Knows AI matters and cannot be ignored
 - Wants fundamental, lasting change—not quick fixes
 - Willing to invest properly (time, money, commitment)
 - Currently overwhelmed and frozen, but ready to move
 
 **Authority and access:**
+
 - Senior decision-maker: CEO, founder, MD, C-suite, director level
 - Can say yes without endless procurement or committee approval
 - Values direct relationships over formal vendor processes
 
 **Disqualifiers (who we don't work with):**
+
 - Shortcut-seekers looking for magic bullets
 - "Build me a chatbot and disappear" buyers
 - Tyre-kickers who want free strategy
@@ -67,6 +70,7 @@ Through our exploration, a clear three-layer architecture emerged. Each layer se
 ### Layer 1: Enablement and activation (highly scalable)
 
 **What it includes:**
+
 - Online courses, frameworks, tools, templates
 - Cohort-based programmes (not 1:1)
 - Community membership
@@ -74,6 +78,7 @@ Through our exploration, a clear three-layer architecture emerged. Each layer se
 - Newsletter, YouTube, podcast, content engine
 
 **Economics:**
+
 - Low marginal cost per additional customer
 - Revenue potential: £1-2M/year once built
 - Requires upfront investment in content and systems
@@ -89,12 +94,14 @@ This is where 80-90% of the value we deliver could live—and it doesn't require
 ### Layer 2: Strategic access (premium, constrained)
 
 **What it includes:**
+
 - Direct advisory and coaching with Andy and Toby
 - The 2-3 hours/week per client layer
 - Strategic thinking, problem-solving, sounding board
 - Reserved for clients who've done workshops or come in at high-ticket
 
 **Economics:**
+
 - High value per hour, but hours are finite
 - Combined capacity: ~50 hours/week (25 each)
 - At 2 hours/client = 25 clients max simultaneously
@@ -110,12 +117,14 @@ This is the scarce, premium offering. It's what clients can't get from digital p
 ### Layer 3: Implementation (outsourced, margin business)
 
 **What it includes:**
+
 - n8n builds, custom AI development, integrations
 - Claude skills, knowledge bases, automation systems
 - Technical architecture and infrastructure
 - Delivered by CTO + trusted contractors/specialists
 
 **Economics:**
+
 - We scope, price, and oversee; they execute
 - Target: 30-50% margin on implementation work
 - Scales through other people's hands, not ours
@@ -137,18 +146,21 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Guarantee:** Full money-back if no value delivered
 
 **What happens:**
+
 - Deep discovery of business, blockers, opportunities
 - Hands-on exercises and AI exposure
 - Clear roadmap and prioritised action plan
 - Proposal for Phase 1 sprint if appropriate
 
 **Strategic purpose:**
+
 - Filters for serious buyers (willingness to pay upfront)
 - Delivers immediate, tangible value
 - Creates the proposal for ongoing work (paid discovery)
 - High conversion to cycles (~70% expected)
 
 **Capacity (Andy + Toby only):**
+
 - 4 workshops/week maximum
 - 192 workshops/year
 - £768k-1.54M annual revenue from workshops alone
@@ -162,17 +174,20 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Commitment:** ~2-3 hours/week of Andy or Toby's time (target state)
 
 **What happens:**
+
 - Weekly or fortnightly sessions (training, advisory, review)
 - Async support and guidance
 - Hands-on implementation support (via Layer 3)
 - Clear deliverables and measurable outcomes each cycle
 
 **Value commitment:**
+
 - Each cycle should deliver 10x+ ROI
 - £25k investment → £250k+ measurable value in year one
 - Value drivers: cost savings, efficiency gains, revenue growth, new capabilities
 
 **Retention model:**
+
 - Clients run as many cycles as needed
 - Average client: 2-3 cycles expected
 - Some clients: ongoing retained relationship
@@ -187,6 +202,7 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Capacity:** 20-40 participants per event
 
 **What happens:**
+
 - Immersive AI transformation experience
 - Peer network of like-minded leaders
 - Direct access to Andy and Toby
@@ -195,6 +211,7 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Revenue potential:** £600k-1.2M/year
 
 **Strategic purpose:**
+
 - High-margin, concentrated delivery
 - Network and community building
 - Authority and brand positioning
@@ -207,6 +224,7 @@ Many clients need things built, not just advice. If we don't offer implementatio
 ### Digital products and content (Layer 1)
 
 **Planned components:**
+
 - Online courses (101-level AI literacy, tool proficiency)
 - Frameworks, templates, tools (immediately applicable)
 - Community membership (ongoing access, peer support)
@@ -214,12 +232,14 @@ Many clients need things built, not just advice. If we don't offer implementatio
 - YouTube and podcast (reach, credibility, inbound)
 
 **Revenue model:**
+
 - Low-ticket self-serve products (£100-500)
 - Mid-ticket courses (£1,000-3,000)
 - Community membership (£50-200/month)
 - Free content → paid funnel
 
 **Strategic purpose:**
+
 - Scalable revenue not dependent on our time
 - Feeds pipeline for workshops and cycles
 - Establishes authority and reach
@@ -232,6 +252,7 @@ Many clients need things built, not just advice. If we don't offer implementatio
 ### Implementation services (Layer 3)
 
 **What we offer:**
+
 - Custom AI development (full-stack web/mobile apps)
 - Knowledge bases and AI agents
 - n8n automation development
@@ -239,11 +260,13 @@ Many clients need things built, not just advice. If we don't offer implementatio
 - Integration and technical implementation
 
 **Delivery model:**
+
 - Andy and Toby scope and oversee
 - CTO leads technical delivery
 - Contractor bench executes
 
 **Economics:**
+
 - Price to client: project-based, varies by scope
 - Margin: 30-50% after contractor costs
 - No upper limit on volume (scales with contractor capacity)
@@ -255,21 +278,25 @@ Many clients need things built, not just advice. If we don't offer implementatio
 ### Future possibilities (not yet prioritised)
 
 **Fractional advisory:**
+
 - Retained relationships (monthly fee for ongoing access)
 - Board advisory roles
 - Could be significant recurring revenue
 
 **JV and equity arrangements:**
+
 - Co-developing assets with clients
 - Equity stake in exchange for expertise and build
 - Already in discussion with one client
 
 **AI recruitment placement:**
+
 - Leveraging Talent Aisle or building internal capability
 - Hiring and training AI implementation specialists for clients
 - Placement fees + onboarding as differentiator
 
 **Licensing and IP monetisation:**
+
 - Licensing methodology to other consultants/firms
 - Productising core frameworks for broader distribution
 - Creates recurring, high-margin revenue
@@ -291,6 +318,7 @@ Many clients need things built, not just advice. If we don't offer implementatio
 134 clients in cycles. Even at 2 hours/week, that's 268 hours/week. Andy and Toby have ~50 combined. The model physically cannot deliver.
 
 **Realistic delivery capacity (Layer 2 only):**
+
 - 25 clients simultaneously at 2 hours each
 - ~75 cycles/year (clients turning over)
 - 75 × £22.5k = £1.7M from cycles
@@ -337,12 +365,14 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Revenue ceiling:** £3-4M (workshops, cycles, events, some digital products)
 
 **Pros:**
+
 - Simplest to manage
 - Highest margin percentage
 - No partner complexity
 - Full control
 
 **Cons:**
+
 - Limited by personal capacity
 - Can't capture full implementation opportunity
 - Risk if either person is unavailable
@@ -359,12 +389,14 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Revenue potential:** £5-7M (existing layers + £2-3M implementation margin)
 
 **Pros:**
+
 - Captures implementation revenue
 - Technical credibility
 - Frees Andy from hands-on build work
 - Scalable through contractors
 
 **Cons:**
+
 - CTO equity/compensation complexity
 - Quality control on contractor work
 - Management overhead
@@ -381,18 +413,21 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Revenue potential:** £7-10M (multiplied Layer 2 capacity + everything else)
 
 **Pros:**
+
 - Expands delivery capacity for premium work
 - May bring new networks and deal flow
 - Risk distribution
 - Succession path
 
 **Cons:**
+
 - Only works if they bring non-linear value (network, not just hours)
 - Equity dilution and governance complexity
 - Risk of quality inconsistency
 - Cultural alignment challenges
 
 **Conditions for this to work:**
+
 - Each new partner must bring pipeline we can't otherwise access
 - Or free Andy/Toby for higher-leverage activities
 - Or open new verticals/geographies
@@ -406,24 +441,28 @@ Many clients need things built, not just advice. If we don't offer implementatio
 **Model:** Combination of B and selective elements of C, with strong Layer 1.
 
 **Team:**
+
 - Andy and Toby (co-founders, 50-50)
 - CTO (equity partner or senior hire, leads Layer 3)
 - Potentially 1-2 additional senior advisors (only if they unlock non-linear growth)
 - Contractor bench for implementation
 
 **Revenue architecture:**
+
 - Layer 1 (digital, events): £1.5-2M
 - Layer 2 (Andy, Toby, select partners): £2-3M
 - Layer 3 (CTO + contractors): £3-4M
 - **Total: £7-9M**, with path to £10M+
 
 **Pros:**
+
 - Balanced growth across all layers
 - Captures implementation opportunity
 - Preserves premium positioning
 - Scalable without excessive headcount
 
 **Cons:**
+
 - More moving parts
 - Requires strong CTO hire
 - Partner selection critical
@@ -493,15 +532,15 @@ We've proven that two founders plus smart leverage can build something substanti
 
 ### This month
 
-4. **CTO conversation** — advance discussions, clarify role and terms
-5. **Workshop pricing decision** — do we move to £6k baseline?
-6. **Newsletter launch plan** — what's the MVP?
+1. **CTO conversation** — advance discussions, clarify role and terms
+2. **Workshop pricing decision** — do we move to £6k baseline?
+3. **Newsletter launch plan** — what's the MVP?
 
 ### This quarter
 
-7. **First event pilot?** — decide whether to run a Q2 or Q3 2026 event
-8. **Layer 1 roadmap** — prioritise digital products
-9. **Financial model build-out** — detailed version of the numbers in this dossier
+1. **First event pilot?** — decide whether to run a Q2 or Q3 2026 event
+2. **Layer 1 roadmap** — prioritise digital products
+3. **Financial model build-out** — detailed version of the numbers in this dossier
 
 ---
 

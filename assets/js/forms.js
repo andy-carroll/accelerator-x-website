@@ -37,13 +37,14 @@
 
   // ── Lead capture ─────────────────────────────────────────────────────────
 
-  const leadForm       = document.getElementById('lead-form');
-  const leadSuccess    = document.getElementById('form-success');
-  const leadError      = document.getElementById('form-error');
+  const leadForms = Array.from(document.querySelectorAll('[data-lead-form], #lead-form'));
 
-  if (leadForm) {
+  leadForms.forEach((leadForm) => {
+    const leadSuccess = document.getElementById(leadForm.dataset.successId || 'form-success');
+    const leadError = document.getElementById(leadForm.dataset.errorId || 'form-error');
+
     const normaliseWebsite = () => {
-      const f = document.getElementById('website');
+      const f = leadForm.querySelector('input[name="website"]');
       if (f && f.value.trim() && !f.value.trim().match(/^https?:\/\//)) {
         f.value = `https://${f.value.trim()}`;
       }
@@ -60,7 +61,7 @@
           [
             { transform: 'scale(0.9)', opacity: 0.2 },
             { transform: 'scale(1.05)', opacity: 1 },
-            { transform: 'scale(1)',    opacity: 1 },
+            { transform: 'scale(1)', opacity: 1 },
           ],
           { duration: 300, easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)' }
         );
@@ -81,7 +82,7 @@
 
       const formData = new FormData(leadForm);
       const payload = {
-        'form-name': 'lead-capture-form',
+        'form-name': formData.get('form-name') || 'lead-capture-form',
         name: formData.get('name'),
         email: formData.get('email'),
         company: formData.get('company'),
@@ -89,6 +90,8 @@
         role: formData.get('role'),
         timeline: formData.get('timeline'),
         message: formData.get('message') || '',
+        interest: formData.get('interest') || leadForm.dataset.interest || '',
+        source: formData.get('source') || leadForm.dataset.source || '',
         _honeypot: formData.get('_honeypot') || ''
       };
 
@@ -111,7 +114,7 @@
           isSubmitting.set(leadForm, false);
         });
     });
-  }
+  });
 
   // ── Newsletter signup ─────────────────────────────────────────────────────
   // Covers: homepage footer, insights hub index, article nurture-trap.
