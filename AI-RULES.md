@@ -23,6 +23,93 @@ If any adapter conflicts with this file, follow `AI-RULES.md`.
 - Email capture: Brevo (list #9 — Main AX Newsletter). Netlify Forms → `submission-created`
   function → Brevo API + Slack `#website-leads`.
 
+## 1.5) Mandatory Planning Workflow
+
+**No implementation without explicit plan approval.**
+
+This is non-negotiable. Violating this workflow creates technical debt, design system violations, and wasted effort that must be undone.
+
+### The workflow
+
+Every non-trivial change follows this sequence:
+
+1. **Draft detailed plan**
+   - List exact files to be created/modified
+   - Specify component reuse strategy (forms, footers, headers, etc.)
+   - Document design system compliance approach
+   - Define content/IA requirements if creating new pages
+   - Include local preview + QA verification steps
+
+2. **Self-review against existing patterns**
+   - Check `docs/design-system.md` for component standards
+   - Verify no duplication of existing components
+   - Confirm alignment with `ROADMAP.md` priorities
+   - Identify any dependencies or prerequisites
+
+3. **Present plan to user for approval**
+   - Show plan in structured format
+   - Highlight any uncertainties or open questions
+   - Wait for explicit approval before proceeding
+
+4. **Implement only after approval**
+   - Follow plan exactly
+   - Document any deviations immediately
+   - Stop and ask if unexpected issues arise
+
+5. **Verify before declaring complete**
+   - Run `npm run build` (must exit 0)
+   - Run `npm run check` (must exit 0)
+   - Confirm visual/functional correctness in local preview
+   - Complete Definition of Done checklist (§7)
+
+### What counts as "non-trivial"
+
+Requires planning workflow:
+
+- Creating new pages or templates
+- Adding new components or UI patterns
+- Modifying navigation structure or IA
+- Changing form layouts or submission flows
+- Updating shared components (footer, header)
+- Any change affecting multiple files
+
+Does NOT require planning workflow:
+
+- Fixing typos or copy edits
+- Updating documentation only
+- Running build/check commands
+- Small CSS tweaks to existing components (single property changes)
+
+### Granularity requirement
+
+**Break large initiatives into single, atomic tasks.**
+
+If a user request spans multiple features or pages:
+
+1. Push back and propose breaking it into individual items
+2. Each item should be completable and verifiable in one focused session
+3. Tick items off as they are verified and complete
+4. Never attempt to implement multiple pages, components, or features simultaneously
+
+Example of correct granularity:
+
+- ❌ "Build conversion funnel pages" (too broad)
+- ✅ "Design and implement Leadership Activation workshop page with approved content and form pattern" (single deliverable)
+
+### Enforcement
+
+This workflow is enforced by:
+
+- Agent behavior contract (§6) — agents must follow this process
+- Session start protocol — reminder at beginning of every session
+- Code review — user will reject work that bypassed this workflow
+
+Violations result in:
+
+- Immediate stop-work
+- Rollback of changes
+- Mandatory process review before resuming
+
 ## 2) Philosophy
 
 **We move fast by not making messes.**
@@ -186,6 +273,10 @@ provides local enforcement.
 
 ## 6) Agent behaviour contract
 
+- **Follow mandatory planning workflow (§1.5) for all non-trivial changes**
+- **Never create new pages, components, or UI patterns without explicit plan approval**
+- **Always verify component reuse opportunities before writing new code**
+- **Push back on overly broad requests — propose breaking into atomic tasks**
 - Ask clarifying questions if requirements are ambiguous.
 - Prefer minimal diffs over broad rewrites.
 - Keep file naming/style consistent with existing repo patterns.
@@ -197,6 +288,7 @@ provides local enforcement.
 
 A task is **not complete** until all of the following are true:
 
+0. **Planning workflow completed (§1.5)** — plan drafted, reviewed, and approved before implementation
 1. `npm run build` exits 0 — no errors, no warnings
 2. `bash scripts/img-audit.sh` exits 0 (if images were touched)
 3. **`CHANGELOG.md` updated** — new entry under `[Unreleased]` describing what changed and why
