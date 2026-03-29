@@ -38,6 +38,10 @@ transparent, anti-agency positioning.
 
 ### Autonomous AI Agent Fleet (strategic priority)
 
+- [x] **Session protocol hardening (Phase 1)** — added profile-driven session lifecycle policy
+      (`.session-protocol.json`), safe-by-default session-end modes (plan/dry-run/write),
+      explicit write confirmation gates, branch policy checks, scoped staging, and updated
+      protocol operator docs (`.claude/rules/session.md`, `CLAUDE.md`, `README.md`).
 - [x] **Shared agent skills sync scaffold** — added canonical skills profile pointer
       (`.agent-skills-profile.json`), sync utility (`scripts/skills-sync.js`), npm scripts
       (`skills:sync`, `skills:sync:force`), and operations runbook
@@ -129,3 +133,9 @@ transparent, anti-agency positioning.
 <!-- Session 20260322-235352 logged -->
 
 <!-- Session 20260329-180314 logged -->
+
+<!-- SESSION_PROTOCOL:START -->
+- Session ID: 20260329-194908
+- Updated: 2026-03-29T18:49:10.039Z
+- Mode: write
+<!-- SESSION_PROTOCOL:END -->

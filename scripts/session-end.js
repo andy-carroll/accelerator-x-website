@@ -1,104 +1,425 @@
-// scripts/session-end.js
-// Session‑End automation (without Slack posting)
-// -------------------------------------------------
-// This script performs the mandatory Session‑End steps:
-// 1. Generate a session log file under .claude/sessions/
-// 2. Ensure CLAUDE.md contains a refreshed "## Next Session Priorities" block
-// 3. (Placeholder) update Airtable deliverables – currently logs IDs
-// 4. git add -A, commit, and push
-// 5. Run the quality gate (npm run build)
-// 6. Echo reminders to manually update ROADMAP.md, README.md, CHANGELOG.md, AI-RULES.md
-// -------------------------------------------------
-
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const {
+  matchesAnyPattern,
+  ensureNextSessionBlock,
+  upsertSessionProtocolBlock
+} = require('./session-protocol-utils');
+
+const EXIT = {
+  SUCCESS: 0,
+  CRITICAL_FAILURE: 1,
+  POLICY_VIOLATION: 2,
+  QUALITY_GATE_FAILURE: 3
+};
+
+const SUPPORTED_FLAGS = new Set(['--json', '--dry-run', '--confirm-write', '--yes', '--airtable']);
+const BUILD_ARTIFACT_PREFIXES = ['insights/', 'assets/css/'];
+const BUILD_ARTIFACT_FILES = new Set(['index.html', 'sitemap.xml']);
+
+function parseArgs(argv) {
+  const args = {
+    json: false,
+    dryRun: false,
+    confirmWrite: false,
+    yes: false,
+    airtable: false
+  };
+
+  const unknown = [];
+  for (const flag of argv) {
+    if (!SUPPORTED_FLAGS.has(flag)) {
+      unknown.push(flag);
+      continue;
+    }
+
+    if (flag === '--json') args.json = true;
+    if (flag === '--dry-run') args.dryRun = true;
+    if (flag === '--confirm-write') args.confirmWrite = true;
+    if (flag === '--yes') args.yes = true;
+    if (flag === '--airtable') args.airtable = true;
+  }
+
+  return { args, unknown };
+}
 
 function run(command) {
   try {
-    return execSync(command, { stdio: 'pipe' }).toString().trim();
-  } catch (e) {
-    console.error(`Command failed: ${command}\n`, e.stdout?.toString() || e.message);
-    process.exit(1);
+    const stdout = execSync(command, { stdio: 'pipe' }).toString().trim();
+    return { ok: true, stdout, code: 0 };
+  } catch (error) {
+    return {
+      ok: false,
+      stdout: error.stdout?.toString()?.trim() || '',
+      stderr: error.stderr?.toString()?.trim() || '',
+      code: error.status || 1,
+      message: error.message
+    };
   }
+}
+
+function shellQuote(input) {
+  return `'${String(input).replace(/'/g, `'\\''`)}'`;
 }
 
 function timestamp() {
   const now = new Date();
-  const pad = (n) => n.toString().padStart(2, '0');
+  const pad = n => n.toString().padStart(2, '0');
   return `${now.getFullYear()}${pad(now.getMonth() + 1)}${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}${pad(now.getSeconds())}`;
 }
 
-// 1. Create session log
-const ts = timestamp();
-const logDir = path.join('.claude', 'sessions');
-if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
-const logPath = path.join(logDir, `session-${ts}.md`);
-const gitHash = run('git rev-parse HEAD');
-const logContent = `# Session Log – ${new Date().toISOString()}
-
-- **Git commit:** ${gitHash}
-- **Build result:** (will be filled after build)
-- **Airtable updates:** (placeholder – replace with real MCP calls)
-- **Decisions / Findings:**
-  - _Add your bullet points here_
-- **Next Session Priorities:**
-  1. _Priority 1_
-  2. _Priority 2_
-  3. _Priority 3_
-`;
-fs.writeFileSync(logPath, logContent);
-console.log(`✅ Session log created at ${logPath}`);
-
-// 2. Ensure CLAUDE.md has Next Session Priorities block
-const claudePath = path.join('CLAUDE.md');
-let claudeContent = fs.readFileSync(claudePath, 'utf8');
-if (!/## Next Session Priorities/.test(claudeContent)) {
-  const block = `\n## Next Session Priorities\n\n1. _Priority 1_\n2. _Priority 2_\n3. _Priority 3_\n`;
-  fs.appendFileSync(claudePath, block);
-  console.log('✅ Added Next Session Priorities block to CLAUDE.md');
-} else {
-  console.log('ℹ️ CLAUDE.md already contains Next Session Priorities');
+function formatDate(date) {
+  return date.toISOString().split('T')[0];
 }
 
-// 3. Placeholder Airtable update
-console.log('🔧 Airtable update placeholder – replace with real MCP call if needed');
+function loadProfile(profilePath) {
+  if (!fs.existsSync(profilePath)) {
+    return { error: `Missing protocol profile at ${profilePath}` };
+  }
 
-// 4. Append session notes to docs
-function appendDoc(file) {
   try {
-    const fullPath = path.join(file);
-    fs.appendFileSync(fullPath, `\n<!-- Session ${ts} logged -->\n`);
-    console.log(`✅ Appended session note to ${file}`);
-  } catch (e) {
-    console.warn(`⚠️ Could not append to ${file}: ${e.message}`);
+    const parsed = JSON.parse(fs.readFileSync(profilePath, 'utf8'));
+    if (!parsed.version || !parsed.git || !Array.isArray(parsed.git.allowedBranchPatterns)) {
+      return { error: 'Invalid protocol profile: missing required git policy fields.' };
+    }
+    return { profile: parsed };
+  } catch (error) {
+    return { error: `Failed to parse protocol profile: ${error.message}` };
   }
 }
-['ROADMAP.md','README.md','CHANGELOG.md','AI-RULES.md'].forEach(appendDoc);
 
-// 5. Run quality gate (npm run build) BEFORE committing
-let buildSuccess = true;
-try {
-  run('npm run build');
-  console.log('✅ Build succeeded');
-} catch (e) {
-  buildSuccess = false;
-  console.error('❌ Build failed – fix issues before proceeding');
+function askForConfirmation(message) {
+  process.stdout.write(`${message} [y/N]: `);
+  const buffer = Buffer.alloc(1024);
+  const bytes = fs.readSync(process.stdin.fd, buffer, 0, buffer.length);
+  const answer = buffer.toString('utf8', 0, bytes).trim().toLowerCase();
+  return answer === 'y' || answer === 'yes';
 }
 
-// Update build result in session log
-let logUpdate = fs.readFileSync(logPath, 'utf8');
-logUpdate = logUpdate.replace('(will be filled after build)', buildSuccess ? '✅ succeeded' : '❌ failed');
-fs.writeFileSync(logPath, logUpdate);
+function collectChangedPaths() {
+  try {
+    const stdout = execSync('git status --porcelain', { stdio: 'pipe' }).toString();
+    return stdout
+      .split('\n')
+      .map(line => {
+        const match = line.match(/^..\s(.+)$/);
+        return match ? match[1].trim() : '';
+      })
+      .filter(Boolean);
+  } catch {
+    return [];
+  }
+}
 
-// 6. Git commit & push (after ALL file modifications including build)
-run('git add -A');
-run(`git commit -m "docs(session): ${new Date().toISOString().split("T")[0]} session wrap – automated"`);
-run('git push');
-console.log('✅ Changes committed and pushed');
+function isAllowedArtifact(filePath) {
+  if (BUILD_ARTIFACT_FILES.has(filePath)) return true;
+  return BUILD_ARTIFACT_PREFIXES.some(prefix => filePath.startsWith(prefix));
+}
 
-// 7. Summary
-console.log('\n📝 Session notes appended to: ROADMAP.md, README.md, CHANGELOG.md, AI-RULES.md');
+const { args, unknown } = parseArgs(process.argv.slice(2));
+if (unknown.length > 0) {
+  console.error(`Unknown flag(s): ${unknown.join(', ')}`);
+  process.exit(EXIT.CRITICAL_FAILURE);
+}
 
+if (args.dryRun && args.confirmWrite) {
+  console.error('Invalid flags: --dry-run and --confirm-write cannot be combined.');
+  process.exit(EXIT.CRITICAL_FAILURE);
+}
 
-process.exit(buildSuccess ? 0 : 1);
+const mode = args.dryRun ? 'dry-run' : args.confirmWrite ? 'write' : 'plan';
+const warnings = [];
+const errors = [];
+const operations = [];
+
+const profilePath = path.join('.session-protocol.json');
+const profileResult = loadProfile(profilePath);
+if (profileResult.error) {
+  console.error(profileResult.error);
+  process.exit(EXIT.CRITICAL_FAILURE);
+}
+const profile = profileResult.profile;
+
+const branchResult = run('git rev-parse --abbrev-ref HEAD');
+if (!branchResult.ok) {
+  console.error('Unable to detect current git branch.');
+  process.exit(EXIT.CRITICAL_FAILURE);
+}
+const branch = branchResult.stdout;
+
+if (!matchesAnyPattern(branch, profile.git.allowedBranchPatterns)) {
+  console.error(`Branch '${branch}' is not allowed by session protocol policy.`);
+  process.exit(EXIT.POLICY_VIOLATION);
+}
+operations.push({ step: 'branch_policy', status: 'ok', detail: branch });
+
+const ts = timestamp();
+const today = formatDate(new Date());
+const logDir = profile.artifacts?.sessionLogDir || '.claude/sessions';
+const logPath = path.join(logDir, `session-${ts}.md`);
+const writeModeEnabled = mode === 'write';
+
+if (mode === 'plan') {
+  warnings.push('Safe-by-default mode: no writes, no commit, no push. Use --confirm-write to execute.');
+}
+
+const currentHead = run('git rev-parse HEAD');
+const headHash = currentHead.ok ? currentHead.stdout : 'unknown';
+
+const plannedManagedFiles = new Set(profile.docs?.managedFiles || []);
+const allowedChangedPathPatterns = profile.sessionEnd?.allowedChangedPathPatterns || [];
+const sessionBlockMarkers = {
+  startMarker: profile.docs?.sessionProtocolBlock?.startMarker,
+  endMarker: profile.docs?.sessionProtocolBlock?.endMarker
+};
+
+if (mode !== 'dry-run') {
+  if (writeModeEnabled && !args.yes) {
+    const approved = askForConfirmation(`Session-end write mode will modify files on branch '${branch}'. Continue?`);
+    if (!approved) {
+      console.error('Write operation cancelled by user.');
+      process.exit(EXIT.POLICY_VIOLATION);
+    }
+  }
+} else {
+  operations.push({ step: 'dry_run', status: 'ok', detail: 'No writes or git mutations will be executed.' });
+}
+
+let qualityGateFailed = false;
+const requiredCommands = profile.quality?.requiredCommands || ['npm run build'];
+const optionalCommands = profile.quality?.optionalCommands || [];
+
+if (writeModeEnabled) {
+  for (const command of requiredCommands) {
+    const gate = run(command);
+    operations.push({ step: 'quality_gate', command, status: gate.ok ? 'ok' : 'failed' });
+    if (!gate.ok) {
+      qualityGateFailed = true;
+      errors.push(`Quality gate failed: ${command}`);
+      if (gate.stdout) warnings.push(gate.stdout);
+      if (gate.stderr) warnings.push(gate.stderr);
+      break;
+    }
+  }
+
+  if (!qualityGateFailed) {
+    for (const command of optionalCommands) {
+      const gate = run(command);
+      operations.push({ step: 'quality_gate_optional', command, status: gate.ok ? 'ok' : 'warning' });
+      if (!gate.ok) {
+        warnings.push(`Optional quality gate failed: ${command}`);
+        if (gate.stdout) warnings.push(gate.stdout);
+        if (gate.stderr) warnings.push(gate.stderr);
+      }
+    }
+  }
+} else {
+  operations.push({ step: 'quality_gate', status: 'skipped', detail: `Skipped in ${mode} mode.` });
+}
+
+if (writeModeEnabled && qualityGateFailed) {
+  const output = {
+    status: 'error',
+    mode,
+    branch,
+    operations,
+    warnings,
+    errors,
+    nextActions: ['Fix quality gate failures, then rerun session-end with --confirm-write.']
+  };
+
+  if (args.json) {
+    console.log(JSON.stringify(output, null, 2));
+  } else {
+    console.error('❌ Session-end aborted due to quality gate failure.');
+    errors.forEach(item => console.error(`- ${item}`));
+  }
+
+  process.exit(EXIT.QUALITY_GATE_FAILURE);
+}
+
+if (writeModeEnabled) {
+  if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+
+  const logContent = `# Session Log – ${new Date().toISOString()}\n\n- **Branch:** ${branch}\n- **Git commit:** ${headHash}\n- **Quality gates:** ✅ passed\n- **Airtable updates:** ${args.airtable ? 'requested (placeholder)' : 'skipped'}\n- **Decisions / Findings:**\n  - _Add your bullet points here_\n- **Next Session Priorities:**\n  1. _Priority 1_\n  2. _Priority 2_\n  3. _Priority 3_\n`;
+  fs.writeFileSync(logPath, logContent);
+  operations.push({ step: 'session_log', status: 'written', detail: logPath });
+
+  const claudePath = 'CLAUDE.md';
+  const claudeContent = fs.readFileSync(claudePath, 'utf8');
+  const claudeUpdate = ensureNextSessionBlock(claudeContent);
+  if (claudeUpdate.changed) {
+    fs.writeFileSync(claudePath, claudeUpdate.content);
+    operations.push({ step: 'claude_priorities', status: 'updated' });
+  } else {
+    operations.push({ step: 'claude_priorities', status: 'unchanged' });
+  }
+
+  const markerFiles = (profile.docs?.managedFiles || []).filter(file => file !== 'CLAUDE.md');
+  for (const file of markerFiles) {
+    if (!fs.existsSync(file)) {
+      warnings.push(`Managed file missing: ${file}`);
+      continue;
+    }
+
+    const content = fs.readFileSync(file, 'utf8');
+    const blockUpdate = upsertSessionProtocolBlock(content, {
+      sessionId: ts,
+      date: new Date().toISOString(),
+      mode
+    }, sessionBlockMarkers);
+    if (blockUpdate.changed) {
+      fs.writeFileSync(file, blockUpdate.content);
+      operations.push({ step: 'doc_marker', file, status: 'updated' });
+    } else {
+      operations.push({ step: 'doc_marker', file, status: 'unchanged' });
+    }
+  }
+
+  if (args.airtable || profile.airtable?.enabledByDefault) {
+    warnings.push('Airtable update is currently a placeholder and did not mutate external state.');
+    operations.push({ step: 'airtable', status: 'warning', detail: 'placeholder only' });
+  }
+
+  const changedPaths = collectChangedPaths();
+  const isAllowedByPattern = filePath => matchesAnyPattern(filePath, allowedChangedPathPatterns);
+  const allowedPaths = changedPaths.filter(filePath => (
+    plannedManagedFiles.has(filePath)
+    || filePath === logPath
+    || isAllowedArtifact(filePath)
+    || isAllowedByPattern(filePath)
+  ));
+  const blockedPaths = changedPaths.filter(filePath => !(
+    plannedManagedFiles.has(filePath)
+    || filePath === logPath
+    || isAllowedArtifact(filePath)
+    || isAllowedByPattern(filePath)
+  ));
+
+  if (blockedPaths.length > 0) {
+    errors.push(`Unexpected changed files outside protocol scope: ${blockedPaths.join(', ')}`);
+    const output = {
+      status: 'error',
+      mode,
+      branch,
+      operations,
+      warnings,
+      errors,
+      nextActions: ['Review changed files and update protocol profile scope if intended.']
+    };
+    if (args.json) {
+      console.log(JSON.stringify(output, null, 2));
+    } else {
+      console.error('❌ Session-end aborted due to unexpected changed files.');
+      errors.forEach(item => console.error(`- ${item}`));
+    }
+    process.exit(EXIT.POLICY_VIOLATION);
+  }
+
+  if (allowedPaths.length > 0) {
+    const addResult = run(`git add ${allowedPaths.map(shellQuote).join(' ')}`);
+    if (!addResult.ok) {
+      errors.push('git add failed for allowed session-end paths.');
+      if (addResult.stdout) warnings.push(addResult.stdout);
+      if (addResult.stderr) warnings.push(addResult.stderr);
+      const output = {
+        status: 'error',
+        mode,
+        branch,
+        operations,
+        warnings,
+        errors,
+        nextActions: ['Resolve git add path errors, then rerun session-end write mode.']
+      };
+      if (args.json) {
+        console.log(JSON.stringify(output, null, 2));
+      } else {
+        console.error('❌ Session-end aborted due to git add failure.');
+        errors.forEach(item => console.error(`- ${item}`));
+      }
+      process.exit(EXIT.CRITICAL_FAILURE);
+    }
+  }
+
+  const staged = run('git diff --cached --name-only');
+  if (!staged.ok || !staged.stdout) {
+    warnings.push('No staged changes detected; skipping commit and push.');
+    operations.push({ step: 'git_commit', status: 'skipped', detail: 'no staged changes' });
+  } else {
+    const commitTemplate = profile.sessionEnd?.commitMessageTemplate || 'docs(session): {date} session wrap';
+    const commitMessage = commitTemplate.replace('{date}', today);
+    const commitResult = run(`git commit -m ${shellQuote(commitMessage)}`);
+    if (!commitResult.ok) {
+      errors.push('git commit failed.');
+      if (commitResult.stdout) warnings.push(commitResult.stdout);
+      if (commitResult.stderr) warnings.push(commitResult.stderr);
+      process.exit(EXIT.CRITICAL_FAILURE);
+    }
+    operations.push({ step: 'git_commit', status: 'ok', detail: commitMessage });
+
+    if (args.yes && profile.sessionEnd?.autoPushAllowed !== false) {
+      const pushResult = run(`git push ${shellQuote(profile.git.defaultPushRemote || 'origin')} ${shellQuote(branch)}`);
+      if (!pushResult.ok) {
+        errors.push('git push failed.');
+        if (pushResult.stdout) warnings.push(pushResult.stdout);
+        if (pushResult.stderr) warnings.push(pushResult.stderr);
+        process.exit(EXIT.CRITICAL_FAILURE);
+      }
+      operations.push({ step: 'git_push', status: 'ok', detail: `${profile.git.defaultPushRemote || 'origin'} ${branch}` });
+    } else {
+      operations.push({ step: 'git_push', status: 'skipped', detail: 'Push requires --yes and autoPushAllowed=true in profile.' });
+      warnings.push('Push skipped by policy. Use --yes and set sessionEnd.autoPushAllowed=true to enable.');
+    }
+  }
+}
+
+if (mode === 'dry-run') {
+  operations.push({ step: 'planned_outputs', status: 'ok', detail: `Would write session log to ${logPath}` });
+  operations.push({ step: 'planned_outputs', status: 'ok', detail: 'Would update CLAUDE.md Next Session Priorities block if missing.' });
+  operations.push({ step: 'planned_outputs', status: 'ok', detail: 'Would upsert single session protocol blocks in managed docs.' });
+}
+
+const status = errors.length > 0 ? 'error' : warnings.length > 0 ? 'warning' : 'ok';
+const output = {
+  status,
+  mode,
+  branch,
+  operations,
+  warnings,
+  errors,
+  nextActions: [
+    mode === 'plan'
+      ? 'Rerun with --confirm-write to execute writes.'
+      : 'Review warnings before closing session.',
+    'If push is required, rerun with --confirm-write --yes and enable autoPushAllowed in profile.'
+  ]
+};
+
+if (args.json) {
+  console.log(JSON.stringify(output, null, 2));
+} else {
+  console.log(`\n## Session End — ${today}\n`);
+  console.log(`Mode: ${mode}`);
+  console.log(`Branch: ${branch}`);
+  operations.forEach(op => {
+    const descriptor = op.command ? `${op.step} (${op.command})` : op.step;
+    console.log(`- ${descriptor}: ${op.status}${op.detail ? ` — ${op.detail}` : ''}`);
+  });
+
+  if (warnings.length > 0) {
+    console.log('\nWarnings:');
+    warnings.forEach(item => console.log(`- ${item}`));
+  }
+
+  if (errors.length > 0) {
+    console.log('\nErrors:');
+    errors.forEach(item => console.log(`- ${item}`));
+  }
+}
+
+if (errors.length > 0) {
+  process.exit(EXIT.CRITICAL_FAILURE);
+}
+
+process.exit(EXIT.SUCCESS);

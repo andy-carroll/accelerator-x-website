@@ -11,6 +11,13 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Added
 
+- **`.session-protocol.json`** — repo-level protocol profile for session lifecycle automation.
+  Defines branch allowlist, quality-gate commands, managed documentation files, session log path,
+  and session-end write/push policy for portable cross-repo adoption.
+- **`scripts/session-protocol-utils.js`** — shared protocol helper module for branch matching,
+  `CLAUDE.md` next-session block ensuring, and idempotent managed-doc session block upserts.
+- **`scripts/test-session-protocols.js`** — protocol regression harness validating wildcard
+  branch policy matching plus idempotent session block and priorities-block behavior.
 - **`scripts/skills-sync.js`** — new shared-skills sync utility for multi-repo workflows.
   Pulls a canonical skills repo to local cache and installs skill folders into
   `~/.claude/skills` via symlink or copy mode. Tracks managed skills by namespace in
@@ -29,6 +36,18 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Changed
 
+- **`scripts/session-start.js`** — hardened with strict flag parsing, profile validation,
+  branch-policy enforcement, stale cockpit checks, and structured severity-based output
+  (`human` default, `--json` machine mode).
+- **`scripts/session-end.js`** — hardened to safe-by-default execution: plan mode by default,
+  explicit `--confirm-write` gating, optional `--dry-run`, prompt/`--yes` confirmation,
+  scoped staging, quality-gate enforcement, policy-controlled push behavior, and idempotent
+  single-block managed-doc updates (replaces append-style session markers).
+- **`package.json`** — added explicit protocol command variants:
+  `session-start:json`, `session-end:dry-run`, `session-end:write`, `session-end:write:yes`,
+  and `test:session-protocols`.
+- **Protocol docs** — updated `.claude/rules/session.md`, `CLAUDE.md`, and `README.md`
+  to document safe-by-default session-end modes and profile-driven policy controls.
 - **`package.json`** — added `skills:sync` and `skills:sync:force` scripts for standardised
   local skill sync from canonical source.
 - **`README.md`** — added shared skills sync usage and linked the operations doc in
@@ -244,3 +263,9 @@ _Project started: February 2026_
 <!-- Session 20260322-235352 logged -->
 
 <!-- Session 20260329-180314 logged -->
+
+<!-- SESSION_PROTOCOL:START -->
+- Session ID: 20260329-194908
+- Updated: 2026-03-29T18:49:10.040Z
+- Mode: write
+<!-- SESSION_PROTOCOL:END -->

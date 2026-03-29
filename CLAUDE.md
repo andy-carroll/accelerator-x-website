@@ -20,6 +20,7 @@
 **Build:** ✅ passing | **Git:** ✅ clean | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
+
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -56,17 +57,19 @@
 Full procedures: `.claude/rules/session.md`
 
 **Start (quick card):**
+
 1. Read this file
-2. `git log --oneline -3` + `git status --short`
-3. Check Airtable for overdue deliverables
+2. `npm run session-start` (or `npm run session-start:json` for machine output)
+3. Review branch policy + repo state warnings
 4. Post brief to user — wait for focus confirmation
 
 **End (quick card):**
-1. Update this file (State + Next)
-2. Update `CHANGELOG.md` + `ROADMAP.md`
-3. `npm run build` → commit → push
-4. Write log to `.claude/sessions/YYYYMMDD-HHMMSS.md`
-5. Post to Slack `#ax-operations` via `slack-ops` MCP
+
+1. Choose mode: `npm run session-end` / `npm run session-end:dry-run` / `npm run session-end:write`
+2. In write mode, pass prompt (or use `npm run session-end:write:yes` for controlled automation)
+3. Let script enforce quality gate + scoped staging + commit policy
+4. Confirm session log written to `.claude/sessions/`
+5. Push only when policy and flags explicitly allow it
 
 ## Next Session Priorities
 

@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "strictMode": false,
+  "git": {
+    "allowedBranchPatterns": [
+      "main",
+      "agent/*",
+      "feat/*"
+    ],
+    "defaultPushRemote": "origin"
+  },
+  "sessionStart": {
+    "staleDaysThreshold": 7,
+    "requiredClaudeSections": [
+      "## Current State",
+      "## Next"
+    ]
+  },
+  "docs": {
+    "managedFiles": [
+      "CLAUDE.md",
+      "ROADMAP.md",
+      "README.md",
+      "CHANGELOG.md",
+      "AI-RULES.md"
+    ],
+    "sessionProtocolBlock": {
+      "startMarker": "<!-- SESSION_PROTOCOL:START -->",
+      "endMarker": "<!-- SESSION_PROTOCOL:END -->"
+    }
+  },
+  "artifacts": {
+    "sessionLogDir": ".claude/sessions"
+  },
+  "quality": {
+    "requiredCommands": [
+      "npm run build"
+    ],
+    "optionalCommands": [
+      "npm run check"
+    ]
+  },
+  "airtable": {
+    "enabledByDefault": false,
+    "baseId": "",
+    "tableId": ""
+  },
+  "sessionEnd": {
+    "autoPushAllowed": false,
+    "defaultWriteMode": false,
+    "commitMessageTemplate": "docs(session): {date} session wrap",
+    "allowedChangedPathPatterns": [
+      ".claude/rules/session.md",
+      "claude/rules/session.md",
+      ".claude/sessions/*.md",
+      "package.json",
+      "scripts/session-end.js",
+      "scripts/session-start.js",
+      "scripts/session-protocol-utils.js",
+      "scripts/test-session-protocols.js",
+      ".session-protocol.json"
+    ]
+  }
+}

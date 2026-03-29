@@ -15,10 +15,15 @@
     "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
     "test:site": "node scripts/test-site.js",
+    "test:session-protocols": "node scripts/test-session-protocols.js",
     "skills:sync": "node scripts/skills-sync.js",
     "skills:sync:force": "node scripts/skills-sync.js --force",
     "session-start": "node scripts/session-start.js",
-    "session-end": "node scripts/session-end.js"
+    "session-start:json": "node scripts/session-start.js --json",
+    "session-end": "node scripts/session-end.js",
+    "session-end:dry-run": "node scripts/session-end.js --dry-run",
+    "session-end:write": "node scripts/session-end.js --confirm-write",
+    "session-end:write:yes": "node scripts/session-end.js --confirm-write --yes"
   },
   "repository": {
     "type": "git",

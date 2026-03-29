@@ -82,6 +82,21 @@ npm run skills:sync
 This repo uses a profile pointer (`.agent-skills-profile.json`) to sync skills from a canonical
 skills repo into `~/.claude/skills`.
 
+### Session protocols (safe-by-default)
+
+```bash
+npm run session-start
+npm run session-start:json
+npm run session-end            # plan mode (no writes)
+npm run session-end:dry-run    # explicit simulation (no writes)
+npm run session-end:write      # write mode with confirmation prompt
+npm run session-end:write:yes  # non-interactive write mode
+npm run test:session-protocols # protocol utility regression checks
+```
+
+Protocol policy/config is stored in `.session-protocol.json` (branch allowlist,
+quality gate commands, managed docs, and session-end push policy).
+
 ### Serve locally
 
 ```bash
@@ -228,3 +243,9 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 <!-- Session 20260322-235352 logged -->
 
 <!-- Session 20260329-180314 logged -->
+
+<!-- SESSION_PROTOCOL:START -->
+- Session ID: 20260329-194908
+- Updated: 2026-03-29T18:49:10.040Z
+- Mode: write
+<!-- SESSION_PROTOCOL:END -->
