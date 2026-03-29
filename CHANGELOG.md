@@ -22,6 +22,7 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 - **Inconsistent navigation IDs** — standardized all mobile navigation to use `mobile-nav-home` ID across homepage, cohort page, and Insights templates. Removed hardcoded Workshops links from `_templates/index.html` and `_templates/article.html`.
 - **Missing nav.js script** — added `/assets/js/nav.js` to cohort page to enable mobile hamburger menu functionality.
 - **Misaligned pink underline** — removed apply-underline SVG from "Apply for the next cohort" heading on cohort page due to alignment issues.
+- **Programs links from navigation** — removed "Programs" link from desktop and mobile navigation on homepage and all Insights templates to make cohort page undiscoverable until complete.
 - **`.session-protocol.json`** — repo-level protocol profile for session lifecycle automation.
   Defines branch allowlist, quality-gate commands, managed documentation files, session log path,
   and session-end write/push policy for portable cross-repo adoption.
