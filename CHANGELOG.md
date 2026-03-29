@@ -11,6 +11,14 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Added
 
+- **`scripts/skills-sync.js`** — new shared-skills sync utility for multi-repo workflows.
+  Pulls a canonical skills repo to local cache and installs skill folders into
+  `~/.claude/skills` via symlink or copy mode. Tracks managed skills by namespace in
+  `.managed-skills.json` for safe cleanup on updates.
+- **`.agent-skills-profile.json`** — repo-level pointer config for canonical skills source,
+  branch/tag, install path, sync mode, namespace, and optional naming prefix.
+- **`docs/agent-skills-shared-ops.md`** — operational guide for managing one canonical skills
+  repo across many project repos while keeping local CLI sessions consistent.
 - **`llms.txt`** — AI-readable context file (llmstxt.org standard). Gives LLMs and AI crawlers
   structured context about Accelerator X: what we do, key pages, contact, and a pointer to the
   codebase. Complements `robots.txt` for AI systems that read structured site metadata.
@@ -21,6 +29,10 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Changed
 
+- **`package.json`** — added `skills:sync` and `skills:sync:force` scripts for standardised
+  local skill sync from canonical source.
+- **`README.md`** — added shared skills sync usage and linked the operations doc in
+  source-of-truth references.
 - **`AGENTS.md`** — expanded from a thin redirect to a full agent orientation document: quick
   orientation, engineering philosophy summary, and pre-work checklist (build, check, roadmap).
 - **`README.md`** — fixed stale email capture description: newsletter flow now correctly documented
@@ -230,3 +242,5 @@ _Project started: February 2026_
 <!-- Session 20260322-234000 logged -->
 
 <!-- Session 20260322-235352 logged -->
+
+<!-- Session 20260329-180314 logged -->

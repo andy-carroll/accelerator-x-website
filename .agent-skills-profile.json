@@ -1,0 +1,9 @@
+{
+  "canonicalRepo": "https://github.com/your-org/agent-skills.git",
+  "ref": "main",
+  "skillsPath": "skills",
+  "installDir": "~/.claude/skills",
+  "syncMode": "symlink",
+  "namespace": "shared-core",
+  "namePrefix": "core-"
+}

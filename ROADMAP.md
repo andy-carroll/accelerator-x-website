@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-03-22_
+_Last updated: 2026-03-25_
 
 ---
 
@@ -38,6 +38,10 @@ transparent, anti-agency positioning.
 
 ### Autonomous AI Agent Fleet (strategic priority)
 
+- [x] **Shared agent skills sync scaffold** — added canonical skills profile pointer
+      (`.agent-skills-profile.json`), sync utility (`scripts/skills-sync.js`), npm scripts
+      (`skills:sync`, `skills:sync:force`), and operations runbook
+      (`docs/agent-skills-shared-ops.md`).
 - [ ] **Design agent permission + capability framework** — define what agents can do
       autonomously vs. what requires human approval. Document in `docs/agent-fleet.md`.
 - [ ] **Introduce first autonomous agent** — scoped to a specific, safe, repeatable task
@@ -123,3 +127,5 @@ transparent, anti-agency positioning.
 <!-- Session 20260322-234000 logged -->
 
 <!-- Session 20260322-235352 logged -->
+
+<!-- Session 20260329-180314 logged -->

@@ -73,6 +73,15 @@ npm run build
 
 Generates: article HTML, hub index, sitemap.xml, testimonials, hero markup.
 
+### Sync shared agent skills
+
+```bash
+npm run skills:sync
+```
+
+This repo uses a profile pointer (`.agent-skills-profile.json`) to sync skills from a canonical
+skills repo into `~/.claude/skills`.
+
 ### Serve locally
 
 ```bash
@@ -207,6 +216,7 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 | `docs/landing-page-spec.md` | Landing page phased delivery spec |
 | `docs/content-hub-plan.md` | Content Hub architecture |
 | `docs/design-system.md` | Typography, colour tokens, image standards |
+| `docs/agent-skills-shared-ops.md` | Shared skills sync model across repos |
 | `docs/notification-workflows-prd.md` | Netlify + Slack notification architecture |
 | `docs/posthog-behavior-insights-prd.md` | Behaviour analytics rollout plan |
 | `docs/PRD-hero-media-library.md` | Hero media library system |
@@ -216,3 +226,5 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 <!-- Session 20260322-234000 logged -->
 
 <!-- Session 20260322-235352 logged -->
+
+<!-- Session 20260329-180314 logged -->

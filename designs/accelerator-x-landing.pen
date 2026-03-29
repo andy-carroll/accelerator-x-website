@@ -1,0 +1,1299 @@
+{
+  "version": "2.9",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "1voBg",
+      "x": 0,
+      "y": 0,
+      "name": "Accelerator X Landing Page",
+      "width": 1440,
+      "fill": "#FFFFFF",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "62ScO",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "$white",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E8E8E8"
+          },
+          "padding": [
+            0,
+            120
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ARTm4",
+              "name": "logo",
+              "fill": "$navy",
+              "content": "Accelerator X",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "iA8nX",
+              "name": "nav",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fDCcb",
+                  "name": "nav1",
+                  "fill": "$muted",
+                  "content": "Programme",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bgwn8",
+                  "name": "nav2",
+                  "fill": "$muted",
+                  "content": "Insights",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bzqoF",
+                  "name": "nav3",
+                  "fill": "$muted",
+                  "content": "About",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eOXmz",
+              "name": "cta",
+              "fill": "$accent",
+              "padding": [
+                12,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RJeeY",
+                  "name": "ctaText",
+                  "fill": "$white",
+                  "content": "Apply Now",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lo000",
+          "name": "Problem Section",
+          "width": "fill_container",
+          "fill": "$surface",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "CDUoI",
+              "name": "problemTitle",
+              "fill": "$navy",
+              "content": "The Problem We Solve",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "lbSB0",
+              "name": "problemGrid",
+              "width": "fill_container",
+              "gap": 32,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "cRjaU",
+                  "name": "prob1",
+                  "width": 360,
+                  "fill": "$white",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border"
+                  },
+                  "layout": "vertical",
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PNHfq",
+                      "name": "prob1Icon",
+                      "content": "⚠️",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uyFsv",
+                      "name": "prob1Title",
+                      "fill": "$navy",
+                      "content": "AI Pilots Stall",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "E9Zbg",
+                      "name": "prob1Desc",
+                      "fill": "$muted",
+                      "content": "90% of AI initiatives fail to reach production. Leaders invest in pilots that never deliver value.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "XnAWQ",
+                  "name": "prob2",
+                  "width": 360,
+                  "fill": "$white",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border"
+                  },
+                  "layout": "vertical",
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "v9Vnj",
+                      "name": "prob2Icon",
+                      "content": "🎯",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H92IU",
+                      "name": "prob2Title",
+                      "fill": "$navy",
+                      "content": "Gap Between Vision & Reality",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "aC7wh",
+                      "name": "prob2Desc",
+                      "fill": "$muted",
+                      "content": "Executives see AI potential but teams lack the skills, processes, and systems to deliver.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Z3Xja",
+                  "name": "prob3",
+                  "width": 360,
+                  "fill": "$white",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border"
+                  },
+                  "layout": "vertical",
+                  "padding": 28,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Mpfht",
+                      "name": "prob3Icon",
+                      "content": "⏰",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0cvxO",
+                      "name": "prob3Title",
+                      "fill": "$navy",
+                      "content": "Time-Starved Leaders",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "80iGU",
+                      "name": "prob3Desc",
+                      "fill": "$muted",
+                      "content": "Senior decision-makers spend 7 seconds on initial assessment. They need clarity, not noise.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fLJ62",
+          "name": "How It Works",
+          "width": "fill_container",
+          "fill": "$white",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Tm5TR",
+              "name": "howTitle",
+              "fill": "$navy",
+              "content": "How We Bridge the Gap",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "tpM79",
+              "name": "howSub",
+              "fill": "$muted",
+              "content": "A structured 8-week programme that transforms AI ambition into operational reality",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "ih5Sb",
+              "name": "steps",
+              "width": "fill_container",
+              "gap": 24,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "SxZOV",
+                  "name": "step1",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "j2qF6",
+                      "name": "step1Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$accent",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "280mp",
+                          "name": "step1NumText",
+                          "fill": "$white",
+                          "content": "1",
+                          "fontFamily": "Inter",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "vyexy",
+                      "name": "step1Title",
+                      "fill": "$navy",
+                      "content": "Diagnose",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IuOcx",
+                      "name": "step1Desc",
+                      "fill": "$muted",
+                      "content": "Assess your AI readiness and identify the highest-impact opportunities",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "k5Bfb",
+                  "name": "step2",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Aghsn",
+                      "name": "step2Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "$primary",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pCDs5",
+                          "name": "step2NumText",
+                          "fill": "$white",
+                          "content": "2",
+                          "fontFamily": "Inter",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ERyk0",
+                      "name": "step2Title",
+                      "fill": "$navy",
+                      "content": "Build",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HH14m",
+                      "name": "step2Desc",
+                      "fill": "$muted",
+                      "content": "Develop the tools, skills, and systems your team needs to execute",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "7AsjV",
+                  "name": "step3",
+                  "width": 280,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gu9Yy",
+                      "name": "step3Num",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#000000",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "2uov3",
+                          "name": "step3NumText",
+                          "fill": "$white",
+                          "content": "3",
+                          "fontFamily": "Inter",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "dfNOv",
+                      "name": "step3Title",
+                      "fill": "$navy",
+                      "content": "Scale",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "w48bN",
+                      "name": "step3Desc",
+                      "fill": "$muted",
+                      "content": "Embed AI capabilities across your organisation for lasting impact",
+                      "lineHeight": 1.5,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "kRfkj",
+          "name": "Social Proof",
+          "width": "fill_container",
+          "fill": "$white",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "rNP9M",
+              "name": "statsRow",
+              "width": "fill_container",
+              "gap": 64,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "evVfn",
+                  "name": "stat1",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "L84aq",
+                      "name": "stat1Num",
+                      "fill": "$accent",
+                      "content": "90%",
+                      "fontFamily": "Inter",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "feIVt",
+                      "name": "stat1Label",
+                      "fill": "$muted",
+                      "content": "of pilots stall before production",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "30Zef",
+                  "name": "stat2",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qPLRy",
+                      "name": "stat2Num",
+                      "fill": "$primary",
+                      "content": "8",
+                      "fontFamily": "Inter",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iDXra",
+                      "name": "stat2Label",
+                      "fill": "$muted",
+                      "content": "weeks to operational AI",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Nm7CF",
+                  "name": "stat3",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uou0V",
+                      "name": "stat3Num",
+                      "fill": "#000000",
+                      "content": "50+",
+                      "fontFamily": "Inter",
+                      "fontSize": 48,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "mGw4v",
+                      "name": "stat3Label",
+                      "fill": "$muted",
+                      "content": "leaders transformed",
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CD96Z",
+              "name": "quote",
+              "width": 800,
+              "fill": "$surface",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IGFFN",
+                  "name": "quoteText",
+                  "fill": "$navy",
+                  "textGrowth": "fixed-width",
+                  "width": 700,
+                  "content": "\"Finally, someone who understands that AI transformation isn't about technology—it's about the people and processes that make it work.\"",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "normal",
+                  "fontStyle": "italic"
+                },
+                {
+                  "type": "text",
+                  "id": "nhez1",
+                  "name": "quoteAttr",
+                  "fill": "$muted",
+                  "content": "— CTO, Manufacturing Company",
+                  "textAlign": "center",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "M9oV8",
+          "name": "Final CTA",
+          "width": "fill_container",
+          "fill": "$accent",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "UIvKY",
+              "name": "finalTitle",
+              "fill": "$white",
+              "content": "Ready to Close the Gap?",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 40,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "b5gW4",
+              "name": "finalSub",
+              "fill": "$white",
+              "content": "Join the next cohort of leaders turning AI ambition into operational reality.",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "3ZCO4",
+              "name": "finalBtn",
+              "fill": "$white",
+              "padding": [
+                16,
+                40
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Eym6N",
+                  "name": "finalBtnText",
+                  "fill": "$accent",
+                  "content": "Apply Now",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "S7eBg",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "$navy",
+          "stroke": {
+            "thickness": {
+              "top": 1
+            },
+            "fill": "#2d3a5a"
+          },
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            48,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "DlJZh",
+              "name": "footerTop",
+              "width": "fill_container",
+              "gap": 120,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "uUIdh",
+                  "name": "footerBrand",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iK1rc",
+                      "name": "footerLogo",
+                      "fill": "$white",
+                      "content": "Accelerator X",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "SW4xf",
+                      "name": "footerTag",
+                      "fill": "$muted",
+                      "content": "AI transformation for leaders who are done waiting.",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "0cicw",
+                  "name": "footerCols",
+                  "gap": 80,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MIUhq",
+                      "name": "col1",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nutA0",
+                          "name": "col1Title",
+                          "fill": "$white",
+                          "content": "Programme",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "reItP",
+                          "name": "col1Item1",
+                          "fill": "$muted",
+                          "content": "Overview",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dihQ4",
+                          "name": "col1Item2",
+                          "fill": "$muted",
+                          "content": "Curriculum",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "8GKQx",
+                          "name": "col1Item3",
+                          "fill": "$muted",
+                          "content": "Apply",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eFdwS",
+                      "name": "col2",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pycZ0",
+                          "name": "col2Title",
+                          "fill": "$white",
+                          "content": "Insights",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Hz0ci",
+                          "name": "col2Item1",
+                          "fill": "$muted",
+                          "content": "Articles",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "b0Yam",
+                          "name": "col2Item2",
+                          "fill": "$muted",
+                          "content": "Resources",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dD9nd",
+                      "name": "col3",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "76Lo5",
+                          "name": "col3Title",
+                          "fill": "$white",
+                          "content": "Company",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "PtEbn",
+                          "name": "col3Item1",
+                          "fill": "$muted",
+                          "content": "About",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "kCyIK",
+                          "name": "col3Item2",
+                          "fill": "$muted",
+                          "content": "Contact",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "0fduJ",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "top": 1
+                },
+                "fill": "#2d3a5a"
+              },
+              "padding": [
+                24,
+                0,
+                0,
+                0
+              ],
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8qPZf",
+                  "name": "copyright",
+                  "fill": "$muted",
+                  "content": "© 2026 Accelerator X. All rights reserved.",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TZpFj",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": "$white",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "2NXSf",
+              "name": "badge",
+              "fill": "#c8f9fe",
+              "padding": [
+                6,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nMIrq",
+                  "name": "badgeText",
+                  "fill": "$primary",
+                  "content": "AI Transformation for Leaders",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "yRrh0",
+              "name": "headline",
+              "fill": "$navy",
+              "textGrowth": "fixed-width",
+              "width": 830,
+              "content": "Close the gap between AI potential and real outcomes",
+              "lineHeight": 1.1,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 56,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "rVYeJ",
+              "name": "subhead",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": 720,
+              "content": "8-week leadership programmes that turn AI ambition into operational reality. No hype. No pilots that stall. Just the tools, skills, and systems that make AI work in the real world.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "CbZBA",
+              "name": "ctas",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "JDz8K",
+                  "name": "btn1",
+                  "fill": "$accent",
+                  "padding": [
+                    16,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sazE0",
+                      "name": "btn1Text",
+                      "fill": "$white",
+                      "content": "Apply for Programme",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pg1hE",
+                  "name": "btn2",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border"
+                  },
+                  "padding": [
+                    16,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CEu2R",
+                      "name": "btn2Text",
+                      "fill": "$navy",
+                      "content": "Explore Insights",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "NDBKb",
+          "name": "Features",
+          "width": "fill_container",
+          "fill": "$navy",
+          "layout": "vertical",
+          "gap": 64,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "DpN4k",
+              "name": "featTitle",
+              "fill": "$white",
+              "content": "What You Get",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 36,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "NVYPo",
+              "name": "feat1",
+              "width": 1200,
+              "gap": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TL50x",
+                  "name": "feat1Content",
+                  "width": 520,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VWlqd",
+                      "name": "feat1Title",
+                      "fill": "$white",
+                      "content": "Peer-Level Expertise",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TKOJo",
+                      "name": "feat1Desc",
+                      "fill": "#cbd5e1",
+                      "textGrowth": "fixed-width",
+                      "width": 520,
+                      "content": "Learn from leaders who've been where you are. Not consultants selling frameworks—practitioners who've shipped real AI products in complex organisations.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ELnM2",
+                  "name": "feat1Img",
+                  "width": 400,
+                  "height": 240,
+                  "fill": "#2d3a5a"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LTgJB",
+              "name": "feat2",
+              "width": 1200,
+              "gap": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "i5m74",
+                  "name": "feat2Img",
+                  "width": 400,
+                  "height": 240,
+                  "fill": "#2d3a5a"
+                },
+                {
+                  "type": "frame",
+                  "id": "cfmUB",
+                  "name": "feat2Content",
+                  "width": 520,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hyMSi",
+                      "name": "feat2Title",
+                      "fill": "$white",
+                      "content": "Battle-Tested Tools",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "44JXn",
+                      "name": "feat2Desc",
+                      "fill": "#cbd5e1",
+                      "textGrowth": "fixed-width",
+                      "width": 520,
+                      "content": "Templates, frameworks, and playbooks that have worked in real transformations. Not theory—actual artefacts you can deploy immediately.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "F42th",
+              "name": "feat3",
+              "width": 1200,
+              "gap": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TQtmw",
+                  "name": "feat3Content",
+                  "width": 520,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iDWD1",
+                      "name": "feat3Title",
+                      "fill": "$white",
+                      "content": "Lasting Capability",
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hus36",
+                      "name": "feat3Desc",
+                      "fill": "#cbd5e1",
+                      "textGrowth": "fixed-width",
+                      "width": 520,
+                      "content": "We build your team's capability, not dependency. You'll leave with the skills to keep improving long after the programme ends.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "smJRY",
+                  "name": "feat3Img",
+                  "width": 400,
+                  "height": 240,
+                  "fill": "#2d3a5a"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "RyA2t",
+      "x": 0,
+      "y": 0,
+      "name": "Accelerator X Landing Page",
+      "width": 1440,
+      "height": "fit_content(0)",
+      "fill": "#FFFFFF",
+      "layout": "vertical"
+    }
+  ],
+  "variables": {
+    "accent": {
+      "type": "color",
+      "value": "#e93f8e"
+    },
+    "border": {
+      "type": "color",
+      "value": "#E8E8E8"
+    },
+    "muted": {
+      "type": "color",
+      "value": "#64748b"
+    },
+    "navy": {
+      "type": "color",
+      "value": "#1b2a4a"
+    },
+    "primary": {
+      "type": "color",
+      "value": "#088abf"
+    },
+    "surface": {
+      "type": "color",
+      "value": "#f8fafc"
+    },
+    "white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    }
+  }
+}

@@ -15,6 +15,8 @@
     "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
     "test:site": "node scripts/test-site.js",
+    "skills:sync": "node scripts/skills-sync.js",
+    "skills:sync:force": "node scripts/skills-sync.js --force",
     "session-start": "node scripts/session-start.js",
     "session-end": "node scripts/session-end.js"
   },
