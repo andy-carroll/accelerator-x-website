@@ -47,6 +47,7 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
   comment block in `index.html` for crawlers indexing the page source, comment in `robots.txt`
   pointing to `/llms.txt`, expanded `AGENTS.md` from a redirect stub to a substantive orientation
   document covering the engineering philosophy and onboarding steps.
+- **Homepage testimonial marker hardening** — `scripts/build-testimonials.js` now injects homepage testimonials using explicit `TESTIMONIALS_COMPONENT_START` / `TESTIMONIALS_COMPONENT_END` markers only. Removed the brittle dependency on the first testimonial comment and section-tail string matching.
 
 ### Changed
 

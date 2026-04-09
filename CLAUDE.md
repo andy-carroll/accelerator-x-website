@@ -15,13 +15,13 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — homepage build architecture slice completed; dedicated homepage source introduced; quality gates passing
+**Last session:** 2026-04-10 — homepage testimonial marker hardening completed; homepage source + testimonial contract now explicit; quality gates passing
 
-**Build:** ✅ passing | **Git:** ⚠️ homepage architecture changes ready to commit | **Deployed:** ✅ auto on push to `main`
+**Build:** ✅ passing | **Git:** ⚠️ testimonial marker hardening changes ready to commit | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 
-- Homepage still uses downstream mutator scripts for footer, testimonials, and hero media; source-of-truth is now `_templates/homepage.html`, while `index.html` remains generated output.
+- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, and testimonial injection now uses explicit component boundary markers.
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -29,13 +29,13 @@
 
 ## Next (do in this order)
 
-1. **Homepage testimonial markers** — replace brittle testimonial injection contract with explicit start/end markers only
-   → `scripts/build-testimonials.js` + homepage template / generated output contract
-
-2. **Hero imagery** — swap interim stills for production photos + update alt text
+1. **Hero imagery** — swap interim stills for production photos + update alt text
    → `content/data/hero-media.config.json` + `npm run process:hero-images`
 
-3. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
+2. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
+
+3. **Homepage section extraction** — choose the next smallest homepage section boundary to extract safely
+   → likely testimonials or footer ownership after current marker contracts
 
 4. **Autonomous AI agent fleet** — design permission + capability framework
    → `docs/agent-fleet.md` (to be created)
@@ -77,6 +77,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. Harden homepage testimonial injection with explicit markers only
-2. Re-run build/check and confirm homepage generation remains stable
-3. Decide the next smallest extraction target after marker hardening
+1. Decide the next smallest homepage extraction target
+2. Keep homepage build contracts explicit before any section extraction
+3. Re-run build/check after the next homepage slice

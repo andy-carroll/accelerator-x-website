@@ -3,6 +3,8 @@ const path = require('path');
 
 const TESTIMONIALS_PATH = path.join(__dirname, '../content/data/testimonials.json');
 const INDEX_HTML_PATH = path.join(__dirname, '../index.html');
+const START_MARKER = '<!-- TESTIMONIALS_COMPONENT_START -->';
+const END_MARKER = '<!-- TESTIMONIALS_COMPONENT_END -->';
 
 function escapeHtml(str) {
   return String(str)
@@ -70,23 +72,20 @@ function main() {
 
   const indexHtml = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
 
-  const startMarker = '<!-- Testimonial 1 -->';
-  const endMarker = '        </div>\n        </div>\n      </section>\n\n      <!-- === ABOUT US === -->';
-
-  const startIdx = indexHtml.indexOf(startMarker);
-  const endIdx = indexHtml.indexOf(endMarker);
+  const startIdx = indexHtml.indexOf(START_MARKER);
+  const endIdx = indexHtml.indexOf(END_MARKER);
 
   if (startIdx === -1 || endIdx === -1 || endIdx <= startIdx) {
-    console.warn('⚠️ Could not locate testimonials section markers in index.html. Skipping.');
-    return;
+    throw new Error('Could not locate TESTIMONIALS_COMPONENT_START/END markers in index.html.');
   }
 
-  const before = indexHtml.slice(0, startIdx);
+  const before = indexHtml.slice(0, startIdx + START_MARKER.length);
   const after = indexHtml.slice(endIdx);
 
   const indent = '          ';
 
   const parts = [];
+  parts.push('');
   for (let i = 0; i < testimonials.length; i += 1) {
     const t = testimonials[i] || {};
 
@@ -100,7 +99,7 @@ function main() {
 
   const replacement = parts.join('\n');
 
-  const outHtml = before + replacement + '\n' + after;
+  const outHtml = `${before}${replacement}\n          ${after}`;
   fs.writeFileSync(INDEX_HTML_PATH, outHtml);
 
   console.log(`✅ Testimonials injected into index.html (${testimonials.length} items)`);
