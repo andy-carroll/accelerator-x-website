@@ -41,10 +41,10 @@ see decision record below.
 ## Repo layout
 
 ```
-index.html                  Landing page
+index.html                  Generated homepage artifact
 styles.css                  Design tokens + custom styles
 assets/                     Images, icons, JS (analytics.js)
-_templates/                 HTML templates (index.html, article.html)
+_templates/                 HTML templates (homepage.html, index.html, article.html)
 content/
   articles/                 Raw Markdown source for Content Hub
   data/                     JSON config (testimonials, hero, authors)
@@ -71,7 +71,7 @@ npm install
 npm run build
 ```
 
-Generates: article HTML, hub index, sitemap.xml, testimonials, hero markup.
+Generates: homepage (`index.html`) from `_templates/homepage.html`, article HTML, hub index, sitemap.xml, testimonials, hero markup.
 
 ### Sync shared agent skills
 

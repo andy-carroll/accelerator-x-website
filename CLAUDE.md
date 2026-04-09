@@ -15,12 +15,13 @@
 
 ## Current State
 
-**Last session:** 2026-03-29 — session protocol wrap completed; quality gates passing; handoff ready
+**Last session:** 2026-04-10 — homepage build architecture slice completed; dedicated homepage source introduced; quality gates passing
 
-**Build:** ✅ passing | **Git:** ✅ clean | **Deployed:** ✅ auto on push to `main`
+**Build:** ✅ passing | **Git:** ⚠️ homepage architecture changes ready to commit | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 
+- Homepage still uses downstream mutator scripts for footer, testimonials, and hero media; source-of-truth is now `_templates/homepage.html`, while `index.html` remains generated output.
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -28,12 +29,15 @@
 
 ## Next (do in this order)
 
-1. **Hero imagery** — swap interim stills for production photos + update alt text
+1. **Homepage testimonial markers** — replace brittle testimonial injection contract with explicit start/end markers only
+   → `scripts/build-testimonials.js` + homepage template / generated output contract
+
+2. **Hero imagery** — swap interim stills for production photos + update alt text
    → `content/data/hero-media.config.json` + `npm run process:hero-images`
 
-2. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
+3. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
 
-3. **Autonomous AI agent fleet** — design permission + capability framework
+4. **Autonomous AI agent fleet** — design permission + capability framework
    → `docs/agent-fleet.md` (to be created)
 
 ---
@@ -73,6 +77,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. _Priority 1_
-2. _Priority 2_
-3. _Priority 3_
+1. Harden homepage testimonial injection with explicit markers only
+2. Re-run build/check and confirm homepage generation remains stable
+3. Decide the next smallest extraction target after marker hardening

@@ -89,7 +89,7 @@ transparent, anti-agency positioning.
 ## 🟤 DEFERRED (Tech Debt)
 
 - [ ] Split `styles.css` (1800+ lines) into logical partials — typography, components, layout, utilities
-- [ ] Refactor `index.html` monolith into template partials driven by build scripts
+- [-] Refactor homepage build architecture — dedicated source template + homepage assembly introduced; section/partial extraction still pending
 - [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
 - [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
 
