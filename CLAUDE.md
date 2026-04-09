@@ -15,13 +15,13 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — homepage testimonial marker hardening completed; homepage source + testimonial contract now explicit; quality gates passing
+**Last session:** 2026-04-10 — homepage testimonials extracted into dedicated fragment; homepage source, testimonial fragment, and injection contract now explicit; quality gates passing
 
-**Build:** ✅ passing | **Git:** ⚠️ testimonial marker hardening changes ready to commit | **Deployed:** ✅ auto on push to `main`
+**Build:** ✅ passing | **Git:** ⚠️ testimonial extraction changes ready to commit | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 
-- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, and testimonial injection now uses explicit component boundary markers.
+- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, testimonials live in `_templates/homepage-testimonials.html`, and testimonial injection uses explicit component boundary markers.
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -35,7 +35,7 @@
 2. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
 
 3. **Homepage section extraction** — choose the next smallest homepage section boundary to extract safely
-   → likely testimonials or footer ownership after current marker contracts
+   → likely footer ownership or another static section after testimonial extraction
 
 4. **Autonomous AI agent fleet** — design permission + capability framework
    → `docs/agent-fleet.md` (to be created)
