@@ -19,9 +19,11 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Removed
 
+- **Homepage pathways section** — removed the unintended “Choose the right way to work with us” section from the live homepage because it was not approved for production and inaccurately described the current offer structure.
 - **Campaign banner from `index.html`** — removed unapproved full-width promotional banner (lines 365-375) that was added without explicit approval in previous session.
 - **`workshops.html`** — deleted entire file. Leadership Activation page will be created separately following proper planning workflow.
 - **Workshops links from navigation** — removed "Workshops" from desktop and mobile navigation on both homepage and cohort page to prevent 404 errors.
+- **Footer links to `/workshops.html` and `/cohort.html`** — removed from the live footer because `workshops.html` 404s and `cohort.html` is not fit for public traffic in its current state.
 - **Inconsistent navigation IDs** — standardized all mobile navigation to use `mobile-nav-home` ID across homepage, cohort page, and Insights templates. Removed hardcoded Workshops links from `_templates/index.html` and `_templates/article.html`.
 - **Missing nav.js script** — added `/assets/js/nav.js` to cohort page to enable mobile hamburger menu functionality.
 - **Misaligned pink underline** — removed apply-underline SVG from "Apply for the next cohort" heading on cohort page due to alignment issues.
