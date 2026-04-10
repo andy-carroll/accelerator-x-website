@@ -47,6 +47,12 @@ transparent, anti-agency positioning.
       `netlify/functions/newsletter-subscribe.js`. 100/month limit no longer applies. — 2026-03-21
 - [ ] **Lighthouse targets** — ≥95 mobile / ≥98 desktop. Capture HTML reports to
       `docs/analytics/`. Fix any blocking issues before driving paid traffic.
+- [x] **Homepage architecture refactor** — canonical homepage shell + assembler contract now live.
+      `_templates/homepage.html` is the authored shell, `scripts/build-homepage.js` assembles the
+      generated homepage, and major static sections now live in dedicated fragments
+      (`homepage-about`, `homepage-apply`, `homepage-who`, `homepage-testimonials`, `homepage-trust`).
+      Remaining decision is whether further decomposition is worthwhile, or whether shared footer/nav
+      ownership is the next higher-value architecture task.
 
 ### Autonomous AI Agent Fleet (strategic priority)
 
@@ -89,7 +95,8 @@ transparent, anti-agency positioning.
 ## 🟤 DEFERRED (Tech Debt)
 
 - [ ] Split `styles.css` (1800+ lines) into logical partials — typography, components, layout, utilities
-- [-] Refactor homepage build architecture — dedicated source template + homepage assembly introduced; section/partial extraction still pending
+- [ ] Shared layout ownership cleanup — resolve footer/navigation single-source-of-truth across homepage,
+      Insights, and other templates now that homepage shell/fragment architecture is in place
 - [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
 - [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
 

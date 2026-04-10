@@ -15,13 +15,13 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — session protocol wrap completed; quality gates passing; handoff ready
+**Last session:** 2026-04-10 — homepage architecture refactor completed and pushed; shell/fragment assembly now explicit; session protocol wrap completed; quality gates passing
 
-**Build:** ✅ passing | **Git:** ⚠️ apply extraction changes ready to commit | **Deployed:** ✅ auto on push to `main`
+**Build:** ✅ passing | **Git:** ✅ clean after homepage refactor push + session wrap | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 
-- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, about lives in `_templates/homepage-about.html`, apply lives in `_templates/homepage-apply.html`, who lives in `_templates/homepage-who.html`, testimonials live in `_templates/homepage-testimonials.html`, trust lives in `_templates/homepage-trust.html`, and testimonial injection uses explicit component boundary markers.
+- Homepage architecture is now explicit: `_templates/homepage.html` is the shell, `scripts/build-homepage.js` assembles dedicated about/apply/who/testimonials/trust fragments into `index.html`, and downstream mutator scripts still own footer and hero-media injection.
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -34,8 +34,8 @@
 
 2. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
 
-3. **Homepage section extraction** — choose the next smallest homepage section boundary to extract safely
-   → likely another static homepage section; avoid shared footer ownership until the broader footer issue is intentionally addressed
+3. **Homepage/shared component review** — decide whether any further homepage decomposition is worth it, or whether the next real architecture task is shared footer/navigation ownership
+   → avoid casual extractions now that the main homepage shell/fragment contract is in place
 
 4. **Autonomous AI agent fleet** — design permission + capability framework
    → `docs/agent-fleet.md` (to be created)
