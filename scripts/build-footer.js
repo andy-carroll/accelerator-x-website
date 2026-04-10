@@ -5,9 +5,27 @@ const ROOT = path.resolve(__dirname, '..');
 const START_MARKER = '<!-- FOOTER_COMPONENT_START -->';
 const END_MARKER = '<!-- FOOTER_COMPONENT_END -->';
 
-const targets = [
-  { file: 'index.html', variant: 'subscribe' },
-];
+function collectTargets() {
+  const targets = [
+    { file: 'index.html', variant: 'subscribe' },
+    { file: 'cohort.html', variant: 'subscribe' },
+    { file: 'insights/index.html', variant: 'subscribed' },
+  ];
+
+  const insightsArticlesDir = path.join(ROOT, 'insights/articles');
+
+  if (fs.existsSync(insightsArticlesDir)) {
+    const articleFiles = fs.readdirSync(insightsArticlesDir)
+      .filter((file) => file.endsWith('.html'))
+      .sort();
+
+    for (const file of articleFiles) {
+      targets.push({ file: `insights/articles/${file}`, variant: 'subscribed' });
+    }
+  }
+
+  return targets;
+}
 
 const socialSlots = [
   {
@@ -149,10 +167,15 @@ function replaceFooter(content, variant) {
     return content.replace(footerRegex, generated);
   }
 
+  const bodyCloseRegex = /<\/body>/;
+  if (bodyCloseRegex.test(content)) {
+    return content.replace(bodyCloseRegex, `${generated}\n  </body>`);
+  }
+
   throw new Error(`Could not find footer block to replace for variant: ${variant}`);
 }
 
-for (const target of targets) {
+for (const target of collectTargets()) {
   const filePath = path.join(ROOT, target.file);
   const existing = fs.readFileSync(filePath, 'utf8');
   const updated = replaceFooter(existing, target.variant);

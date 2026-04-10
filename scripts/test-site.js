@@ -23,11 +23,12 @@ function run() {
   assertIncludes(homepage, '/assets/images/andy-black-t-400.jpg', 'Homepage founder headshot regression check failed for Andy.');
   assertIncludes(homepage, 'data-hero-library', 'Homepage hero media library did not render.');
   assertIncludes(homepage, 'hero-media-slide', 'Homepage hero media slides missing.');
+  assertIncludes(homepage, 'site-footer', 'Homepage footer missing.');
+  assertIncludes(insightsIndex, 'site-footer', 'Insights index footer missing.');
+  assertIncludes(article, 'site-footer', 'Insights article footer missing.');
   assertIncludes(article, 'article-author-card__image', 'Insights article author card did not render.');
   assertIncludes(article, 'Andy Carroll', 'Insights article author name missing.');
   assertIncludes(article, 'Co-founder', 'Insights article author role missing.');
-  assertIncludes(insightsIndex, 'Add Accelerator X as a preferred Google source.', 'Insights index preferred source CTA missing.');
-  assertIncludes(article, 'Add Accelerator X as a preferred source on Google.', 'Insights article preferred source CTA missing.');
   assertIncludes(privacy, 'Accelerator X Ltd is a company registered in England and Wales under company number 16974247.', 'Privacy fallback legal identity missing.');
   assertIncludes(terms, 'The website is operated by Accelerator X Ltd, a company registered in England and Wales under company number 16974247.', 'Terms fallback legal identity missing.');
 

@@ -32,6 +32,7 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 - **Missing nav.js script** — added `/assets/js/nav.js` to cohort page to enable mobile hamburger menu functionality.
 - **Misaligned pink underline** — removed apply-underline SVG from "Apply for the next cohort" heading on cohort page due to alignment issues.
 - **Programs links from navigation** — removed "Programs" link from desktop and mobile navigation on homepage and all Insights templates to make cohort page undiscoverable until complete.
+- **Shared footer from `privacy.html` and `terms.html`** — removed the marketing footer from the legal pages so they remain lightweight standalone documents rather than conversion surfaces.
 - **`.session-protocol.json`** — repo-level protocol profile for session lifecycle automation.
   Defines branch allowlist, quality-gate commands, managed documentation files, session log path,
   and session-end write/push policy for portable cross-repo adoption.
@@ -91,11 +92,19 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
   orientation, engineering philosophy summary, and pre-work checklist (build, check, roadmap).
 - **`README.md`** — fixed stale email capture description: newsletter flow now correctly documented
   as direct POST → `newsletter-subscribe` function (Netlify Forms bypassed since March 2026).
+- **`package.json` build pipeline** — footer sync now runs after Insights generation so shared footer ownership applies to generated pages as well as static ones.
+- **`scripts/build-footer.js`** — footer target collection now covers homepage, cohort, Insights index, and Insights articles, while explicitly excluding legal pages. Insights pages use a non-form footer variant to avoid duplicate newsletter IDs.
+- **`scripts/test-site.js`** — regression coverage now enforces footer presence on homepage, cohort, Insights index, and Insights articles, while treating legal pages as standalone content pages.
 
-- **`.githooks/pre-commit`** — pre-commit hook committed to source control in `.githooks/`.
-  Activated automatically by `npm install` via the new `prepare` script in `package.json`.
-  Every environment (fresh clone, new worktree, AI agent) now gets enforcement without
-  any manual setup step.
+### Fixed
+
+- **Footer consistency across generated pages** — the shared footer now lands reliably on generated Insights pages because footer sync runs after the content hub build completes.
+- **Google-source promo card** — temporarily disabled in both Insights templates by commenting out the current implementation pending a better design.
+
+### Changed
+
+- **`package.json`** — added `prepare` script: `git config core.hooksPath .githooks`.
+  Runs after every `npm install` to activate committed hooks. No manual setup required.
 - **`.env.example`** — canonical documentation of all five required environment variables
   with one-line explanations, where to obtain each value, and which function uses it.
   Closes the gap that contributed to the hardcoded `SLACK_WEBHOOK_URL` incident.
