@@ -12,6 +12,7 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 ### Added
 
 - **`_templates/homepage.html`** — dedicated canonical homepage source template. This is now the authored source for homepage structure, while `index.html` is treated as a generated artifact during the build.
+- **`_templates/homepage-about.html`** — dedicated homepage about fragment. Owns the founder/about section markup separately from the main homepage template.
 - **`_templates/homepage-testimonials.html`** — dedicated homepage testimonial fragment. Owns the testimonial card markup and explicit testimonial component markers, separate from the main homepage template.
 - **`_templates/homepage-trust.html`** — dedicated homepage trust fragment. Owns the trust/logo bar markup separately from the main homepage template.
 - **`scripts/build-homepage.js`** — new homepage assembly step. Copies `_templates/homepage.html` to `index.html` before footer, testimonial, and hero-media mutation steps run.
@@ -55,8 +56,10 @@ _Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
 
 ### Changed
 
+- **`_templates/homepage.html`** — about section markup was extracted from the main homepage source into a dedicated fragment include token (`{{homepageAbout}}`).
 - **`_templates/homepage.html`** — testimonial card markup was extracted from the main homepage source into a dedicated fragment include token (`{{homepageTestimonials}}`), while keeping the testimonial section shell in place.
 - **`_templates/homepage.html`** — trust section markup was extracted from the main homepage source into a dedicated fragment include token (`{{homepageTrust}}`).
+- **`scripts/build-homepage.js`** — homepage assembly now resolves the `{{homepageAbout}}` token from `_templates/homepage-about.html` before writing `index.html`.
 - **`scripts/build-homepage.js`** — homepage assembly now resolves the `{{homepageTestimonials}}` token from `_templates/homepage-testimonials.html` before writing `index.html`.
 - **`scripts/build-homepage.js`** — homepage assembly now also resolves the `{{homepageTrust}}` token from `_templates/homepage-trust.html` before writing `index.html`.
 - **`package.json` build pipeline** — added `build:homepage` and made homepage assembly run before existing homepage mutators. This establishes a clear source-of-truth model without yet changing footer/testimonial/hero ownership.

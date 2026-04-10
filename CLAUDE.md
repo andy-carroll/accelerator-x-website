@@ -15,13 +15,13 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — homepage trust section extracted into dedicated fragment; homepage source, testimonials fragment, trust fragment, and injection contracts now explicit; quality gates passing
+**Last session:** 2026-04-10 — homepage about section extracted into dedicated fragment; homepage source, about fragment, testimonials fragment, trust fragment, and injection contracts now explicit; quality gates passing
 
-**Build:** ✅ passing | **Git:** ⚠️ trust extraction changes ready to commit | **Deployed:** ✅ auto on push to `main`
+**Build:** ✅ passing | **Git:** ⚠️ about extraction changes ready to commit | **Deployed:** ✅ auto on push to `main`
 
 **Known issues:**
 
-- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, testimonials live in `_templates/homepage-testimonials.html`, trust lives in `_templates/homepage-trust.html`, and testimonial injection uses explicit component boundary markers.
+- Homepage still uses downstream mutator scripts for footer and hero media; source-of-truth is now `_templates/homepage.html`, about lives in `_templates/homepage-about.html`, testimonials live in `_templates/homepage-testimonials.html`, trust lives in `_templates/homepage-trust.html`, and testimonial injection uses explicit component boundary markers.
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
