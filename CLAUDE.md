@@ -15,7 +15,7 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — homepage apply section extracted into dedicated fragment; homepage source, about fragment, apply fragment, who fragment, testimonials fragment, trust fragment, and injection contracts now explicit; quality gates passing
+**Last session:** 2026-04-10 — session protocol wrap completed; quality gates passing; handoff ready
 
 **Build:** ✅ passing | **Git:** ⚠️ apply extraction changes ready to commit | **Deployed:** ✅ auto on push to `main`
 
