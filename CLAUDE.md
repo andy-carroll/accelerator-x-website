@@ -19,7 +19,8 @@
 
 **Last session:** 2026-05-16 — Phase 1 (Foundations) in progress on `rebuild/v2`; branch created, canonical design system tokens landed, build pipeline extended, design-system showcase scaffold in place
 
-**Build:** ⏳ pending `npm install` (node not yet installed on this machine — use `brew install node`) | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` still live and untouched
+**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (Phase 1 done) | **Deployed:** `main` still live and untouched
+**Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — `npm install` already run. Use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
 
 **Phase 1 status:**
 - ✅ Branch `rebuild/v2` created from `main`
