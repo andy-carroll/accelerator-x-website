@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-16 — quality gates passing; see session log for details
+**Last session:** 2026-05-17 — Wave D in progress: QuizCTA ✅, ScarcityCard ✅, CohortList ✅; 4-issue quality audit (`.ax-kicker--accent` token, `noreferrer` on external links, ARIA role fixes, dead CSS removed); session end protocol updated (mandatory pre-close audit); ApplyForm plan approved — build it first next session
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
