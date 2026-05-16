@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { resolveComponentTokens } = require('./build-components');
 
 const ROOT = path.resolve(__dirname, '..');
 const SHELL_PATH = path.join(ROOT, '_templates/design-system.html');
@@ -40,6 +41,8 @@ function main() {
 
     source = source.replace(token, partial);
   }
+
+  source = resolveComponentTokens(source);
 
   const existing = fs.existsSync(OUTPUT_PATH) ? fs.readFileSync(OUTPUT_PATH, 'utf8') : '';
 

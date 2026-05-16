@@ -6,6 +6,9 @@
   <title>Accelerator X — Design System v2.0</title>
   <link rel="stylesheet" href="../assets/css/tokens.css">
   <link rel="stylesheet" href="../assets/css/tailwind.generated.css">
+  <link rel="stylesheet" href="../assets/css/components/Buttons.css">
+  <link rel="stylesheet" href="../assets/css/components/Chips.css">
+  <link rel="stylesheet" href="../assets/css/components/FormInputs.css">
   <style>
     body {
       background: var(--bg-1);
@@ -285,20 +288,203 @@
     <p class="ds-section-subtitle">Wave A — Type scale, Buttons, Chips, Form inputs. Foundation for all other components.</p>
     <div class="ds-subsection">
   <h3 class="ds-subsection-title">TypeScale</h3>
-  <div class="ds-component-stub"><strong>TypeScale</strong>Wave A · Phase 2</div>
+
+  <div style="padding:var(--space-5) 0;border-bottom:1px solid var(--border-1)">
+    <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);display:block;margin-bottom:var(--space-3)">.ax-display--xl · Figtree weight-900 · fluid clamp(2.5rem → 4.5rem) · tracking-tight</span>
+    <div class="ax-display--xl">The future of leadership<br>is AI-native</div>
+  </div>
+
+  <div style="padding:var(--space-5) 0;border-bottom:1px solid var(--border-1)">
+    <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);display:block;margin-bottom:var(--space-3)">.ax-display · Figtree weight-700 · fluid clamp(2rem → 3.75rem) · tracking-tight</span>
+    <div class="ax-display">Clarity over complexity</div>
+  </div>
+
+  <div style="padding:var(--space-5) 0;border-bottom:1px solid var(--border-1)">
+    <span style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);display:block;margin-bottom:var(--space-3)">.ax-kicker · system font · weight-700 · uppercase · tracking-wide · --action-primary colour</span>
+    <span class="ax-kicker">AI Transformation Programme</span>
+  </div>
+
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">h1 · 48px · bold</span>
+    <h1 style="margin:0">Page headline</h1>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">h2 · 36px · bold</span>
+    <h2 style="margin:0">Section heading</h2>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">h3 · 30px · bold</span>
+    <h3 style="margin:0">Subsection heading</h3>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">h4 · 24px · semibold</span>
+    <h4 style="margin:0">Card heading</h4>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">h5 · 20px · semibold</span>
+    <h5 style="margin:0">Minor heading</h5>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">.lead · 18px · fg-2</span>
+    <span class="lead">For senior leaders serious about genuine AI transformation — not vendor-led hype.</span>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">p body · 16px · fg-3</span>
+    <span style="font-size:var(--text-base);color:var(--fg-3);line-height:var(--lh-relaxed)">Standard body copy used across marketing sections and editorial content. Optimised for readability at paragraph lengths of 60–80 characters.</span>
+  </div>
+  <div class="ds-type-specimen">
+    <span class="ds-type-label">small / .caption · 14px · fg-4</span>
+    <small>Published 14 May 2026 · 4 min read</small>
+  </div>
+
+  <div style="margin-top:var(--space-8);padding:var(--space-6);background:var(--bg-dark);border-radius:var(--radius-lg)">
+    <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:rgba(255,255,255,0.4);margin:0 0 var(--space-4)">On dark surface</p>
+    <div class="ax-kicker" style="color:var(--ax-pink)">Cohort 4 · September 2026</div>
+    <div class="ax-display--xl" style="color:var(--fg-on-dark);margin:var(--space-3) 0">Transform your organisation</div>
+    <p style="color:var(--fg-muted-on-dark);margin:0">An eight-week programme for senior leaders ready to build genuine AI capability — not just talk about it.</p>
+  </div>
 </div>
+
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">Buttons</h3>
-  <div class="ds-component-stub"><strong>Buttons</strong>Wave A · Phase 2</div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Variants · md (default) size</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin-bottom:var(--space-8)">
+    <button class="btn btn--primary">Primary</button>
+    <button class="btn btn--accent">Accent</button>
+    <button class="btn btn--outline">Outline</button>
+    <button class="btn btn--ghost">Ghost</button>
+    <a href="#" class="btn btn--link">Link</a>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Sizes · btn--primary</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin-bottom:var(--space-8)">
+    <button class="btn btn--primary btn--sm">Small · 32px</button>
+    <button class="btn btn--primary">Medium · 40px</button>
+    <button class="btn btn--primary btn--lg">Large · 48px</button>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Disabled state</p>
+  <div style="display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3);margin-bottom:var(--space-8)">
+    <button class="btn btn--primary" disabled>Primary</button>
+    <button class="btn btn--accent" disabled>Accent</button>
+    <button class="btn btn--outline" disabled>Outline</button>
+    <button class="btn btn--ghost" disabled>Ghost</button>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">On dark surface</p>
+  <div style="background:var(--bg-dark);padding:var(--space-6);border-radius:var(--radius-lg);display:flex;flex-wrap:wrap;align-items:center;gap:var(--space-3)">
+    <button class="btn btn--accent">Apply now</button>
+    <button class="btn btn--outline" style="color:var(--fg-on-dark);border-color:rgba(255,255,255,0.3)">Learn more</button>
+    <a href="#" class="btn btn--link" style="color:rgba(255,255,255,0.7)">View details</a>
+  </div>
 </div>
+
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">Chips</h3>
-  <div class="ds-component-stub"><strong>Chips</strong>Wave A · Phase 2</div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Variants</p>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-8)">
+    <button class="chip">Default</button>
+    <button class="chip chip--selected" aria-selected="true">Selected</button>
+    <span class="chip chip--kicker">AI Strategy</span>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Filter group · mixed selection</p>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-8)">
+    <button class="chip chip--selected" aria-selected="true">All</button>
+    <button class="chip">Strategy</button>
+    <button class="chip">Implementation</button>
+    <button class="chip chip--selected" aria-selected="true">Leadership</button>
+    <button class="chip">Case Studies</button>
+    <button class="chip">Tools</button>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Kicker chips · section labels</p>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2);margin-bottom:var(--space-8)">
+    <span class="chip chip--kicker">Cohort 4</span>
+    <span class="chip chip--kicker">September 2026</span>
+    <span class="chip chip--kicker">8 Weeks</span>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Status pills</p>
+  <div style="display:flex;flex-wrap:wrap;gap:var(--space-2)">
+    <span class="chip pill-success">Completed</span>
+    <span class="chip pill-warning">In progress</span>
+    <span class="chip pill-error">Blocked</span>
+  </div>
 </div>
+
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">Form Inputs</h3>
-  <div class="ds-component-stub"><strong>Form Inputs</strong>Wave A · Phase 2</div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-4)">States · text input</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-5);margin-bottom:var(--space-8)">
+    <div class="field">
+      <label class="field-label">Default</label>
+      <input type="text" class="input" placeholder="Placeholder text">
+    </div>
+    <div class="field">
+      <label class="field-label">With value</label>
+      <input type="text" class="input" value="Chief Executive Officer">
+    </div>
+    <div class="field">
+      <label class="field-label">Error state <span class="required">*</span></label>
+      <input type="email" class="input input--error" value="not-an-email">
+      <span class="field-helper field-helper--error">Please enter a valid email address.</span>
+    </div>
+    <div class="field">
+      <label class="field-label">Disabled</label>
+      <input type="text" class="input" value="Read-only value" disabled>
+      <span class="field-helper">Populated from your profile.</span>
+    </div>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-4)">Select</p>
+  <div style="max-width:360px;margin-bottom:var(--space-8)">
+    <div class="field">
+      <label class="field-label">Organisation size</label>
+      <select class="select">
+        <option value="">Select…</option>
+        <option>50–200 employees</option>
+        <option>200–1,000 employees</option>
+        <option selected>1,000–5,000 employees</option>
+        <option>5,000+ employees</option>
+      </select>
+    </div>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-4)">Textarea</p>
+  <div class="field" style="margin-bottom:var(--space-8)">
+    <label class="field-label">Tell us about your AI ambitions</label>
+    <textarea class="textarea" rows="4" placeholder="Describe the transformation outcomes you're looking to achieve…"></textarea>
+    <span class="field-helper">This helps us tailor the programme to your context.</span>
+  </div>
+
+  <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-4)">Full field · real-world example</p>
+  <div style="background:var(--bg-2);padding:var(--space-6);border-radius:var(--radius-lg);max-width:520px">
+    <div style="display:grid;gap:var(--space-5)">
+      <div class="field">
+        <label class="field-label">Full name <span class="required">*</span></label>
+        <input type="text" class="input" placeholder="Jane Smith">
+      </div>
+      <div class="field">
+        <label class="field-label">Work email <span class="required">*</span></label>
+        <input type="email" class="input" placeholder="jane@company.com">
+      </div>
+      <div class="field">
+        <label class="field-label">Organisation size</label>
+        <select class="select">
+          <option value="">Select…</option>
+          <option>50–200 employees</option>
+          <option>200–1,000 employees</option>
+        </select>
+      </div>
+      <button class="btn btn--accent btn--lg" style="width:100%">Request your place</button>
+    </div>
+  </div>
 </div>
+
 
   </section>
 

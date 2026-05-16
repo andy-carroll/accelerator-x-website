@@ -1,0 +1,27 @@
+/* =============================================================================
+   Chips — extensions beyond tokens.css §11
+   Base .chip variants live in tokens.css.
+   ============================================================================= */
+
+/* Colour-tinted variants — brand accent chips */
+.chip--cyan   { background: rgba(8, 138, 191, 0.10); color: var(--ax-cyan); }
+.chip--pink   { background: rgba(233, 63, 142, 0.10); color: var(--ax-pink); }
+.chip--amber  { background: rgba(254, 167, 0, 0.12); color: #7a5400; }
+.chip--purple { background: rgba(136, 45, 231, 0.10); color: var(--ax-purple); }
+
+/* Removable chip — add a dismiss × via JS */
+.chip--removable { padding-right: var(--space-2); }
+.chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: var(--space-1);
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+.chip__remove:hover { opacity: 1; }

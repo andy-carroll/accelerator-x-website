@@ -1,0 +1,84 @@
+/* =============================================================================
+   FormInputs — extensions beyond tokens.css §11
+   Base .field, .input, .select, .textarea live in tokens.css.
+   ============================================================================= */
+
+/* Input group — prefix/suffix addons */
+.input-group {
+  display: flex;
+  align-items: stretch;
+}
+.input-group .input {
+  border-radius: 0;
+  flex: 1;
+  min-width: 0;
+}
+.input-group .input:first-child { border-radius: var(--radius-md) 0 0 var(--radius-md); }
+.input-group .input:last-child  { border-radius: 0 var(--radius-md) var(--radius-md) 0; }
+
+.input-addon {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  background: var(--bg-3);
+  border: var(--input-border-width) solid var(--border-1);
+  color: var(--fg-4);
+  font-size: var(--text-sm);
+  white-space: nowrap;
+}
+.input-addon:first-child {
+  border-right: none;
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+.input-addon:last-child {
+  border-left: none;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* Custom checkbox / radio */
+.check-field {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  cursor: pointer;
+}
+.check-field input[type="checkbox"],
+.check-field input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.125rem;
+  height: 1.125rem;
+  min-width: 1.125rem;
+  border: var(--input-border-width) solid var(--border-2);
+  border-radius: var(--radius-sm);
+  background: var(--bg-1);
+  margin-top: 2px;
+  cursor: pointer;
+  transition:
+    background var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+.check-field input[type="radio"] { border-radius: var(--radius-full); }
+
+.check-field input[type="checkbox"]:checked,
+.check-field input[type="radio"]:checked {
+  background: var(--ax-navy);
+  border-color: var(--ax-navy);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 6l3 3 5-5' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px;
+}
+.check-field input[type="radio"]:checked {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='6' cy='6' r='2.5' fill='white'/%3E%3C/svg%3E");
+  background-size: 12px;
+}
+.check-field input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.check-field__label {
+  font-size: var(--text-sm);
+  color: var(--fg-1);
+  line-height: 1.5;
+}

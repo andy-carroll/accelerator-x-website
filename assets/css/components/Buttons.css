@@ -1,0 +1,43 @@
+/* =============================================================================
+   Buttons — extensions beyond tokens.css §11
+   Base .btn variants and sizes live in tokens.css.
+   ============================================================================= */
+
+/* Full-width modifier */
+.btn--full { width: 100%; }
+
+/* Icon-only square button */
+.btn--icon {
+  width: var(--btn-md-height);
+  padding: 0;
+}
+.btn--icon.btn--sm { width: var(--btn-sm-height); }
+.btn--icon.btn--lg { width: var(--btn-lg-height); }
+
+/* Loading state — pair with JS to swap in after click */
+.btn--loading {
+  position: relative;
+  color: transparent;
+  pointer-events: none;
+}
+.btn--loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.6s linear infinite;
+  color: var(--fg-on-dark);
+}
+.btn--outline.btn--loading::after,
+.btn--ghost.btn--loading::after {
+  color: var(--fg-1);
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
