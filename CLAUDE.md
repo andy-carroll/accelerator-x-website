@@ -17,27 +17,24 @@
 
 **Active track:** `rebuild/v2` — full visual + structural rebuild from design handoff (`docs/design_handoff_website_rebuild/`)
 
-**Last session:** 2026-05-16 — Phase 1 (Foundations) in progress on `rebuild/v2`; branch created, canonical design system tokens landed, build pipeline extended, design-system showcase scaffold in place
+**Last session:** 2026-05-16 — Phase 2 Wave A complete; TypeScale, Buttons, Chips, FormInputs primitives live in design system showcase; all breakpoints verified
 
-**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (Phase 1 done) | **Deployed:** `main` still live and untouched
-**Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — `npm install` already run. Use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
+**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (Wave A done, 3 commits unpushed) | **Deployed:** `main` still live and untouched
+**Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
 
-**Phase 1 status:**
-- ✅ Branch `rebuild/v2` created from `main`
-- ✅ `.session-protocol.json` updated (branch + path allowlist)
-- ✅ `assets/css/tokens.css` — canonical design system v2.0 tokens
-- ✅ `assets/brand/logos/` — SVG + PNG logo variants
-- ✅ `assets/css/components/` — empty dir for per-component CSS
-- ✅ `scripts/tailwind.input.css` — imports tokens.css
-- ✅ `tailwind.config.js` — extended content glob + --ax-* theme tokens
-- ✅ `scripts/build-design-system.js` — assembles design-system/index.html
-- ✅ `scripts/build-components.js` — component registry + renderComponent() API
-- ✅ `_templates/design-system.html` + section partials (stub placeholders for Phase 2)
-- ✅ `package.json` — build:design-system added; build chain updated
-- ⏳ `npm install` + `npm run build` — blocked on node install
+**Phase 2 Wave A status:**
+- ✅ `scripts/build-design-system.js` — now calls `resolveComponentTokens` (enables `{{component:X}}` in section partials)
+- ✅ `_templates/components/TypeScale.html` — display sizes, kicker, h1–h5, lead, body, caption; dark surface demo
+- ✅ `_templates/components/Buttons.html` — all 5 variants, 3 sizes, disabled states, on-dark surface
+- ✅ `_templates/components/Chips.html` — default/selected/kicker, filter group, status pills
+- ✅ `_templates/components/FormInputs.html` — text/select/textarea, all states, full real-world form example
+- ✅ `assets/css/components/Buttons.css` — loading, icon, full-width extensions
+- ✅ `assets/css/components/Chips.css` — colour variants, removable
+- ✅ `assets/css/components/FormInputs.css` — input groups, custom checkbox/radio
+- ✅ `_templates/design-system/primitives.html` — wired to 4 component tokens
+- ✅ Verified at mobile (375px), tablet (768px), desktop (1280px)
 
 **Known issues (rebuild track):**
-- Node.js not installed; `brew install node && npm install` needed before first build
 - Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
 
 **Known issues (main/live):**
@@ -48,20 +45,14 @@
 
 ## Next (do in this order)
 
-1. **Install node + verify Phase 1 build gate**
-   → `brew install node && cd /path/to/repo && npm install && npm run build`
-   → Verify `design-system/index.html` renders tokens correctly; legacy pages unchanged
-
-2. **Phase 2 — Wave A Primitives** (TypeScale, Buttons, Chips, Form inputs)
-   → `_templates/components/{TypeScale,Buttons,Chips,FormInputs}.html`
-   → `assets/css/components/{Buttons,Chips,FormInputs}.css`
-   → Register each in `_templates/design-system/primitives.html`
-   → Gate: showcase Wave A at all 3 breakpoints before Wave B
-
-3. **Phase 2 — Wave B Global chrome** (Nav, Footer, PageHero, CTABand)
+1. **Phase 2 — Wave B Global Chrome** (Nav, Footer, PageHero, CTABand)
    → Decide Footer/NewsletterCTA deduplication before starting Footer
+   → `_templates/components/{Nav,Footer,PageHero,CTABand}.html`
+   → `assets/css/components/{Nav,Footer,PageHero,CTABand}.css`
+   → Register each in `_templates/design-system/chrome.html`
+   → Gate: showcase Wave B at all 3 breakpoints before Wave C
 
-4. **Phase 2 — Waves C + D** (Content blocks, Interactive)
+2. **Phase 2 — Waves C + D** (Content blocks, Interactive)
    → Follow component sequencing in plan
 
 ---
@@ -101,6 +92,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. `brew install node && npm install && npm run build` — Phase 1 verification gate
-2. Start Phase 2 Wave A — Primitives (TypeScale, Buttons, Chips, FormInputs)
-3. Decide Footer/NewsletterCTA deduplication strategy before Wave B
+1. Decide Footer/NewsletterCTA deduplication strategy before Wave B starts
+2. Start Phase 2 Wave B — Global Chrome (Nav, Footer, PageHero, CTABand)
+3. Gate: showcase Wave B at all 3 breakpoints before Wave C
