@@ -103,11 +103,10 @@ Full procedures: `.claude/rules/session.md`
 
 **End (quick card):**
 
-1. Choose mode: `npm run session-end` / `npm run session-end:dry-run` / `npm run session-end:write`
-2. In write mode, pass prompt (or use `npm run session-end:write:yes` for controlled automation)
-3. Let script enforce quality gate + scoped staging + commit policy
-4. Confirm session log written to `.claude/sessions/`
-5. Push only when policy and flags explicitly allow it
+1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
+2. Run `npm run session-end:write:yes`
+3. Confirm session log written to `.claude/sessions/`
+4. Push only when policy and flags explicitly allow it
 
 ## Next Session Priorities
 

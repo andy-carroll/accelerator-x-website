@@ -39,7 +39,26 @@ Restate the agreed plan so the transcript captures the decision.
 ## SESSION END
 
 **Trigger:** User says "end session", "wrap up", "close session", or similar.
-**Requirement:** Run the script with explicit mode. Safe-by-default is now enforced.
+**Requirement:** Complete the pre-close audit first, then run the script. Safe-by-default is enforced.
+
+### Step 0 — Pre-close audit (mandatory, non-skippable)
+
+Before touching any script or file, work through this checklist silently and act on every finding:
+
+**Code quality**
+- Review all files created or modified this session. Be self-critical. Score honestly.
+- Flag any bugs, ARIA errors, dead CSS, inline styles, missing `noreferrer`, or other quality issues found — then fix them before closing.
+- Flag any refinement opportunities (architectural, naming, token usage) that are quick wins — fix them or log them in session-notes.md if they need a future session.
+
+**Docs**
+- `CLAUDE.md` — "Last session" line accurate and specific? "Next" section pointing at the exact next task with enough detail to cold-start? "Next Session Priorities" ≤3 items, actionable?
+- `CHANGELOG.md` — Every component added or modified this session has an entry? Every bug fixed has a Fixed entry?
+- `ROADMAP.md` — Does the NOW sprint reflect current state? "Last updated" date correct?
+
+**Session notes**
+- Write `.claude/session-notes.md` with: decisions made, things deferred (and why), key findings, anything a cold-start agent would need that isn't in CLAUDE.md.
+
+Only once all findings are addressed and `.claude/session-notes.md` exists: proceed to script.
 
 ### Choose session-end mode
 
