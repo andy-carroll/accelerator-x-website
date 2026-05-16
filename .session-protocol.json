@@ -6,7 +6,8 @@
     "allowedBranchPatterns": [
       "main",
       "agent/*",
-      "feat/*"
+      "feat/*",
+      "rebuild/*"
     ],
     "defaultPushRemote": "origin"
   },
@@ -59,7 +60,20 @@
       "scripts/session-start.js",
       "scripts/session-protocol-utils.js",
       "scripts/test-session-protocols.js",
-      ".session-protocol.json"
+      ".session-protocol.json",
+      "CLAUDE.md",
+      "tailwind.config.js",
+      "scripts/tailwind.input.css",
+      "scripts/build-components.js",
+      "scripts/build-design-system.js",
+      "assets/css/tokens.css",
+      "assets/css/components/*",
+      "assets/brand/*",
+      "assets/brand/logos/*",
+      "_templates/design-system.html",
+      "_templates/design-system/*.html",
+      "_templates/components/*.html",
+      "design-system/index.html"
     ]
   },
   "operatingModes": {

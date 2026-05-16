@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Accelerator X · Mobile screens (375px)</title>
+
+<!-- ext-resource-dependency: type=font name=Geist -->
+<!-- ext-resource-dependency: type=font name=JetBrains+Mono -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Direction B tokens — shared with the desktop mockup */
+    --c-bg: #ffffff;
+    --c-bg-alt: #f5f3ee;
+    --c-tint: #f1ede2;
+    --c-fg: #0e1726;
+    --c-fg-muted: #5b6173;
+    --c-line: rgba(14, 23, 38, 0.10);
+    --c-line-faint: rgba(14, 23, 38, 0.05);
+    --c-accent: #088abf;
+    --c-accent-2: #e93f8e;
+    --c-amber: #fea700;
+
+    --f-body: 'Geist', system-ui, -apple-system, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Page chrome */
+    --page-bg: #ebe7dd;
+    --page-fg: #1c1c1c;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--page-bg);
+    font-family: var(--f-body);
+    color: var(--page-fg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── Page chrome ───────────────────────────────────────────── */
+  .page-header {
+    padding: 56px 48px 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .page-meta {
+    display: flex;
+    gap: 24px;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: #6e6a5d;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    margin-bottom: 28px;
+  }
+  .page-meta b { color: #1c1c1c; font-weight: 500; margin-right: 8px; }
+  .page-title {
+    font-family: var(--f-body);
+    font-size: 44px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.04;
+    margin: 0 0 12px;
+  }
+  .page-lede {
+    font-size: 16px;
+    line-height: 1.55;
+    color: #4a4738;
+    max-width: 700px;
+    margin: 0;
+  }
+
+  /* ─── Canvas ────────────────────────────────────────────────── */
+  .canvas {
+    padding: 32px 48px 96px;
+    overflow-x: auto;
+  }
+  .canvas-inner {
+    display: flex;
+    gap: 56px;
+    align-items: flex-start;
+    min-width: max-content;
+  }
+
+  /* ─── Phone frame ───────────────────────────────────────────── */
+  .phone {
+    width: 411px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .phone-label {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 4px;
+  }
+  .phone-label .pn {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: #6e6a5d;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .phone-label .pt {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--c-fg);
+    letter-spacing: -0.012em;
+  }
+  .phone-label .ps {
+    font-size: 13px;
+    color: #4a4738;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .phone-shell {
+    background: #0e1726;
+    border-radius: 44px;
+    padding: 14px;
+    box-shadow:
+      0 30px 60px rgba(14, 23, 38, 0.22),
+      0 8px 24px rgba(14, 23, 38, 0.14);
+  }
+  .phone-screen {
+    width: 375px;
+    height: 812px;
+    border-radius: 32px;
+    overflow: hidden;
+    overflow-y: auto;
+    background: var(--c-bg);
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.2) transparent;
+  }
+  .phone-screen::-webkit-scrollbar { width: 6px; }
+  .phone-screen::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 3px; }
+
+  /* Status bar */
+  .status-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: 44px;
+    background: var(--c-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 0 28px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--c-fg);
+    letter-spacing: -0.005em;
+  }
+  .status-bar .icons {
+    display: flex; gap: 5px; align-items: center;
+  }
+  .status-bar .icons svg { display: block; }
+
+  /* Top nav (mobile drawer trigger) */
+  .m-nav {
+    position: sticky;
+    top: 44px;
+    z-index: 9;
+    height: 56px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--c-line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  .m-nav.tinted {
+    background: rgba(245, 243, 238, 0.92);
+  }
+  .m-nav .logo {
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--c-fg);
+  }
+  .m-nav .logo .x { color: var(--c-accent-2); }
+  .m-nav .nav-right { display: flex; align-items: center; gap: 12px; }
+  .m-nav .nav-cta {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 12px;
+    background: var(--c-fg);
+    color: var(--c-bg);
+    border-radius: 999px;
+  }
+  .m-nav .burger {
+    width: 44px; height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-right: -8px;
+  }
+  .m-nav .burger span {
+    display: block;
+    width: 18px; height: 1.5px;
+    background: var(--c-fg);
+    border-radius: 1px;
+  }
+
+  /* Minimal funnel nav */
+  .m-nav-min {
+    position: sticky;
+    top: 44px;
+    z-index: 9;
+    height: 52px;
+    background: var(--c-bg);
+    border-bottom: 1px solid var(--c-line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+  }
+  .m-nav-min .apply {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    background: var(--c-accent-2);
+    color: #fff;
+    border-radius: 999px;
+  }
+
+  /* ─── Mobile content primitives ─────────────────────────────── */
+  .ms-section { padding: 32px 20px; }
+  .ms-section.tinted { background: var(--c-bg-alt); }
+  .ms-section.dark { background: var(--c-fg); color: var(--c-bg); }
+  .ms-section.dark p { color: rgba(255,255,255,0.7); }
+  .ms-section.tint { background: var(--c-tint); }
+  .ms-section.tight { padding-top: 20px; padding-bottom: 24px; }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--c-fg-muted);
+    background: var(--c-bg);
+  }
+  .chip.dot::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 999px;
+    background: var(--c-accent);
+  }
+  .chip.on-dark {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.88);
+  }
+  .chip.on-tint { background: var(--c-bg); }
+
+  .h-display {
+    font-family: var(--f-body);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    color: var(--c-fg);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .h-display.on-dark { color: var(--c-bg); }
+  .h1 { font-size: 38px; }
+  .h2 { font-size: 32px; }
+  .h3 { font-size: 22px; }
+  .h4 { font-size: 18px; }
+
+  .body { font-size: 15px; line-height: 1.55; color: var(--c-fg-muted); margin: 0; }
+  .body.on-dark { color: rgba(255,255,255,0.72); }
+  .body strong { color: var(--c-fg); font-weight: 600; }
+  .body.on-dark strong { color: var(--c-bg); }
+  .muted-small { font-size: 12px; color: var(--c-fg-muted); line-height: 1.5; }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 48px;
+    padding: 0 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    border: 1px solid transparent;
+    background: var(--c-fg);
+    color: var(--c-bg);
+  }
+  .btn.full { width: 100%; }
+  .btn.accent { background: var(--c-accent-2); color: #fff; }
+  .btn.cyan { background: var(--c-accent); color: #fff; }
+  .btn.outline { background: transparent; color: var(--c-fg); border-color: var(--c-fg); }
+  .btn.ghost-on-dark { background: transparent; color: var(--c-bg); border: 1px solid rgba(255,255,255,0.25); }
+
+  .stack-12 > * + * { margin-top: 12px; }
+  .stack-14 > * + * { margin-top: 14px; }
+  .stack-16 > * + * { margin-top: 16px; }
+  .stack-20 > * + * { margin-top: 20px; }
+  .stack-24 > * + * { margin-top: 24px; }
+
+  /* Placeholder image */
+  .img-ph {
+    background:
+      linear-gradient(135deg, rgba(14,23,38,0.06) 0%, rgba(14,23,38,0.10) 100%);
+    border: 1px solid var(--c-line);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--c-fg-muted);
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    position: relative;
+    overflow: hidden;
+  }
+  .img-ph::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(135deg,
+        transparent 0 14px,
+        rgba(14,23,38,0.025) 14px 15px);
+    pointer-events: none;
+  }
+  .img-ph .label {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 12px;
+  }
+  .img-ph.ratio-45 { aspect-ratio: 4 / 5; }
+  .img-ph.ratio-43 { aspect-ratio: 4 / 3; }
+  .img-ph.ratio-169 { aspect-ratio: 16 / 9; }
+  .img-ph.ratio-11 { aspect-ratio: 1; }
+
+  .panel {
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: 16px;
+    padding: 22px;
+  }
+  .panel.tinted { background: var(--c-bg-alt); }
+
+  .eyebrow-small {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-fg-muted);
+  }
+  .eyebrow-small.cyan { color: var(--c-accent); }
+  .eyebrow-small.pink { color: var(--c-accent-2); }
+  .eyebrow-small.amber { color: #a36e00; }
+
+  /* Trust strip */
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: 12px;
+  }
+  .trust-row span {
+    font-size: 12.5px;
+    color: var(--c-fg-muted);
+    font-weight: 500;
+  }
+
+  /* Phase arrow */
+  .phase-arrow {
+    text-align: center;
+    color: var(--c-fg-muted);
+    font-size: 14px;
+    padding: 4px 0;
+    line-height: 1;
+  }
+
+  /* Sticky CTA on funnel */
+  .sticky-cta {
+    position: sticky;
+    bottom: 0;
+    left: 0; right: 0;
+    background: rgba(14, 23, 38, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 12px 16px 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 20;
+  }
+  .sticky-cta .info { color: var(--c-bg); display: flex; flex-direction: column; gap: 2px; }
+  .sticky-cta .info .l1 { font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
+  .sticky-cta .info .l2 { font-size: 13px; font-weight: 600; }
+  .sticky-cta .btn { height: 42px; padding: 0 18px; font-size: 13px; }
+
+  /* Scarcity card */
+  .scarcity {
+    background: var(--c-fg);
+    color: var(--c-bg);
+    border-radius: 16px;
+    padding: 22px;
+  }
+  .scarcity .row { display: flex; justify-content: space-between; padding: 12px 0; border-top: 1px solid rgba(255,255,255,0.12); font-size: 13px; }
+  .scarcity .row:first-of-type { border-top: none; }
+  .scarcity .row .k { color: rgba(255,255,255,0.6); }
+  .scarcity .row .v { color: var(--c-bg); font-weight: 600; }
+
+  /* Annotations from designer */
+  .design-note {
+    position: relative;
+    margin-top: 14px;
+  }
+  .design-note-card {
+    background: #fff8e3;
+    border: 1px solid #f0e2a8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: #5b4a1a;
+    width: 411px;
+  }
+  .design-note-card b { color: #3d3204; font-weight: 600; }
+  .design-note-card .l {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8a7615;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  /* Decision tree row */
+  .dt-row {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    gap: 12px;
+    padding: 14px 0;
+    border-top: 1px solid var(--c-line-faint);
+    align-items: baseline;
+  }
+  .dt-row:first-of-type { border-top: none; }
+  .dt-row .n { font-family: var(--f-mono); font-size: 11px; color: var(--c-fg-muted); }
+  .dt-row .q { font-size: 14px; color: var(--c-fg); font-weight: 500; line-height: 1.35; }
+  .dt-row .a { font-size: 12px; color: var(--c-accent); font-weight: 600; white-space: nowrap; }
+
+  /* Two-phase arc */
+  .arc-card {
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--c-line);
+  }
+  .arc-card.phase-0 { background: var(--c-bg-alt); border-color: var(--c-accent); border-width: 1.5px; }
+  .arc-card .pn { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+  .arc-card.phase-0 .pn { color: var(--c-accent); }
+  .arc-card.phase-1 .pn { color: var(--c-fg); }
+  .arc-card .pt { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-top: 8px; color: var(--c-fg); }
+  .arc-card .pd { font-size: 13px; color: var(--c-fg-muted); margin-top: 6px; line-height: 1.45; }
+
+  /* FAQ */
+  .faq-item {
+    padding: 16px 0;
+    border-top: 1px solid var(--c-line);
+  }
+  .faq-item:first-child { border-top: none; }
+  .faq-item .q {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--c-fg);
+    line-height: 1.35;
+  }
+  .faq-item .q .plus {
+    font-family: var(--f-mono);
+    font-size: 18px;
+    color: var(--c-fg-muted);
+    font-weight: 400;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .faq-item .a {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--c-fg-muted);
+    margin-top: 10px;
+  }
+
+  /* Fit check stack */
+  .fit-col {
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .fit-col.yes { background: rgba(31, 122, 74, 0.06); border: 1px solid rgba(31, 122, 74, 0.25); }
+  .fit-col.no  { background: rgba(0,0,0,0.03); border: 1px solid var(--c-line); }
+  .fit-col h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--c-fg);
+  }
+  .fit-col.yes h4::before { content: '✓'; color: #1f7a4a; font-weight: 700; }
+  .fit-col.no h4::before { content: '✗'; color: #c14545; font-weight: 700; }
+  .fit-col ul { margin: 0; padding-left: 18px; }
+  .fit-col li { font-size: 13px; line-height: 1.5; color: var(--c-fg-muted); margin-bottom: 6px; }
+
+  /* Cards (offerings) */
+  .o-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .o-card .meta-row { display: flex; gap: 10px; font-size: 12px; color: var(--c-fg-muted); align-items: center; }
+  .o-card .meta-row strong { color: var(--c-fg); font-weight: 600; }
+  .o-card .top-row { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid var(--c-line); }
+  .o-card .ix { font-family: var(--f-mono); font-size: 11px; color: var(--c-fg-muted); }
+  .o-card h3 { font-size: 28px; font-weight: 500; letter-spacing: -0.03em; line-height: 1; margin: 0; color: var(--c-fg); }
+
+  /* Stats */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 14px;
+  }
+  .stat-grid .stat .n {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--c-fg);
+  }
+  .stat-grid .stat .l {
+    font-size: 11.5px;
+    color: var(--c-fg-muted);
+    margin-top: 6px;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+  }
+
+  /* Footer (mobile) */
+  .m-footer {
+    background: var(--c-fg);
+    color: var(--c-bg);
+    padding: 32px 20px 24px;
+  }
+  .m-footer .logo { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+  .m-footer .logo .x { color: var(--c-accent-2); }
+  .m-footer .nl-input {
+    display: flex;
+    margin-top: 14px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+  }
+  .m-footer .nl-input input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0 16px;
+    height: 44px;
+    color: var(--c-bg);
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .m-footer .nl-input input::placeholder { color: rgba(255,255,255,0.4); }
+  .m-footer .nl-input button {
+    border: none;
+    height: 44px;
+    background: var(--c-bg);
+    color: var(--c-fg);
+    padding: 0 18px;
+    font-weight: 600;
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .m-footer .accordion {
+    margin-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .m-footer .accordion .item {
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .m-footer .accordion .item span:last-child { color: rgba(255,255,255,0.5); font-family: var(--f-mono); font-size: 14px; }
+  .m-footer .legal {
+    margin-top: 20px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.02em;
+  }
+
+  /* VSL specific */
+  .video-frame {
+    background: linear-gradient(135deg, #1a2540 0%, #0e1726 100%);
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(8,138,191,0.18), transparent 50%),
+      radial-gradient(circle at 70% 70%, rgba(233,63,142,0.14), transparent 50%);
+  }
+  .video-frame .play {
+    width: 64px; height: 64px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1;
+  }
+  .video-frame .play::after {
+    content: '';
+    width: 0; height: 0;
+    border-style: solid;
+    border-width: 11px 0 11px 18px;
+    border-color: transparent transparent transparent #0e1726;
+    margin-left: 4px;
+  }
+  .video-frame .runtime {
+    position: absolute;
+    bottom: 12px;
+    right: 14px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 1;
+  }
+
+  /* Bridge block */
+  .bridge {
+    background: var(--c-tint);
+    border-radius: 14px;
+    padding: 20px;
+    text-align: center;
+    border: 1px dashed rgba(14, 23, 38, 0.18);
+  }
+  .bridge .arrow {
+    font-size: 24px;
+    color: var(--c-fg-muted);
+    margin: 8px 0 12px;
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    padding: 4px 0;
+  }
+  .pull-quote .q {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--c-fg);
+  }
+  .pull-quote .attr {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pull-quote .avatar {
+    width: 40px; height: 40px;
+    background: var(--c-bg-alt);
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .pull-quote .who { font-size: 12.5px; line-height: 1.4; }
+  .pull-quote .who strong { color: var(--c-fg); font-weight: 600; display: block; }
+  .pull-quote .who span { color: var(--c-fg-muted); }
+</style>
+</head>
+<body>
+
+  <!-- ─── Page header ──────────────────────────────────────────── -->
+  <div class="page-header">
+    <div class="page-meta">
+      <span><b>Doc</b>Mobile screens · 375px</span>
+      <span><b>Direction</b>B (locked)</span>
+      <span><b>Status</b>Draft · for review</span>
+      <span><b>Date</b>16 May 2026</span>
+    </div>
+    <h1 class="page-title">Mobile screens.</h1>
+    <p class="page-lede">
+      The three densest screens in the system, rendered at 375px to sanity-check vertical rhythm and CTA placement before Phase C component work.
+      Every other page follows the rules in §08 of the Build Plan — these are the ones where prose alone wasn't enough.
+    </p>
+  </div>
+
+  <!-- ─── Canvas with phones ──────────────────────────────────── -->
+  <div class="canvas">
+    <div class="canvas-inner">
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           PHONE 1 · HOME
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="phone">
+        <div class="phone-label">
+          <span class="pn">01 · Marketing</span>
+          <span class="pt">Home — /</span>
+          <span class="ps">Vertical rhythm across 11 sections. Scroll the screen to validate the journey.</span>
+        </div>
+
+        <div class="phone-shell">
+          <div class="phone-screen">
+
+            <!-- Status bar -->
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M1 7.5L1 9.5C1 9.77614 1.22386 10 1.5 10H2.5C2.77614 10 3 9.77614 3 9.5V7.5C3 7.22386 2.77614 7 2.5 7H1.5C1.22386 7 1 7.22386 1 7.5Z" fill="currentColor"/><path d="M5 5.5L5 9.5C5 9.77614 5.22386 10 5.5 10H6.5C6.77614 10 7 9.77614 7 9.5V5.5C7 5.22386 6.77614 5 6.5 5H5.5C5.22386 5 5 5.22386 5 5.5Z" fill="currentColor"/><path d="M9 3.5L9 9.5C9 9.77614 9.22386 10 9.5 10H10.5C10.7761 10 11 9.77614 11 9.5V3.5C11 3.22386 10.7761 3 10.5 3H9.5C9.22386 3 9 3.22386 9 3.5Z" fill="currentColor"/><path d="M13 1.5L13 9.5C13 9.77614 13.2239 10 13.5 10H14.5C14.7761 10 15 9.77614 15 9.5V1.5C15 1.22386 14.7761 1 14.5 1H13.5C13.2239 1 13 1.22386 13 1.5Z" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="15" height="7" rx="1" fill="currentColor"/><rect x="19.5" y="3.5" width="1.5" height="4" rx="0.5" fill="currentColor" opacity="0.5"/></svg>
+              </div>
+            </div>
+
+            <!-- Nav -->
+            <div class="m-nav">
+              <div class="logo">Accelerator<span class="x">X</span></div>
+              <div class="nav-right">
+                <span class="nav-cta">Apply</span>
+                <div class="burger" aria-label="Menu"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+
+            <!-- 01 Hero -->
+            <section class="ms-section">
+              <span class="chip dot">Now booking · Q3 2026</span>
+              <h1 class="h-display h1" style="margin-top: 16px;">Stop buying tools.<br/>Start building <span style="color: var(--c-accent-2);">capability.</span></h1>
+              <p class="body" style="margin-top: 16px;">We build AI capability that compounds — owned by your people, embedded in your workflows.</p>
+              <div class="stack-12" style="margin-top: 24px;">
+                <button class="btn full">Start with Phase 0 →</button>
+                <button class="btn outline full">For individual leaders →</button>
+              </div>
+              <p class="muted-small" style="margin-top: 16px;"><strong style="color: var(--c-fg);">Phase 0 from £5,000 · 2 weeks.</strong> Risk-free start: if it isn't valuable, you don't pay.</p>
+              <div class="img-ph ratio-45" style="margin-top: 24px;"><span class="label">Workshop · founders + leadership team</span></div>
+            </section>
+
+            <!-- 02 Trust -->
+            <section class="ms-section tinted tight">
+              <div class="eyebrow-small">Operators from</div>
+              <div class="trust-row">
+                <span>Anthropic</span>
+                <span>Booking.com</span>
+                <span>Skyscanner</span>
+                <span>Trainline</span>
+                <span>Funding Circle</span>
+              </div>
+            </section>
+
+            <!-- 03 Problem -->
+            <section class="ms-section">
+              <span class="chip">The problem</span>
+              <h2 class="h-display h2" style="margin-top: 16px;">You've tried.<br/><span style="color: var(--c-accent-2);">It hasn't worked.</span></h2>
+              <p class="body" style="margin-top: 18px;">You've tested a few tools. Maybe a pilot or two. The deck looked good. The traction didn't follow.</p>
+              <p class="body" style="margin-top: 12px;">You're not behind. Most companies are stuck at the same edge — between curiosity and capability — because the gap is structural, not technical.</p>
+              <p class="body" style="margin-top: 12px;"><strong>The work that compounds is people, process, and product — together.</strong> That's what we build.</p>
+            </section>
+
+            <!-- 04 DOTS -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">Our method</span>
+              <h2 class="h-display h2" style="margin-top: 16px;">We start with DOTS.</h2>
+              <p class="body" style="margin-top: 14px;">Every engagement opens with a DOTS session — <strong>Dream, Obstacles, Triage, Sequence</strong>. The fastest way we know to move a team from overwhelmed to aligned.</p>
+              <div class="stack-12" style="margin-top: 20px;">
+                <div class="panel" style="background: var(--c-bg); padding: 16px;">
+                  <div class="eyebrow-small cyan">D · Dream</div>
+                  <p class="muted-small" style="margin: 6px 0 0;">What would great look like in 12 months?</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg); padding: 16px;">
+                  <div class="eyebrow-small cyan">O · Obstacles</div>
+                  <p class="muted-small" style="margin: 6px 0 0;">What's actually in the way?</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg); padding: 16px;">
+                  <div class="eyebrow-small cyan">T · Triage</div>
+                  <p class="muted-small" style="margin: 6px 0 0;">Which of those matter, now?</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg); padding: 16px;">
+                  <div class="eyebrow-small cyan">S · Sequence</div>
+                  <p class="muted-small" style="margin: 6px 0 0;">Who does what, in what order?</p>
+                </div>
+              </div>
+              <a style="display: inline-block; margin-top: 18px; font-size: 13px; color: var(--c-accent); font-weight: 600;">Read the DOTS method →</a>
+            </section>
+
+            <!-- 05 Two doors in -->
+            <section class="ms-section">
+              <span class="chip">What we do · Two doors in</span>
+              <h2 class="h-display h2" style="margin-top: 16px;">Pick your starting point.</h2>
+
+              <div class="stack-14" style="margin-top: 24px;">
+                <!-- Company -->
+                <div class="o-card">
+                  <div class="top-row">
+                    <span class="eyebrow-small cyan">For your business</span>
+                    <span class="ix">01 / 02</span>
+                  </div>
+                  <h3>Company AI Enablement</h3>
+                  <div class="meta-row">
+                    <span><strong>Phase 0 · 2 weeks</strong></span>
+                    <span>·</span>
+                    <span><strong>From £5,000</strong></span>
+                  </div>
+                  <p class="muted-small" style="font-size: 13.5px; line-height: 1.55;">Three workshops plus an AI strategy playback. Aligns leadership, activates the team, and leaves you with a costed 90-day plan — whether you continue with us or not.</p>
+                  <div style="padding-top: 14px; border-top: 1px solid var(--c-line);">
+                    <div class="eyebrow-small" style="margin-bottom: 6px;">Then, when ready</div>
+                    <div style="font-size: 13.5px;">Phase 1+ Transformation Cycles <span style="color: var(--c-fg-muted);">· from £20k</span></div>
+                  </div>
+                  <button class="btn full" style="margin-top: 4px;">See Company Enablement →</button>
+                </div>
+
+                <!-- Coaching -->
+                <div class="o-card">
+                  <div class="top-row">
+                    <span class="eyebrow-small pink">For yourself or your leadership team</span>
+                    <span class="ix">02 / 02</span>
+                  </div>
+                  <h3>Leadership AI Coaching</h3>
+                  <div class="meta-row">
+                    <span><strong>8 weeks</strong></span>
+                    <span>·</span>
+                    <span><strong>From £3,500</strong></span>
+                  </div>
+                  <p class="muted-small" style="font-size: 13.5px; line-height: 1.55;">1:1 or small cohorts of non-competing senior leaders. Workshops, peer accountability, and DOTS applied to your own context.</p>
+                  <div style="padding-top: 14px; border-top: 1px solid var(--c-line);">
+                    <div class="eyebrow-small" style="margin-bottom: 6px;">Available as</div>
+                    <div style="font-size: 13.5px;">Bootcamps · Cohort · 1:1 Executive Coaching</div>
+                  </div>
+                  <button class="btn outline full" style="margin-top: 4px;">See Coaching & Cohorts →</button>
+                </div>
+
+                <!-- Advisory strip -->
+                <div class="panel" style="display: flex; gap: 14px; align-items: center; padding: 18px;">
+                  <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(254,167,0,0.14); color: #fea700; display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); font-weight: 600; font-size: 13px; flex-shrink: 0;">03</div>
+                  <div style="flex: 1; min-width: 0;">
+                    <div class="eyebrow-small amber" style="font-size: 9.5px;">Already running AI?</div>
+                    <div style="font-size: 13px; font-weight: 500; margin-top: 3px;">Fractional AI Advisory</div>
+                  </div>
+                  <span style="color: var(--c-fg-muted); font-size: 18px;">→</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- 06 How it works · timeline (stacked for mobile) -->
+            <section class="ms-section">
+              <span class="chip">How it works · For businesses</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 28px;">Phase 0 hands you a roadmap. Phase 1+ ships it.</h2>
+
+              <div class="stack-12" style="margin-top: 24px;">
+                <div class="panel" style="background: var(--c-bg-alt); border: 1.5px solid var(--c-accent); padding: 18px;">
+                  <div class="eyebrow-small cyan">Phase 0</div>
+                  <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px;">2 weeks · from £5k</div>
+                  <div class="muted-small" style="margin-top: 4px;">Two DOTS sessions + team activation + AI strategy playback</div>
+                </div>
+                <div class="phase-arrow">↓</div>
+                <div class="panel" style="padding: 18px;">
+                  <div class="eyebrow-small">Phase 1</div>
+                  <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px;">8-week cycle · from £20k</div>
+                  <div class="muted-small" style="margin-top: 4px;">Ship first AI capability with your team. Train internal operators.</div>
+                </div>
+                <div class="phase-arrow">↓</div>
+                <div class="panel" style="padding: 18px;">
+                  <div class="eyebrow-small">Phase 2…n</div>
+                  <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px;">Sequential cycles</div>
+                  <div class="muted-small" style="margin-top: 4px;">Each builds on the last. Run as many as the roadmap calls for.</div>
+                </div>
+                <div class="phase-arrow">↓</div>
+                <div class="panel" style="background: rgba(254,167,0,0.08); border-color: #fea700; padding: 18px;">
+                  <div class="eyebrow-small amber">Advisory</div>
+                  <div style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; margin-top: 6px;">Ongoing</div>
+                  <div class="muted-small" style="margin-top: 4px;">When you're self-sufficient.</div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 07 Why us -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">Why us</span>
+              <h2 class="h-display h2" style="margin-top: 16px;">Not an agency. Not a consultancy. <span style="color: var(--c-accent);">Your partner.</span></h2>
+
+              <div class="stack-14" style="margin-top: 24px;">
+                <div class="panel" style="background: var(--c-bg);">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(8,138,191,0.14); color: var(--c-accent); display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); font-weight: 600; font-size: 13px;">01</div>
+                  <div class="eyebrow-small cyan" style="margin-top: 14px;">Founder-led</div>
+                  <h4 class="h-display h4" style="margin-top: 8px;">Founder-led, always.</h4>
+                  <p class="muted-small" style="margin-top: 8px;">Toby and Andy in every session. No associates, no juniors running ghost-projects.</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg);">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(254,167,0,0.14); color: var(--c-amber); display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); font-weight: 600; font-size: 13px;">02</div>
+                  <div class="eyebrow-small amber" style="margin-top: 14px;">People · Process · Product</div>
+                  <h4 class="h-display h4" style="margin-top: 8px;">We do all three.</h4>
+                  <p class="muted-small" style="margin-top: 8px;">We build the systems. We change the behaviour. We architect the strategy and stay until it ships.</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg);">
+                  <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(233,63,142,0.14); color: var(--c-accent-2); display: flex; align-items: center; justify-content: center; font-family: var(--f-mono); font-weight: 600; font-size: 13px;">03</div>
+                  <div class="eyebrow-small pink" style="margin-top: 14px;">Capability over dependency</div>
+                  <h4 class="h-display h4" style="margin-top: 8px;">The best outcome is you outgrow us.</h4>
+                  <p class="muted-small" style="margin-top: 8px;">We train your people, install systems that work without us, and step out when you're ready.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- 08 Talks & Events ribbon -->
+            <section class="ms-section dark">
+              <span class="chip on-dark">Talks · Keynotes · AI Hackathons</span>
+              <h2 class="h-display h2 on-dark" style="margin-top: 16px;">Move a whole room <span style="color: var(--c-accent-2);">in an afternoon.</span></h2>
+              <p class="body on-dark" style="margin-top: 14px;">From conference keynotes to bespoke AI hackathons for senior partner groups. Live this week in Paris.</p>
+
+              <div class="stat-grid" style="margin-top: 22px;">
+                <div class="stat">
+                  <div class="n" style="color: var(--c-bg);">85</div>
+                  <div class="l" style="color: rgba(255,255,255,0.6);">Partners in the room</div>
+                </div>
+                <div class="stat">
+                  <div class="n" style="color: var(--c-bg);">12</div>
+                  <div class="l" style="color: rgba(255,255,255,0.6);">Prototypes by 6pm</div>
+                </div>
+              </div>
+
+              <div class="img-ph ratio-43" style="margin-top: 22px; background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.12); color: rgba(255,255,255,0.5);"><span class="label">Claude Hackathon · London · May 2026</span></div>
+
+              <button class="btn accent full" style="margin-top: 20px;">Explore Talks & Events →</button>
+            </section>
+
+            <!-- 09 Proof -->
+            <section class="ms-section">
+              <span class="chip">Proof</span>
+              <h2 class="h-display h2" style="margin-top: 16px;">What our clients say.</h2>
+
+              <div class="stack-14" style="margin-top: 22px;">
+                <div class="panel">
+                  <div style="color: var(--c-accent); font-size: 12px;">★★★★★</div>
+                  <p class="body" style="margin-top: 10px; font-size: 14.5px; color: var(--c-fg);">"More done in two weeks of Phase 0 than the previous twelve months of internal AI conversations."</p>
+                  <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--c-line); display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; background: var(--c-bg-alt); border-radius: 999px;"></div>
+                    <div style="font-size: 12px;">
+                      <div style="font-weight: 600; color: var(--c-fg);">CEO, £60M healthcare</div>
+                      <div style="color: var(--c-fg-muted);">Phase 0, Q1 2026</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel">
+                  <div style="color: var(--c-accent); font-size: 12px;">★★★★★</div>
+                  <p class="body" style="margin-top: 10px; font-size: 14.5px; color: var(--c-fg);">"They walked in and asked sharper questions than my CTO. By Friday we had a roadmap that survived contact with reality."</p>
+                  <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--c-line); display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; background: var(--c-bg-alt); border-radius: 999px;"></div>
+                    <div style="font-size: 12px;">
+                      <div style="font-weight: 600; color: var(--c-fg);">COO, £45M retail group</div>
+                      <div style="color: var(--c-fg-muted);">8-Week Cycle, Q1 2026</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel tinted" style="margin-top: 18px; padding: 20px;">
+                <div class="stat-grid">
+                  <div class="stat">
+                    <div class="n">24</div>
+                    <div class="l">Engagements completed</div>
+                  </div>
+                  <div class="stat">
+                    <div class="n">10×+</div>
+                    <div class="l">Average cycle ROI</div>
+                  </div>
+                  <div class="stat">
+                    <div class="n">£4.2M</div>
+                    <div class="l">Client value delivered</div>
+                  </div>
+                  <div class="stat">
+                    <div class="n">100%</div>
+                    <div class="l">Cycles shipped on time</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- 10 Insights -->
+            <section class="ms-section tinted">
+              <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <span class="chip on-tint">From the dispatch</span>
+                <a style="font-size: 12px; color: var(--c-accent); font-weight: 600;">All →</a>
+              </div>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">Field notes from the work.</h2>
+
+              <div class="stack-14" style="margin-top: 20px;">
+                <article class="panel" style="background: var(--c-bg); padding: 0; overflow: hidden;">
+                  <div class="img-ph ratio-169" style="border-radius: 0; border-left: none; border-right: none; border-top: none;"><span class="label">Cover</span></div>
+                  <div style="padding: 18px; display: flex; flex-direction: column; gap: 6px;">
+                    <span class="chip" style="align-self: flex-start; font-size: 9.5px;">Article · 8 min read</span>
+                    <h4 style="font-size: 16px; font-weight: 600; margin: 4px 0 0; line-height: 1.25; color: var(--c-fg);">Why your AI pilot didn't compound</h4>
+                    <p class="muted-small">The three failure modes we see in 80% of stalled AI programmes.</p>
+                  </div>
+                </article>
+                <article class="panel" style="background: var(--c-bg); padding: 0; overflow: hidden;">
+                  <div class="img-ph ratio-169" style="border-radius: 0; border-left: none; border-right: none; border-top: none;"><span class="label">Cover</span></div>
+                  <div style="padding: 18px; display: flex; flex-direction: column; gap: 6px;">
+                    <span class="chip" style="align-self: flex-start; font-size: 9.5px;">Podcast · 42 min</span>
+                    <h4 style="font-size: 16px; font-weight: 600; margin: 4px 0 0; line-height: 1.25; color: var(--c-fg);">DOTS, explained in 40 minutes</h4>
+                    <p class="muted-small">Toby & Andy walk through the framework with a recent client.</p>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- 11 Apply -->
+            <section class="ms-section dark" style="text-align: center; padding: 48px 20px;">
+              <span class="chip on-dark">Apply</span>
+              <h2 class="h-display h2 on-dark" style="margin-top: 16px; font-size: 36px;">If you're done waiting, <span style="color: var(--c-accent);">let's build.</span></h2>
+              <p class="body on-dark" style="margin-top: 14px;">Most engagements start with Phase 0. Tell us where you are — we'll come back within a week.</p>
+              <div class="stack-12" style="margin-top: 24px;">
+                <button class="btn accent full">Apply to work with us</button>
+              </div>
+              <p class="muted-small" style="margin-top: 14px; color: rgba(255,255,255,0.5);">Short pre-qualification form · no calendar booking · we reply within a week.</p>
+            </section>
+
+            <!-- Footer -->
+            <footer class="m-footer">
+              <div class="logo">Accelerator<span class="x">X</span></div>
+              <p class="muted-small" style="color: rgba(255,255,255,0.5); margin-top: 12px; font-size: 13px;">Field notes monthly. No spam, no LinkedIn-bait.</p>
+              <div class="nl-input">
+                <input type="email" placeholder="you@company.com"/>
+                <button>Subscribe</button>
+              </div>
+              <div class="accordion">
+                <div class="item"><span>What we do</span><span>+</span></div>
+                <div class="item"><span>How we work</span><span>+</span></div>
+                <div class="item"><span>Insights</span><span>+</span></div>
+                <div class="item"><span>Company</span><span>+</span></div>
+                <div class="item"><span>Legal</span><span>+</span></div>
+              </div>
+              <p class="legal">© 2026 Accelerator X · London</p>
+            </footer>
+
+          </div>
+        </div>
+
+        <div class="design-note">
+          <div class="design-note-card">
+            <span class="l">Vertical rhythm check</span>
+            <b>Section padding 32px top/bottom holds up.</b> Hero feels confident at this width; the dual CTA stacked-and-full-width reads as intentional, not cramped. Two-doors-in cards are the right scale — we keep them as one big block per offering rather than horizontal-scroll.
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           PHONE 2 · COMPANY ENABLEMENT
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="phone">
+        <div class="phone-label">
+          <span class="pn">02 · Offering detail</span>
+          <span class="pt">Company Enablement — /what-we-do/company-enablement</span>
+          <span class="ps">The densest layout: two-phase arc + bridge + section pairs.</span>
+        </div>
+
+        <div class="phone-shell">
+          <div class="phone-screen">
+
+            <!-- Status bar -->
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M1 7.5L1 9.5C1 9.77614 1.22386 10 1.5 10H2.5C2.77614 10 3 9.77614 3 9.5V7.5C3 7.22386 2.77614 7 2.5 7H1.5C1.22386 7 1 7.22386 1 7.5Z" fill="currentColor"/><path d="M5 5.5L5 9.5C5 9.77614 5.22386 10 5.5 10H6.5C6.77614 10 7 9.77614 7 9.5V5.5C7 5.22386 6.77614 5 6.5 5H5.5C5.22386 5 5 5.22386 5 5.5Z" fill="currentColor"/><path d="M9 3.5L9 9.5C9 9.77614 9.22386 10 9.5 10H10.5C10.7761 10 11 9.77614 11 9.5V3.5C11 3.22386 10.7761 3 10.5 3H9.5C9.22386 3 9 3.22386 9 3.5Z" fill="currentColor"/><path d="M13 1.5L13 9.5C13 9.77614 13.2239 10 13.5 10H14.5C14.7761 10 15 9.77614 15 9.5V1.5C15 1.22386 14.7761 1 14.5 1H13.5C13.2239 1 13 1.22386 13 1.5Z" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="15" height="7" rx="1" fill="currentColor"/><rect x="19.5" y="3.5" width="1.5" height="4" rx="0.5" fill="currentColor" opacity="0.5"/></svg>
+              </div>
+            </div>
+
+            <!-- Nav -->
+            <div class="m-nav">
+              <div class="logo">Accelerator<span class="x">X</span></div>
+              <div class="nav-right">
+                <span class="nav-cta">Apply</span>
+                <div class="burger"><span></span><span></span><span></span></div>
+              </div>
+            </div>
+
+            <!-- Breadcrumb + Hero -->
+            <section class="ms-section">
+              <div style="font-size: 11.5px; color: var(--c-fg-muted); display: flex; gap: 6px; align-items: center;">
+                <span style="opacity: 0.7;">What we do</span>
+                <span style="opacity: 0.4;">/</span>
+                <span style="color: var(--c-fg); font-weight: 500;">Company Enablement</span>
+              </div>
+
+              <span class="chip" style="margin-top: 18px;">Flagship · Phase 0 → Phase 1+</span>
+              <h1 class="h-display h1" style="margin-top: 16px; font-size: 36px;">How a company moves <span style="color: var(--c-accent);">with us.</span></h1>
+              <p class="body" style="margin-top: 16px;">Two phases. The first aligns and activates in two weeks. The second ships capability, cycle by cycle, until you're self-sufficient. Everyone starts with Phase 0.</p>
+
+              <!-- Sidebar card (now inline) -->
+              <div class="panel" style="margin-top: 24px; background: var(--c-bg-alt);">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--c-line);">
+                  <div class="eyebrow-small">Start with</div>
+                  <div style="font-family: var(--f-mono); font-size: 11px; color: var(--c-accent);">Phase 0</div>
+                </div>
+                <div style="margin-top: 14px; display: flex; flex-direction: column; gap: 10px;">
+                  <div style="display: flex; justify-content: space-between;"><span class="muted-small">Duration</span><strong style="font-size: 13.5px;">2 weeks</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="muted-small">From</span><strong style="font-size: 13.5px;">£5,000</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="muted-small">Start date</span><strong style="font-size: 13.5px;">Agreed on signing</strong></div>
+                  <div style="display: flex; justify-content: space-between;"><span class="muted-small">Typical lead time</span><strong style="font-size: 13.5px;">~3 weeks</strong></div>
+                </div>
+                <button class="btn full" style="margin-top: 18px;">Apply to work with us →</button>
+                <p class="muted-small" style="margin-top: 10px; text-align: center; font-size: 11.5px;">We review every application personally. If it's a fit, we'll send you a booking link.</p>
+              </div>
+            </section>
+
+            <!-- Two-phase arc -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">The arc</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">Two phases. One direction.</h2>
+
+              <div class="stack-12" style="margin-top: 22px;">
+                <div class="arc-card phase-0">
+                  <div class="pn">Phase 0 · everyone starts here</div>
+                  <div class="pt">2 weeks · from £5k</div>
+                  <div class="pd">Strategy & activation. Three workshops + roadmap.</div>
+                </div>
+                <div class="phase-arrow">↓</div>
+                <div class="arc-card phase-1">
+                  <div class="pn">Phase 1+</div>
+                  <div class="pt">8-week cycles · from £20k</div>
+                  <div class="pd">Build & ship capability your team owns.</div>
+                </div>
+              </div>
+              <p class="muted-small" style="margin-top: 18px; text-align: center;">No deep-link to Phase 1+ alone. The roadmap depends on the workshop.</p>
+            </section>
+
+            <!-- Phase 0 section -->
+            <section class="ms-section">
+              <span class="chip" style="background: rgba(8,138,191,0.08); border-color: rgba(8,138,191,0.3); color: var(--c-accent);">Phase 0 · in depth</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 30px;">Two weeks <span style="color: var(--c-accent);">to clarity.</span></h2>
+
+              <p class="body" style="margin-top: 16px;">Three workshops, one playback, one costed 90-day plan. Built around our proprietary DOTS framework.</p>
+
+              <!-- Plan layers (numbered) -->
+              <div class="stack-16" style="margin-top: 24px;">
+                <div>
+                  <div style="display: flex; align-items: baseline; gap: 10px;">
+                    <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent); font-weight: 600;">01</span>
+                    <h4 class="h-display h4">Executive DOTS</h4>
+                  </div>
+                  <p class="muted-small" style="margin-top: 6px;">Half-day with your leadership team. The Dream / Obstacles / Triage / Sequence pass that aligns the room on AI strategy.</p>
+                </div>
+                <div>
+                  <div style="display: flex; align-items: baseline; gap: 10px;">
+                    <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent); font-weight: 600;">02</span>
+                    <h4 class="h-display h4">Team activation</h4>
+                  </div>
+                  <p class="muted-small" style="margin-top: 6px;">Wider function or department session — 10–40 people. The work moves from leadership decision into team adoption.</p>
+                </div>
+                <div>
+                  <div style="display: flex; align-items: baseline; gap: 10px;">
+                    <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent); font-weight: 600;">03</span>
+                    <h4 class="h-display h4">AI strategy playback</h4>
+                  </div>
+                  <p class="muted-small" style="margin-top: 6px;">We integrate the outputs and present the costed 90-day roadmap. Phase 1 scope agreed (or not).</p>
+                </div>
+              </div>
+
+              <!-- Deliverables grid -->
+              <h3 class="h-display" style="font-size: 16px; font-weight: 600; margin-top: 32px;">What you walk away with</h3>
+              <div class="stack-12" style="margin-top: 14px;">
+                <div class="panel" style="padding: 16px; display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 11px; color: var(--c-accent); font-weight: 600;">01</span>
+                  <div>
+                    <div style="font-size: 14px; font-weight: 600;">90-day roadmap</div>
+                    <p class="muted-small" style="margin-top: 4px;">Costed, sequenced, owned by your team.</p>
+                  </div>
+                </div>
+                <div class="panel" style="padding: 16px; display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 11px; color: var(--c-accent); font-weight: 600;">02</span>
+                  <div>
+                    <div style="font-size: 14px; font-weight: 600;">Use cases evaluated</div>
+                    <p class="muted-small" style="margin-top: 4px;">Highest-leverage first build, with success metrics.</p>
+                  </div>
+                </div>
+                <div class="panel" style="padding: 16px; display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 11px; color: var(--c-accent); font-weight: 600;">03</span>
+                  <div>
+                    <div style="font-size: 14px; font-weight: 600;">Aligned leadership</div>
+                    <p class="muted-small" style="margin-top: 4px;">One story, told the same way across the C-suite.</p>
+                  </div>
+                </div>
+                <div class="panel" style="padding: 16px; display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 11px; color: var(--c-accent); font-weight: 600;">04</span>
+                  <div>
+                    <div style="font-size: 14px; font-weight: 600;">Activated team</div>
+                    <p class="muted-small" style="margin-top: 4px;">Not a deck — a department that already knows what's coming.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn cyan full" style="margin-top: 24px;">Apply to work with us →</button>
+            </section>
+
+            <!-- Bridge -->
+            <section class="ms-section">
+              <div class="bridge">
+                <span class="chip" style="background: var(--c-bg);">What Phase 0 produces</span>
+                <div class="arrow">↓</div>
+                <p style="font-size: 15px; line-height: 1.45; margin: 0; color: var(--c-fg);"><strong>A roadmap you can defend.</strong><br/>What we do with it next is Phase 1+.</p>
+              </div>
+            </section>
+
+            <!-- Phase 1+ section -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint" style="border-color: var(--c-fg); color: var(--c-fg);">Phase 1+ · in depth</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 30px;">Eight-week cycles. <br/>One capability at a time.</h2>
+              <p class="body" style="margin-top: 16px;">Once the roadmap is signed off, sequential 8-week cycles deliver against it. Each cycle ships a real capability your team owns.</p>
+
+              <!-- Three streams -->
+              <div class="stack-12" style="margin-top: 22px;">
+                <div class="panel" style="background: var(--c-bg);">
+                  <div class="eyebrow-small">Stream 01 · People</div>
+                  <h4 class="h-display h4" style="margin-top: 6px;">Train your operators.</h4>
+                  <p class="muted-small" style="margin-top: 6px;">2–4 internal builders gain hands-on capability across the cycle.</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg);">
+                  <div class="eyebrow-small">Stream 02 · Process</div>
+                  <h4 class="h-display h4" style="margin-top: 6px;">Change the rituals.</h4>
+                  <p class="muted-small" style="margin-top: 6px;">New workflows embedded — not appended. The capability sticks because the process changes around it.</p>
+                </div>
+                <div class="panel" style="background: var(--c-bg);">
+                  <div class="eyebrow-small">Stream 03 · Product</div>
+                  <h4 class="h-display h4" style="margin-top: 6px;">Ship the thing.</h4>
+                  <p class="muted-small" style="margin-top: 6px;">A production-ready AI capability — owned, instrumented, demonstrably valuable.</p>
+                </div>
+              </div>
+
+              <button class="btn outline full" style="margin-top: 24px;">See if you're ready for Phase 1+</button>
+            </section>
+
+            <!-- Fit check -->
+            <section class="ms-section">
+              <span class="chip">Fit check</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 28px;">For companies who want to build capability — not just buy a strategy deck.</h2>
+
+              <div class="stack-12" style="margin-top: 22px;">
+                <div class="fit-col yes">
+                  <h4>Right fit if you…</h4>
+                  <ul>
+                    <li>Have a leadership team willing to spend 4 sessions over 2 weeks.</li>
+                    <li>Believe AI capability is a building exercise, not a procurement one.</li>
+                    <li>Want internal operators trained, not external dependency.</li>
+                    <li>Are comfortable being challenged on what's actually slowing you down.</li>
+                  </ul>
+                </div>
+                <div class="fit-col no">
+                  <h4>Probably not for you if you…</h4>
+                  <ul>
+                    <li>Want a slide deck to take to the board, not a working capability.</li>
+                    <li>Need to outsource AI ownership long-term.</li>
+                    <li>Aren't able to commit leadership time in the first fortnight.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Proof: pull quote -->
+            <section class="ms-section tint">
+              <div class="pull-quote">
+                <p class="q">"By the end of week two we had a roadmap that survived contact with our CFO. Six weeks later we shipped the first capability. I haven't seen anyone work like this."</p>
+                <div class="attr">
+                  <div class="avatar"></div>
+                  <div class="who">
+                    <strong>COO, £45M retail group</strong>
+                    <span>Phase 0 + Phase 1, Q1 2026</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="ms-section">
+              <span class="chip">Common questions</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">Asked at week 2, week 8, and week 16.</h2>
+
+              <div style="margin-top: 22px;">
+                <div class="faq-item">
+                  <div class="q">Can we skip Phase 0?<span class="plus">+</span></div>
+                  <div class="a">No. Phase 1+ assumes a roadmap exists. If you've built one elsewhere we can validate it in a shorter Phase 0 — but the workshop step doesn't get cut.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">How firm is the £5,000 price?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">What's the "+" in Phase 1+?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Can we run cycles in parallel?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Who owns the IP?<span class="plus">+</span></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Final CTA -->
+            <section class="ms-section dark" style="text-align: center; padding: 48px 20px;">
+              <span class="chip on-dark">Start here</span>
+              <h2 class="h-display h2 on-dark" style="margin-top: 16px; font-size: 32px;">Two weeks. £5,000. <span style="color: var(--c-accent);">Worth it.</span></h2>
+              <p class="body on-dark" style="margin-top: 14px;">Phase 0 is the most leveraged fortnight we run. Tell us where you are; we'll come back within a week.</p>
+              <div class="stack-12" style="margin-top: 24px;">
+                <button class="btn accent full">Apply to work with us</button>
+              </div>
+              <p class="muted-small" style="margin-top: 14px; color: rgba(255,255,255,0.5);">No calendars to book. We vet every application and reply personally.</p>
+            </section>
+
+            <!-- Footer (compact) -->
+            <footer class="m-footer">
+              <div class="logo">Accelerator<span class="x">X</span></div>
+              <div class="accordion">
+                <div class="item"><span>What we do</span><span>+</span></div>
+                <div class="item"><span>How we work</span><span>+</span></div>
+                <div class="item"><span>Insights</span><span>+</span></div>
+                <div class="item"><span>Company</span><span>+</span></div>
+              </div>
+              <p class="legal">© 2026 Accelerator X · London</p>
+            </footer>
+
+          </div>
+        </div>
+
+        <div class="design-note">
+          <div class="design-note-card">
+            <span class="l">Density check</span>
+            <b>The arc + bridge + section-pair pattern holds at 375px</b> because each phase gets a full breathing section. The bridge block re-anchors the reader before Phase 1+ — without it the page would feel like two pages glued together. The sidebar investment card moves inline below the hero; works well here. <b>Phase 0 is not a cohort</b> — start date is agreed on signing, with ~3 weeks typical lead time. <b>Single CTA throughout: "Apply to work with us"</b> — no direct calendar bookings anywhere on the site; we vet every application and send a booking link if it's a fit.
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ═══════════════════════════════════════════════════════════
+           PHONE 3 · VSL LANDER
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="phone">
+        <div class="phone-label">
+          <span class="pn">03 · Funnel · optional</span>
+          <span class="pt">VSL lander — /programmes/leadership-cohort</span>
+          <span class="ps">Conversion-engineered: stripped nav, sticky CTA, scarcity card.</span>
+        </div>
+
+        <div class="phone-shell">
+          <div class="phone-screen">
+
+            <!-- Status bar -->
+            <div class="status-bar">
+              <span>9:41</span>
+              <div class="icons">
+                <svg width="16" height="11" viewBox="0 0 16 11" fill="none"><path d="M1 7.5L1 9.5C1 9.77614 1.22386 10 1.5 10H2.5C2.77614 10 3 9.77614 3 9.5V7.5C3 7.22386 2.77614 7 2.5 7H1.5C1.22386 7 1 7.22386 1 7.5Z" fill="currentColor"/><path d="M5 5.5L5 9.5C5 9.77614 5.22386 10 5.5 10H6.5C6.77614 10 7 9.77614 7 9.5V5.5C7 5.22386 6.77614 5 6.5 5H5.5C5.22386 5 5 5.22386 5 5.5Z" fill="currentColor"/><path d="M9 3.5L9 9.5C9 9.77614 9.22386 10 9.5 10H10.5C10.7761 10 11 9.77614 11 9.5V3.5C11 3.22386 10.7761 3 10.5 3H9.5C9.22386 3 9 3.22386 9 3.5Z" fill="currentColor"/><path d="M13 1.5L13 9.5C13 9.77614 13.2239 10 13.5 10H14.5C14.7761 10 15 9.77614 15 9.5V1.5C15 1.22386 14.7761 1 14.5 1H13.5C13.2239 1 13 1.22386 13 1.5Z" fill="currentColor"/></svg>
+                <svg width="22" height="11" viewBox="0 0 22 11" fill="none"><rect x="0.5" y="0.5" width="18" height="10" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="15" height="7" rx="1" fill="currentColor"/><rect x="19.5" y="3.5" width="1.5" height="4" rx="0.5" fill="currentColor" opacity="0.5"/></svg>
+              </div>
+            </div>
+
+            <!-- Minimal nav -->
+            <div class="m-nav-min">
+              <div style="font-weight: 600; font-size: 17px; letter-spacing: -0.02em; color: var(--c-fg);">Accelerator<span style="color: var(--c-accent-2);">X</span></div>
+              <span class="apply">Apply</span>
+            </div>
+
+            <!-- VSL hero -->
+            <section class="ms-section">
+              <span class="chip dot">Next cohort · 12 Aug 2026 · 6 places left</span>
+              <h1 class="h-display h1" style="margin-top: 16px; font-size: 34px;">A leadership programme for the AI shift you're already living through.</h1>
+              <p class="body" style="margin-top: 16px;">8 weeks. Senior leaders from non-competing companies. Run by the people who teach this for a living.</p>
+
+              <!-- Video -->
+              <div class="video-frame" style="margin-top: 22px;">
+                <div class="play"></div>
+                <span class="runtime">5:42</span>
+              </div>
+              <p class="muted-small" style="margin-top: 10px; text-align: center;">Watch · 5 min · or <a style="color: var(--c-accent); font-weight: 600;">read the transcript</a></p>
+
+              <button class="btn accent full" style="margin-top: 22px;">Apply for the August cohort →</button>
+              <p class="muted-small" style="margin-top: 10px; text-align: center;">Applications reviewed within 48 hours.</p>
+            </section>
+
+            <!-- For / not for -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">Disqualify fast</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">Built for senior leaders. <span style="color: var(--c-accent-2);">Not for everyone.</span></h2>
+
+              <div class="stack-12" style="margin-top: 22px;">
+                <div class="fit-col yes" style="background: var(--c-bg);">
+                  <h4>This is for you if you…</h4>
+                  <ul>
+                    <li>Run a function or business unit and own outcomes.</li>
+                    <li>Want to lead the AI conversation, not be led by it.</li>
+                    <li>Can commit 4 hours a week for 8 weeks.</li>
+                  </ul>
+                </div>
+                <div class="fit-col no" style="background: var(--c-bg);">
+                  <h4>This isn't for you if you…</h4>
+                  <ul>
+                    <li>Are looking for technical training — there's no code in this room.</li>
+                    <li>Need certificates more than capability.</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- What you walk away with -->
+            <section class="ms-section">
+              <span class="chip">What you walk away with</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">Eight weeks. Four outcomes.</h2>
+
+              <div class="stack-14" style="margin-top: 22px;">
+                <div style="display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent-2); font-weight: 700; flex-shrink: 0; padding-top: 2px;">01</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 600; color: var(--c-fg);">A personal AI operating model</div>
+                    <p class="muted-small" style="margin-top: 4px;">How you actually use AI in your role — tested against your context, not generic.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent-2); font-weight: 700; flex-shrink: 0; padding-top: 2px;">02</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 600; color: var(--c-fg);">A shipped artefact</div>
+                    <p class="muted-small" style="margin-top: 4px;">By week 8 you've built something real with AI, in your own workflow.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent-2); font-weight: 700; flex-shrink: 0; padding-top: 2px;">03</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 600; color: var(--c-fg);">A peer network</div>
+                    <p class="muted-small" style="margin-top: 4px;">Six senior leaders, vetted to be non-competing, who you can text.</p>
+                  </div>
+                </div>
+                <div style="display: flex; gap: 14px;">
+                  <span style="font-family: var(--f-mono); font-size: 13px; color: var(--c-accent-2); font-weight: 700; flex-shrink: 0; padding-top: 2px;">04</span>
+                  <div>
+                    <div style="font-size: 15px; font-weight: 600; color: var(--c-fg);">The DOTS method, applied to you</div>
+                    <p class="muted-small" style="margin-top: 4px;">The framework we run with corporates — turned inward, for your own work.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn accent full" style="margin-top: 26px;">Apply for the August cohort →</button>
+            </section>
+
+            <!-- Proof -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">Proof</span>
+
+              <div class="pull-quote" style="margin-top: 16px;">
+                <p class="q">"It moved my Monday morning. I now run my leadership team meetings with AI in the loop, not as a topic on the agenda. Hard to overstate the shift."</p>
+                <div class="attr">
+                  <div class="avatar"></div>
+                  <div class="who">
+                    <strong>CMO, B2B SaaS</strong>
+                    <span>Cohort 02 · Feb 2026</span>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--c-line);">
+                <div class="pull-quote">
+                  <p class="q">"The peer network alone was worth the price. The framework changed how I make decisions."</p>
+                  <div class="attr">
+                    <div class="avatar"></div>
+                    <div class="who">
+                      <strong>VP Operations, fintech</strong>
+                      <span>Cohort 01 · Oct 2025</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Founders speak -->
+            <section class="ms-section">
+              <span class="chip">Why this exists</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">From Toby & Andy.</h2>
+              <p class="body" style="margin-top: 14px;">We've spent two years inside corporates teaching this work. The senior leaders who get the most from it weren't sent on the training — they brought themselves. This is the room for those people.</p>
+              <div style="display: flex; gap: 14px; margin-top: 20px;">
+                <div style="width: 64px; height: 64px; background: var(--c-bg-alt); border-radius: 999px; flex-shrink: 0;"></div>
+                <div style="width: 64px; height: 64px; background: var(--c-bg-alt); border-radius: 999px; flex-shrink: 0;"></div>
+                <div style="font-size: 12.5px; color: var(--c-fg-muted); line-height: 1.4; align-self: center;">
+                  <strong style="color: var(--c-fg);">Toby & Andy</strong><br/>
+                  Co-founders, Accelerator X
+                </div>
+              </div>
+            </section>
+
+            <!-- Investment + scarcity -->
+            <section class="ms-section">
+              <span class="chip">Investment</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 26px;">£3,500 per place.<br/><span style="color: var(--c-fg-muted); font-size: 18px; font-weight: 400;">Includes everything below. No add-ons.</span></h2>
+
+              <div class="scarcity" style="margin-top: 22px;">
+                <div class="eyebrow-small" style="color: var(--c-accent-2);">Next cohort</div>
+                <div style="font-size: 22px; font-weight: 600; margin-top: 6px;">12 August 2026 — 8 weeks</div>
+                <div style="font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 6px;">Mondays · 4–7pm · London + Zoom</div>
+
+                <div style="margin-top: 18px;">
+                  <div class="row"><span class="k">Places remaining</span><span class="v" style="color: var(--c-accent-2);">6 of 12</span></div>
+                  <div class="row"><span class="k">Applications close</span><span class="v">29 July 2026</span></div>
+                  <div class="row"><span class="k">Payment</span><span class="v">£3,500 · or 3×£1,200</span></div>
+                  <div class="row"><span class="k">Refund window</span><span class="v">After session 2</span></div>
+                </div>
+
+                <button class="btn accent full" style="margin-top: 18px;">Apply now →</button>
+              </div>
+            </section>
+
+            <!-- Objection FAQ -->
+            <section class="ms-section tinted">
+              <span class="chip on-tint">The questions you'll ask before applying</span>
+              <h2 class="h-display h2" style="margin-top: 16px; font-size: 24px;">If you've read this far, you have six.</h2>
+
+              <div style="margin-top: 22px;">
+                <div class="faq-item">
+                  <div class="q">I don't have 4 hours a week.<span class="plus">+</span></div>
+                  <div class="a">You probably do — but it'll come from somewhere. Most cohort members say week 3 is when they realise the time was always there.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Will my company expense this?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Can my whole team join?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">What if I miss a session?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Is there a money-back guarantee?<span class="plus">+</span></div>
+                </div>
+                <div class="faq-item">
+                  <div class="q">Will this work for non-tech leaders?<span class="plus">+</span></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Final CTA + scarcity reminder -->
+            <section class="ms-section dark" style="text-align: center; padding: 48px 20px 80px;">
+              <h2 class="h-display h2 on-dark" style="font-size: 32px;">August cohort.<br/><span style="color: var(--c-accent-2);">6 places left.</span></h2>
+              <p class="body on-dark" style="margin-top: 14px;">If you've read this far, you should apply. Worst case, we say no — and you've spent 5 minutes.</p>
+              <button class="btn accent full" style="margin-top: 20px;">Apply now →</button>
+              <p class="muted-small" style="color: rgba(255,255,255,0.5); margin-top: 12px;">Reviewed within 48 hours · no automated rejections</p>
+            </section>
+
+            <!-- Sticky CTA (appears mid-scroll, shown here as final position) -->
+            <div class="sticky-cta">
+              <div class="info">
+                <span class="l1">12 Aug · 6 places</span>
+                <span class="l2">£3,500</span>
+              </div>
+              <button class="btn accent">Apply →</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="design-note">
+          <div class="design-note-card">
+            <span class="l">Funnel discipline</span>
+            <b>Sticky CTA appears after the user scrolls past the hero</b> (not from page load — it'd compete with the primary CTA below the video). The minimal nav has no exit links — only Apply. Scarcity card is data-driven (real cohort date, real places left), not fake urgency. Six FAQ items — the objection handler is the longest single section deliberately.
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</body>
+</html>

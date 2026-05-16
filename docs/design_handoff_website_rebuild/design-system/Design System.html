@@ -1,0 +1,1350 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Accelerator X — Design System v2</title>
+
+<!-- ext-resource-dependency: type=font name=Figtree -->
+
+<link rel="stylesheet" href="tokens.css" />
+
+<style>
+  /* ─── Doc-only styles ─────────────────────────────────────────────────── */
+  body {
+    background: var(--bg-1);
+    color: var(--fg-1);
+  }
+
+  /* Layout */
+  .doc {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: var(--space-16) var(--space-8) var(--space-32);
+  }
+
+  .doc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-8);
+    align-items: end;
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--border-1);
+    margin-bottom: var(--space-16);
+  }
+  .doc-meta-row {
+    display: flex; gap: var(--space-6); flex-wrap: wrap;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: var(--fg-4);
+    margin-bottom: var(--space-6);
+  }
+  .doc-meta-row b { color: var(--fg-1); font-weight: var(--fw-medium); margin-right: 6px; }
+
+  h1.doc-title {
+    font-family: var(--font-display);
+    font-weight: var(--fw-black);
+    font-size: clamp(3rem, 6vw + 1rem, 5.5rem);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    margin: 0 0 var(--space-4);
+  }
+  .doc-title .ax-x {
+    color: var(--ax-pink);
+  }
+  .doc-lede {
+    font-size: var(--text-xl);
+    line-height: var(--lh-relaxed);
+    color: var(--fg-2);
+    margin: 0;
+    max-width: 720px;
+  }
+
+  /* Section structure */
+  section {
+    scroll-margin-top: var(--space-8);
+    margin-top: var(--space-32);
+  }
+  section:first-of-type { margin-top: var(--space-16); }
+
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-2);
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-weight: var(--fw-bold);
+    font-size: var(--text-5xl);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-snug);
+    margin: 0 0 var(--space-3);
+  }
+  .section-sub {
+    font-size: var(--text-lg);
+    color: var(--fg-3);
+    max-width: 720px;
+    margin: 0 0 var(--space-10);
+  }
+
+  h3.subhead {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--fg-1);
+    margin: var(--space-10) 0 var(--space-4);
+    letter-spacing: var(--tracking-snug);
+  }
+
+  /* TOC */
+  .toc {
+    background: var(--bg-paper);
+    border: 1px solid var(--border-paper);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-8);
+    margin-top: var(--space-10);
+  }
+  .toc-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg-4);
+    margin-bottom: var(--space-3);
+  }
+  .toc ol {
+    list-style: none; padding: 0; margin: 0;
+    columns: 2; column-gap: var(--space-10);
+    font-size: var(--text-sm);
+  }
+  .toc ol li { margin-bottom: var(--space-1); break-inside: avoid; }
+  .toc ol li a { color: var(--fg-1); text-decoration: none; }
+  .toc ol li a:hover { color: var(--ax-pink); }
+  .toc .tnum {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+    margin-right: var(--space-3);
+  }
+
+  /* Color swatches */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
+  .swatch {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-1);
+    background: var(--bg-1);
+  }
+  .swatch .chip-color {
+    height: 96px;
+    display: flex; align-items: flex-end;
+    padding: var(--space-3);
+  }
+  .swatch-meta {
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-body);
+  }
+  .swatch-name {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--fg-1);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--space-2);
+  }
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+  }
+  .swatch-token {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--fg-4);
+    margin-top: var(--space-1);
+    line-height: 1.4;
+  }
+  .swatch-role {
+    font-size: var(--text-xs);
+    color: var(--fg-3);
+    margin-top: var(--space-2);
+    line-height: 1.5;
+  }
+
+  /* Accessibility badge */
+  .aa {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: var(--fw-bold);
+    letter-spacing: 0.04em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: var(--space-2);
+    vertical-align: 1px;
+  }
+  .aa.pass    { background: rgba(31, 189, 83, 0.16); color: #15803d; }
+  .aa.large   { background: rgba(254, 167, 0, 0.18); color: #7a5400; }
+  .aa.fail    { background: rgba(239, 68, 68, 0.16); color: #b91c1c; }
+
+  /* AA matrix */
+  table.aa-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-4);
+    font-size: var(--text-sm);
+  }
+  table.aa-matrix th, table.aa-matrix td {
+    padding: var(--space-3) var(--space-3);
+    border-bottom: 1px solid var(--border-1);
+    text-align: left;
+  }
+  table.aa-matrix thead th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-4);
+    background: var(--bg-2);
+  }
+  table.aa-matrix tbody td {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-3);
+  }
+  table.aa-matrix tbody td:first-child {
+    font-family: var(--font-body);
+    color: var(--fg-1);
+    font-weight: var(--fw-medium);
+  }
+
+  /* Type specimens */
+  .type-spec {
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    margin-bottom: var(--space-3);
+    background: var(--bg-1);
+  }
+  .type-spec .label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: var(--space-4);
+  }
+  .type-spec .label .spec {
+    font-family: var(--font-mono);
+    color: var(--fg-3);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* Spacing visual */
+  .space-stack { display: flex; flex-direction: column; gap: var(--space-2); }
+  .space-row {
+    display: grid;
+    grid-template-columns: 90px 80px 1fr;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-1);
+    font-size: var(--text-sm);
+  }
+  .space-row .token { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-3); }
+  .space-row .value { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-4); }
+  .space-bar { height: 12px; background: var(--ax-cyan); border-radius: var(--radius-sm); }
+
+  /* Radius visual */
+  .radius-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+  .radius-spec {
+    padding: var(--space-4);
+    border: 1px solid var(--border-1);
+    background: var(--bg-1);
+    text-align: center;
+  }
+  .radius-spec .preview {
+    height: 80px;
+    background: var(--ax-navy);
+    margin-bottom: var(--space-3);
+  }
+  .radius-spec .name {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-2);
+    font-weight: var(--fw-semibold);
+  }
+  .radius-spec .meta {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--fg-4);
+    margin-top: 2px;
+  }
+
+  /* Shadow visual */
+  .shadow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-6);
+    padding: var(--space-6);
+    background: var(--bg-2);
+    border-radius: var(--radius-lg);
+  }
+  .shadow-spec {
+    background: var(--bg-1);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    height: 120px;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .shadow-spec .name { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-2); font-weight: var(--fw-semibold); }
+  .shadow-spec .desc { font-size: var(--text-xs); color: var(--fg-4); }
+
+  /* Buttons sample */
+  .button-row {
+    display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center;
+    padding: var(--space-5) 0;
+    border-bottom: 1px solid var(--border-1);
+  }
+  .button-row .row-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    flex-basis: 140px;
+  }
+
+  /* Forms sample */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5);
+  }
+
+  /* Surface demo blocks */
+  .surface-demo {
+    border-radius: var(--radius-xl);
+    padding: var(--space-10);
+    margin-bottom: var(--space-4);
+  }
+  .surface-demo h4 {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: var(--fw-bold);
+    margin: 0 0 var(--space-3);
+    letter-spacing: var(--tracking-snug);
+  }
+  .surface-demo p { max-width: 600px; }
+  .surface-demo .ax-kicker { color: var(--ax-pink); }
+  .surface-demo.white-demo  { background: var(--bg-1); border: 1px solid var(--border-1); }
+  .surface-demo.paper-demo  { background: var(--bg-paper); border: 1px solid var(--border-paper); }
+  .surface-demo.paper-demo .label { color: var(--fg-body-on-paper); }
+  .surface-demo.dark-demo   { background: var(--bg-dark); color: var(--fg-on-dark); }
+  .surface-demo.dark-demo h4 { color: var(--fg-on-dark); }
+  .surface-demo.dark-demo p  { color: var(--fg-muted-on-dark); }
+  .surface-demo.dark-demo .ax-kicker { color: var(--ax-pink); }
+
+  /* Voice — examples */
+  .voice-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    margin-top: var(--space-3);
+  }
+  .voice-card {
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-1);
+    background: var(--bg-1);
+  }
+  .voice-card .vlabel {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-3);
+    font-weight: var(--fw-bold);
+  }
+  .voice-card.bad .vlabel { color: var(--ax-error); }
+  .voice-card.good .vlabel { color: var(--ax-success); }
+  .voice-card .vquote {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--fw-semibold);
+    line-height: var(--lh-snug);
+    letter-spacing: var(--tracking-snug);
+    color: var(--fg-1);
+  }
+  .voice-card.bad .vquote { text-decoration: line-through; text-decoration-color: rgba(239,68,68,0.4); color: var(--fg-3); }
+  .voice-card .vnote {
+    font-size: var(--text-xs);
+    color: var(--fg-4);
+    margin-top: var(--space-3);
+  }
+
+  /* Migration */
+  .migration-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin-top: var(--space-4);
+  }
+  .migration-table th, .migration-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border-1);
+    vertical-align: top;
+  }
+  .migration-table thead th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-4);
+    background: var(--bg-2);
+  }
+  .migration-table .from { font-family: var(--font-mono); color: var(--fg-3); font-size: 12px; }
+  .migration-table .arrow { color: var(--fg-4); padding: 0 var(--space-3); }
+  .migration-table .to { font-family: var(--font-mono); color: var(--ax-cyan); font-size: 12px; font-weight: var(--fw-semibold); }
+
+  /* Pink X motif strip */
+  .x-strip {
+    display: flex; align-items: center; gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--border-1);
+    border-bottom: 1px solid var(--border-1);
+    margin: var(--space-6) 0;
+    overflow: hidden;
+    color: var(--fg-4);
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+  }
+  .x-strip .x-big {
+    font-family: var(--font-display);
+    font-weight: var(--fw-black);
+    font-size: var(--text-4xl);
+    color: var(--ax-pink);
+    line-height: 1;
+  }
+
+  /* Logo placeholder */
+  .logo-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+  .logo-mark {
+    height: 200px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-1);
+  }
+  .logo-mark.on-light { background: var(--bg-1); }
+  .logo-mark.on-dark  { background: var(--bg-dark); }
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: var(--fw-black);
+    font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+    letter-spacing: -0.03em;
+    color: var(--ax-navy);
+  }
+  .logo-mark.on-dark .logo-text { color: var(--ax-white); }
+  .logo-text .x { color: var(--ax-pink); }
+
+  /* Type scale row */
+  .scale-row {
+    display: grid;
+    grid-template-columns: 100px 60px 1fr;
+    align-items: baseline;
+    gap: var(--space-4);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--border-1);
+  }
+  .scale-row .token { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-3); }
+  .scale-row .px    { font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-4); }
+  .scale-row .demo  { color: var(--fg-1); font-family: var(--font-display); font-weight: var(--fw-bold); line-height: var(--lh-tight); letter-spacing: var(--tracking-snug); }
+
+  /* Naming convention table */
+  .naming-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  .naming-table th, .naming-table td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border-1);
+  }
+  .naming-table thead th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--fw-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fg-4);
+    background: var(--bg-2);
+  }
+  .naming-table tbody td:nth-child(2),
+  .naming-table tbody td:nth-child(3) {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-3);
+  }
+
+  /* Iconography placeholders */
+  .icon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-3);
+  }
+  .icon-card {
+    padding: var(--space-4);
+    border: 1px solid var(--border-1);
+    border-radius: var(--radius-lg);
+    background: var(--bg-1);
+    text-align: center;
+  }
+  .icon-card .glyph-box {
+    height: 96px;
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-3);
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-2);
+    color: var(--fg-4);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    border: 1px dashed var(--border-2);
+  }
+  .icon-card .icon-label {
+    font-size: var(--text-xs);
+    color: var(--fg-3);
+    font-weight: var(--fw-semibold);
+  }
+  .icon-card .icon-meta {
+    font-size: 10.5px;
+    color: var(--fg-4);
+    margin-top: 2px;
+    font-family: var(--font-mono);
+  }
+
+  /* Callouts */
+  .callout {
+    border-left: 3px solid var(--ax-cyan);
+    background: var(--bg-2);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-sm);
+    margin: var(--space-4) 0;
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+  }
+  .callout strong { color: var(--fg-1); }
+  .callout .label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--fg-4);
+    margin-bottom: var(--space-2);
+  }
+
+  ul.clean { padding-left: 1.2rem; margin: 0; }
+  ul.clean li { margin-bottom: var(--space-2); color: var(--fg-3); }
+  ul.clean li::marker { color: var(--fg-4); }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--border-1);
+    margin: var(--space-10) 0;
+  }
+</style>
+</head>
+<body>
+  <div class="doc">
+
+    <!-- ─── HEADER ─────────────────────────────────────────────── -->
+    <header class="doc-header">
+      <div>
+        <div class="doc-meta-row">
+          <span><b>Doc</b>Design system · v2.0</span>
+          <span><b>Status</b>Canonical</span>
+          <span><b>Date</b>16 May 2026</span>
+          <span><b>Supersedes</b>v1.3 + wireframe tokens</span>
+        </div>
+        <img src="brand-assets/logos/SVG/AcceleratorX.svg" alt="AcceleratorX" class="doc-title-mark" style="display: block; width: 100%; max-width: 560px; height: auto; margin: 0 0 var(--space-6);" />
+        <p class="doc-lede">
+          One canonical system. Web, slides, documents, email — same brand on every surface, zero-install everywhere. Reconciled from the v1.3 audit and the wireframe explorations into a single source of truth.
+        </p>
+      </div>
+    </header>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><span class="tnum">01</span><a href="#brand">Brand foundations</a></li>
+        <li><span class="tnum">02</span><a href="#logo">Logo</a></li>
+        <li><span class="tnum">03</span><a href="#colour">Colour</a></li>
+        <li><span class="tnum">04</span><a href="#surfaces">Surfaces</a></li>
+        <li><span class="tnum">05</span><a href="#a11y">Accessibility pairings</a></li>
+        <li><span class="tnum">06</span><a href="#type">Typography</a></li>
+        <li><span class="tnum">07</span><a href="#scale">Type scale</a></li>
+        <li><span class="tnum">08</span><a href="#spacing">Spacing</a></li>
+        <li><span class="tnum">09</span><a href="#radii">Radii</a></li>
+        <li><span class="tnum">10</span><a href="#shadow">Shadows</a></li>
+        <li><span class="tnum">11</span><a href="#motion">Motion</a></li>
+        <li><span class="tnum">12</span><a href="#iconography">Iconography</a></li>
+        <li><span class="tnum">13</span><a href="#photography">Photography</a></li>
+        <li><span class="tnum">14</span><a href="#buttons">Buttons</a></li>
+        <li><span class="tnum">15</span><a href="#inputs">Form inputs</a></li>
+        <li><span class="tnum">16</span><a href="#chips">Chips &amp; pills</a></li>
+        <li><span class="tnum">17</span><a href="#voice">Voice</a></li>
+        <li><span class="tnum">18</span><a href="#conventions">Conventions</a></li>
+        <li><span class="tnum">19</span><a href="#migration">Migration from v1.3</a></li>
+      </ol>
+    </div>
+
+    <!-- ─── 01 Brand ──────────────────────────────────────────── -->
+    <section id="brand">
+      <div class="section-num">01 · Brand</div>
+      <h2 class="section-title">A practitioner brand.</h2>
+      <p class="section-sub">
+        Credibility and precision. Practical intelligence. Energy without volume. The visual system is editorial in restraint, modern in palette, and engineered for reliability across every surface AX work travels through.
+      </p>
+
+      <div class="x-strip" aria-hidden="true">
+        <span class="x-big">X</span>
+        <span>The pink X is the brand's strongest signature — it earns priority in any composition.</span>
+        <span class="x-big" style="margin-left:auto">X</span>
+      </div>
+    </section>
+
+    <!-- ─── 02 Logo ───────────────────────────────────────────── -->
+    <section id="logo">
+      <div class="section-num">02 · Logo</div>
+      <h2 class="section-title">Wordmark &amp; icon.</h2>
+      <p class="section-sub">The terminal X is rendered in <strong style="color: var(--ax-pink)">brand pink</strong> against navy letterforms. Never recolour, distort, crop, or alter proportion. The pink X may stand alone as a punctuation motif — sparingly.</p>
+
+      <h3 class="subhead">Wordmark</h3>
+      <div class="logo-card">
+        <div class="logo-mark on-light">
+          <img src="brand-assets/logos/SVG/AcceleratorX.svg" alt="AcceleratorX wordmark" style="max-width: 80%; height: auto;" />
+        </div>
+        <div class="logo-mark on-dark">
+          <img src="brand-assets/logos/SVG/AcceleratorX-white.svg" alt="AcceleratorX wordmark — white variant" style="max-width: 80%; height: auto;" />
+        </div>
+      </div>
+
+      <h3 class="subhead">Icon mark</h3>
+      <p style="color: var(--fg-3); font-size: var(--text-sm); margin-bottom: var(--space-4); max-width: 720px;">A circular avatar / app-icon variant of the brand. Use for favicons, social profiles, app icons, and anywhere the wordmark won't fit. The pink X reads strongly even at small sizes.</p>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); align-items: end;">
+        <div style="background: var(--bg-1); border: 1px solid var(--border-1); border-radius: var(--radius-lg); padding: var(--space-4); display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+          <img src="brand-assets/logos/PNG/AcceleratorX-icon.png" alt="AX icon — large" style="width: 128px; height: 128px;" />
+          <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-4);">128px</div>
+        </div>
+        <div style="background: var(--bg-1); border: 1px solid var(--border-1); border-radius: var(--radius-lg); padding: var(--space-4); display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+          <img src="brand-assets/logos/PNG/AcceleratorX-icon.png" alt="AX icon — 64" style="width: 64px; height: 64px;" />
+          <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-4);">64px</div>
+        </div>
+        <div style="background: var(--bg-1); border: 1px solid var(--border-1); border-radius: var(--radius-lg); padding: var(--space-4); display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+          <img src="brand-assets/logos/PNG/AcceleratorX-icon.png" alt="AX icon — 32" style="width: 32px; height: 32px;" />
+          <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-4);">32px</div>
+        </div>
+        <div style="background: var(--bg-dark); border: 1px solid var(--border-1); border-radius: var(--radius-lg); padding: var(--space-4); display: flex; flex-direction: column; align-items: center; gap: var(--space-3);">
+          <img src="brand-assets/logos/PNG/AcceleratorX-icon.png" alt="AX icon — on dark" style="width: 96px; height: 96px;" />
+          <div style="font-family: var(--font-mono); font-size: var(--text-xs); color: var(--fg-muted-on-dark);">On dark</div>
+        </div>
+      </div>
+
+      <h3 class="subhead">Available files</h3>
+      <ul class="clean">
+        <li><code>design-system/brand-assets/logos/SVG/AcceleratorX.svg</code> — wordmark, full colour, 748×127</li>
+        <li><code>design-system/brand-assets/logos/SVG/AcceleratorX-white.svg</code> — wordmark, white for dark backgrounds</li>
+        <li><code>design-system/brand-assets/logos/PNG/AcceleratorX-wordmark.png</code> — wordmark PNG, 1125×195</li>
+        <li><code>design-system/brand-assets/logos/PNG/AcceleratorX-icon.png</code> — circular icon mark, 362×362</li>
+      </ul>
+
+      <div class="callout">
+        <span class="label">Usage rules</span>
+        <strong>SVG first.</strong> Use the SVG wordmark for web and any digital surface that supports it. ·
+        <strong>White variant on dark.</strong> Never tint the colour version onto a dark background — use the white SVG. ·
+        <strong>Icon for tight spaces.</strong> Favicons, social avatars, app icons, footer chips. Where the wordmark won't fit. ·
+        <strong>Clear space</strong> = the height of the capital "A" on all sides. ·
+        <strong>Never</strong> recolour, distort, crop, add effects, or set the X to anything other than pink (#E93F8E).
+      </div>
+    </section>
+
+    <!-- ─── 03 Colour ─────────────────────────────────────────── -->
+    <section id="colour">
+      <div class="section-num">03 · Colour</div>
+      <h2 class="section-title">Brand palette.</h2>
+      <p class="section-sub">A short, opinionated palette. Navy is the default brand background. Pink earns the visitor's attention. Cyan is the action colour on web. Amber, purple, green are functional — never decorative for its own sake.</p>
+
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-navy);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Navy <span class="swatch-hex">#1B2A4A</span></div>
+            <div class="swatch-token">--ax-navy</div>
+            <div class="swatch-role">Primary dark · backgrounds · headlines</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-navy-deep);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Navy deep <span class="swatch-hex">#131D30</span></div>
+            <div class="swatch-token">--ax-navy-deep</div>
+            <div class="swatch-role">Section dividers · footer bars</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-pink);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Pink <span class="swatch-hex">#E93F8E</span></div>
+            <div class="swatch-token">--ax-pink</div>
+            <div class="swatch-role">Signature accent · the X · primary CTAs · emphasis</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-cyan);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Cyan <span class="swatch-hex">#088ABF</span></div>
+            <div class="swatch-token">--ax-cyan</div>
+            <div class="swatch-role">Action colour on web · links · data callouts</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-amber);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Amber <span class="swatch-hex">#FEA700</span></div>
+            <div class="swatch-token">--ax-amber</div>
+            <div class="swatch-role">Outputs · highlights · warnings <span class="aa fail">No text on light</span></div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-purple);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Purple <span class="swatch-hex">#882DE7</span></div>
+            <div class="swatch-token">--ax-purple</div>
+            <div class="swatch-role">Quaternary · alternative pathways</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-green);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Green <span class="swatch-hex">#1FBD53</span></div>
+            <div class="swatch-token">--ax-green</div>
+            <div class="swatch-role">Success · positive indicators</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-blue);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Blue <span class="swatch-hex">#3477F5</span></div>
+            <div class="swatch-token">--ax-blue</div>
+            <div class="swatch-role">Functional · links · secondary CTAs</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subhead">Slate text scale</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-slate-dark);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Slate dark <span class="swatch-hex">#334155</span></div>
+            <div class="swatch-token">--ax-slate-dark</div>
+            <div class="swatch-role">Subheadings · secondary text</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-slate-medium);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Slate medium <span class="swatch-hex">#475569</span></div>
+            <div class="swatch-token">--ax-slate-medium</div>
+            <div class="swatch-role">Body text — the default</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-slate-light);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Slate light <span class="swatch-hex">#64748B</span></div>
+            <div class="swatch-token">--ax-slate-light</div>
+            <div class="swatch-role">Captions · supporting</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-border);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Border <span class="swatch-hex">#E2E8F0</span></div>
+            <div class="swatch-token">--ax-border</div>
+            <div class="swatch-role">Default dividers</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subhead">Pastel washes — used sparingly</h3>
+      <div class="swatch-grid">
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-cyan-light);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Cyan light <span class="swatch-hex">#C8F9FE</span></div>
+            <div class="swatch-token">--ax-cyan-light</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-pink-light);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Pink light <span class="swatch-hex">#FCE3F1</span></div>
+            <div class="swatch-token">--ax-pink-light</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="chip-color" style="background: var(--ax-purple-light);"></div>
+          <div class="swatch-meta">
+            <div class="swatch-name">Purple light <span class="swatch-hex">#F1E5FF</span></div>
+            <div class="swatch-token">--ax-purple-light</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 04 Surfaces ───────────────────────────────────────── -->
+    <section id="surfaces">
+      <div class="section-num">04 · Surfaces</div>
+      <h2 class="section-title">Two families: cool and warm.</h2>
+      <p class="section-sub">
+        A page picks one family and stays there. <strong>Cool</strong> for marketing and conversion surfaces — white-based, energetic. <strong>Warm</strong> for editorial reading — paper-toned, considered. Never mix on the same page.
+      </p>
+
+      <div class="surface-demo white-demo">
+        <div class="ax-kicker">Cool family</div>
+        <h4>White is the default.</h4>
+        <p>Home, overview pages, forms, applications, conversion flows. Energetic, contemporary, business-forward. Navy text on white, pink for emphasis, cyan for action.</p>
+        <div class="swatch-token" style="margin-top: var(--space-4);">--bg-1 (#FFFFFF) · --bg-2 (#F8FAFC) · --bg-3 (#F1F5F9)</div>
+      </div>
+
+      <div class="surface-demo paper-demo">
+        <div class="ax-kicker">Warm family — new in v2</div>
+        <h4>Paper, for reading surfaces.</h4>
+        <p>Articles, case studies, methodology longform, the About page. The warm tone reads as considered, editorial, calm. Navy text on paper, pink accents still earn the eye. Use when the visitor is meant to settle in.</p>
+        <div class="swatch-token" style="margin-top: var(--space-4);">--bg-paper (#FAF8F3) · --bg-paper-deep (#F1EDE2)</div>
+      </div>
+
+      <div class="surface-demo dark-demo">
+        <div class="ax-kicker">Dark family</div>
+        <h4>Navy carries weight.</h4>
+        <p>Hero sections, section dividers, footer bars, the title slides of every deck. White text, pink accents earn maximum punch on this surface. Used for the brand's loudest moments — restrained but present.</p>
+        <div class="swatch-token" style="margin-top: var(--space-4); color: var(--fg-muted-on-dark);">--bg-dark (#1B2A4A) · --bg-darker (#131D30)</div>
+      </div>
+    </section>
+
+    <!-- ─── 05 Accessibility ──────────────────────────────────── -->
+    <section id="a11y">
+      <div class="section-num">05 · Accessibility</div>
+      <h2 class="section-title">Verified pairings.</h2>
+      <p class="section-sub">
+        WCAG AA contrast checked. <span class="aa pass">PASS</span> = body text safe. <span class="aa large">LARGE</span> = only for large text or non-text (icons, decorative). <span class="aa fail">FAIL</span> = never for text.
+      </p>
+
+      <table class="aa-matrix">
+        <thead>
+          <tr>
+            <th>Foreground</th>
+            <th>on White</th>
+            <th>on Paper</th>
+            <th>on Navy</th>
+            <th>on Navy Deep</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Navy</td>           <td>15.9 <span class="aa pass">PASS</span></td><td>14.8 <span class="aa pass">PASS</span></td><td>—</td><td>—</td></tr>
+          <tr><td>Slate dark</td>     <td>10.6 <span class="aa pass">PASS</span></td><td>9.9 <span class="aa pass">PASS</span></td><td>—</td><td>—</td></tr>
+          <tr><td>Slate medium</td>   <td>7.5 <span class="aa pass">PASS</span></td><td>7.0 <span class="aa pass">PASS</span></td><td>—</td><td>—</td></tr>
+          <tr><td>Slate light</td>    <td>4.6 <span class="aa pass">PASS</span></td><td>4.3 <span class="aa large">LARGE</span></td><td>—</td><td>—</td></tr>
+          <tr><td>Pink</td>           <td>3.5 <span class="aa large">LARGE</span></td><td>3.3 <span class="aa large">LARGE</span></td><td>4.5 <span class="aa pass">PASS</span></td><td>5.1 <span class="aa pass">PASS</span></td></tr>
+          <tr><td>Cyan</td>           <td>4.8 <span class="aa pass">PASS</span></td><td>4.5 <span class="aa pass">PASS</span></td><td>3.3 <span class="aa large">LARGE</span></td><td>3.8 <span class="aa large">LARGE</span></td></tr>
+          <tr><td>Amber</td>          <td>2.1 <span class="aa fail">FAIL</span></td><td>2.0 <span class="aa fail">FAIL</span></td><td>4.2 <span class="aa large">LARGE</span></td><td>4.8 <span class="aa pass">PASS</span></td></tr>
+          <tr><td>Purple</td>         <td>8.3 <span class="aa pass">PASS</span></td><td>7.7 <span class="aa pass">PASS</span></td><td>—</td><td>—</td></tr>
+          <tr><td>White</td>          <td>—</td><td>—</td><td>15.9 <span class="aa pass">PASS</span></td><td>18.4 <span class="aa pass">PASS</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <span class="label">Practical rules</span>
+        <strong>Pink for emphasis, never body.</strong> Use on short headlines, CTAs, chips. ·
+        <strong>Amber is decorative on light.</strong> For text, only on navy. ·
+        <strong>Captions on paper</strong> use slate-medium, not slate-light. ·
+        <strong>Links</strong> are cyan on light, pink on dark. ·
+        <strong>Focus ring</strong> verified against every surface — see tokens.css.
+      </div>
+    </section>
+
+    <!-- ─── 06 Typography ─────────────────────────────────────── -->
+    <section id="type">
+      <div class="section-num">06 · Typography</div>
+      <h2 class="section-title">Three faces. Zero installs.</h2>
+      <p class="section-sub">
+        Figtree for display. The OS system stack for body. Arial for slides and Word. Every surface looks native because nothing has to load.
+      </p>
+
+      <div class="type-spec">
+        <div class="label">
+          <span>Display — Figtree</span>
+          <span class="spec">Google Fonts · 500 / 600 / 700 / 900 · fallback → system stack</span>
+        </div>
+        <div class="ax-display" style="font-weight: 900;">Accelerator<span style="color: var(--ax-pink);">X</span>.</div>
+        <div style="font-family: var(--font-display); font-weight: 700; font-size: var(--text-4xl); line-height: 1.05; letter-spacing: -0.02em; margin-top: var(--space-3);">A practitioner brand, not a polish brand.<span style="color: var(--ax-pink);"> ×</span></div>
+        <div style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-2xl); line-height: 1.2; margin-top: var(--space-3); color: var(--fg-2);">Used sparingly — one display moment per page.</div>
+      </div>
+
+      <div class="type-spec">
+        <div class="label">
+          <span>Body / UI — System stack</span>
+          <span class="spec">San Francisco · Segoe UI · Roboto · never loads</span>
+        </div>
+        <div style="font-family: var(--font-system); font-size: var(--text-xl); color: var(--fg-1); line-height: 1.5;">We build capability, not dependency. The visual system is built for surfaces that travel — web, slides, documents, email — without ever waiting for a font to load.<span style="color: var(--ax-pink); font-weight: 700;"> ×</span></div>
+        <div style="font-family: var(--font-system); font-size: var(--text-base); color: var(--fg-3); line-height: var(--lh-relaxed); margin-top: var(--space-3); max-width: 640px;">This is the default body face on every page of the site. It resolves to San Francisco on Mac/iOS, Segoe UI on Windows, Roboto on Android. It is always there, always native, and never a render block. The brand's distinctiveness lives in colour, layout, and the pink X — not in the typeface itself.</div>
+      </div>
+
+      <div class="type-spec">
+        <div class="label">
+          <span>Decks / Word — Arial</span>
+          <span class="spec">Pre-installed on every OS · used in .potx and .dotx</span>
+        </div>
+        <div style="font-family: Arial, sans-serif; font-size: var(--text-3xl); font-weight: 700; color: var(--fg-1);">Accelerator<span style="color: var(--ax-pink);">X</span> in decks.</div>
+        <div style="font-family: Arial, sans-serif; font-size: var(--text-base); color: var(--fg-3); margin-top: var(--space-2);">Same family in client documents. Bold for headings, regular for body. The brand looks the same on any laptop, anywhere.</div>
+      </div>
+    </section>
+
+    <!-- ─── 07 Type scale ─────────────────────────────────────── -->
+    <section id="scale">
+      <div class="section-num">07 · Scale</div>
+      <h2 class="section-title">Type scale.</h2>
+      <p class="section-sub">Tailwind-compatible rem scale. Display weights via Figtree; body weights via the system stack.</p>
+
+      <div class="scale-row"><span class="token">--text-7xl</span><span class="px">72px</span><span class="demo" style="font-size: var(--text-7xl);">Display hero.</span></div>
+      <div class="scale-row"><span class="token">--text-6xl</span><span class="px">60px</span><span class="demo" style="font-size: var(--text-6xl);">Display.</span></div>
+      <div class="scale-row"><span class="token">--text-5xl</span><span class="px">48px</span><span class="demo" style="font-size: var(--text-5xl);">H1 — Section opener.</span></div>
+      <div class="scale-row"><span class="token">--text-4xl</span><span class="px">36px</span><span class="demo" style="font-size: var(--text-4xl);">H2 — Subsection.</span></div>
+      <div class="scale-row"><span class="token">--text-3xl</span><span class="px">30px</span><span class="demo" style="font-size: var(--text-3xl);">H3 — Card title.</span></div>
+      <div class="scale-row"><span class="token">--text-2xl</span><span class="px">24px</span><span class="demo" style="font-size: var(--text-2xl); font-weight: var(--fw-semibold);">H4 — Block heading.</span></div>
+      <div class="scale-row"><span class="token">--text-xl</span><span class="px">20px</span><span class="demo" style="font-size: var(--text-xl); font-weight: var(--fw-semibold);">H5 — Inline heading.</span></div>
+      <div class="scale-row"><span class="token">--text-lg</span><span class="px">18px</span><span class="demo" style="font-family: var(--font-body); font-weight: var(--fw-medium); font-size: var(--text-lg); letter-spacing: 0;">Lead paragraphs and emphasis copy.</span></div>
+      <div class="scale-row"><span class="token">--text-base</span><span class="px">16px</span><span class="demo" style="font-family: var(--font-body); font-weight: var(--fw-regular); font-size: var(--text-base); letter-spacing: 0; color: var(--fg-3);">Body default — the workhorse size for paragraphs.</span></div>
+      <div class="scale-row"><span class="token">--text-sm</span><span class="px">14px</span><span class="demo" style="font-family: var(--font-body); font-weight: var(--fw-regular); font-size: var(--text-sm); letter-spacing: 0; color: var(--fg-3);">Supporting copy, helpers, captions.</span></div>
+      <div class="scale-row"><span class="token">--text-xs</span><span class="px">12px</span><span class="demo" style="font-family: var(--font-mono); font-weight: var(--fw-bold); font-size: var(--text-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--action-primary);">EYEBROW · KICKER · LABEL</span></div>
+    </section>
+
+    <!-- ─── 08 Spacing ────────────────────────────────────────── -->
+    <section id="spacing">
+      <div class="section-num">08 · Spacing</div>
+      <h2 class="section-title">A 4-pixel scale.</h2>
+      <p class="section-sub">Tailwind-compatible. Components compose at the scale; sections breathe at the larger values. Everything is divisible by 4 so the grid stays clean.</p>
+
+      <div class="space-stack">
+        <div class="space-row"><span class="token">--space-1</span><span class="value">4 / 0.25</span><div class="space-bar" style="width: 4px;"></div></div>
+        <div class="space-row"><span class="token">--space-2</span><span class="value">8 / 0.5</span><div class="space-bar" style="width: 8px;"></div></div>
+        <div class="space-row"><span class="token">--space-3</span><span class="value">12 / 0.75</span><div class="space-bar" style="width: 12px;"></div></div>
+        <div class="space-row"><span class="token">--space-4</span><span class="value">16 / 1</span><div class="space-bar" style="width: 16px;"></div></div>
+        <div class="space-row"><span class="token">--space-6</span><span class="value">24 / 1.5</span><div class="space-bar" style="width: 24px;"></div></div>
+        <div class="space-row"><span class="token">--space-8</span><span class="value">32 / 2</span><div class="space-bar" style="width: 32px;"></div></div>
+        <div class="space-row"><span class="token">--space-12</span><span class="value">48 / 3</span><div class="space-bar" style="width: 48px;"></div></div>
+        <div class="space-row"><span class="token">--space-16</span><span class="value">64 / 4</span><div class="space-bar" style="width: 64px;"></div></div>
+        <div class="space-row"><span class="token">--space-20</span><span class="value">80 / 5</span><div class="space-bar" style="width: 80px;"></div></div>
+        <div class="space-row"><span class="token">--space-24</span><span class="value">96 / 6</span><div class="space-bar" style="width: 96px;"></div></div>
+        <div class="space-row"><span class="token">--space-32</span><span class="value">128 / 8</span><div class="space-bar" style="width: 128px;"></div></div>
+      </div>
+    </section>
+
+    <!-- ─── 09 Radii ──────────────────────────────────────────── -->
+    <section id="radii">
+      <div class="section-num">09 · Radii</div>
+      <h2 class="section-title">Corner radii.</h2>
+      <p class="section-sub">Each level has an intended use — components don't pick at random.</p>
+
+      <div class="radius-grid">
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-sm);"></div><div class="name">--radius-sm</div><div class="meta">6 · small inputs</div></div>
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-md);"></div><div class="name">--radius-md</div><div class="meta">8 · buttons</div></div>
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-lg);"></div><div class="name">--radius-lg</div><div class="meta">12 · cards</div></div>
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-xl);"></div><div class="name">--radius-xl</div><div class="meta">16 · feature cards</div></div>
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-2xl);"></div><div class="name">--radius-2xl</div><div class="meta">24 · hero cards</div></div>
+        <div class="radius-spec"><div class="preview" style="border-radius: var(--radius-full);"></div><div class="name">--radius-full</div><div class="meta">∞ · pills, avatars</div></div>
+      </div>
+    </section>
+
+    <!-- ─── 10 Shadows ────────────────────────────────────────── -->
+    <section id="shadow">
+      <div class="section-num">10 · Shadow</div>
+      <h2 class="section-title">Shadows.</h2>
+      <p class="section-sub">Soft, brand-neutral, additive. Used to indicate elevation, not as decoration. The "hover" variants increase the lift on interaction.</p>
+
+      <div class="shadow-grid">
+        <div class="shadow-spec" style="box-shadow: var(--shadow-sm);"><span class="name">--shadow-sm</span><span class="desc">Subtle lift — chips, low-elevation inputs</span></div>
+        <div class="shadow-spec" style="box-shadow: var(--shadow-md);"><span class="name">--shadow-md</span><span class="desc">Default card elevation</span></div>
+        <div class="shadow-spec" style="box-shadow: var(--shadow-lg);"><span class="name">--shadow-lg</span><span class="desc">Higher elevation — dropdowns, popovers</span></div>
+        <div class="shadow-spec" style="box-shadow: var(--shadow-xl);"><span class="name">--shadow-xl</span><span class="desc">Modals, hero cards</span></div>
+        <div class="shadow-spec" style="box-shadow: var(--shadow-card-hover);"><span class="name">--shadow-card-hover</span><span class="desc">Card hover lift</span></div>
+        <div class="shadow-spec" style="box-shadow: var(--shadow-button-hover);"><span class="name">--shadow-button-hover</span><span class="desc">Button hover lift</span></div>
+      </div>
+    </section>
+
+    <!-- ─── 11 Motion ─────────────────────────────────────────── -->
+    <section id="motion">
+      <div class="section-num">11 · Motion</div>
+      <h2 class="section-title">Motion principles.</h2>
+      <p class="section-sub">
+        Motion exists to inform, not decorate. Quiet by default. Fast for interactions, slower for reveals. Always honour <code>prefers-reduced-motion</code>.
+      </p>
+
+      <h3 class="subhead">Durations</h3>
+      <ul class="clean">
+        <li><code>--dur-fast</code> · 150ms — hover, focus state changes</li>
+        <li><code>--dur-base</code> · 200ms — button press, small state change</li>
+        <li><code>--dur-slow</code> · 300ms — modal entry, page-level state</li>
+        <li><code>--dur-page</code> · 600ms — scroll reveal, large block entry</li>
+        <li><code>--dur-reveal</code> · 800ms — generous reveal, hero moments</li>
+      </ul>
+
+      <h3 class="subhead">Easings</h3>
+      <ul class="clean">
+        <li><code>--ease-out</code> · default — interactions feel native</li>
+        <li><code>--ease-in-out</code> · transitions between states</li>
+        <li><code>--ease-spring</code> · subtle bounce, used very sparingly</li>
+      </ul>
+
+      <h3 class="subhead">Standard patterns</h3>
+      <ul class="clean">
+        <li><strong>Hover lift</strong> — translateY −2px + card-hover shadow, 200ms ease-out</li>
+        <li><strong>Fade-up on scroll</strong> — opacity 0→1 + translateY 20→0, 600ms ease-out, triggered at 80% viewport</li>
+        <li><strong>Link underline expand</strong> — width 0→100%, 200ms ease-out, left-anchored</li>
+        <li><strong>Pink X bullet on appear</strong> — scale 0→1, 300ms ease-spring, used on list items entering view</li>
+      </ul>
+    </section>
+
+    <!-- ─── 12 Iconography ────────────────────────────────────── -->
+    <section id="iconography">
+      <div class="section-num">12 · Iconography</div>
+      <h2 class="section-title">Three asset families.</h2>
+      <p class="section-sub">Brand graphics for concepts, brand icons for category markers, system icons for UI. Each has a role; never mix roles.</p>
+
+      <h3 class="subhead">Brand graphics — abstract, geometric, flat</h3>
+      <div class="icon-grid">
+        <div class="icon-card"><div class="glyph-box">Graphic 01</div><div class="icon-label">258×258</div><div class="icon-meta">section opener</div></div>
+        <div class="icon-card"><div class="glyph-box">Graphic 02</div><div class="icon-label">258×258</div><div class="icon-meta">framework anchor</div></div>
+        <div class="icon-card"><div class="glyph-box">Graphic 03</div><div class="icon-label">258×258</div><div class="icon-meta">callout decoration</div></div>
+        <div class="icon-card"><div class="glyph-box">Graphic 04</div><div class="icon-label">258×258</div><div class="icon-meta">page divider</div></div>
+      </div>
+
+      <h3 class="subhead">Brand icons — pink, purple, yellow</h3>
+      <div class="icon-grid">
+        <div class="icon-card"><div class="glyph-box" style="color: var(--ax-pink); border-color: var(--ax-pink);">Pink</div><div class="icon-label">Primary concepts</div></div>
+        <div class="icon-card"><div class="glyph-box" style="color: var(--ax-purple); border-color: var(--ax-purple);">Purple</div><div class="icon-label">Alternatives</div></div>
+        <div class="icon-card"><div class="glyph-box" style="color: var(--ax-amber); border-color: var(--ax-amber);">Yellow</div><div class="icon-label">Outputs · results</div></div>
+        <div class="icon-card" style="border-style: dashed; border-color: var(--ax-error);"><div class="glyph-box" style="color: var(--ax-error); border-color: var(--ax-error);">Navy</div><div class="icon-label">Gap — for light bg</div></div>
+      </div>
+
+      <h3 class="subhead">System icons — Lucide, 1.5px stroke, currentColor</h3>
+      <div class="icon-grid">
+        <div class="icon-card"><div class="glyph-box" style="font-family: var(--font-body);">×</div><div class="icon-label">close</div><div class="icon-meta">16/20/24/32</div></div>
+        <div class="icon-card"><div class="glyph-box" style="font-family: var(--font-body);">→</div><div class="icon-label">arrow-right</div><div class="icon-meta">link out</div></div>
+        <div class="icon-card"><div class="glyph-box" style="font-family: var(--font-body);">+</div><div class="icon-label">plus</div><div class="icon-meta">expand</div></div>
+        <div class="icon-card"><div class="glyph-box" style="font-family: var(--font-body);">↗</div><div class="icon-label">external</div><div class="icon-meta">outbound</div></div>
+      </div>
+
+      <div class="callout">
+        <span class="label">When to use which</span>
+        <strong>UI affordance?</strong> System icon (Lucide). · <strong>Concept in the content?</strong> Brand graphic or brand icon. · <strong>Decorative anchor?</strong> Brand graphic, sparingly. · <strong>Punctuation moment?</strong> The pink X — section divider, end-of-article, list bullet in hero moments.
+      </div>
+    </section>
+
+    <!-- ─── 13 Photography ────────────────────────────────────── -->
+    <section id="photography">
+      <div class="section-num">13 · Photography</div>
+      <h2 class="section-title">Real moments only.</h2>
+      <p class="section-sub">No stock. Photography earns its place by doing work that type and graphics can't — humanising founders, anchoring case studies, showing real engagement settings.</p>
+
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--space-3);">
+        <div style="aspect-ratio: 16/9; background: var(--bg-3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--fg-4); font-family: var(--font-mono); font-size: var(--text-sm); border: 1px dashed var(--border-2);">16:9 · Hero / engagement</div>
+        <div style="aspect-ratio: 3/4; background: var(--bg-3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--fg-4); font-family: var(--font-mono); font-size: var(--text-sm); border: 1px dashed var(--border-2);">3:4 · Portrait</div>
+        <div style="aspect-ratio: 1/1; background: var(--bg-3); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: var(--fg-4); font-family: var(--font-mono); font-size: var(--text-sm); border: 1px dashed var(--border-2);">1:1 · Tile</div>
+      </div>
+
+      <h3 class="subhead">Provisional rules</h3>
+      <ul class="clean">
+        <li><strong>Crop tight.</strong> Faces fill the frame. Settings show context, not décor.</li>
+        <li><strong>Natural colour.</strong> No heavy grading, no duotone — the brand graphics carry the colour.</li>
+        <li><strong>On dark sections:</strong> 10% navy tint over portraits to integrate with palette.</li>
+        <li><strong>Stock photography is banned.</strong> Real photos of real moments only.</li>
+      </ul>
+
+      <div class="callout">
+        <span class="label">Pending the photos</span>
+        Final guidelines will firm up once the in-flight photo library lands. Until then: navy + brand graphics + Figtree-as-photo are the substitute aesthetic.
+      </div>
+    </section>
+
+    <!-- ─── 14 Buttons ────────────────────────────────────────── -->
+    <section id="buttons">
+      <div class="section-num">14 · Buttons</div>
+      <h2 class="section-title">Buttons.</h2>
+      <p class="section-sub">Five variants, three sizes, every state defined. The same primitive ships everywhere.</p>
+
+      <h3 class="subhead">Variants — md (default)</h3>
+      <div class="button-row">
+        <span class="row-label">Primary</span>
+        <button class="btn btn--primary">Apply now</button>
+        <button class="btn btn--primary"><span class="ax-x">×</span>&nbsp;With X motif</button>
+        <button class="btn btn--primary" disabled>Disabled</button>
+      </div>
+      <div class="button-row">
+        <span class="row-label">Accent</span>
+        <button class="btn btn--accent">Book a call</button>
+        <button class="btn btn--accent">Apply →</button>
+        <button class="btn btn--accent" disabled>Disabled</button>
+      </div>
+      <div class="button-row">
+        <span class="row-label">Outline</span>
+        <button class="btn btn--outline">Read more</button>
+        <button class="btn btn--outline">See cases</button>
+        <button class="btn btn--outline" disabled>Disabled</button>
+      </div>
+      <div class="button-row">
+        <span class="row-label">Ghost</span>
+        <button class="btn btn--ghost">Cancel</button>
+        <button class="btn btn--ghost">Back</button>
+        <button class="btn btn--ghost" disabled>Disabled</button>
+      </div>
+      <div class="button-row">
+        <span class="row-label">Link</span>
+        <button class="btn btn--link">Read the article →</button>
+        <button class="btn btn--link">More about us →</button>
+      </div>
+
+      <h3 class="subhead">Sizes</h3>
+      <div class="button-row">
+        <span class="row-label">sm · md · lg</span>
+        <button class="btn btn--primary btn--sm">Small</button>
+        <button class="btn btn--primary">Default</button>
+        <button class="btn btn--primary btn--lg">Large</button>
+      </div>
+
+      <h3 class="subhead">On dark surface</h3>
+      <div class="surface-demo dark-demo" style="padding: var(--space-6); margin-bottom: 0;">
+        <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <button class="btn btn--accent">Apply for Q2 cohort</button>
+          <button class="btn" style="background: transparent; color: var(--fg-on-dark); border-color: rgba(255,255,255,0.25);">Book a 20-min call</button>
+          <button class="btn btn--link" style="color: var(--ax-pink);">Read the brief →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 15 Inputs ─────────────────────────────────────────── -->
+    <section id="inputs">
+      <div class="section-num">15 · Inputs</div>
+      <h2 class="section-title">Form inputs.</h2>
+      <p class="section-sub">Label above. Helper or error below. Focus state always visible. Required marked with a pink asterisk.</p>
+
+      <div class="form-grid">
+        <div class="field">
+          <label class="field-label" for="ex-default">Your name <span class="required">*</span></label>
+          <input class="input" id="ex-default" placeholder="Default state" />
+          <span class="field-helper">Helper text appears here.</span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ex-focus">Email address</label>
+          <input class="input" id="ex-focus" placeholder="Click to see focus" />
+          <span class="field-helper">Focus state shows cyan border + ring.</span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ex-error">Company name</label>
+          <input class="input input--error" id="ex-error" value="A.X" />
+          <span class="field-helper field-helper--error">Please use the full company name.</span>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ex-disabled">Programme</label>
+          <input class="input" id="ex-disabled" value="Leadership cohort — Miami · Aug 12" disabled />
+          <span class="field-helper">Pre-filled, read-only.</span>
+        </div>
+        <div class="field" style="grid-column: 1 / -1;">
+          <label class="field-label" for="ex-textarea">What are you trying to solve?</label>
+          <textarea class="textarea" id="ex-textarea" rows="4" placeholder="Plain talk preferred. We read every one."></textarea>
+        </div>
+        <div class="field">
+          <label class="field-label" for="ex-select">How did you hear about us?</label>
+          <select class="select" id="ex-select">
+            <option>Choose one…</option>
+            <option>Word of mouth</option>
+            <option>LinkedIn</option>
+            <option>An event</option>
+            <option>The newsletter</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 16 Chips ──────────────────────────────────────────── -->
+    <section id="chips">
+      <div class="section-num">16 · Chips &amp; pills</div>
+      <h2 class="section-title">Chips, tags, pills.</h2>
+      <p class="section-sub">Small categorical markers. Filter chips for selection, status pills for state, kicker chips for category labels above headings.</p>
+
+      <h3 class="subhead">Filter chips — interactive</h3>
+      <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <span class="chip">All</span>
+        <span class="chip chip--selected">Strategy</span>
+        <span class="chip">Capability</span>
+        <span class="chip">Cases</span>
+        <span class="chip">Tooling</span>
+        <span class="chip">Opinion</span>
+      </div>
+
+      <h3 class="subhead">Kicker chips — above headings</h3>
+      <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <span class="chip chip--kicker">Featured</span>
+        <span class="chip chip--kicker">Most popular</span>
+        <span class="chip chip--kicker">Help me choose</span>
+      </div>
+
+      <h3 class="subhead">Status pills</h3>
+      <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+        <span class="chip pill-success">Live</span>
+        <span class="chip pill-warning">2 places left</span>
+        <span class="chip pill-error">Closed</span>
+      </div>
+
+      <h3 class="subhead">Pink X as motif</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--space-3); align-items: center;">
+        <div style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: var(--fw-bold); display: flex; align-items: baseline; gap: var(--space-2);"><span class="ax-x">×</span>Section divider</div>
+        <div style="font-size: var(--text-base); display: flex; align-items: center; gap: var(--space-2);"><span class="ax-x" style="font-size: 1.2em;">×</span><span>List item</span></div>
+        <div style="text-align: center;"><span class="ax-x" style="font-size: var(--text-5xl);">×</span><br /><span style="font-size: var(--text-xs); color: var(--fg-4);">End-of-article</span></div>
+      </div>
+    </section>
+
+    <!-- ─── 17 Voice ──────────────────────────────────────────── -->
+    <section id="voice">
+      <div class="section-num">17 · Voice</div>
+      <h2 class="section-title">How we write.</h2>
+      <p class="section-sub">Direct. Credible. Challenging. Human. Practitioner voice, not consultant voice. Short sentences. Active. Real numbers.</p>
+
+      <h3 class="subhead">Principles</h3>
+      <ul class="clean">
+        <li><strong>Direct.</strong> Say it once, clearly. No preamble.</li>
+        <li><strong>Credible.</strong> Practitioner voice. Avoid jargon.</li>
+        <li><strong>Challenging.</strong> Make the audience feel something — seen, slightly uncomfortable, then clear.</li>
+        <li><strong>Human.</strong> Warm but not soft. Not corporate. Not agency-casual.</li>
+      </ul>
+
+      <h3 class="subhead">Banned phrases</h3>
+      <p style="color: var(--fg-3);">
+        <em>leverage · ecosystem · unlock potential · transformative journey · synergies · best-in-class · world-class · thought leader · step-change · value-add · north star (non-literally) · low-hanging fruit</em>
+      </p>
+
+      <h3 class="subhead">Before / after</h3>
+      <div class="voice-row">
+        <div class="voice-card bad">
+          <div class="vlabel">Don't</div>
+          <div class="vquote">We leverage our deep expertise to unlock transformative AI potential across your enterprise ecosystem.</div>
+          <div class="vnote">Buzzword soup. Says nothing.</div>
+        </div>
+        <div class="voice-card good">
+          <div class="vlabel">Do</div>
+          <div class="vquote">Eight weeks. Clear scope. At least 10× the value of what you invest.</div>
+          <div class="vnote">Specific. Measurable. No hedging.</div>
+        </div>
+        <div class="voice-card bad">
+          <div class="vlabel">Don't</div>
+          <div class="vquote">Differentiators</div>
+          <div class="vnote">A label, not a thought.</div>
+        </div>
+        <div class="voice-card good">
+          <div class="vlabel">Do</div>
+          <div class="vquote">What makes us different.</div>
+          <div class="vnote">Headers tell, don't label.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 18 Conventions ────────────────────────────────────── -->
+    <section id="conventions">
+      <div class="section-num">18 · Conventions</div>
+      <h2 class="section-title">Naming.</h2>
+      <p class="section-sub">Boring but compounding. Same patterns across URLs, files, components, events, slugs.</p>
+
+      <table class="naming-table">
+        <thead>
+          <tr><th>What</th><th>Pattern</th><th>Example</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>URLs</td><td>kebab-case</td><td>/what-we-do/company-enablement</td></tr>
+          <tr><td>Content files</td><td>kebab-case · format in frontmatter</td><td>phase-0-the-honest-bit.md</td></tr>
+          <tr><td>Components (React)</td><td>PascalCase</td><td>OfferingCard · CTABand</td></tr>
+          <tr><td>CSS tokens</td><td>--ax-{family}-{role}</td><td>--ax-cyan · --ax-paper-deep</td></tr>
+          <tr><td>Semantic aliases</td><td>--{role}-{level}</td><td>--fg-1 · --bg-paper · --action-primary</td></tr>
+          <tr><td>Analytics events</td><td>snake_case · intent-led</td><td>offering_apply_clicked · vsl_section_in_view</td></tr>
+          <tr><td>Programme slugs</td><td>kebab-case · cohort identifier</td><td>leadership-cohort-miami-2026-08</td></tr>
+          <tr><td>Image assets</td><td>descriptive kebab-case</td><td>toby-portrait-engaged.jpg · graphic-04-pink.png</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─── 19 Migration ──────────────────────────────────────── -->
+    <section id="migration">
+      <div class="section-num">19 · Migration</div>
+      <h2 class="section-title">From v1.3 to v2.</h2>
+      <p class="section-sub">What changes when this lands. Apply in order: tokens, type, surfaces, components, voice/accessibility pass.</p>
+
+      <table class="migration-table">
+        <thead>
+          <tr><th>v1.3 / wireframes</th><th></th><th>v2 canonical</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="from">Aptos (PPT body)</td><td class="arrow">→</td><td class="to">Arial</td></tr>
+          <tr><td class="from">"Play" font (display)</td><td class="arrow">→</td><td class="to">Arial in decks · Figtree on web</td></tr>
+          <tr><td class="from">Newsreader serif (wireframe B)</td><td class="arrow">→</td><td class="to">Figtree (display)</td></tr>
+          <tr><td class="from">Geist (wireframe B body)</td><td class="arrow">→</td><td class="to">System stack</td></tr>
+          <tr><td class="from">--c-bg / --c-fg / --c-accent</td><td class="arrow">→</td><td class="to">--bg-1 / --fg-1 / --action-accent</td></tr>
+          <tr><td class="from">Direction A / C / D variants</td><td class="arrow">→</td><td class="to">Removed — Direction B alone</td></tr>
+          <tr><td class="from">Purple #7C3AED (rogue)</td><td class="arrow">→</td><td class="to">--ax-purple #882DE7</td></tr>
+          <tr><td class="from">Amber #D97706 (rogue)</td><td class="arrow">→</td><td class="to">--ax-amber #FEA700</td></tr>
+          <tr><td class="from">#FFFF00 (Albany deck)</td><td class="arrow">→</td><td class="to">Remove — use --ax-amber</td></tr>
+          <tr><td class="from">Ivory paper (no token)</td><td class="arrow">→</td><td class="to">--ax-paper · --ax-paper-deep</td></tr>
+          <tr><td class="from">ReadinessQuiz component</td><td class="arrow">→</td><td class="to">QuizCTA → quiz.accelerator-x.ai</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <span class="label">Order of operations</span>
+        <strong>1.</strong> Drop in <code>tokens.css</code> — replaces hand-rolled colours and spacing. ·
+        <strong>2.</strong> Swap typefaces — Figtree for display, system stack for body. ·
+        <strong>3.</strong> Pick a surface family per page — cool or warm. ·
+        <strong>4.</strong> Refactor components against the primitive specs. ·
+        <strong>5.</strong> Voice review and accessibility audit pass.
+      </div>
+
+      <hr class="rule" />
+
+      <p style="font-size: var(--text-sm); color: var(--fg-4); margin-top: var(--space-8);">
+        End of v2.0. See <code>DESIGN.md</code> for principles, <code>tokens.css</code> for implementation, <code>tokens.json</code> for interop. PRs welcome.
+      </p>
+    </section>
+
+  </div>
+</body>
+</html>

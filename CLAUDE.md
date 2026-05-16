@@ -15,13 +15,31 @@
 
 ## Current State
 
-**Last session:** 2026-04-10 — homepage architecture refactor completed and pushed; shell/fragment assembly now explicit; session protocol wrap completed; quality gates passing
+**Active track:** `rebuild/v2` — full visual + structural rebuild from design handoff (`docs/design_handoff_website_rebuild/`)
 
-**Build:** ✅ passing | **Git:** ✅ clean after homepage refactor push + session wrap | **Deployed:** ✅ auto on push to `main`
+**Last session:** 2026-05-16 — Phase 1 (Foundations) in progress on `rebuild/v2`; branch created, canonical design system tokens landed, build pipeline extended, design-system showcase scaffold in place
 
-**Known issues:**
+**Build:** ⏳ pending `npm install` (node not yet installed on this machine — use `brew install node`) | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` still live and untouched
 
-- Homepage architecture is now explicit: `_templates/homepage.html` is the shell, `scripts/build-homepage.js` assembles dedicated about/apply/who/testimonials/trust fragments into `index.html`, and downstream mutator scripts still own footer and hero-media injection.
+**Phase 1 status:**
+- ✅ Branch `rebuild/v2` created from `main`
+- ✅ `.session-protocol.json` updated (branch + path allowlist)
+- ✅ `assets/css/tokens.css` — canonical design system v2.0 tokens
+- ✅ `assets/brand/logos/` — SVG + PNG logo variants
+- ✅ `assets/css/components/` — empty dir for per-component CSS
+- ✅ `scripts/tailwind.input.css` — imports tokens.css
+- ✅ `tailwind.config.js` — extended content glob + --ax-* theme tokens
+- ✅ `scripts/build-design-system.js` — assembles design-system/index.html
+- ✅ `scripts/build-components.js` — component registry + renderComponent() API
+- ✅ `_templates/design-system.html` + section partials (stub placeholders for Phase 2)
+- ✅ `package.json` — build:design-system added; build chain updated
+- ⏳ `npm install` + `npm run build` — blocked on node install
+
+**Known issues (rebuild track):**
+- Node.js not installed; `brew install node && npm install` needed before first build
+- Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
+
+**Known issues (main/live):**
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
 - Hero imagery still interim stills — production photos not yet swapped in
 
@@ -29,16 +47,21 @@
 
 ## Next (do in this order)
 
-1. **Hero imagery** — swap interim stills for production photos + update alt text
-   → `content/data/hero-media.config.json` + `npm run process:hero-images`
+1. **Install node + verify Phase 1 build gate**
+   → `brew install node && cd /path/to/repo && npm install && npm run build`
+   → Verify `design-system/index.html` renders tokens correctly; legacy pages unchanged
 
-2. **Lighthouse targets** — ≥95 mobile / ≥98 desktop; capture reports to `docs/analytics/`
+2. **Phase 2 — Wave A Primitives** (TypeScale, Buttons, Chips, Form inputs)
+   → `_templates/components/{TypeScale,Buttons,Chips,FormInputs}.html`
+   → `assets/css/components/{Buttons,Chips,FormInputs}.css`
+   → Register each in `_templates/design-system/primitives.html`
+   → Gate: showcase Wave A at all 3 breakpoints before Wave B
 
-3. **Homepage/shared component review** — decide whether any further homepage decomposition is worth it, or whether the next real architecture task is shared footer/navigation ownership
-   → avoid casual extractions now that the main homepage shell/fragment contract is in place
+3. **Phase 2 — Wave B Global chrome** (Nav, Footer, PageHero, CTABand)
+   → Decide Footer/NewsletterCTA deduplication before starting Footer
 
-4. **Autonomous AI agent fleet** — design permission + capability framework
-   → `docs/agent-fleet.md` (to be created)
+4. **Phase 2 — Waves C + D** (Content blocks, Interactive)
+   → Follow component sequencing in plan
 
 ---
 
@@ -77,6 +100,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. Decide the next smallest homepage extraction target
-2. Keep homepage build contracts explicit before any section extraction
-3. Re-run build/check after the next homepage slice
+1. `brew install node && npm install && npm run build` — Phase 1 verification gate
+2. Start Phase 2 Wave A — Primitives (TypeScale, Buttons, Chips, FormInputs)
+3. Decide Footer/NewsletterCTA deduplication strategy before Wave B

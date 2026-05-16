@@ -1,0 +1,1367 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Accelerator X · Website Build Plan — Phase A</title>
+
+<!-- ext-resource-dependency: type=font name=Geist -->
+<!-- ext-resource-dependency: type=font name=Newsreader -->
+<!-- ext-resource-dependency: type=font name=JetBrains+Mono -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #faf8f3;
+    --bg-alt: #f1ede2;
+    --bg-sunken: #ece7d8;
+    --ink: #0e1726;
+    --ink-soft: #2f3a52;
+    --muted: #5b6173;
+    --line: rgba(14, 23, 38, 0.12);
+    --line-faint: rgba(14, 23, 38, 0.06);
+    --teal: #088abf;
+    --pink: #e93f8e;
+    --amber: #fea700;
+    --purple: #882de7;
+    --ok: #1f7a4a;
+
+    --f-display: 'Newsreader', 'Times New Roman', serif;
+    --f-body: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: var(--f-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  a { color: var(--teal); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .page {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 80px 48px 160px;
+  }
+
+  /* ─── Document header ─────────────────────────────────────────── */
+  .doc-meta {
+    display: flex; gap: 24px; flex-wrap: wrap;
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 40px;
+  }
+  .doc-meta b { color: var(--ink); font-weight: 500; margin-right: 8px; }
+
+  h1.doc-title {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 18px;
+  }
+  .doc-lede {
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+    max-width: 680px;
+    font-weight: 400;
+  }
+  .doc-lede em { font-family: var(--f-display); font-style: italic; color: var(--ink); }
+
+  /* ─── Section structure ───────────────────────────────────────── */
+  section { margin-top: 80px; }
+  section:first-of-type { margin-top: 56px; }
+
+  .section-num {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  h2.section-title {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 12px;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 640px;
+    margin: 0 0 28px;
+  }
+
+  h3 {
+    font-family: var(--f-body);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin: 32px 0 10px;
+  }
+  h4 {
+    font-family: var(--f-body);
+    font-size: 14px;
+    font-weight: 600;
+    margin: 18px 0 8px;
+  }
+
+  p { margin: 0 0 14px; }
+  ul { padding-left: 22px; margin: 0 0 14px; }
+  ul li { margin-bottom: 4px; }
+  ul li::marker { color: var(--muted); }
+
+  /* ─── Callout block ───────────────────────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--teal);
+    background: var(--bg-alt);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .callout.warn { border-color: var(--amber); }
+  .callout.decision { border-color: var(--pink); }
+  .callout strong { font-weight: 600; }
+  .callout .label {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ─── Sitemap tree ────────────────────────────────────────────── */
+  .sitemap {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    line-height: 1.9;
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin: 16px 0 24px;
+    overflow-x: auto;
+  }
+  .sitemap .node { display: block; white-space: pre; }
+  .sitemap .url { color: var(--ink); }
+  .sitemap .label { color: var(--muted); }
+  .sitemap .new { color: var(--pink); font-weight: 600; }
+  .sitemap .exists { color: var(--ok); }
+  .sitemap .funnel { color: var(--purple); font-weight: 600; }
+
+  .legend {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .legend span::before {
+    content: ''; display: inline-block;
+    width: 9px; height: 9px; border-radius: 2px;
+    margin-right: 6px; vertical-align: 1px;
+  }
+  .legend .lg-exists::before { background: var(--ok); }
+  .legend .lg-new::before { background: var(--pink); }
+  .legend .lg-funnel::before { background: var(--purple); }
+
+  /* ─── Page-inventory table ────────────────────────────────────── */
+  table.inv {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin: 12px 0 8px;
+  }
+  table.inv th {
+    text-align: left;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-alt);
+  }
+  table.inv td {
+    padding: 12px;
+    border-bottom: 1px solid var(--line-faint);
+    vertical-align: top;
+  }
+  table.inv tr:hover td { background: var(--bg-alt); }
+  table.inv .ix { font-family: var(--f-mono); font-size: 11px; color: var(--muted); white-space: nowrap; }
+  table.inv .pg { font-weight: 500; }
+  table.inv .url { font-family: var(--f-mono); font-size: 11.5px; color: var(--muted); }
+  .pill {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--bg-sunken);
+    color: var(--ink-soft);
+  }
+  .pill.exists { background: rgba(31, 122, 74, 0.12); color: var(--ok); }
+  .pill.new { background: rgba(233, 63, 142, 0.12); color: var(--pink); }
+  .pill.funnel { background: rgba(136, 45, 231, 0.12); color: var(--purple); }
+  .pill.priority { background: rgba(254, 167, 0, 0.18); color: #7a5400; }
+
+  /* ─── Block outline (per-page) ────────────────────────────────── */
+  .page-block {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin: 18px 0;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .page-block header {
+    padding: 18px 24px;
+    background: var(--bg-alt);
+    border-bottom: 1px solid var(--line);
+    display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
+  }
+  .page-block header .num {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+  }
+  .page-block header .title {
+    font-family: var(--f-display);
+    font-size: 22px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-right: auto;
+  }
+  .page-block header .url {
+    font-family: var(--f-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .page-block .body { padding: 18px 24px 22px; }
+  .page-block .intent {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .page-block .intent b { color: var(--ink); font-weight: 600; }
+
+  ol.blocks {
+    list-style: none;
+    padding: 0; margin: 0;
+    counter-reset: blk;
+  }
+  ol.blocks li {
+    counter-increment: blk;
+    display: grid;
+    grid-template-columns: 36px 200px 1fr;
+    gap: 14px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--line-faint);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  ol.blocks li:last-child { border-bottom: none; }
+  ol.blocks li::before {
+    content: counter(blk, decimal-leading-zero);
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+  ol.blocks .bname { font-weight: 500; }
+  ol.blocks .bnote { color: var(--muted); font-size: 13px; }
+  ol.blocks .bname .tag {
+    display: inline-block;
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--bg-alt);
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-left: 6px;
+    vertical-align: 1px;
+  }
+  ol.blocks .bname .tag.cmp { background: rgba(8, 138, 191, 0.12); color: var(--teal); }
+  ol.blocks .bname .tag.new { background: rgba(233, 63, 142, 0.12); color: var(--pink); }
+
+  /* ─── Component library ──────────────────────────────────────── */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 12px 0;
+  }
+  .comp {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    background: var(--bg);
+  }
+  .comp .cname {
+    font-family: var(--f-mono);
+    font-size: 12.5px;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .comp .cmeta {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .comp .cwhere {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--line-faint);
+    letter-spacing: 0.03em;
+  }
+
+  /* ─── Funnel flow ─────────────────────────────────────────────── */
+  .funnel-flow {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) 24px;
+    gap: 8px;
+    margin: 18px 0 12px;
+  }
+  .funnel-step {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 10px;
+    font-size: 11.5px;
+    line-height: 1.4;
+    text-align: center;
+  }
+  .funnel-step .fnum {
+    font-family: var(--f-mono);
+    font-size: 9.5px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .funnel-step .ftitle { font-weight: 600; }
+  .funnel-arrow {
+    color: var(--muted);
+    font-family: var(--f-mono);
+    font-size: 16px;
+    align-self: center;
+    text-align: center;
+  }
+
+  /* ─── Decisions table ─────────────────────────────────────────── */
+  .decisions {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 16px;
+  }
+  .decisions .row {
+    display: grid;
+    grid-template-columns: 40px 1fr 120px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line-faint);
+    font-size: 14px;
+    gap: 12px;
+    align-items: start;
+  }
+  .decisions .row:last-child { border-bottom: none; }
+  .decisions .row .dnum {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 2px;
+  }
+  .decisions .row .dquestion b { display: block; margin-bottom: 4px; }
+  .decisions .row .dquestion .ddetail { color: var(--muted); font-size: 13px; }
+  .decisions .row .dstatus {
+    font-family: var(--f-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--pink);
+    text-align: right;
+    padding-top: 4px;
+  }
+  .decisions .row.decided { background: rgba(31, 122, 74, 0.04); }
+  .decisions .row.decided .dstatus { color: var(--ok); }
+  .decisions .row .dresolution {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: rgba(31, 122, 74, 0.08);
+    border-left: 2px solid var(--ok);
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .decisions .row .dresolution b { color: var(--ok); }
+
+  /* ─── TOC ─────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 28px 0 0;
+    font-size: 13.5px;
+  }
+  .toc-title {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .toc ol { padding-left: 0; list-style: none; columns: 2; column-gap: 36px; }
+  .toc ol li { margin-bottom: 4px; break-inside: avoid; }
+  .toc ol li a { color: var(--ink); }
+  .toc ol li .tnum {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-right: 10px;
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--line);
+    margin: 56px 0 0;
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ─── Header ─────────────────────────────────────────────── -->
+    <div class="doc-meta">
+      <span><b>Doc</b>Build plan · v0.5</span>
+      <span><b>Phase</b>A · Sitemap & page outlines</span>
+      <span><b>Author</b>Design</span>
+      <span><b>Status</b>Draft for review</span>
+      <span><b>Date</b>16 May 2026</span>
+    </div>
+
+    <h1 class="doc-title">Website build plan.</h1>
+    <p class="doc-lede">
+      A handoff-oriented spec for systematically rebuilding accelerator-x.io. The goal of <em>this</em> document is a locked sitemap, page-level block outlines for every page, and a small set of decisions to unblock the rest of the work.
+    </p>
+    <p class="doc-lede" style="font-size: 15px; color: var(--muted);">
+      It is deliberately not a wireframe. Wireframes are downstream of the structure agreed here. The artefacts that go to engineering are: this doc → component library at hi-fi → clickable walkthrough.
+    </p>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><span class="tnum">01</span><a href="#lens">The handoff lens</a></li>
+        <li><span class="tnum">02</span><a href="#sitemap">Sitemap</a></li>
+        <li><span class="tnum">03</span><a href="#inventory">Page inventory</a></li>
+        <li><span class="tnum">04</span><a href="#marketing">Marketing pages — block outlines</a></li>
+        <li><span class="tnum">05</span><a href="#offerings">Offering pages — block outlines</a></li>
+        <li><span class="tnum">06</span><a href="#funnels">VSL / funnel pages — placement &amp; sketch</a></li>
+        <li><span class="tnum">07</span><a href="#supporting">Supporting pages</a></li>
+        <li><span class="tnum">08</span><a href="#components">Component library inventory</a></li>
+        <li><span class="tnum">09</span><a href="#analytics">Analytics &amp; instrumentation</a></li>
+        <li><span class="tnum">10</span><a href="#content">Content pipeline</a></li>
+        <li><span class="tnum">11</span><a href="#decisions">Open decisions</a></li>
+        <li><span class="tnum">12</span><a href="#next">What happens next</a></li>
+      </ol>
+    </div>
+
+    <!-- ─── 01 The lens ────────────────────────────────────────── -->
+    <section id="lens">
+      <div class="section-num">01 · Framing</div>
+      <h2 class="section-title">The handoff lens.</h2>
+      <p class="section-sub">Every artefact in this rebuild is evaluated against one question: <b>does it reduce ambiguity at implementation time?</b> If the answer is no, it doesn't get made.</p>
+
+      <p>The work that measurably accelerates a clean implementation in Claude Code is:</p>
+      <ul>
+        <li><b>Locked IA</b> — every page, every URL, every cross-link, no ambiguity.</li>
+        <li><b>Content structure per page</b> — the blocks in order, what each one does, what real copy lives there.</li>
+        <li><b>A component library at production fidelity</b> — the reusable pieces (hero, card, CTA band, etc.) with their states and tokens, in the new design system.</li>
+        <li><b>Interaction specs</b> — what hovers, what animates, what's a modal vs. a route.</li>
+      </ul>
+      <p>The work that <em>looks</em> useful but mostly creates rework downstream:</p>
+      <ul>
+        <li>Pixel-perfect mockups of every page before the IA is settled.</li>
+        <li>Design-system polish applied page-by-page instead of to the underlying components.</li>
+        <li>Animations specced in design tools that won't translate to web cleanly.</li>
+      </ul>
+      <div class="callout">
+        <span class="label">Design-system question, answered</span>
+        Apply the new design system <strong>here</strong>, but only to the ~12 reusable components in §08. Pages are composed from those components downstream; mocking every page in the new system is wasted work the developer will redo anyway.
+      </div>
+    </section>
+
+    <!-- ─── 02 Sitemap ─────────────────────────────────────────── -->
+    <section id="sitemap">
+      <div class="section-num">02 · Information architecture</div>
+      <h2 class="section-title">Sitemap.</h2>
+      <p class="section-sub">Three top-level zones: marketing (the public site), conversion (offering detail + funnels), and supporting (legal, utility). The funnel layer is new and lives parallel to the offerings, not under them.</p>
+
+      <div class="legend">
+        <span class="lg-exists">Already wireframed</span>
+        <span class="lg-new">New — needs wireframe</span>
+        <span class="lg-funnel">VSL / funnel</span>
+      </div>
+
+      <div class="sitemap">
+<span class="node"><span class="url">/</span>                                          <span class="label">Home <span class="exists">[exists]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/what-we-do</span>                            <span class="label">Offerings overview <span class="exists">[exists]</span></span></span>
+<span class="node">│  │</span>
+<span class="node">│  ├─ <span class="url">/what-we-do/company-enablement</span>      <span class="label">Flagship · Phase 0 → Phase 1+ <span class="new">[merged]</span></span></span>
+<span class="node">│  ├─ <span class="url">/what-we-do/leadership-cohort</span>       <span class="label">Coaching · cohort <span class="new">[new]</span></span></span>
+<span class="node">│  ├─ <span class="url">/what-we-do/senior-leader-acceleration</span> <span class="label">Coaching · group <span class="new">[new]</span></span></span>
+<span class="node">│  ├─ <span class="url">/what-we-do/executive-coaching</span>      <span class="label">Coaching · 1:1 <span class="new">[new]</span></span></span>
+<span class="node">│  └─ <span class="url">/what-we-do/fractional-advisory</span>     <span class="label">Ongoing partnership <span class="new">[new]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/programmes/...</span>                       <span class="label">VSL funnels <span class="funnel">[new ▼]</span></span></span>
+<span class="node">│  ├─ <span class="url">/programmes/leadership-cohort</span>       <span class="label">VSL landing <span class="funnel">[funnel]</span></span></span>
+<span class="node">│  │  ├─ <span class="url">.../apply</span>                       <span class="label">Application form <span class="funnel">[funnel]</span></span></span>
+<span class="node">│  │  └─ <span class="url">.../thanks</span>                      <span class="label">Confirmation + nurture <span class="funnel">[funnel]</span></span></span>
+<span class="node">│  ├─ <span class="url">/programmes/senior-leader-acceleration</span> <span class="label">VSL + apply + thanks <span class="funnel">[funnel]</span></span></span>
+<span class="node">│  └─ <span class="url">/programmes/executive-coaching</span>      <span class="label">VSL + apply + thanks <span class="funnel">[funnel]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/talks-events</span>                          <span class="label">Talks & Events <span class="exists">[exists]</span></span></span>
+<span class="node">│  └─ <span class="url">/talks-events/[slug]</span>                <span class="label">Event detail <span class="new">[new]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/how-we-work</span>                           <span class="label">Methodology <span class="exists">[exists]</span></span></span>
+<span class="node">│  └─ <span class="url">/how-we-work/dots</span>                    <span class="label">DOTS method <span class="exists">[exists]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/insights</span>                              <span class="label">Article hub <span class="exists">[exists]</span></span></span>
+<span class="node">│  ├─ <span class="url">/insights/[slug]</span>                    <span class="label">Article detail <span class="exists">[exists]</span></span></span>
+<span class="node">│  └─ <span class="url">/insights/tag/[tag]</span>                 <span class="label">Tag archive <span class="new">[new]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/case-studies</span>                          <span class="label">Index <span class="exists">[exists]</span></span></span>
+<span class="node">│  └─ <span class="url">/case-studies/[slug]</span>                <span class="label">Case detail <span class="exists">[exists]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/about</span>                                 <span class="label">Founders & origin <span class="exists">[exists]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">/contact</span>                               <span class="label">Application form · single front door <span class="exists">[exists · CTA copy revised]</span></span></span>
+<span class="node">│</span>
+<span class="node">├─ <span class="url">quiz.accelerator-x.ai</span>                  <span class="label">AI Readiness Assessment <span class="exists">[external · live]</span></span></span>
+<span class="node">│</span>
+<span class="node">└─ <span class="url">/_</span>                                       <span class="label">Supporting</span></span>
+<span class="node">   ├─ <span class="url">/privacy</span>                              <span class="label">Privacy policy <span class="exists">[exists · minor uplift]</span></span></span>
+<span class="node">   ├─ <span class="url">/terms</span>                                <span class="label">Terms <span class="exists">[exists · minor uplift]</span></span></span>
+<span class="node">   ├─ <span class="url">/cookies</span>                              <span class="label">Cookie policy <span class="exists">[exists · minor uplift]</span></span></span>
+<span class="node">   └─ <span class="url">/404</span>                                  <span class="label">Not found <span class="new">[new · with personality]</span></span></span>
+      </div>
+
+      <div class="callout warn">
+        <span class="label">IA decision worth flagging</span>
+        Funnel landers live at <code>/programmes/[slug]</code>, not nested under <code>/what-we-do</code>. Reason: funnel pages are <strong>standalone conversion surfaces</strong> — they have their own nav (or no nav), their own meta, and are linked from ads + email, not from the marketing site's IA. Treating them as distinct routes keeps the marketing site honest about what's a landing page and what's a content page.
+      </div>
+    </section>
+
+    <!-- ─── 03 Inventory ───────────────────────────────────────── -->
+    <section id="inventory">
+      <div class="section-num">03 · Inventory</div>
+      <h2 class="section-title">Page inventory.</h2>
+      <p class="section-sub">Twenty-two unique page templates across the site. Templates are the unit a developer builds; data instances (each article, each case study) reuse a template.</p>
+
+      <table class="inv">
+        <thead>
+          <tr><th>#</th><th>Page</th><th>URL</th><th>Status</th><th>Template</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="ix">01</td><td class="pg">Home</td><td class="url">/</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · home</td></tr>
+          <tr><td class="ix">02</td><td class="pg">Offerings overview</td><td class="url">/what-we-do</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · index</td></tr>
+          <tr><td class="ix">03</td><td class="pg">Leadership Cohort</td><td class="url">/what-we-do/leadership-cohort</td><td><span class="pill new">Needs WF</span></td><td>Offering · detail</td></tr>
+          <tr><td class="ix">04</td><td class="pg">Senior Leader Acceleration</td><td class="url">/what-we-do/senior-leader-acceleration</td><td><span class="pill new">Needs WF</span></td><td>Offering · detail</td></tr>
+          <tr><td class="ix">05</td><td class="pg">Executive Coaching</td><td class="url">/what-we-do/executive-coaching</td><td><span class="pill new">Needs WF</span></td><td>Offering · detail</td></tr>
+          <tr><td class="ix">06</td><td class="pg">Company Enablement (Phase 0 → Phase 1+)</td><td class="url">/what-we-do/company-enablement</td><td><span class="pill new">Needs WF · merge</span></td><td>Offering · two-phase</td></tr>
+          <tr><td class="ix">08</td><td class="pg">Fractional AI Advisory</td><td class="url">/what-we-do/fractional-advisory</td><td><span class="pill new">Needs WF</span></td><td>Offering · detail</td></tr>
+          <tr><td class="ix">09</td><td class="pg">Programme VSL — Leadership Cohort</td><td class="url">/programmes/leadership-cohort</td><td><span class="pill funnel">Funnel · new</span></td><td>VSL · landing</td></tr>
+          <tr><td class="ix">10</td><td class="pg">Programme VSL — Sr. Leader Accel.</td><td class="url">/programmes/senior-leader-acceleration</td><td><span class="pill funnel">Funnel · new</span></td><td>VSL · landing</td></tr>
+          <tr><td class="ix">11</td><td class="pg">Programme VSL — Executive Coaching</td><td class="url">/programmes/executive-coaching</td><td><span class="pill funnel">Funnel · new</span></td><td>VSL · landing</td></tr>
+          <tr><td class="ix">12</td><td class="pg">Programme application</td><td class="url">/programmes/[slug]/apply</td><td><span class="pill funnel">Funnel · new</span></td><td>VSL · apply</td></tr>
+          <tr><td class="ix">13</td><td class="pg">Programme thank-you</td><td class="url">/programmes/[slug]/thanks</td><td><span class="pill funnel">Funnel · new</span></td><td>VSL · thanks</td></tr>
+          <tr><td class="ix">14</td><td class="pg">Talks &amp; Events</td><td class="url">/talks-events</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · index</td></tr>
+          <tr><td class="ix">15</td><td class="pg">Event detail</td><td class="url">/talks-events/[slug]</td><td><span class="pill new">Needs WF</span></td><td>Event · detail</td></tr>
+          <tr><td class="ix">16</td><td class="pg">How we work</td><td class="url">/how-we-work</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · article</td></tr>
+          <tr><td class="ix">17</td><td class="pg">DOTS method</td><td class="url">/how-we-work/dots</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · article</td></tr>
+          <tr><td class="ix">18</td><td class="pg">Insights hub</td><td class="url">/insights</td><td><span class="pill exists">Wireframed</span></td><td>Editorial · index</td></tr>
+          <tr><td class="ix">19</td><td class="pg">Article</td><td class="url">/insights/[slug]</td><td><span class="pill exists">Wireframed</span></td><td>Editorial · detail</td></tr>
+          <tr><td class="ix">20</td><td class="pg">Tag archive</td><td class="url">/insights/tag/[tag]</td><td><span class="pill new">Needs WF</span></td><td>Editorial · index</td></tr>
+          <tr><td class="ix">21</td><td class="pg">Case studies index</td><td class="url">/case-studies</td><td><span class="pill new">Needs rework</span></td><td>Editorial · index w/ empty state</td></tr>
+          <tr><td class="ix">22</td><td class="pg">Case study detail</td><td class="url">/case-studies/[slug]</td><td><span class="pill exists">Wireframed</span></td><td>Editorial · detail</td></tr>
+          <tr><td class="ix">23</td><td class="pg">About / Founders</td><td class="url">/about</td><td><span class="pill exists">Wireframed</span></td><td>Marketing · article</td></tr>
+          <tr><td class="ix">24</td><td class="pg">Contact / Apply</td><td class="url">/contact</td><td><span class="pill exists">Wireframed</span></td><td>Form · apply</td></tr>
+          <tr><td class="ix">25</td><td class="pg">AI Readiness Assessment <em style="color: var(--muted); font-style: normal; font-size: 12px;">(external)</em></td><td class="url">quiz.accelerator-x.ai</td><td><span class="pill exists">Live · standalone</span></td><td>External subdomain</td></tr>
+          <tr><td class="ix">26</td><td class="pg">Privacy / Terms / Cookies</td><td class="url">/_</td><td><span class="pill exists">Exists · uplift</span></td><td>Utility</td></tr>
+          <tr><td class="ix">27</td><td class="pg">404</td><td class="url">/404</td><td><span class="pill new">Needs WF</span></td><td>Utility · fun</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 18px; font-size: 13.5px; color: var(--muted);">
+        <b style="color: var(--ink);">~26 templates on accelerator-x.ai</b> · of which <b style="color: var(--ok);">10 already wireframed</b>, <b style="color: var(--pink);">8 need new wireframes</b> (incl. the merged Company Enablement page), <b style="color: var(--purple);">5 are funnel pages</b> covered by the VSL spec (Phase B), and <b style="color: var(--ink);">3 legal pages</b> carry over from the live site with a minor uplift. The <b>AI Readiness Assessment is already live</b> at <code>quiz.accelerator-x.ai</code> — we link to it, we don't rebuild it.
+      </p>
+    </section>
+
+    <!-- ─── 04 Marketing pages ──────────────────────────────────── -->
+    <section id="marketing">
+      <div class="section-num">04 · Marketing</div>
+      <h2 class="section-title">Marketing pages — block outlines.</h2>
+      <p class="section-sub">Block-level structure for each marketing page. "Block" = a contiguous section in the page; in implementation this maps roughly 1:1 to a React component. Annotations: <span class="pill exists">existing</span> uses an existing wireframed section; <span class="pill new">new</span> needs design.</p>
+
+      <div class="callout decision">
+        <span class="label">Conversion principle — applies to every page</span>
+        <b>One CTA, one path: "Apply to work with us".</b> No "book a call" buttons. No direct calendar embeds. No "talk it through (20 min)" alternates. Every interested visitor flows through the application form on <code>/contact</code> (or <code>/programmes/[slug]/apply</code> for funnels), which captures the minimum pre-qualification we need. We review every application personally and reply with a booking link <em>only</em> if it's a fit. This rule is non-negotiable across marketing pages, offering pages, and the home — funnels follow it too. <b>Phase 0 specifically is not a cohort</b> — start date is agreed on signing, typical lead time ~3 weeks; the page should communicate "starts soon" without a fake calendar date. Cohort-based programmes (Leadership Cohort, Sr. Leader Acceleration) <em>do</em> have fixed dates and may surface scarcity copy.
+      </div>
+
+      <!-- Home -->
+      <div class="page-block">
+        <header>
+          <span class="num">01</span>
+          <span class="title">Home</span>
+          <span class="url">/</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Within 10 seconds, a visiting CEO knows what we do, who it's for, and what to click. Within 60 seconds, they have proof and a next move.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav <span class="tag cmp">Nav</span></span><span class="bnote">Global mega-menu with the three service categories.</span></li>
+            <li><span class="bname">Hero</span><span class="bnote">Headline + sub + dual CTA (primary: <b>Apply to work with us</b> · secondary: How we work). Optional visual motif (cube).</span></li>
+            <li><span class="bname">Logo strip</span><span class="bnote">Clients we've worked with. Quiet, single row, monochrome.</span></li>
+            <li><span class="bname">The problem we solve</span><span class="bnote">3-up: stuck on strategy / stuck on shipping / stuck on capability. Sets up the offerings.</span></li>
+            <li><span class="bname">Offerings preview <span class="tag cmp">OfferingCard ×3</span></span><span class="bnote">The three categories (Coaching · Company Enablement · Ongoing). Each links to its category section on /what-we-do.</span></li>
+            <li><span class="bname">How we're different</span><span class="bnote">Founder-led · ship working capability · risk-free first day. Reinforces positioning.</span></li>
+            <li><span class="bname">Case studies preview <span class="tag cmp">CaseTile ×3</span></span><span class="bnote">Three featured cases when available. <b>Hidden entirely on home if zero published</b> — don't show an empty slot. Re-enables automatically when content lands.</span></li>
+            <li><span class="bname">Methodology teaser</span><span class="bnote">DOTS in 1 visual + 1 sentence. Links to /how-we-work.</span></li>
+            <li><span class="bname">Insights preview <span class="tag cmp">ArticleTile ×3</span></span><span class="bnote">Latest 3. "More writing →" to /insights.</span></li>
+            <li><span class="bname">Founders strip <span class="tag cmp">FounderCard ×2</span></span><span class="bnote">Toby + Andy. Portrait + name + 1-line conviction each — <b>not</b> a bio repetition. Trust beat at decision-moment. Link "More about us →" pushes to /about for the deep dive.</span></li>
+            <li><span class="bname">Final CTA band <span class="tag cmp">CTABand</span></span><span class="bnote">Single CTA: <b>"Apply to work with us"</b>. Routes to <code>/contact</code>. <em>No</em> alt-flow — every contact is pre-qualified through the form. Sub-line: "Short form. Real reply within a week. No calendars to book."</span></li>
+            <li><span class="bname">Footer <span class="tag cmp">Footer</span></span><span class="bnote">Global.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- What we do overview -->
+      <div class="page-block">
+        <header>
+          <span class="num">02</span>
+          <span class="title">What we do — overview</span>
+          <span class="url">/what-we-do</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Help a prospect self-select the offering that fits. Comparison-first, decision-aid at the bottom.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav <span class="tag cmp">Nav</span></span><span class="bnote">Global, "What we do" active.</span></li>
+            <li><span class="bname">Page hero <span class="tag cmp">PageHero</span></span><span class="bnote">Breadcrumb · kicker · title · sub. No CTA.</span></li>
+            <li><span class="bname">Comparison table <span class="tag cmp">OfferingTable</span></span><span class="bnote">All offerings, scannable: duration / size / from / cadence / link. Already designed.</span></li>
+            <li><span class="bname">Category section · Coaching <span class="tag new">new</span></span><span class="bnote">Three coaching offerings as detail cards (Cohort, Sr. Leader, Exec 1:1). Funnel CTA on each.</span></li>
+            <li><span class="bname">Category section · Company Enablement</span><span class="bnote">Phase 0 + Phase 1+ cards. Already designed.</span></li>
+            <li><span class="bname">Category section · Ongoing</span><span class="bnote">Fractional Advisory.</span></li>
+            <li><span class="bname">Decision aid <span class="tag cmp">DecisionTree</span></span><span class="bnote">"Not sure which fits?" — 4-row pattern + prominent CTA out to <code>quiz.accelerator-x.ai</code> (opens in new tab, returns to /what-we-do with result-aware suggestions if possible).</span></li>
+            <li><span class="bname">Final CTA band</span><span class="bnote">Single CTA: <b>"Apply to work with us"</b>. Routes to <code>/contact</code>.</span></li>
+            <li><span class="bname">Footer</span><span class="bnote">Global.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- How we work -->
+      <div class="page-block">
+        <header>
+          <span class="num">03</span>
+          <span class="title">How we work (methodology)</span>
+          <span class="url">/how-we-work</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Make our way of working legible — the whole way, not just the start. Convinces the skeptic that there's a real system behind the work and that what makes us different is structural, not stylistic.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span><span class="bnote">Global, "How we work" active.</span></li>
+            <li><span class="bname">Page hero</span><span class="bnote">Title + thesis statement — "How we work, end to end." Sets up that this is the full picture, not a teaser.</span></li>
+            <li><span class="bname">Principles <span class="tag cmp">PrincipleList</span></span><span class="bnote">4–6 anti-platitudes — the beliefs that show up in every engagement. Already designed.</span></li>
+            <li><span class="bname">Our approach — the four moves <span class="tag new">new</span></span><span class="bnote"><b>Replaces the DOTS-only treatment.</b> The 4–5 distinct practices that define how we work end-to-end. DOTS is the starting move; the others (e.g. founder-led embed, capability transfer, ship-don't-strategise, cycle-based scope) deserve equal weight. Each as a labelled block with a paragraph + visual.</span></li>
+            <li><span class="bname">DOTS method, in depth</span><span class="bnote">Now framed as <em>one</em> of the moves above — the diagnostic starting point. Visual + paragraph + link to /how-we-work/dots for the full method page.</span></li>
+            <li><span class="bname">What an engagement looks like</span><span class="bnote">A typical week, in plain language. Photo or sketch.</span></li>
+            <li><span class="bname">What makes us different</span><span class="bnote"><b>New</b>. Explicit contrast block: what we don't do (decks-and-leave, headcount, managed services forever). Anti-positioning that reinforces the approach.</span></li>
+            <li><span class="bname">Pull-quote / proof</span><span class="bnote">One client voice that vouches for the method, not just the outcome.</span></li>
+            <li><span class="bname">Final CTA</span><span class="bnote">Single CTA: <b>"Apply to work with us"</b>. Same flow as everywhere else — no "book a call" variant on this page.</span></li>
+            <li><span class="bname">Footer</span><span class="bnote">Global.</span></li>
+          </ol>
+          <div class="callout">
+            <span class="label">Framing note</span>
+            DOTS is the start, not the whole story. The current wireframe over-indexes on it. The Phase B / wireframe pass needs to define <strong>the other 3–4 moves</strong> with the same rigour as DOTS — these are what actually differentiates us. The DOTS standalone page (/how-we-work/dots) stays as a deep dive.
+          </div>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="page-block">
+        <header>
+          <span class="num">04</span>
+          <span class="title">About / Founders</span>
+          <span class="url">/about</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Trust. Why these two people. Why now. Make the company feel small in the right way — close, accessible, expert.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Founder hero <span class="tag cmp">FounderCard ×2</span></span><span class="bnote">Toby + Andy. Portrait + 1-line bio + LinkedIn.</span></li>
+            <li><span class="bname">Origin story</span><span class="bnote">Long-form. Why we started this. Where the conviction comes from.</span></li>
+            <li><span class="bname">Beliefs</span><span class="bnote">5–7 statements we hold. The anti-consultancy stance.</span></li>
+            <li><span class="bname">Press / speaking <span class="tag cmp">LogoStrip</span></span><span class="bnote">Where we've been quoted / spoken.</span></li>
+            <li><span class="bname">Final CTA</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Talks & Events -->
+      <div class="page-block">
+        <header>
+          <span class="num">05</span>
+          <span class="title">Talks &amp; Events</span>
+          <span class="url">/talks-events</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Show we're public-facing experts. Drive registrations to upcoming events; nurture from past-event recordings.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Page hero</span></li>
+            <li><span class="bname">Upcoming events <span class="tag cmp">EventCard</span></span><span class="bnote">Featured upcoming, then list. Filter by format.</span></li>
+            <li><span class="bname">Past events archive</span><span class="bnote">Recordings + slides where public.</span></li>
+            <li><span class="bname">Book us to speak</span><span class="bnote">CTA + brief form (topics, audience size).</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Insights hub -->
+      <div class="page-block">
+        <header>
+          <span class="num">06</span>
+          <span class="title">Insights hub</span>
+          <span class="url">/insights</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Be the canonical place a mid-market exec goes to read serious AI thinking. Convert reader → newsletter → conversation.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Featured article <span class="tag cmp">ArticleFeature</span></span><span class="bnote">Magazine-style lead.</span></li>
+            <li><span class="bname">Recent articles grid <span class="tag cmp">ArticleTile</span></span><span class="bnote">8–12 tiles, mixed format.</span></li>
+            <li><span class="bname">Filter by tag</span><span class="bnote">Tag chips → /insights/tag/[tag].</span></li>
+            <li><span class="bname">Newsletter sign-up <span class="tag cmp">NewsletterCTA</span></span><span class="bnote">Inline, mid-list.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Case studies index -->
+      <div class="page-block">
+        <header>
+          <span class="num">07</span>
+          <span class="title">Case studies index</span>
+          <span class="url">/case-studies</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Proof. Outcomes-first. Built to grow gracefully — launches empty (or near-empty), evolves into a populated index without a redesign.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Page hero</span><span class="bnote">Title + one-line thesis on how we measure success. <em>Small</em> single-line note: "Not every engagement can be shared publicly — the ones we can are here." No song and dance, no NDA hero.</span></li>
+            <li><span class="bname">Case tile grid <span class="tag cmp">CaseTile</span></span><span class="bnote">Public case studies only. Simple grid — no sector grouping yet (premature with 0–3 items). Add grouping/filtering when we hit ~8–10 cases.</span></li>
+            <li><span class="bname">Empty / sparse state <span class="tag new">new</span></span><span class="bnote">Until case studies are published: a single feature panel saying "We're publishing our first case studies. In the meantime — read how we work, or talk to us." Two links: /how-we-work + /contact. Designed to look intentional, not under-construction.</span></li>
+            <li><span class="bname">Final CTA</span><span class="bnote">Talk to us about outcomes.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+          <div class="callout">
+            <span class="label">Growth path — staged complexity</span>
+            <b>v1 (launch, 0–3 cases):</b> Empty state + simple grid. No filters, no sectors.<br />
+            <b>v2 (≥5 cases):</b> Add filter chips by offering.<br />
+            <b>v3 (≥10 cases):</b> Sectoral grouping if it actually helps users find what they want — not before.<br />
+            <b>v4 (later):</b> Anonymous / NDA-respecting variants <em>if</em> a real need surfaces. Don't pre-build it.
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="page-block">
+        <header>
+          <span class="num">08</span>
+          <span class="title">Contact / Apply</span>
+          <span class="url">/contact</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> The single front door for every interested visitor. Every CTA on the site routes here. The form pre-qualifies; we reply personally. <b>No calendar booking on this page</b> — the whole point of the form is that we vet before sharing time slots.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Page hero</span><span class="bnote">Promise: a real human replies within a week. Set expectation that there's no calendar to book — a fit check comes first.</span></li>
+            <li><span class="bname">Intent picker</span><span class="bnote">"What brings you here?" — apply to an offering · invite us to speak · press / partnership. All routes still go through the same form; only the conditional fields change.</span></li>
+            <li><span class="bname">Application form <span class="tag cmp">ApplyForm</span></span><span class="bnote">Conditional fields based on intent. Includes a <b>"Which programme were you told about?"</b> field that routes leads to specific live cohorts (or to "general enquiry" if they don't have one in mind).</span></li>
+            <li><span class="bname">Direct contact card</span><span class="bnote">Email + LinkedIn for each founder. <em>Public</em> channels only — for press / speaking enquiries and edge-cases the form can't capture. The form is still the front door for application-shaped intent.</span></li>
+            <li><span class="bname">Readiness assessment CTA</span><span class="bnote">"Not sure where you are? Take the 4-min assessment." — outbound link to <code>quiz.accelerator-x.ai</code>.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 05 Offering pages ──────────────────────────────────── -->
+    <section id="offerings">
+      <div class="section-num">05 · Offerings</div>
+      <h2 class="section-title">Offering detail pages.</h2>
+      <p class="section-sub">Five offerings share <b>one template</b> (differences are content-only). Company Enablement is a <b>two-phase variant</b> on the same template — it has to communicate sequencing, not parity. Getting these two patterns right buys you six pages.</p>
+
+      <div class="page-block">
+        <header>
+          <span class="num">TPL</span>
+          <span class="title">Offering · detail template</span>
+          <span class="url">/what-we-do/[slug]</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> A prospect lands here from the nav, the home offerings preview, or an article. They leave with enough confidence to apply, or with enough information to disqualify themselves cleanly.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Detail hero <span class="tag cmp">OfferingHero</span></span><span class="bnote">Breadcrumb · kicker · title · 1-sentence promise · 1-paragraph elaboration · sidebar investment card with single CTA <b>"Apply to work with us"</b>. Sidebar shows: duration · from-price · start-date copy ("agreed on signing" for Company Enablement, fixed cohort date for cohort-based programmes).</span></li>
+            <li><span class="bname">Current cohorts <span class="tag new">new</span> <span class="tag cmp">CohortList</span></span><span class="bnote">When active programme instances exist (e.g. Miami cohort starting Aug 12, London Sep 3, CMO-only Oct 1), they're listed here with date · location · audience · link to the VSL. Hidden entirely if no live programmes — the page doesn't show empty cohort slots.</span></li>
+            <li><span class="bname">The plan <span class="tag cmp">PlanLayers</span></span><span class="bnote">2–4 numbered layers/phases explaining how it actually works. The Phase 1 cycle has 3 layers; coaching offerings will have 3 phases (Prep · Sessions · Embed).</span></li>
+            <li><span class="bname">What you get <span class="tag cmp">DeliverablesGrid</span></span><span class="bnote">4 tangible outputs. Already designed for the 8-week cycle.</span></li>
+            <li><span class="bname">Fit check <span class="tag cmp">FitCheck</span></span><span class="bnote">Two columns: right fit if / probably not for you. The honesty signal.</span></li>
+            <li><span class="bname">Proof <span class="tag cmp">ProofRow</span></span><span class="bnote">Either a featured case-study tile OR a long pull-quote. Per-offering choice.</span></li>
+            <li><span class="bname">FAQ <span class="tag cmp">FAQList</span></span><span class="bnote">5–7 questions actually asked. Per-offering content.</span></li>
+            <li><span class="bname">Final CTA band <span class="tag cmp">CTABand</span></span><span class="bnote">Single CTA: <b>"Apply to work with us"</b>. For cohort-based programmes, scarcity copy ("Applications close 29 July · 6 places left"). For Company Enablement, no cohort copy — replace with lead-time framing.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+
+          <div class="callout">
+            <span class="label">Variant note</span>
+            The three <strong>coaching</strong> offerings have a slightly different "Plan" block — peer mix and session cadence matter more than streams. We'll spec the coaching variant alongside the VSL pages in Phase B (it informs the same content).
+          </div>
+        </div>
+      </div>
+
+      <div class="page-block">
+        <header>
+          <span class="num">TPL · variant</span>
+          <span class="title">Company Enablement — two-phase page</span>
+          <span class="url">/what-we-do/company-enablement</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> A visitor lands here from anywhere — nav, ad, peer link, search — and within one screen understands that <b>Phase 0 is where everyone starts</b>, and Phase 1+ is what happens after. The page makes the sequencing impossible to miss; deep-linking to Phase 1+ on its own is not a thing.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav</span></li>
+            <li><span class="bname">Detail hero <span class="tag cmp">OfferingHero</span></span><span class="bnote">Variant: shows the two-phase arc visually in the header. "How a company moves with us: Phase 0 → Phase 1+." Sidebar card pushes Phase 0 as the start CTA.</span></li>
+            <li><span class="bname">The arc <span class="tag new">new</span></span><span class="bnote">A simple two-step diagram or labelled sequence: Phase 0 (2 weeks · strategy &amp; activation) → Phase 1+ (8-week cycles · build &amp; ship). Makes the dependency obvious before anyone scrolls.</span></li>
+            <li><span class="bname">Phase 0 section <span class="tag cmp">PlanLayers + DeliverablesGrid</span></span><span class="bnote">Full Phase 0 content: what it is, what you get, who it's for. Section-level CTA: "Book a Phase 0".</span></li>
+            <li><span class="bname">Bridge <span class="tag new">new</span></span><span class="bnote">One-screen transition: "What Phase 0 produces — and what we do with it next." Visual handoff cue.</span></li>
+            <li><span class="bname">Phase 1+ section <span class="tag cmp">PlanLayers + DeliverablesGrid</span></span><span class="bnote">Full Phase 1+ content: the three streams, what ships, how cycles chain. Section-level CTA is softer: "See if you're ready for Phase 1+" (links to readiness or contact).</span></li>
+            <li><span class="bname">Fit check <span class="tag cmp">FitCheck</span></span><span class="bnote">For the full arc, not per-phase. "This is for companies who want to build capability — not just buy a strategy deck."</span></li>
+            <li><span class="bname">FAQ <span class="tag cmp">FAQList</span></span><span class="bnote">Front-and-centre: "Can we skip Phase 0?" answered honestly. Other questions: pricing structure across phases, how cycles chain, what "+" in Phase 1+ means.</span></li>
+            <li><span class="bname">Proof <span class="tag cmp">ProofRow</span></span><span class="bnote">Featured case study that spans both phases. Outcome over time.</span></li>
+            <li><span class="bname">Final CTA band <span class="tag cmp">CTABand</span></span><span class="bnote">Single CTA: <b>"Apply to work with us"</b>. Routes to <code>/contact</code>. No "book a Phase 0" or call-alt button — every Phase 0 starts with an application. Hero/sidebar shows <b>Duration · 2 weeks · From £5,000 · Typical lead time ~3 weeks · Start date agreed on signing</b>. <em>Not</em> a cohort date.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+
+          <div class="callout warn">
+            <span class="label">Why this is a variant, not a fork</span>
+            The template is the same as other offering pages — same components, same rhythm. What changes is that <strong>Phase 0 and Phase 1+ each occupy a full "section pair"</strong> (PlanLayers + DeliverablesGrid), with the arc diagram + bridge component making the sequencing obvious. If we ever add a Phase 2, it slots in as another section pair without restructuring.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 06 VSL / Funnel ────────────────────────────────────── -->
+    <section id="funnels">
+      <div class="section-num">06 · Funnels</div>
+      <h2 class="section-title">VSL / funnel pages.</h2>
+      <p class="section-sub">Three programmes (Leadership Cohort, Senior Leader Acceleration, Executive Coaching) each get a funnel. One funnel template, three content instances. Funnels are <b>conversion-engineered</b>, not stylistically different — same design system, different page architecture.</p>
+
+      <h3>Funnel flow</h3>
+
+      <div class="funnel-flow">
+        <div class="funnel-step"><div class="fnum">01</div><div class="ftitle">Ad / email</div><div>Cold or warm source</div></div>
+        <div class="funnel-arrow">→</div>
+        <div class="funnel-step" style="background: rgba(136,45,231,0.1); border-color: var(--purple);"><div class="fnum">02</div><div class="ftitle">VSL lander</div><div>/programmes/[slug]</div></div>
+        <div class="funnel-arrow">→</div>
+        <div class="funnel-step"><div class="fnum">03</div><div class="ftitle">Apply form</div><div>.../apply</div></div>
+        <div class="funnel-step" style="grid-column: 1 / 2;"><div class="fnum">04</div><div class="ftitle">Thank-you</div><div>.../thanks + nurture</div></div>
+      </div>
+
+      <h3>How a VSL page differs from an offering detail page</h3>
+      <p>Same brand, same design system, but the page does a different job. Compared to <code>/what-we-do/[slug]</code>:</p>
+      <ul>
+        <li><b>No top nav</b> — or a stripped, single-link nav. Removes exit routes.</li>
+        <li><b>Single CTA, repeated</b> — only one action on the page: apply.</li>
+        <li><b>Video sales letter at the top</b> — embedded video (3–8 mins) with a fallback transcript. This is the spine of the page.</li>
+        <li><b>Conversion-engineered copy order</b> — promise · pain · proof · plan · price · objections · CTA. Not the marketing-site order.</li>
+        <li><b>Scarcity cues</b> — next cohort date, places left. Honest, not fake.</li>
+        <li><b>Anchor CTAs throughout</b> — every block ends with a button.</li>
+      </ul>
+
+      <div class="callout decision">
+        <span class="label">Phase B deliverable</span>
+        The full VSL block-by-block spec — what's said in the video, what each section accomplishes, the objection-handling pass, the apply form fields — is the next document I'll write after this one is signed off. It deserves its own treatment; trying to compress it here would shortcut the work that actually matters for conversion.
+      </div>
+
+      <h3>Stub block list (for sizing)</h3>
+      <ol class="blocks">
+        <li><span class="bname">Minimal nav</span><span class="bnote">Logo only · single "Apply" button.</span></li>
+        <li><span class="bname">VSL hero <span class="tag new">new</span></span><span class="bnote">Headline · sub · video embed · primary CTA below video.</span></li>
+        <li><span class="bname">For who · for whom not</span><span class="bnote">Disqualify fast.</span></li>
+        <li><span class="bname">What you walk away with</span><span class="bnote">Outcomes-first, not features.</span></li>
+        <li><span class="bname">The plan <span class="tag cmp">PlanLayers</span></span><span class="bnote">Reused from offering detail.</span></li>
+        <li><span class="bname">Proof — case study / pull quotes</span><span class="bnote">Heavier than on marketing pages. 2–3 quotes.</span></li>
+        <li><span class="bname">Founders speak</span><span class="bnote">Why this exists. Photo + signature.</span></li>
+        <li><span class="bname">Investment + what's included</span><span class="bnote">Honest pricing. No "starting from".</span></li>
+        <li><span class="bname">Objection handler / FAQ</span><span class="bnote">Pre-empt the 6 reasons people walk away.</span></li>
+        <li><span class="bname">Scarcity card + final CTA</span><span class="bnote">Cohort date · places left · apply.</span></li>
+        <li><span class="bname">Minimal footer</span><span class="bnote">Just legal + contact.</span></li>
+      </ol>
+    </section>
+
+    <!-- ─── 07 Supporting ──────────────────────────────────────── -->
+    <section id="supporting">
+      <div class="section-num">07 · Supporting</div>
+      <h2 class="section-title">Supporting pages.</h2>
+      <p class="section-sub">Necessary but unsexy. Legal pages already exist on the live site and carry over with a minor visual uplift. The Readiness Assessment is already live at <code>quiz.accelerator-x.ai</code>. The only net-new page here is the 404 — which we make good for free.</p>
+
+      <div class="page-block">
+        <header>
+          <span class="num">09</span>
+          <span class="title">Legal pages — carry over</span>
+          <span class="url">/privacy · /terms · /cookies</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Be findable, be readable, get out of the way. <b>Scope:</b> copy content as-is from the live site, apply the new type scale and color tokens, ensure last-updated date is visible. No restructuring, no new components, no design effort beyond the type pass.</p>
+          <div class="callout">
+            <span class="label">Effort cap</span>
+            <b>~2 hours of styling work per page</b>, not a design pass. If we find ourselves componentising a sticky TOC or designing custom legal layouts, we've overshot.
+          </div>
+        </div>
+      </div>
+
+      <div class="page-block">
+        <header>
+          <span class="num">10</span>
+          <span class="title">AI Readiness Assessment — external</span>
+          <span class="url">quiz.accelerator-x.ai</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Already built, already live, already sophisticated. The marketing site links out to it; we do not rebuild it. Treated as a first-class destination from /what-we-do, /contact, /how-we-work, the home decision aid, and footer.</p>
+          <ol class="blocks">
+            <li><span class="bname">Inbound links</span><span class="bnote">From <code>/what-we-do</code> (DecisionTree CTA), <code>/contact</code>, footer utility row, and any offering page where readiness is in question.</span></li>
+            <li><span class="bname">Outbound continuity</span><span class="bnote">Worth checking: does the quiz's result page link back to a specific offering on the marketing site? If yes, we mirror those URLs in our IA. If no, this is a small product opportunity for the quiz team.</span></li>
+            <li><span class="bname">Brand consistency</span><span class="bnote">Ensure the design system tokens are shared (or replicated) on the subdomain when the new system lands — a jarring style break across <code>accelerator-x.ai ↔ quiz.accelerator-x.ai</code> erodes trust.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="page-block">
+        <header>
+          <span class="num">11</span>
+          <span class="title">404 — not found</span>
+          <span class="url">/404</span>
+        </header>
+        <div class="body">
+          <p class="intent"><b>Intent:</b> Free upside. People land here annoyed; we make them smile. Tone-on-brand, light AI-self-deprecating joke that earns trust through wit.</p>
+          <ol class="blocks">
+            <li><span class="bname">Top nav (light)</span></li>
+            <li><span class="bname">Big type</span><span class="bnote">"This page wasn't AI-ready." or "404. Even our AI didn't see this coming." Sketch direction — final copy in Phase B.</span></li>
+            <li><span class="bname">Sub</span><span class="bnote">One line that owns it without trying too hard. "We'd run a Phase 0 on this, but the URL doesn't exist."</span></li>
+            <li><span class="bname">Recovery links</span><span class="bnote">Home · What we do · Insights · Contact. Same component as the footer link grid.</span></li>
+            <li><span class="bname">Footer</span></li>
+          </ol>
+          <div class="callout">
+            <span class="label">Scope discipline</span>
+            No illustration commission. No animation. Type, three links, one good line. That's the whole brief.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 08 Components ──────────────────────────────────────── -->
+    <section id="components">
+      <div class="section-num">08 · Component library</div>
+      <h2 class="section-title">Component library inventory.</h2>
+      <p class="section-sub">These are the building blocks. Every page on the site composes from this list. <b>This is the artefact we take to hi-fi in the new design system</b> — not the pages themselves.</p>
+
+      <h3>Global chrome</h3>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">Nav</div><div class="cmeta">Top bar + mega menu. Active state per page. Mobile drawer variant.</div><div class="cwhere">Every page</div></div>
+        <div class="comp"><div class="cname">Footer</div><div class="cmeta">Multi-column. Sitemap · newsletter · legal. Light + dark variants.</div><div class="cwhere">Every page</div></div>
+        <div class="comp"><div class="cname">PageHero</div><div class="cmeta">Breadcrumb · kicker · title · sub. Compact + full variants.</div><div class="cwhere">Most marketing &amp; offering pages</div></div>
+        <div class="comp"><div class="cname">CTABand</div><div class="cmeta">Closing CTA section. Light + dark variants. Inline scarcity slot.</div><div class="cwhere">End of every page</div></div>
+      </div>
+
+      <h3>Content blocks</h3>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">OfferingTable</div><div class="cmeta">Comparison row across all offerings. Sticky header on long views.</div><div class="cwhere">/what-we-do</div></div>
+        <div class="comp"><div class="cname">OfferingCard</div><div class="cmeta">One offering, summarised. "Featured" variant. Used on /what-we-do and home.</div><div class="cwhere">Home · /what-we-do</div></div>
+        <div class="comp"><div class="cname">PlanLayers</div><div class="cmeta">Numbered phases / layers describing how an engagement works.</div><div class="cwhere">All offering detail pages · VSL</div></div>
+        <div class="comp"><div class="cname">DeliverablesGrid</div><div class="cmeta">4 tiles describing what leaves the room. Numbered.</div><div class="cwhere">All offering detail pages · VSL</div></div>
+        <div class="comp"><div class="cname">FitCheck</div><div class="cmeta">Two columns: right fit / not for you. Honesty signal.</div><div class="cwhere">All offering detail pages · VSL</div></div>
+        <div class="comp"><div class="cname">FAQList</div><div class="cmeta">Numbered Q/A list. Per-offering content. Expandable variant optional.</div><div class="cwhere">Offering details · VSL · About</div></div>
+        <div class="comp"><div class="cname">CaseTile</div><div class="cmeta">Client · outcome metric · cover · link. Public only at launch — confidential / anonymous variants deferred until there's a real need.</div><div class="cwhere">/case-studies · home preview</div></div>
+        <div class="comp"><div class="cname">ArticleTile / Feature</div><div class="cmeta">Format-aware: article (read-time) · podcast (duration + play affordance) · video (cover + play). Plus a featured-lead variant.</div><div class="cwhere">/insights · home preview</div></div>
+        <div class="comp"><div class="cname">EventCard</div><div class="cmeta">Upcoming vs. past event. Date · format · location · link.</div><div class="cwhere">/talks-events</div></div>
+        <div class="comp"><div class="cname">FounderCard</div><div class="cmeta">Portrait · name · role · 1-liner · LinkedIn.</div><div class="cwhere">/about · VSL "Founders speak" · footer credit</div></div>
+        <div class="comp"><div class="cname">DecisionTree</div><div class="cmeta">"If you want X → consider Y". 4-row pattern. Also drives Readiness CTA.</div><div class="cwhere">/what-we-do · /contact</div></div>
+        <div class="comp"><div class="cname">LogoStrip</div><div class="cmeta">Quiet client / press logo row. Monochrome.</div><div class="cwhere">Home · About</div></div>
+        <div class="comp"><div class="cname">ProofRow</div><div class="cmeta">Pull-quote + attribution OR featured case tile, swappable.</div><div class="cwhere">Offering details · VSL · home</div></div>
+      </div>
+
+      <h3>Interactive</h3>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">ApplyForm</div><div class="cmeta">Conditional-field form. Intent picker · contextual fields · programme routing field · SLA promise.</div><div class="cwhere">/contact · VSL apply</div></div>
+        <div class="comp"><div class="cname">QuizCTA</div><div class="cmeta">Promo block that points out to <code>quiz.accelerator-x.ai</code>. Title, one-line benefit, button. Replaces a built-in quiz component — the real quiz lives on the subdomain.</div><div class="cwhere">/what-we-do · /contact · home decision aid</div></div>
+        <div class="comp"><div class="cname">NewsletterCTA</div><div class="cmeta">Inline sign-up. 1-field, async submit. Used in articles and the hub.</div><div class="cwhere">/insights · articles · footer</div></div>
+        <div class="comp"><div class="cname">CohortList <span style="font-family: var(--f-body); font-size: 9.5px; padding: 1px 5px; border-radius: 3px; background: rgba(233, 63, 142, 0.12); color: var(--pink); margin-left: 4px; vertical-align: 1px;">new</span></div><div class="cmeta">List of active programme instances on an offering page. Each row: date · location · audience · link to VSL. Hides itself when empty.</div><div class="cwhere">Offering detail pages (when programmes are live)</div></div>
+        <div class="comp"><div class="cname">ScarcityCard</div><div class="cmeta">Next cohort date · places left · CTA. Honest data, not fake urgency.</div><div class="cwhere">Offering details · VSL</div></div>
+      </div>
+
+      <h3>Primitives (tokens, not components — but they belong in the system)</h3>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">Buttons</div><div class="cmeta">Primary · accent · outline · ghost. Sizes sm/md/lg. Loading state.</div><div class="cwhere">Everywhere</div></div>
+        <div class="comp"><div class="cname">Chip / Tag</div><div class="cmeta">Kicker chips, filter chips, status pills.</div><div class="cwhere">Everywhere</div></div>
+        <div class="comp"><div class="cname">Form inputs</div><div class="cmeta">Text · select · textarea · checkbox · radio. Error / focus states.</div><div class="cwhere">Forms</div></div>
+        <div class="comp"><div class="cname">Type scale</div><div class="cmeta">Display (Newsreader) + body (Geist) + mono (JetBrains). 6 sizes each.</div><div class="cwhere">Everywhere</div></div>
+      </div>
+
+      <p style="margin-top: 24px; font-size: 13.5px; color: var(--muted);">
+        <b style="color: var(--ink);">22 components + ~4 primitive groups.</b> The vast majority of the implementation work is building these well; pages are 80% composition once these exist.
+      </p>
+
+      <h3 style="margin-top: 40px;">Responsive behaviour</h3>
+      <p style="font-size: 14px; color: var(--ink-soft); max-width: 680px;">Mobile-first, three breakpoints. The component library is where responsiveness is solved — pages compose responsive components, they don't fight CSS. Notes below are the contract Claude Code should build to; mobile-specific mockups will follow for the 2–3 screens where the behaviour isn't obvious from these rules.</p>
+
+      <h4 style="font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 22px;">Breakpoints</h4>
+      <ol class="blocks" style="margin-top: 6px;">
+        <li><span class="bname">Mobile · &lt; 640px</span><span class="bnote">Single column. Default state. All copy and CTAs validated at 375px width (iPhone SE).</span></li>
+        <li><span class="bname">Tablet · 640–1024px</span><span class="bnote">Two columns where it helps; otherwise still single. Nav remains drawer until ≥ 1024px.</span></li>
+        <li><span class="bname">Desktop · ≥ 1024px</span><span class="bnote">Full layouts as designed. Max content width 1200px; comfortable reading column 680px.</span></li>
+      </ol>
+
+      <h4 style="font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 22px;">Per-component rules</h4>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">Nav</div><div class="cmeta">Below 1024px: logo + hamburger only. Drawer opens full-height from right, contains the mega-menu items as a stacked accordion. Active page highlighted. CTA pinned at drawer bottom.</div></div>
+        <div class="comp"><div class="cname">Hero / PageHero</div><div class="cmeta">Title scales fluidly (clamp), drops one size at mobile. Dual CTAs stack vertically, primary on top, both full-width within content padding. Sidebar info card (offering pages) moves below the hero text.</div></div>
+        <div class="comp"><div class="cname">OfferingTable</div><div class="cmeta">Below 1024px: <b>not a table</b>. Renders as a stack of <code>OfferingCard</code>s with the same data. Horizontal-scroll table is explicitly rejected — it loses the comparison value.</div></div>
+        <div class="comp"><div class="cname">OfferingCard / CaseTile / ArticleTile / EventCard</div><div class="cmeta">Grid 3-up → 2-up at tablet → 1-up at mobile. Cards keep their internal layout; only the outer grid changes. Image aspect ratios preserved.</div></div>
+        <div class="comp"><div class="cname">PlanLayers</div><div class="cmeta">Numbered phases stack vertically at all sizes; the desktop layout is already a vertical stack with side rule. Phase number stays prominent; copy reflows.</div></div>
+        <div class="comp"><div class="cname">DeliverablesGrid</div><div class="cmeta">4-up grid → 2-up at tablet → 1-up at mobile. Numbered tiles, no truncation.</div></div>
+        <div class="comp"><div class="cname">FitCheck</div><div class="cmeta">Two-column layout → stacked at mobile with the "right fit" column first. Headings sticky on the column boundaries is not worth the complexity — just stack.</div></div>
+        <div class="comp"><div class="cname">FAQList</div><div class="cmeta">Accordion behaviour by default at mobile (expanded-on-load reads as walls of text). Desktop keeps open-by-default for scannability.</div></div>
+        <div class="comp"><div class="cname">CTABand</div><div class="cmeta">Headline + CTA side-by-side at desktop → stacked at mobile. CTA goes full-width. Scarcity slot wraps below headline.</div></div>
+        <div class="comp"><div class="cname">DecisionTree</div><div class="cmeta">4-row pattern stays vertical at all sizes. Indentation/connector lines drop on mobile; rely on numbering + spacing.</div></div>
+        <div class="comp"><div class="cname">FounderCard</div><div class="cmeta">Side-by-side pair → stacked at mobile. Portrait stays generous (don't shrink below 160px square); the trust beat depends on the photo.</div></div>
+        <div class="comp"><div class="cname">ApplyForm</div><div class="cmeta">Single-column always. Intent picker becomes segmented radio at mobile (was horizontal pill row). Field labels above inputs, never beside. Submit pinned full-width at the bottom of the form, not inline.</div></div>
+        <div class="comp"><div class="cname">VSL hero (video)</div><div class="cmeta">Video stays 16:9, scales with container width. CTA below video, full-width. Apply form on <code>/programmes/[slug]/apply</code> is the canonical mobile conversion surface — single column, big touch targets, autofill-friendly.</div></div>
+        <div class="comp"><div class="cname">Footer</div><div class="cmeta">Multi-column → 2-column at tablet → single column at mobile with sections as collapsible accordions (closed by default except newsletter).</div></div>
+      </div>
+
+      <h4 style="font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 22px;">Global rules</h4>
+      <ul>
+        <li><b>Touch targets ≥ 44 × 44px.</b> All CTAs, nav items, accordion handles, form controls.</li>
+        <li><b>Body font 16px minimum at mobile.</b> No 13/14px body copy — it triggers iOS zoom-on-focus on inputs and is unreadable in sunlight.</li>
+        <li><b>Side padding 20px at mobile, 32px at tablet, 48px+ at desktop.</b> Never edge-to-edge text.</li>
+        <li><b>Fluid type via <code>clamp()</code>.</b> Display sizes scale between mobile and desktop — defined in <code>tokens.css</code>, not per-component.</li>
+        <li><b>No horizontal scroll, ever.</b> Includes tables (see <code>OfferingTable</code>), code blocks (wrap), and image overflows.</li>
+        <li><b>Sticky CTA on funnel pages only.</b> Marketing pages don't get a sticky apply bar; VSL pages do, appearing after scroll past the hero, dismissable.</li>
+        <li><b>Animations honour <code>prefers-reduced-motion</code>.</b> Default to subtle; disable transforms when the user has opted out.</li>
+      </ul>
+
+      <div class="callout">
+        <span class="label">What gets mocked, what doesn't</span>
+        Most components above are deterministic from the rules — Claude Code can build them without a mobile mockup. The two screens worth designing explicitly at 375px are: <b>(1) Home</b> (vertical rhythm of so many sections needs a sanity check) and <b>(2) Offering detail · Company Enablement</b> (the two-phase arc + bridge + section pairs are the densest layout in the system, and the most likely to feel cramped). A third optional one: <b>VSL lander</b>, if the video + sticky-CTA + scarcity-card stack needs validation before build.
+      </div>
+    </section>
+
+    <!-- ─── 09 Decisions ───────────────────────────────────────── -->
+    <section id="analytics">
+      <div class="section-num">09 · Analytics &amp; instrumentation</div>
+      <h2 class="section-title">Analytics &amp; instrumentation.</h2>
+      <p class="section-sub">PostHog as the data layer. Instrumentation baked in from day one, not bolted on. A Claude Skill ("data analyst") connects via MCP and routinely surfaces patterns to Slack — turning passive analytics into an active intelligence loop.</p>
+
+      <h3>Why PostHog</h3>
+      <ul>
+        <li><b>Product analytics + session replay + feature flags + experiments</b> in one tool. We don't need a stack.</li>
+        <li><b>MCP-friendly</b> — PostHog exposes a query API that a Claude Skill can hit, which means we get an analyst on-call in Slack without buying a BI tool.</li>
+        <li><b>Self-host-able</b> if needed. Avoids GA's data-privacy theatre.</li>
+      </ul>
+
+      <h3>The instrumentation contract</h3>
+      <p>Every component in §08 emits events to a defined contract. Two principles:</p>
+      <ul>
+        <li><b>Events describe intent, not clicks.</b> <code>offering_card_opened</code>, not <code>div_clicked</code>. The schema reads like a funnel narrative, not a DOM log.</li>
+        <li><b>Props are typed and stable.</b> Every event has the same enriched shape (<code>page</code>, <code>component</code>, <code>offering_slug</code>, <code>cohort_date</code>, <code>variant</code>). The schema lives in code as one file; Claude reads it before answering questions.</li>
+      </ul>
+
+      <h3>Event taxonomy — starter set</h3>
+      <table class="inv">
+        <thead>
+          <tr><th>Surface</th><th>Event</th><th>When</th><th>Key props</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="pg">Global</td><td class="url">page_viewed</td><td>Every route change</td><td>page, referrer, utm_*</td></tr>
+          <tr><td class="pg">Nav</td><td class="url">nav_item_clicked</td><td>Top-nav or mega-menu</td><td>item, category</td></tr>
+          <tr><td class="pg">Home</td><td class="url">hero_cta_clicked</td><td>Hero primary/secondary CTA</td><td>variant, label</td></tr>
+          <tr><td class="pg">Offerings</td><td class="url">offering_card_opened</td><td>Tile or row clicked on overview</td><td>offering_slug, source</td></tr>
+          <tr><td class="pg">Offerings</td><td class="url">offering_apply_clicked</td><td>Any "apply / book" CTA on a detail page</td><td>offering_slug, position</td></tr>
+          <tr><td class="pg">VSL</td><td class="url">vsl_video_played</td><td>Video play / 25 / 50 / 75 / 100</td><td>programme_slug, marker</td></tr>
+          <tr><td class="pg">VSL</td><td class="url">vsl_section_in_view</td><td>Each section enters viewport</td><td>programme_slug, section_id, scroll_depth</td></tr>
+          <tr><td class="pg">VSL</td><td class="url">vsl_cta_clicked</td><td>Any apply CTA on a VSL page</td><td>programme_slug, position, scroll_depth</td></tr>
+          <tr><td class="pg">Form</td><td class="url">apply_form_started</td><td>First focus on any apply form</td><td>form_id, programme_slug</td></tr>
+          <tr><td class="pg">Form</td><td class="url">apply_form_submitted</td><td>Successful submission</td><td>form_id, programme_slug, intent</td></tr>
+          <tr><td class="pg">Form</td><td class="url">apply_form_abandoned</td><td>30s idle or unload mid-form</td><td>form_id, last_field, completion_pct</td></tr>
+          <tr><td class="pg">Insights</td><td class="url">article_opened</td><td>Article route</td><td>slug, tag</td></tr>
+          <tr><td class="pg">Insights</td><td class="url">article_read</td><td>50% scroll + 30s dwell</td><td>slug, read_time</td></tr>
+          <tr><td class="pg">Insights</td><td class="url">newsletter_signup</td><td>Newsletter form submit</td><td>placement</td></tr>
+          <tr><td class="pg">Case study</td><td class="url">case_opened</td><td>Detail route</td><td>slug, sector</td></tr>
+          <tr><td class="pg">Cross-site</td><td class="url">quiz_outbound_clicked</td><td>Any link out to <code>quiz.accelerator-x.ai</code></td><td>source_page, placement</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">PostHog's <code>autocapture</code> stays on as a safety net, but the events above are the ones we trust for funnels and dashboards.</p>
+
+      <h3>The Claude routine — "data analyst" skill</h3>
+      <p>A Claude Skill connected to PostHog over MCP. Runs on a schedule (weekly digest) and on-demand (when we ask it something in Slack). Three job-shapes:</p>
+      <div class="comp-grid">
+        <div class="comp"><div class="cname">Weekly digest</div><div class="cmeta">Auto-posts to a <code>#site-analytics</code> Slack channel every Monday. Top movers, funnel deltas, surprising drop-offs, top articles, anything anomalous. ~5 cards.</div></div>
+        <div class="comp"><div class="cname">Funnel deep-dive (on-demand)</div><div class="cmeta">"Why did Senior Leader applies drop 30% last week?" — Claude segments by source, replays the funnel, returns hypotheses + the next experiment to run.</div></div>
+        <div class="comp"><div class="cname">Cohort retro</div><div class="cmeta">After a VSL cohort closes, Claude pulls the funnel + survey data and writes a one-page retro — what converted, what didn't, what to change before the next launch.</div></div>
+      </div>
+
+      <h3>What ships, when</h3>
+      <ol class="blocks">
+        <li><span class="bname">Phase 1 · Foundation</span><span class="bnote">PostHog installed, identified users wired (form submitters), <code>page_viewed</code> + <code>nav_item_clicked</code> live. Ships with the site.</span></li>
+        <li><span class="bname">Phase 2 · Funnels</span><span class="bnote">All VSL + offering + apply events instrumented. Funnels dashboards in PostHog. Ships before any paid traffic touches a VSL.</span></li>
+        <li><span class="bname">Phase 3 · Claude routine</span><span class="bnote">MCP connection, weekly digest skill running, Slack channel live. Ships ~2 weeks after launch when there's real data to surface.</span></li>
+        <li><span class="bname">Phase 4 · Experiments</span><span class="bnote">Feature flags + A/B testing on VSL hero, CTA copy, pricing display. Ships once we have a baseline to compare against.</span></li>
+      </ol>
+
+      <div class="callout decision">
+        <span class="label">Implication for design</span>
+        Every interactive component in §08 needs a small extra column in its spec: <strong>"emits which events, with which props"</strong>. I'll add this in Phase C when the components go to hi-fi — it's the cheapest moment to lock event names in.
+      </div>
+    </section>
+
+    <section id="content">
+      <div class="section-num">10 · Content pipeline</div>
+      <h2 class="section-title">Content pipeline.</h2>
+      <p class="section-sub">Markdown in repo + a Claude-powered authoring loop. The goal: make publishing fast enough that we can <em>radically</em> dial up the cadence — without sacrificing voice or quality. Insights, case studies, and events all run through the same pipeline.</p>
+
+      <h3>The data model</h3>
+      <p>All content lives in <code>/content/</code> as Markdown with YAML frontmatter. One file = one piece of content. Tiles, indexes, RSS, and SEO metadata derive from the frontmatter at build time. No CMS to provision or pay for.</p>
+
+      <table class="inv">
+        <thead>
+          <tr><th>Path</th><th>Type</th><th>Frontmatter</th><th>Body</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="url">/content/insights/*.md</td><td class="pg">Article</td><td>format · title · subtitle · published · author · tags · hero · read_time</td><td>Long-form prose</td></tr>
+          <tr><td class="url">/content/insights/*.md</td><td class="pg">Podcast</td><td>+ audio_url · duration · guests · platforms (spotify/apple/etc)</td><td>Show notes + transcript</td></tr>
+          <tr><td class="url">/content/insights/*.md</td><td class="pg">Video</td><td>+ video_url · duration · platforms (youtube/vimeo)</td><td>Description + transcript</td></tr>
+          <tr><td class="url">/content/case-studies/*.md</td><td class="pg">Case study</td><td>client · sector · offering · outcome_metric · hero</td><td>Narrative + pull-quotes</td></tr>
+          <tr><td class="url">/content/events/*.md</td><td class="pg">Event</td><td>format · date · location · audience · register_url</td><td>Description + speakers</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">The <b>format</b> field on insights is the key one — the tile component reads it and renders differently (play button for podcast/video, read-time chip for articles). Resolves the "podcasts as article types" awkwardness on the current site.</p>
+
+      <h3>The authoring loop</h3>
+      <p>Three Claude skills, each a different stage of the pipeline. All run via Claude Code, against the repo, producing PRs that you review.</p>
+      <div class="comp-grid">
+        <div class="comp">
+          <div class="cname">1 · Ideation skill</div>
+          <div class="cmeta">Pulls from a backlog file + recent analytics signals + topical inputs. Output: 3–5 concrete article ideas with angles, hooks, and target audience. You pick one.</div>
+          <div class="cwhere">Trigger: weekly, or on-demand</div>
+        </div>
+        <div class="comp">
+          <div class="cname">2 · Draft skill</div>
+          <div class="cmeta">Given a picked idea + voice guide + reference articles + any source material (Loom, transcript, notes), produces a draft Markdown file in <code>/content/insights/_drafts/</code>. Includes suggested tags, hero direction, and a short editorial brief.</div>
+          <div class="cwhere">Trigger: per idea</div>
+        </div>
+        <div class="comp">
+          <div class="cname">3 · Polish &amp; publish skill</div>
+          <div class="cmeta">Takes a reviewed draft, runs a final voice/clarity pass, generates social post variants, alt text, OG-image hint, and opens a PR. Merge = published.</div>
+          <div class="cwhere">Trigger: on "ready" tag</div>
+        </div>
+      </div>
+
+      <h3>Adjacent skills (same pipeline, different output)</h3>
+      <div class="comp-grid">
+        <div class="comp">
+          <div class="cname">Podcast show-notes skill</div>
+          <div class="cmeta">Given a podcast audio + transcript: produces show notes, chapter markers, pull quotes, social cards. Outputs a Markdown file ready for review.</div>
+        </div>
+        <div class="comp">
+          <div class="cname">Case study skill</div>
+          <div class="cmeta">Given engagement notes + outcomes: produces a draft case study respecting the client-approval constraint. Public-only at launch.</div>
+        </div>
+        <div class="comp">
+          <div class="cname">Repurposing skill</div>
+          <div class="cmeta">Article → thread → LinkedIn post → newsletter blurb. One source, four outputs, each tuned for the medium.</div>
+        </div>
+      </div>
+
+      <h3>Voice guide — the missing artefact</h3>
+      <p>None of the skills above produce on-brand work without a <b>voice guide</b>: a single Markdown file in the repo that captures how you write. Tone, sentence cadence, no-go phrases, examples-vs.-counter-examples. Without it, AI-assisted writing slides toward the LinkedIn-thoughtleader mean. <b>This is a small write-up I'd recommend doing before the draft skill goes live</b> — 90 minutes of work, multiplies the value of everything downstream.</p>
+
+      <h3>What ships, when</h3>
+      <ol class="blocks">
+        <li><span class="bname">Phase 1 · Data model</span><span class="bnote">Markdown structure live, existing content migrated, Insights / Case studies / Events all reading from the new structure. Ships with the site.</span></li>
+        <li><span class="bname">Phase 2 · Voice guide</span><span class="bnote">You + I write the voice guide together based on your strongest existing pieces. ~90 min collab.</span></li>
+        <li><span class="bname">Phase 3 · Core skills</span><span class="bnote">Ideation → Draft → Polish skills running against the repo. First articles through the pipeline.</span></li>
+        <li><span class="bname">Phase 4 · Adjacent skills</span><span class="bnote">Podcast notes, case studies, repurposing. Built as they're needed, not pre-emptively.</span></li>
+      </ol>
+
+      <div class="callout decision">
+        <span class="label">Component implication</span>
+        The <code>ArticleTile</code> component spec'd in §08 needs a <b>format-aware variant</b>: article (kicker + title + read-time) · podcast (kicker + title + duration + play affordance) · video (cover + duration + play affordance). Same tile, three render modes. I'll bake this in during Phase C.
+      </div>
+    </section>
+
+    <section id="decisions">
+      <div class="section-num">11 · Decisions needed</div>
+      <h2 class="section-title">Open decisions.</h2>
+      <p class="section-sub">Things I need a yes/no or pick-one from you before Phase B can land cleanly. Each is small but each one branches downstream.</p>
+
+      <div class="decisions">
+        <div class="row decided">
+          <div class="dnum">01</div>
+          <div class="dquestion">
+            <b>Funnel URL pattern: <code>/programmes/[slug]</code> or <code>/apply/[slug]</code>?</b>
+            <div class="ddetail">"Programmes" reads as marketing; "apply" reads as conversion. I've drafted with /programmes — feels truer to the content.</div>
+            <div class="dresolution"><b>Decided:</b> <code>/programmes/[slug]</code>. Reads as content, not conversion plumbing. Stays clean even when programme names are descriptive ("miami-leadership-cohort-aug-2026").</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">02</div>
+          <div class="dquestion">
+            <b>Top-nav for funnels: hidden, or shown in a "Programmes" dropdown?</b>
+            <div class="ddetail">Most VSLs hide nav entirely. But Accelerator X is a serious brand and may want the programmes visible from the marketing site too. Trade-off: discoverability vs. funnel conversion.</div>
+            <div class="dresolution"><b>Decided:</b> Top nav stays clean — no Programmes dropdown. Programmes are ephemeral (rotate quarterly) and listing them implies a stable browse surface they don't have. Discoverability instead handled by <b>two contextual surfaces</b>: a "Current cohorts" block on the matching offering detail page, and a "Which programme were you told about?" field in the apply form / contact flow. Direct links remain the primary path.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">03</div>
+          <div class="dquestion">
+            <b>VSL: video on every funnel page, or selectively?</b>
+            <div class="ddetail">A "video sales letter" implies video. But producing three good 3–8 min videos is non-trivial. We can ship the page with a video placeholder and a strong text-only spine that converts on its own.</div>
+            <div class="dresolution"><b>Decided:</b> Template <b>supports video from day one</b>, but video is <b>not mandatory</b>. The same VSL page works with a video, an image, or just a strong typographic hero. We ship the spine, you produce videos on the cadence that makes sense (start with the highest-traffic programme).</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">04</div>
+          <div class="dquestion">
+            <b>Pricing on funnel pages: show or gate?</b>
+            <div class="ddetail">Currently shown on offering detail pages ("From £8k"). On VSL, common practice is to show exact price + payment options.</div>
+            <div class="dresolution"><b>Decided:</b> Show exact pricing. Vagueness on a VSL reads as evasive to CEO-level audiences. Price + what's included + payment terms, plain and visible.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">05</div>
+          <div class="dquestion">
+            <b>Quiz subdomain styling: share tokens, or accept a small style break?</b>
+            <div class="ddetail">The quiz lives at <code>quiz.accelerator-x.ai</code> as a standalone Next.js app. When the new design system lands, do we propagate tokens to the subdomain (ideal but more work) or accept a temporary visual delta?</div>
+            <div class="dresolution"><b>Decided:</b> Propagate tokens. Schedule the work at the <b>end</b> of the rebuild — once the design system is locked, port tokens to the quiz subdomain as a closing task. Avoids two restyling passes on the quiz.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">06</div>
+          <div class="dquestion">
+            <b>Direction lock for the design system: B?</b>
+            <div class="ddetail">The current wireframe set has explored A/B/C/D directions. The hi-fi component pass in Phase C needs one direction locked.</div>
+            <div class="dresolution"><b>Decided:</b> B. Phase C drops the A/C/D variants and commits. <b>Follow-up flagged as D09 below</b> — there's a parallel design system in flight that needs to harmonise with this one.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">07</div>
+          <div class="dquestion">
+            <b>Insights tag taxonomy + content formats</b>
+            <div class="ddetail">Affects /insights filter, content modelling, and how the hub renders mixed media. The current site treats podcasts and videos as "article types" but the execution is unclear.</div>
+            <div class="dresolution"><b>Decided:</b> Start with 5 tags (Strategy, Capability, Cases, Tooling, Opinion) — add tags only when ≥3 articles need a new one. <b>And:</b> rework Insights to be explicit about content <b>format</b> (article · podcast · video) as a first-class field, not a hidden type. Tiles render differently per format. Spec'd in the Content Pipeline section below.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">08</div>
+          <div class="dquestion">
+            <b>CMS / data layer: where do articles, case studies, events live?</b>
+            <div class="ddetail">Determines whether tiles are templated or hand-written.</div>
+            <div class="dresolution"><b>Decided:</b> Markdown in repo. Frontmatter-driven. Paired with a <b>Claude-powered content pipeline</b> for ideation, drafting, and publishing — spec'd as §10 below. This is the structure that makes "radically dial up content creation" feasible.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+        <div class="row decided">
+          <div class="dnum">09</div>
+          <div class="dquestion">
+            <b>Design-system harmonisation — what's the other system, what's the path?</b>
+            <div class="ddetail">Surfaced after you flagged a parallel system from prior dev effort (DESIGN.md v1.3 + colors_and_type.css).</div>
+            <div class="dresolution"><b>Decided:</b> Reconciled into a <b>single canonical design system v2.0</b>, living in <code>design-system/</code>. Brand DS (Figtree + AX palette) wins on type and colour. Direction B's structural quality survives in <em>how</em> we apply it (editorial restraint, spacing, layout). New warm <b>paper surface</b> added. Wireframes' ­<code>--c-*</code> tokens dropped. See <code><a href="design-system/Design System.html" style="color: var(--ok);">Design System.html</a></code> for the visual reference, <code>DESIGN.md</code> for principles, <code>tokens.css</code> + <code>tokens.json</code> for implementation.</div>
+          </div>
+          <div class="dstatus">Decided</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 10 Next ────────────────────────────────────────────── -->
+    <section id="next">
+      <div class="section-num">12 · Sequence</div>
+      <h2 class="section-title">What happens next.</h2>
+      <p class="section-sub">In order. Each step is gated by the one before it — no parallel tracks until the component library lands.</p>
+
+      <ol class="blocks" style="margin-top: 18px;">
+        <li><span class="bname">A · This document, reviewed</span><span class="bnote">You read it, flag what's wrong, answer the 8 decisions. Half a day of your time, max.</span></li>
+        <li><span class="bname">B · VSL/funnel spec (next doc)</span><span class="bnote">Deep spec for one funnel template, copy intent block-by-block, apply form fields, thank-you nurture flow. ~1 day of design.</span></li>
+        <li><span class="bname">C · Component library at hi-fi</span><span class="bnote">The 22 components, in the new design system, with states. ~2–3 days. This is the handoff artefact for engineering.</span></li>
+        <li><span class="bname">D · New wireframes for the missing pages</span><span class="bnote">Three coaching offering details · merged Company Enablement · event detail · expanded How we work · 404. Block-level, not hi-fi. ~1 day.</span></li>
+        <li><span class="bname">E · Clickable walkthrough</span><span class="bnote">Wire everything together as an internal walkthrough. Hi-fi components in place. ~1–2 days.</span></li>
+        <li><span class="bname">F · Engineering handoff package</span><span class="bnote">This doc + the component library + the walkthrough + tokens.json. Claude Code starts from here.</span></li>
+      </ol>
+
+      <div class="callout">
+        <span class="label">Critical insight worth repeating</span>
+        The single highest-leverage artefact in this whole plan is the <strong>component library at hi-fi in the new design system</strong>. Everything else is composition. If you're optimising your own time, that's the one to review most carefully when it lands.
+      </div>
+
+      <hr class="rule" />
+
+      <p style="margin-top: 40px; font-size: 13px; color: var(--muted);">
+        End of Phase A. Reply with answers to the decisions in §09 (even partial — I can proceed with placeholders) and I'll move to Phase B.
+      </p>
+    </section>
+
+  </div>
+</body>
+</html>

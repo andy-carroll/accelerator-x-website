@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Wireframes · Coaching offerings + Company Enablement</title>
+
+<!-- ext-resource-dependency: type=font name=Geist -->
+<!-- ext-resource-dependency: type=font name=JetBrains+Mono -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    /* Direction B tokens — matches the rest of the deliverables */
+    --c-bg: #ffffff;
+    --c-bg-alt: #f5f3ee;
+    --c-tint: #f1ede2;
+    --c-fg: #0e1726;
+    --c-fg-muted: #5b6173;
+    --c-line: rgba(14, 23, 38, 0.10);
+    --c-line-faint: rgba(14, 23, 38, 0.05);
+    --c-accent: #088abf;
+    --c-accent-2: #e93f8e;
+    --c-amber: #fea700;
+
+    --f-body: 'Geist', system-ui, -apple-system, sans-serif;
+    --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    /* Page chrome — the surrounding canvas */
+    --page-bg: #ebe7dd;
+  }
+
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    background: var(--page-bg);
+    font-family: var(--f-body);
+    color: var(--c-fg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: geometricPrecision;
+  }
+
+  /* Doc chrome */
+  .doc-page { max-width: 1440px; margin: 0 auto; padding: 56px 48px 120px; }
+  .doc-meta {
+    display: flex; gap: 24px;
+    font-family: var(--f-mono);
+    font-size: 11px; letter-spacing: 0.04em;
+    color: #6e6a5d;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    margin-bottom: 28px;
+  }
+  .doc-meta b { color: #1c1c1c; font-weight: 500; margin-right: 8px; }
+  .doc-title {
+    font-size: 44px; font-weight: 500;
+    letter-spacing: -0.025em; line-height: 1.04;
+    margin: 0 0 12px; color: #1c1c1c;
+  }
+  .doc-lede {
+    font-size: 16px; line-height: 1.55;
+    color: #4a4738; max-width: 740px; margin: 0;
+  }
+  .doc-lede em { font-style: italic; color: #1c1c1c; }
+
+  /* Artboard caption row */
+  .artboard-cap {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin: 40px 4px 12px;
+  }
+  .artboard-cap .lhs { display: flex; flex-direction: column; gap: 2px; }
+  .artboard-cap .pn {
+    font-family: var(--f-mono); font-size: 10.5px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: #6e6a5d;
+  }
+  .artboard-cap .pt {
+    font-size: 20px; font-weight: 600;
+    letter-spacing: -0.015em; color: #1c1c1c;
+  }
+  .artboard-cap .url {
+    font-family: var(--f-mono); font-size: 11px; color: #6e6a5d;
+  }
+
+  /* Artboard frame */
+  .artboard {
+    background: var(--c-bg);
+    border-radius: 10px;
+    box-shadow:
+      0 30px 60px rgba(14, 23, 38, 0.14),
+      0 8px 16px rgba(14, 23, 38, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Browser bar */
+  .browser-bar {
+    height: 36px;
+    border-bottom: 1px solid var(--c-line);
+    display: flex; align-items: center; gap: 8px;
+    padding: 0 16px;
+    background: var(--c-bg-alt);
+  }
+  .browser-bar .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(14,23,38,0.18); }
+  .browser-bar .url {
+    margin-left: 14px;
+    font-family: var(--f-mono); font-size: 11.5px; color: var(--c-fg-muted);
+  }
+  .browser-bar .url b { color: var(--c-fg); font-weight: 500; }
+
+  /* Top nav */
+  .top-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 40px;
+    border-bottom: 1px solid var(--c-line);
+  }
+  .top-nav .left { display: flex; align-items: center; gap: 28px; }
+  .top-nav .logo { font-size: 17px; font-weight: 600; letter-spacing: -0.02em; }
+  .top-nav .logo .x { color: var(--c-accent-2); }
+  .top-nav .link { font-size: 13.5px; color: var(--c-fg-muted); }
+  .top-nav .link.active { color: var(--c-fg); font-weight: 500; }
+  .top-nav .right .btn { font-size: 13px; padding: 9px 16px; }
+
+  /* Sections */
+  .sec { padding: 56px 64px; border-bottom: 1px dashed var(--c-line); position: relative; }
+  .sec:last-child { border-bottom: none; }
+  .sec.alt { background: var(--c-bg-alt); }
+  .sec.tint { background: var(--c-tint); }
+  .sec.dark { background: var(--c-fg); color: var(--c-bg); }
+  .sec.dark .muted { color: rgba(255,255,255,0.55); }
+  .sec.dark .eyebrow { color: rgba(255,255,255,0.55); }
+  .sec.compact { padding-top: 36px; padding-bottom: 36px; }
+
+  /* Eyebrow + headings */
+  .eyebrow {
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--c-fg-muted);
+  }
+  .eyebrow.cyan { color: var(--c-accent); }
+  .eyebrow.pink { color: var(--c-accent-2); }
+  .eyebrow.amber { color: #a36e00; }
+
+  .h-display {
+    font-family: var(--f-body);
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    margin: 0;
+    color: var(--c-fg);
+    text-wrap: balance;
+  }
+  .sec.dark .h-display { color: var(--c-bg); }
+  .h1 { font-size: 56px; }
+  .h2 { font-size: 42px; }
+  .h3 { font-size: 30px; }
+  .h4 { font-size: 22px; }
+  .h5 { font-size: 16px; font-weight: 600; }
+
+  .body { font-size: 15px; line-height: 1.55; color: var(--c-fg-muted); margin: 0; }
+  .body.lg { font-size: 17px; }
+  .body strong { color: var(--c-fg); font-weight: 600; }
+  .sec.dark .body { color: rgba(255,255,255,0.7); }
+  .sec.dark .body strong { color: var(--c-bg); }
+  .small { font-size: 12.5px; color: var(--c-fg-muted); line-height: 1.5; }
+  .muted { color: var(--c-fg-muted); }
+
+  /* Pill / chip */
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px;
+    border: 1px solid var(--c-line);
+    border-radius: 999px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--c-fg-muted); background: var(--c-bg);
+  }
+  .chip.cyan { color: var(--c-accent); border-color: rgba(8, 138, 191, 0.3); background: rgba(8, 138, 191, 0.06); }
+  .chip.pink { color: var(--c-accent-2); border-color: rgba(233, 63, 142, 0.3); background: rgba(233, 63, 142, 0.06); }
+  .chip.amber { color: #a36e00; border-color: rgba(254, 167, 0, 0.4); background: rgba(254, 167, 0, 0.08); }
+  .chip.on-dark { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.88); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 6px;
+    height: 44px; padding: 0 22px;
+    border-radius: 999px;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: -0.005em;
+    border: 1px solid transparent;
+    background: var(--c-fg); color: var(--c-bg);
+    font-family: inherit;
+  }
+  .btn.lg { height: 50px; padding: 0 26px; font-size: 15px; }
+  .btn.sm { height: 36px; padding: 0 16px; font-size: 13px; }
+  .btn.accent { background: var(--c-accent-2); color: #fff; }
+  .btn.cyan { background: var(--c-accent); color: #fff; }
+  .btn.outline { background: transparent; color: var(--c-fg); border-color: var(--c-fg); }
+  .btn.full { width: 100%; }
+
+  /* Placeholder image */
+  .img-ph {
+    background: rgba(14, 23, 38, 0.04);
+    border: 1px solid var(--c-line);
+    border-radius: 14px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--c-fg-muted);
+    font-family: var(--f-mono); font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .img-ph::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(135deg,
+        transparent 0 16px,
+        rgba(14,23,38,0.03) 16px 17px);
+    pointer-events: none;
+  }
+
+  /* Avatar placeholder */
+  .avatar { width: 40px; height: 40px; border-radius: 999px; background: var(--c-bg-alt); flex-shrink: 0; }
+
+  /* Card / panel */
+  .panel {
+    background: var(--c-bg);
+    border: 1px solid var(--c-line);
+    border-radius: 14px;
+    padding: 22px;
+  }
+  .panel.alt { background: var(--c-bg-alt); }
+  .panel.accent { border-color: rgba(8, 138, 191, 0.4); background: rgba(8, 138, 191, 0.04); }
+  .panel.cyan-fill { background: var(--c-bg-alt); border: 1.5px solid var(--c-accent); }
+
+  /* Spec table (for sidebar investment card etc.) */
+  .spec-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--c-line-faint);
+    font-size: 13.5px;
+  }
+  .spec-row:last-child { border-bottom: none; }
+  .spec-row .k { color: var(--c-fg-muted); font-size: 12.5px; }
+  .spec-row .v { color: var(--c-fg); font-weight: 600; }
+  .spec-row .v.highlight { color: var(--c-accent); }
+
+  /* Annotations — yellow margin notes (consistent with mobile screens file) */
+  .ann-rail {
+    position: absolute;
+    top: 32px; right: 16px;
+    width: 200px;
+    display: flex; flex-direction: column; gap: 16px;
+    pointer-events: none;
+    z-index: 5;
+  }
+  .ann-rail .ann {
+    background: #fff8e3;
+    border: 1px solid #f0e2a8;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px; line-height: 1.45;
+    color: #5b4a1a;
+    box-shadow: 0 4px 12px rgba(91, 74, 26, 0.08);
+  }
+  .ann-rail .ann b { color: #3d3204; font-weight: 600; }
+  .ann-rail .ann .pin {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #5b4a1a; color: #fff8e3;
+    font-family: var(--f-mono); font-size: 10px; font-weight: 600;
+    margin-right: 6px; vertical-align: 1px;
+  }
+
+  /* Variant deltas table (for Sr. Leader + Exec Coaching) */
+  .delta-card {
+    background: var(--c-bg);
+    border: 1.5px dashed var(--c-fg-muted);
+    border-radius: 10px;
+    padding: 28px 32px;
+    position: relative;
+    margin-top: 24px;
+  }
+  .delta-card::before {
+    content: 'VARIANT DELTAS';
+    position: absolute;
+    top: -10px; left: 22px;
+    background: var(--c-bg-alt);
+    padding: 0 10px;
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.16em; font-weight: 600;
+    color: var(--c-fg);
+  }
+  .delta-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--c-line-faint);
+  }
+  .delta-row:last-child { border-bottom: none; }
+  .delta-row .k {
+    font-family: var(--f-mono); font-size: 10.5px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--c-fg-muted); padding-top: 2px;
+  }
+  .delta-row .v { font-size: 13.5px; line-height: 1.5; color: var(--c-fg); }
+  .delta-row .v b { font-weight: 600; }
+  .delta-row .v em { color: var(--c-accent); font-style: normal; font-weight: 500; }
+
+  /* Same-as banner */
+  .same-as-banner {
+    background: rgba(8, 138, 191, 0.06);
+    border: 1px dashed rgba(8, 138, 191, 0.35);
+    border-radius: 8px;
+    padding: 14px 22px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--c-accent);
+    margin: 0;
+  }
+  .same-as-banner b { color: var(--c-fg); font-weight: 600; }
+
+  /* Mini section rule */
+  .mini-rule {
+    display: flex; align-items: center; gap: 14px;
+    margin: 32px 0 18px;
+  }
+  .mini-rule .line { flex: 1; height: 1px; background: var(--c-line); }
+  .mini-rule .lbl {
+    font-family: var(--f-mono); font-size: 10.5px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--c-fg-muted);
+  }
+
+  /* Grid helpers */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 14px; }
+  .row { display: flex; gap: 14px; }
+  .row.middle { align-items: center; }
+
+  /* Numbered step (plan layers) */
+  .step-num {
+    font-family: var(--f-mono); font-size: 12px;
+    color: var(--c-accent); font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* FAQ rows */
+  .faq-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 16px 0;
+    border-top: 1px solid var(--c-line);
+    gap: 18px;
+  }
+  .faq-row:last-child { border-bottom: 1px solid var(--c-line); }
+  .faq-row .q { font-size: 15px; font-weight: 600; color: var(--c-fg); }
+  .faq-row .plus {
+    font-family: var(--f-mono); font-size: 18px;
+    color: var(--c-fg-muted); font-weight: 400; line-height: 1;
+  }
+
+  /* Fit columns */
+  .fit-col { border-radius: 14px; padding: 22px 24px; }
+  .fit-col.yes { background: rgba(31, 122, 74, 0.05); border: 1px solid rgba(31, 122, 74, 0.25); }
+  .fit-col.no  { background: rgba(14, 23, 38, 0.02); border: 1px solid var(--c-line); }
+  .fit-col h4 {
+    font-size: 13px; font-weight: 600; margin: 0 0 12px;
+    display: flex; align-items: center; gap: 8px;
+    color: var(--c-fg);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  .fit-col.yes h4::before { content: '✓'; color: #1f7a4a; font-weight: 700; font-size: 14px; }
+  .fit-col.no h4::before { content: '✗'; color: #c14545; font-weight: 700; font-size: 14px; }
+  .fit-col ul { margin: 0; padding-left: 20px; }
+  .fit-col li { font-size: 13.5px; line-height: 1.55; color: var(--c-fg-muted); margin-bottom: 8px; }
+
+  /* Bridge block (Company Enablement) */
+  .bridge {
+    background: var(--c-tint);
+    border: 1.5px dashed var(--c-fg-muted);
+    border-radius: 14px;
+    padding: 32px 40px;
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+  .bridge .arrow { font-size: 28px; color: var(--c-fg-muted); margin: 14px 0; line-height: 1; }
+
+  /* Cycle chain */
+  .cycle-chain {
+    display: flex; align-items: stretch; gap: 8px;
+    margin-top: 18px;
+  }
+  .cycle-chain .arrow {
+    display: flex; align-items: center;
+    color: var(--c-fg-muted); font-family: var(--f-mono);
+    font-size: 18px; padding: 0 4px;
+  }
+  .cycle-chain .panel { flex: 1; padding: 16px 18px; }
+
+  /* Hero arc (Company Enablement) */
+  .hero-arc {
+    display: grid;
+    grid-template-columns: 1fr 28px 1fr;
+    gap: 4px;
+    align-items: stretch;
+    margin-top: 32px;
+  }
+  .hero-arc .arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: var(--c-fg-muted);
+  }
+  .hero-arc .panel { padding: 18px 20px; }
+
+  /* Footer placeholder */
+  .footer-ph {
+    background: var(--c-fg);
+    color: var(--c-bg);
+    padding: 40px 64px 28px;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+  .footer-ph h5 {
+    font-family: var(--f-mono); font-size: 10px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .footer-ph ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .footer-ph li { font-size: 13px; color: rgba(255,255,255,0.85); }
+  .footer-ph .logo { font-size: 22px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .footer-ph .logo .x { color: var(--c-accent-2); }
+  .footer-ph .small { color: rgba(255,255,255,0.5); }
+</style>
+</head>
+<body>
+
+  <div class="doc-page">
+
+    <!-- ─── Doc header ────────────────────────────────────── -->
+    <div class="doc-meta">
+      <span><b>Doc</b>Wireframes · v0.2</span>
+      <span><b>Scope</b>Coaching offerings + Company Enablement (merged)</span>
+      <span><b>Direction</b>B (locked)</span>
+      <span><b>Status</b>Block-level · for review</span>
+      <span><b>Date</b>16 May 2026</span>
+    </div>
+    <h1 class="doc-title">Coaching &amp; Enablement wireframes.</h1>
+    <p class="doc-lede">
+      The four missing structural pages from the Build Plan, rendered in the locked design system at block fidelity. Coaching offerings share <em>one template</em> with content-only deltas; Company Enablement is the <em>two-phase variant</em>. These are layout decisions, not hi-fi component decisions — hi-fi happens in Phase C.
+    </p>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         WIREFRAME 01 · LEADERSHIP COHORT (canonical coaching template)
+         ═══════════════════════════════════════════════════════ -->
+    <div class="artboard-cap">
+      <div class="lhs">
+        <span class="pn">01 · Coaching · canonical template</span>
+        <span class="pt">Leadership Cohort</span>
+      </div>
+      <span class="url">/what-we-do/leadership-cohort</span>
+    </div>
+
+    <div class="artboard">
+      <!-- Browser bar -->
+      <div class="browser-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">accelerator-x.ai<b>/what-we-do/leadership-cohort</b></span>
+      </div>
+
+      <!-- Top nav -->
+      <div class="top-nav">
+        <div class="left">
+          <span class="logo">Accelerator<span class="x">X</span></span>
+          <span class="link active">What we do</span>
+          <span class="link">How we work</span>
+          <span class="link">Insights</span>
+          <span class="link">About</span>
+        </div>
+        <div class="right">
+          <span class="btn sm">Apply to work with us →</span>
+        </div>
+      </div>
+
+      <!-- ═══ HERO ═══ -->
+      <section class="sec">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">1</span> Variant-aware sidebar: cohort offerings show <b>fixed dates</b> + places remaining. Company Enablement uses lead-time copy instead.
+          </div>
+        </div>
+
+        <!-- Breadcrumb -->
+        <div style="display: flex; gap: 6px; font-size: 12px; color: var(--c-fg-muted); margin-bottom: 22px;">
+          <span style="opacity: 0.7;">What we do</span><span style="opacity: 0.4;">/</span>
+          <span style="opacity: 0.7;">Coaching</span><span style="opacity: 0.4;">/</span>
+          <span style="color: var(--c-fg); font-weight: 500;">Leadership Cohort</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.4fr 0.85fr; gap: 56px; align-items: start;">
+          <div>
+            <span class="chip cyan">Cohort · 8 weeks · 12 places · senior leaders</span>
+            <h1 class="h-display h1" style="margin-top: 20px;">Eight weeks of AI in a room of <span style="color: var(--c-accent);">your peers.</span></h1>
+            <p class="body lg" style="margin-top: 22px; max-width: 540px;">A founder-led cohort for senior leaders who'd rather lead the AI conversation than be led by it. Non-competing companies. Four hours a week. Eight weeks. One shipped artefact.</p>
+          </div>
+
+          <!-- Sidebar investment card -->
+          <div class="panel alt">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--c-line);">
+              <span class="eyebrow">Apply to join</span>
+              <span class="eyebrow cyan">Cohort 04</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <div class="spec-row"><span class="k">Duration</span><span class="v">8 weeks</span></div>
+              <div class="spec-row"><span class="k">Cadence</span><span class="v">Weekly · 4hrs · Mondays</span></div>
+              <div class="spec-row"><span class="k">Format</span><span class="v">In-person + Zoom hybrid</span></div>
+              <div class="spec-row"><span class="k">From</span><span class="v">£3,500 per place</span></div>
+              <div class="spec-row"><span class="k">Starts</span><span class="v">12 Aug 2026</span></div>
+              <div class="spec-row"><span class="k">Places left</span><span class="v highlight">6 of 12</span></div>
+            </div>
+            <button class="btn full" style="margin-top: 18px;">Apply to work with us →</button>
+            <p class="small" style="margin-top: 10px; line-height: 1.4;">Short pre-qualification form · we reply within a week · only good fits get a booking link.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ WHO IS THIS FOR ═══ -->
+      <section class="sec alt">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">2</span> Coaching-template variant: <b>"peer mix"</b> replaces the "current cohorts" list from the standard offering template.
+          </div>
+        </div>
+
+        <span class="eyebrow">Who this is for</span>
+        <h2 class="h-display h2" style="margin-top: 14px; max-width: 600px;">A room of senior leaders, vetted to be non-competing.</h2>
+
+        <div class="grid-3" style="margin-top: 32px;">
+          <div class="panel">
+            <span class="eyebrow cyan">The peer mix</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">12 places, 12 industries.</h4>
+            <p class="body" style="margin-top: 8px;">No two cohort members from competing companies. Vetted at application.</p>
+          </div>
+          <div class="panel">
+            <span class="eyebrow cyan">The seniority bar</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Director+ / function owner.</h4>
+            <p class="body" style="margin-top: 8px;">Real decision authority. AI is on your plate, not your team's.</p>
+          </div>
+          <div class="panel">
+            <span class="eyebrow cyan">The commitment</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">4 hrs / week. 8 weeks.</h4>
+            <p class="body" style="margin-top: 8px;">Light pre-work. No certificate. A shipped artefact by week 8.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ THE PLAN ═══ -->
+      <section class="sec">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">3</span> Coaching variant of <b>PlanLayers</b>: 3 phases (Prep · Sessions · Embed), not the 4 layers used for Company Enablement.
+          </div>
+        </div>
+
+        <span class="eyebrow">The plan</span>
+        <h2 class="h-display h2" style="margin-top: 14px; max-width: 560px;">Three phases. Eight weeks. One shipped artefact.</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1.4fr 1fr; gap: 16px; margin-top: 32px;">
+          <div class="panel">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span class="step-num">01 · PREP</span>
+              <span class="small">Week 0</span>
+            </div>
+            <h4 class="h-display h4" style="margin-top: 12px;">Pre-cohort interview.</h4>
+            <p class="body" style="margin-top: 10px;">1:1 with a founder. Context-gathering and cohort-fit confirmation.</p>
+          </div>
+          <div class="panel accent">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span class="step-num">02 · SESSIONS</span>
+              <span class="small">Weeks 1–8</span>
+            </div>
+            <h4 class="h-display h4" style="margin-top: 12px;">Weekly working sessions.</h4>
+            <p class="body" style="margin-top: 10px;">DOTS applied to each leader's context. Peer accountability. Founder-led teaching, not associates.</p>
+          </div>
+          <div class="panel">
+            <div style="display: flex; justify-content: space-between; align-items: baseline;">
+              <span class="step-num">03 · EMBED</span>
+              <span class="small">Weeks 6–8</span>
+            </div>
+            <h4 class="h-display h4" style="margin-top: 12px;">Ship + share.</h4>
+            <p class="body" style="margin-top: 10px;">Each leader ships a real artefact and presents it to the cohort.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ DELIVERABLES ═══ -->
+      <section class="sec alt">
+        <span class="eyebrow">What you walk away with</span>
+        <h2 class="h-display h2" style="margin-top: 14px;">Four outcomes. None of them a certificate.</h2>
+
+        <div class="grid-4" style="margin-top: 32px;">
+          <div class="panel">
+            <span class="step-num">01</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">Personal AI operating model</h4>
+            <p class="small">How you actually use AI in your role — tested against your own context.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">02</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">A shipped artefact</h4>
+            <p class="small">By week 8 you've built something real with AI in your own workflow.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">03</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">A peer network</h4>
+            <p class="small">Eleven senior leaders, vetted non-competing, who you can text.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">04</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">DOTS, turned inward</h4>
+            <p class="small">The framework we run with corporates, applied to your own work.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FIT CHECK ═══ -->
+      <section class="sec">
+        <span class="eyebrow">Fit check</span>
+        <h2 class="h-display h2" style="margin-top: 14px; max-width: 600px;">For leaders who'll lead the AI conversation. Not be led by it.</h2>
+
+        <div class="grid-2" style="margin-top: 32px;">
+          <div class="fit-col yes">
+            <h4>Right fit if you…</h4>
+            <ul>
+              <li>Run a function or business unit and own outcomes.</li>
+              <li>Want to lead the AI conversation, not be led by it.</li>
+              <li>Can commit 4 hours a week for 8 weeks.</li>
+              <li>Are comfortable being challenged by peers.</li>
+            </ul>
+          </div>
+          <div class="fit-col no">
+            <h4>Probably not for you if you…</h4>
+            <ul>
+              <li>Are looking for technical training — there's no code in this room.</li>
+              <li>Need a certificate more than capability.</li>
+              <li>Can't make consistent time week-to-week.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ PROOF ═══ -->
+      <section class="sec alt">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">4</span> <b>ProofRow</b> here is a long pull-quote — not a case-study tile (no public cohort cases yet).
+          </div>
+        </div>
+
+        <span class="eyebrow">Proof</span>
+        <blockquote style="font-size: 28px; font-weight: 500; line-height: 1.3; letter-spacing: -0.02em; margin: 18px 0 0; max-width: 760px; color: var(--c-fg);">
+          "It moved my Monday morning. I now run my leadership team meetings with AI in the loop, not as a topic on the agenda. Hard to overstate the shift."
+        </blockquote>
+        <div class="row middle" style="margin-top: 24px;">
+          <div class="avatar"></div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: var(--c-fg);">CMO, B2B SaaS</div>
+            <div class="small">Cohort 02 · Feb 2026</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FAQ ═══ -->
+      <section class="sec">
+        <span class="eyebrow">Common questions</span>
+        <h2 class="h-display h2" style="margin-top: 14px;">The six questions cohort applicants ask.</h2>
+
+        <div style="margin-top: 32px; max-width: 800px;">
+          <div class="faq-row"><span class="q">I don't have 4 hours a week.</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">Will my company expense this?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">What if a competitor of mine applies?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">Can my whole team join?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">What if I miss a session?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">Is there a money-back guarantee?</span><span class="plus">+</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ FINAL CTA ═══ -->
+      <section class="sec dark" style="text-align: center; padding: 72px 64px;">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">5</span> Single CTA only. <b>No "talk it through"</b> alt button anywhere on the site.
+          </div>
+        </div>
+
+        <span class="chip on-dark">Apply</span>
+        <h2 class="h-display h2" style="margin-top: 20px; font-size: 52px;">August cohort. <span style="color: var(--c-accent-2);">6 places left.</span></h2>
+        <p class="body lg" style="margin: 18px auto 0; max-width: 520px;">If you've read this far, you should apply. Worst case, we say no — and you've spent 5 minutes.</p>
+        <button class="btn accent lg" style="margin-top: 28px;">Apply to work with us →</button>
+        <p class="small" style="margin-top: 14px; color: rgba(255,255,255,0.5);">Short pre-qualification form · no calendars to book · we reply within a week.</p>
+      </section>
+
+      <!-- Footer placeholder -->
+      <div class="footer-ph">
+        <div>
+          <div class="logo">Accelerator<span class="x">X</span></div>
+          <p class="small">Field notes monthly. No spam.</p>
+        </div>
+        <div><h5>What we do</h5><ul><li>Company Enablement</li><li>Coaching</li><li>Advisory</li></ul></div>
+        <div><h5>Resources</h5><ul><li>Insights</li><li>Case studies</li><li>Talks</li></ul></div>
+        <div><h5>Legal</h5><ul><li>Privacy</li><li>Terms</li><li>Cookies</li></ul></div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         WIREFRAME 02 · SENIOR LEADER ACCELERATION (deltas only)
+         ═══════════════════════════════════════════════════════ -->
+    <div class="artboard-cap">
+      <div class="lhs">
+        <span class="pn">02 · Coaching · variant (deltas only)</span>
+        <span class="pt">Senior Leader Acceleration</span>
+      </div>
+      <span class="url">/what-we-do/senior-leader-acceleration</span>
+    </div>
+
+    <div class="artboard">
+      <div class="browser-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">accelerator-x.ai<b>/what-we-do/senior-leader-acceleration</b></span>
+      </div>
+
+      <section class="sec compact">
+        <p class="same-as-banner">↑ Top nav · footer · all blocks below — identical to <b>Leadership Cohort</b> template. Only the deltas below are different.</p>
+      </section>
+
+      <!-- Hero with delta sidebar -->
+      <section class="sec">
+        <div style="display: flex; gap: 6px; font-size: 12px; color: var(--c-fg-muted); margin-bottom: 22px;">
+          <span style="opacity: 0.7;">What we do</span><span style="opacity: 0.4;">/</span>
+          <span style="opacity: 0.7;">Coaching</span><span style="opacity: 0.4;">/</span>
+          <span style="color: var(--c-fg); font-weight: 500;">Senior Leader Acceleration</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.4fr 0.85fr; gap: 56px; align-items: start;">
+          <div>
+            <span class="chip cyan">Group · 8 weeks · single leadership team · in-house</span>
+            <h1 class="h-display h1" style="margin-top: 20px;">A leadership team that <span style="color: var(--c-accent);">moves together.</span></h1>
+            <p class="body lg" style="margin-top: 22px; max-width: 540px;">For an existing leadership team — your team, not a peer cohort. We come to you, bi-weekly, for eight weeks. By the end you share a way of working with AI, not just five separate views of it.</p>
+          </div>
+
+          <div class="panel alt">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--c-line);">
+              <span class="eyebrow">Bring us to your team</span>
+              <span class="eyebrow cyan">In-house</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <div class="spec-row"><span class="k">Duration</span><span class="v">8 weeks</span></div>
+              <div class="spec-row"><span class="k">Cadence</span><span class="v" style="color: var(--c-accent-2);">Bi-weekly · ½ day</span></div>
+              <div class="spec-row"><span class="k">Format</span><span class="v" style="color: var(--c-accent-2);">On-site at your offices</span></div>
+              <div class="spec-row"><span class="k">Group size</span><span class="v" style="color: var(--c-accent-2);">5–10 people</span></div>
+              <div class="spec-row"><span class="k">From</span><span class="v">£18,000 fixed-team</span></div>
+              <div class="spec-row"><span class="k">Start date</span><span class="v" style="color: var(--c-accent-2);">Agreed on signing</span></div>
+            </div>
+            <button class="btn full" style="margin-top: 18px;">Apply to work with us →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Variant deltas table -->
+      <section class="sec alt">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">1</span> Same template, different audience. <b>~8 content swaps, zero structural change.</b>
+          </div>
+        </div>
+
+        <span class="eyebrow">What changes vs. Leadership Cohort</span>
+        <h2 class="h-display h3" style="margin-top: 14px;">The deltas — content only, never structure.</h2>
+
+        <div class="delta-card">
+          <div class="delta-row"><span class="k">Audience</span><span class="v"><b>One team, not 12 peers.</b> Existing leadership team of the same company.</span></div>
+          <div class="delta-row"><span class="k">Peer mix block</span><span class="v">Replaced with <em>"How your team will work together"</em> block.</span></div>
+          <div class="delta-row"><span class="k">Sidebar</span><span class="v">No "places left" — <b>no cohort dates</b>. Lead-time copy instead.</span></div>
+          <div class="delta-row"><span class="k">The plan</span><span class="v">Same 3 phases. Phase 2 sessions become <b>bi-weekly half-days</b>, on-site.</span></div>
+          <div class="delta-row"><span class="k">Deliverables</span><span class="v">Outcome #2 becomes a <b>shared team operating model</b>, not personal.</span></div>
+          <div class="delta-row"><span class="k">Fit check</span><span class="v">Emphasises team cohesion and executive alignment.</span></div>
+          <div class="delta-row"><span class="k">Proof</span><span class="v">Featured case study (when available) — team outcomes are easier to share publicly than 1:1 quotes.</span></div>
+          <div class="delta-row"><span class="k">FAQ</span><span class="v"><em>"Can my CEO not attend?"</em> replaces <em>"What if a competitor applies?"</em></span></div>
+        </div>
+      </section>
+
+      <section class="sec compact">
+        <p class="same-as-banner">↓ All remaining blocks (What you walk away with · Fit check · Proof · FAQ · Final CTA · Footer) follow the canonical coaching template with the content swaps above.</p>
+      </section>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         WIREFRAME 03 · EXECUTIVE COACHING (deltas only)
+         ═══════════════════════════════════════════════════════ -->
+    <div class="artboard-cap">
+      <div class="lhs">
+        <span class="pn">03 · Coaching · variant (deltas only)</span>
+        <span class="pt">Executive Coaching</span>
+      </div>
+      <span class="url">/what-we-do/executive-coaching</span>
+    </div>
+
+    <div class="artboard">
+      <div class="browser-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">accelerator-x.ai<b>/what-we-do/executive-coaching</b></span>
+      </div>
+
+      <section class="sec compact">
+        <p class="same-as-banner">↑ Top nav · footer · all blocks below — identical to <b>Leadership Cohort</b> template. Only the deltas below are different.</p>
+      </section>
+
+      <section class="sec">
+        <div style="display: flex; gap: 6px; font-size: 12px; color: var(--c-fg-muted); margin-bottom: 22px;">
+          <span style="opacity: 0.7;">What we do</span><span style="opacity: 0.4;">/</span>
+          <span style="opacity: 0.7;">Coaching</span><span style="opacity: 0.4;">/</span>
+          <span style="color: var(--c-fg); font-weight: 500;">Executive Coaching</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.4fr 0.85fr; gap: 56px; align-items: start;">
+          <div>
+            <span class="chip cyan">1:1 · 12 weeks · single executive · founder-led</span>
+            <h1 class="h-display h1" style="margin-top: 20px;">A founder in your corner. <span style="color: var(--c-accent);">For one quarter.</span></h1>
+            <p class="body lg" style="margin-top: 22px; max-width: 540px;">For C-suite leaders carrying AI alone. Weekly 1:1s with one of the founders, plus async support. By the end you have a 90-day plan you can defend and the capability to run it.</p>
+          </div>
+
+          <div class="panel alt">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--c-line);">
+              <span class="eyebrow">Talk to a founder</span>
+              <span class="eyebrow cyan">1:1</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <div class="spec-row"><span class="k">Duration</span><span class="v" style="color: var(--c-accent-2);">12 weeks</span></div>
+              <div class="spec-row"><span class="k">Cadence</span><span class="v" style="color: var(--c-accent-2);">Weekly · 90 min · plus async</span></div>
+              <div class="spec-row"><span class="k">Format</span><span class="v">Hybrid: Zoom + 2 in-person</span></div>
+              <div class="spec-row"><span class="k">Coach</span><span class="v" style="color: var(--c-accent-2);">Toby or Andy</span></div>
+              <div class="spec-row"><span class="k">From</span><span class="v" style="color: var(--c-accent-2);">£12,000</span></div>
+              <div class="spec-row"><span class="k">Start date</span><span class="v">Agreed on signing</span></div>
+            </div>
+            <button class="btn full" style="margin-top: 18px;">Apply to work with us →</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec alt">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">1</span> Highest-cost, smallest audience. <b>Confidentiality copy</b> matters here.
+          </div>
+        </div>
+
+        <span class="eyebrow">What changes vs. Leadership Cohort</span>
+        <h2 class="h-display h3" style="margin-top: 14px;">The deltas — confidentiality is the big one.</h2>
+
+        <div class="delta-card">
+          <div class="delta-row"><span class="k">Audience</span><span class="v"><b>One executive.</b> CEO, founder, or C-suite leader carrying AI alone.</span></div>
+          <div class="delta-row"><span class="k">Peer mix block</span><span class="v">Replaced with <em>"How a 1:1 engagement works"</em> — chemistry call, contract, kick-off.</span></div>
+          <div class="delta-row"><span class="k">Sidebar</span><span class="v">No peer mix, no places left. <b>Names the coach</b> (Toby or Andy) on the page.</span></div>
+          <div class="delta-row"><span class="k">The plan</span><span class="v">3 phases, but Phase 2 is <b>weekly 1:1s + async support</b>. Phase 3 includes a 90-day plan handoff.</span></div>
+          <div class="delta-row"><span class="k">Deliverables</span><span class="v">Outcomes are personal-only. Add: <b>access to Toby/Andy's network</b> as outcome #4.</span></div>
+          <div class="delta-row"><span class="k">Fit check</span><span class="v">Right fit: carrying AI alone, can't be candid in a cohort. Not for: people who'd benefit more from peer learning.</span></div>
+          <div class="delta-row"><span class="k">Proof</span><span class="v">Anonymised quote, often. CEO testimonials are sensitive — use pull-quotes, no avatar.</span></div>
+          <div class="delta-row"><span class="k">FAQ</span><span class="v"><em>"Can I get one of you specifically?"</em> + <em>"What about confidentiality?"</em> replace cohort questions.</span></div>
+        </div>
+      </section>
+
+      <section class="sec compact">
+        <p class="same-as-banner">↓ All remaining blocks follow the canonical coaching template with the content swaps above.</p>
+      </section>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════
+         WIREFRAME 04 · COMPANY ENABLEMENT (merged Phase 0 → Phase 1+)
+         ═══════════════════════════════════════════════════════ -->
+    <div class="artboard-cap">
+      <div class="lhs">
+        <span class="pn">04 · Offering · two-phase variant</span>
+        <span class="pt">Company Enablement — merged Phase 0 → Phase 1+</span>
+      </div>
+      <span class="url">/what-we-do/company-enablement</span>
+    </div>
+
+    <div class="artboard">
+      <div class="browser-bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">accelerator-x.ai<b>/what-we-do/company-enablement</b></span>
+      </div>
+
+      <div class="top-nav">
+        <div class="left">
+          <span class="logo">Accelerator<span class="x">X</span></span>
+          <span class="link active">What we do</span>
+          <span class="link">How we work</span>
+          <span class="link">Insights</span>
+          <span class="link">About</span>
+        </div>
+        <div class="right">
+          <span class="btn sm">Apply to work with us →</span>
+        </div>
+      </div>
+
+      <!-- ═══ HERO with arc ═══ -->
+      <section class="sec">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">1</span> Arc <b>inside the hero</b> — not below it. Sequencing is visible before any scroll.
+          </div>
+          <div class="ann">
+            <span class="pin">2</span> Sidebar = lead-time copy, <b>no cohort date</b>. Phase 0 isn't a cohort.
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 6px; font-size: 12px; color: var(--c-fg-muted); margin-bottom: 22px;">
+          <span style="opacity: 0.7;">What we do</span><span style="opacity: 0.4;">/</span>
+          <span style="color: var(--c-fg); font-weight: 500;">Company Enablement</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.4fr 0.85fr; gap: 56px; align-items: start;">
+          <div>
+            <span class="chip cyan">Flagship · Phase 0 → Phase 1+ · everyone starts at Phase 0</span>
+            <h1 class="h-display h1" style="margin-top: 20px; font-size: 64px;">How a company moves <span style="color: var(--c-accent);">with us.</span></h1>
+            <p class="body lg" style="margin-top: 22px; max-width: 560px;">Two phases. The first aligns and activates in two weeks. The second ships capability, cycle by cycle, until you're self-sufficient. Everyone starts with Phase 0.</p>
+
+            <div class="hero-arc">
+              <div class="panel cyan-fill">
+                <span class="eyebrow cyan">Phase 0 · start here</span>
+                <h4 class="h-display h4" style="margin-top: 8px;">2 weeks · from £5k</h4>
+                <p class="small" style="margin-top: 4px;">Align + activate + roadmap</p>
+              </div>
+              <div class="arrow">→</div>
+              <div class="panel">
+                <span class="eyebrow">Phase 1+</span>
+                <h4 class="h-display h4" style="margin-top: 8px;">8-week cycles · from £20k</h4>
+                <p class="small" style="margin-top: 4px;">Build & ship capability</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel alt">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid var(--c-line);">
+              <span class="eyebrow">Start with</span>
+              <span class="eyebrow cyan">Phase 0</span>
+            </div>
+            <div style="margin-top: 14px;">
+              <div class="spec-row"><span class="k">Duration</span><span class="v">2 weeks</span></div>
+              <div class="spec-row"><span class="k">From</span><span class="v">£5,000</span></div>
+              <div class="spec-row"><span class="k">Start date</span><span class="v">Agreed on signing</span></div>
+              <div class="spec-row"><span class="k">Lead time</span><span class="v">~3 weeks</span></div>
+              <div class="spec-row"><span class="k">Format</span><span class="v">3 workshops + 1 playback</span></div>
+            </div>
+            <button class="btn full" style="margin-top: 18px;">Apply to work with us →</button>
+            <p class="small" style="margin-top: 10px; font-style: italic;">No calendars to book. We vet every application and reply personally.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ PHASE 0 IN DEPTH ═══ -->
+      <section class="sec alt">
+        <span class="chip cyan">Phase 0 · in depth</span>
+        <h2 class="h-display h2" style="margin-top: 18px; font-size: 52px;">Two weeks <span style="color: var(--c-accent);">to clarity.</span></h2>
+        <p class="body lg" style="margin-top: 18px; max-width: 640px;">Three workshops, one playback, one costed 90-day plan. Built around our proprietary DOTS framework.</p>
+
+        <div class="mini-rule"><span class="line"></span><span class="lbl">Phase 0 plan layers</span><span class="line"></span></div>
+
+        <div class="grid-3">
+          <div class="panel">
+            <span class="step-num">01</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Executive DOTS</h4>
+            <p class="body" style="margin-top: 8px;">Half-day with your leadership team — Dream / Obstacles / Triage / Sequence.</p>
+            <p class="small" style="margin-top: 6px; font-style: italic;">Half-day · leadership team</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">02</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Team activation</h4>
+            <p class="body" style="margin-top: 8px;">Wider function session. The work moves from leadership decision into team adoption.</p>
+            <p class="small" style="margin-top: 6px; font-style: italic;">Wider function · 10–40 people</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">03</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Strategy playback</h4>
+            <p class="body" style="margin-top: 8px;">We integrate the outputs and present the costed 90-day roadmap. Phase 1 scope agreed (or not).</p>
+            <p class="small" style="margin-top: 6px; font-style: italic;">Costed 90-day roadmap</p>
+          </div>
+        </div>
+
+        <div class="mini-rule"><span class="line"></span><span class="lbl">What you walk away with</span><span class="line"></span></div>
+
+        <div class="grid-4">
+          <div class="panel">
+            <span class="step-num">01</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">90-day roadmap</h4>
+            <p class="small">Costed, sequenced, owned by your team.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">02</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">Use cases evaluated</h4>
+            <p class="small">Highest-leverage first build, with success metrics.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">03</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">Aligned leadership</h4>
+            <p class="small">One story, told the same way across the C-suite.</p>
+          </div>
+          <div class="panel">
+            <span class="step-num">04</span>
+            <h4 class="h5" style="margin: 10px 0 6px;">Activated team</h4>
+            <p class="small">A department that already knows what's coming.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ BRIDGE ═══ -->
+      <section class="sec">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">3</span> The <b>bridge</b> block — the page would feel like two pages glued together without it.
+          </div>
+        </div>
+
+        <div class="bridge">
+          <span class="chip">What Phase 0 produces</span>
+          <div class="arrow">↓</div>
+          <h3 class="h-display h3" style="font-size: 28px;">A roadmap you can defend.</h3>
+          <p class="small" style="margin-top: 8px;">What we do with it next is Phase 1+.</p>
+        </div>
+      </section>
+
+      <!-- ═══ PHASE 1+ IN DEPTH ═══ -->
+      <section class="sec alt">
+        <span class="chip">Phase 1+ · in depth</span>
+        <h2 class="h-display h2" style="margin-top: 18px; font-size: 52px;">Eight-week cycles. <span style="font-style: italic;">One capability at a time.</span></h2>
+        <p class="body lg" style="margin-top: 18px; max-width: 640px;">Once the roadmap is signed off, sequential 8-week cycles deliver against it. Each cycle ships a real capability your team owns.</p>
+
+        <div class="mini-rule"><span class="line"></span><span class="lbl">Three streams in every cycle</span><span class="line"></span></div>
+
+        <div class="grid-3">
+          <div class="panel">
+            <span class="eyebrow cyan">Stream 01 · People</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Train your operators.</h4>
+            <p class="body" style="margin-top: 8px;">2–4 internal builders gain hands-on capability across the cycle.</p>
+          </div>
+          <div class="panel">
+            <span class="eyebrow cyan">Stream 02 · Process</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Change the rituals.</h4>
+            <p class="body" style="margin-top: 8px;">New workflows embedded, not appended. The capability sticks because the process changes around it.</p>
+          </div>
+          <div class="panel">
+            <span class="eyebrow cyan">Stream 03 · Product</span>
+            <h4 class="h-display h4" style="margin-top: 10px;">Ship the thing.</h4>
+            <p class="body" style="margin-top: 8px;">A production-ready AI capability — owned, instrumented, demonstrably valuable.</p>
+          </div>
+        </div>
+
+        <div class="mini-rule"><span class="line"></span><span class="lbl">How cycles chain</span><span class="line"></span></div>
+
+        <div class="cycle-chain">
+          <div class="panel">
+            <span class="eyebrow">Cycle 01</span>
+            <p class="small" style="margin-top: 6px; color: var(--c-fg);">Ship first capability</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="panel">
+            <span class="eyebrow">Cycle 02</span>
+            <p class="small" style="margin-top: 6px; color: var(--c-fg);">Build on 01 · train next operators</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="panel">
+            <span class="eyebrow">Cycle N</span>
+            <p class="small" style="margin-top: 6px; color: var(--c-fg);">Run as many as the roadmap calls for</p>
+          </div>
+          <div class="arrow">→</div>
+          <div class="panel" style="background: rgba(254, 167, 0, 0.08); border-color: rgba(254, 167, 0, 0.35);">
+            <span class="eyebrow amber">Advisory</span>
+            <p class="small" style="margin-top: 6px; color: var(--c-fg);">When you're self-sufficient</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FIT CHECK ═══ -->
+      <section class="sec">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">4</span> Fit check is for <b>the whole arc</b>, not per-phase. Phase 0 isn't optional.
+          </div>
+        </div>
+
+        <span class="eyebrow">Fit check</span>
+        <h2 class="h-display h2" style="margin-top: 14px; max-width: 700px;">For companies who want to build capability — not just buy a strategy deck.</h2>
+
+        <div class="grid-2" style="margin-top: 32px;">
+          <div class="fit-col yes">
+            <h4>Right fit if you…</h4>
+            <ul>
+              <li>Have a leadership team willing to spend 4 sessions over 2 weeks.</li>
+              <li>Believe AI capability is a building exercise, not a procurement one.</li>
+              <li>Want internal operators trained, not external dependency.</li>
+              <li>Are comfortable being challenged on what's actually slowing you down.</li>
+            </ul>
+          </div>
+          <div class="fit-col no">
+            <h4>Probably not for you if you…</h4>
+            <ul>
+              <li>Want a slide deck to take to the board, not a working capability.</li>
+              <li>Need to outsource AI ownership long-term.</li>
+              <li>Aren't able to commit leadership time in the first fortnight.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FAQ ═══ -->
+      <section class="sec alt">
+        <div class="ann-rail">
+          <div class="ann">
+            <span class="pin">5</span> "Can we skip Phase 0?" is the <b>first FAQ</b>. Answered honestly.
+          </div>
+        </div>
+
+        <span class="eyebrow">Common questions</span>
+        <h2 class="h-display h2" style="margin-top: 14px;">Asked at week 2, week 8, and week 16.</h2>
+
+        <div style="margin-top: 32px; max-width: 800px;">
+          <div class="faq-row"><span class="q">Can we skip Phase 0?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">How firm is the £5,000 price?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">What's the "+" in Phase 1+?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">Can we run cycles in parallel?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">Who owns the IP?</span><span class="plus">+</span></div>
+          <div class="faq-row"><span class="q">What happens after the last cycle?</span><span class="plus">+</span></div>
+        </div>
+      </section>
+
+      <!-- ═══ PROOF ═══ -->
+      <section class="sec">
+        <span class="eyebrow">Proof</span>
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; margin-top: 24px; align-items: start;">
+          <div>
+            <blockquote style="font-size: 24px; font-weight: 500; line-height: 1.35; letter-spacing: -0.015em; margin: 0; max-width: 520px; color: var(--c-fg);">
+              "By the end of week two we had a roadmap that survived contact with our CFO. Six weeks later we shipped the first capability. I haven't seen anyone work like this."
+            </blockquote>
+            <div class="row middle" style="margin-top: 24px;">
+              <div class="avatar"></div>
+              <div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--c-fg);">COO, £45M retail group</div>
+                <div class="small">Phase 0 + Phase 1, Q1 2026</div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <span class="eyebrow">Linked case study</span>
+            <div class="img-ph" style="height: 140px; margin: 12px 0; border-radius: 10px;">Cover</div>
+            <h4 class="h-display h4" style="font-size: 18px;">Two phases, four cycles, one new capability per quarter.</h4>
+            <p class="small" style="margin-top: 6px;">12-month outcome view</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ FINAL CTA ═══ -->
+      <section class="sec dark" style="text-align: center; padding: 72px 64px;">
+        <span class="chip on-dark">Start here</span>
+        <h2 class="h-display h2" style="margin-top: 20px; font-size: 56px;">Two weeks. £5,000. <span style="color: var(--c-accent);">Worth it.</span></h2>
+        <p class="body lg" style="margin: 18px auto 0; max-width: 580px;">Phase 0 is the most leveraged fortnight we run. Tell us where you are; we'll come back within a week.</p>
+        <button class="btn accent lg" style="margin-top: 28px;">Apply to work with us →</button>
+        <p class="small" style="margin-top: 14px; color: rgba(255,255,255,0.5);">Short pre-qualification form · no calendars to book · we reply within a week.</p>
+      </section>
+
+      <!-- Footer placeholder -->
+      <div class="footer-ph">
+        <div>
+          <div class="logo">Accelerator<span class="x">X</span></div>
+          <p class="small">Field notes monthly. No spam.</p>
+        </div>
+        <div><h5>What we do</h5><ul><li>Company Enablement</li><li>Coaching</li><li>Advisory</li></ul></div>
+        <div><h5>Resources</h5><ul><li>Insights</li><li>Case studies</li><li>Talks</li></ul></div>
+        <div><h5>Legal</h5><ul><li>Privacy</li><li>Terms</li><li>Cookies</li></ul></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

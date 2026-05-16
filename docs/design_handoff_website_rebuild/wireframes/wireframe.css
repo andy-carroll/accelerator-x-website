@@ -1,0 +1,416 @@
+/* ============================================================
+   Accelerator X · Redesign Wireframes
+   Working-sketch aesthetic — confident strokes, real copy,
+   strategic annotation. Not a doodle; a creative director's
+   pen-on-paper thinking.
+   ============================================================ */
+
+:root {
+  /* Paper + ink */
+  --paper: #f4efe4;
+  --paper-edge: #ebe4d2;
+  --ink: #1b2a4a;
+  --ink-soft: #51607c;
+  --ink-faint: #9aa1ad;
+  --rule: #d4ccb8;
+  --rule-faint: #e1d9c5;
+
+  /* Direction accent inks (one per direction — for annotations only) */
+  --acc-a: #b45309;   /* amber — Direction A · Editorial */
+  --acc-b: #0e7490;   /* teal-ink — Direction B · Studio */
+  --acc-c: #355e3b;   /* hunter — Direction C · Field Notes */
+  --acc-d: #7f1d1d;   /* oxblood — Direction D · System */
+
+  /* Typography */
+  --hand: 'Caveat', 'Brush Script MT', cursive;
+  --sans: 'IBM Plex Sans', 'Manrope', system-ui, sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* Dark mode tweak — used by wireframe pages when 'dark' toggle is on */
+.wf.dark {
+  --paper: #181b20;
+  --paper-edge: #20242c;
+  --ink: #f1ece0;
+  --ink-soft: #b4afa0;
+  --ink-faint: #6f6a5e;
+  --rule: #2c303a;
+  --rule-faint: #23262e;
+}
+
+* { box-sizing: border-box; }
+
+/* ============================================================
+   Page (artboard interior)
+   ============================================================ */
+
+.wf {
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1.5;
+  position: relative;
+  overflow: hidden;
+  /* Paper-like grain — very subtle */
+  background-image:
+    radial-gradient(circle at 22% 18%, rgba(0,0,0,0.018) 0, transparent 50%),
+    radial-gradient(circle at 78% 76%, rgba(0,0,0,0.012) 0, transparent 60%);
+}
+
+/* Subtle paper edge shadow inside the artboard */
+.wf::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.04);
+}
+
+/* ============================================================
+   Page chrome: section labels, dimension lines, paper rules
+   ============================================================ */
+
+.wf-page-rail {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 38px;
+  border-right: 1px solid var(--rule);
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-edge) 100%);
+  display: flex; flex-direction: column; align-items: center;
+  padding: 14px 0;
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.wf-page-rail .num {
+  font-family: var(--hand);
+  font-size: 22px; line-height: 1;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.wf-page-rail .label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  margin-top: auto;
+}
+
+.wf-body {
+  position: absolute;
+  inset: 0 0 0 38px;
+  overflow: hidden;
+}
+
+/* The browser-frame metaphor: a thin top bar with three dots, hinting we're
+   sketching a browser window without becoming a literal browser mock. */
+.wf-browser-bar {
+  height: 28px;
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 6px;
+  padding: 0 14px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+}
+.wf-browser-bar .dot { width: 7px; height: 7px; border-radius: 50%; background: transparent; border: 1px solid var(--ink-soft); }
+.wf-browser-bar .url { margin-left: 10px; opacity: 0.75; }
+.wf-browser-bar .url b { color: var(--ink); opacity: 0.95; }
+
+/* ============================================================
+   SKETCH PRIMITIVES — boxes, lines, blocks, image placeholders
+   ============================================================ */
+
+.sk-box {
+  border: 1.25px solid var(--ink);
+  border-radius: 3px;
+  background: transparent;
+  position: relative;
+}
+.sk-box.dashed { border-style: dashed; border-color: var(--ink-soft); }
+.sk-box.soft { border-color: var(--ink-soft); }
+.sk-box.faint { border-color: var(--rule); }
+.sk-box.fill { background: var(--ink); color: var(--paper); }
+.sk-box.fill-soft { background: rgba(27,42,74,0.06); border-color: var(--ink-soft); }
+
+.wf.dark .sk-box.fill { background: var(--paper); color: var(--ink); }
+
+/* Image placeholder — a box with a single diagonal slash (architectural drawing
+   convention for "fill" or "image goes here"). */
+.sk-img {
+  border: 1.25px solid var(--ink-soft);
+  border-radius: 3px;
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--hand); font-size: 14px; color: var(--ink-soft);
+}
+.sk-img::before,
+.sk-img::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: linear-gradient(to top right, transparent calc(50% - 0.5px), var(--ink-soft) calc(50% - 0.5px), var(--ink-soft) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+  opacity: 0.4;
+  pointer-events: none;
+}
+.sk-img::after { transform: scaleX(-1); }
+.sk-img > * { position: relative; z-index: 1; background: var(--paper); padding: 2px 6px; border-radius: 2px; }
+.wf.dark .sk-img > * { background: var(--paper); }
+
+.sk-img.heavy::before, .sk-img.heavy::after { opacity: 0.7; }
+.sk-img.dense {
+  background:
+    repeating-linear-gradient(135deg, var(--ink-soft) 0 0.75px, transparent 0.75px 5px);
+  opacity: 0.95;
+}
+.sk-img.dense::before, .sk-img.dense::after { display: none; }
+
+/* Text block — horizontal lines representing copy */
+.sk-lines {
+  display: flex; flex-direction: column;
+  gap: 5px;
+}
+.sk-lines > i {
+  display: block;
+  height: 6px;
+  background: var(--rule);
+  border-radius: 1px;
+  font-style: normal;
+}
+.sk-lines > i.s   { width: 35%; }
+.sk-lines > i.m   { width: 60%; }
+.sk-lines > i.l   { width: 84%; }
+.sk-lines > i.xl  { width: 96%; }
+.sk-lines.dark > i { background: var(--ink-soft); opacity: 0.55; }
+
+/* Headline mock — bold text shape */
+.sk-head {
+  font-family: var(--sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.sk-head.serif { font-family: var(--serif); font-weight: 600; letter-spacing: -0.01em; }
+.sk-head.mono  { font-family: var(--mono); font-weight: 500; letter-spacing: -0.01em; }
+
+/* Eyebrow / kicker */
+.sk-eyebrow {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Buttons — drawn, not styled */
+.sk-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  border: 1.25px solid var(--ink);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink);
+  background: transparent;
+  white-space: nowrap;
+}
+.sk-btn.fill { background: var(--ink); color: var(--paper); }
+.sk-btn.sq   { border-radius: 4px; }
+.sk-btn.lg   { padding: 11px 22px; font-size: 13px; }
+.sk-btn.sm   { padding: 5px 10px; font-size: 10px; }
+
+/* Pill / tag */
+.sk-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid var(--ink-soft);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 9.5px;
+  font-family: var(--mono);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  background: transparent;
+}
+
+/* ============================================================
+   ANNOTATIONS — handwritten margin notes, callouts, arrows
+   The 'design thinking' layer. Each direction tints its own.
+   ============================================================ */
+
+.an {
+  font-family: var(--hand);
+  font-size: 16px;
+  line-height: 1.15;
+  color: var(--acc, var(--acc-a));
+  letter-spacing: 0.005em;
+}
+.an.sm { font-size: 14px; }
+.an.lg { font-size: 19px; }
+
+/* Margin note: handwritten label with a leader line.  Caller positions
+   absolutely and sets --leader-w if the leader should extend. */
+.an-note {
+  position: absolute;
+  font-family: var(--hand);
+  font-size: 14px;
+  color: var(--acc, var(--acc-a));
+  line-height: 1.15;
+  max-width: 140px;
+  z-index: 3;
+  pointer-events: none;
+}
+.an-note.right { text-align: left; }
+.an-note.left  { text-align: right; }
+.an-note .leader {
+  display: block;
+  height: 1px;
+  background: var(--acc, var(--acc-a));
+  opacity: 0.65;
+  margin: 4px 0;
+}
+
+/* Numbered pin — used to point at parts of a wireframe */
+.an-pin {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 1.25px solid var(--acc, var(--acc-a));
+  background: var(--paper);
+  color: var(--acc, var(--acc-a));
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 600;
+}
+.an-pin.fill { background: var(--acc, var(--acc-a)); color: var(--paper); }
+
+/* Caption — small italic note below something */
+.an-cap {
+  font-family: var(--hand);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Underline scribble (used to mark up a word) */
+.an-underline { position: relative; display: inline-block; }
+.an-underline::after {
+  content: "";
+  position: absolute; left: -2px; right: -2px; bottom: -4px;
+  height: 6px;
+  background: no-repeat center/100% 100% url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 3.5 Q 18 0.5, 35 3 T 70 2.8 T 99 3.2' fill='none' stroke='%23b45309' stroke-width='1.4' stroke-linecap='round'/></svg>");
+}
+
+/* ============================================================
+   PER-DIRECTION OVERRIDES
+   Each direction's pages set .dir-a / .dir-b / .dir-c / .dir-d
+   so the .an, leader, pin colours all retint at once.
+   ============================================================ */
+
+.dir-a { --acc: var(--acc-a); }
+.dir-b { --acc: var(--acc-b); }
+.dir-c { --acc: var(--acc-c); }
+.dir-d { --acc: var(--acc-d); }
+
+.dir-a .an-underline::after { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 3.5 Q 18 0.5, 35 3 T 70 2.8 T 99 3.2' fill='none' stroke='%23b45309' stroke-width='1.4' stroke-linecap='round'/></svg>"); }
+.dir-b .an-underline::after { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 3.5 Q 18 0.5, 35 3 T 70 2.8 T 99 3.2' fill='none' stroke='%230e7490' stroke-width='1.4' stroke-linecap='round'/></svg>"); }
+.dir-c .an-underline::after { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 3.5 Q 18 0.5, 35 3 T 70 2.8 T 99 3.2' fill='none' stroke='%23355e3b' stroke-width='1.4' stroke-linecap='round'/></svg>"); }
+.dir-d .an-underline::after { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M1 3.5 Q 18 0.5, 35 3 T 70 2.8 T 99 3.2' fill='none' stroke='%237f1d1d' stroke-width='1.4' stroke-linecap='round'/></svg>"); }
+
+/* ============================================================
+   NAV bar at the top of every full-page wireframe
+   Stays consistent across pages within a direction; varies between
+   directions to show the four nav personalities.
+   ============================================================ */
+
+.wf-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 28px;
+  border-bottom: 1px solid var(--rule-faint);
+}
+.wf-nav .left, .wf-nav .right { display: flex; align-items: center; gap: 18px; }
+.wf-nav .logo {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+}
+.wf-nav .logo .x { color: var(--acc, var(--ink)); }
+.wf-nav .link { font-size: 11.5px; color: var(--ink-soft); display: inline-flex; gap: 4px; align-items: center; }
+.wf-nav .link .chev { width: 8px; height: 8px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); display: inline-block; margin-bottom: 3px; }
+
+/* ============================================================
+   GENERIC HELPERS
+   ============================================================ */
+
+.row { display: flex; }
+.col { display: flex; flex-direction: column; }
+.gap-4 { gap: 4px; } .gap-6 { gap: 6px; } .gap-8 { gap: 8px; } .gap-10 { gap: 10px; } .gap-12 { gap: 12px; } .gap-14 { gap: 14px; } .gap-16 { gap: 16px; } .gap-20 { gap: 20px; } .gap-24 { gap: 24px; } .gap-32 { gap: 32px; } .gap-40 { gap: 40px; } .gap-48 { gap: 48px; } .gap-64 { gap: 64px; }
+.center { align-items: center; justify-content: center; }
+.between { justify-content: space-between; }
+.start { align-items: flex-start; } .end { align-items: flex-end; }
+.middle { align-items: center; }
+.f1 { flex: 1 1 0; min-width: 0; }
+.muted { color: var(--ink-soft); }
+.faint { color: var(--ink-faint); }
+.serif { font-family: var(--serif); }
+.mono  { font-family: var(--mono); }
+.hand  { font-family: var(--hand); }
+.upper { text-transform: uppercase; letter-spacing: 0.14em; font-size: 9.5px; font-family: var(--mono); color: var(--ink-soft); }
+.tiny  { font-size: 10px; }
+.small { font-size: 11px; }
+
+/* Direction-coloured small fill (used very sparingly, e.g. CTA fill) */
+.acc-fill { background: var(--acc, var(--ink)); color: var(--paper) !important; border-color: var(--acc, var(--ink)) !important; }
+.acc-stroke { border-color: var(--acc, var(--ink)) !important; color: var(--acc, var(--ink)) !important; }
+
+/* Section label inside a page (small caps marker for site sections) */
+.wf-section-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.wf-section-label::before {
+  content: ""; width: 18px; height: 1px; background: var(--ink-soft);
+}
+
+/* Divider rule across the page */
+.wf-rule { height: 1px; background: var(--rule); width: 100%; }
+
+/* Used to mark "parallax / motion" zones */
+.wf-motion-zone {
+  position: relative;
+}
+.wf-motion-zone::after {
+  content: "▾ parallax zone";
+  position: absolute;
+  top: 8px; right: 10px;
+  font-family: var(--mono);
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  color: var(--acc, var(--ink-soft));
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* Footer placeholder common to all pages */
+.wf-foot {
+  border-top: 1px solid var(--rule);
+  padding: 22px 28px 24px;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 18px;
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+.wf-foot h5 { font-family: var(--mono); font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--ink); margin: 0 0 8px 0; }
+.wf-foot ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }

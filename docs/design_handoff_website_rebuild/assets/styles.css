@@ -1,0 +1,782 @@
+/* =========================================================================
+   ACCELERATOR X — Redesign Wireframes
+   Shared foundations + direction-specific design tokens.
+   ========================================================================= */
+
+:root {
+  /* Brand palette pulled from existing site (styles.css) */
+  --ax-navy: #1b2a4a;
+  --ax-navy-soft: #2d3d5f;
+  --ax-ivory: #f6f3ec;
+  --ax-paper: #faf8f3;
+  --ax-ink: #0e1726;
+  --ax-teal: #088abf;
+  --ax-teal-light: #c8f9fe;
+  --ax-pink: #e93f8e;
+  --ax-pink-light: #fce3f1;
+  --ax-amber: #fea700;
+  --ax-purple: #882de7;
+  --ax-purple-light: #f1e5ff;
+
+  /* Wireframe greys — used as neutral mid-tones so the wireframes feel
+     considered, not raw. */
+  --wf-100: #f5f3ee;
+  --wf-200: #e8e4dc;
+  --wf-300: #d6d1c6;
+  --wf-400: #b3ad9f;
+  --wf-500: #7e7868;
+  --wf-600: #585243;
+  --wf-700: #2f2a1f;
+
+  --wf-line: rgba(15, 23, 38, 0.08);
+  --wf-line-strong: rgba(15, 23, 38, 0.16);
+  --wf-line-faint: rgba(15, 23, 38, 0.04);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: #f0eee9; }
+body {
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  color: var(--ax-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================================
+   ARTBOARD BASE
+   Every artboard inherits this. Direction-specific overrides live below.
+   ========================================================================= */
+.ax-board {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  background: var(--ax-paper);
+  color: var(--ax-ink);
+  font-family: 'Geist', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+.ax-board * { box-sizing: border-box; }
+.ax-board a { color: inherit; text-decoration: none; }
+
+/* =========================================================================
+   DIRECTION A — QUIET AUTHORITY
+   Editorial restraint. Serif headlines (Newsreader). Navy + ivory.
+   Color used as punctuation. FT meets Stripe Press.
+   ========================================================================= */
+.dir-a {
+  --c-bg: #faf8f3;
+  --c-bg-alt: #f1ede2;
+  --c-fg: #0e1726;
+  --c-fg-muted: #5b6173;
+  --c-line: rgba(14, 23, 38, 0.12);
+  --c-line-faint: rgba(14, 23, 38, 0.06);
+  --c-accent: #088abf;
+  --c-accent-2: #e93f8e;
+
+  --f-display: 'Newsreader', 'Times New Roman', serif;
+  --f-body: 'Geist', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--f-body);
+}
+.dir-a .h-display { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.022em; line-height: 1.02; }
+.dir-a .eyebrow { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--c-fg-muted); font-weight: 500; }
+.dir-a .rule { height: 1px; background: var(--c-line); }
+.dir-a .rule-strong { height: 1px; background: var(--c-fg); opacity: 0.7; }
+
+/* =========================================================================
+   DIRECTION B — STUDIO SYSTEM
+   Modular panel-based. Sans throughout. Color as semantic system.
+   Anthropic-meets-Pentagram precision.
+   ========================================================================= */
+.dir-b {
+  --c-bg: #ffffff;
+  --c-bg-alt: #f5f3ee;
+  --c-fg: #0e1726;
+  --c-fg-muted: #5b6173;
+  --c-line: rgba(14, 23, 38, 0.10);
+  --c-line-faint: rgba(14, 23, 38, 0.05);
+  --c-accent: #088abf;
+  --c-accent-2: #e93f8e;
+  --c-tint: #f1ede2;
+
+  --f-display: 'Geist', system-ui, sans-serif;
+  --f-body: 'Geist', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--f-body);
+}
+.dir-b .h-display { font-family: var(--f-display); font-weight: 500; letter-spacing: -0.035em; line-height: 1.02; }
+.dir-b .eyebrow { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-fg-muted); font-weight: 600; }
+.dir-b .panel {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: 14px;
+}
+.dir-b .panel-tint { background: var(--c-tint); border-radius: 14px; }
+
+/* =========================================================================
+   DIRECTION C — LIVING MANUSCRIPT
+   Magazine editorial. Instrument Serif drama. Asymmetric grids.
+   Color as compositional element.
+   ========================================================================= */
+.dir-c {
+  --c-bg: #f0ebde;
+  --c-bg-alt: #e6dfce;
+  --c-bg-deep: #1b2a4a;
+  --c-fg: #1b2a4a;
+  --c-fg-muted: #5b6173;
+  --c-line: rgba(27, 42, 74, 0.18);
+  --c-line-faint: rgba(27, 42, 74, 0.08);
+  --c-accent: #e93f8e;
+  --c-accent-2: #088abf;
+  --c-accent-3: #fea700;
+
+  --f-display: 'Instrument Serif', 'Times New Roman', serif;
+  --f-body: 'Geist', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--f-body);
+}
+.dir-c .h-display { font-family: var(--f-display); font-weight: 400; letter-spacing: -0.015em; line-height: 0.95; }
+.dir-c .h-display em { font-style: italic; }
+.dir-c .eyebrow { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--c-fg); font-weight: 500; }
+.dir-c .folio { font-family: var(--f-display); font-style: italic; color: var(--c-fg-muted); }
+
+/* =========================================================================
+   DIRECTION D — INDEX
+   Reference-manual precision. Monospace accents. Numbered systems.
+   Library-card hierarchy. Distinctively quiet.
+   ========================================================================= */
+.dir-d {
+  --c-bg: #f6f3ec;
+  --c-bg-alt: #ece7da;
+  --c-fg: #0e1726;
+  --c-fg-muted: #5b6173;
+  --c-line: rgba(14, 23, 38, 0.16);
+  --c-line-faint: rgba(14, 23, 38, 0.07);
+  --c-accent: #088abf;
+  --c-accent-2: #e93f8e;
+  --c-rule: rgba(14, 23, 38, 0.85);
+
+  --f-display: 'Geist', system-ui, sans-serif;
+  --f-body: 'Geist', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  background: var(--c-bg);
+  color: var(--c-fg);
+  font-family: var(--f-body);
+}
+.dir-d .h-display { font-family: var(--f-display); font-weight: 500; letter-spacing: -0.028em; line-height: 1.04; }
+.dir-d .eyebrow,
+.dir-d .index-num { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--c-fg); font-weight: 500; }
+.dir-d .index-num { letter-spacing: 0.04em; }
+
+/* =========================================================================
+   SHARED PRIMITIVES (used across directions)
+   ========================================================================= */
+.ax-board .img-ph {
+  background:
+    linear-gradient(135deg, rgba(14,23,38,0.06) 25%, transparent 25%, transparent 50%, rgba(14,23,38,0.06) 50%, rgba(14,23,38,0.06) 75%, transparent 75%, transparent),
+    var(--wf-200);
+  background-size: 14px 14px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wf-500);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ax-board .img-ph[data-tag]::after {
+  content: attr(data-tag);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ax-board .text-line {
+  height: 0.55em;
+  background: currentColor;
+  opacity: 0.18;
+  border-radius: 2px;
+  margin: 0.3em 0;
+}
+.ax-board .text-line.w-90 { width: 90%; }
+.ax-board .text-line.w-80 { width: 80%; }
+.ax-board .text-line.w-70 { width: 70%; }
+.ax-board .text-line.w-60 { width: 60%; }
+.ax-board .text-line.w-50 { width: 50%; }
+.ax-board .text-line.w-40 { width: 40%; }
+
+.ax-board .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--c-line);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.ax-board .pill .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--c-accent); }
+
+.ax-board .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  cursor: default;
+}
+.ax-board .btn-primary { background: var(--c-fg); color: var(--c-bg); }
+.ax-board .btn-accent { background: var(--c-accent); color: #fff; }
+.ax-board .btn-pink { background: var(--c-accent-2); color: #fff; }
+.ax-board .btn-outline { background: transparent; border: 1px solid var(--c-fg); color: var(--c-fg); }
+
+/* Direction A — square buttons, more editorial */
+.dir-a .btn { border-radius: 0; padding: 12px 22px; }
+
+/* Direction C — soft pill */
+.dir-c .btn { border-radius: 999px; padding: 12px 22px; font-weight: 500; }
+
+/* Direction D — slab buttons, mono label */
+.dir-d .btn { border-radius: 4px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.04em; padding: 10px 16px; }
+
+/* AX wordmark placeholder, drawn in CSS */
+.ax-board .ax-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.ax-board .ax-mark .ax-glyph {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--c-fg);
+  color: var(--c-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+.dir-a .ax-mark .ax-glyph { border-radius: 2px; background: var(--c-fg); }
+.dir-c .ax-mark .ax-glyph { background: var(--c-fg); border-radius: 50%; }
+.dir-d .ax-mark .ax-glyph { border-radius: 0; background: var(--c-fg); font-family: var(--f-mono); }
+
+/* Generic divider */
+.ax-board .hr { height: 1px; background: var(--c-line); border: 0; margin: 0; }
+.ax-board .hr-strong { height: 1px; background: var(--c-fg); opacity: 0.85; border: 0; margin: 0; }
+
+/* Section labels */
+.ax-board .section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--c-fg-muted);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Scrollable board content — every board is rendered inside a Stage that
+   ALSO controls the visible height. We let content overflow if needed but
+   most boards are sized to fit their content. */
+.ax-board.scroll-y { overflow-y: auto; }
+
+/* =========================================================================
+   FOUNDATIONS / INTRO CARDS
+   ========================================================================= */
+.found-card {
+  background: var(--ax-paper);
+  border-radius: 14px;
+  padding: 28px;
+  font-family: 'Geist', system-ui, sans-serif;
+  color: var(--ax-ink);
+  border: 1px solid var(--wf-line);
+}
+.found-card h2 {
+  font-family: 'Newsreader', serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0 0 12px;
+}
+.found-card p {
+  color: var(--wf-600);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0 0 10px;
+}
+.found-card .label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--wf-500);
+  margin-bottom: 8px;
+}
+.found-grid { display: grid; gap: 14px; }
+
+/* Direction swatch chip */
+.dir-chip {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--wf-line);
+}
+.dir-chip:last-child { border-bottom: 0; }
+.dir-chip .swatch {
+  width: 56px; height: 64px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Geist', sans-serif; font-weight: 600;
+  font-size: 22px;
+}
+.dir-chip h3 { margin: 0 0 4px; font-size: 14px; font-weight: 600; letter-spacing: -0.005em; }
+.dir-chip h3 .meta { font-weight: 400; color: var(--wf-500); margin-left: 6px; }
+.dir-chip p { margin: 0; font-size: 12px; line-height: 1.5; color: var(--wf-600); }
+
+/* =========================================================================
+   DOTS CUBE CHAIN
+   Sequence-chain visualisation for the DOTS framework. 4 isometric cubes
+   connected by linking joints. Used at two scales:
+     .dots-chain         → large (DOTS standalone page hero)
+     .dots-chain.compact → small (inline on home, offerings, Phase 0)
+   ========================================================================= */
+.dots-chain {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  padding: 28px 0 16px;
+  perspective: 2400px;
+  perspective-origin: 50% 30%;
+}
+
+.dots-cube-wrap {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.dots-cube {
+  --accent: #088abf;
+  --cube-size: 180px;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-22deg) rotateY(-30deg);
+  transition: transform .45s cubic-bezier(.2,.7,.3,1);
+  margin-bottom: calc(var(--cube-size) * 0.25); /* room for cast-down shadow + isometric foot */
+}
+
+.dots-chain.compact .dots-cube {
+  --cube-size: 116px;
+}
+
+.dots-cube:hover {
+  transform: rotateX(-22deg) rotateY(-30deg) translateY(-10px) scale(1.05);
+}
+
+.dots-cube-shadow {
+  position: absolute;
+  bottom: -10px;
+  left: 14%;
+  width: 72%;
+  height: 18px;
+  background: radial-gradient(ellipse at center, rgba(14,23,38,0.18) 0%, transparent 65%);
+  transform: rotateX(70deg);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.dots-cube .cube-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(14,23,38,0.10);
+  background: #ffffff;
+  backface-visibility: hidden;
+}
+
+.dots-cube .cube-front {
+  transform: translateZ(calc(var(--cube-size) / 2));
+  background: linear-gradient(180deg, #ffffff 0%, #f6f3ec 100%);
+  border-color: var(--accent);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 1px 2px rgba(14,23,38,0.05);
+}
+
+.dots-cube .cube-right {
+  transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
+  background: var(--accent);
+  filter: brightness(0.88);
+}
+
+.dots-cube .cube-top {
+  transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
+  background: rgba(14,23,38,0.04);
+  border-color: rgba(14,23,38,0.08);
+}
+
+.dots-cube .cube-back,
+.dots-cube .cube-left,
+.dots-cube .cube-bottom {
+  display: none; /* not visible in isometric view */
+}
+
+.dots-cube .letter {
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: calc(var(--cube-size) * 0.6);
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  color: var(--accent);
+}
+
+.dots-cube .cube-right .face-content {
+  transform: rotate(0deg);
+  text-align: center;
+  padding: 0 10px;
+  color: #fff;
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: calc(var(--cube-size) * 0.085);
+  letter-spacing: 0.02em;
+}
+
+.dots-cube .cube-top .face-content {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: calc(var(--cube-size) * 0.058);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(14,23,38,0.55);
+  padding: 6px 0 0;
+}
+
+.dots-cube-label {
+  text-align: center;
+  margin-top: 4px;
+}
+
+.dots-cube-label .num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #585243;
+}
+
+.dots-cube-label .name {
+  font-family: 'Geist', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #0e1726;
+  margin-top: 4px;
+  letter-spacing: -0.005em;
+}
+
+.dots-chain.compact .dots-cube-label .name { font-size: 13px; }
+.dots-chain.compact .dots-cube-label .num { font-size: 9.5px; }
+
+.dots-connector {
+  align-self: flex-start;
+  width: 36px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(14,23,38,0.25) 30%, rgba(14,23,38,0.25) 70%, transparent);
+  position: relative;
+  margin-top: calc(var(--cube-size, 180px) * 0.55);
+  flex: 0 0 auto;
+}
+
+.dots-connector::after {
+  content: '';
+  position: absolute;
+  right: 8px;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-top: 1.5px solid rgba(14,23,38,0.5);
+  border-right: 1.5px solid rgba(14,23,38,0.5);
+  transform: rotate(45deg);
+}
+
+.dots-chain.compact .dots-connector {
+  width: 24px;
+  margin-top: 38px;
+}
+
+/* Mobile: stack vertically */
+@media (max-width: 768px) {
+  .dots-chain { flex-direction: column; align-items: center; gap: 12px; }
+  .dots-connector {
+    width: 2px;
+    height: 28px;
+    margin-top: 0;
+    background: linear-gradient(180deg, transparent, rgba(14,23,38,0.25) 30%, rgba(14,23,38,0.25) 70%, transparent);
+  }
+  .dots-connector::after {
+    right: -3px;
+    top: auto;
+    bottom: 8px;
+    transform: rotate(135deg);
+  }
+}
+
+/* =========================================================================
+   DOTS DETAIL — Editorial spread-per-letter layout
+   One full-width spread per DOTS move:
+     • Left column (360px): move number, MASSIVE letter (320pt+), move name
+     • Right column: defining question (display serif), follow-up questions,
+                     output / anti-pattern pairing
+   Spreads connected by a single accent-colour thread (no 4-up grid, no
+   matrix, no card hover affordances — reads as a method essay).
+   ========================================================================= */
+.dots-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(14,23,38,0.10);
+}
+
+.dots-spread {
+  --accent: #088abf;
+  position: relative;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 56px;
+  padding: 72px 0;
+  border-bottom: 1px solid rgba(14,23,38,0.10);
+}
+
+.dots-spread-letter {
+  position: relative;
+  padding-top: 4px;
+}
+
+.dots-spread-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(14,23,38,0.55);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.dots-spread-letterform {
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: 340px;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  color: var(--accent);
+  margin: 0;
+  display: block;
+}
+
+.dots-spread-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 24px;
+}
+
+.dots-spread-content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 4px;
+  border-left: 1px solid rgba(14,23,38,0.08);
+  padding-left: 48px;
+  margin-left: -24px;
+}
+
+.dots-spread-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(14,23,38,0.55);
+  font-weight: 600;
+}
+
+.dots-defining-block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dots-defining {
+  font-family: 'Newsreader', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: 38px;
+  line-height: 1.18;
+  letter-spacing: -0.020em;
+  color: #0e1726;
+  margin: 0;
+}
+
+.dots-followups {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.dots-followups-label { margin-bottom: 4px; }
+
+.dots-followup {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(14,23,38,0.10);
+  align-items: baseline;
+}
+.dots-followup:last-child { border-bottom: 1px solid rgba(14,23,38,0.10); }
+
+.dots-followup-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: rgba(14,23,38,0.55);
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
+
+.dots-followup-text {
+  font-family: 'Geist', sans-serif;
+  font-size: 17px;
+  line-height: 1.5;
+  color: #0e1726;
+  margin: 0;
+  font-weight: 500;
+}
+
+.dots-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.dots-pair-cell {
+  padding: 22px 24px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dots-pair-cell.is-output {
+  background: color-mix(in oklab, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+}
+
+.dots-pair-cell.is-anti {
+  background: rgba(14,23,38,0.035);
+  border: 1px solid rgba(14,23,38,0.08);
+}
+
+.dots-pair-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+.dots-pair-cell.is-anti .dots-pair-label { color: rgba(14,23,38,0.6); }
+
+.dots-pair-text {
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #0e1726;
+  margin: 0;
+  font-weight: 500;
+}
+.dots-pair-cell.is-anti .dots-pair-text {
+  color: rgba(14,23,38,0.7);
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Vertical thread connecting spreads */
+.dots-spread-thread {
+  position: absolute;
+  left: 180px;
+  bottom: -22px;
+  width: 1px;
+  height: 44px;
+  background: var(--accent);
+  opacity: 0.45;
+  z-index: 2;
+}
+.dots-spread-thread::before,
+.dots-spread-thread::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+.dots-spread-thread::before { top: -2px; }
+.dots-spread-thread::after { bottom: -2px; }
+.dots-spread:last-child .dots-spread-thread { display: none; }
+
+/* Mobile: letter shrinks, single column, thread re-centres */
+@media (max-width: 900px) {
+  .dots-spread {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 56px 0;
+  }
+  .dots-spread-letterform { font-size: 160px; line-height: 0.9; }
+  .dots-spread-name { margin-top: 16px; }
+  .dots-spread-content {
+    border-left: 0;
+    border-top: 1px solid rgba(14,23,38,0.10);
+    padding-left: 0;
+    padding-top: 28px;
+    margin-left: 0;
+  }
+  .dots-defining { font-size: 26px; }
+  .dots-pair { grid-template-columns: 1fr; }
+  .dots-spread-thread { left: 50%; transform: translateX(-50%); }
+}
