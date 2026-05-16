@@ -1,0 +1,57 @@
+/* =============================================================================
+   CTABand — full-width closing CTA section
+   Markup: _templates/components/CTABand.html
+   Single ask: "Apply to work with us" → /contact
+   One CTA only — never add a second action to this component.
+   ============================================================================= */
+
+.ax-cta-band {
+  background: var(--bg-dark);
+  padding: var(--space-20) 0;
+}
+
+@media (min-width: 768px) {
+  .ax-cta-band { padding: var(--space-24) 0; }
+}
+
+.ax-cta-band__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .ax-cta-band__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gutter-tablet);
+  }
+}
+@media (min-width: 1024px) {
+  .ax-cta-band__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Copy ---------------------------------------------------------------------- */
+.ax-cta-band__heading {
+  margin: var(--space-2) 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-on-dark);
+  text-wrap: balance;
+}
+
+.ax-cta-band__sub {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-muted-on-dark);
+}
+
+/* Button -------------------------------------------------------------------- */
+.ax-cta-band__btn { flex-shrink: 0; white-space: nowrap; }

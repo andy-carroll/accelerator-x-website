@@ -1,0 +1,31 @@
+<section class="ax-newsletter-cta" aria-labelledby="newsletter-cta-heading">
+  <div class="ax-newsletter-cta__inner">
+    <div class="ax-newsletter-cta__copy">
+      <span class="ax-kicker">Weekly dispatch</span>
+      <h2 id="newsletter-cta-heading" class="ax-newsletter-cta__heading">Stay sharp on AI.</h2>
+      <p class="ax-newsletter-cta__sub">High-signal notes for leaders building real AI capability — not the hype, the hard-won lessons. One email a week.</p>
+    </div>
+    <div class="ax-newsletter-cta__form-wrap">
+      <form class="ax-newsletter-cta__form" id="newsletter-cta-form" novalidate>
+        <label for="newsletter-cta-email" class="sr-only">Work email</label>
+        <input
+          type="email"
+          id="newsletter-cta-email"
+          name="email"
+          class="input ax-newsletter-cta__input"
+          placeholder="you@company.com"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="btn btn--accent btn--lg">Get the dispatch</button>
+      </form>
+      <p class="ax-newsletter-cta__note">One useful note each week. Unsubscribe anytime.</p>
+      <div id="newsletter-cta-success" class="ax-newsletter-cta__status" hidden role="status" aria-live="polite">
+        <p>You're in. Welcome email on its way.</p>
+      </div>
+      <div id="newsletter-cta-error" class="ax-newsletter-cta__status ax-newsletter-cta__status--error" hidden role="alert">
+        <p>Something went wrong — please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
