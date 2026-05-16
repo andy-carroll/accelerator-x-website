@@ -1,0 +1,170 @@
+/* =============================================================================
+   EventCard — event format tile
+   Markup: _templates/components/EventCard.html
+   Used on: /talks-events, /about
+   data-variant="standard" (light) | data-variant="featured" (navy, inverted)
+   ============================================================================= */
+
+.ax-event-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              transform  var(--dur-base) var(--ease-out);
+}
+
+.ax-event-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Featured (dark) variant */
+.ax-event-card[data-variant="featured"] {
+  background: var(--bg-dark);
+  border-color: transparent;
+  color: var(--fg-on-dark);
+}
+
+/* Header row ---------------------------------------------------------------- */
+.ax-event-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-1);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__header {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.ax-event-card__kicker {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--action-primary);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__kicker {
+  color: var(--ax-pink);
+}
+
+.ax-event-card__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--action-primary);
+  flex-shrink: 0;
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__dot {
+  background: var(--ax-pink);
+}
+
+/* Title --------------------------------------------------------------------- */
+.ax-event-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 2vw, var(--text-3xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__title {
+  color: var(--fg-on-dark);
+}
+
+/* Meta (duration + size) ---------------------------------------------------- */
+.ax-event-card__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--fg-4);
+}
+
+.ax-event-card__meta-strong {
+  font-weight: var(--fw-semibold);
+  color: var(--fg-2);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__meta {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__meta-strong {
+  color: var(--fg-on-dark);
+}
+
+/* Pitch --------------------------------------------------------------------- */
+.ax-event-card__pitch {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+  flex: 1;
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__pitch {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* Outputs list -------------------------------------------------------------- */
+.ax-event-card__outputs-label {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+  margin-bottom: var(--space-2);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__outputs-label {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.ax-event-card__outputs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-1);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__outputs {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.ax-event-card__output {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+.ax-event-card__output::before {
+  content: '—';
+  flex-shrink: 0;
+  font-weight: var(--fw-bold);
+  color: var(--action-primary);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__output {
+  color: var(--fg-on-dark);
+}
+
+.ax-event-card[data-variant="featured"] .ax-event-card__output::before {
+  color: var(--ax-pink);
+}

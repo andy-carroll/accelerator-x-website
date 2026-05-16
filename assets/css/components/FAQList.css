@@ -1,0 +1,138 @@
+/* =============================================================================
+   FAQList — numbered Q&A list, per-offering content
+   Markup: _templates/components/FAQList.html
+   Used on: Offering details, VSL, About
+   Mobile: accordion (collapsed by default). Desktop: open-by-default for scan.
+   ============================================================================= */
+
+.ax-faq-list {
+  padding: var(--space-16) 0;
+}
+
+@media (min-width: 768px) {
+  .ax-faq-list { padding: var(--space-20) 0; }
+}
+
+.ax-faq-list__inner {
+  max-width: var(--container-tight);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .ax-faq-list__inner { padding: 0 var(--gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .ax-faq-list__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Header -------------------------------------------------------------------- */
+.ax-faq-list__heading {
+  margin: var(--space-3) 0 var(--space-10);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+/* Items --------------------------------------------------------------------- */
+.ax-faq-list__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* FAQ item (uses <details>/<summary> for native accordion) */
+.ax-faq-item {
+  border-bottom: 1px solid var(--border-1);
+}
+
+.ax-faq-item:first-child {
+  border-top: 1px solid var(--border-1);
+}
+
+.ax-faq-item summary {
+  /* Remove default disclosure triangle */
+  list-style: none;
+}
+
+.ax-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Question row */
+.ax-faq-item__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ax-faq-item__question-text {
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+  line-height: var(--lh-snug);
+}
+
+.ax-faq-item__icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--fg-4);
+  transition: transform var(--dur-base) var(--ease-out),
+              color    var(--dur-base) var(--ease-out);
+}
+
+/* Rotate icon when open */
+.ax-faq-item[open] .ax-faq-item__icon {
+  transform: rotate(45deg);
+  color: var(--action-primary);
+}
+
+/* Answer */
+.ax-faq-item__answer {
+  padding: 0 0 var(--space-5);
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+  max-width: 65ch;
+}
+
+.ax-faq-item__answer p {
+  margin: 0 0 var(--space-3);
+}
+
+.ax-faq-item__answer p:last-child {
+  margin-bottom: 0;
+}
+
+/* Desktop: open all by default (JS toggles data-desktop-open) --------------- */
+@media (min-width: 1024px) {
+  .ax-faq-item[data-desktop-open] {
+    /* open attribute handled by JS on load */
+  }
+}
+
+/* Hover state */
+.ax-faq-item summary:hover .ax-faq-item__question-text {
+  color: var(--action-primary);
+}
+
+/* Focus */
+.ax-faq-item summary:focus-visible {
+  outline: none;
+}
+
+.ax-faq-item summary:focus-visible .ax-faq-item__question {
+  outline: 3px solid rgba(8, 138, 191, 0.4);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

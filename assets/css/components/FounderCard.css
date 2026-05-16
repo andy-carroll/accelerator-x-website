@@ -1,0 +1,153 @@
+/* =============================================================================
+   FounderCard — founder profile tile: photo · name · role · bio · track record
+   Markup: _templates/components/FounderCard.html
+   Used on: /about, home About snippet
+   ============================================================================= */
+
+.ax-founder-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Identity header ----------------------------------------------------------- */
+.ax-founder-card__identity {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.ax-founder-card__portrait {
+  width: 6rem;
+  height: 6rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  background: var(--bg-3);
+}
+
+.ax-founder-card__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Portrait placeholder (used when photo not yet available) */
+.ax-founder-card__portrait-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  color: var(--action-primary);
+  background: color-mix(in srgb, var(--action-primary) 10%, transparent);
+}
+
+.ax-founder-card__identity-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ax-founder-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+}
+
+.ax-founder-card__role {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+/* Social links */
+.ax-founder-card__socials {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.ax-founder-card__social-link {
+  width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-1);
+  color: var(--fg-4);
+  text-decoration: none;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  transition: color var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+
+.ax-founder-card__social-link:hover {
+  color: var(--action-primary);
+  border-color: var(--action-primary);
+}
+
+/* Bio ----------------------------------------------------------------------- */
+.ax-founder-card__bio {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+}
+
+/* Track record -------------------------------------------------------------- */
+.ax-founder-card__track {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-1);
+}
+
+.ax-founder-card__track-label {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+  margin-bottom: var(--space-3);
+}
+
+.ax-founder-card__track-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ax-founder-card__track-item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  padding: var(--space-1) 0;
+  border-bottom: 1px solid var(--border-1);
+}
+
+.ax-founder-card__track-item:last-child {
+  border-bottom: none;
+}
+
+.ax-founder-card__track-item::before {
+  content: '—';
+  flex-shrink: 0;
+  font-weight: var(--fw-bold);
+  color: var(--action-primary);
+}

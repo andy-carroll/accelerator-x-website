@@ -1,0 +1,114 @@
+<!-- FAQList — accordion Q&A
+     Mobile: closed by default. Desktop: JS opens all on load.
+     Adapt questions per offering. 5–7 questions recommended. -->
+<section class="ax-faq-list" aria-labelledby="faq-heading">
+  <div class="ax-faq-list__inner">
+
+    <span class="ax-kicker">Questions</span>
+    <h2 class="ax-faq-list__heading" id="faq-heading">The questions clients ask first.</h2>
+
+    <ul class="ax-faq-list__items">
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question" aria-expanded="false">
+            <span class="ax-faq-item__question-text">What happens after we apply?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>We read every application personally. If it looks like a fit, we'll reply within a week with a few follow-up questions or a proposed next step — usually a short call to confirm scope and timeline. If it's not right, we'll say so clearly and, where we can, point you somewhere useful.</p>
+          </div>
+        </details>
+      </li>
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question">
+            <span class="ax-faq-item__question-text">How much does it actually cost?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>The "from" price is the floor. Final cost depends on company size, number of people involved, travel logistics, and how much pre-work we do together. We scope it transparently before any commitment — you'll know the number before you sign anything.</p>
+          </div>
+        </details>
+      </li>
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question">
+            <span class="ax-faq-item__question-text">Do we need to have started on AI already?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>No. Most of our clients have tried things internally — with mixed results. Some haven't touched AI at all. The work we do is calibrated to where you actually are, not where we assume you should be.</p>
+          </div>
+        </details>
+      </li>
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question">
+            <span class="ax-faq-item__question-text">How much time does this take from our team?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>The working sessions are scheduled in advance — typically half a day per week over the cycle. We run them efficiently. The bigger ask is that a senior decision-maker stays connected throughout. The value compounds when leadership is genuinely in it.</p>
+          </div>
+        </details>
+      </li>
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question">
+            <span class="ax-faq-item__question-text">What if we don't get 10× ROI?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>We've never had a cycle where we didn't find it — but we build the measurement criteria into week 1 so there's no argument about what counts. If we're heading off-track at the midpoint, we recalibrate. We don't wait until week 8 to flag a problem.</p>
+          </div>
+        </details>
+      </li>
+
+      <li class="ax-faq-item">
+        <details>
+          <summary class="ax-faq-item__question">
+            <span class="ax-faq-item__question-text">Do you work with regulated industries?</span>
+            <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </summary>
+          <div class="ax-faq-item__answer">
+            <p>Yes — we've worked with financial services, healthcare, and professional services firms with real compliance requirements. We know how to build AI capability without creating regulatory exposure. It changes the scoping conversation, not the ability to do the work.</p>
+          </div>
+        </details>
+      </li>
+
+    </ul>
+
+  </div>
+</section>
+
+<script>
+  /* Open all FAQ items at desktop widths on load */
+  (function () {
+    function openDesktopFAQs() {
+      var items = document.querySelectorAll('.ax-faq-item details');
+      items.forEach(function (d) {
+        if (window.innerWidth >= 1024) {
+          d.open = true;
+        }
+      });
+    }
+    openDesktopFAQs();
+  })();
+</script>

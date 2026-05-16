@@ -1,0 +1,136 @@
+/* =============================================================================
+   CaseTile — case study card: sector · outcome metrics · cover · link
+   Markup: _templates/components/CaseTile.html
+   Used on: /case-studies index, home preview
+   data-variant="standard" (default) | data-variant="feature" (wider lead card)
+   ============================================================================= */
+
+.ax-case-tile {
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              transform  var(--dur-base) var(--ease-out);
+}
+
+.ax-case-tile:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+/* Cover image --------------------------------------------------------------- */
+.ax-case-tile__cover {
+  aspect-ratio: 3 / 2;
+  background: var(--bg-3);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ax-case-tile[data-variant="feature"] .ax-case-tile__cover {
+  aspect-ratio: 21 / 9;
+}
+
+.ax-case-tile__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.ax-case-tile:hover .ax-case-tile__cover img {
+  transform: scale(1.03);
+}
+
+/* Body ---------------------------------------------------------------------- */
+.ax-case-tile__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+/* Meta chips ---------------------------------------------------------------- */
+.ax-case-tile__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.ax-case-tile__sector {
+  font-size: 10px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--action-primary) 14%, transparent);
+  color: var(--action-primary);
+}
+
+.ax-case-tile__meta-sep {
+  color: var(--fg-4);
+  font-size: var(--text-xs);
+}
+
+.ax-case-tile__meta-text {
+  font-size: var(--text-xs);
+  color: var(--fg-4);
+}
+
+/* Heading ------------------------------------------------------------------- */
+.ax-case-tile__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-case-tile[data-variant="feature"] .ax-case-tile__heading {
+  font-size: clamp(var(--text-xl), 2vw, var(--text-3xl));
+}
+
+/* Sub ----------------------------------------------------------------------- */
+.ax-case-tile__sub {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+  flex: 1;
+}
+
+/* Metrics ------------------------------------------------------------------- */
+.ax-case-tile__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-1);
+  margin-top: auto;
+}
+
+.ax-case-tile__metric-value {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-snug);
+  line-height: 1;
+  color: var(--fg-1);
+}
+
+.ax-case-tile__metric-label {
+  font-size: 10px;
+  color: var(--fg-4);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  margin-top: var(--space-1);
+}

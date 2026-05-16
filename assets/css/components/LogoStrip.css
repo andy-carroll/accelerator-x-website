@@ -1,0 +1,99 @@
+/* =============================================================================
+   LogoStrip — quiet credential row
+   Markup: _templates/components/LogoStrip.html
+   Used on: Home, About
+   Monochrome treatment — names or logo images, never colour logos.
+   Supports data-variant="text" (default) and data-variant="logos" (img-based).
+   ============================================================================= */
+
+.ax-logo-strip {
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+  padding: var(--space-8) 0;
+}
+
+.ax-logo-strip__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .ax-logo-strip__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-8);
+    padding: 0 var(--gutter-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ax-logo-strip__inner {
+    padding: 0 var(--gutter-desktop);
+  }
+}
+
+/* Label --------------------------------------------------------------------- */
+.ax-logo-strip__label {
+  flex-shrink: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+  white-space: nowrap;
+}
+
+/* Separator ----------------------------------------------------------------- */
+.ax-logo-strip__sep {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .ax-logo-strip__sep {
+    display: block;
+    flex-shrink: 0;
+    width: 1px;
+    height: 1.25rem;
+    background: var(--border-1);
+  }
+}
+
+/* Items row ----------------------------------------------------------------- */
+.ax-logo-strip__items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-8);
+}
+
+/* Text variant -------------------------------------------------------------- */
+.ax-logo-strip__item {
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-3);
+  line-height: 1;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+/* Logo image variant -------------------------------------------------------- */
+.ax-logo-strip[data-variant="logos"] .ax-logo-strip__item {
+  display: flex;
+  align-items: center;
+}
+
+.ax-logo-strip__logo {
+  display: block;
+  height: 24px;
+  width: auto;
+  filter: grayscale(1) opacity(0.45);
+  transition: filter var(--dur-base) var(--ease-out);
+}
+
+.ax-logo-strip__logo:hover {
+  filter: grayscale(1) opacity(0.65);
+}

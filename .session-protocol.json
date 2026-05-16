@@ -73,6 +73,7 @@
       "_templates/design-system.html",
       "_templates/design-system/*.html",
       "_templates/components/*.html",
+      "_templates/*.html",
       "design-system/index.html"
     ]
   },
