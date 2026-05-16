@@ -15,7 +15,10 @@
 
 ## Current State
 
-**Active track:** `rebuild/v2` — full visual + structural rebuild from design handoff (`docs/design_handoff_website_rebuild/`)
+**Active track:** `rebuild/v2` — full visual + structural rebuild from design handoff
+- Build plan: `docs/design_handoff_website_rebuild/README.md`
+- Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
+- Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
 **Last session:** 2026-05-16 — Wave B complete (Nav, Footer, NewsletterCTA, PageHero, CTABand) + architecture audit fixes; all 5 arch issues resolved; quality gate passing
 
@@ -45,8 +48,8 @@
 ## Next (do in this order)
 
 1. **Phase 2 — Wave C Content Blocks**
-   → LogoStrip, ProofRow, PlanLayers, OfferingTable, OfferingCard, DeliverablesGrid
-   → FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard, DecisionTree
+   → Full list + specs: `docs/design_handoff_website_rebuild/README.md` (Phase 2 section) and `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
+   → Order: LogoStrip, ProofRow, PlanLayers, OfferingTable, OfferingCard, DeliverablesGrid, FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard, DecisionTree
    → Register each in `_templates/design-system/` content-blocks section
    → Gate: all blocks verified at 3 breakpoints before Wave D
 
