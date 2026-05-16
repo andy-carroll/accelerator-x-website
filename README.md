@@ -254,7 +254,7 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260516-233748
-- Updated: 2026-05-16T22:37:50.110Z
+- Session ID: 20260517-003234
+- Updated: 2026-05-16T23:32:35.738Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

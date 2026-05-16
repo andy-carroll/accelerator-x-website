@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-16 — Wave C complete (all 13 content block components); 5 post-build quality fixes (invalid CSS property, hardcoded aria-expanded, role="rowgroup", color-mix() replaced with design tokens, quality gate extended to scan components/ subdirectory)
+**Last session:** 2026-05-16 — quality gates passing; see session log for details
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -36,6 +36,14 @@
 - ⚠️ `aria-current="page"` on nav active links — deferred (needs per-page variable mechanism)
 - ⚠️ PostHog `data-posthog-*` attrs on DecisionTree CTA — live but unread until Phase 5 instrumentation
 
+**Phase 2 Wave D status (in progress):**
+- ✅ Wave C gate check passed (all 13 blocks verified at mobile/tablet/desktop)
+- ✅ `QuizCTA` — dark navy promo block; 2-col ≥768px; pink CTA → `quiz.accelerator-x.ai`
+- ✅ `ScarcityCard` — `--cohort` (pink) + `--open` (cyan) variants; 2-col ≥640px
+- ✅ `CohortList` — table-style cohort instance list; 4-col ≥640px; `[hidden]` collapses when empty
+- ✅ Post-build quality pass: `.ax-kicker--accent` added to tokens; `noreferrer` on external links; `role="region"` on ScarcityCard; dead `--open` CSS removed
+- ⬜ `ApplyForm` — **next** (plan approved; see session notes for full spec)
+
 **Known issues (rebuild track):**
 - Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
 - `cohort.html` still uses v1 nav + `build-footer.js` marker pattern — will be replaced when cohort page is rebuilt in v2
@@ -48,13 +56,22 @@
 
 ## Next (do in this order)
 
-1. **Phase 2 — Wave D Interactive**
-   → Full list + specs: `docs/design_handoff_website_rebuild/README.md` (Phase 2 section) and `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
-   → Gate: all Wave C blocks verified at 3 breakpoints before starting Wave D
-   → Follow component sequencing in plan
+1. **Phase 2 — Wave D Interactive: ApplyForm** ← start here
+   → 3 numbered sections: "Who you are" (name/role/email/company), "The business" (sector/revenue/AI maturity), "The work" (offering/message/timeline)
+   → Uses existing `.field`, `.input`, `.select`, `.textarea` from `tokens.css`; radio groups use `.chip` pill pattern (pure-CSS `input:checked + .chip` selection)
+   → Consent checkbox + SLA promise ("Average response time: 2 business days") + full-width submit
+   → Hooks into `[data-lead-form]` handler in `assets/js/forms.js` — no new JS
+   → Single-column always; submit full-width at bottom (per spec)
+   → Submission target: `/.netlify/functions/lead-capture`
+   → Create: `assets/css/components/ApplyForm.css`, `_templates/components/ApplyForm.html`
+   → Register in `_templates/design-system/interactive.html`; link CSS in `_templates/design-system.html` + `_templates/homepage.html`
 
-2. **Phase 3 — Page Assembly**
-   → Wire Wave B + Wave C components into full page templates
+2. **Phase 2 — Wave D complete gate** (after ApplyForm)
+   → Verify all 4 Wave D components at mobile/tablet/desktop in design system
+   → Run `npm run build && npm run check`
+
+3. **Phase 3 — Page Assembly**
+   → Wire Wave B + Wave C + Wave D components into full page templates
    → Start with homepage (most components already linked)
 
 ---
@@ -94,5 +111,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. Gate: verify all 13 Wave C blocks at mobile/tablet/desktop in the design system
-2. Phase 2 Wave D — Interactive components (follow sequencing in plan)
+1. **Build ApplyForm** — plan is approved, spec is in the "Next" section above. Read the plan, then implement. No re-planning needed.
+2. Run Wave D complete gate (all 4 components at 3 breakpoints) once ApplyForm is done
+3. Phase 3 — Page Assembly (after Wave D gate passes)

@@ -310,6 +310,7 @@ h6 { font-size: var(--text-lg); font-weight: var(--fw-semibold); }
   color: var(--action-primary);
   margin-bottom: var(--space-3);
 }
+.ax-kicker--accent { color: var(--action-accent); }
 
 /* Body --------------------------------------------------------------------- */
 p {

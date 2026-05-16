@@ -1,0 +1,67 @@
+/* =============================================================================
+   QuizCTA — inline promo block linking to quiz.accelerator-x.ai
+   Markup: _templates/components/QuizCTA.html
+   Used on: /what-we-do, /contact, home (decision aid context)
+   ============================================================================= */
+
+.ax-quiz-cta {
+  background: var(--bg-dark);
+  padding: var(--space-12) 0;
+}
+
+@media (min-width: 768px) {
+  .ax-quiz-cta { padding: var(--space-16) 0; }
+}
+
+.ax-quiz-cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-6);
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .ax-quiz-cta__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    padding: 0 var(--gutter-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ax-quiz-cta__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Copy ---------------------------------------------------------------------- */
+
+.ax-quiz-cta__copy { flex: 1; }
+
+.ax-quiz-cta__heading {
+  margin: var(--space-2) 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 2.5vw, var(--text-3xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-on-dark);
+  text-wrap: balance;
+}
+
+.ax-quiz-cta__sub {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-muted-on-dark);
+  max-width: 48ch;
+}
+
+/* Button -------------------------------------------------------------------- */
+
+.ax-quiz-cta__btn { flex-shrink: 0; white-space: nowrap; }
+
+@media (max-width: 767px) {
+  .ax-quiz-cta__btn { width: 100%; justify-content: center; }
+}

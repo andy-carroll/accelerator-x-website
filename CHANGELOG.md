@@ -8,9 +8,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Wave C complete. Next: Phase 2 Wave D — Interactive._
+_Wave D in progress: QuizCTA ✅ · ScarcityCard ✅ · CohortList ✅ · ApplyForm_
 
 ### Added
+
+- **Phase 2 Wave D — Interactive (in progress)** (`rebuild/v2`):
+  - `QuizCTA` — dark navy promo block; kicker + heading + benefit + pink CTA → `quiz.accelerator-x.ai`; 2-col ≥768px, single-col + full-width button below; registered in design system Interactive section
+  - `ScarcityCard` — programme availability signal; `--cohort` variant (pink border, deadline + places) and `--open` variant (cyan border, lead-time framing); 2-col ≥640px, stacked + full-width button below
+  - `CohortList` — active programme instance table; header row with open count; each row: date/duration + location + audience/places + Apply CTA; 4-col grid ≥640px, 2-col + full-span CTA below; `[hidden]` on `<section>` collapses entirely when no cohorts are live; registered in design system Interactive section
+- **`tokens.css`** — `.ax-kicker--accent` modifier added (`color: var(--action-accent)`); allows pink kicker without inline style override
+
+### Fixed
+
+- **`QuizCTA.html`** — replaced `style="color:var(--ax-pink)"` inline override with `.ax-kicker--accent` class; added `noreferrer` to `rel` on external link (was `noopener` only — Referer header was leaking)
+- **`ScarcityCard.html`** — `role="status"` (live region) replaced with `role="region" aria-label="Programme availability"` on both variants; removed inline `margin-top` from open variant example
+- **`ScarcityCard.css`** — removed dead `.ax-scarcity-card--open` rule which restated the base `border-left-color` and did nothing
 
 - **Phase 2 Wave C — Content Blocks** (`rebuild/v2`) — all 13 content block components built:
   - `LogoStrip` — flex row of client/partner names with separator and eyebrow label
@@ -360,7 +372,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260516-233748
-- Updated: 2026-05-16T22:37:50.110Z
+- Session ID: 20260517-003234
+- Updated: 2026-05-16T23:32:35.738Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
