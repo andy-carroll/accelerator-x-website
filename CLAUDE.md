@@ -17,25 +17,24 @@
 
 **Active track:** `rebuild/v2` — full visual + structural rebuild from design handoff (`docs/design_handoff_website_rebuild/`)
 
-**Last session:** 2026-05-16 — Phase 2 Wave A complete; TypeScale, Buttons, Chips, FormInputs primitives live in design system showcase; all breakpoints verified
+**Last session:** 2026-05-16 — Phase 2 Wave B complete; all 5 Chrome components (Nav, Footer, NewsletterCTA, PageHero, CTABand) in design system showcase and wired into all page builds; architecture audit fixes applied
 
-**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (Wave A done, 3 commits unpushed) | **Deployed:** `main` still live and untouched
+**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
 
-**Phase 2 Wave A status:**
-- ✅ `scripts/build-design-system.js` — now calls `resolveComponentTokens` (enables `{{component:X}}` in section partials)
-- ✅ `_templates/components/TypeScale.html` — display sizes, kicker, h1–h5, lead, body, caption; dark surface demo
-- ✅ `_templates/components/Buttons.html` — all 5 variants, 3 sizes, disabled states, on-dark surface
-- ✅ `_templates/components/Chips.html` — default/selected/kicker, filter group, status pills
-- ✅ `_templates/components/FormInputs.html` — text/select/textarea, all states, full real-world form example
-- ✅ `assets/css/components/Buttons.css` — loading, icon, full-width extensions
-- ✅ `assets/css/components/Chips.css` — colour variants, removable
-- ✅ `assets/css/components/FormInputs.css` — input groups, custom checkbox/radio
-- ✅ `_templates/design-system/primitives.html` — wired to 4 component tokens
-- ✅ Verified at mobile (375px), tablet (768px), desktop (1280px)
+**Phase 2 Wave B + architecture fixes status:**
+- ✅ `{{component:Nav}}` and `{{component:Footer}}` resolve in homepage, article, and insights-index builds
+- ✅ `build-homepage.js` + `build-hub.js` call `resolveComponentTokens` — component tokens work in all page builds
+- ✅ `build-footer.js` scoped to `cohort.html` only (v1 static page not yet on v2)
+- ✅ `id="main-content"` on `<main>` in all three page templates — skip link has a target
+- ✅ v2 CSS (`tokens.css`, `Buttons.css`, `Nav.css`, `Footer.css`) linked in all page templates
+- ✅ Footer tablet layout fixed — newsletter col spans full width at 640px–1023px
+- ✅ All Wave B components (Nav, Footer, NewsletterCTA, PageHero, CTABand) in design system
+- ⚠️ `aria-current="page"` on nav active links — deferred (needs per-page variable mechanism)
 
 **Known issues (rebuild track):**
 - Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
+- `cohort.html` still uses v1 nav + `build-footer.js` marker pattern — will be replaced when cohort page is rebuilt in v2
 
 **Known issues (main/live):**
 - LinkedIn Post Inspector "No author found" — JSON-LD correct, likely cache. Low priority.
@@ -45,14 +44,13 @@
 
 ## Next (do in this order)
 
-1. **Phase 2 — Wave B Global Chrome** (Nav, Footer, PageHero, CTABand)
-   → Decide Footer/NewsletterCTA deduplication before starting Footer
-   → `_templates/components/{Nav,Footer,PageHero,CTABand}.html`
-   → `assets/css/components/{Nav,Footer,PageHero,CTABand}.css`
-   → Register each in `_templates/design-system/chrome.html`
-   → Gate: showcase Wave B at all 3 breakpoints before Wave C
+1. **Phase 2 — Wave C Content Blocks**
+   → LogoStrip, ProofRow, PlanLayers, OfferingTable, OfferingCard, DeliverablesGrid
+   → FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard, DecisionTree
+   → Register each in `_templates/design-system/` content-blocks section
+   → Gate: all blocks verified at 3 breakpoints before Wave D
 
-2. **Phase 2 — Waves C + D** (Content blocks, Interactive)
+2. **Phase 2 — Wave D Interactive**
    → Follow component sequencing in plan
 
 ---
@@ -92,6 +90,5 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. Decide Footer/NewsletterCTA deduplication strategy before Wave B starts
-2. Start Phase 2 Wave B — Global Chrome (Nav, Footer, PageHero, CTABand)
-3. Gate: showcase Wave B at all 3 breakpoints before Wave C
+1. Phase 2 Wave C — Content Blocks (LogoStrip first, then follow sequencing in plan)
+2. Gate: verify all Wave C blocks at mobile/tablet/desktop before Wave D
