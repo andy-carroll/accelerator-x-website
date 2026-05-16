@@ -18,6 +18,11 @@
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos-Bold.woff2" crossorigin />
     <link rel="stylesheet" href="/styles.css" />
     <link rel="stylesheet" href="/assets/css/tailwind.generated.css" />
+    <!-- v2 design system components -->
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/components/Buttons.css" />
+    <link rel="stylesheet" href="/assets/css/components/Nav.css" />
+    <link rel="stylesheet" href="/assets/css/components/Footer.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
@@ -32,40 +37,9 @@
   </head>
   
   <body class="bg-surface text-navy min-h-screen flex flex-col">
-    <!-- Header -->
-    <header class="sticky top-0 z-50 border-b border-surface bg-background-95 backdrop-blur">
-      <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-        <a href="/">
-          <img src="/assets/icons/AX-wordmark-and-logo.png" alt="Accelerator X" class="h-6 sm:h-7 w-auto" width="1125" height="195" loading="eager" decoding="async" />
-        </a>
-        <div class="hidden items-center gap-6 md:flex">
-          <a href="/insights/" class="text-sm font-medium text-navy transition hover:opacity-80">Insights</a>
-          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-navy transition hover:opacity-80">Quiz</a>
-          <a href="/#apply" class="btn btn-primary btn-sm whitespace-nowrap">Apply to work with us</a>
-        </div>
+    {{component:Nav}}
 
-        <button
-          type="button"
-          class="inline-flex items-center justify-center rounded-md border border-surface px-3 py-2 text-navy md:hidden"
-          data-mobile-nav-toggle
-          aria-expanded="false"
-          aria-controls="mobile-nav-home"
-          aria-label="Open menu"
-        >
-          <span class="material-symbols-outlined" aria-hidden="true">menu</span>
-        </button>
-      </div>
-
-      <div id="mobile-nav-home" class="hidden border-t border-surface bg-background md:hidden">
-        <nav class="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-4" aria-label="Mobile">
-          <a href="/insights/" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">Insights</a>
-          <a href="https://quiz.accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="rounded-md px-2 py-2 text-sm font-medium text-navy hover:bg-surface">AI readiness quiz</a>
-          <a href="/#apply" class="btn btn-primary btn-sm mt-2 w-full">Apply to work with us</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="flex-grow">
+    <main id="main-content" class="flex-grow">
       
       <!-- Micro Hero & Guided Pathways -->
       <section class="bg-navy py-16 lg:py-24 text-center px-4 border-b-4 border-primary">
@@ -139,6 +113,8 @@
       </section>
 
     </main>
+
+    {{component:Footer}}
 
     <script defer src="/assets/js/nav.js"></script>
     <script defer src="/assets/js/hub-filter.js"></script>

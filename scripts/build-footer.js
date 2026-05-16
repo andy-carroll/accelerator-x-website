@@ -6,25 +6,12 @@ const START_MARKER = '<!-- FOOTER_COMPONENT_START -->';
 const END_MARKER = '<!-- FOOTER_COMPONENT_END -->';
 
 function collectTargets() {
-  const targets = [
-    { file: 'index.html', variant: 'subscribe' },
+  // index.html, insights/index.html, and insights/articles/* are now handled by
+  // build-homepage.js and build-hub.js via resolveComponentTokens + {{component:Footer}}.
+  // cohort.html is a static v1 page not yet migrated to the component system.
+  return [
     { file: 'cohort.html', variant: 'subscribe' },
-    { file: 'insights/index.html', variant: 'subscribed' },
   ];
-
-  const insightsArticlesDir = path.join(ROOT, 'insights/articles');
-
-  if (fs.existsSync(insightsArticlesDir)) {
-    const articleFiles = fs.readdirSync(insightsArticlesDir)
-      .filter((file) => file.endsWith('.html'))
-      .sort();
-
-    for (const file of articleFiles) {
-      targets.push({ file: `insights/articles/${file}`, variant: 'subscribed' });
-    }
-  }
-
-  return targets;
 }
 
 const socialSlots = [

@@ -24,6 +24,7 @@
     grid-template-columns: 1fr 1fr;
     padding: 0 var(--gutter-tablet) var(--space-12);
   }
+  .ax-footer__newsletter { grid-column: 1 / -1; }
 }
 
 @media (min-width: 1024px) {

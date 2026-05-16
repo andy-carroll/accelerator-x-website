@@ -8,10 +8,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Next: Phase 2 Wave B — Global Chrome (Nav, Footer, PageHero, CTABand). Decision needed: Footer/NewsletterCTA deduplication strategy._
+_Wave B complete. Architecture fixes applied. Next: Phase 2 Wave C — Content Blocks._
 
 ### Added
 
+- **Architecture fixes (pre-Wave C)** (`rebuild/v2`):
+  - `Footer.css` — newsletter column now spans full width (`grid-column: 1 / -1`) at 640px–1023px; fixes orphaned 3rd-column at tablet breakpoint
+  - `build-homepage.js`, `build-hub.js` — both now call `resolveComponentTokens` after template assembly; `{{component:X}}` tokens work in all page builds
+  - `_templates/homepage.html`, `_templates/article.html`, `_templates/index.html` — old v1 inline nav replaced with `{{component:Nav}}`; old v1/marker footer replaced with `{{component:Footer}}`; `id="main-content"` added to `<main>` in all three (skip link now has a target)
+  - v2 CSS (`tokens.css`, `Buttons.css`, `Nav.css`, `Footer.css`) linked in all three page templates
+  - `build-footer.js` — scoped down to `cohort.html` only; `index.html`, `insights/index.html`, and article pages now get their footer via `resolveComponentTokens` instead of the old marker-injection pattern
+- **Phase 2 Wave B — Global Chrome** (`rebuild/v2`) — five fully-rendered Chrome components live in the design system showcase:
+  - `_templates/components/Nav.html` + `assets/css/components/Nav.css` — sticky backdrop-blur header, skip link, desktop links, hamburger toggle wired to existing `nav.js` pattern
+  - `_templates/components/Footer.html` + `assets/css/components/Footer.css` — dark 3-col grid footer (brand / nav / newsletter), 3-col at ≥1024px
+  - `_templates/components/NewsletterCTA.html` + `assets/css/components/NewsletterCTA.css` — standalone full-width newsletter section, 2-col at ≥768px
+  - `_templates/components/PageHero.html` + `assets/css/components/PageHero.css` — breadcrumb + kicker + h1 + subline; used on inner pages
+  - `_templates/components/CTABand.html` + `assets/css/components/CTABand.css` — dark closing CTA, single accent button → `/contact/`
 - **Phase 2 Wave A — Primitives** (`rebuild/v2`) — four fully-rendered primitive components live in the design system showcase at `design-system/index.html`:
   - `_templates/components/TypeScale.html` — display sizes (ax-display--xl, ax-display), kicker, h1–h5, lead, body, caption; dark-surface demo
   - `_templates/components/Buttons.html` — all 5 variants (primary, accent, outline, ghost, link), 3 sizes, disabled states, on-dark surface
