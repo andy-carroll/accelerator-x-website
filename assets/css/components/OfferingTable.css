@@ -78,6 +78,13 @@
   }
 }
 
+/* ARIA rowgroup/row wrappers — display:contents makes them invisible to CSS grid */
+.ax-offering-table__thead,
+.ax-offering-table__tbody,
+.ax-offering-table__header-row {
+  display: contents;
+}
+
 /* Column headers */
 .ax-offering-table__col-head {
   padding: var(--space-3) var(--space-4);
@@ -123,7 +130,7 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--action-primary) 12%, transparent);
+  background: var(--surface-primary-subtle);
   font-family: var(--font-display);
   font-size: var(--text-xs);
   font-weight: var(--fw-bold);
@@ -131,7 +138,7 @@
 }
 
 .ax-offering-table__row--featured .ax-offering-table__row-num {
-  background: color-mix(in srgb, var(--fg-1) 10%, transparent);
+  background: var(--surface-navy-subtle);
   color: var(--fg-1);
 }
 

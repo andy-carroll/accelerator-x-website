@@ -11,7 +11,7 @@
 
       <li class="ax-faq-item">
         <details>
-          <summary class="ax-faq-item__question" aria-expanded="false">
+          <summary class="ax-faq-item__question">
             <span class="ax-faq-item__question-text">What happens after we apply?</span>
             <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -97,18 +97,3 @@
 
   </div>
 </section>
-
-<script>
-  /* Open all FAQ items at desktop widths on load */
-  (function () {
-    function openDesktopFAQs() {
-      var items = document.querySelectorAll('.ax-faq-item details');
-      items.forEach(function (d) {
-        if (window.innerWidth >= 1024) {
-          d.open = true;
-        }
-      });
-    }
-    openDesktopFAQs();
-  })();
-</script>

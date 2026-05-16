@@ -81,7 +81,7 @@
 }
 
 .ax-decision-tree__quiz-cta:hover {
-  background: color-mix(in srgb, var(--action-accent) 88%, black);
+  background: var(--action-accent-hover);
   box-shadow: var(--shadow-button-hover);
 }
 

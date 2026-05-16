@@ -20,20 +20,21 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-16 — Wave B complete (Nav, Footer, NewsletterCTA, PageHero, CTABand) + architecture audit fixes; all 5 arch issues resolved; quality gate passing
+**Last session:** 2026-05-16 — Wave C complete (all 13 content block components); 5 post-build quality fixes (invalid CSS property, hardcoded aria-expanded, role="rowgroup", color-mix() replaced with design tokens, quality gate extended to scan components/ subdirectory)
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
 
-**Phase 2 Wave B + architecture fixes status:**
-- ✅ `{{component:Nav}}` and `{{component:Footer}}` resolve in homepage, article, and insights-index builds
-- ✅ `build-homepage.js` + `build-hub.js` call `resolveComponentTokens` — component tokens work in all page builds
-- ✅ `build-footer.js` scoped to `cohort.html` only (v1 static page not yet on v2)
-- ✅ `id="main-content"` on `<main>` in all three page templates — skip link has a target
-- ✅ v2 CSS (`tokens.css`, `Buttons.css`, `Nav.css`, `Footer.css`) linked in all page templates
-- ✅ Footer tablet layout fixed — newsletter col spans full width at 640px–1023px
-- ✅ All Wave B components (Nav, Footer, NewsletterCTA, PageHero, CTABand) in design system
+**Phase 2 Wave C status (complete):**
+- ✅ All 13 content block components built and registered in design system
+- ✅ All 13 CSS files linked in `_templates/design-system.html` and `_templates/homepage.html`
+- ✅ 5 post-build quality fixes applied (see CHANGELOG)
+- ✅ `assets/js/faq-init.js` extracted from component; linked in `_templates/homepage.html`
+- ✅ `--surface-*-subtle` tint tokens added to `tokens.css`; `color-mix()` removed from all components
+- ✅ `scripts/check.js` now recursively scans `_templates/` subdirectories
+- ✅ `npm run build` + `npm run check` both passing
 - ⚠️ `aria-current="page"` on nav active links — deferred (needs per-page variable mechanism)
+- ⚠️ PostHog `data-posthog-*` attrs on DecisionTree CTA — live but unread until Phase 5 instrumentation
 
 **Known issues (rebuild track):**
 - Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
@@ -47,14 +48,14 @@
 
 ## Next (do in this order)
 
-1. **Phase 2 — Wave C Content Blocks**
+1. **Phase 2 — Wave D Interactive**
    → Full list + specs: `docs/design_handoff_website_rebuild/README.md` (Phase 2 section) and `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
-   → Order: LogoStrip, ProofRow, PlanLayers, OfferingTable, OfferingCard, DeliverablesGrid, FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard, DecisionTree
-   → Register each in `_templates/design-system/` content-blocks section
-   → Gate: all blocks verified at 3 breakpoints before Wave D
-
-2. **Phase 2 — Wave D Interactive**
+   → Gate: all Wave C blocks verified at 3 breakpoints before starting Wave D
    → Follow component sequencing in plan
+
+2. **Phase 3 — Page Assembly**
+   → Wire Wave B + Wave C components into full page templates
+   → Start with homepage (most components already linked)
 
 ---
 
@@ -93,5 +94,5 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. Phase 2 Wave C — Content Blocks (LogoStrip first, then follow sequencing in plan)
-2. Gate: verify all Wave C blocks at mobile/tablet/desktop before Wave D
+1. Gate: verify all 13 Wave C blocks at mobile/tablet/desktop in the design system
+2. Phase 2 Wave D — Interactive components (follow sequencing in plan)

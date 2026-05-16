@@ -126,13 +126,20 @@
     <!-- Desktop: table grid (hidden below 1024px) -->
     <div class="ax-offering-table__grid" role="table" aria-label="Offerings comparison">
 
-      <!-- Column headers -->
-      <div class="ax-offering-table__col-head" role="columnheader">Offering</div>
-      <div class="ax-offering-table__col-head" role="columnheader">Duration</div>
-      <div class="ax-offering-table__col-head" role="columnheader">Group size</div>
-      <div class="ax-offering-table__col-head" role="columnheader">From</div>
-      <div class="ax-offering-table__col-head" role="columnheader">Cadence</div>
-      <div class="ax-offering-table__col-head ax-offering-table__col-head--cta" role="columnheader"></div>
+      <!-- Header row -->
+      <div class="ax-offering-table__thead" role="rowgroup">
+        <div class="ax-offering-table__header-row" role="row">
+          <div class="ax-offering-table__col-head" role="columnheader">Offering</div>
+          <div class="ax-offering-table__col-head" role="columnheader">Duration</div>
+          <div class="ax-offering-table__col-head" role="columnheader">Group size</div>
+          <div class="ax-offering-table__col-head" role="columnheader">From</div>
+          <div class="ax-offering-table__col-head" role="columnheader">Cadence</div>
+          <div class="ax-offering-table__col-head ax-offering-table__col-head--cta" role="columnheader"></div>
+        </div>
+      </div>
+
+      <!-- Data rows -->
+      <div class="ax-offering-table__tbody" role="rowgroup">
 
       <!-- Row 1: Leadership Activation -->
       <div class="ax-offering-table__row" role="row">
@@ -208,6 +215,8 @@
           <a href="/what-we-do/fractional-advisory/" class="ax-offering-table__row-link">Details <span aria-hidden="true">→</span></a>
         </div>
       </div>
+
+      </div><!-- /.ax-offering-table__tbody -->
 
     </div><!-- /.ax-offering-table__grid -->
 

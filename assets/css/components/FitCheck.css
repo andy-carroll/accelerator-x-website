@@ -94,12 +94,12 @@
 }
 
 .ax-fit-check__col--yes .ax-fit-check__col-heading-icon {
-  background: color-mix(in srgb, var(--ax-green) 15%, transparent);
+  background: var(--surface-green-subtle);
   color: var(--ax-green);
 }
 
 .ax-fit-check__col--no .ax-fit-check__col-heading-icon {
-  background: color-mix(in srgb, var(--fg-4) 15%, transparent);
+  background: var(--surface-muted-subtle);
   color: var(--fg-3);
 }
 

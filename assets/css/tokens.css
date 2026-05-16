@@ -83,6 +83,14 @@
   --border-2:           var(--ax-border-strong);
   --border-paper:       rgba(27, 42, 74, 0.10);    /* Softer for warm surfaces */
 
+  /* Tinted surfaces — subtle bg overlays for chips, rows, and section columns */
+  --surface-primary-subtle:  rgba(8, 138, 191, 0.12);   /* ~12% cyan */
+  --surface-accent-subtle:   rgba(233, 63, 142, 0.14);  /* 14% pink */
+  --surface-amber-subtle:    rgba(254, 167, 0, 0.14);   /* 14% amber */
+  --surface-green-subtle:    rgba(31, 189, 83, 0.15);   /* 15% green */
+  --surface-muted-subtle:    rgba(100, 116, 139, 0.15); /* 15% slate */
+  --surface-navy-subtle:     rgba(27, 42, 74, 0.10);    /* 10% navy */
+
   /* Action */
   --action-primary:     var(--ax-cyan);
   --action-primary-hover: #06729F;                 /* cyan -10% */

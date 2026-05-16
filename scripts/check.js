@@ -35,9 +35,16 @@ function readFile(rel) {
 function filesIn(relDir, ext) {
   const dir = path.join(ROOT, relDir);
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
-    .filter(f => !ext || f.endsWith(ext))
-    .map(f => `${relDir}/${f}`);
+  const results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const rel = `${relDir}/${entry.name}`;
+    if (entry.isDirectory()) {
+      results.push(...filesIn(rel, ext));
+    } else if (!ext || entry.name.endsWith(ext)) {
+      results.push(rel);
+    }
+  }
+  return results;
 }
 
 // ── Check 1: No inline <script> blocks in templates ───────────────────────────

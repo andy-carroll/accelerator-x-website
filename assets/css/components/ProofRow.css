@@ -49,7 +49,6 @@
   color: var(--ax-pink);
   margin-bottom: var(--space-4);
   user-select: none;
-  aria-hidden: true;
 }
 
 .ax-proof-row__quote-text {

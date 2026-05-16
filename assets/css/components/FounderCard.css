@@ -48,7 +48,7 @@
   font-size: var(--text-2xl);
   font-weight: var(--fw-bold);
   color: var(--action-primary);
-  background: color-mix(in srgb, var(--action-primary) 10%, transparent);
+  background: var(--surface-primary-subtle);
 }
 
 .ax-founder-card__identity-meta {

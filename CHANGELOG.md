@@ -8,9 +8,36 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Wave B complete. Architecture fixes applied. Next: Phase 2 Wave C — Content Blocks._
+_Wave C complete. Next: Phase 2 Wave D — Interactive._
 
 ### Added
+
+- **Phase 2 Wave C — Content Blocks** (`rebuild/v2`) — all 13 content block components built:
+  - `LogoStrip` — flex row of client/partner names with separator and eyebrow label
+  - `ProofRow` — quote variant (big pull-quote + pink mark) and case-tile variant (2-col outcome grid)
+  - `PlanLayers` — numbered vertical list with `::before` connecting rule and z-indexed bubbles
+  - `OfferingTable` — desktop 6-col grid with ARIA table semantics; hidden below 1024px
+  - `OfferingCard` — kicker + badge + meta grid standalone card for mobile/tablet
+  - `DeliverablesGrid` — 4-up → 2-up → 1-up responsive grid of deliverable items
+  - `FitCheck` — 2-col yes/no layout on bg-2 with coloured `::before` markers
+  - `FAQList` — `<details>/<summary>` accordion; desktop opens all on load via `faq-init.js`
+  - `CaseTile` — card with cover image (hover scale), sector chip, metrics grid; feature variant
+  - `ArticleTile` — format-aware (`data-format`), play overlay for non-article; feature horizontal
+  - `EventCard` — standard (light) and featured (navy, fully inverted) variants
+  - `FounderCard` — identity header with portrait, socials, bio, track record list
+  - `DecisionTree` — 2-col layout (intro + rows), 3-col row grid (`1fr auto 1fr`); quiz CTA
+  - All 13 registered in `_templates/design-system/content.html`
+  - All 13 CSS files linked in `_templates/design-system.html`, `_templates/homepage.html`
+- **`assets/js/faq-init.js`** — extracted from FAQList component; safe to include on any page (no-ops if no `.ax-faq-item` elements present)
+- **`assets/css/tokens.css`** — 6 new `--surface-*-subtle` tint tokens (`primary`, `accent`, `amber`, `green`, `muted`, `navy`); replace component-level `color-mix()` calls for broader browser compatibility
+- **`scripts/check.js`** — `filesIn()` made recursive; quality gate now scans `_templates/components/` and `_templates/design-system/` subdirectories (previously only top-level `_templates/`)
+
+### Fixed
+
+- **`ProofRow.css`** — removed invalid `aria-hidden: true;` CSS property (was a no-op; `aria-hidden` is an HTML attribute, not a CSS property)
+- **`FAQList.html`** — removed hardcoded `aria-expanded="false"` on `<summary>`; native `<details>` manages open/closed state and the attribute was factually wrong when JS opened items on desktop
+- **`OfferingTable.html`** — added `role="rowgroup"` wrappers (`ax-offering-table__thead` / `ax-offering-table__tbody`) with `display: contents` so screen readers correctly identify the header vs. body row groups
+- **All 6 Wave C CSS files** — replaced 10 `color-mix()` calls with new `--surface-*-subtle` design tokens for consistency with existing codebase and full browser compatibility
 
 - **Architecture fixes (pre-Wave C)** (`rebuild/v2`):
   - `Footer.css` — newsletter column now spans full width (`grid-column: 1 / -1`) at 640px–1023px; fixes orphaned 3rd-column at tablet breakpoint
@@ -333,7 +360,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260516-232113
-- Updated: 2026-05-16T22:21:14.661Z
+- Session ID: 20260516-233748
+- Updated: 2026-05-16T22:37:50.110Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

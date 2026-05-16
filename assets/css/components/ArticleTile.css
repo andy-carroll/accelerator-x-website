@@ -108,17 +108,17 @@
 
 /* Format colour variants */
 .ax-article-tile[data-format="article"]  .ax-article-tile__format {
-  background: color-mix(in srgb, var(--action-primary) 14%, transparent);
+  background: var(--surface-primary-subtle);
   color: var(--action-primary);
 }
 
 .ax-article-tile[data-format="podcast"]  .ax-article-tile__format {
-  background: color-mix(in srgb, var(--ax-pink) 14%, transparent);
+  background: var(--surface-accent-subtle);
   color: var(--ax-pink);
 }
 
 .ax-article-tile[data-format="video"]    .ax-article-tile__format {
-  background: color-mix(in srgb, var(--ax-amber) 14%, transparent);
+  background: var(--surface-amber-subtle);
   color: var(--ax-amber);
 }
 

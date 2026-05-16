@@ -69,7 +69,7 @@
   text-transform: uppercase;
   padding: 3px 8px;
   border-radius: var(--radius-sm);
-  background: color-mix(in srgb, var(--action-primary) 14%, transparent);
+  background: var(--surface-primary-subtle);
   color: var(--action-primary);
 }
 
