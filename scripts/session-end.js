@@ -74,8 +74,14 @@ function formatDate(date) {
   return date.toISOString().split('T')[0];
 }
 
-function upsertClaudeLastSession(content, date, summary) {
-  const line = `**Last session:** ${date} — ${summary}`;
+function upsertClaudeLastSession(content, date, fallbackSummary) {
+  // If the agent already wrote a "Last session:" line for today, preserve it.
+  const existing = content.match(/\*\*Last session:\*\*\s*(\d{4}-\d{2}-\d{2})\s*—\s*(.+)/i);
+  if (existing && existing[1] === date) {
+    return content; // already set today — don't clobber
+  }
+
+  const line = `**Last session:** ${date} — ${fallbackSummary}`;
   if (/\*\*Last session:\*\*/i.test(content)) {
     return content.replace(/\*\*Last session:\*\*.*(?:\n|$)/i, `${line}\n`);
   }
@@ -85,6 +91,65 @@ function upsertClaudeLastSession(content, date, summary) {
   }
 
   return `${content}${content.endsWith('\n') ? '' : '\n'}\n## Current State\n\n${line}\n`;
+}
+
+function extractNextSessionPriorities(claudeContent) {
+  const match = claudeContent.match(/## Next Session Priorities\n([\s\S]*?)(?=\n##|$)/i);
+  if (!match) return null;
+  return match[1].trim();
+}
+
+function recentCommits(n = 8) {
+  try {
+    return execSync(`git log -${n} --oneline`, { stdio: 'pipe' }).toString().trim();
+  } catch {
+    return null;
+  }
+}
+
+function loadSessionNotes(notesPath) {
+  if (!fs.existsSync(notesPath)) return null;
+  return fs.readFileSync(notesPath, 'utf8').trim();
+}
+
+function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeContent, notesPath }) {
+  const priorities = extractNextSessionPriorities(claudeContent);
+  const commits = recentCommits(8);
+  const notes = loadSessionNotes(notesPath);
+
+  const decisionsSection = notes
+    ? notes
+    : '  - _Fill in `.claude/session-notes.md` before running session-end, or edit this log._';
+
+  const prioritiesSection = priorities
+    ? priorities.split('\n').map(l => `  ${l}`).join('\n')
+    : '  1. _See CLAUDE.md → Next Session Priorities_';
+
+  const commitsSection = commits
+    ? commits.split('\n').map(l => `  ${l}`).join('\n')
+    : '  _no commits found_';
+
+  return [
+    `# Session Log – ${isoDate}`,
+    '',
+    `- **Branch:** ${branch}`,
+    `- **Git commit:** ${headHash}`,
+    `- **Quality gates:** ✅ passed`,
+    `- **Airtable updates:** ${airtable ? 'requested (placeholder)' : 'skipped'}`,
+    '',
+    '## Recent commits this session',
+    '',
+    commitsSection,
+    '',
+    '## Decisions / Findings',
+    '',
+    decisionsSection,
+    '',
+    '## Next Session Priorities',
+    '',
+    prioritiesSection,
+    '',
+  ].join('\n');
 }
 
 function loadProfile(profilePath) {
@@ -265,13 +330,29 @@ if (writeModeEnabled && qualityGateFailed) {
 if (writeModeEnabled) {
   if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
 
-  const logContent = `# Session Log – ${new Date().toISOString()}\n\n- **Branch:** ${branch}\n- **Git commit:** ${headHash}\n- **Quality gates:** ✅ passed\n- **Airtable updates:** ${args.airtable ? 'requested (placeholder)' : 'skipped'}\n- **Decisions / Findings:**\n  - _Add your bullet points here_\n- **Next Session Priorities:**\n  1. _Priority 1_\n  2. _Priority 2_\n  3. _Priority 3_\n`;
+  const claudePath = 'CLAUDE.md';
+  const claudeContent = fs.readFileSync(claudePath, 'utf8');
+  const notesPath = path.join('.claude', 'session-notes.md');
+
+  const logContent = buildSessionLog({
+    branch,
+    headHash,
+    date: today,
+    isoDate: new Date().toISOString(),
+    airtable: args.airtable,
+    claudeContent,
+    notesPath,
+  });
   fs.writeFileSync(logPath, logContent);
   operations.push({ step: 'session_log', status: 'written', detail: logPath });
 
-  const claudePath = 'CLAUDE.md';
-  const claudeContent = fs.readFileSync(claudePath, 'utf8');
-  const sessionSummary = 'session protocol wrap completed; quality gates passing; handoff ready';
+  // Remove session notes after incorporating them into the log
+  if (fs.existsSync(notesPath)) {
+    fs.unlinkSync(notesPath);
+    operations.push({ step: 'session_notes', status: 'consumed', detail: notesPath });
+  }
+
+  const sessionSummary = 'quality gates passing; see session log for details';
   const withFreshLastSession = upsertClaudeLastSession(claudeContent, today, sessionSummary);
   const claudeUpdate = ensureNextSessionBlock(withFreshLastSession);
   if (claudeUpdate.changed || claudeUpdate.content !== claudeContent) {
