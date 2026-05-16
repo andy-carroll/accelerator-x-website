@@ -7,9 +7,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
-_Next items: hero imagery swap, Lighthouse targets, autonomous agent fleet._
+_Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
+_Next: Phase 2 Wave B — Global Chrome (Nav, Footer, PageHero, CTABand). Decision needed: Footer/NewsletterCTA deduplication strategy._
 
 ### Added
+
+- **Phase 2 Wave A — Primitives** (`rebuild/v2`) — four fully-rendered primitive components live in the design system showcase at `design-system/index.html`:
+  - `_templates/components/TypeScale.html` — display sizes (ax-display--xl, ax-display), kicker, h1–h5, lead, body, caption; dark-surface demo
+  - `_templates/components/Buttons.html` — all 5 variants (primary, accent, outline, ghost, link), 3 sizes, disabled states, on-dark surface
+  - `_templates/components/Chips.html` — default/selected/kicker variants, filter group, status pills (success/warning/error)
+  - `_templates/components/FormInputs.html` — text/select/textarea with all states (default, value, error, disabled); full real-world form example
+- **`assets/css/components/Buttons.css`** — loading spinner state, icon/square variant, full-width modifier
+- **`assets/css/components/Chips.css`** — colour-tinted variants (cyan, pink, amber, purple), removable chip pattern
+- **`assets/css/components/FormInputs.css`** — input groups (prefix/suffix addons), custom checkbox/radio styling
+- **`scripts/build-design-system.js`** — now calls `resolveComponentTokens` after section injection, enabling `{{component:X}}` composition tokens in all design-system section partials
+- **Phase 1 gate verified** — `npm run build` and `npm run check` both pass with Node v26.0.0; legacy pages unchanged
 
 - **`_templates/homepage.html`** — dedicated canonical homepage source template. This is now the authored source for homepage structure, while `index.html` is treated as a generated artifact during the build.
 - **`_templates/homepage-about.html`** — dedicated homepage about fragment. Owns the founder/about section markup separately from the main homepage template.

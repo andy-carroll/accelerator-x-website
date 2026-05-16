@@ -9,6 +9,7 @@
 
 # Local AI tool settings
 .claude/settings.local.json
+.claude/launch.json
 
 # Brand assets (keep locally, don't commit large binaries)
 docs/Accelerator-X-brand-pack.pdf
