@@ -92,7 +92,9 @@
         message: formData.get('message') || '',
         interest: formData.get('interest') || leadForm.dataset.interest || '',
         source: formData.get('source') || leadForm.dataset.source || '',
-        _honeypot: formData.get('_honeypot') || ''
+        _honeypot: formData.get('_honeypot') || '',
+        consent_given: formData.get('consent_given') === 'true',
+        consent_timestamp: new Date().toISOString()
       };
 
       fetch('/.netlify/functions/lead-capture', {

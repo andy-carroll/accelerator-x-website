@@ -8,14 +8,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Wave D in progress: QuizCTA ✅ · ScarcityCard ✅ · CohortList ✅ · ApplyForm_
+_Wave D complete ✅ · Phase 2 component library complete · Phase 3 Page Assembly next_
 
 ### Added
 
-- **Phase 2 Wave D — Interactive (in progress)** (`rebuild/v2`):
+- **Phase 2 Wave D — Interactive (complete)** (`rebuild/v2`):
   - `QuizCTA` — dark navy promo block; kicker + heading + benefit + pink CTA → `quiz.accelerator-x.ai`; 2-col ≥768px, single-col + full-width button below; registered in design system Interactive section
   - `ScarcityCard` — programme availability signal; `--cohort` variant (pink border, deadline + places) and `--open` variant (cyan border, lead-time framing); 2-col ≥640px, stacked + full-width button below
   - `CohortList` — active programme instance table; header row with open count; each row: date/duration + location + audience/places + Apply CTA; 4-col grid ≥640px, 2-col + full-span CTA below; `[hidden]` on `<section>` collapses entirely when no cohorts are live; registered in design system Interactive section
+  - `ApplyForm` — 3-section application form ("Who you are" / "The business" / "The work"); pure-CSS radio chip groups for timeline selection (`input:checked + .chip`); consent checkbox with timestamped GDPR-compliant acceptance; SLA promise line; hooks into `[data-lead-form]` handler in `forms.js`; no new JS; registered in design system Interactive section
+- **`assets/js/forms.js`** — `consent_given` (boolean) and `consent_timestamp` (ISO 8601 string) added to lead-capture payload; captured at submit time
+- **`netlify/functions/lead-capture.js`** — `Consent Given` (checkbox) and `Consent Timestamp` (text) written to Airtable on every lead-capture submission; requires matching fields in Airtable prospects table before going live
 - **`tokens.css`** — `.ax-kicker--accent` modifier added (`color: var(--action-accent)`); allows pink kicker without inline style override
 
 ### Fixed
@@ -372,7 +375,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-003903
-- Updated: 2026-05-16T23:39:04.520Z
+- Session ID: 20260517-100250
+- Updated: 2026-05-17T09:02:51.349Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

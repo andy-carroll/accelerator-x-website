@@ -68,6 +68,8 @@ exports.handler = async (event, context) => {
     const message = safeTrim(data.message || '');
     const interest = safeTrim(data.interest || '');
     const source = safeTrim(data.source || '');
+    const consentGiven = data.consent_given === true;
+    const consentTimestamp = safeTrim(data.consent_timestamp || new Date().toISOString());
 
     // Required fields guard
     if (!name || !email || !company || !website || !role) {
@@ -187,7 +189,9 @@ exports.handler = async (event, context) => {
             source ? `Source detail: ${source}` : '',
             message || ''
           ].filter(Boolean).join('\n\n'),
-          Source: 'Accelerator-X Website'
+          Source: 'Accelerator-X Website',
+          'Consent Given': consentGiven,
+          'Consent Timestamp': consentTimestamp
         }
       };
 

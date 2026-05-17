@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Wave D in progress: QuizCTA ✅, ScarcityCard ✅, CohortList ✅; 4-issue quality audit (`.ax-kicker--accent` token, `noreferrer` on external links, ARIA role fixes, dead CSS removed); session end protocol updated (mandatory pre-close audit); ApplyForm plan approved — build it first next session
+**Last session:** 2026-05-17 — Wave D complete: ApplyForm built (3-section form, pure-CSS chip radios, consent checkbox with GDPR timestamp written to Airtable); `forms.js` + `lead-capture.js` updated for consent; Wave D gate passed (all 4 components verified at mobile/tablet/desktop); Phase 2 component library complete — Phase 3 Page Assembly is next
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -36,13 +36,14 @@
 - ⚠️ `aria-current="page"` on nav active links — deferred (needs per-page variable mechanism)
 - ⚠️ PostHog `data-posthog-*` attrs on DecisionTree CTA — live but unread until Phase 5 instrumentation
 
-**Phase 2 Wave D status (in progress):**
+**Phase 2 Wave D status (complete ✅):**
 - ✅ Wave C gate check passed (all 13 blocks verified at mobile/tablet/desktop)
 - ✅ `QuizCTA` — dark navy promo block; 2-col ≥768px; pink CTA → `quiz.accelerator-x.ai`
 - ✅ `ScarcityCard` — `--cohort` (pink) + `--open` (cyan) variants; 2-col ≥640px
 - ✅ `CohortList` — table-style cohort instance list; 4-col ≥640px; `[hidden]` collapses when empty
 - ✅ Post-build quality pass: `.ax-kicker--accent` added to tokens; `noreferrer` on external links; `role="region"` on ScarcityCard; dead `--open` CSS removed
-- ⬜ `ApplyForm` — **next** (plan approved; see session notes for full spec)
+- ✅ `ApplyForm` — 3-section form; pure-CSS chip radios; consent checkbox + GDPR timestamp → Airtable; hooks into `forms.js [data-lead-form]`; no new JS
+- ✅ Wave D gate passed: all 4 components verified at mobile/tablet/desktop
 
 **Known issues (rebuild track):**
 - Figtree loaded via Google Fonts CDN (render-blocking) — self-hosting deferred to later
@@ -56,23 +57,17 @@
 
 ## Next (do in this order)
 
-1. **Phase 2 — Wave D Interactive: ApplyForm** ← start here
-   → 3 numbered sections: "Who you are" (name/role/email/company), "The business" (sector/revenue/AI maturity), "The work" (offering/message/timeline)
-   → Uses existing `.field`, `.input`, `.select`, `.textarea` from `tokens.css`; radio groups use `.chip` pill pattern (pure-CSS `input:checked + .chip` selection)
-   → Consent checkbox + SLA promise ("Average response time: 2 business days") + full-width submit
-   → Hooks into `[data-lead-form]` handler in `assets/js/forms.js` — no new JS
-   → Single-column always; submit full-width at bottom (per spec)
-   → Submission target: `/.netlify/functions/lead-capture`
-   → Create: `assets/css/components/ApplyForm.css`, `_templates/components/ApplyForm.html`
-   → Register in `_templates/design-system/interactive.html`; link CSS in `_templates/design-system.html` + `_templates/homepage.html`
-
-2. **Phase 2 — Wave D complete gate** (after ApplyForm)
-   → Verify all 4 Wave D components at mobile/tablet/desktop in design system
-   → Run `npm run build && npm run check`
-
-3. **Phase 3 — Page Assembly**
+1. **Phase 3 — Page Assembly** ← start here
    → Wire Wave B + Wave C + Wave D components into full page templates
-   → Start with homepage (most components already linked)
+   → Start with homepage (`_templates/homepage.html`) — most component CSS already linked
+   → Read `docs/design_handoff_website_rebuild/wireframes/` for page layout specs before assembling
+   → **Before going live:** add `Consent Given` (checkbox) + `Consent Timestamp` (single line text) to Airtable prospects table — ApplyForm writes these fields on every submission
+
+2. **Phase 4 — Content pipeline**
+   → Migrate articles to Markdown frontmatter model
+
+3. **Phase 5 — Analytics**
+   → PostHog event instrumentation
 
 ---
 
@@ -110,6 +105,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Build ApplyForm** — plan is approved, spec is in the "Next" section above. Read the plan, then implement. No re-planning needed.
-2. Run Wave D complete gate (all 4 components at 3 breakpoints) once ApplyForm is done
-3. Phase 3 — Page Assembly (after Wave D gate passes)
+1. **Phase 3 — Page Assembly** — start with homepage. Read wireframes first (`docs/design_handoff_website_rebuild/wireframes/`), then assemble components into `_templates/homepage.html`.
+2. **Airtable action (user)** — add `Consent Given` + `Consent Timestamp` fields to prospects table before ApplyForm goes live.
+3. Phase 4 — Content pipeline (after homepage assembly)
