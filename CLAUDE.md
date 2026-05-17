@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 4 complete + senior engineer audit: content pipeline migrated to Build Plan §10 data model; live `ReferenceError` in hub-filter.js fixed; `Capability` added to `TAG_FILTER_MAP`; session-end now blocks on stale priorities; `npm run build` + `npm run check` clean
+**Last session:** 2026-05-17 — Phase 4 + post-session audit: article 001 dead `next_article_url` fixed; `Cases` + `Opinion` added to `TAG_FILTER_MAP`; `content/articles/` added to session-protocol allowed paths; CHANGELOG cleanup queued as background task
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.

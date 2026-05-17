@@ -348,7 +348,7 @@ If project workflow changes, update this file first, then adapters (`CLAUDE.md`,
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-202830
-- Updated: 2026-05-17T19:28:31.496Z
+- Session ID: 20260517-215358
+- Updated: 2026-05-17T20:53:59.993Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
