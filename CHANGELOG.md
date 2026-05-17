@@ -8,7 +8,24 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Phase 3 Page Assembly in progress — all homepage inline sections now v2 token-based markup_
+_Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
+
+### Added
+
+- **Phase 3 — Inner page assembly (complete)** (`rebuild/v2`): all four marketing pages assembled from v2 component library:
+  - `/what-we-do/` — PageHero + `{{component:OfferingTable}}` + `{{component:DecisionTree}}` + `{{component:CTABand}}`; full JSON-LD `WebPage` schema; CSS links for OfferingTable, OfferingCard, DecisionTree
+  - `/how-we-work/` — PageHero + principles grid (4 items) + approach cards (4 cards) + engagement phases (Phase 0/1/2…n/Advisory) + contrast table (never/always) + pull-quote (`<blockquote>` with Mark Bennett attribution) + `{{component:CTABand}}`
+  - `/about/` — PageHero ("Two operators. One partnership.") + founders hero (real portrait images, full track records for Toby + Andy) + origin story (placeholder — see GO-LIVE-CHECKLIST) + beliefs (6 numbered operating principles) + `{{component:LogoStrip}}` + `{{component:CTABand}}`
+  - `/contact/` — PageHero + `{{component:ApplyForm}}` + direct contact cards (Toby + Andy, toby@/andy@ emails, LinkedIn) + quiz prompt (→ `quiz.accelerator-x.ai`) + `{{component:Footer}}`; `ContactPage` JSON-LD schema; no CTABand (form is the CTA)
+- **`scripts/build-inner-pages.js`** — new build script; processes all 4 inner page templates via `resolveComponentTokens`; creates output directories idempotently; integrated into `npm run build` chain
+- **`assets/css/components/InnerPages.css`** — new shared CSS (~430 lines) for all inner page sections: `.ax-inner-section`, `.ax-principles`, `.ax-approach`, `.ax-engagement`, `.ax-contrast`, `.ax-pull-quote`, `.ax-founders-hero`, `.ax-origin-story`, `.ax-beliefs`, `.ax-contact-layout`, `.ax-contact-direct`, `.ax-contact-card`, `.ax-quiz-prompt`; fully token-based; mobile-first (640/768/1024 breakpoints)
+- **`package.json`** — added `"build:inner-pages": "node scripts/build-inner-pages.js"` script; added to end of `build` chain
+- **`scripts/build-hub.js`** — added 4 inner pages to `staticPages` array in `generateSitemap()`; sitemap now has 12 URLs (was 8)
+
+### Fixed
+
+- **`CTABand.html`** — CTA destination updated from `/#apply` to `/contact/`; now that `/contact/` is built, the pending decision (documented in §1f of GO-LIVE-CHECKLIST) is resolved
+- **`contact.html`** — wrapped `{{component:ApplyForm}}` in `<div class="ax-contact-layout">` rather than `<section>`; `ApplyForm` already renders its own `<section aria-labelledby="apply-form-heading">`, so wrapping in another labelled section would create redundant landmark nesting
 
 ### Documentation
 
@@ -407,7 +424,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-152324
-- Updated: 2026-05-17T14:23:26.138Z
+- Session ID: 20260517-185413
+- Updated: 2026-05-17T17:54:14.795Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

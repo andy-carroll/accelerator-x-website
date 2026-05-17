@@ -329,6 +329,10 @@ function generateSitemap(articles, siteUrl) {
 
   const staticPages = [
     { loc: `${siteUrl}/`, changefreq: 'weekly', priority: '1.0', lastmod: today },
+    { loc: `${siteUrl}/what-we-do/`, changefreq: 'monthly', priority: '0.9', lastmod: today },
+    { loc: `${siteUrl}/how-we-work/`, changefreq: 'monthly', priority: '0.9', lastmod: today },
+    { loc: `${siteUrl}/about/`, changefreq: 'monthly', priority: '0.8', lastmod: today },
+    { loc: `${siteUrl}/contact/`, changefreq: 'monthly', priority: '0.8', lastmod: today },
     { loc: `${siteUrl}/insights/`, changefreq: 'weekly', priority: '0.8', lastmod: today },
   ];
 

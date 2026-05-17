@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-05-17 (Phase 3 in progress — homepage partials converted to v2 components)_
+_Last updated: 2026-05-17 (Phase 3 complete — all 4 inner pages assembled from v2 components)_
 
 ---
 
@@ -29,7 +29,7 @@ transparent, anti-agency positioning.
   - [x] Wave B — Global Chrome (Nav, Footer, NewsletterCTA, PageHero, CTABand)
   - [x] Wave C — Content Blocks (all 13 components: LogoStrip → DecisionTree)
   - [x] Wave D — Interactive: QuizCTA · ScarcityCard · CohortList · ApplyForm — gate passed ✅
-- [-] **Phase 3 — Page Assembly** — homepage partials converted ✅; v1 inline sections + other pages next
+- [x] **Phase 3 — Page Assembly** — all pages assembled ✅ (`/what-we-do`, `/how-we-work`, `/about`, `/contact`; homepage v2 inline sections done in prior session)
 - [ ] **Phase 4 — Content pipeline** — migrate articles to Markdown frontmatter model
 - [ ] **Phase 5 — Analytics** — PostHog event instrumentation
 
@@ -176,7 +176,7 @@ enough that manual protocol overhead becomes measurable.
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-152324
-- Updated: 2026-05-17T14:23:26.137Z
+- Session ID: 20260517-185413
+- Updated: 2026-05-17T17:54:14.794Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

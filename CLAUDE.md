@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 3 continued: all 5 v1 inline homepage sections replaced with v2 token-based BEM markup (Hero, Problem, WhyUs, Process, Testimonials); `HomeSections.css` created; testimonial cards updated to `ax-testimonial-card`; hero copy updated to v2 ("Stop buying tools…"), pricing updated to Phase 0 £5k model; GO-LIVE-CHECKLIST updated with pricing and copy items
+**Last session:** 2026-05-17 — Phase 3 complete: all 4 inner pages assembled (`/what-we-do`, `/how-we-work`, `/about`, `/contact`); `build-inner-pages.js` + `InnerPages.css` created; CTABand now routes to `/contact/`; sitemap updated to 12 URLs; `npm run build` + `npm run check` both passing
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -57,10 +57,10 @@
 
 ## Next (do in this order)
 
-1. **Phase 3 — Page Assembly (in progress)**
-   → Homepage partials done ✅ — next: replace v1 inline sections (Hero, Problem, Different, Process, Testimonials) with v2 token-based markup in `_templates/homepage.html`
-   → Then: assemble remaining pages (`/what-we-do`, `/how-we-work`, `/about`, `/contact`) from components
+1. **Phase 3 — Page Assembly ✅ Complete**
+   → All 4 inner pages live (`/what-we-do`, `/how-we-work`, `/about`, `/contact`)
    → **Before going live:** add `Consent Given` (checkbox) + `Consent Timestamp` (single line text) to Airtable prospects table — ApplyForm writes these fields on every submission
+   → **Before going live:** replace about page origin story placeholder (see `GO-LIVE-CHECKLIST.md §1h`)
 
 2. **Phase 4 — Content pipeline**
    → Migrate articles to Markdown frontmatter model

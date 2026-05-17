@@ -99,12 +99,34 @@ Component: `_templates/components/ProofRow.html`
 
 ### 1f — CTA destination / contact page decision
 
-> CTABand currently points to `/#apply` (homepage apply section).
-> Decision pending: keep form on homepage vs. create a dedicated `/contact/` page.
+> **Resolved (2026-05-17):** `/contact/` page exists. CTABand routes to `/contact/`.
 
-- `[ ]` **Decision required:** homepage form only, or `/contact/` page too?
-- `[ ]` If `/contact/` page created: update CTABand href; add page to nav + sitemap
-- `[ ]` If homepage only: confirm all inner pages' CTAs resolve correctly via `/#apply`
+- `[x]` **Decision:** `/contact/` page created — CTABand `href` updated to `/contact/`
+- `[x]` Sitemap updated — `/contact/` included at priority 0.8
+- `[ ]` Add `/contact/` to nav (currently missing — nav was built before this page existed)
+
+### 1h — Inner page content requiring founder review
+
+Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17).
+
+**`/about/` — Origin story**
+- `[ ]` **BLOCKING** Origin story (3 paragraphs) is AI-written placeholder — Andy/Toby to replace with accurate narrative before launch
+- `[ ]` "Two operators. One partnership." heading — intentional?
+
+**`/how-we-work/` — Section copy**
+- `[ ]` Principles section (4 items: "Founder-led, always" / "All three, or none" / "We want you to outgrow us" / "Week one earns its keep") — confirm exact wording with founders
+- `[ ]` Approach cards (4 cards: "Diagnose first" / "Embedded, not remote" / "Ship, don't strategise" / "Transfer capability") — confirm exact wording
+- `[ ]` Engagement phases — Phase 0/1/2…n/Advisory descriptions — confirm details (esp. pricing/duration if any)
+- `[ ]` Contrast table ("We never…" / "We always…") — confirm every item is accurate and intentional
+- `[ ]` **Mark Bennett pull-quote** — quote attributed to Mark Bennett (CEO, W R Bennett Group) on `/how-we-work/` — confirm: (a) this is a real quote, not placeholder; (b) Mark has approved its use on the site; (c) attribution is correct
+
+**`/contact/` — Contact details**
+- `[ ]` Confirm `toby@accelerator-x.ai` is the correct public email for Toby
+- `[ ]` Confirm `andy@accelerator-x.ai` is the correct public email for Andy
+- `[ ]` LinkedIn URLs in contact cards match §1a above
+
+**`/what-we-do/` — Offering detail links**
+- `[ ]` `OfferingTable` and `DecisionTree` components link to offering detail pages (e.g. `/what-we-do/leadership-activation/`) that do not yet exist — all will 404 until detail pages are built or links are removed/redirected
 
 ### 1g — General copy review
 
@@ -122,12 +144,13 @@ Component: `_templates/components/ProofRow.html`
 ### 2a — Navigation
 
 - `[ ]` All nav links resolve to built pages or valid anchors
-- `[ ]` "What we do" → page built?
-- `[ ]` "How we work" → page built?
+- `[x]` "What we do" → `/what-we-do/` built ✅
+- `[x]` "How we work" → `/how-we-work/` built ✅
 - `[ ]` "Insights" → `/insights/` working?
 - `[ ]` "Quiz" → `quiz.accelerator-x.ai` live?
 - `[ ]` Logo → `/` correct?
-- `[ ]` Nav CTA "Apply to work with us" → resolves correctly (`#apply` or `/contact/`)
+- `[ ]` Nav CTA "Apply to work with us" → should resolve to `/contact/` (page now exists — confirm nav href is updated)
+- `[ ]` `/contact/` — add to nav if not already present (nav was built before /contact/ existed — §1f)
 - `[ ]` Mobile nav — all links work at 375px
 
 ### 2b — Footer links
@@ -317,10 +340,10 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 | Page | Blocking cutover? | Status |
 |---|---|---|
-| `/what-we-do/` | **Yes** — nav link | `[ ]` |
-| `/how-we-work/` | **Yes** — nav link | `[ ]` |
-| `/about/` | **Yes** — nav link | `[ ]` |
-| `/contact/` | **Decision pending** — see §1f | `[ ]` |
+| `/what-we-do/` | **Yes** — nav link | `[x]` Built ✅ |
+| `/how-we-work/` | **Yes** — nav link | `[x]` Built ✅ |
+| `/about/` | **Yes** — nav link | `[x]` Built ✅ (origin story placeholder — see §1h) |
+| `/contact/` | **Yes** — CTABand destination | `[x]` Built ✅ |
 | `/privacy.html` | **Yes** — consent link | `[ ]` (may exist in v1) |
 | `/case-studies/` | No — ProofRow link commented out | `[ ]` |
 
