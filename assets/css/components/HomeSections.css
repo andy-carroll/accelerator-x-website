@@ -63,20 +63,15 @@
 }
 
 .ax-hero__sub {
-  margin: var(--space-6) 0 0;
+  margin: var(--space-6) auto 0;
   font-size: var(--text-lg);
   line-height: var(--lh-relaxed);
   color: var(--fg-3);
   max-width: 52ch;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 @media (min-width: 1024px) {
-  .ax-hero__sub {
-    margin-left: 0;
-    margin-right: 0;
-  }
+  .ax-hero__sub { margin: var(--space-6) 0 0; }
 }
 
 .ax-hero__cta-row {
@@ -214,7 +209,7 @@
 .ax-why-us .ax-kicker { color: var(--ax-cyan); }
 
 .ax-why-us__heading {
-  max-width: 720px;
+  max-width: var(--container-tight);
   margin: var(--space-4) 0 var(--space-10);
   font-family: var(--font-display);
   font-size: clamp(var(--text-3xl), 3vw + 0.5rem, var(--text-5xl));
@@ -244,7 +239,7 @@
   background: var(--bg-1);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-xl);
-  padding: 1.75rem;
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
@@ -261,7 +256,6 @@
   font-weight: var(--fw-semibold);
   font-size: var(--text-sm);
   flex-shrink: 0;
-  margin-bottom: var(--space-1);
 }
 
 .ax-why-us__card--cyan .ax-why-us__card-icon {
@@ -334,12 +328,12 @@
 }
 
 .ax-process__header {
-  max-width: 720px;
+  max-width: var(--container-tight);
   margin-bottom: var(--space-10);
 }
 
 .ax-process__heading {
-  margin: var(--space-4) 0 var(--space-4);
+  margin: var(--space-4) 0;
   font-family: var(--font-display);
   font-size: clamp(var(--text-3xl), 3vw + 0.5rem, var(--text-5xl));
   font-weight: var(--fw-bold);

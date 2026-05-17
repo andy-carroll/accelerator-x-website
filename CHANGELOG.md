@@ -12,6 +12,9 @@ _Phase 3 Page Assembly in progress — all homepage inline sections now v2 token
 
 ### Added
 
+- **`HomeSections.css`** — new component CSS covering all 5 homepage inline sections (post-build quality pass: fixed `.ax-hero__sub` margin conflict, `1.75rem` → `var(--space-6)`, raw `720px` → `var(--container-tight)` ×2, redundant margin shorthand on `.ax-process__heading`, redundant `margin-bottom` on `.ax-why-us__card-icon`)
+- **`main.js`** — stripped 5 dead v1 section-specific reveal functions and their IntersectionObservers (`.problem-headline`, `.different-headline`, `.testimonials-headline`, `.process-card`, `.apply-shell`); generic `.reveal` observer remains; all v2 section headings, cards, and phase tiles now carry `reveal`/`reveal-delay-*` classes for staggered scroll animation
+
 - **`HomeSections.css`** — new component CSS covering all 5 homepage inline sections (Hero, Problem, WhyUs, Process, Testimonials) using v2 design tokens; BEM naming (`ax-hero`, `ax-problem`, `ax-why-us`, `ax-process`, `ax-testimonials`); fully responsive (mobile-first, tablet 640px+, desktop 1024px+)
 - **Phase 3 — Homepage inline section rebuild** (`rebuild/v2`): replaced all 5 v1 Tailwind/styles.css inline sections with v2 token-based BEM markup:
   - Hero: v2 copy ("Stop buying tools. Start building capability."), `chip--kicker` availability badge, `ax-hero__heading` display type, existing hero media library preserved
