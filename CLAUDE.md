@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 3 homepage partials done (FitCheck, ProofRow+LogoStrip, FounderCards with portraits, ApplyForm); `docs/GO-LIVE-CHECKLIST.md` created (11 sections: content, links, forms, email, PostHog gold standard, SEO/AEO gold standard, QA, deployment, sign-off); LogoStrip fixed (Premium Car Parks removed); ProofRow case-studies link commented out; CTABand → `/#apply`; checklist sweep baked into session-end protocol
+**Last session:** 2026-05-17 — Phase 3 continued: all 5 v1 inline homepage sections replaced with v2 token-based BEM markup (Hero, Problem, WhyUs, Process, Testimonials); `HomeSections.css` created; testimonial cards updated to `ax-testimonial-card`; hero copy updated to v2 ("Stop buying tools…"), pricing updated to Phase 0 £5k model; GO-LIVE-CHECKLIST updated with pricing and copy items
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Phase 3 continued** — replace v1 inline sections in `_templates/homepage.html` (Hero, Problem, Different, Process, Testimonials) with v2 token-based markup; then assemble `/what-we-do`, `/how-we-work`, `/about`, `/contact` pages.
+1. **Phase 3 — Inner pages** — assemble `/what-we-do`, `/how-we-work`, `/about`, `/contact` pages from v2 components using `Coaching & Enablement Wireframes.html` and `Build Plan.html` as reference.
 2. **Airtable action (user)** — add `Consent Given` + `Consent Timestamp` fields to prospects table before ApplyForm goes live.
-3. Phase 4 — Content pipeline (after page assembly complete)
+3. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy in hero + process section before go-live.

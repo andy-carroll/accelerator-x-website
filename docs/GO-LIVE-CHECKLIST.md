@@ -71,7 +71,7 @@ Currently lists: Capgemini, WPP, Capital One, NHS, Pegasus Group
 
 - `[ ]` **BLOCKING** Replace all three testimonial quotes with real client quotes
 - `[ ]` Alastair Constance, CEO Mercury Global — get real quote and written approval to use
-- `[ ]` Mark Bennett, CEO W R Bennett Group / Premium Car Parks — real quote + approval
+- `[ ]` Mark Bennett, CEO W R Bennett Group — real quote + approval (attribution updated: "Premium Car Parks" removed, now reads "CEO, W R Bennett Group" only — confirm this is correct)
 - `[ ]` David Carry, Founder CEO Track Record Coaching — real quote + approval
   - Name confirmed: "David Carry" (not Carey)
 - `[ ]` All job titles and company names confirmed with each client
@@ -90,7 +90,9 @@ Component: `_templates/components/ProofRow.html`
 ### 1e — Pricing and commercial copy
 
 - `[ ]` JSON-LD in `index.html`: prices £4,000 (workshop) + £12,000 (8-week cycle) — current?
-- `[ ]` Hero risk-note copy: "From £2,000 + VAT depending on scope" — current pricing?
+- `[ ]` Hero risk-note copy: now reads "Phase 0 from £5,000 · 2 weeks" — confirm pricing with founders before go-live
+- `[ ]` Hero chip: "Now taking on new clients · Q3 2026" — confirm this is accurate at launch date
+- `[ ]` Process timeline: "Phase 1 from £20,000" — confirm pricing with founders before go-live
 - `[ ]` ApplyForm SLA: "Average response time: 2 business days" — accurate?
 - `[ ]` CTABand: "Real reply within a week" — accurate SLA?
 - `[ ]` Confirm no `priceRange` in JSON-LD remains the right decision (noted in CLAUDE.md)

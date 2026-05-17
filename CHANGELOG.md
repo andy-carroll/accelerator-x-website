@@ -8,10 +8,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Phase 3 Page Assembly in progress — homepage partials converted to v2 components_
+_Phase 3 Page Assembly in progress — all homepage inline sections now v2 token-based markup_
 
 ### Added
 
+- **`HomeSections.css`** — new component CSS covering all 5 homepage inline sections (Hero, Problem, WhyUs, Process, Testimonials) using v2 design tokens; BEM naming (`ax-hero`, `ax-problem`, `ax-why-us`, `ax-process`, `ax-testimonials`); fully responsive (mobile-first, tablet 640px+, desktop 1024px+)
+- **Phase 3 — Homepage inline section rebuild** (`rebuild/v2`): replaced all 5 v1 Tailwind/styles.css inline sections with v2 token-based BEM markup:
+  - Hero: v2 copy ("Stop buying tools. Start building capability."), `chip--kicker` availability badge, `ax-hero__heading` display type, existing hero media library preserved
+  - Problem: warm paper background panel (`bg-paper-deep`), 2-col layout at 1024px+, `ax-kicker--accent` kicker
+  - Why Us (was "Different"): dark navy, 3 cards with numbered monospace icons (01/02/03), updated copy (founder-led / all three / outgrow us)
+  - Process: 4-phase timeline (Phase 0 · Phase 1 · Phase 2…n · Advisory), off-white background, highlight treatment on Phase 0
+  - Testimonials: dark navy, `ax-testimonial-card` BEM cards with gold star ratings; real client quotes kept, cards converted from Tailwind to v2 tokens
 - **Go-live governance** — `docs/GO-LIVE-CHECKLIST.md` created: forensic pre-launch audit covering content accuracy, links, forms, email flows, PostHog analytics (gold standard), SEO/AEO (gold standard), technical QA, responsive QA, pages to build, and owner sign-off. Maintained continuously — session protocol enforces adding new items whenever a placeholder or unresolved decision is introduced.
 - **Session protocol** — pre-close audit in `.claude/rules/session.md` now includes mandatory go-live checklist sweep step
 - **CLAUDE.md + AI-RULES.md** — checklist referenced in session quick cards and project context; stale `docs/go-live-checklist.md` path corrected to `docs/GO-LIVE-CHECKLIST.md`
@@ -393,7 +400,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-124822
-- Updated: 2026-05-17T11:48:23.291Z
+- Session ID: 20260517-150336
+- Updated: 2026-05-17T14:03:37.926Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
