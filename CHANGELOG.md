@@ -10,6 +10,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly in progress — all homepage inline sections now v2 token-based markup_
 
+### Documentation
+
+- **`docs/GO-LIVE-CHECKLIST.md` §7** — added dead v1 CSS cleanup item: ~200 lines of orphaned rules (`.hero-shell`, `.diff-card`, `.process-card`, `.problem-headline`, `.testimonials-*`, etc.) to remove from `assets/css/styles.css` in the go-live cutover PR
+
 ### Added
 
 - **`HomeSections.css`** — new component CSS covering all 5 homepage inline sections (post-build quality pass: fixed `.ax-hero__sub` margin conflict, `1.75rem` → `var(--space-6)`, raw `720px` → `var(--container-tight)` ×2, redundant margin shorthand on `.ax-process__heading`, redundant `margin-bottom` on `.ax-why-us__card-icon`)
@@ -403,7 +407,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-150336
-- Updated: 2026-05-17T14:03:37.926Z
+- Session ID: 20260517-152324
+- Updated: 2026-05-17T14:23:26.138Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

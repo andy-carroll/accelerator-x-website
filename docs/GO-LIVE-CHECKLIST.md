@@ -298,6 +298,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` Mobile hamburger nav opens and closes
 - `[ ]` No horizontal scroll at 375px
 - `[ ]` Reduced-motion media query respected (animations disabled)
+- `[ ]` **Dead v1 CSS removed from `assets/css/styles.css`** — ~200 lines of orphaned rules left over from v1 inline sections: `.hero-shell`, `.hero-copy-block`, `.hero-media`, `.diff-card`, `.process-card`, `.problem-headline`, `.testimonials-section`, `.testimonial-card`, `.testimonial-stars`, `.testimonial-quote`, `.testimonial-name`, `.testimonial-role`, and related modifier/state selectors. Deferred until v2 go-live to avoid touching the live branch; remove in the same PR as cutover.
 
 ---
 
