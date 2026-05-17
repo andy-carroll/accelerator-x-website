@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-05-17 (Wave D complete)_
+_Last updated: 2026-05-17 (Phase 3 in progress — homepage partials converted to v2 components)_
 
 ---
 
@@ -24,12 +24,12 @@ transparent, anti-agency positioning.
 
 ### Site Rebuild — v2 (primary track)
 
-- [-] **Phase 2 — Component library** — building 22 components from design handoff. Detail in `CLAUDE.md`.
+- [x] **Phase 2 — Component library** — all 22 components built and gate-verified ✅
   - [x] Wave A — Primitives (TypeScale, Buttons, FormInputs, Chips)
   - [x] Wave B — Global Chrome (Nav, Footer, NewsletterCTA, PageHero, CTABand)
   - [x] Wave C — Content Blocks (all 13 components: LogoStrip → DecisionTree)
   - [x] Wave D — Interactive: QuizCTA · ScarcityCard · CohortList · ApplyForm — gate passed ✅
-- [-] **Phase 3 — Page Assembly** — wire components into full page templates — **starting now**
+- [-] **Phase 3 — Page Assembly** — homepage partials converted ✅; v1 inline sections + other pages next
 - [ ] **Phase 4 — Content pipeline** — migrate articles to Markdown frontmatter model
 - [ ] **Phase 5 — Analytics** — PostHog event instrumentation
 
@@ -176,7 +176,7 @@ enough that manual protocol overhead becomes measurable.
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-100250
-- Updated: 2026-05-17T09:02:51.349Z
+- Session ID: 20260517-122630
+- Updated: 2026-05-17T11:26:31.677Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

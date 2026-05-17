@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Wave D complete: ApplyForm built (3-section form, pure-CSS chip radios, consent checkbox with GDPR timestamp written to Airtable); `forms.js` + `lead-capture.js` updated for consent; Wave D gate passed (all 4 components verified at mobile/tablet/desktop); Phase 2 component library complete — Phase 3 Page Assembly is next
+**Last session:** 2026-05-17 — Phase 3 started: all 4 homepage partials converted to v2 components (FitCheck replaces who section; ProofRow + LogoStrip replace trust bar; FounderCards with real portraits replace about section; ApplyForm replaces old lead form); `ax-founders-section` + `ax-apply-section` CSS added; build + check passing; all 5 components verified in browser
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -57,10 +57,9 @@
 
 ## Next (do in this order)
 
-1. **Phase 3 — Page Assembly** ← start here
-   → Wire Wave B + Wave C + Wave D components into full page templates
-   → Start with homepage (`_templates/homepage.html`) — most component CSS already linked
-   → Read `docs/design_handoff_website_rebuild/wireframes/` for page layout specs before assembling
+1. **Phase 3 — Page Assembly (in progress)**
+   → Homepage partials done ✅ — next: replace v1 inline sections (Hero, Problem, Different, Process, Testimonials) with v2 token-based markup in `_templates/homepage.html`
+   → Then: assemble remaining pages (`/what-we-do`, `/how-we-work`, `/about`, `/contact`) from components
    → **Before going live:** add `Consent Given` (checkbox) + `Consent Timestamp` (single line text) to Airtable prospects table — ApplyForm writes these fields on every submission
 
 2. **Phase 4 — Content pipeline**
@@ -111,6 +110,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Phase 3 — Page Assembly** — start with homepage. Read wireframes first (`docs/design_handoff_website_rebuild/wireframes/`), then assemble components into `_templates/homepage.html`.
+1. **Phase 3 continued** — replace v1 inline sections in `_templates/homepage.html` (Hero, Problem, Different, Process, Testimonials) with v2 token-based markup; then assemble `/what-we-do`, `/how-we-work`, `/about`, `/contact` pages.
 2. **Airtable action (user)** — add `Consent Given` + `Consent Timestamp` fields to prospects table before ApplyForm goes live.
-3. Phase 4 — Content pipeline (after homepage assembly)
+3. Phase 4 — Content pipeline (after page assembly complete)

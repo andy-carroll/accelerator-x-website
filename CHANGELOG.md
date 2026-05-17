@@ -8,9 +8,17 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 ## [Unreleased]
 
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
-_Wave D complete ✅ · Phase 2 component library complete · Phase 3 Page Assembly next_
+_Phase 3 Page Assembly in progress — homepage partials converted to v2 components_
 
 ### Added
+
+- **Phase 3 — Homepage partial assembly** (`rebuild/v2`):
+  - `homepage-who.html` — replaced v1 "Who this is for" section with `{{component:FitCheck}}`
+  - `homepage-trust.html` — replaced v1 logo grid with `{{component:ProofRow}}` + `{{component:LogoStrip}}`
+  - `homepage-about.html` — replaced v1 bio cards with v2 founders section; both Toby and Andy have real portrait images, bios, track records using `ax-founder-card` BEM markup
+  - `homepage-apply.html` — replaced v1 lead form with dark `ax-apply-section` wrapper + `{{component:ApplyForm}}`
+  - `FounderCard.css` — added `ax-founders-section` wrapper CSS (responsive 2-col grid, `bg-paper-deep` background, container + gutter tokens)
+  - `ApplyForm.css` — added `ax-apply-section` wrapper CSS (dark `bg-dark` background, centred header with `ax-apply-section__heading` and `__sub`)
 
 - **Phase 2 Wave D — Interactive (complete)** (`rebuild/v2`):
   - `QuizCTA` — dark navy promo block; kicker + heading + benefit + pink CTA → `quiz.accelerator-x.ai`; 2-col ≥768px, single-col + full-width button below; registered in design system Interactive section
@@ -375,7 +383,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-100250
-- Updated: 2026-05-17T09:02:51.349Z
+- Session ID: 20260517-122630
+- Updated: 2026-05-17T11:26:31.677Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

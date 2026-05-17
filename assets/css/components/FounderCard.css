@@ -151,3 +151,53 @@
   font-weight: var(--fw-bold);
   color: var(--action-primary);
 }
+
+/* =============================================================================
+   Founders section wrapper — homepage About snippet and /about page
+   ============================================================================= */
+
+.ax-founders-section {
+  background: var(--bg-paper-deep);
+  padding: var(--space-16) 0;
+}
+
+@media (min-width: 768px) {
+  .ax-founders-section { padding: var(--space-20) 0; }
+}
+
+.ax-founders-section__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .ax-founders-section__inner { padding: 0 var(--gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .ax-founders-section__inner { padding: 0 var(--gutter-desktop); }
+}
+
+.ax-founders-section__heading {
+  margin: var(--space-3) 0 var(--space-10);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-founders-section__cards {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .ax-founders-section__cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
