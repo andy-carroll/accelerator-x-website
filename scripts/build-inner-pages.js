@@ -11,6 +11,8 @@ const PAGES = [
   { template: '_templates/how-we-work.html', output: 'how-we-work/index.html' },
   { template: '_templates/about.html',       output: 'about/index.html'       },
   { template: '_templates/contact.html',     output: 'contact/index.html'     },
+  // Offering detail pages
+  { template: '_templates/offerings/company-enablement.html', output: 'what-we-do/company-enablement/index.html' },
 ];
 
 function main() {

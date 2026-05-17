@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 4 + post-session audit: article 001 dead `next_article_url` fixed; `Cases` + `Opinion` added to `TAG_FILTER_MAP`; `content/articles/` added to session-protocol allowed paths; CHANGELOG cleanup queued as background task
+**Last session:** 2026-05-18 — Company Enablement page built (`_templates/offerings/company-enablement.html` + `CompanyEnablement.css`); 6 offering page specs written to `docs/page-specs/`; build + check passing; ready to push
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).
-2. **Voice guide** — write the voice guide before the Claude draft skill goes live (Build Plan §10 Phase 2; ~90 min collab with Andy + Toby).
-3. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy in hero + process section before go-live.
+1. **Build remaining offering pages** — Leadership Cohort, Leadership Activation, Senior Leader Acceleration, Talks & Events. Specs are in `docs/page-specs/`. Fractional Advisory is blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`).
+2. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy (used in company-enablement page and homepage) before go-live.
+3. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).

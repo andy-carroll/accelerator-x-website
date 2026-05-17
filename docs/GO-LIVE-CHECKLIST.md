@@ -128,6 +128,13 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 **`/what-we-do/` — Offering detail links**
 - `[ ]` `OfferingTable` and `DecisionTree` components link to offering detail pages (e.g. `/what-we-do/leadership-activation/`) that do not yet exist — all will 404 until detail pages are built or links are removed/redirected
 
+**`/what-we-do/company-enablement/` — Blocking items before launch**
+- `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
+- `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
+- `[ ]` **BLOCKING** Proof section pull-quote (`"By the end of week two we had a roadmap that survived contact with our CFO…"`) — confirm this is a real, approved client quote; attribution `COO, £45M retail group · Phase 0 + Phase 1, Q1 2026` must be verified
+- `[ ]` **BLOCKING** FAQ answers — all 6 answers are placeholder `<!-- TODO -->` comments; founders must write real answers before launch
+- `[ ]` Right panel of proof section — placeholder case study (links to `/insights/?tag=cases`); confirm this is the intended approach or remove the right col before launch
+
 ### 1g — General copy review
 
 - `[ ]` Hero headline and subhead — still the right positioning?
