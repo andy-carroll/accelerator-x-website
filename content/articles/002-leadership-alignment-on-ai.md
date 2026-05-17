@@ -1,9 +1,9 @@
 ---
 title: "Leadership Alignment: Why Your Exec Team is Blocking AI ROI"
-date: "2026-02-18"
+published: "2026-02-18"
 author: "Toby Henry"
-category: "AI Strategy"
-tags: ["Leadership", "Strategy", "C-Suite"]
+format: "article"
+tags: ["Strategy", "Leadership", "C-Suite"]
 excerpt: "If your CEO thinks AI is magic and your CTO thinks it's a security threat, your transformation will fail. Here's how to align the board."
 slug: "leadership-alignment-on-ai"
 bluf: "Executive misalignment is the single biggest point of failure for enterprise AI initiatives. Without a shared thesis on where AI creates operational leverage, projects devolve into isolated experiments with no path to scale."

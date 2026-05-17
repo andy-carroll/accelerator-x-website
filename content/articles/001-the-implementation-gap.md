@@ -1,9 +1,9 @@
 ---
 title: "The Implementation Gap: Why AI Pilots Stall"
-date: "2026-02-24"
+published: "2026-02-24"
 author: "Toby Henry"
-category: "The Implementation Gap"
-tags: ["Operations", "Scaling", "Change Management"]
+format: "article"
+tags: ["Capability", "Operations", "Scaling", "Change Management"]
 excerpt: "You bought the licenses. You built the proof-of-concept. So why isn't anyone actually using it? Here's what's really going on."
 slug: "the-implementation-gap"
 bluf: "The problem with AI implementation isn't the technology; it's treating it like an IT deployment rather than operational transformation. Success requires embedding models directly into existing friction points and focusing on capability over tools."

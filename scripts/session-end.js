@@ -152,6 +152,29 @@ function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeCont
   ].join('\n');
 }
 
+function detectStalePriorities(claudeContent) {
+  // Extract completed item labels from the ## Next section (lines containing ✅).
+  // Expects format: `**Label — Description ✅ Complete**` — the bold label before
+  // the first — or ✅ is used as the match key. Keep CLAUDE.md Next items in this format.
+  const nextMatch = claudeContent.match(/## Next \(do in this order\)([\s\S]*?)(?=\n## |\n---)/i);
+  if (!nextMatch) return [];
+
+  const completedLabels = [];
+  for (const line of nextMatch[1].split('\n')) {
+    if (!line.includes('✅')) continue;
+    const m = line.match(/\*\*([^*—]+?)(?:\s*[—✅])/);
+    if (m) completedLabels.push(m[1].trim());
+  }
+  if (completedLabels.length === 0) return [];
+
+  // Check the ## Next Session Priorities block for any of those labels
+  const prioritiesMatch = claudeContent.match(/## Next Session Priorities\n([\s\S]*?)(?=\n## |$)/i);
+  if (!prioritiesMatch) return [];
+
+  const prioritiesText = prioritiesMatch[1].toLowerCase();
+  return completedLabels.filter(label => prioritiesText.includes(label.toLowerCase()));
+}
+
 function loadProfile(profilePath) {
   if (!fs.existsSync(profilePath)) {
     return { error: `Missing protocol profile at ${profilePath}` };
@@ -325,6 +348,40 @@ if (writeModeEnabled && qualityGateFailed) {
   }
 
   process.exit(EXIT.QUALITY_GATE_FAILURE);
+}
+
+// Stale priorities check — runs in all modes; blocks write, warns in plan/dry-run
+if (fs.existsSync('CLAUDE.md')) {
+  const claudeForCheck = fs.readFileSync('CLAUDE.md', 'utf8');
+  const staleItems = detectStalePriorities(claudeForCheck);
+  if (staleItems.length > 0) {
+    const detail = staleItems.join(', ');
+    const staleMsg = `Stale "Next Session Priorities" — these completed items are still listed as priorities: ${detail}. Update CLAUDE.md § Next Session Priorities before closing.`;
+    operations.push({ step: 'priorities_freshness', status: writeModeEnabled ? 'error' : 'warning', detail });
+    if (writeModeEnabled) {
+      errors.push(staleMsg);
+      const output = {
+        status: 'error',
+        mode,
+        branch,
+        operations,
+        warnings,
+        errors,
+        nextActions: ['Update CLAUDE.md ## Next Session Priorities to reflect current work state, then rerun session-end.']
+      };
+      if (args.json) {
+        console.log(JSON.stringify(output, null, 2));
+      } else {
+        console.error('❌ Session-end aborted: stale Next Session Priorities detected.');
+        errors.forEach(item => console.error(`- ${item}`));
+      }
+      process.exit(EXIT.QUALITY_GATE_FAILURE);
+    } else {
+      warnings.push(staleMsg);
+    }
+  } else {
+    operations.push({ step: 'priorities_freshness', status: 'ok' });
+  }
 }
 
 if (writeModeEnabled) {

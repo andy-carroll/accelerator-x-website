@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 3 complete: all 4 inner pages assembled (`/what-we-do`, `/how-we-work`, `/about`, `/contact`); `build-inner-pages.js` + `InnerPages.css` created; CTABand now routes to `/contact/`; sitemap updated to 12 URLs; `npm run build` + `npm run check` both passing
+**Last session:** 2026-05-17 — Phase 4 complete + senior engineer audit: content pipeline migrated to Build Plan §10 data model; live `ReferenceError` in hub-filter.js fixed; `Capability` added to `TAG_FILTER_MAP`; session-end now blocks on stale priorities; `npm run build` + `npm run check` clean
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Phase 3 — Inner pages** — assemble `/what-we-do`, `/how-we-work`, `/about`, `/contact` pages from v2 components using `Coaching & Enablement Wireframes.html` and `Build Plan.html` as reference.
-2. **Airtable action (user)** — add `Consent Given` + `Consent Timestamp` fields to prospects table before ApplyForm goes live.
+1. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).
+2. **Voice guide** — write the voice guide before the Claude draft skill goes live (Build Plan §10 Phase 2; ~90 min collab with Andy + Toby).
 3. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy in hero + process section before go-live.

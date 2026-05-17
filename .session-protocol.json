@@ -76,6 +76,8 @@
       "scripts/build-components.js",
       "scripts/build-design-system.js",
       "scripts/build-hub.js",
+      "content/articles/*.md",
+      "content/data/*.json",
       "scripts/build-inner-pages.js",
       "scripts/build-homepage.js",
       "scripts/build-footer.js",

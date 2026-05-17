@@ -1,10 +1,9 @@
 ---
 title: "Building the AI-Native Team: Stop Hiring and Start Upskilling"
-date: "2026-02-12"
+published: "2026-02-12"
 author: "Andy Carroll"
-category: "Capability Building"
-type: "Video"
-tags: ["Teams", "Reskilling", "Culture"]
+format: "video"
+tags: ["Capability", "Teams", "Reskilling", "Culture"]
 excerpt: "You don't need a team of expensive 'prompt engineers'. You need your current business experts to become AI fluent."
 slug: "building-the-ai-native-team"
 bluf: "The most successful AI transformations are driven from the bottom up by domain experts who understand the business context. Companies trying to hire their way out of the AI talent shortage are wasting money; the real opportunity is aggressive internal reskilling."

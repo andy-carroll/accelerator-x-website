@@ -1,10 +1,9 @@
 ---
 title: "The End of Prompt Engineering"
-date: "2026-01-29"
+published: "2026-01-29"
 author: "Andy Carroll"
-category: "Capability Building"
-type: "Podcast"
-tags: ["Future", "Agents", "Workflows"]
+format: "podcast"
+tags: ["Tooling", "Future", "Agents", "Workflows"]
 excerpt: "Why teaching your team to write complex prompts is a temporary fix. The future is workflow orchestration."
 slug: "the-end-of-prompt-engineering"
 bluf: "Prompt engineering is a transitional skill. As AI models become better at reasoning and intent-parsing, the true value lies not in writing clever prompts, but in orchestrating complex, multi-step workflows using autonomous agents."

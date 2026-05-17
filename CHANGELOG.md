@@ -12,6 +12,21 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Added
 
+- **Phase 4 — Content pipeline** (`rebuild/v2`): migrated articles to the Build Plan §10 data model:
+  - **6 article frontmatter files** — `date` renamed to `published`; `format` field added (`article` / `video` / `podcast`); `category` and `type` fields removed; Build Plan canonical tag (`Strategy` / `Capability` / `Tooling`) added as primary (first) tag in each article's `tags` array
+  - **`scripts/build-hub.js`** — added `computeReadTime()` (word count ÷ 200, min 1 min); added `resolveFilterTag()` (maps primary tag to hub filter bucket); added `renderArticleTile()` (generates `ax-article-tile` component HTML with `data-format`, `data-tag`, byline, read time); removed `categoryMap` and old ad-hoc `article-card` tile markup; sort and sitemap lastmod now use `published` field; `safeReplace` now injects `published`, `format`, `read_time`, and derives `category` from first tag for article-page display
+  - **`_templates/article.html`** — `{{date}}` token replaced with `{{published}}` in OG `article:published_time` meta and JSON-LD `datePublished`
+  - **`_templates/index.html`** — hub pathway filter tiles updated to Build Plan taxonomy: Strategy (For Leaders) / Capability (For Teams) / Tooling (Tech & AI); filter IDs updated from `strategy` / `implementation` / `capability` to `strategy` / `capability` / `tooling`
+  - **`assets/js/hub-filter.js`** — updated to target `.ax-article-tile` (was `.article-card`) and `data-tag` attribute (was `data-category`)
+
+### Fixed
+
+- **`assets/js/hub-filter.js`** — live `ReferenceError` fixed: `categoryId` renamed to `tagId` throughout `filterContent()` after parameter rename in previous edit left lines 33 and 39 referencing an undefined variable; stale comment updated to reflect `data-tag` / `.ax-article-tile`
+- **`scripts/build-hub.js`** — `TAG_FILTER_MAP` was missing `'Capability': 'capability'`; three articles with `Capability` as primary tag were silently falling through to the default; now correctly resolves to the `capability` filter bucket; `AVG_READING_SPEED_WPM` extracted as named constant; taxonomy source-of-truth comment added above `TAG_FILTER_MAP`
+- **`scripts/session-end.js`** — added `detectStalePriorities()`: cross-references `## Next Session Priorities` against completed items (lines containing `✅`) in `## Next (do in this order)`. Write mode blocks with `EXIT.QUALITY_GATE_FAILURE` if a completed task label is still listed as a priority; plan/dry-run modes emit a warning. Prevents the session-end from closing cleanly when priorities have drifted from the actual project state.
+
+### Added
+
 - **Phase 3 — Inner page assembly (complete)** (`rebuild/v2`): all four marketing pages assembled from v2 component library:
   - `/what-we-do/` — PageHero + `{{component:OfferingTable}}` + `{{component:DecisionTree}}` + `{{component:CTABand}}`; full JSON-LD `WebPage` schema; CSS links for OfferingTable, OfferingCard, DecisionTree
   - `/how-we-work/` — PageHero + principles grid (4 items) + approach cards (4 cards) + engagement phases (Phase 0/1/2…n/Advisory) + contrast table (never/always) + pull-quote (`<blockquote>` with Mark Bennett attribution) + `{{component:CTABand}}`
@@ -424,7 +439,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-185413
-- Updated: 2026-05-17T17:54:14.795Z
+- Session ID: 20260517-202830
+- Updated: 2026-05-17T19:28:31.496Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

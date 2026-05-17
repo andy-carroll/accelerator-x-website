@@ -311,6 +311,8 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 ## 7 · Technical / build
 
+- `[ ]` **Hub filter — no transition on card show/hide.** Cards jump instantly when a pathway tile is clicked (`display: none/''`). Add a CSS opacity/visibility transition before go-live; the abrupt jump is jarring against the smooth-scroll behaviour already in place.
+- `[~]` **Content pipeline — `excerpt` / `subtitle` split deferred.** Phase 4 uses a single `excerpt` field for both OG meta and tile display copy. Before the Claude draft skill goes live (Build Plan §10 Phase 3), decide whether to split into separate fields. The draft skill can generate both at zero extra cost; doing it earlier means manually rewriting copy for every article. Revisit at draft-skill build time, not before go-live.
 - `[ ]` `npm run build` passes — zero errors or warnings
 - `[ ]` `npm run check` — all 8 checks green
 - `[ ]` No unsubstituted `{{tokens}}` in built HTML

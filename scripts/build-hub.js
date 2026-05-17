@@ -90,6 +90,62 @@ function escapeHtml(str) {
     .replace(/'/g, '&#39;');
 }
 
+const AVG_READING_SPEED_WPM = 200;
+
+function computeReadTime(markdownBody) {
+  const wordCount = markdownBody.trim().split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(wordCount / AVG_READING_SPEED_WPM));
+  return `${minutes} min read`;
+}
+
+// Maps the primary (first) tag to a filter bucket ID used by hub-filter.js.
+// Canonical primary tags: Strategy | Capability | Tooling | Cases | Opinion
+// All three pathway tile href IDs in _templates/index.html must match values here.
+const TAG_FILTER_MAP = {
+  'Strategy': 'strategy', 'Leadership': 'strategy', 'C-Suite': 'strategy',
+  'Capability': 'capability',
+  'Tooling': 'tooling', 'Frameworks': 'tooling', 'Future': 'tooling',
+  'Agents': 'tooling', 'Workflows': 'tooling',
+};
+
+function resolveFilterTag(tags = [], slug = '') {
+  for (const tag of tags) {
+    if (TAG_FILTER_MAP[tag]) return TAG_FILTER_MAP[tag];
+  }
+  const known = Object.keys(TAG_FILTER_MAP).join(', ');
+  console.warn(`  ⚠️  No recognised filter tag in [${tags.join(', ')}]${slug ? ` (${slug})` : ''}. Defaulting to 'capability'. Known tags: ${known}`);
+  return 'capability';
+}
+
+function formatLabel(format) {
+  return { article: 'Article', podcast: 'Podcast', video: 'Video' }[format] || 'Article';
+}
+
+function renderArticleTile(article) {
+  const format = article.format || 'article';
+  const filterTag = resolveFilterTag(article.tags, article.slug);
+  const primaryTag = article.tags?.[0] || '';
+  const formattedDate = formatArticleDate(article.published);
+  const playBtn = `<div class="ax-article-tile__play" aria-hidden="true"><div class="ax-article-tile__play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div></div>`;
+  const coverHtml = article.hero
+    ? `\n  <div class="ax-article-tile__cover">\n    <img src="${escapeHtml(article.hero)}" alt="" loading="lazy" width="600" height="400">\n    ${format !== 'article' ? playBtn : ''}\n  </div>`
+    : '';
+
+  return `<article class="ax-article-tile" data-format="${escapeHtml(format)}" data-variant="standard" data-tag="${escapeHtml(filterTag)}">${coverHtml}
+  <div class="ax-article-tile__body">
+    <div class="ax-article-tile__meta">
+      <span class="ax-article-tile__format">${escapeHtml(formatLabel(format))}</span>${primaryTag ? `\n      <span class="ax-article-tile__category">· ${escapeHtml(primaryTag)}</span>` : ''}
+    </div>
+    <h3 class="ax-article-tile__heading"><a href="${escapeHtml(article.url)}">${escapeHtml(article.title)}</a></h3>
+    <p class="ax-article-tile__sub">${escapeHtml(article.excerpt || '')}</p>
+    <div class="ax-article-tile__byline">
+      <span class="ax-article-tile__author-date">${escapeHtml(article.author || '')}${formattedDate ? ` · ${formattedDate}` : ''}</span>
+      <span class="ax-article-tile__duration">${escapeHtml(article.readTime || '')}</span>
+    </div>
+  </div>
+</article>`;
+}
+
 function formatArticleDate(value) {
   if (!value) {
     return '';
@@ -234,14 +290,16 @@ async function build() {
     // Inject Standard Tokens
     safeReplace('title', frontmatter.title);
     safeReplace('author', frontmatter.author);
-    safeReplace('date', frontmatter.date);
-    safeReplace('category', frontmatter.category);
+    safeReplace('published', frontmatter.published);
+    safeReplace('format', frontmatter.format || 'article');
+    safeReplace('category', frontmatter.tags?.[0] || '');
+    safeReplace('read_time', computeReadTime(content));
     safeReplace('excerpt', frontmatter.excerpt);
     safeReplace('slug', slug);
     safeReplace('site_url', siteUrl);
     safeReplace('content', htmlContent);
-    safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.date));
-    safeReplace('article_date', renderArticleDate(frontmatter.date));
+    safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.published));
+    safeReplace('article_date', renderArticleDate(frontmatter.published));
     safeReplace('share_panel', renderSharePanel({ ...frontmatter, slug }, siteUrl));
     safeReplace('og_image', `${siteUrl}/assets/images/og-image-1200.png`);
     safeReplace('og_url', `${siteUrl}/insights/articles/${slug}.html`);
@@ -262,52 +320,23 @@ async function build() {
       ...frontmatter,
       authorProfile,
       slug,
-      url: `/insights/articles/${slug}.html`
+      url: `/insights/articles/${slug}.html`,
+      readTime: computeReadTime(content),
     });
   }
 
   // Generate Hub Index
   console.log('Generating Feed Index...');
   
-  // Sort articles by date descending
-  articles.sort((a, b) => new Date(b.date) - new Date(a.date));
-  
+  // Sort articles by published date descending
+  articles.sort((a, b) => new Date(b.published) - new Date(a.published));
+
   let indexHtml = loadTemplate('index.html');
 
   indexHtml = indexHtml.replace(/{{site_url}}/g, siteUrl);
-  
-  // Enhanced category mapping for filtering/visuals
-  const categoryMap = {
-    'AI Strategy': { id: 'strategy', label: 'C-Suite', color: 'text-primary' },
-    'The Implementation Gap': { id: 'implementation', label: 'Operations', color: 'text-amber' },
-    'Capability Building': { id: 'capability', label: 'Teams', color: 'text-accent' },
-    'Default': { id: 'all', label: 'Framework', color: 'text-primary' }
-  };
 
-  const articlesListHtml = articles.map(article => {
-    const catInfo = categoryMap[article.category] || categoryMap['Default'];
-    const typeLabel = article.type || 'Dispatch';
-    const typeIcon = article.type === 'Video' ? 'play_circle' : 
-                     article.type === 'Podcast' ? 'mic' : 
-                     article.type === 'Webinar' ? 'videocam' : 
-                     article.type === 'Case Study' ? 'assignment' : 'arrow_forward';
-    
-    return `
-    <a href="${article.url}" data-category="${catInfo.id}" class="article-card card card-hoverable block transition-all overflow-hidden">
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-sm font-bold uppercase tracking-wider ${catInfo.color}">${article.category || 'Focus'}</span>
-        <span class="text-[10px] font-bold uppercase tracking-widest text-muted/60 bg-surface px-2 py-0.5 rounded border border-surface-2">${typeLabel}</span>
-      </div>
-      <h3 class="font-display text-xl font-bold text-navy transition-colors mb-3 h-14 line-clamp-2">${article.title}</h3>
-      <p class="text-muted leading-relaxed line-clamp-2 text-sm h-10">${article.excerpt}</p>
-      <div class="mt-6 flex items-center justify-between text-sm text-muted">
-        <span>${article.date}</span>
-        <span class="flex items-center text-primary font-medium">Read Article <span class="material-symbols-outlined ml-1 text-sm">${typeIcon}</span></span>
-      </div>
-    </a>
-    `;
-  }).join('');
-  
+  const articlesListHtml = articles.map(article => renderArticleTile(article)).join('\n');
+
   indexHtml = indexHtml.replace(/{{articlesList}}/g, articlesListHtml);
   fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), resolveComponentTokens(indexHtml));
 
@@ -340,7 +369,7 @@ function generateSitemap(articles, siteUrl) {
     loc: `${siteUrl}/insights/articles/${article.slug}.html`,
     changefreq: 'monthly',
     priority: '0.7',
-    lastmod: article.date ? String(article.date).slice(0, 10) : today,
+    lastmod: article.published ? String(article.published).slice(0, 10) : today,
   }));
 
   const allPages = [...staticPages, ...articlePages];

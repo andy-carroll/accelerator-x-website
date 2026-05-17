@@ -1,9 +1,9 @@
 ---
 title: "The hard truth about AI in the workplace that nobody selling AI wants to say"
-date: "2026-03-04"
+published: "2026-03-04"
 author: "Andy Carroll"
-category: "Capability Building"
-tags: ["Adoption", "Skills", "Change Management"]
+format: "article"
+tags: ["Capability", "Adoption", "Skills", "Change Management"]
 excerpt: "Almost everyone is using AI. Almost nobody feels confident using it. The gap isn’t a tooling problem — it’s a capability problem."
 slug: "the-hard-truth-about-ai-in-the-workplace"
 bluf: "AI adoption is stalling because most people are using it like a smarter search engine. The fix isn’t more tools or automation — it’s building the skills, confidence, and habits that make the tools worth having."

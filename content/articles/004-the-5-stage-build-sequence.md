@@ -1,9 +1,9 @@
 ---
 title: "The 5-Stage Build Sequence: From Pilot to Production"
-date: "2026-02-05"
+published: "2026-02-05"
 author: "Toby Henry"
-category: "The Implementation Gap"
-tags: ["Frameworks", "Operations", "Scaling"]
+format: "article"
+tags: ["Tooling", "Frameworks", "Operations", "Scaling"]
 excerpt: "A proven, step-by-step framework to take your AI initiatives out of the sandbox and into the core of your operations."
 slug: "the-5-stage-build-sequence"
 bluf: "Bridging the implementation gap requires a disciplined framework. The 5-Stage Build Sequence (Discover, Structure, Agentify, Embed, Scale) provides a roadmap to ensure AI solutions actually integrate into business operations rather than remaining isolated experiments."
