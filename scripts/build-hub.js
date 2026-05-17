@@ -99,11 +99,12 @@ function computeReadTime(markdownBody) {
 }
 
 // Maps the primary (first) tag to a filter bucket ID used by hub-filter.js.
-// Canonical primary tags: Strategy | Capability | Tooling | Cases | Opinion
-// All three pathway tile href IDs in _templates/index.html must match values here.
+// Canonical primary tags (Build Plan §10): Strategy | Capability | Tooling | Cases | Opinion
+// Cases and Opinion route to existing buckets — no new pathway tile needed.
+// Pathway tile href IDs in _templates/index.html must match the values here.
 const TAG_FILTER_MAP = {
-  'Strategy': 'strategy', 'Leadership': 'strategy', 'C-Suite': 'strategy',
-  'Capability': 'capability',
+  'Strategy': 'strategy', 'Leadership': 'strategy', 'C-Suite': 'strategy', 'Opinion': 'strategy',
+  'Capability': 'capability', 'Cases': 'capability',
   'Tooling': 'tooling', 'Frameworks': 'tooling', 'Future': 'tooling',
   'Agents': 'tooling', 'Workflows': 'tooling',
 };

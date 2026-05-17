@@ -21,6 +21,8 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Fixed
 
+- **`content/articles/001-the-implementation-gap.md`** — `next_article_url` was `"#"` (dead link); corrected to `/insights/articles/the-5-stage-build-sequence.html`
+- **`scripts/build-hub.js`** — `TAG_FILTER_MAP` missing `'Cases'` and `'Opinion'` entries despite both being declared as canonical primary tags in Build Plan §10 comment; `Cases` now routes to `capability`, `Opinion` to `strategy`; comment updated to clarify routing intent; `allowedChangedPathPatterns` in `.session-protocol.json` updated to include `content/articles/*.md` and `content/data/*.json`
 - **`assets/js/hub-filter.js`** — live `ReferenceError` fixed: `categoryId` renamed to `tagId` throughout `filterContent()` after parameter rename in previous edit left lines 33 and 39 referencing an undefined variable; stale comment updated to reflect `data-tag` / `.ax-article-tile`
 - **`scripts/build-hub.js`** — `TAG_FILTER_MAP` was missing `'Capability': 'capability'`; three articles with `Capability` as primary tag were silently falling through to the default; now correctly resolves to the `capability` filter bucket; `AVG_READING_SPEED_WPM` extracted as named constant; taxonomy source-of-truth comment added above `TAG_FILTER_MAP`
 - **`scripts/session-end.js`** — added `detectStalePriorities()`: cross-references `## Next Session Priorities` against completed items (lines containing `✅`) in `## Next (do in this order)`. Write mode blocks with `EXIT.QUALITY_GATE_FAILURE` if a completed task label is still listed as a priority; plan/dry-run modes emit a warning. Prevents the session-end from closing cleanly when priorities have drifted from the actual project state.
