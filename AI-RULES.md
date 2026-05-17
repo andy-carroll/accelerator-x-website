@@ -13,7 +13,7 @@ If any adapter conflicts with this file, follow `AI-RULES.md`.
 
 - Project: Accelerator X public website — live at `https://accelerator-x.ai`
 - Strategic roadmap: `ROADMAP.md` (always check before starting work)
-- Active checklist: `docs/go-live-checklist.md` (priority-ordered outstanding items)
+- Go-live checklist: `docs/GO-LIVE-CHECKLIST.md` — forensic pre-launch audit; add new items any time a placeholder, dummy value, or unresolved decision is introduced
 - Primary specs: `docs/landing-page-spec.md`, `docs/content-hub-plan.md`
 - Stack: static HTML + Tailwind CSS (CDN) + custom CSS (`styles.css`)
 - Build system: `npm run build` — wraps `scripts/build-hub.js` (articles + sitemap),
@@ -348,7 +348,7 @@ If project workflow changes, update this file first, then adapters (`CLAUDE.md`,
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-122630
-- Updated: 2026-05-17T11:26:31.677Z
+- Session ID: 20260517-124822
+- Updated: 2026-05-17T11:48:23.292Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

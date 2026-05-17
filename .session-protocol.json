@@ -69,6 +69,8 @@
       "ROADMAP.md",
       ".session-protocol.json",
       "CLAUDE.md",
+      "AI-RULES.md",
+      "docs/*.md",
       "tailwind.config.js",
       "scripts/tailwind.input.css",
       "scripts/build-components.js",

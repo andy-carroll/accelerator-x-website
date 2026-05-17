@@ -677,14 +677,18 @@
   <h3 class="ds-subsection-title">CTABand</h3>
   <p style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--fg-4);margin:0 0 var(--space-3)">Closing CTA · one action only · always routes to /contact</p>
   <div style="border:1px solid var(--border-1);border-radius:var(--radius-md);overflow:hidden">
-    <section class="ax-cta-band" aria-labelledby="cta-band-heading">
+    <!-- CTABand — full-width closing CTA for inner pages.
+     CTA destination: /#apply (homepage apply section) until a dedicated /contact/ page exists.
+     Decision pending: keep form on homepage vs. create /contact/ page.
+     See docs/GO-LIVE-CHECKLIST.md §2c. Update href when /contact/ is built. -->
+<section class="ax-cta-band" aria-labelledby="cta-band-heading">
   <div class="ax-cta-band__inner">
     <div class="ax-cta-band__copy">
       <span class="ax-kicker" style="color:var(--ax-pink)">Ready to start?</span>
       <h2 id="cta-band-heading" class="ax-cta-band__heading">Apply to work with us.</h2>
       <p class="ax-cta-band__sub">Short form. Real reply within a week. No calendars to book.</p>
     </div>
-    <a href="/contact/" class="btn btn--accent btn--lg ax-cta-band__btn">Apply to work with us</a>
+    <a href="/#apply" class="btn btn--accent btn--lg ax-cta-band__btn">Apply to work with us</a>
   </div>
 </section>
 

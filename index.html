@@ -1019,9 +1019,11 @@
       </section>
 
 
-<!-- ProofRow — quote variant
+<!-- ProofRow — quote variant (default)
      Switch data-variant="case-tile" and use the case-tile markup below
-     when a published case study is available for the page. -->
+     when a published case study is available for the page.
+     NOTE: All quotes currently placeholder copy — replace with real approved client quotes
+     before go-live. See docs/GO-LIVE-CHECKLIST.md §1e. -->
 <section class="ax-proof-row ax-proof-row--quote" data-variant="quote" aria-labelledby="proof-row-heading">
   <div class="ax-proof-row__inner">
     <div class="ax-proof-row__quote-mark" aria-hidden="true">&ldquo;</div>
@@ -1034,7 +1036,9 @@
         <span class="ax-proof-row__role">Phase 0 · Q1 2026</span>
       </footer>
     </blockquote>
+    <!-- Case studies link — restore when /case-studies/ page is live:
     <a href="/case-studies/" class="ax-proof-row__cta-link">Read the case studies <span aria-hidden="true">→</span></a>
+    -->
   </div>
 </section>
 
@@ -1068,11 +1072,11 @@
 </section>
 -->
 
-<!-- LogoStrip — text-name variant (default)
-     Used on: Home, About
-     Swap data-variant="logos" and replace <span class="ax-logo-strip__item"> with
-     <span class="ax-logo-strip__item"><img class="ax-logo-strip__logo" src="..." alt="..."></span>
-     when production logo files are available. -->
+<!-- LogoStrip — founder pedigree strip ("where our operators built")
+     NOT a client logo strip. Only list organisations the founders actually worked at.
+     When production logo files are available, swap data-variant="logos" and replace
+     <span class="ax-logo-strip__item"> with
+     <span class="ax-logo-strip__item"><img class="ax-logo-strip__logo" src="..." alt="..."></span> -->
 <section class="ax-logo-strip" aria-label="Organisations our team has built at">
   <div class="ax-logo-strip__inner">
     <span class="ax-logo-strip__label">Operators who built at</span>
@@ -1083,7 +1087,6 @@
       <span class="ax-logo-strip__item">Capital One</span>
       <span class="ax-logo-strip__item">NHS</span>
       <span class="ax-logo-strip__item">Pegasus Group</span>
-      <span class="ax-logo-strip__item">Premium Car Parks</span>
     </div>
   </div>
 </section>

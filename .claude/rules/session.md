@@ -74,6 +74,12 @@ Before touching any script or file, work through this checklist silently and act
 - `CHANGELOG.md` — Every component added or modified this session has an entry? Every bug fixed has a Fixed entry?
 - `ROADMAP.md` — Does the NOW sprint reflect current state? "Last updated" date correct?
 
+**Go-live checklist sweep** — mandatory on every session close:
+- Did this session introduce any placeholder content, dummy data, unverified copy, or TODO links? → Add to `docs/GO-LIVE-CHECKLIST.md`.
+- Were any go-live blockers resolved this session? → Mark `[x]` in the checklist.
+- Were any new concerns raised (SEO, analytics, form behaviour, legal, ARIA) that need pre-launch verification? → Add them.
+- The checklist must always reflect the current true state of the site — nothing unresolved should go unrecorded.
+
 **Session notes**
 - Write `.claude/session-notes.md` with: decisions made, things deferred (and why), key findings, anything a cold-start agent would need that isn't in CLAUDE.md.
 

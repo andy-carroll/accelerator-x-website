@@ -12,6 +12,16 @@ _Phase 3 Page Assembly in progress — homepage partials converted to v2 compone
 
 ### Added
 
+- **Go-live governance** — `docs/GO-LIVE-CHECKLIST.md` created: forensic pre-launch audit covering content accuracy, links, forms, email flows, PostHog analytics (gold standard), SEO/AEO (gold standard), technical QA, responsive QA, pages to build, and owner sign-off. Maintained continuously — session protocol enforces adding new items whenever a placeholder or unresolved decision is introduced.
+- **Session protocol** — pre-close audit in `.claude/rules/session.md` now includes mandatory go-live checklist sweep step
+- **CLAUDE.md + AI-RULES.md** — checklist referenced in session quick cards and project context; stale `docs/go-live-checklist.md` path corrected to `docs/GO-LIVE-CHECKLIST.md`
+
+### Fixed
+
+- **`LogoStrip.html`** — removed "Premium Car Parks" (a client, not a founder's previous employer); header comment clarifies this is a pedigree strip not a client logo strip
+- **`ProofRow.html`** — placeholder quote flagged with a `GO-LIVE-CHECKLIST.md §1d` pointer; case studies link commented out (restore when `/case-studies/` is live)
+- **`CTABand.html`** — CTA destination updated from `/contact/` (page does not exist) to `/#apply`; decision pending on whether a `/contact/` page will be created — documented in both inline comment and checklist §1f
+
 - **Phase 3 — Homepage partial assembly** (`rebuild/v2`):
   - `homepage-who.html` — replaced v1 "Who this is for" section with `{{component:FitCheck}}`
   - `homepage-trust.html` — replaced v1 logo grid with `{{component:ProofRow}}` + `{{component:LogoStrip}}`
@@ -383,7 +393,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-122630
-- Updated: 2026-05-17T11:26:31.677Z
+- Session ID: 20260517-124822
+- Updated: 2026-05-17T11:48:23.291Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-17 — Phase 3 started: all 4 homepage partials converted to v2 components (FitCheck replaces who section; ProofRow + LogoStrip replace trust bar; FounderCards with real portraits replace about section; ApplyForm replaces old lead form); `ax-founders-section` + `ax-apply-section` CSS added; build + check passing; all 5 components verified in browser
+**Last session:** 2026-05-17 — Phase 3 homepage partials done (FitCheck, ProofRow+LogoStrip, FounderCards with portraits, ApplyForm); `docs/GO-LIVE-CHECKLIST.md` created (11 sections: content, links, forms, email, PostHog gold standard, SEO/AEO gold standard, QA, deployment, sign-off); LogoStrip fixed (Premium Car Parks removed); ProofRow case-studies link commented out; CTABand → `/#apply`; checklist sweep baked into session-end protocol
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -100,13 +100,16 @@ Full procedures: `.claude/rules/session.md`
 - Update CHANGELOG immediately on component complete
 - Update CLAUDE.md Wave status + "Last session" on gate/wave complete
 - Update ROADMAP on any NOW-sprint milestone
+- Any placeholder content, dummy data, unverified copy, or open decisions identified → add to `docs/GO-LIVE-CHECKLIST.md` immediately, not at session end
 
 **End (quick card) — agent initiates at any gate/wave/phase completion, no user prompt needed:**
 
-1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
+1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; sweep `docs/GO-LIVE-CHECKLIST.md` for new items; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
 2. Run `npm run session-end:write:yes`
 3. Confirm session log written to `.claude/sessions/`
 4. Push only when policy and flags explicitly allow it
+
+**Go-live checklist:** `docs/GO-LIVE-CHECKLIST.md` — forensic audit before switching to v2. Add to it continuously; never let a placeholder, dummy value, or unresolved decision exist in the codebase without a corresponding entry.
 
 ## Next Session Priorities
 
