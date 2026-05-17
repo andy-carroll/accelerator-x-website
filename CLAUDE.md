@@ -96,7 +96,13 @@ Full procedures: `.claude/rules/session.md`
 3. Review branch policy + repo state warnings
 4. Post brief to user — wait for focus confirmation
 
-**End (quick card):**
+**During session (continuous):**
+
+- Update CHANGELOG immediately on component complete
+- Update CLAUDE.md Wave status + "Last session" on gate/wave complete
+- Update ROADMAP on any NOW-sprint milestone
+
+**End (quick card) — agent initiates at any gate/wave/phase completion, no user prompt needed:**
 
 1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
 2. Run `npm run session-end:write:yes`

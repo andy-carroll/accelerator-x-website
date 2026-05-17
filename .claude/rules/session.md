@@ -36,9 +36,28 @@ Restate the agreed plan so the transcript captures the decision.
 
 ---
 
+## CONTINUOUS DOCUMENTATION (during the session)
+
+**Principle:** Self-documenting at all times. Docs stay live, not batched at close.
+
+- **On component complete:** Update `CHANGELOG.md` [Unreleased] immediately — Added/Fixed entries while context is fresh. Do not defer.
+- **On gate passed or wave complete:** Update CLAUDE.md Wave status block and "Last session" line immediately.
+- **On ROADMAP-visible milestone:** Update ROADMAP.md NOW sprint status immediately.
+
+These are not session-end steps. They happen inline as work lands.
+
+---
+
 ## SESSION END
 
-**Trigger:** User says "end session", "wrap up", "close session", or similar.
+**Trigger:** Any of the following — agent initiates without waiting for explicit instruction:
+- User says "end session", "wrap up", "close session", or similar
+- A named gate passes (Wave gate, Phase gate, quality gate)
+- A wave or phase completes
+- Natural pause after a major deliverable lands
+
+**Agent responsibility:** Do not wait for the user to ask "is everything documented?". When a gate passes or work is done, proactively say so and begin Step 0 immediately.
+
 **Requirement:** Complete the pre-close audit first, then run the script. Safe-by-default is enforced.
 
 ### Step 0 — Pre-close audit (mandatory, non-skippable)
@@ -50,7 +69,7 @@ Before touching any script or file, work through this checklist silently and act
 - Flag any bugs, ARIA errors, dead CSS, inline styles, missing `noreferrer`, or other quality issues found — then fix them before closing.
 - Flag any refinement opportunities (architectural, naming, token usage) that are quick wins — fix them or log them in session-notes.md if they need a future session.
 
-**Docs**
+**Docs** — verify each is current (continuous documentation above should mean these are already done):
 - `CLAUDE.md` — "Last session" line accurate and specific? "Next" section pointing at the exact next task with enough detail to cold-start? "Next Session Priorities" ≤3 items, actionable?
 - `CHANGELOG.md` — Every component added or modified this session has an entry? Every bug fixed has a Fixed entry?
 - `ROADMAP.md` — Does the NOW sprint reflect current state? "Last updated" date correct?
@@ -137,3 +156,5 @@ Set `operatingMode` in `.session-protocol.json` to switch behavior without editi
 - Session end requires explicit mode selection; write actions are never implicit
 - `CLAUDE.md` is the contract between sessions — if it's wrong, everything downstream is wrong
 - A missing or stale session log means the previous session did not close correctly — flag it
+- Agent initiates session close at natural completion points — user should never have to ask "is everything documented?"
+- Docs (CHANGELOG, ROADMAP, CLAUDE.md) are updated inline as work lands, not batched at close
