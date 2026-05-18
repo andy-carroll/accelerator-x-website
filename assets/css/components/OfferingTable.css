@@ -81,7 +81,8 @@
 /* ARIA rowgroup/row wrappers — display:contents makes them invisible to CSS grid */
 .ax-offering-table__thead,
 .ax-offering-table__tbody,
-.ax-offering-table__header-row {
+.ax-offering-table__header-row,
+.ax-offering-table__row {
   display: contents;
 }
 

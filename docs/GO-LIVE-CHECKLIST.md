@@ -128,6 +128,16 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 **`/what-we-do/` — Offering detail links**
 - `[ ]` `OfferingTable` and `DecisionTree` components link to offering detail pages (e.g. `/what-we-do/leadership-activation/`) that do not yet exist — all will 404 until detail pages are built or links are removed/redirected
 
+**`/what-we-do/` — OfferingTable content misalignment (BLOCKING)**
+
+The `OfferingTable` component was built with old content that predates the canonical offering names confirmed via the DecisionTree. The two components on the same page currently describe different product portfolios. All items below must be resolved before launch.
+
+- `[ ]` **BLOCKING** "8-Week Transformation Cycle" is not a canonical product name — it does not appear in the DecisionTree or any confirmed spec. Founders must decide: rename to match a canonical offering, or remove this row.
+- `[ ]` **BLOCKING** Row 01 "Leadership Activation · Foundation · half-day · £2,000 · one-off" describes a completely different product from the canonical "Leadership Activation" in the DecisionTree (8-week in-house team programme, £18k). Same name, different product — resolve before launch.
+- `[ ]` **BLOCKING** "8-Week Transformation Cycle" links to `/what-we-do/8-week-cycle/` which does not exist and will never be built under current specs — will 404.
+- `[ ]` "FOUR OFFERINGS" kicker and "Four ways to build real AI capability" H1 — verify these counts are still accurate once the offering set is confirmed (DecisionTree currently shows 6 offerings, not 4).
+- `[ ]` Align all OfferingTable rows (names, descriptions, durations, prices, links) with the canonical offering set confirmed in the DecisionTree once the above decisions are made. Edit `_templates/components/OfferingTable.html`.
+
 **`/what-we-do/company-enablement/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
 - `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
