@@ -16,6 +16,8 @@ const PAGES = [
   { template: '_templates/offerings/leadership-cohort.html',          output: 'what-we-do/leadership-cohort/index.html'          },
   { template: '_templates/offerings/leadership-activation.html',      output: 'what-we-do/leadership-activation/index.html'      },
   { template: '_templates/offerings/senior-leader-acceleration.html', output: 'what-we-do/senior-leader-acceleration/index.html' },
+  // Standalone pages
+  { template: '_templates/talks-events.html', output: 'talks-events/index.html' },
 ];
 
 function main() {

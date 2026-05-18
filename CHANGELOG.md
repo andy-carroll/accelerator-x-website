@@ -18,6 +18,12 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   - **`scripts/build-inner-pages.js`** — Company Enablement entry registered in PAGES array; page now builds to `what-we-do/company-enablement/index.html`
   - **6 page specs** written to `docs/page-specs/`: `leadership-cohort.md`, `leadership-activation.md`, `senior-leader-acceleration.md`, `fractional-advisory.md` (shell — blocked on founder content), `company-enablement.md`, `talks-events.md`
 
+- **Talks & Events page** (`rebuild/v2`): `/talks-events/` built and registered
+  - **`_templates/talks-events.html`** — informational listing page: PageHero (kicker "WHERE TO FIND US", H1 "Speaking, events, and workshops."), Upcoming Events section (empty-state copy + `role="status"`, flagged for replacement when first event confirmed), Speaking Inquiry section (`--alt` bg, CTA → `/contact/`), NewsletterCTA, Footer; WebPage JSON-LD; Event JSON-LD deferred until real events listed
+  - **`assets/css/components/EventCard.css`** — added `.ax-empty-state` block (border-top, padding, muted paragraph) for use when no events are scheduled
+  - **`scripts/build-inner-pages.js`** — Talks & Events entry registered; builds to `talks-events/index.html`
+  - **`docs/GO-LIVE-CHECKLIST.md`** — two go-live items added: replace empty state with EventCards when first event confirmed; add Event JSON-LD when events listed
+
 - **Leadership Activation + Senior Leader Acceleration offering pages** (`rebuild/v2`): both pages built and registered
   - **`_templates/offerings/leadership-activation.html`** — full page: 2-col hero (sidebar card: In-house cyan badge, 6-row spec table, £18k fixed-team pricing, CTA → `/contact/`), 3-col who-is-this-for peer cards, PlanLayers 3-col variant (Prep / Sessions / Embed), DeliverablesGrid 4-up, FitCheck, dark proof quote (placeholder flagged for founder review), 6-question FAQ (questions from spec; answers placeholder flagged), dark final CTA; Service JSON-LD; go-live flags in HTML comments
   - **`_templates/offerings/senior-leader-acceleration.html`** — full page: 2-col hero (sidebar card: 1:1 cyan badge, 6-row spec table including Coach: Toby or Andy, £12k, go-live flag on coach naming), 3-col who-is-this-for peer cards, PlanLayers 3-col variant (Orient / Build / Handoff), DeliverablesGrid 4-up, FitCheck, dark proof quote (anonymised treatment, placeholder flagged), 6-question FAQ (placeholder answers flagged), dark final CTA; Service JSON-LD
@@ -465,7 +471,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260518-122251
-- Updated: 2026-05-18T11:22:52.773Z
+- Session ID: 20260518-131259
+- Updated: 2026-05-18T12:13:00.755Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

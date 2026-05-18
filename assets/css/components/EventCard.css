@@ -168,3 +168,20 @@
 .ax-event-card[data-variant="featured"] .ax-event-card__output::before {
   color: var(--ax-pink);
 }
+
+/* =============================================================================
+   Empty state — shown when no events are scheduled yet
+   ============================================================================= */
+
+.ax-empty-state {
+  padding: var(--space-10) 0;
+  border-top: 1px solid var(--border-1);
+}
+
+.ax-empty-state p {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+  max-width: 55ch;
+}

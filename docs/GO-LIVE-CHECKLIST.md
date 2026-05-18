@@ -153,6 +153,10 @@ The `OfferingTable` component was built with old content that predates the canon
 - `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
 - `[ ]` Confirm coach naming ("Toby or Andy") on the sidebar is intentional and both founders are comfortable
 
+**`/talks-events/` — Blocking items before launch**
+- `[ ]` Replace empty state with real EventCard instances when first event is confirmed
+- `[ ]` Add `Event` JSON-LD schema when real events are listed
+
 **`/what-we-do/company-enablement/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
 - `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
