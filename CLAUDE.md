@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-18 — Company Enablement built + reviewed; OfferingTable CSS layout bug fixed (missing display:contents on row); /what-we-do page fully reviewed; OfferingTable content misalignment captured in GO-LIVE-CHECKLIST as blocking
+**Last session:** 2026-05-18 — Leadership Cohort offering page built (`/what-we-do/leadership-cohort/`); LeadershipCohort.css + chip--on-dark + DeliverablesGrid--alt added; doc drift warning fixed (dry-run added to CLAUDE.md quick card); 4 blocking go-live items added for leadership-cohort
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -105,7 +105,7 @@ Full procedures: `.claude/rules/session.md`
 **End (quick card) — agent initiates at any gate/wave/phase completion, no user prompt needed:**
 
 1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; sweep `docs/GO-LIVE-CHECKLIST.md` for new items; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
-2. Run `npm run session-end:write:yes`
+2. Run `npm run session-end:dry-run` to verify what will happen, then `npm run session-end:write:yes` to commit
 3. Confirm session log written to `.claude/sessions/`
 4. Push only when policy and flags explicitly allow it
 
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Build remaining offering pages** — Leadership Cohort, Leadership Activation, Senior Leader Acceleration, Talks & Events. Specs are in `docs/page-specs/`. Fractional Advisory is blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`).
+1. **Build remaining offering pages** — Leadership Activation next, then Senior Leader Acceleration, then Talks & Events. Specs in `docs/page-specs/`. Leadership Cohort ✅ done. Fractional Advisory blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`).
 2. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy (used in company-enablement page and homepage) before go-live.
 3. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).

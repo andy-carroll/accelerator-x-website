@@ -9,6 +9,13 @@
 .chip--amber  { background: rgba(254, 167, 0, 0.12); color: #7a5400; }
 .chip--purple { background: rgba(136, 45, 231, 0.10); color: var(--ax-purple); }
 
+/* On-dark variant — for chips placed on dark/navy backgrounds */
+.chip--on-dark {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--fg-on-dark);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Removable chip — add a dismiss × via JS */
 .chip--removable { padding-right: var(--space-2); }
 .chip__remove {

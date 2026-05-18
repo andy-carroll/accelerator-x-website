@@ -13,6 +13,12 @@
   .ax-deliverables-grid { padding: var(--space-20) 0; }
 }
 
+.ax-deliverables-grid--alt {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
 .ax-deliverables-grid__inner {
   max-width: var(--container-default);
   margin: 0 auto;

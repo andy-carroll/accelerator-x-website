@@ -13,6 +13,7 @@ const PAGES = [
   { template: '_templates/contact.html',     output: 'contact/index.html'     },
   // Offering detail pages
   { template: '_templates/offerings/company-enablement.html', output: 'what-we-do/company-enablement/index.html' },
+  { template: '_templates/offerings/leadership-cohort.html',  output: 'what-we-do/leadership-cohort/index.html'  },
 ];
 
 function main() {

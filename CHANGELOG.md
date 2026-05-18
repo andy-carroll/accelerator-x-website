@@ -18,6 +18,14 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   - **`scripts/build-inner-pages.js`** — Company Enablement entry registered in PAGES array; page now builds to `what-we-do/company-enablement/index.html`
   - **6 page specs** written to `docs/page-specs/`: `leadership-cohort.md`, `leadership-activation.md`, `senior-leader-acceleration.md`, `fractional-advisory.md` (shell — blocked on founder content), `company-enablement.md`, `talks-events.md`
 
+- **Leadership Cohort offering page** (`rebuild/v2`): `/what-we-do/leadership-cohort/` built and registered
+  - **`_templates/offerings/leadership-cohort.html`** — full page template: 2-col hero (sidebar investment card: Cohort 04 badge, spec table with cyan places-left highlight, CTA → `/contact/`), 3-col "who is this for" peer cards, PlanLayers 3-col variant (3 phases: Prep / Sessions / Embed), DeliverablesGrid 4-up (personal AI model, shipped artefact, peer network, DOTS), FitCheck, dark ProofRow quote, 6-question FAQ with AI-written placeholder answers (all flagged for founder review), dark final CTA with `chip--on-dark`; Service JSON-LD; all go-live flags in HTML comments
+  - **`assets/css/components/LeadershipCohort.css`** — new CSS: `.ax-lc-who` + `.ax-lc-peer-card` (3-col peer cards with cyan eyebrows), `.ax-lc-steps` (3-col grid override for PlanLayers, rule hidden), `.ax-lc-spec-highlight` (cyan places-left value), `.ax-fit-check--alt` / `.ax-faq-list--alt` (background overrides), `.ax-lc-proof` (centered dark quote block), `.ax-lc-cta` (dark closing CTA section)
+  - **`assets/css/components/Chips.css`** — added `.chip--on-dark` variant (rgba white bg, white text, subtle border) for chips on dark backgrounds
+  - **`assets/css/components/DeliverablesGrid.css`** — added `.ax-deliverables-grid--alt` modifier (bg-2 background with border top/bottom)
+  - **`scripts/build-inner-pages.js`** — Leadership Cohort registered in PAGES array; builds to `what-we-do/leadership-cohort/index.html`
+  - **`docs/GO-LIVE-CHECKLIST.md`** — 4 blocking items added for leadership-cohort: start date, places left, proof quote, FAQ answers
+
 - **`/what-we-do/` review** (`rebuild/v2`): full page audit at desktop + mobile
   - **`assets/css/components/OfferingTable.css`** — bug fix: `.ax-offering-table__row` was missing `display: contents`; row divs were blocking the CSS grid, cells never became direct grid children; one-line fix restores correct 6-column table layout at desktop
   - **`docs/GO-LIVE-CHECKLIST.md`** — added blocking OfferingTable content misalignment section: old offering names (8-Week Transformation Cycle not canonical), Leadership Activation name collision, broken `/what-we-do/8-week-cycle/` link, offering count copy
@@ -451,7 +459,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260518-092141
-- Updated: 2026-05-18T08:21:43.017Z
+- Session ID: 20260518-100058
+- Updated: 2026-05-18T09:01:00.175Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

@@ -1,0 +1,242 @@
+/* =============================================================================
+   LeadershipCohort — page-specific styles for /what-we-do/leadership-cohort/
+   Covers: who-is-this-for peer cards, plan steps 3-col override, fit-check/faq
+   alt backgrounds, proof, final CTA.
+   All values reference design tokens from tokens.css.
+   Offering hero shared styles live in CompanyEnablement.css.
+   ============================================================================= */
+
+/* =============================================================================
+   1. WHO IS THIS FOR — 3-col peer cards
+   ============================================================================= */
+
+.ax-lc-who {
+  padding: var(--space-16) 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
+.ax-lc-who__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .ax-lc-who__inner { padding: 0 var(--gutter-tablet); }
+}
+@media (min-width: 1024px) {
+  .ax-lc-who__inner { padding: 0 var(--gutter-desktop); }
+}
+
+.ax-lc-who__heading {
+  margin: 0 0 var(--space-10);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-lc-who__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .ax-lc-who__grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.ax-lc-peer-card {
+  padding: var(--space-6);
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+}
+
+.ax-lc-peer-card__eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ax-cyan);
+  margin-bottom: var(--space-3);
+}
+
+.ax-lc-peer-card__heading {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+}
+
+.ax-lc-peer-card__body {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+/* =============================================================================
+   2. PLAN STEPS — 3-col grid override (mirrors ax-ce-steps)
+   ============================================================================= */
+
+.ax-lc-steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+@media (min-width: 640px) {
+  .ax-lc-steps { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* 3-col grid: remove the vertical rule that only works for stacked layout */
+.ax-lc-steps::before { display: none; }
+
+/* =============================================================================
+   3. PLACES-LEFT HIGHLIGHT — cyan spec value in sidebar card
+   Higher specificity than .ax-offering-hero__spec-row dd to override color.
+   ============================================================================= */
+
+.ax-offering-hero__spec-row .ax-lc-spec-highlight {
+  color: var(--ax-cyan);
+  font-weight: var(--fw-bold);
+}
+
+/* =============================================================================
+   4. FIT CHECK / FAQ alt background overrides
+   ============================================================================= */
+
+.ax-fit-check--alt {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
+.ax-faq-list--alt {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
+/* =============================================================================
+   5. PROOF — centered dark quote (reuses ax-pull-quote from InnerPages.css)
+   ============================================================================= */
+
+.ax-lc-proof {
+  padding: var(--space-16) 0;
+  background: var(--bg-dark);
+  color: var(--fg-on-dark);
+}
+
+.ax-lc-proof__inner {
+  max-width: var(--container-tight);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .ax-lc-proof__inner { padding: 0 var(--gutter-tablet); }
+}
+@media (min-width: 1024px) {
+  .ax-lc-proof__inner { padding: 0 var(--gutter-desktop); }
+}
+
+.ax-lc-proof__mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--action-accent);
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+.ax-lc-proof__quote {
+  margin: 0 0 var(--space-8);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-xl), 2.5vw, var(--text-3xl));
+  font-weight: var(--fw-medium);
+  font-style: italic;
+  line-height: var(--lh-snug);
+  color: var(--fg-on-dark);
+}
+
+.ax-lc-proof__who {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  font-style: normal;
+  color: var(--fg-on-dark);
+  margin-bottom: var(--space-1);
+}
+
+.ax-lc-proof__context {
+  font-size: var(--text-sm);
+  color: var(--fg-muted-on-dark);
+}
+
+/* =============================================================================
+   6. FINAL CTA — dark background closing section
+   ============================================================================= */
+
+.ax-lc-cta {
+  background: var(--bg-dark);
+  color: var(--fg-on-dark);
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.ax-lc-cta__inner {
+  max-width: var(--container-tight);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .ax-lc-cta__inner { padding: 0 var(--gutter-tablet); }
+}
+@media (min-width: 1024px) {
+  .ax-lc-cta__inner { padding: 0 var(--gutter-desktop); }
+}
+
+.ax-lc-cta__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-on-dark);
+  text-wrap: balance;
+}
+
+.ax-lc-cta__sub {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--fg-muted-on-dark);
+  line-height: var(--lh-relaxed);
+  max-width: 55ch;
+}
+
+.ax-lc-cta__note {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-muted-on-dark);
+  opacity: 0.7;
+}

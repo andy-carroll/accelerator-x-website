@@ -138,6 +138,12 @@ The `OfferingTable` component was built with old content that predates the canon
 - `[ ]` "FOUR OFFERINGS" kicker and "Four ways to build real AI capability" H1 — verify these counts are still accurate once the offering set is confirmed (DecisionTree currently shows 6 offerings, not 4).
 - `[ ]` Align all OfferingTable rows (names, descriptions, durations, prices, links) with the canonical offering set confirmed in the DecisionTree once the above decisions are made. Edit `_templates/components/OfferingTable.html`.
 
+**`/what-we-do/leadership-cohort/` — Blocking items before launch**
+- `[ ]` **BLOCKING** Cohort start date (12 Aug 2026) — confirm accuracy at launch
+- `[ ]` **BLOCKING** Places left (6 of 12) — update to actual availability at launch
+- `[ ]` **BLOCKING** ProofRow quote (`"It moved my Monday morning…"`) — confirm this is a real, approved client quote; attribution `CMO, B2B SaaS · Cohort 02 · Feb 2026` must be verified
+- `[ ]` **BLOCKING** FAQ answers — all 6 answers are AI-written placeholders; founders must review and approve each before launch
+
 **`/what-we-do/company-enablement/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
 - `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
