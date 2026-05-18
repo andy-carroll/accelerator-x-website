@@ -18,6 +18,10 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   - **`scripts/build-inner-pages.js`** — Company Enablement entry registered in PAGES array; page now builds to `what-we-do/company-enablement/index.html`
   - **6 page specs** written to `docs/page-specs/`: `leadership-cohort.md`, `leadership-activation.md`, `senior-leader-acceleration.md`, `fractional-advisory.md` (shell — blocked on founder content), `company-enablement.md`, `talks-events.md`
 
+- **`/what-we-do/` review** (`rebuild/v2`): full page audit at desktop + mobile
+  - **`assets/css/components/OfferingTable.css`** — bug fix: `.ax-offering-table__row` was missing `display: contents`; row divs were blocking the CSS grid, cells never became direct grid children; one-line fix restores correct 6-column table layout at desktop
+  - **`docs/GO-LIVE-CHECKLIST.md`** — added blocking OfferingTable content misalignment section: old offering names (8-Week Transformation Cycle not canonical), Leadership Activation name collision, broken `/what-we-do/8-week-cycle/` link, offering count copy
+
 - **Phase 4 — Content pipeline** (`rebuild/v2`): migrated articles to the Build Plan §10 data model:
   - **6 article frontmatter files** — `date` renamed to `published`; `format` field added (`article` / `video` / `podcast`); `category` and `type` fields removed; Build Plan canonical tag (`Strategy` / `Capability` / `Tooling`) added as primary (first) tag in each article's `tags` array
   - **`scripts/build-hub.js`** — added `computeReadTime()` (word count ÷ 200, min 1 min); added `resolveFilterTag()` (maps primary tag to hub filter bucket); added `renderArticleTile()` (generates `ax-article-tile` component HTML with `data-format`, `data-tag`, byline, read time); removed `categoryMap` and old ad-hoc `article-card` tile markup; sort and sitemap lastmod now use `published` field; `safeReplace` now injects `published`, `format`, `read_time`, and derives `category` from first tag for article-page display
@@ -447,7 +451,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260517-215358
-- Updated: 2026-05-17T20:53:59.993Z
+- Session ID: 20260518-092141
+- Updated: 2026-05-18T08:21:43.017Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-18 — Company Enablement page built (`_templates/offerings/company-enablement.html` + `CompanyEnablement.css`); 6 offering page specs written to `docs/page-specs/`; build + check passing; ready to push
+**Last session:** 2026-05-18 — Company Enablement built + reviewed; OfferingTable CSS layout bug fixed (missing display:contents on row); /what-we-do page fully reviewed; OfferingTable content misalignment captured in GO-LIVE-CHECKLIST as blocking
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
