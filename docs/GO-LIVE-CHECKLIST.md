@@ -144,6 +144,15 @@ The `OfferingTable` component was built with old content that predates the canon
 - `[ ]` **BLOCKING** ProofRow quote (`"It moved my Monday morning…"`) — confirm this is a real, approved client quote; attribution `CMO, B2B SaaS · Cohort 02 · Feb 2026` must be verified
 - `[ ]` **BLOCKING** FAQ answers — all 6 answers are AI-written placeholders; founders must review and approve each before launch
 
+**`/what-we-do/leadership-activation/` — Blocking items before launch**
+- `[ ]` **BLOCKING** ProofRow quote — real, approved client quote required (currently placeholder)
+- `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
+
+**`/what-we-do/senior-leader-acceleration/` — Blocking items before launch**
+- `[ ]` **BLOCKING** ProofRow quote — must be real, client-approved, and appropriately anonymised (no company name, no photo)
+- `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
+- `[ ]` Confirm coach naming ("Toby or Andy") on the sidebar is intentional and both founders are comfortable
+
 **`/what-we-do/company-enablement/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
 - `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch

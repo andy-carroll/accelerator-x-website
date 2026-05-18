@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-18 — Leadership Cohort offering page built (`/what-we-do/leadership-cohort/`); LeadershipCohort.css + chip--on-dark + DeliverablesGrid--alt added; doc drift warning fixed (dry-run added to CLAUDE.md quick card); 4 blocking go-live items added for leadership-cohort
+**Last session:** 2026-05-18 — Leadership Activation + Senior Leader Acceleration offering pages built (`/what-we-do/leadership-activation/`, `/what-we-do/senior-leader-acceleration/`); both registered in build-inner-pages.js; go-live blockers added for both pages; build + check passing
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Build remaining offering pages** — Leadership Activation next, then Senior Leader Acceleration, then Talks & Events. Specs in `docs/page-specs/`. Leadership Cohort ✅ done. Fractional Advisory blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`).
+1. **Build remaining offering pages** — Talks & Events next. Specs in `docs/page-specs/talks-events.md`. Leadership Cohort ✅, Leadership Activation ✅, Senior Leader Acceleration ✅ done. Fractional Advisory blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`).
 2. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy (used in company-enablement page and homepage) before go-live.
 3. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).

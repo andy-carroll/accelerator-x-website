@@ -18,6 +18,12 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   - **`scripts/build-inner-pages.js`** — Company Enablement entry registered in PAGES array; page now builds to `what-we-do/company-enablement/index.html`
   - **6 page specs** written to `docs/page-specs/`: `leadership-cohort.md`, `leadership-activation.md`, `senior-leader-acceleration.md`, `fractional-advisory.md` (shell — blocked on founder content), `company-enablement.md`, `talks-events.md`
 
+- **Leadership Activation + Senior Leader Acceleration offering pages** (`rebuild/v2`): both pages built and registered
+  - **`_templates/offerings/leadership-activation.html`** — full page: 2-col hero (sidebar card: In-house cyan badge, 6-row spec table, £18k fixed-team pricing, CTA → `/contact/`), 3-col who-is-this-for peer cards, PlanLayers 3-col variant (Prep / Sessions / Embed), DeliverablesGrid 4-up, FitCheck, dark proof quote (placeholder flagged for founder review), 6-question FAQ (questions from spec; answers placeholder flagged), dark final CTA; Service JSON-LD; go-live flags in HTML comments
+  - **`_templates/offerings/senior-leader-acceleration.html`** — full page: 2-col hero (sidebar card: 1:1 cyan badge, 6-row spec table including Coach: Toby or Andy, £12k, go-live flag on coach naming), 3-col who-is-this-for peer cards, PlanLayers 3-col variant (Orient / Build / Handoff), DeliverablesGrid 4-up, FitCheck, dark proof quote (anonymised treatment, placeholder flagged), 6-question FAQ (placeholder answers flagged), dark final CTA; Service JSON-LD
+  - **`scripts/build-inner-pages.js`** — both pages registered; builds to `what-we-do/leadership-activation/index.html` and `what-we-do/senior-leader-acceleration/index.html`
+  - **`docs/GO-LIVE-CHECKLIST.md`** — blocking items added for both pages: proof quotes, FAQ answers, coach naming confirmation
+
 - **Leadership Cohort offering page** (`rebuild/v2`): `/what-we-do/leadership-cohort/` built and registered
   - **`_templates/offerings/leadership-cohort.html`** — full page template: 2-col hero (sidebar investment card: Cohort 04 badge, spec table with cyan places-left highlight, CTA → `/contact/`), 3-col "who is this for" peer cards, PlanLayers 3-col variant (3 phases: Prep / Sessions / Embed), DeliverablesGrid 4-up (personal AI model, shipped artefact, peer network, DOTS), FitCheck, dark ProofRow quote, 6-question FAQ with AI-written placeholder answers (all flagged for founder review), dark final CTA with `chip--on-dark`; Service JSON-LD; all go-live flags in HTML comments
   - **`assets/css/components/LeadershipCohort.css`** — new CSS: `.ax-lc-who` + `.ax-lc-peer-card` (3-col peer cards with cyan eyebrows), `.ax-lc-steps` (3-col grid override for PlanLayers, rule hidden), `.ax-lc-spec-highlight` (cyan places-left value), `.ax-fit-check--alt` / `.ax-faq-list--alt` (background overrides), `.ax-lc-proof` (centered dark quote block), `.ax-lc-cta` (dark closing CTA section)
@@ -459,7 +465,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260518-100058
-- Updated: 2026-05-18T09:01:00.175Z
+- Session ID: 20260518-122251
+- Updated: 2026-05-18T11:22:52.773Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
