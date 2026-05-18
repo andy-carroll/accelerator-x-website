@@ -51,6 +51,9 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Fixed
 
+- **`ApplyForm` dark-surface bug** (`assets/css/components/ApplyForm.css`): all form text was invisible on the dark navy homepage section — field labels, section headings, section number badges, consent text, SLA text, and submit button all used light-bg tokens (`--fg-1`, `--fg-3` etc.) that rendered navy-on-navy. Fixed by adding a `.ax-apply-section`-scoped dark-surface override block; submit button overridden to `--action-accent` (pink) on dark. Light-bg `/contact/` page unaffected and verified.
+- **`ApplyForm` footer divider** (`assets/css/components/ApplyForm.css`): horizontal rule was flush against the chip radio group with no gap. `.ax-apply-form__footer` had `padding-top` (space after the border) but nothing before it; added `margin-top: var(--space-8)`.
+
 - **`content/articles/001-the-implementation-gap.md`** — `next_article_url` was `"#"` (dead link); corrected to `/insights/articles/the-5-stage-build-sequence.html`
 - **`scripts/build-hub.js`** — `TAG_FILTER_MAP` missing `'Cases'` and `'Opinion'` entries despite both being declared as canonical primary tags in Build Plan §10 comment; `Cases` now routes to `capability`, `Opinion` to `strategy`; comment updated to clarify routing intent; `allowedChangedPathPatterns` in `.session-protocol.json` updated to include `content/articles/*.md` and `content/data/*.json`
 - **`assets/js/hub-filter.js`** — live `ReferenceError` fixed: `categoryId` renamed to `tagId` throughout `filterContent()` after parameter rename in previous edit left lines 33 and 39 referencing an undefined variable; stale comment updated to reflect `data-tag` / `.ax-article-tile`
@@ -471,7 +474,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260518-131259
-- Updated: 2026-05-18T12:13:00.755Z
+- Session ID: 20260519-002839
+- Updated: 2026-05-18T23:28:41.154Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

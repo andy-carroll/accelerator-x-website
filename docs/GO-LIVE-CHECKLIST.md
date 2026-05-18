@@ -391,7 +391,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 - `[ ]` Netlify preview deploy built from `rebuild/v2` — full walkthrough on preview URL
 - `[ ]` All Netlify env vars set in production: Airtable API key, Brevo API key, Slack webhook
-- `[ ]` `rebuild/v2` branch pushed to remote
+- `[x]` `rebuild/v2` branch pushed to remote — 2026-05-19
 - `[ ]` Old `main` tagged `v1-archive` before cutover
 - `[ ]` Cutover plan agreed: swap Netlify production branch OR merge `rebuild/v2` → `main`
 - `[ ]` Post-cutover: verify all forms fire (Netlify functions deploy with branch)

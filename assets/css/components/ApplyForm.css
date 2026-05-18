@@ -102,6 +102,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  margin-top: var(--space-8);
   padding-top: var(--space-8);
   border-top: 1px solid var(--border-1);
 }
@@ -176,6 +177,34 @@
   text-decoration: underline;
   text-underline-offset: 2px;
 }
+
+/* =============================================================================
+   Dark-surface overrides — scoped to .ax-apply-section (dark navy bg)
+   The base component above uses light-bg tokens (--fg-1 etc).
+   These overrides apply only when the form sits on the dark section wrapper.
+   ============================================================================= */
+
+.ax-apply-section .ax-apply-form__section-heading { color: var(--fg-on-dark); }
+
+.ax-apply-section .ax-apply-form__section-num { background: rgba(255, 255, 255, 0.12); }
+
+.ax-apply-section .field-label { color: var(--fg-on-dark); }
+
+.ax-apply-section .chip-radio:checked + .chip {
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--fg-on-dark);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.ax-apply-section .ax-apply-form__consent-text { color: var(--fg-muted-on-dark); }
+.ax-apply-section .ax-apply-form__consent-link:hover { color: var(--fg-on-dark); }
+.ax-apply-section .ax-apply-form__sla { color: var(--fg-muted-on-dark); }
+
+.ax-apply-section .ax-apply-form__submit { background: var(--action-accent); }
+.ax-apply-section .ax-apply-form__submit:hover { background: var(--action-accent-hover); }
+
+.ax-apply-section .ax-apply-form__success-heading { color: var(--fg-on-dark); }
+.ax-apply-section .ax-apply-form__success-body { color: var(--fg-muted-on-dark); }
 
 /* =============================================================================
    Apply section wrapper — homepage bottom CTA and /contact page

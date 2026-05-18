@@ -20,9 +20,9 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-18 — Talks & Events page built (`/talks-events/`); empty-state upcoming events section + speaking inquiry CTA; `ax-empty-state` CSS added to EventCard.css; registered in build-inner-pages.js; go-live items added; build + check passing
+**Last session:** 2026-05-18 — quality gates passing; see session log for details
 
-**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` committed (unpushed) | **Deployed:** `main` still live and untouched
+**Build:** ✅ passing | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` live; `rebuild/v2` branch deploy active on Netlify — push to see latest preview
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
 
 **Phase 2 Wave C status (complete):**
