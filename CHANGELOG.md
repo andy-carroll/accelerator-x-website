@@ -12,6 +12,17 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Added
 
+- **`/programmes/leadership-cohort/` VSL funnel page** (`rebuild/v2`): conversion-engineered landing page distinct from the `/what-we-do/leadership-cohort/` informational offering page; live paid cohorts running (Cohort 1 started 15 May 2026); 10-section page with conversion rationale comment on every section
+  - **`_templates/programmes/leadership-cohort.html`** — full VSL funnel template: minimal nav (logo-only, no escape routes), hero (outcome-first H1, qualifier sub), ScarcityCard (4 seats at early rate, inline cohort variant), ProofRow quote variant with 3 outcome-stats (Mark / W R Bennett Group / £16k week-1 return vs £2,950 cost), AlternativesGrid component, Programme Arc (3 phase cards + included list + time commitment), Founders section (both cards inline — portrait images confirmed in `/assets/images/`), PricingBlock component, FAQList (6 questions, inline), CTABand component, stripped footer. Single CTA destination: `/contact/`. Zero "book a call" language. PLACEHOLDER comments on H1, Mark's quote, and FAQ answers per GO-LIVE-CHECKLIST §12.
+  - **`_templates/components/AlternativesGrid.html`** — new component: competitive comparison, dual layout (mobile stacked cards / desktop table, CSS-toggled — no JS). Four alternatives: YouTube/DIY, Udemy/LinkedIn Learning, University exec ed, Claude Bootcamp. Six criteria rows. AX column highlighted with navy header (`var(--ax-navy)`) and cyan-tint cells (`var(--surface-primary-subtle)`). Tick marks `var(--ax-green)`, cross marks `var(--fg-4)`. `aria-labelledby="alternatives-heading"`.
+  - **`_templates/components/PricingBlock.html`** — new component: two pricing cards (£2,950 early / £3,500 standard), ROI math block (3 hrs × £150/hr × 8 wks = £3,600), Mark's proof story, money-back guarantee. CTA → `/contact/`. `aria-labelledby="pricing-heading"`.
+  - **`assets/css/components/AlternativesGrid.css`** — new component CSS: dual-layout toggle (cards/table via CSS breakpoint), AX column styling, tick/cross marks, row hover
+  - **`assets/css/components/PricingBlock.css`** — new component CSS: 2-col pricing card grid (1-col mobile → 2-col ≥640px), early-rate card (pink `var(--action-accent)` border + shadow), standard card (opacity 0.75), ROI block (`var(--bg-paper-deep)` + cyan left-border), guarantee text
+  - **`assets/css/components/ProgrammeFunnel.css`** — new page-level CSS for funnel pages only: `.ax-funnel-scarcity` wrapper, `.ax-programme-arc` section (warm `var(--bg-paper)`, 3-phase card grid), `.ax-phase-card` (num, weeks, name, unlock), `.ax-funnel-footer` (stripped footer — logo + legal links, `var(--bg-darker)`)
+  - **`scripts/build-inner-pages.js`** — funnel page entry added to PAGES array under `// Funnel pages` comment; builds to `programmes/leadership-cohort/index.html`
+  - **`sitemap.xml`** — `/programmes/leadership-cohort/` URL added (priority 0.9, changefreq weekly)
+  - **`docs/GO-LIVE-CHECKLIST.md`** — §12 added: 13 blocking items for funnel page go-live (Mark's quote approval, 4-seats ownership, H1 confirmation, FAQ review, portrait image confirmation, etc.)
+
 - **Phase 3 — Offering detail pages (Company Enablement)** (`rebuild/v2`): first offering detail sub-page built
   - **`_templates/offerings/company-enablement.html`** — full page template; unique 2-phase layout with Phase Arc (hero 3-col arc: cyan Phase 0 panel / arrow / Phase 1+ panel), Phase 0 in-depth section (3 plan steps + 4 deliverables), Bridge block (centered dashed box), Phase 1+ section (3 stream cards + cycle chain), FitCheck, 6-question FAQ, 2-col proof section (quote + placeholder case study), dark final CTA; all CTAs → `/contact/`; complete `<head>` with Service JSON-LD, all CSS links
   - **`assets/css/components/CompanyEnablement.css`** — new 12-section CSS file for layout elements unique to this page: `.ax-offering-hero` (2-col hero grid, sticky sidebar), `.ax-phase-arc` (3-col arc with `--cyan` panel variant), `.ax-ce-steps` / `.ax-ce-deliverables` (inline plan/deliverable grids), `.ax-bridge` (dashed border centered box), `.ax-ce-streams` (3-col capability streams), `.ax-cycle-chain` (horizontal scrollable with `--advisory` amber variant), `.ax-ce-proof` (2-col proof), `.ax-ce-cta` (dark CTA section), `.ax-accent` utility; fully token-based
@@ -474,7 +485,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260519-002839
-- Updated: 2026-05-18T23:28:41.154Z
+- Session ID: 20260523-001056
+- Updated: 2026-05-22T23:10:57.901Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

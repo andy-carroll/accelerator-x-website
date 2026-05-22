@@ -1,0 +1,221 @@
+/* =============================================================================
+   AlternativesGrid — competitive comparison table / card stack
+   Markup: _templates/components/AlternativesGrid.html
+   Used on: /programmes/leadership-cohort (and future funnel pages)
+
+   Responsive strategy (no JS):
+     < 768px  → stacked cards, one per alternative, AX card last + highlighted
+     ≥ 768px  → comparison table, AX column right + highlighted with navy header
+
+   Purpose: name the alternatives the reader has already considered, then show
+   clearly why each one has a ceiling. The goal is not to mock competitors —
+   it is to help the reader articulate why they're still looking.
+   ============================================================================= */
+
+.ax-alternatives-grid {
+  padding: var(--space-16) 0;
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
+@media (min-width: 768px) {
+  .ax-alternatives-grid { padding: var(--space-20) 0; }
+}
+
+.ax-alternatives-grid__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .ax-alternatives-grid__inner { padding: 0 var(--gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .ax-alternatives-grid__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Section header ------------------------------------------------------------ */
+
+.ax-alternatives-grid__heading {
+  margin: var(--space-3) 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-alternatives-grid__sub {
+  margin: 0 0 var(--space-10);
+  font-size: var(--text-lg);
+  color: var(--fg-3);
+  line-height: var(--lh-normal);
+}
+
+/* =============================================================================
+   CARD LAYOUT  (< 768px)
+   ============================================================================= */
+
+.ax-alternatives-grid__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .ax-alternatives-grid__cards { display: none; }
+}
+
+.ax-alternatives-card {
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* AX card gets navy border + subtle tint to stand out */
+.ax-alternatives-card--ax {
+  border: 2px solid var(--ax-navy);
+  background: var(--surface-primary-subtle);
+}
+
+.ax-alternatives-card__label {
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+
+.ax-alternatives-card--ax .ax-alternatives-card__label {
+  color: var(--action-primary);
+}
+
+.ax-alternatives-card__verdict {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-alternatives-card__gap {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-4);
+  font-style: italic;
+  line-height: var(--lh-normal);
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border-1);
+}
+
+/* =============================================================================
+   TABLE LAYOUT  (≥ 768px)
+   ============================================================================= */
+
+.ax-alternatives-grid__table {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .ax-alternatives-grid__table { display: table; width: 100%; border-collapse: collapse; }
+}
+
+/* Column widths: criterion | alt1 | alt2 | alt3 | AX */
+.ax-alternatives-grid__table colgroup col:first-child { width: 18%; }
+.ax-alternatives-grid__table colgroup col:nth-child(2) { width: 20%; }
+.ax-alternatives-grid__table colgroup col:nth-child(3) { width: 20%; }
+.ax-alternatives-grid__table colgroup col:nth-child(4) { width: 20%; }
+.ax-alternatives-grid__table colgroup col:last-child   { width: 22%; }
+
+/* Header row ---------------------------------------------------------------- */
+
+.ax-alternatives-grid__thead { display: table-header-group; }
+.ax-alternatives-grid__tbody { display: table-row-group; }
+.ax-alternatives-grid__tr    { display: table-row; }
+
+.ax-alternatives-grid__th,
+.ax-alternatives-grid__td {
+  display: table-cell;
+  padding: var(--space-4) var(--space-5);
+  text-align: left;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border-1);
+}
+
+/* Criterion column (first cell of each row) */
+.ax-alternatives-grid__td--criterion {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-2);
+  vertical-align: middle;
+}
+
+/* Alternative column headers */
+.ax-alternatives-grid__th {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-2);
+  background: var(--bg-3);
+  border-bottom: 2px solid var(--border-2);
+}
+
+/* Empty top-left header cell */
+.ax-alternatives-grid__th--empty {
+  background: var(--bg-2);
+}
+
+/* AX column header — navy background, white text */
+.ax-alternatives-grid__th--ax {
+  background: var(--ax-navy);
+  color: var(--fg-on-dark);
+  font-weight: var(--fw-bold);
+  font-family: var(--font-display);
+  letter-spacing: var(--tracking-snug);
+  font-size: var(--text-base);
+}
+
+/* AX column body cells — cyan tint */
+.ax-alternatives-grid__td--ax {
+  background: var(--surface-primary-subtle);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+}
+
+/* Data cells — alternative columns */
+.ax-alternatives-grid__td {
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  line-height: var(--lh-normal);
+}
+
+/* Tick / cross marks -------------------------------------------------------- */
+
+.ax-alternatives-grid__tick {
+  color: var(--ax-green);
+  font-weight: var(--fw-bold);
+  font-size: var(--text-base);
+}
+
+.ax-alternatives-grid__cross {
+  color: var(--fg-4);
+  font-size: var(--text-base);
+}
+
+/* Row hover ----------------------------------------------------------------- */
+
+.ax-alternatives-grid__tr:hover .ax-alternatives-grid__td {
+  background: var(--bg-3);
+}
+
+/* Don't override the AX column tint on hover */
+.ax-alternatives-grid__tr:hover .ax-alternatives-grid__td--ax {
+  background: var(--surface-primary-subtle);
+}

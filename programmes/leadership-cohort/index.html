@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- PLACEHOLDER: meta title — confirm with founders before go-live. See GO-LIVE-CHECKLIST §9. -->
+    <title>Claude Bootcamp for Business Leaders | 8-Week Cohort | Accelerator X</title>
+
+    <!-- PLACEHOLDER: meta description — 155-char outcome-first description needed. See GO-LIVE-CHECKLIST §9. -->
+    <meta name="description" content="An 8-week cohort for C-suite and senior leaders. Run by practitioners who use these exact tools in their own business every day. £2,950 early rate — 4 seats left." />
+
+    <link rel="canonical" href="https://accelerator-x.ai/programmes/leadership-cohort/" />
+    <!-- robots: index, follow confirmed intentional — this is a public conversion page. See GO-LIVE-CHECKLIST §9 for final confirmation. -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Fonts -->
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos-Bold.woff2" crossorigin />
+
+    <!-- Styles — order matters: base → tokens → components.
+         New component CSS (PricingBlock, AlternativesGrid, ProgrammeFunnel) appended last.
+         Do not link LeadershipCohort.css here — that file belongs to /what-we-do/leadership-cohort/ only. -->
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/assets/css/tailwind.generated.css" />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
+    <link rel="stylesheet" href="/assets/css/components/Buttons.css" />
+    <link rel="stylesheet" href="/assets/css/components/Chips.css" />
+    <link rel="stylesheet" href="/assets/css/components/Nav.css" />
+    <link rel="stylesheet" href="/assets/css/components/Footer.css" />
+    <link rel="stylesheet" href="/assets/css/components/PageHero.css" />
+    <link rel="stylesheet" href="/assets/css/components/CTABand.css" />
+    <link rel="stylesheet" href="/assets/css/components/FAQList.css" />
+    <link rel="stylesheet" href="/assets/css/components/ProofRow.css" />
+    <link rel="stylesheet" href="/assets/css/components/ScarcityCard.css" />
+    <link rel="stylesheet" href="/assets/css/components/FounderCard.css" />
+    <link rel="stylesheet" href="/assets/css/components/InnerPages.css" />
+    <link rel="stylesheet" href="/assets/css/components/PricingBlock.css" />
+    <link rel="stylesheet" href="/assets/css/components/AlternativesGrid.css" />
+    <link rel="stylesheet" href="/assets/css/components/ProgrammeFunnel.css" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Claude Bootcamp for Business Leaders | Accelerator X" />
+    <meta property="og:description" content="An 8-week cohort for C-suite and senior leaders. Run by practitioners who use these exact tools in their own business every day." />
+    <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
+    <meta property="og:image:alt" content="Accelerator X — Claude Bootcamp for Business Leaders" />
+    <meta property="og:url" content="https://accelerator-x.ai/programmes/leadership-cohort/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Accelerator X" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Claude Bootcamp for Business Leaders | Accelerator X" />
+    <meta name="twitter:description" content="An 8-week cohort for C-suite and senior leaders. Run by practitioners who use these exact tools every day." />
+    <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/icons/AX-icon.png" sizes="any" />
+    <link rel="shortcut icon" type="image/png" href="/assets/icons/AX-icon.png" />
+    <meta name="theme-color" content="#00C4CC" />
+
+    <!-- JSON-LD: Course schema.
+         Price is published and specific — including it is appropriate here (unlike consulting services).
+         GO-LIVE-CHECKLIST §9: confirm price inclusion is intentional before launch. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Claude Bootcamp for Business Leaders",
+      "description": "An 8-week cohort for C-suite and senior leaders at 50–500 person companies. Weekly live sessions, applied to your real business. Run by Andy Carroll and Toby Henry.",
+      "provider": { "@id": "https://accelerator-x.ai/#organization" },
+      "url": "https://accelerator-x.ai/programmes/leadership-cohort/",
+      "offers": {
+        "@type": "Offer",
+        "price": "2950",
+        "priceCurrency": "GBP",
+        "availability": "https://schema.org/LimitedAvailability"
+      }
+    }
+    </script>
+
+    <script defer src="/assets/js/analytics.js"></script>
+  </head>
+
+  <body class="bg-background text-navy">
+
+    <!-- Skip link — must be first in body. Minimal nav is written inline below (not the full Nav
+         component) because funnel pages remove all navigation links to prevent escape routes. -->
+    <a href="#main-content" class="ax-skip-link">Skip to main content</a>
+
+    <!-- Minimal nav — logo only, no navigation links, no hamburger, no CTA.
+         Every additional link is an escape route. This page has one action: apply.
+         Uses ax-nav / ax-nav__bar classes so Nav.css handles sticky + backdrop blur —
+         no new CSS needed. The nav JS (nav.js) manages scroll state only. -->
+    <header class="ax-nav" role="banner" aria-label="Site header">
+      <div class="ax-nav__bar">
+        <a href="/" class="ax-nav__logo" aria-label="Accelerator X home">
+          <img src="/assets/brand/logos/AcceleratorX.svg" alt="Accelerator X" class="ax-nav__logo-img" width="224" height="38" loading="eager" decoding="async" />
+        </a>
+        <!-- No nav links. No CTA. No hamburger. Deliberate funnel-page design decision. -->
+      </div>
+    </header>
+
+    <main id="main-content">
+
+      <!-- ===================================================================
+           HERO
+           Promise and qualifier land together. The H1 names the outcome,
+           not the product. The sub-heading qualifies the reader immediately —
+           right person leans forward, wrong person self-selects out before
+           investing time. No breadcrumb — breadcrumbs are escape routes back
+           into the site hierarchy. They don't belong on a conversion page.
+           =================================================================== -->
+
+      <section class="ax-page-hero" aria-labelledby="hero-heading">
+        <div class="ax-page-hero__inner">
+
+          <span class="ax-kicker">8-week cohort · Next intake forming</span>
+
+          <!-- PLACEHOLDER: H1 headline — must be outcome-first, not feature-first.
+               Draft below is a strong starting point; confirm with founders before go-live.
+               See GO-LIVE-CHECKLIST §9. -->
+          <h1 class="ax-page-hero__heading" id="hero-heading">
+            The AI bootcamp built for leaders who run real businesses.
+          </h1>
+
+          <p class="ax-page-hero__sub">
+            For C-suite and senior decision-makers at 50–500 person companies.
+            Run by practitioners who use these exact tools to run their own business — every single day.
+            Not academics. Not course authors. People who are in the weeds with this, right now.
+          </p>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           SCARCITY
+           Urgency established before they've read anything — before the
+           curriculum, before the price, before the proof. Urgency seen early
+           reads as a fact about the offer. Urgency added only at the end reads
+           as a pressure tactic.
+           "4 seats remaining" is a real number. Update this when seats change.
+           =================================================================== -->
+
+      <!-- PLACEHOLDER: "4 seats remaining" — who owns this number and how/when
+           does it get updated? See GO-LIVE-CHECKLIST §9. -->
+      <div class="ax-funnel-scarcity">
+        <div class="ax-funnel-scarcity__inner">
+          <div class="ax-scarcity-card ax-scarcity-card--cohort" role="region" aria-label="Programme availability">
+            <div class="ax-scarcity-card__body">
+              <p class="ax-scarcity-card__status">Early rate closing</p>
+              <p class="ax-scarcity-card__primary">4 seats remaining at the early cohort rate</p>
+              <p class="ax-scarcity-card__secondary">Early rate: £2,950 · Standard rate: £3,500 · +VAT</p>
+            </div>
+            <div class="ax-scarcity-card__cta">
+              <a href="/contact/" class="btn btn--primary">Apply to work with us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================
+           PROOF — MARK'S STORY
+           Proof before curriculum. The standard funnel mistake is showing the
+           syllabus before the evidence. Mark's story makes the price feel small
+           before the reader ever reaches the pricing section. A £16,000 return
+           in week 1 against a £2,950 programme cost is not a testimonial —
+           it is a proof of mechanism.
+           =================================================================== -->
+
+      <!-- PLACEHOLDER: Mark's exact quote is required. The story and outcome
+           figures have been confirmed by the founders; the verbatim quote and
+           Mark's approval to be named publicly have not yet been obtained.
+           Do not go live without these. See GO-LIVE-CHECKLIST §9. -->
+      <section class="ax-proof-row ax-proof-row--quote" aria-labelledby="proof-heading">
+        <div class="ax-proof-row__inner">
+
+          <span class="ax-kicker">Week 1 result</span>
+
+          <blockquote>
+            <p class="ax-proof-row__quote-mark" aria-hidden="true">"</p>
+            <!-- PLACEHOLDER: Replace with Mark's exact approved quote. -->
+            <p class="ax-proof-row__quote-text" id="proof-heading">
+              [PLACEHOLDER — Mark's exact quote, approved for publication. See GO-LIVE-CHECKLIST §9.]
+            </p>
+            <footer class="ax-proof-row__attribution">
+              <cite class="ax-proof-row__who">Mark</cite>
+              <span class="ax-proof-row__role">Group CEO · W R Bennett Group</span>
+            </footer>
+          </blockquote>
+
+          <!-- Outcome stats: the numbers make the proof concrete.
+               £16k resolved vs £2,950 cost. Shows ROI before the pricing section arrives. -->
+          <div class="ax-proof-row__outcomes">
+            <div class="ax-proof-row__outcome">
+              <span class="ax-proof-row__outcome-value">£16,000</span>
+              <span class="ax-proof-row__outcome-label">Legal dispute resolved, week 1</span>
+            </div>
+            <div class="ax-proof-row__outcome">
+              <span class="ax-proof-row__outcome-value">2 years</span>
+              <span class="ax-proof-row__outcome-label">The dispute had been unresolved</span>
+            </div>
+            <div class="ax-proof-row__outcome">
+              <span class="ax-proof-row__outcome-value">£2,950</span>
+              <span class="ax-proof-row__outcome-label">Programme cost (early rate)</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           ALTERNATIVES GRID
+           Competitive reframe. By this point the reader is interested — but
+           their next thought is "I've seen other options." This section names
+           those options directly and shows clearly where each one has a
+           ceiling. The goal is not to mock competitors; it is to help the
+           reader articulate why they're still looking. Placed after proof so
+           the reader has seen evidence before we ask them to compare.
+           =================================================================== -->
+
+      <!-- AlternativesGrid — competitive comparison: four options, six criteria.
+     Naming the alternatives the reader has already considered does two things:
+     (1) It signals respect — we know you've looked around.
+     (2) It lets us show calmly where the ceiling is on each option.
+     Goal is not to mock competitors — it is to help the reader articulate
+     why they're still looking. AX column is last (right), highlighted in navy.
+     Responsive strategy: stacked cards < 768px, full table ≥ 768px.
+     Both layouts live in the HTML — CSS toggles visibility, no JS. -->
+
+<section class="ax-alternatives-grid" aria-labelledby="alternatives-heading">
+  <div class="ax-alternatives-grid__inner">
+
+    <span class="ax-kicker">You've probably looked at these</span>
+    <h2 class="ax-alternatives-grid__heading" id="alternatives-heading">Why leaders are still looking after trying everything else.</h2>
+    <p class="ax-alternatives-grid__sub">Every alternative has a ceiling. Here's what each one gives you — and where it stops.</p>
+
+    <!-- =====================================================================
+         CARD LAYOUT — visible < 768px
+         One card per alternative. AX card appears last with navy border.
+         ===================================================================== -->
+
+    <div class="ax-alternatives-grid__cards">
+
+      <div class="ax-alternatives-card">
+        <p class="ax-alternatives-card__label">YouTube / DIY</p>
+        <p class="ax-alternatives-card__verdict">Free, infinite content. You can learn almost anything — if you already know what to look for and have the discipline to learn it alone.</p>
+        <p class="ax-alternatives-card__gap">No structure, no accountability, no one to tell you what actually matters for a business like yours.</p>
+      </div>
+
+      <div class="ax-alternatives-card">
+        <p class="ax-alternatives-card__label">Udemy / LinkedIn Learning</p>
+        <p class="ax-alternatives-card__verdict">A course exists. It covers the basics well. You'll complete it alone, with generic examples, and no one to help when it doesn't translate to your situation.</p>
+        <p class="ax-alternatives-card__gap">Course authors — not operators running their own business with these tools. No peers, no accountability, no application to your actual work.</p>
+      </div>
+
+      <div class="ax-alternatives-card">
+        <p class="ax-alternatives-card__label">University exec ed</p>
+        <p class="ax-alternatives-card__verdict">Prestigious. Structured. Delivered by academics with deep theoretical knowledge — but not by practitioners who use this in their own business every day.</p>
+        <p class="ax-alternatives-card__gap">Theory-heavy, case-study learning. Often costs £10,000–£30,000+. No money-back guarantee. Not built around your real business problems.</p>
+      </div>
+
+      <!-- AX card: highlighted, placed last — conversion target -->
+      <div class="ax-alternatives-card ax-alternatives-card--ax">
+        <p class="ax-alternatives-card__label">Claude Bootcamp</p>
+        <p class="ax-alternatives-card__verdict">Run by Andy and Toby, who use these exact tools in their own business every single day. Everything you learn is applied to your actual work — not hypothetical cases.</p>
+        <p class="ax-alternatives-card__gap">8 places. 8 weeks. Practitioner-led, peer-cohort accountability, applied to your real business. Full refund if you don't feel real value after 4 sessions.</p>
+      </div>
+
+    </div>
+
+    <!-- =====================================================================
+         TABLE LAYOUT — visible ≥ 768px
+         Five columns: criterion | YouTube | Udemy | Uni exec ed | AX (highlighted)
+         Six rows: practitioner delivery, structure, applied work, peers, cost, guarantee.
+         ===================================================================== -->
+
+    <table class="ax-alternatives-grid__table" role="table" aria-label="Comparison of learning alternatives">
+      <colgroup>
+        <col style="width: 18%">
+        <col style="width: 20%">
+        <col style="width: 20%">
+        <col style="width: 20%">
+        <col style="width: 22%">
+      </colgroup>
+
+      <thead class="ax-alternatives-grid__thead">
+        <tr class="ax-alternatives-grid__tr">
+          <th class="ax-alternatives-grid__th ax-alternatives-grid__th--empty" scope="col"><span class="ax-sr-only">Criterion</span></th>
+          <th class="ax-alternatives-grid__th" scope="col">YouTube / DIY</th>
+          <th class="ax-alternatives-grid__th" scope="col">Udemy / LinkedIn Learning</th>
+          <th class="ax-alternatives-grid__th" scope="col">University exec ed</th>
+          <th class="ax-alternatives-grid__th ax-alternatives-grid__th--ax" scope="col">Claude Bootcamp</th>
+        </tr>
+      </thead>
+
+      <tbody class="ax-alternatives-grid__tbody">
+
+        <!-- Row 1: Practitioner delivery -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Taught by practitioners running their own business</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Creators, not operators</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Course authors, not operators</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Academics, not operators</td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> Andy + Toby run their own business with these tools every day</td>
+        </tr>
+
+        <!-- Row 2: Structure and accountability -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Structure and accountability</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> You supply all the discipline</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Self-paced, no accountability</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> Scheduled, cohort-based</td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> Weekly live sessions, cohort, buddy pairing</td>
+        </tr>
+
+        <!-- Row 3: Applied to your real business -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Work applied to your real business</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Generic examples</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Generic examples</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Case studies and theory</td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> Every exercise runs on your actual work</td>
+        </tr>
+
+        <!-- Row 4: Senior peer cohort -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Cohort of senior peers</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Solo</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span> Forum, not peers</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__tick" aria-label="Partial">✓</span> Cohort, mixed seniority</td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> 8 places max — 50–500 person company leaders only</td>
+        </tr>
+
+        <!-- Row 5: Cost -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Cost</td>
+          <td class="ax-alternatives-grid__td">Free — but slow and unstructured</td>
+          <td class="ax-alternatives-grid__td">£20–£500/year</td>
+          <td class="ax-alternatives-grid__td">£10,000–£30,000+</td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax">£2,950 early rate (standard £3,500)</td>
+        </tr>
+
+        <!-- Row 6: Guarantee -->
+        <tr class="ax-alternatives-grid__tr">
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--criterion" scope="row">Money-back guarantee</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span></td>
+          <td class="ax-alternatives-grid__td">30-day refund only</td>
+          <td class="ax-alternatives-grid__td"><span class="ax-alternatives-grid__cross" aria-label="No">–</span></td>
+          <td class="ax-alternatives-grid__td ax-alternatives-grid__td--ax"><span class="ax-alternatives-grid__tick" aria-label="Yes">✓</span> Full refund after 4 sessions, no conditions</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+
+      <!-- ===================================================================
+           PROGRAMME ARC
+           Structure arrives after proof and competitive framing. By this
+           point the reader believes the outcome is real and understands why
+           alternatives don't get them there. Now they need to know HOW.
+           Three phases show what changes for the reader across 8 weeks —
+           not what topics are covered. The "unlock" line for each phase is
+           the internal shift, not a module description.
+           =================================================================== -->
+
+      <section class="ax-programme-arc" aria-labelledby="arc-heading">
+        <div class="ax-programme-arc__inner">
+
+          <span class="ax-kicker">The 8-week arc</span>
+          <h2 class="ax-programme-arc__heading" id="arc-heading">What changes across 8 weeks.</h2>
+          <p class="ax-programme-arc__sub">Three phases. Each one builds on the last. By week 8 you're not thinking about AI — you're using it.</p>
+
+          <!-- Phase cards: three phases, each with its unlock moment -->
+          <div class="ax-programme-arc__phases">
+
+            <div class="ax-phase-card">
+              <div>
+                <span class="ax-phase-card__num">Phase 1</span>
+                <span class="ax-phase-card__weeks"> · Weeks 1–3</span>
+              </div>
+              <h3 class="ax-phase-card__name">Your AI-augmented foundation</h3>
+              <p class="ax-phase-card__unlock">"I am in control."</p>
+            </div>
+
+            <div class="ax-phase-card">
+              <div>
+                <span class="ax-phase-card__num">Phase 2</span>
+                <span class="ax-phase-card__weeks"> · Weeks 4–6</span>
+              </div>
+              <h3 class="ax-phase-card__name">Power use and co-work mastery</h3>
+              <p class="ax-phase-card__unlock">"I am operating at a different level."</p>
+            </div>
+
+            <div class="ax-phase-card">
+              <div>
+                <span class="ax-phase-card__num">Phase 3</span>
+                <span class="ax-phase-card__weeks"> · Weeks 7–8</span>
+              </div>
+              <h3 class="ax-phase-card__name">Strategic advantage</h3>
+              <p class="ax-phase-card__unlock">"This is now a competitive asset."</p>
+            </div>
+
+          </div>
+
+          <!-- What's included + time commitment: the practical "how does this work" questions
+               that always surface when someone is weighing whether to commit. -->
+          <div class="ax-programme-arc__details">
+
+            <div>
+              <p class="ax-programme-arc__details-heading">What's included</p>
+              <ul class="ax-programme-arc__includes">
+                <li class="ax-programme-arc__include">Weekly live sessions — 60–90 min, Google Meet</li>
+                <li class="ax-programme-arc__include">Async content — 30–45 min per week</li>
+                <li class="ax-programme-arc__include">Private cohort community — daily access</li>
+                <li class="ax-programme-arc__include">Buddy pairing within the cohort</li>
+                <li class="ax-programme-arc__include">Copy-paste skills library — yours to keep</li>
+                <li class="ax-programme-arc__include">Session recordings and all resources</li>
+                <li class="ax-programme-arc__include">90-day AI blueprint built around your business</li>
+              </ul>
+            </div>
+
+            <div class="ax-programme-arc__commitment">
+              <p class="ax-programme-arc__details-heading">Time commitment</p>
+
+              <div class="ax-programme-arc__commitment-stat">
+                <span class="ax-programme-arc__commitment-value">2–2.5 hrs</span>
+                <span class="ax-programme-arc__commitment-label">Per week. The live session is 60–90 minutes. The rest is async, on your schedule.</span>
+              </div>
+
+              <div class="ax-programme-arc__commitment-stat">
+                <span class="ax-programme-arc__commitment-value">8 places</span>
+                <span class="ax-programme-arc__commitment-label">Hard cap. Quality over scale — every participant gets real attention.</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           FOUNDERS
+           Practitioners, not academics. The reader needs to trust who is
+           delivering before they will trust the price. This section is not
+           a credentials list — it is operational proof. Andy and Toby run
+           their own business with these exact tools every single day.
+           They teach what they do, not what they read.
+           Placed after the programme arc so the reader understands the WHAT
+           before meeting the WHO. The HOW (price) comes after the WHO.
+           =================================================================== -->
+
+      <section class="ax-founders-section" aria-labelledby="founders-heading">
+        <div class="ax-founders-section__inner">
+
+          <span class="ax-kicker">Who delivers it</span>
+          <h2 class="ax-founders-section__heading" id="founders-heading">Run by people who do this for their own business.</h2>
+
+          <div class="ax-founders-section__cards">
+
+            <!-- Toby Henry — portrait image confirmed in /assets/images/ -->
+            <div class="ax-founder-card">
+              <div class="ax-founder-card__identity">
+                <div class="ax-founder-card__portrait">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/images/toby-green-shirt-400.webp 400w, /assets/images/toby-green-shirt-800.webp 800w" sizes="96px" />
+                    <img src="/assets/images/toby-green-shirt-400.png" srcset="/assets/images/toby-green-shirt-400.png 400w, /assets/images/toby-green-shirt-800.png 800w" sizes="96px" alt="Toby Henry" width="96" height="96" loading="lazy" decoding="async" />
+                  </picture>
+                </div>
+                <div class="ax-founder-card__identity-meta">
+                  <h3 class="ax-founder-card__name">Toby Henry</h3>
+                  <span class="ax-founder-card__role">Co-founder · Strategy &amp; Consulting</span>
+                  <div class="ax-founder-card__socials">
+                    <a href="https://www.linkedin.com/in/tobyhenry/" class="ax-founder-card__social-link" aria-label="Toby Henry on LinkedIn" rel="noopener noreferrer" target="_blank">Li</a>
+                  </div>
+                </div>
+              </div>
+              <p class="ax-founder-card__bio">
+                Twenty years of tier-one management consulting, leading transformation programmes for some of the UK's largest organisations.
+                He's built and sold businesses, and knows what it takes to make change stick at scale.
+              </p>
+              <div class="ax-founder-card__track">
+                <div class="ax-founder-card__track-label">Track record</div>
+                <ul class="ax-founder-card__track-items">
+                  <li class="ax-founder-card__track-item">Capgemini · Senior Consulting Manager</li>
+                  <li class="ax-founder-card__track-item">NHS &amp; public sector transformation</li>
+                  <li class="ax-founder-card__track-item">WPP · Data &amp; technology strategy</li>
+                  <li class="ax-founder-card__track-item">Two business builds + exits</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Andy Carroll — portrait image confirmed in /assets/images/ -->
+            <div class="ax-founder-card">
+              <div class="ax-founder-card__identity">
+                <div class="ax-founder-card__portrait">
+                  <picture>
+                    <source type="image/webp" srcset="/assets/images/andy-black-t-400.webp 400w, /assets/images/andy-black-t-800.webp 800w" sizes="96px" />
+                    <img src="/assets/images/andy-black-t-400.jpg" srcset="/assets/images/andy-black-t-400.jpg 400w, /assets/images/andy-black-t-800.jpg 800w" sizes="96px" alt="Andy Carroll" width="96" height="96" loading="lazy" decoding="async" />
+                  </picture>
+                </div>
+                <div class="ax-founder-card__identity-meta">
+                  <h3 class="ax-founder-card__name">Andy Carroll</h3>
+                  <span class="ax-founder-card__role">Co-founder · Product &amp; AI</span>
+                  <div class="ax-founder-card__socials">
+                    <a href="https://linkedin.com/in/andycarroll" class="ax-founder-card__social-link" aria-label="Andy Carroll on LinkedIn" rel="noopener noreferrer" target="_blank">Li</a>
+                    <a href="https://accelerator-x.ai/insights/" class="ax-founder-card__social-link" aria-label="Andy Carroll's writing">↗</a>
+                  </div>
+                </div>
+              </div>
+              <p class="ax-founder-card__bio">
+                Seventeen years in product and AI across startups and banks. Shipped real systems at Capital One and three Series B companies.
+                Builds the systems we recommend — hands-on, in the weeds, making things work.
+              </p>
+              <div class="ax-founder-card__track">
+                <div class="ax-founder-card__track-label">Track record</div>
+                <ul class="ax-founder-card__track-items">
+                  <li class="ax-founder-card__track-item">Capital One · Head of AI Product</li>
+                  <li class="ax-founder-card__track-item">Pegasus Group · Product Lead</li>
+                  <li class="ax-founder-card__track-item">Two startup exits</li>
+                  <li class="ax-founder-card__track-item">B.Eng Computer Science</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           PRICING
+           Price arrives after proof, after understanding the programme, and
+           after trusting the people who deliver it. The reader has done the
+           work — the price should feel like a conclusion, not a surprise.
+           The ROI math (3 hrs/week reclaimed × £150/hr × 8 weeks = £3,600)
+           makes the standard rate pay for itself before week 8 is done.
+           The guarantee removes the last remaining hesitation.
+           =================================================================== -->
+
+      <!-- PricingBlock — two-tier pricing: early rate (highlighted) + standard rate (muted).
+     ROI math block shows value before the reader finishes processing the price.
+     Guarantee removes the last risk after the price is absorbed.
+     Reusable across all funnel pages — update numbers per programme.
+     The "4 seats remaining" badge is real. Update it when seats change. -->
+
+<section class="ax-pricing-block" aria-labelledby="pricing-heading">
+  <div class="ax-pricing-block__inner">
+
+    <span class="ax-kicker">Investment</span>
+    <h2 class="ax-pricing-block__heading" id="pricing-heading">Straightforward pricing.</h2>
+
+    <div class="ax-pricing-block__cards">
+
+      <!-- Early-rate card: the primary ask. Pink border signals priority. -->
+      <div class="ax-pricing-card ax-pricing-card--early">
+        <span class="ax-pricing-card__badge">4 seats remaining at this rate</span>
+        <p class="ax-pricing-card__label">Early cohort rate</p>
+        <p class="ax-pricing-card__price">£2,950</p>
+        <p class="ax-pricing-card__per">per place, +VAT</p>
+        <ul class="ax-pricing-card__features">
+          <li class="ax-pricing-card__feature">Full 8-week programme</li>
+          <li class="ax-pricing-card__feature">Weekly live sessions with Andy &amp; Toby</li>
+          <li class="ax-pricing-card__feature">Private cohort community (daily access)</li>
+          <li class="ax-pricing-card__feature">Copy-paste skills library — yours to keep</li>
+          <li class="ax-pricing-card__feature">90-day AI blueprint built around your business</li>
+        </ul>
+        <div class="ax-pricing-card__cta">
+          <a href="/contact/" class="btn btn--accent btn--lg">Apply to work with us</a>
+        </div>
+      </div>
+
+      <!-- Standard-rate card: present for framing, not the conversion target. -->
+      <div class="ax-pricing-card ax-pricing-card--standard">
+        <p class="ax-pricing-card__label">Standard rate</p>
+        <p class="ax-pricing-card__price">£3,500</p>
+        <p class="ax-pricing-card__per">per place, +VAT</p>
+        <ul class="ax-pricing-card__features">
+          <li class="ax-pricing-card__feature">Full 8-week programme</li>
+          <li class="ax-pricing-card__feature">Weekly live sessions with Andy &amp; Toby</li>
+          <li class="ax-pricing-card__feature">Private cohort community (daily access)</li>
+          <li class="ax-pricing-card__feature">Copy-paste skills library — yours to keep</li>
+          <li class="ax-pricing-card__feature">90-day AI blueprint built around your business</li>
+        </ul>
+        <p class="ax-pricing-card__note">Early rate closes when 4 seats fill.</p>
+      </div>
+
+    </div>
+
+    <!-- ROI math: makes the price feel earned. Conservative numbers, real proof. -->
+    <div class="ax-pricing-block__roi">
+      <p class="ax-pricing-block__roi-heading">The maths</p>
+      <p class="ax-pricing-block__roi-equation">3 hours reclaimed per week × £150/hour × 8 weeks = £3,600 returned before the programme ends.</p>
+      <p class="ax-pricing-block__roi-proof"><strong>Mark, Group CEO of W R Bennett Group</strong> resolved a £16,000 legal dispute in the first week of the programme. It had been unresolved for two years. Programme cost: £2,950.</p>
+    </div>
+
+    <!-- Guarantee: stated plainly, no conditions. Removes the last remaining hesitation. -->
+    <p class="ax-pricing-block__guarantee">
+      <strong>Full refund if you don't feel real value after 4 sessions.</strong> No forms, no conditions. Just let us know.
+    </p>
+
+  </div>
+</section>
+
+
+      <!-- ===================================================================
+           FAQ
+           Final objection handler. The reader has seen the proof, understood
+           the programme, met the founders, and seen the price. FAQs serve the
+           nearly-converted who have one specific remaining blocker. Questions
+           are phrased as the reader would actually ask them — not as feature
+           descriptions in disguise.
+           =================================================================== -->
+
+      <!-- PLACEHOLDER: All FAQ answers below have been drafted from available
+           programme data. Founders must review and approve all six answers
+           before go-live. See GO-LIVE-CHECKLIST §9. -->
+      <section class="ax-faq-list" aria-labelledby="faq-heading">
+        <div class="ax-faq-list__inner">
+
+          <span class="ax-kicker">Questions</span>
+          <h2 class="ax-faq-list__heading" id="faq-heading">The things people always ask.</h2>
+
+          <div class="ax-faq-list__items">
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">What if I can't make a live session?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>All sessions are recorded and the recording is shared within 24 hours. The async content is designed to stand alone. That said, the live sessions are where the real work happens — showing up consistently is the difference between getting the most out of the programme and getting some of it. You'll also miss the direct input from Andy and Toby on your specific situation.</p>
+              </div>
+            </details>
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">How much time does this actually take each week?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>2–2.5 hours per week. One live session (60–90 minutes on Google Meet). The async content takes around 30–45 minutes — a short piece of reading or video, and a task you'll apply to your own business. There's no homework for the sake of it. Everything you do goes directly into your work.</p>
+              </div>
+            </details>
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">Do I need a Claude account? Is that an extra cost?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>Yes — you'll need a Claude Pro account, currently £18/month. We'll tell you exactly what to set up before the programme starts. It's the only tool you'll need to buy. Everything else is provided.</p>
+              </div>
+            </details>
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">I've barely used Claude. Will I keep up?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>Yes. The programme starts from the beginning — but moves fast. We've built it for leaders who are time-poor and sceptical, not for early adopters who want to geek out on the tools. You won't be the only person in the cohort who hasn't used it much before. Being new to it is often an advantage — you haven't picked up any bad habits yet.</p>
+              </div>
+            </details>
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">Will this be relevant to my industry?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>The programme is deliberately industry-agnostic. The tools, the thinking, and the process work whether you're in professional services, manufacturing, property, or anywhere else. Mark resolved a £16,000 legal dispute in week 1 — that wasn't on any syllabus. It was the result of applying the programme's thinking to his specific situation. That's what week 1 is designed to unlock.</p>
+              </div>
+            </details>
+
+            <details class="ax-faq-item">
+              <summary class="ax-faq-item__question">
+                <span class="ax-faq-item__question-text">How does the money-back guarantee work?</span>
+                <span class="ax-faq-item__icon" aria-hidden="true"></span>
+              </summary>
+              <div class="ax-faq-item__answer">
+                <p>If you don't feel real value after the first four sessions, we'll refund you in full. No forms, no conditions — you just tell us. We've never had to honour it, but the offer is genuine. We don't want your money if we haven't earned it.</p>
+              </div>
+            </details>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           CTA BAND
+           Closing action. The reader has done the work — this is confirmation,
+           not persuasion. "Short form. Real reply within a week. No calendars
+           to book." removes the last hesitation around what applying involves.
+           =================================================================== -->
+
+      <!-- CTABand — full-width closing CTA for inner pages. Routes to /contact/. -->
+<section class="ax-cta-band" aria-labelledby="cta-band-heading">
+  <div class="ax-cta-band__inner">
+    <div class="ax-cta-band__copy">
+      <span class="ax-kicker" style="color:var(--ax-pink)">Ready to start?</span>
+      <h2 id="cta-band-heading" class="ax-cta-band__heading">Apply to work with us.</h2>
+      <p class="ax-cta-band__sub">Short form. Real reply within a week. No calendars to book.</p>
+    </div>
+    <a href="/contact/" class="btn btn--accent btn--lg ax-cta-band__btn">Apply to work with us</a>
+  </div>
+</section>
+
+
+    </main>
+
+    <!-- ===================================================================
+         STRIPPED FOOTER
+         Funnel pages use a stripped footer — company identity + legal links
+         only. The full footer (nav links, newsletter) creates escape routes
+         at the bottom of the page. Full footer lives in Footer.css / the
+         Footer component; this variant is defined in ProgrammeFunnel.css.
+         See GO-LIVE-CHECKLIST §9 for footer decision confirmation.
+         =================================================================== -->
+
+    <footer class="ax-funnel-footer" role="contentinfo">
+      <div class="ax-funnel-footer__inner">
+
+        <div class="ax-funnel-footer__brand">
+          <img src="/assets/brand/logos/AcceleratorX.svg" alt="Accelerator X" class="ax-funnel-footer__logo-img" width="160" height="27" loading="lazy" decoding="async" />
+          <p class="ax-funnel-footer__copy">© 2025 Accelerator X Ltd · Company no. 15948340</p>
+        </div>
+
+        <ul class="ax-funnel-footer__legal-links" role="list">
+          <li>
+            <a href="/privacy/" class="ax-funnel-footer__legal-link">Privacy</a>
+          </li>
+          <li>
+            <a href="/terms/" class="ax-funnel-footer__legal-link">Terms</a>
+          </li>
+        </ul>
+
+      </div>
+    </footer>
+
+    <!-- JS: deferred, non-blocking. nav.js manages scroll state for sticky nav.
+         faq-init.js opens all .ax-faq-item details on desktop (≥1024px).
+         No forms.js — this page routes to /contact/, not an inline form. -->
+    <script defer src="/assets/js/nav.js"></script>
+    <script defer src="/assets/js/faq-init.js"></script>
+
+  </body>
+</html>

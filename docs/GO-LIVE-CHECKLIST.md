@@ -409,3 +409,27 @@ Before cutover, both founders sign off:
 - `[ ]` Both — pricing copy intentional
 - `[ ]` Both — full site walkthrough on mobile and desktop
 - `[ ]` Both — happy for site to be indexed and crawled on launch
+
+---
+
+## 12 · /programmes/leadership-cohort funnel page
+
+This page is a live conversion surface separate from the main site cutover.
+It can go live independently once all blocking items below are resolved.
+Source template: `_templates/programmes/leadership-cohort.html`
+
+| Item | Blocking go-live? | Status |
+|---|---|---|
+| Mark's exact quote — verbatim, approved for publication | **Yes** | `[ ]` |
+| Mark's consent to be named publicly as "Mark, Group CEO, W R Bennett Group" | **Yes** | `[ ]` |
+| "£16,000 legal dispute" figure — confirmed accurate and approved for use in marketing | **Yes** | `[ ]` |
+| H1 headline — confirmed by founders (current draft: "The AI bootcamp built for leaders who run real businesses.") | **Yes** | `[ ]` |
+| Meta description — 155-char outcome-first copy written and confirmed | **Yes** | `[ ]` |
+| "4 seats remaining" — who owns this number and how/when it gets updated | **Yes** | `[ ]` |
+| FAQ answers (6 questions) — reviewed and approved by founders | **Yes** | `[ ]` |
+| Andy + Toby portrait images confirmed OK at `/assets/images/andy-black-t-400.*` and `/assets/images/toby-green-shirt-400.*` | **Yes** | `[ ]` |
+| Cohort start date — show specific date or keep "Next intake forming"? | **Yes** | `[ ]` |
+| Footer decision — stripped footer (current) or full footer? | Yes | `[ ]` |
+| JSON-LD Course schema — price inclusion (`"price": "2950"`) confirmed intentional | No | `[ ]` |
+| `robots: index, follow` — confirmed (not `noindex`; this page should be crawlable) | No | `[ ]` |
+| Page title — confirm or replace draft: "Claude Bootcamp for Business Leaders \| 8-Week Cohort \| Accelerator X" | **Yes** | `[ ]` |

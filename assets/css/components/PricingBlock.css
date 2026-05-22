@@ -1,0 +1,240 @@
+/* =============================================================================
+   PricingBlock — programme pricing cards with ROI math and guarantee
+   Markup: _templates/components/PricingBlock.html
+   Used on: /programmes/leadership-cohort (and future funnel pages)
+   Two-tier layout: early-rate card (highlighted) + standard-rate card (muted).
+   ROI math block makes the price feel earned before the reader decides.
+   Guarantee removes the last remaining risk after the price is seen.
+   ============================================================================= */
+
+.ax-pricing-block {
+  padding: var(--space-16) 0;
+  background: var(--bg-1);
+}
+
+@media (min-width: 768px) {
+  .ax-pricing-block { padding: var(--space-20) 0; }
+}
+
+.ax-pricing-block__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 640px) {
+  .ax-pricing-block__inner { padding: 0 var(--gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .ax-pricing-block__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Header -------------------------------------------------------------------- */
+
+.ax-pricing-block__heading {
+  margin: var(--space-3) 0 var(--space-10);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+/* Cards grid ---------------------------------------------------------------- */
+
+.ax-pricing-block__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+@media (min-width: 640px) {
+  .ax-pricing-block__cards {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
+
+/* Individual card ----------------------------------------------------------- */
+
+.ax-pricing-card {
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  background: var(--bg-1);
+}
+
+/* Early-rate card: pink accent border to signal priority */
+.ax-pricing-card--early {
+  border: 2px solid var(--action-accent);
+  box-shadow: var(--shadow-md);
+}
+
+/* Standard card: muted — present but not the hero */
+.ax-pricing-card--standard {
+  opacity: 0.75;
+}
+
+/* Badge (early rate only) --------------------------------------------------- */
+
+.ax-pricing-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  background: var(--surface-accent-subtle);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--action-accent);
+  width: fit-content;
+}
+
+/* Label (tier name) --------------------------------------------------------- */
+
+.ax-pricing-card__label {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-3);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+/* Price --------------------------------------------------------------------- */
+
+.ax-pricing-card__price {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  font-weight: var(--fw-black);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1;
+  color: var(--fg-1);
+  margin: 0;
+}
+
+.ax-pricing-card__per {
+  font-size: var(--text-sm);
+  color: var(--fg-4);
+  margin: 0;
+}
+
+/* Features list ------------------------------------------------------------- */
+
+.ax-pricing-card__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-1);
+  flex: 1;
+}
+
+.ax-pricing-card__feature {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: var(--lh-normal);
+}
+
+.ax-pricing-card__feature::before {
+  content: '✓';
+  flex-shrink: 0;
+  font-weight: var(--fw-bold);
+  color: var(--ax-green);
+}
+
+/* CTA button ---------------------------------------------------------------- */
+
+.ax-pricing-card__cta {
+  display: block;
+  text-align: center;
+}
+
+/* Standard-rate note (no CTA — directs to early-rate card) ----------------- */
+
+.ax-pricing-card__note {
+  margin: 0;
+  font-size: var(--text-xs);
+  color: var(--fg-4);
+  font-style: italic;
+  text-align: center;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-1);
+}
+
+/* ROI math block ------------------------------------------------------------ */
+/* Appears after pricing cards. Makes the value case before the reader second-guesses the price. */
+
+.ax-pricing-block__roi {
+  background: var(--bg-paper-deep);
+  border-radius: var(--radius-lg);
+  border-left: 3px solid var(--action-primary);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.ax-pricing-block__roi-heading {
+  margin: 0;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+
+.ax-pricing-block__roi-equation {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-lg), 1.5vw, var(--text-xl));
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+  line-height: var(--lh-snug);
+}
+
+.ax-pricing-block__roi-proof {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border-paper);
+}
+
+.ax-pricing-block__roi-proof strong {
+  color: var(--action-accent);
+  font-weight: var(--fw-bold);
+}
+
+/* Guarantee note ------------------------------------------------------------ */
+/* Placed last — removes the final hesitation after the price is absorbed. */
+
+.ax-pricing-block__guarantee {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  text-align: center;
+  line-height: var(--lh-relaxed);
+}
+
+.ax-pricing-block__guarantee strong {
+  color: var(--fg-2);
+}
+
+/* Focus: CTA button inherits from Buttons.css — no override needed */

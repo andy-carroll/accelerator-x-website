@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-18 — quality gates passing; see session log for details
+**Last session:** 2026-05-22 — quality gates passing; see session log for details
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` live; `rebuild/v2` branch deploy active on Netlify — push to see latest preview
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -113,6 +113,6 @@ Full procedures: `.claude/rules/session.md`
 
 ## Next Session Priorities
 
-1. **Build remaining offering pages** — Talks & Events ✅. Fractional Advisory blocked (6 founder Q&A items in `docs/page-specs/fractional-advisory.md`). All other offering pages complete.
-2. **Pricing review (user)** — confirm Phase 0 £5k and Phase 1 £20k copy (used in company-enablement page and homepage) before go-live.
+1. **Funnel page go-live unblocking** — 13 items in GO-LIVE-CHECKLIST §12. Most urgent: Mark's quote + approval, H1 headline confirmation, "4 seats remaining" ownership. Once resolved, push `rebuild/v2` and confirm preview.
+2. **Fractional Advisory offering page** — blocked on 6 founder Q&A items in `docs/page-specs/fractional-advisory.md`. All other offering pages complete.
 3. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).

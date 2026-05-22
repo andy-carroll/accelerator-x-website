@@ -18,6 +18,8 @@ const PAGES = [
   { template: '_templates/offerings/senior-leader-acceleration.html', output: 'what-we-do/senior-leader-acceleration/index.html' },
   // Standalone pages
   { template: '_templates/talks-events.html', output: 'talks-events/index.html' },
+  // Funnel pages — conversion-engineered landing pages, separate from offering detail pages
+  { template: '_templates/programmes/leadership-cohort.html', output: 'programmes/leadership-cohort/index.html' },
 ];
 
 function main() {
