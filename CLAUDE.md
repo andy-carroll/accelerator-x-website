@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-05-22 — quality gates passing; see session log for details
+**Last session:** 2026-06-03 — Hardened session protocol: session-end now enforces real summary before write; session-start surfaces full priorities + recent session context; session-notes template created; CLAUDE.md session-start prominence updated.
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` live; `rebuild/v2` branch deploy active on Netlify — push to see latest preview
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -86,14 +86,19 @@
 
 ## Session protocols
 
+> **Every new session begins with `npm run session-start` — no exceptions.**
+> This is the first action in every conversation, before any task work. It reads CLAUDE.md,
+> checks git state, surfaces the last few session decisions, and outputs the full priority list.
+> A session that skips this step starts blind.
+
 Full procedures: `.claude/rules/session.md`
+Session notes template: `.claude/session-notes-template.md`
 
 **Start (quick card):**
 
-1. Read this file
-2. `npm run session-start` (or `npm run session-start:json` for machine output)
-3. Review branch policy + repo state warnings
-4. Post brief to user — wait for focus confirmation
+1. `npm run session-start` — read the full output before anything else
+2. Post brief to user — confirm or redirect focus before starting work
+3. Do not begin task work until focus is confirmed
 
 **During session (continuous):**
 
@@ -104,15 +109,16 @@ Full procedures: `.claude/rules/session.md`
 
 **End (quick card) — agent initiates at any gate/wave/phase completion, no user prompt needed:**
 
-1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; sweep `docs/GO-LIVE-CHECKLIST.md` for new items; write `.claude/session-notes.md`. Full checklist: `.claude/rules/session.md §Step 0`.
-2. Run `npm run session-end:dry-run` to verify what will happen, then `npm run session-end:write:yes` to commit
-3. Confirm session log written to `.claude/sessions/`
-4. Push only when policy and flags explicitly allow it
+1. **Pre-close audit first** — review all files touched this session; fix bugs, ARIA issues, dead code, missing docs; update CLAUDE.md + CHANGELOG + ROADMAP; sweep `docs/GO-LIVE-CHECKLIST.md` for new items. Full checklist: `.claude/rules/session.md §Step 0`.
+2. **Write `.claude/session-notes.md`** — copy from `.claude/session-notes-template.md`; fill in all sections honestly. Check `.claude/sessions/` for recent logs and account for carry-forwards. `session-end:write` will block if `## Summary` is missing or a placeholder.
+3. Run `npm run session-end:dry-run` to verify what will happen, then `npm run session-end:write:yes` to commit
+4. Confirm session log written to `.claude/sessions/`
+5. Push only when policy and flags explicitly allow it
 
 **Go-live checklist:** `docs/GO-LIVE-CHECKLIST.md` — forensic audit before switching to v2. Add to it continuously; never let a placeholder, dummy value, or unresolved decision exist in the codebase without a corresponding entry.
 
 ## Next Session Priorities
 
-1. **Funnel page go-live unblocking** — 13 items in GO-LIVE-CHECKLIST §12. Most urgent: Mark's quote + approval, H1 headline confirmation, "4 seats remaining" ownership. Once resolved, push `rebuild/v2` and confirm preview.
-2. **Fractional Advisory offering page** — blocked on 6 founder Q&A items in `docs/page-specs/fractional-advisory.md`. All other offering pages complete.
-3. **Phase 5 — Analytics** — PostHog event instrumentation (see Build Plan §09 for event taxonomy).
+1. **CLAUDE.md full revamp** — update Current State (13 pages built, all placeholder-heavy), kill stale wave/phase docs, write phased go-live plan (Wave 1: homepage + 4 core pages). Needs: brand voice answer from Andy + Wave 1 scope confirmation. Do this before any other task.
+2. **Brand voice + Wave 1 scope** — establish brand voice guidelines (even rough notes); confirm Wave 1 page list; then begin systematic content sweep + UX audit using `/design:ux-audit` and `/design:ux-copy`.
+3. **Funnel page go-live unblocking** — 13 items in GO-LIVE-CHECKLIST §12 still fully open. Most urgent: Mark's quote + approval, H1 headline, "4 seats remaining" ownership.

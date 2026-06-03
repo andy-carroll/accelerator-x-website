@@ -25,6 +25,8 @@ const BUILD_ARTIFACT_PREFIXES = [
   'about/',
   'contact/',
   'talks-events/',
+  'programmes/',
+  'design-system/',
 ];
 const BUILD_ARTIFACT_FILES = new Set(['index.html', 'sitemap.xml']);
 
@@ -81,6 +83,17 @@ function timestamp() {
 
 function formatDate(date) {
   return date.toISOString().split('T')[0];
+}
+
+function extractSessionSummary(notesPath) {
+  if (!fs.existsSync(notesPath)) return null;
+  const content = fs.readFileSync(notesPath, 'utf8');
+  const match = content.match(/^##\s+Summary\s*\n+([^#\n].+)/im);
+  if (!match) return null;
+  const summary = match[1].trim();
+  // Reject unfilled template placeholders
+  if (!summary || summary.startsWith('_') || summary.startsWith('-')) return null;
+  return summary;
 }
 
 function upsertClaudeLastSession(content, date, fallbackSummary) {
@@ -400,6 +413,20 @@ if (writeModeEnabled) {
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
   const notesPath = path.join('.claude', 'session-notes.md');
 
+  // Require a real session summary before writing anything.
+  // Create .claude/session-notes.md from .claude/session-notes-template.md and fill in ## Summary.
+  const sessionSummary = extractSessionSummary(notesPath);
+  if (!sessionSummary) {
+    const hint = fs.existsSync(notesPath)
+      ? 'session-notes.md exists but ## Summary is missing or still a placeholder.'
+      : 'session-notes.md not found.';
+    const summaryError = `${hint} Copy .claude/session-notes-template.md → .claude/session-notes.md, fill in ## Summary with a one-line description of what was done, then rerun.`;
+    errors.push(summaryError);
+    const earlyOutput = { status: 'error', mode, branch, operations, warnings, errors, nextActions: ['Write session-notes.md with a real ## Summary line, then rerun session-end:write.'] };
+    if (args.json) { console.log(JSON.stringify(earlyOutput, null, 2)); } else { console.error('❌ Session-end aborted: no session summary.'); errors.forEach(e => console.error(`- ${e}`)); }
+    process.exit(EXIT.QUALITY_GATE_FAILURE);
+  }
+
   const logContent = buildSessionLog({
     branch,
     headHash,
@@ -418,7 +445,6 @@ if (writeModeEnabled) {
     operations.push({ step: 'session_notes', status: 'consumed', detail: notesPath });
   }
 
-  const sessionSummary = 'quality gates passing; see session log for details';
   const withFreshLastSession = upsertClaudeLastSession(claudeContent, today, sessionSummary);
   const claudeUpdate = ensureNextSessionBlock(withFreshLastSession);
   if (claudeUpdate.changed || claudeUpdate.content !== claudeContent) {

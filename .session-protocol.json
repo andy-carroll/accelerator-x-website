@@ -60,6 +60,7 @@
       "scripts/session-start.js",
       "scripts/session-protocol-utils.js",
       "scripts/test-session-protocols.js",
+      ".claude/session-notes-template.md",
       "scripts/check.js",
       "assets/js/*.js",
       "netlify/functions/*.js",

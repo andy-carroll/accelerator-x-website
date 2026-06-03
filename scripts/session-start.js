@@ -76,6 +76,33 @@ function loadProfile(profilePath) {
   }
 }
 
+function loadRecentSessions(sessionDir, count = 3) {
+  if (!fs.existsSync(sessionDir)) return [];
+  try {
+    const files = fs.readdirSync(sessionDir)
+      .filter(f => f.startsWith('session-') && f.endsWith('.md'))
+      .sort()
+      .slice(-count);
+
+    return files.map(file => {
+      const content = fs.readFileSync(path.join(sessionDir, file), 'utf8');
+      const dateMatch = file.match(/session-(\d{4})(\d{2})(\d{2})/);
+      const date = dateMatch
+        ? `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
+        : file.replace('session-', '').replace('.md', '');
+
+      const decisionsMatch = content.match(/## Decisions \/ Findings\n+([\s\S]*?)(?=\n## |$)/i);
+      const decisions = decisionsMatch ? decisionsMatch[1].trim() : null;
+
+      // Skip logs with unfilled placeholders
+      if (!decisions || decisions.includes('Fill in') || decisions.startsWith('  - _')) return null;
+      return { date, decisions };
+    }).filter(Boolean);
+  } catch {
+    return [];
+  }
+}
+
 function parseClaudeState(claudeContent) {
   const lastSession = { date: null, summary: 'No session recorded' };
   let blockingIssues = [];
@@ -106,15 +133,25 @@ function parseClaudeState(claudeContent) {
     }
   }
 
-  const prioritiesMatch = claudeContent.match(/## Next[^\n]*\n\n?((?:\d+\.\s*\*\*[^*]+\*\*[^\n]*(?:\n\s+→[^\n]*)*\n?)+)/i);
-  if (prioritiesMatch) {
-    nextPriorities = prioritiesMatch[1]
-      .split(/\n(?=\d+\.)/)
-      .map(item => {
-        const titleMatch = item.match(/\*\*([^*]+)\*\*/);
-        return titleMatch ? titleMatch[1].trim() : null;
-      })
-      .filter(Boolean);
+  // Prefer ## Next Session Priorities (actionable, ≤3 items) with full text including sub-bullets.
+  // Fall back to ## Next (do in this order) extracting bold titles only.
+  const sessionPrioritiesMatch = claudeContent.match(/## Next Session Priorities\n([\s\S]*?)(?=\n## |$)/i);
+  if (sessionPrioritiesMatch) {
+    nextPriorities = sessionPrioritiesMatch[1]
+      .split(/\n(?=\s*\d+\.)/)
+      .map(item => item.trim())
+      .filter(item => item && /^\d+\./.test(item));
+  } else {
+    const nextMatch = claudeContent.match(/## Next[^\n]*\n\n?((?:\d+\.\s*\*\*[^*]+\*\*[^\n]*(?:\n\s+→[^\n]*)*\n?)+)/i);
+    if (nextMatch) {
+      nextPriorities = nextMatch[1]
+        .split(/\n(?=\d+\.)/)
+        .map(item => {
+          const titleMatch = item.match(/\*\*([^*]+)\*\*/);
+          return titleMatch ? titleMatch[1].trim() : null;
+        })
+        .filter(Boolean);
+    }
   }
 
   return { lastSession, blockingIssues, nonBlockingIssues, nextPriorities };
@@ -239,10 +276,17 @@ if (airtableEnabled) {
 }
 
 const today = formatDate(new Date());
-const suggestedFocus = claudeState.nextPriorities[0] || 'No priorities defined in CLAUDE.md';
+// Extract a short title from the first priority item (strip markdown, sub-bullets)
+const firstPriority = claudeState.nextPriorities[0] || '';
+const suggestedFocus = firstPriority
+  ? (firstPriority.match(/\*\*([^*]+)\*\*/) || [])[1] || firstPriority.split('\n')[0].replace(/^\d+\.\s*/, '')
+  : 'No priorities defined in CLAUDE.md';
 const nextPriorities = claudeState.nextPriorities.length > 0
   ? claudeState.nextPriorities
   : ['Define priorities in CLAUDE.md'];
+
+const sessionDir = path.join('.claude', 'sessions');
+const recentSessions = loadRecentSessions(sessionDir, 3);
 
 if (claudeState.blockingIssues.length > 0) {
   warnings.push(...claudeState.blockingIssues);
@@ -281,26 +325,46 @@ const output = {
 };
 
 if (args.json) {
-  console.log(JSON.stringify(output, null, 2));
+  console.log(JSON.stringify({ ...output, recentSessions }, null, 2));
 } else {
   console.log(`\n## Session Brief — ${today}\n`);
   console.log(`**Branch:** ${currentBranch}`);
   console.log(`**Last session:** ${output.lastSession}`);
   console.log(`**Git state:** ${gitState.clean ? '✅ Clean' : `⚠️ ${gitState.uncommitted.length} uncommitted, ${gitState.unpushed} unpushed`}`);
-  console.log(`**Airtable:** ${airtableStatus}`);
-  console.log(`**Suggested focus:** ${suggestedFocus}`);
 
   if (warnings.length > 0) {
-    console.log('\nWarnings:');
+    console.log('\n⚠️  Warnings:');
     warnings.forEach(w => console.log(`- ${w}`));
   }
 
   if (allErrors.length > 0) {
-    console.log('\nErrors:');
+    console.log('\n❌ Errors:');
     allErrors.forEach(e => console.log(`- ${e}`));
   }
 
-  console.log('\n---\nReady to proceed. Confirm focus or redirect.');
+  // Recent session context — helps a cold-start agent understand what was and wasn't resolved
+  if (recentSessions.length > 0) {
+    console.log('\n---\n### Recent session context\n');
+    console.log('> Do not assume prior priorities were completed — verify against work done this session.\n');
+    [...recentSessions].reverse().forEach(s => {
+      console.log(`**${s.date}:**`);
+      console.log(s.decisions);
+      console.log('');
+    });
+  }
+
+  // Full priority detail — not just titles
+  if (nextPriorities.length > 0) {
+    console.log('---\n### Session priorities\n');
+    nextPriorities.forEach(p => {
+      console.log(p);
+      console.log('');
+    });
+  } else {
+    console.log(`\n**Suggested focus:** ${suggestedFocus}`);
+  }
+
+  console.log('---\nReady to proceed. Confirm focus or redirect.');
 }
 
 if (allErrors.length > 0) {
