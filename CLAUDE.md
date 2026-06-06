@@ -20,7 +20,7 @@
 - Component specs: `docs/design_handoff_website_rebuild/design-system/DESIGN.md`
 - Wireframes: `docs/design_handoff_website_rebuild/wireframes/`
 
-**Last session:** 2026-06-03 — Hardened session protocol: session-end now enforces real summary before write; session-start surfaces full priorities + recent session context; session-notes template created; CLAUDE.md session-start prominence updated.
+**Last session:** 2026-06-07 — Reset & direction (no code shipped). Diagnosed `rebuild/v2` as a 22-day / 39-commit / +40k-line big-bang that never shipped. Decided: commit to a deliberate, checklist-gated **full cutover** delivered as tracked iterative slices; stand up GitHub Issues + "v2 Cutover" milestone as the next session's first task. Full handoff: `.claude/sessions/session-20260607-005027.md`.
 
 **Build:** ✅ passing | **Git:** ✅ `rebuild/v2` clean | **Deployed:** `main` live; `rebuild/v2` branch deploy active on Netlify — push to see latest preview
 **Node:** ✅ v26.0.0 via `/opt/homebrew/bin/node` — use `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found in shell.
@@ -81,6 +81,7 @@
 - **Pre-built artefacts committed** — no build command on Netlify, serves repo root as-is
 - **Single opt-in** — no Brevo double opt-in confirmation email for now
 - **No `priceRange` in JSON-LD** — deliberate; many clients won't pay listed rates
+- **`rebuild/v2` ships as a full cutover, not piecemeal** — v2 is one coherent system (shared nav/footer/tokens); switch `main` to v2 once `GO-LIVE-CHECKLIST.md` blockers clear. No long-lived unshipped branches: every session ends in a deploy (preview at minimum) or an explicitly tracked carry. Work is tracked as GitHub Issues under the "v2 Cutover" milestone.
 
 ---
 
@@ -119,6 +120,9 @@ Session notes template: `.claude/session-notes-template.md`
 
 ## Next Session Priorities
 
-1. **CLAUDE.md full revamp** — update Current State (13 pages built, all placeholder-heavy), kill stale wave/phase docs, write phased go-live plan (Wave 1: homepage + 4 core pages). Needs: brand voice answer from Andy + Wave 1 scope confirmation. Do this before any other task.
-2. **Brand voice + Wave 1 scope** — establish brand voice guidelines (even rough notes); confirm Wave 1 page list; then begin systematic content sweep + UX audit using `/design:ux-audit` and `/design:ux-copy`.
-3. **Funnel page go-live unblocking** — 13 items in GO-LIVE-CHECKLIST §12 still fully open. Most urgent: Mark's quote + approval, H1 headline, "4 seats remaining" ownership.
+> First proper session of the new cadence. Goal: stand up the delivery system, not write feature code.
+> Full context: `.claude/sessions/session-20260607-005027.md`.
+
+1. **Stand up the delivery system** — triage open `docs/GO-LIVE-CHECKLIST.md` blockers (18 BLOCKING / 211 open) into GitHub Issues under a "v2 Cutover" milestone. Split "founder must decide/supply" items (testimonials, founder bios, pricing, origin story, FAQ) from "build" items (cohort page, nav overhaul, §9 pages, Phase 5 analytics).
+2. **Sequence the cutover + get a preview** — agree slice order and the first shippable slice; confirm/fix a `rebuild/v2` branch preview deploy so v2 can be seen without touching production.
+3. **Codify the SDLC loop into the protocol** — every session runs scope → measurable outcome → build → test → deploy → monitor, and can't close without its work tracked + shipped or carried. Fold the long-overdue CLAUDE.md revamp into this.
