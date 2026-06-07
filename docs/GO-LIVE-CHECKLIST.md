@@ -9,6 +9,11 @@
 >
 > **Status:** `[ ]` Not done · `[-]` In progress · `[x]` Done · `[~]` Deferred/accepted risk
 > **Blocking** = must be resolved before cutover.
+>
+> **Tracking (2026-06-07):** This checklist is the source of truth for line-item detail.
+> Work is now tracked as GitHub Issues under the **["v2 Cutover" milestone](https://github.com/andy-carroll/accelerator-x-website/milestone/1)** —
+> 30 issues split `founder-input` (Andy/Toby supply/decide) vs `build` (engineering), with `blocking` marking the critical path.
+> Each issue links back to the relevant section here. Close issues as line-items complete.
 
 ---
 
@@ -389,7 +394,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 ## 10 · Pre-cutover deployment
 
-- `[ ]` Netlify preview deploy built from `rebuild/v2` — full walkthrough on preview URL
+- `[-]` Netlify preview deploy built from `rebuild/v2` — **deploy confirmed live 2026-06-07** at https://rebuild-v2--accelerator-x.netlify.app (verified serving v2 component system, distinct from prod). Full manual walkthrough still pending.
 - `[ ]` All Netlify env vars set in production: Airtable API key, Brevo API key, Slack webhook
 - `[x]` `rebuild/v2` branch pushed to remote — 2026-05-19
 - `[ ]` Old `main` tagged `v1-archive` before cutover

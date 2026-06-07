@@ -12,6 +12,7 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Added
 
+- **Delivery system — "v2 Cutover" GitHub milestone** (2026-06-07): triaged `docs/GO-LIVE-CHECKLIST.md` (211 line-items / 18 blocking rows) into [milestone #1](https://github.com/andy-carroll/accelerator-x-website/milestone/1) with 30 work-unit issues. Labels: `founder-input` (14) vs `build` (16) work-streams, `blocking` (14) for critical path, plus `area:*` filters. Each issue links back to its checklist section; checklist header now points to the milestone as the live tracker.
 - **`/programmes/leadership-cohort/` VSL funnel page** (`rebuild/v2`): conversion-engineered landing page distinct from the `/what-we-do/leadership-cohort/` informational offering page; live paid cohorts running (Cohort 1 started 15 May 2026); 10-section page with conversion rationale comment on every section
   - **`_templates/programmes/leadership-cohort.html`** — full VSL funnel template: minimal nav (logo-only, no escape routes), hero (outcome-first H1, qualifier sub), ScarcityCard (4 seats at early rate, inline cohort variant), ProofRow quote variant with 3 outcome-stats (Mark / W R Bennett Group / £16k week-1 return vs £2,950 cost), AlternativesGrid component, Programme Arc (3 phase cards + included list + time commitment), Founders section (both cards inline — portrait images confirmed in `/assets/images/`), PricingBlock component, FAQList (6 questions, inline), CTABand component, stripped footer. Single CTA destination: `/contact/`. Zero "book a call" language. PLACEHOLDER comments on H1, Mark's quote, and FAQ answers per GO-LIVE-CHECKLIST §12.
   - **`_templates/components/AlternativesGrid.html`** — new component: competitive comparison, dual layout (mobile stacked cards / desktop table, CSS-toggled — no JS). Four alternatives: YouTube/DIY, Udemy/LinkedIn Learning, University exec ed, Claude Bootcamp. Six criteria rows. AX column highlighted with navy header (`var(--ax-navy)`) and cyan-tint cells (`var(--surface-primary-subtle)`). Tick marks `var(--ax-green)`, cross marks `var(--fg-4)`. `aria-labelledby="alternatives-heading"`.
@@ -59,6 +60,12 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   - **`_templates/article.html`** — `{{date}}` token replaced with `{{published}}` in OG `article:published_time` meta and JSON-LD `datePublished`
   - **`_templates/index.html`** — hub pathway filter tiles updated to Build Plan taxonomy: Strategy (For Leaders) / Capability (For Teams) / Tooling (Tech & AI); filter IDs updated from `strategy` / `implementation` / `capability` to `strategy` / `capability` / `tooling`
   - **`assets/js/hub-filter.js`** — updated to target `.ax-article-tile` (was `.article-card`) and `data-tag` attribute (was `data-category`)
+
+### Changed
+
+- **SDLC session loop codified** (2026-06-07): `.claude/rules/session.md` now opens with "THE SESSION LOOP (SDLC)" — every session runs scope → measurable outcome → build → test → deploy → monitor, with a non-negotiable close-gate (work must be **tracked** + **shipped**, or **explicitly carried**). Added a tracking+shipping check to Step 0 and two enforcement bullets.
+- **CLAUDE.md revamped** (2026-06-07): slimmed back under one page — cut historical Phase 2 Wave C/D status detail (now in CHANGELOG + session logs), replaced the stale Phase 3/4/5 "Next" block with the milestone-driven cutover, added a dedicated "The cutover" section, folded in the SDLC loop reference.
+- **`rebuild/v2` pushed + branch preview confirmed live** (2026-06-07): preview at https://rebuild-v2--accelerator-x.netlify.app verified serving the full v2 component system, distinct from production v1. `GO-LIVE-CHECKLIST.md §10` updated.
 
 ### Fixed
 
@@ -485,7 +492,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260603-080322
-- Updated: 2026-06-03T07:03:24.613Z
+- Session ID: 20260607-014046
+- Updated: 2026-06-07T00:40:48.133Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->

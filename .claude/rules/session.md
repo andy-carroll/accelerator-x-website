@@ -5,6 +5,21 @@
 
 ---
 
+## THE SESSION LOOP (SDLC)
+
+Every session runs one turn of the same loop. This is the spine the rest of this file hangs off — start, continuous docs, and end are just the mechanics of executing it honestly.
+
+1. **Scope** — pick the work from the tracker (GitHub "v2 Cutover" milestone), not from memory. One or a few issues, not "whatever comes up."
+2. **Measurable outcome** — state, before building, what "done" looks like for this session: which issue(s) close, what becomes visible on the preview. If you can't name the outcome, the scope is wrong.
+3. **Build** — do the work. Update CHANGELOG/docs inline as it lands (see Continuous Documentation).
+4. **Test** — verify against the outcome. Build + check green; for anything user-visible, verify on the **Netlify preview**, not just localhost.
+5. **Deploy** — push `rebuild/v2` so the branch preview reflects the work. Every session ends in a deploy (preview at minimum) — no long-lived unshipped work.
+6. **Monitor** — confirm the deployed change is live and correct; note anything to watch next session.
+
+**The close-gate (non-negotiable):** a session cannot close unless its work is **tracked** (a GitHub issue exists and is updated/closed) AND **shipped** (pushed to the preview) — or **explicitly carried** (written into session-notes + Next Session Priorities with the reason). "Done but unpushed" and "done but untracked" both mean the session is not finished.
+
+---
+
 ## SESSION START
 
 **Trigger:** Automatically on every new conversation. Complete before any task work.
@@ -79,6 +94,11 @@ Before touching any script or file, work through this checklist silently and act
 - Were any go-live blockers resolved this session? → Mark `[x]` in the checklist.
 - Were any new concerns raised (SEO, analytics, form behaviour, legal, ARIA) that need pre-launch verification? → Add them.
 - The checklist must always reflect the current true state of the site — nothing unresolved should go unrecorded.
+
+**Tracking + shipping (the close-gate)**
+- Every piece of work done this session maps to a GitHub issue under the "v2 Cutover" milestone — updated or closed. Work with no issue: create one, or carry it explicitly.
+- `rebuild/v2` is pushed; the branch preview reflects this session's work. If nothing shippable was produced, that is itself the carry — say so in session-notes and why.
+- Anything not finished is written into session-notes + "Next Session Priorities" with the reason. Nothing left "done but unpushed" or "done but untracked."
 
 **Session notes**
 - Write `.claude/session-notes.md` with: decisions made, things deferred (and why), key findings, anything a cold-start agent would need that isn't in CLAUDE.md.
@@ -158,6 +178,8 @@ Set `operatingMode` in `.session-protocol.json` to switch behavior without editi
 
 ## Enforcement
 
+- Every session runs the loop: scope → measurable outcome → build → test → deploy → monitor
+- A session cannot close unless its work is **tracked** (GitHub issue) and **shipped** (preview push) — or **explicitly carried** with a reason
 - Session start brief is mandatory before any work
 - Session end requires explicit mode selection; write actions are never implicit
 - `CLAUDE.md` is the contract between sessions — if it's wrong, everything downstream is wrong
