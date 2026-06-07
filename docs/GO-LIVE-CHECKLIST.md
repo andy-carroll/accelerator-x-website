@@ -23,8 +23,8 @@ These must exist in the Airtable prospects table before ANY form submission goes
 
 | Field | Type | Blocking? | Status |
 |---|---|---|---|
-| `Consent Given` | Checkbox | **Yes** | `[ ]` |
-| `Consent Timestamp` | Single line text | **Yes** | `[ ]` |
+| `Consent Given` | Checkbox | **Yes** | `[x]` created 2026-06-08 (#32) |
+| `Consent Timestamp` | Single line text | **Yes** | `[x]` created 2026-06-08 (#32) |
 
 ---
 
