@@ -228,10 +228,32 @@ Target: `/.netlify/functions/lead-capture`
 - `[ ]` Honeypot invisible; not submitted
 - `[ ]` All required fields block submission if empty
 - `[ ]` Consent checkbox required — cannot submit without it
-- `[ ]` **Airtable:** record created with all fields including `Consent Given` + `Consent Timestamp`
 - `[ ]` **Brevo:** contact added to list #9
 - `[ ]` **Slack:** `#website-leads` notification fires
 - `[ ]` **Email:** Brevo welcome automation triggers for new contact
+
+#### TEST CASE GNG-1 — Consent capture writes to Airtable (go/no-go)
+
+> **Status:** schema in place 2026-06-08 ([#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)) — fields created; end-to-end write **not yet tested**. Run before production cutover.
+> **Why this is go/no-go:** consent is a GDPR record. If the write silently drops, we are capturing leads without a defensible consent trail. A pass here is mandatory to go live.
+
+**Setup**
+- Prospects table `tblQzgVPzXL4cEQBp`, base `appZwa2e4VZk4ULDA` — fields `Consent Given` (checkbox), `Consent Timestamp` (single line text) exist.
+- Use the Netlify preview URL, not localhost.
+
+**Steps**
+1. Open the preview ApplyForm, tick the consent checkbox, submit a real test record (note the timestamp).
+2. Open the new Prospects record in Airtable.
+
+**Pass criteria (all must hold)**
+- `[ ]` `Consent Given` is checked (true).
+- `[ ]` `Consent Timestamp` holds a valid ISO 8601 string matching the submission time (within a minute).
+- `[ ]` No fields silently dropped — `Source` shows "Accelerator-X Website" and the record is otherwise complete.
+- `[ ]` Function logs (Netlify) show the Airtable insert returned 200, not an "unknown field name" error.
+
+**Fail = NO-GO.** Most likely cause if it fails: a field name in [`netlify/functions/lead-capture.js`](netlify/functions/lead-capture.js) drifted from the Airtable field name. Reconcile names, redeploy preview, re-run.
+
+_Cleanup: delete the test record after the run._
 
 ### 3b — Newsletter subscribe (footer + inline)
 
