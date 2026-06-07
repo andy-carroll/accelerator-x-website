@@ -21,7 +21,7 @@
 - Build plan: `docs/design_handoff_website_rebuild/README.md` · design system: `…/design-system/DESIGN.md` · wireframes: `…/wireframes/`
 - Built through Phase 2 Wave D + Phase 3 page assembly (4 inner pages live: `/what-we-do`, `/how-we-work`, `/about`, `/contact`). Component-level detail in `CHANGELOG.md` + `.claude/sessions/`.
 
-**Last session:** 2026-06-07 — Pushed `rebuild/v2`, confirmed the live branch preview, and stood up the delivery system: "v2 Cutover" GitHub milestone with 30 triaged issues (14 founder-input / 16 build / 14 blocking), checklist wired to it. Codified the SDLC session loop into `.claude/rules/session.md` and slimmed this file. Full handoff: `.claude/sessions/`.
+**Last session:** 2026-06-07 — Closed #32 — created `Consent Given` + `Consent Timestamp` fields on the Airtable Prospects table, verified the whole lead-capture payload maps to real fields, and added formal go/no-go test case GNG-1; first critical-path blocker cleared.
 
 **Build:** ✅ passing | **Git:** `rebuild/v2` clean + pushed | **Deployed:** `main` live (v1); v2 preview → https://rebuild-v2--accelerator-x.netlify.app (verified serving v2)
 
@@ -82,8 +82,9 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 
 ## Next Session Priorities
 
-> Cadence is live; the tracker is stood up. Goal now: start burning down the cutover backlog.
+> **New north star (Andy, 2026-06-08): ship a *working, honest* v2 soon — doesn't need to be perfect, but zero clangers.** The #1 unacceptable clanger is **fabricated content** — invented past clients, suppliers, testimonials, logos, or stats. Truth-audit gates the ship.
 
-1. **Drive the keystone decision — [#26 offering portfolio](https://github.com/andy-carroll/accelerator-x-website/issues/26).** Lay out the OfferingTable-vs-DecisionTree options from existing specs; get founders to pick the canonical offering set. Unblocks the detail-page work.
-2. **Start a build slice in parallel** — pick a `build` issue with no founder dependency (Airtable consent fields #32 or nav overhaul #33), complete it end-to-end, ship to preview.
-3. **Begin gathering founder-input** — open the highest-value `founder-input` issues with Andy/Toby (testimonials #21, pricing #23) so content starts flowing while build proceeds.
+1. **Truth audit — hunt and kill all fabricated content.** Sweep every v2 page/template for invented clients, suppliers, logos, testimonials, names, and unverifiable stats. Anything not founder-confirmed gets removed or clearly marked placeholder + logged as a blocking go-live item. Cross-check against existing `founder-input` issues (#21 testimonials, #22 proof, etc.). This is the gate to a shippable v2.
+2. **Define "minimum shippable v2"** — agree the smallest set of pages/blockers that lets `main` cut over honestly (perfect not required). Re-triage the milestone against that bar; decide what's must-fix vs defer-after-launch.
+3. **Build slice with no founder dependency** — nav overhaul [#33](https://github.com/andy-carroll/accelerator-x-website/issues/33) is queued and ready (add `/contact/`, fix CTA hrefs, aria-current). Complete end-to-end, ship to preview.
+4. **Test GNG-1** when a preview deploy is convenient — submit ApplyForm, confirm consent fields land in Airtable (see GO-LIVE-CHECKLIST §3a).
