@@ -14,6 +14,14 @@
   .ax-fit-check { padding: var(--space-20) 0; }
 }
 
+/* Alt variant — same surface as the base, with hairline top/bottom rules to
+   separate the section when it sits between same-coloured sections (offering pages).
+   Consolidated here from CompanyEnablement.css / LeadershipCohort.css (see #49). */
+.ax-fit-check--alt {
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+}
+
 .ax-fit-check__inner {
   max-width: var(--container-default);
   margin: 0 auto;

@@ -458,17 +458,7 @@
 }
 
 /* =============================================================================
-   8. FIT CHECK alt background override
-   ============================================================================= */
-
-.ax-fit-check--alt {
-  background: var(--bg-2);
-  border-top: 1px solid var(--border-1);
-  border-bottom: 1px solid var(--border-1);
-}
-
-/* =============================================================================
-   9. FAQ alt background override
+   8. FAQ alt background override
    ============================================================================= */
 
 .ax-faq-list--alt {
