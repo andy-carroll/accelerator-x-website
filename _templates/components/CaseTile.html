@@ -1,10 +1,16 @@
 <!-- CaseTile — standard variant
      For the feature (lead) variant, add data-variant="feature" to .ax-case-tile.
-     Replace src/alt on the cover image when real photography lands. -->
+     Replace src/alt on the cover image when real photography lands.
+
+     GO-LIVE FLAG — BLOCKING (#48): the original sample data ("£45M retail group",
+     60% / £420k / 11×, link to /case-studies/retail-group-backlog/) was FABRICATED
+     and has been replaced with neutral placeholder tokens. Do NOT render this
+     component on any live page until populated with a real, founder-approved case
+     study (and the linked case-study page actually exists). -->
 <article class="ax-case-tile" data-variant="standard">
   <div class="ax-case-tile__cover">
     <img
-      src="/assets/img/case-studies/retail-group-hero.jpg"
+      src="/assets/img/case-studies/placeholder-hero.jpg"
       alt=""
       loading="lazy"
       width="600"
@@ -13,30 +19,28 @@
   </div>
   <div class="ax-case-tile__body">
     <div class="ax-case-tile__meta">
-      <span class="ax-case-tile__sector">Retail</span>
+      <span class="ax-case-tile__sector">[Sector — TBC]</span>
       <span class="ax-case-tile__meta-sep">·</span>
-      <span class="ax-case-tile__meta-text">£45M revenue</span>
-      <span class="ax-case-tile__meta-sep">·</span>
-      <span class="ax-case-tile__meta-text">8-Week Cycle</span>
+      <span class="ax-case-tile__meta-text">[Context — TBC]</span>
     </div>
     <h3 class="ax-case-tile__heading">
-      <a href="/case-studies/retail-group-backlog/" style="color:inherit;text-decoration:none;">
-        How a £45M retail group cut backlog 60% in one cycle.
+      <a href="/insights/?tag=cases" style="color:inherit;text-decoration:none;">
+        [PLACEHOLDER — real, approved case study headline. See #48.]
       </a>
     </h3>
-    <p class="ax-case-tile__sub">Eight weeks. Three operators. One production system the ops team runs without us.</p>
+    <p class="ax-case-tile__sub">[PLACEHOLDER — case study summary, to be supplied by founders.]</p>
     <div class="ax-case-tile__metrics">
       <div>
-        <div class="ax-case-tile__metric-value">60%</div>
-        <div class="ax-case-tile__metric-label">Backlog reduction</div>
+        <div class="ax-case-tile__metric-value">—</div>
+        <div class="ax-case-tile__metric-label">[Metric — TBC]</div>
       </div>
       <div>
-        <div class="ax-case-tile__metric-value">£420k</div>
-        <div class="ax-case-tile__metric-label">Annualised saving</div>
+        <div class="ax-case-tile__metric-value">—</div>
+        <div class="ax-case-tile__metric-label">[Metric — TBC]</div>
       </div>
       <div>
-        <div class="ax-case-tile__metric-value">11×</div>
-        <div class="ax-case-tile__metric-label">Return on fee</div>
+        <div class="ax-case-tile__metric-value">—</div>
+        <div class="ax-case-tile__metric-label">[Metric — TBC]</div>
       </div>
     </div>
   </div>

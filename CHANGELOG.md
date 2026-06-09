@@ -10,6 +10,15 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
 
+### Changed
+
+- **Truth audit — removed fabricated content** (2026-06-08, [#48](https://github.com/andy-carroll/accelerator-x-website/issues/48)): swept v2 for invented clients, suppliers, pedigree, and stats. Founder-verified the real picture and corrected:
+  - **Founder pedigree** — replaced fabricated employers across `LogoStrip.html`, `homepage-about.html`, `about.html`, `components/FounderCard.html`, `programmes/leadership-cohort.html`. Real orgs only (Andy: BCG Digital Ventures, Allica Bank, Equals Money Group · Toby: Alpha, Capco, 10x Banking); invented titles, "two exits", and "B.Eng" claims removed; tenure/bio claims flagged for founder sign-off. (Was: Capgemini/WPP/Capital One/NHS/Pegasus — all invented.)
+  - **`how-we-work.html`** — corrected Mark Bennett's attribution from the fabricated "CFO, Wittenrein Hering & former IPO board" to his real "CEO, W R Bennett Group" (the quote is his real, approved homepage quote).
+  - **£16k legal-dispute story** — anonymised in `components/PricingBlock.html` and `programmes/leadership-cohort.html` per founder decision (real story, not attributed to the client by name).
+  - **Fabricated "£45M retail group" case** — neutralised in `components/CaseTile.html` (60% / £420k / 11× metrics + non-existent case-study link) and `offerings/company-enablement.html` proof block; both now carry BLOCKING placeholders pending a real, approved case study.
+  - **Kept (founder-confirmed real):** homepage testimonials — Mark Bennett / W R Bennett Group, Alastair Constance / Mercury Global, David Carry / Track Record Coaching.
+
 ### Added
 
 - **Airtable consent fields** (2026-06-08, [#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)): added `Consent Given` (checkbox) and `Consent Timestamp` (single line text) to the Prospects table (`tblQzgVPzXL4cEQBp`, base `appZwa2e4VZk4ULDA`). The lead-capture function ([`netlify/functions/lead-capture.js:193`](netlify/functions/lead-capture.js)) already writes both on every submission; they were silently dropping until the fields existed. Verified all ten fields the function writes now map to existing Prospects fields (incl. `Source` choice "Accelerator-X Website"). Unblocks GO-LIVE-CHECKLIST §0. Airtable-schema change only — no code/preview deploy.

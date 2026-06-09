@@ -34,52 +34,42 @@ These must exist in the Airtable prospects table before ANY form submission goes
 
 Both cards live in `_templates/homepage-about.html`. Every line must be verified by the named founder before launch.
 
-**Toby Henry** — *all items below were inferred by an AI agent; Toby must approve each line*
+> **2026-06-08 (#48):** earlier AI-inferred employers were FABRICATED and have been removed. Real orgs are now founder-confirmed; **titles/roles and tenure/bio claims still need founder sign-off.**
+
+**Toby Henry**
 - `[ ]` Job title: "Co-founder · Strategy & Consulting" — correct?
-- `[ ]` Bio paragraph — accurate?
-- `[ ]` Track record: "Capgemini · Senior Consulting Manager" — correct title/company?
-- `[ ]` Track record: "NHS & public sector transformation" — accurate framing?
-- `[ ]` Track record: "WPP · Data & technology strategy" — correct?
-- `[ ]` Track record: "Two business builds + exits" — factually correct?
+- `[ ]` Bio paragraph + "twenty years" tenure + "built and sold businesses" — confirm (flagged in template).
+- `[x]` Track record orgs corrected to real: **Alpha, Capco, 10x Banking** (was Capgemini/NHS/WPP/"two exits" — fabricated).
+- `[ ]` Add titles/roles at Alpha / Capco / 10x Banking (orgs only listed for now).
 - `[ ]` LinkedIn URL: `https://www.linkedin.com/in/tobyhenry/` — correct handle?
 
-**Andy Carroll** — *from FounderCard.html component; verify*
+**Andy Carroll**
 - `[ ]` Job title: "Co-founder · Product & AI" — correct?
-- `[ ]` Bio paragraph — accurate?
-- `[ ]` Track record: "Capital One · Head of AI Product" — correct title?
-- `[ ]` Track record: "Pegasus Group · Product Lead" — correct?
-- `[ ]` Track record: "Two startup exits" — accurate?
-- `[ ]` Track record: "B.Eng Computer Science" — correct qualification?
+- `[ ]` Bio paragraph + "seventeen years" tenure — confirm (flagged in template; "Capital One / three Series B" fabrication removed).
+- `[x]` Track record orgs corrected to real: **BCG Digital Ventures, Allica Bank, Equals Money Group** (was Capital One/Pegasus/"two exits"/"B.Eng" — fabricated).
+- `[ ]` Add titles/roles at BCG DV / Allica Bank / Equals Money Group (orgs only listed for now).
 - `[ ]` LinkedIn URL: `https://linkedin.com/in/andycarroll` — correct handle?
 
 ### 1b — LogoStrip ("Operators who built at")
 
 Component: `_templates/components/LogoStrip.html`
-Currently lists: Capgemini, WPP, Capital One, NHS, Pegasus Group
 
 > Framed as founder pedigree (where we built), NOT a client logo strip.
-> Premium Car Parks removed — it is a client, not a previous employer.
+> **2026-06-08 (#48):** previous list (Capgemini, WPP, Capital One, NHS, Pegasus Group) was FABRICATED — replaced with real founder pedigree.
 
-- `[ ]` Capgemini — confirm Toby worked here in a named capacity
-- `[ ]` WPP — confirm which entity; accurate attribution?
-- `[ ]` Capital One — confirm Andy's role (Head of AI Product per FounderCard)
-- `[ ]` NHS — confirm which programme/organisation and that the framing is accurate
-- `[ ]` Pegasus Group — confirm Andy's role here
-- `[ ]` Agree final list with both founders before launch
+- `[x]` List corrected to real orgs: BCG Digital Ventures, Capco, 10x Banking, Allica Bank, Equals Money Group, Alpha.
+- `[ ]` Final visual review with both founders before launch (order, which orgs to feature).
 
 ### 1c — Client testimonials
 
 **File:** `_templates/homepage-testimonials.html`
 
-> All three current quotes are **placeholder/mockup copy** and must be replaced with real,
-> approved client quotes before launch.
+> **2026-06-08 (#48):** the three named people + companies + roles are **founder-confirmed REAL** (Alastair Constance / Mercury Global; Mark Bennett / W R Bennett Group — our first client; David Carry / Track Record Coaching). Andy indicated the quotes are approved.
+> **OUTSTANDING:** an earlier session flagged the exact *quote wording* as AI-drafted mockup. Reconcile: confirm the verbatim words on the page are genuinely each client's and approved — real person + invented words is still a clanger.
 
-- `[ ]` **BLOCKING** Replace all three testimonial quotes with real client quotes
-- `[ ]` Alastair Constance, CEO Mercury Global — get real quote and written approval to use
-- `[ ]` Mark Bennett, CEO W R Bennett Group — real quote + approval (attribution updated: "Premium Car Parks" removed, now reads "CEO, W R Bennett Group" only — confirm this is correct)
-- `[ ]` David Carry, Founder CEO Track Record Coaching — real quote + approval
-  - Name confirmed: "David Carry" (not Carey)
-- `[ ]` All job titles and company names confirmed with each client
+- `[x]` Names, companies, and roles confirmed real with founders.
+- `[ ]` **BLOCKING** Confirm the exact quote *wording* for each of the three is genuinely theirs + approved (not AI-drafted). If any wording is mockup, replace with their real words.
+- `[ ]` Written approval on file to use each named quote publicly.
 
 ### 1d — ProofRow quote
 
