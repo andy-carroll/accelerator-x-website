@@ -18,6 +18,8 @@ Every session runs one turn of the same loop. This is the spine the rest of this
 
 **The close-gate (non-negotiable):** a session cannot close unless its work is **tracked** (a GitHub issue exists and is updated/closed) AND **shipped** (pushed to the preview) — or **explicitly carried** (written into session-notes + Next Session Priorities with the reason). "Done but unpushed" and "done but untracked" both mean the session is not finished.
 
+**The zero-loss principle (what the close-gate exists to guarantee):** nothing of value from a session may exist only in the chat transcript. Every decision, finding, artefact, and piece of unfinished intent must live in the repo (issue, commit, CHANGELOG, session log, CLAUDE.md) by the time the session closes. The operator must be able to close the chat window, never reopen it, and lose nothing. If recording something feels optional, record it.
+
 ---
 
 ## SESSION START
