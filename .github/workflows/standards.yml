@@ -1,6 +1,6 @@
 name: Standards
 
-# Enforces AI-RULES.md §Philosophy on every push to main.
+# Enforces AI-RULES.md §Philosophy on every push to main and rebuild/* branches.
 # Two jobs, both required:
 #   build   — npm run build must exit 0 (no broken artefacts reach Netlify)
 #   check   — npm run check must exit 0 (no standards violations in the codebase)
@@ -10,7 +10,7 @@ name: Standards
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'rebuild/**']
 
 jobs:
   build:

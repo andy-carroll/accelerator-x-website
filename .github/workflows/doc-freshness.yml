@@ -8,7 +8,7 @@ name: Doc Freshness
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'rebuild/**']
 
 jobs:
   changelog-updated:
@@ -17,12 +17,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2   # need parent commit to diff against
+          fetch-depth: 0   # full history — the diff covers the whole push range, not just the last commit
+
+      - name: Determine diff base for this push
+        id: diff_base
+        run: |
+          # Diff the whole push (before..after) so multi-commit pushes are judged as a unit:
+          # a CHANGELOG entry in any commit of the push satisfies the check.
+          # Fall back to HEAD~1 when 'before' is unavailable (new branch or force push).
+          BASE="${{ github.event.before }}"
+          if [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+            BASE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          fi
+          echo "base=$BASE" >> $GITHUB_OUTPUT
+          echo "Diffing against base: ${BASE:-<repo root — single-commit history>}"
 
       - name: Check if code files changed
         id: code_changed
         run: |
-          CODE_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep -E \
+          BASE="${{ steps.diff_base.outputs.base }}"
+          if [ -z "$BASE" ]; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No diff base available — skipping check."
+            exit 0
+          fi
+          CODE_CHANGED=$(git diff --name-only "$BASE" HEAD | grep -E \
             '^(scripts/|_templates/|netlify/|assets/js/|styles\.css|index\.html)' \
             | grep -v '\.md$' || true)
           if [ -n "$CODE_CHANGED" ]; then
@@ -37,7 +56,7 @@ jobs:
       - name: Check CHANGELOG.md was updated
         if: steps.code_changed.outputs.changed == 'true'
         run: |
-          CHANGELOG_CHANGED=$(git diff --name-only HEAD~1 HEAD | grep '^CHANGELOG\.md$' || true)
+          CHANGELOG_CHANGED=$(git diff --name-only "${{ steps.diff_base.outputs.base }}" HEAD | grep '^CHANGELOG\.md$' || true)
           if [ -z "$CHANGELOG_CHANGED" ]; then
             echo ""
             echo "❌ CHANGELOG.md was not updated."
