@@ -325,6 +325,48 @@ function checkBuiltHtml() {
   if (clean) pass('Built HTML: no missing alt attributes or duplicate IDs');
 }
 
+// ── Check 9: No hardcoded LinkedIn or site-config URLs in templates ───────────
+// Rule: AI-RULES.md §Philosophy — site-wide URLs must use {{site:KEY}} tokens
+// Rationale: LinkedIn profile/company URLs and external tool URLs (quiz etc.)
+//   must live in scripts/site-config.js. Hardcoding them causes silent drift
+//   when URLs change. We ran into this with founder profiles. Comments are
+//   excluded; only href/src/content attribute values are flagged.
+
+function checkNoHardcodedSiteUrls() {
+  console.log('\n[9] No hardcoded site-config URLs in templates (use {{site:KEY}} tokens)');
+
+  const TEMPLATE_DIRS = ['_templates'];
+  const PATTERNS = [
+    { label: 'founder LinkedIn profile', re: /href="https?:\/\/(www\.)?linkedin\.com\/in\//i },
+    { label: 'company LinkedIn',         re: /href="https?:\/\/(www\.)?linkedin\.com\/company\//i },
+    { label: 'quiz URL',                 re: /href="https?:\/\/quiz\.accelerator-x\.ai/i },
+  ];
+
+  let clean = true;
+
+  for (const dir of TEMPLATE_DIRS) {
+    for (const file of filesIn(dir, '.html')) {
+      // Skip design-system docs — they contain demo/documentation content
+      if (file.includes('design-system')) continue;
+
+      const lines = readFile(file).split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        // Skip HTML comments
+        if (/^\s*<!--/.test(line)) continue;
+        for (const { label, re } of PATTERNS) {
+          if (re.test(line)) {
+            fail(`${file}:${i + 1} — hardcoded ${label} URL. Use {{site:KEY}} token from scripts/site-config.js`);
+            clean = false;
+          }
+        }
+      }
+    }
+  }
+
+  if (clean) pass('No hardcoded site-config URLs in templates');
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -341,6 +383,7 @@ function main() {
   checkWeNeverRulesAreClassified();
   checkNoCssTokenDrift();
   checkBuiltHtml();
+  checkNoHardcodedSiteUrls();
 
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 

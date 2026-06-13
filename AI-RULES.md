@@ -168,6 +168,9 @@ causes `npm run check` to fail. A rule without enforcement is a wish, not a rule
   <!-- check: scripts/check.js#7 -->
 - Ship built HTML with missing `alt` attributes or duplicate `id` values
   <!-- check: scripts/check.js#8 -->
+- Hardcode site-wide URLs or emails defined in `scripts/site-config.js` (LinkedIn
+  profiles, company LinkedIn, quiz URL, founder emails) — use `{{site:KEY}}` tokens
+  <!-- check: scripts/check.js#9 -->
 
 ### Core goals
 
