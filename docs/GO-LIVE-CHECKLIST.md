@@ -100,7 +100,7 @@ Component: `_templates/components/ProofRow.html`
 
 - `[x]` **Decision:** `/contact/` page created — CTABand `href` updated to `/contact/`
 - `[x]` Sitemap updated — `/contact/` included at priority 0.8
-- `[ ]` Add `/contact/` to nav (currently missing — nav was built before this page existed)
+- `[x]` Superseded 2026-06-13: nav IA ruling — Contact via the nav CTA (already wired); About added to nav instead (#33)
 
 ### 1h — Inner page content requiring founder review
 
@@ -176,14 +176,17 @@ The `OfferingTable` component was built with old content that predates the canon
 
 ### 2a — Navigation
 
+> **IA approved (Andy, 2026-06-13, #33):** What we do · How we work · **About** · Insights · Quiz → CTA "Apply to work with us" (→ `/contact/`). Contact via CTA only — no separate link. Fixes `/about/` being orphaned (linked from neither nav nor footer).
+
 - `[ ]` All nav links resolve to built pages or valid anchors
 - `[x]` "What we do" → `/what-we-do/` built ✅
 - `[x]` "How we work" → `/how-we-work/` built ✅
 - `[ ]` "Insights" → `/insights/` working?
 - `[ ]` "Quiz" → `quiz.accelerator-x.ai` live?
 - `[ ]` Logo → `/` correct?
-- `[ ]` Nav CTA "Apply to work with us" → should resolve to `/contact/` (page now exists — confirm nav href is updated)
-- `[ ]` `/contact/` — add to nav if not already present (nav was built before /contact/ existed — §1f)
+- `[x]` Nav CTA "Apply to work with us" → `/contact/` — confirmed 2026-06-13 in desktop bar + mobile drawer (`Nav.html`)
+- `[x]` `/contact/` in nav — resolved by IA ruling 2026-06-13: Contact via CTA only; **About** added to nav instead (#33)
+- `[ ]` Add **About** → `/about/` to desktop links + mobile drawer per approved IA (#33)
 - `[ ]` Mobile nav — all links work at 375px
 
 ### 2b — Footer links
