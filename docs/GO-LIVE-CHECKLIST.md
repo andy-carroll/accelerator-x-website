@@ -34,20 +34,21 @@ These must exist in the Airtable prospects table before ANY form submission goes
 
 Both cards live in `_templates/homepage-about.html`. Every line must be verified by the named founder before launch.
 
-> **2026-06-08 (#48):** earlier AI-inferred employers were FABRICATED and have been removed. Real orgs are now founder-confirmed; **titles/roles and tenure/bio claims still need founder sign-off.**
+> **2026-06-08 (#48):** earlier AI-inferred employers were FABRICATED and have been removed. Real orgs are now founder-confirmed.
+> **2026-06-13 (#48):** founder rulings landed — bios rewritten (Andy: 18 years as a product manager and leader; Toby: two decades across tier-one consultancies, startups and scale-ups; "built and sold businesses" dropped). Orgs-only track records confirmed fine to ship.
 
 **Toby Henry**
 - `[ ]` Job title: "Co-founder · Strategy & Consulting" — correct?
-- `[ ]` Bio paragraph + "twenty years" tenure + "built and sold businesses" — confirm (flagged in template).
+- `[x]` Bio rewritten 2026-06-13 per founder ruling: two decades across tier-one consultancies, startups and scale-ups, building businesses; "built and sold" claim dropped.
 - `[x]` Track record orgs corrected to real: **Alpha, Capco, 10x Banking** (was Capgemini/NHS/WPP/"two exits" — fabricated).
-- `[ ]` Add titles/roles at Alpha / Capco / 10x Banking (orgs only listed for now).
+- `[x]` Founder ruling 2026-06-13: orgs-only is fine — no titles/roles needed.
 - `[ ]` LinkedIn URL: `https://www.linkedin.com/in/tobyhenry/` — correct handle?
 
 **Andy Carroll**
 - `[ ]` Job title: "Co-founder · Product & AI" — correct?
-- `[ ]` Bio paragraph + "seventeen years" tenure — confirm (flagged in template; "Capital One / three Series B" fabrication removed).
+- `[x]` Bio rewritten 2026-06-13 per founder ruling: "Eighteen years as a product manager and leader…" ("Capital One / three Series B" fabrication previously removed).
 - `[x]` Track record orgs corrected to real: **BCG Digital Ventures, Allica Bank, Equals Money Group** (was Capital One/Pegasus/"two exits"/"B.Eng" — fabricated).
-- `[ ]` Add titles/roles at BCG DV / Allica Bank / Equals Money Group (orgs only listed for now).
+- `[x]` Founder ruling 2026-06-13: orgs-only is fine — no titles/roles needed.
 - `[ ]` LinkedIn URL: `https://linkedin.com/in/andycarroll` — correct handle?
 
 ### 1b — LogoStrip ("Operators who built at")
@@ -65,21 +66,22 @@ Component: `_templates/components/LogoStrip.html`
 **File:** `_templates/homepage-testimonials.html`
 
 > **2026-06-08 (#48):** the three named people + companies + roles are **founder-confirmed REAL** (Alastair Constance / Mercury Global; Mark Bennett / W R Bennett Group — our first client; David Carry / Track Record Coaching). Andy indicated the quotes are approved.
-> **OUTSTANDING:** an earlier session flagged the exact *quote wording* as AI-drafted mockup. Reconcile: confirm the verbatim words on the page are genuinely each client's and approved — real person + invented words is still a clanger.
+> **RESOLVED 2026-06-13 (#48):** Andy confirmed all three quote wordings are the clients' own and fully approved.
 
 - `[x]` Names, companies, and roles confirmed real with founders.
-- `[ ]` **BLOCKING** Confirm the exact quote *wording* for each of the three is genuinely theirs + approved (not AI-drafted). If any wording is mockup, replace with their real words.
+- `[x]` **RESOLVED 2026-06-13:** Andy confirmed all three quote wordings are the clients' own and fully approved.
 - `[ ]` Written approval on file to use each named quote publicly.
 
 ### 1d — ProofRow quote
 
 Component: `_templates/components/ProofRow.html`
 
-> Quote ("More done in two weeks of Phase 0…") is currently **placeholder copy**.
+> **RESOLVED 2026-06-13 (#48):** placeholder quote + fabricated attribution ("CEO, £60M healthcare group") replaced with a real founder-supplied quote — Charlotte Steedman, CEO, Conductor.
 > Case studies link is commented out until `/case-studies/` page is live — restore it then.
 
-- `[ ]` **BLOCKING** Replace with a real, approved client quote before launch
-- `[ ]` Confirm attribution format (anonymised "CEO, £60M healthcare group" or named)
+- `[x]` Replaced 2026-06-13 with real founder-supplied quote — Charlotte Steedman, CEO, Conductor (also used on /what-we-do/leadership-cohort/ proof section).
+- `[x]` Attribution: named (Charlotte Steedman, CEO, Conductor).
+- `[ ]` Written approval on file for the Charlotte Steedman quote (tracked in #55).
 - `[ ]` Restore `<a href="/case-studies/" ...>Read the case studies</a>` when `/case-studies/` is published
 
 ### 1e — Pricing and commercial copy
@@ -113,7 +115,7 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[ ]` Approach cards (4 cards: "Diagnose first" / "Embedded, not remote" / "Ship, don't strategise" / "Transfer capability") — confirm exact wording
 - `[ ]` Engagement phases — Phase 0/1/2…n/Advisory descriptions — confirm details (esp. pricing/duration if any)
 - `[ ]` Contrast table ("We never…" / "We always…") — confirm every item is accurate and intentional
-- `[ ]` **Mark Bennett pull-quote** — quote attributed to Mark Bennett (CEO, W R Bennett Group) on `/how-we-work/` — confirm: (a) this is a real quote, not placeholder; (b) Mark has approved its use on the site; (c) attribution is correct
+- `[x]` **Mark Bennett pull-quote** — resolved 2026-06-13: the page carried a *paraphrased variant* of Mark's approved homepage quote; replaced with a verbatim excerpt of the approved wording. Attribution (CEO, W R Bennett Group) founder-confirmed.
 
 **`/contact/` — Contact details**
 - `[ ]` Confirm `toby@accelerator-x.ai` is the correct public email for Toby
@@ -136,15 +138,15 @@ The `OfferingTable` component was built with old content that predates the canon
 **`/what-we-do/leadership-cohort/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Cohort start date (12 Aug 2026) — confirm accuracy at launch
 - `[ ]` **BLOCKING** Places left (6 of 12) — update to actual availability at launch
-- `[ ]` **BLOCKING** ProofRow quote (`"It moved my Monday morning…"`) — confirm this is a real, approved client quote; attribution `CMO, B2B SaaS · Cohort 02 · Feb 2026` must be verified
+- `[x]` ProofRow quote resolved 2026-06-13: unverified "It moved my Monday morning…" (CMO, B2B SaaS · Cohort 02) removed; replaced with real founder-supplied quote — Charlotte Steedman, CEO, Conductor.
 - `[ ]` **BLOCKING** FAQ answers — all 6 answers are AI-written placeholders; founders must review and approve each before launch
 
 **`/what-we-do/leadership-activation/` — Blocking items before launch**
-- `[ ]` **BLOCKING** ProofRow quote — real, approved client quote required (currently placeholder)
+- `[x]` Proof section removed 2026-06-13 pending a real client quote — tracked in #55 (founder-input, high priority).
 - `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
 
 **`/what-we-do/senior-leader-acceleration/` — Blocking items before launch**
-- `[ ]` **BLOCKING** ProofRow quote — must be real, client-approved, and appropriately anonymised (no company name, no photo)
+- `[x]` Proof section removed 2026-06-13 pending a real anonymised client quote — tracked in #55 (founder-input, high priority).
 - `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
 - `[ ]` Confirm coach naming ("Toby or Andy") on the sidebar is intentional and both founders are comfortable
 
@@ -155,9 +157,9 @@ The `OfferingTable` component was built with old content that predates the canon
 **`/what-we-do/company-enablement/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
 - `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
-- `[ ]` **BLOCKING** Proof section pull-quote (`"By the end of week two we had a roadmap that survived contact with our CFO…"`) — confirm this is a real, approved client quote; attribution `COO, £45M retail group · Phase 0 + Phase 1, Q1 2026` must be verified
+- `[x]` Proof section removed 2026-06-13 (quote slot had already been neutralised — the original was fabricated). Real quote + linked case study tracked in #55 (founder-input, high priority).
 - `[ ]` **BLOCKING** FAQ answers — all 6 answers are placeholder `<!-- TODO -->` comments; founders must write real answers before launch
-- `[ ]` Right panel of proof section — placeholder case study (links to `/insights/?tag=cases`); confirm this is the intended approach or remove the right col before launch
+- `[x]` Right panel removed with the proof section 2026-06-13 — real case-study panel tracked in #55.
 
 ### 1g — General copy review
 
