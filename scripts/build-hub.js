@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
-const { resolveComponentTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens } = require('./build-components');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, '../content/articles');
@@ -314,7 +314,7 @@ async function build() {
       
     // Save to /insights/articles/[slug].html
     const outPath = path.join(OUTPUT_DIR, 'articles', `${slug}.html`);
-    fs.writeFileSync(outPath, resolveComponentTokens(articleHtml));
+    fs.writeFileSync(outPath, resolveSiteTokens(resolveComponentTokens(articleHtml)));
     
     // Store metadata for the index page
     articles.push({
@@ -339,7 +339,7 @@ async function build() {
   const articlesListHtml = articles.map(article => renderArticleTile(article)).join('\n');
 
   indexHtml = indexHtml.replace(/{{articlesList}}/g, articlesListHtml);
-  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), resolveComponentTokens(indexHtml));
+  fs.writeFileSync(path.join(OUTPUT_DIR, 'index.html'), resolveSiteTokens(resolveComponentTokens(indexHtml)));
 
   // Generate sitemap.xml
   generateSitemap(articles, siteUrl);

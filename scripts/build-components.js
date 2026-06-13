@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { SITE_CONFIG } = require('./site-config');
 
 const ROOT = path.resolve(__dirname, '..');
 const COMPONENTS_DIR = path.join(ROOT, '_templates/components');
@@ -71,6 +72,15 @@ function resolveComponentTokens(html) {
   return resolved;
 }
 
+function resolveSiteTokens(html) {
+  return html.replace(/\{\{site:([A-Z0-9_]+)\}\}/g, (match, key) => {
+    if (!(key in SITE_CONFIG)) {
+      throw new Error(`Unknown site token: {{site:${key}}}. Available: ${Object.keys(SITE_CONFIG).join(', ')}`);
+    }
+    return SITE_CONFIG[key];
+  });
+}
+
 function validateComponentTokens(html, context) {
   const TOKEN_PATTERN = /\{\{component:([A-Za-z0-9_-]+)\}\}/g;
   const registry = getRegistry();
@@ -94,5 +104,6 @@ module.exports = {
   getRegisteredComponents,
   renderComponent,
   resolveComponentTokens,
+  resolveSiteTokens,
   validateComponentTokens,
 };

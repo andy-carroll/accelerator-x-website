@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { resolveComponentTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens } = require('./build-components');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -37,7 +37,7 @@ function main() {
     }
 
     const source   = fs.readFileSync(templatePath, 'utf8');
-    const resolved = resolveComponentTokens(source);
+    const resolved = resolveSiteTokens(resolveComponentTokens(source));
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });

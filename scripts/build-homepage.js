@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { resolveComponentTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens } = require('./build-components');
 
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE_PATH = path.join(ROOT, '_templates/homepage.html');
@@ -37,7 +37,7 @@ function main() {
   const withWho = withApply.replace(WHO_TOKEN, whoPartial);
   const withTestimonials = withWho.replace(TESTIMONIALS_TOKEN, testimonialsPartial);
   const withTrust = withTestimonials.replace(TRUST_TOKEN, trustPartial);
-  const source = resolveComponentTokens(withTrust);
+  const source = resolveSiteTokens(resolveComponentTokens(withTrust));
 
   if (withAbout === sourceTemplate) {
     throw new Error(`Homepage template token missing: ${ABOUT_TOKEN}`);
