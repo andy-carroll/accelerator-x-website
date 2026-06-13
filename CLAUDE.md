@@ -12,6 +12,7 @@
 **Stack:** Static HTML + Tailwind CDN + `npm run build` → Netlify (pre-built artefacts committed)
 **Email:** Brevo list #9 | **Analytics:** PostHog | **Notifications:** Slack `#website-leads`
 **Node:** v26.0.0 via `/opt/homebrew/bin/node` — run `export PATH="/opt/homebrew/bin:$PATH"` if npm isn't found.
+**DNS/hosting reference:** `docs/tech-architecture/dns-hosting.md` — registrar, nameservers, full zone, SSL, email, quiz, incident log.
 
 ---
 
