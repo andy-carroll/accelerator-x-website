@@ -12,6 +12,8 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Changed
 
+- **Nav overhaul shipped** (2026-06-13, [#33](https://github.com/andy-carroll/accelerator-x-website/issues/33)): added **About** → `/about/` to `components/Nav.html` (desktop bar + mobile drawer, between How we work and Insights) per the approved IA — `/about/` is no longer orphaned. Rebuilt all consumers (12 pages + 5 insights articles); funnel page's deliberate minimal nav untouched. Verified at 375px (drawer opens, all 5 links + CTA, navigation works, drawer closes) and desktop. `aria-current` remains with #49's per-page variable mechanism.
+
 - **Nav IA decided + #33 made swarm-ready** (2026-06-13, [#33](https://github.com/andy-carroll/accelerator-x-website/issues/33)): founder-approved nav IA — What we do · How we work · **About** · Insights · Quiz → CTA "Apply to work with us" (Contact via CTA, no separate link; fixes `/about/` being orphaned from nav + footer). Ticket rewritten against verified code state (stale "CTA → /contact/" bullet was already done), with explicit out-of-scope (funnel minimal nav, `cohort.html` v1) and acceptance criteria. `aria-current` moved behind the per-page component-variable mechanism now formally owned by [#49](https://github.com/andy-carroll/accelerator-x-website/issues/49). No site changes — ticket/spec work only.
 
 - **Truth audit closed out — founder rulings applied** (2026-06-13, [#48](https://github.com/andy-carroll/accelerator-x-website/issues/48) → follow-up [#55](https://github.com/andy-carroll/accelerator-x-website/issues/55)): all remaining founder-input gates resolved live with Andy and applied across templates + built pages:

@@ -178,16 +178,17 @@ The `OfferingTable` component was built with old content that predates the canon
 
 > **IA approved (Andy, 2026-06-13, #33):** What we do · How we work · **About** · Insights · Quiz → CTA "Apply to work with us" (→ `/contact/`). Contact via CTA only — no separate link. Fixes `/about/` being orphaned (linked from neither nav nor footer).
 
-- `[ ]` All nav links resolve to built pages or valid anchors
+- `[x]` All nav links resolve to built pages or valid anchors — verified 2026-06-13 (#33)
 - `[x]` "What we do" → `/what-we-do/` built ✅
 - `[x]` "How we work" → `/how-we-work/` built ✅
-- `[ ]` "Insights" → `/insights/` working?
-- `[ ]` "Quiz" → `quiz.accelerator-x.ai` live?
-- `[ ]` Logo → `/` correct?
+- `[x]` "Insights" → `/insights/` — hub page built ✅
+- `[ ]` "Quiz" → `quiz.accelerator-x.ai` live? — HTTP answers with a 302 but HTTPS couldn't be verified from the build sandbox (2026-06-13); confirm in a browser before launch
+- `[x]` Logo → `/` — confirmed 2026-06-13
 - `[x]` Nav CTA "Apply to work with us" → `/contact/` — confirmed 2026-06-13 in desktop bar + mobile drawer (`Nav.html`)
 - `[x]` `/contact/` in nav — resolved by IA ruling 2026-06-13: Contact via CTA only; **About** added to nav instead (#33)
-- `[ ]` Add **About** → `/about/` to desktop links + mobile drawer per approved IA (#33)
-- `[ ]` Mobile nav — all links work at 375px
+- `[x]` **About** → `/about/` added to desktop links + mobile drawer per approved IA — shipped 2026-06-13 (#33)
+- `[x]` Mobile nav — verified at 375px (2026-06-13): drawer opens, shows all 5 links + CTA, links navigate, drawer closes
+- `[ ]` `aria-current="page"` on active link — blocked on per-page variable mechanism, owned by #49
 
 ### 2b — Footer links
 
