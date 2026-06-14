@@ -39,6 +39,8 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Fixed
 
+- **Removed the "Not sure which door is yours?" quiz prompt from TwoDoors** (2026-06-14, [#61](https://github.com/andy-carroll/accelerator-x-website/issues/61)): the door-picker linked to the AI-readiness quiz — a non-sequitur (the quiz assesses business readiness, not which offering door). Removed the whole `.ax-two-doors__quiz` block + its now-dead CSS from the shared `TwoDoors` component (renders on `/` + `/what-we-do/`), so it's gone from both. Also eliminated one of the two false "Free · No email required" claims (the contact-page instance remains, tracked in #61). Future direction (Andy): re-point the quiz so it leads into how we can help — separate work.
+
 - **Primary CTA hover was pink-on-pink** (2026-06-14, [#60](https://github.com/andy-carroll/accelerator-x-website/issues/60)): the base `a:hover { color: var(--action-accent) }` repainted anchor-button text pink, so the `.btn--accent` CTA ("Apply to work with us", an `<a>`) lost its white text against the darker-pink hover background — while the newsletter `<button>` was unaffected, giving inconsistent hover behaviour. Scoped the rule to `a:not(.btn):hover` in `tokens.css` and regenerated `tailwind.generated.css` (`npm run build:css` — the minified bundle ships its own copy of the base layer, so token-only edits don't land until it's rebuilt). All anchor-button variants now keep their text colour on hover; accent CTA matches the newsletter button. Verified on preview.
 
 ### Added
