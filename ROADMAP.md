@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-06-14 (Offer Canon established — single source of truth for offerings; [#57](https://github.com/andy-carroll/accelerator-x-website/issues/57))_
+_Last updated: 2026-06-14 (Phase 5 build — site now derives from the Offer Canon; Two Doors restored, offering pages reconciled, Check #10 drift-guard; [#57](https://github.com/andy-carroll/accelerator-x-website/issues/57))_
 
 ---
 
@@ -33,7 +33,7 @@ transparent, anti-agency positioning.
 - [x] **Phase 3 — Page Assembly** — all pages assembled ✅ (`/what-we-do`, `/how-we-work`, `/about`, `/contact`; homepage v2 inline sections done in prior session)
 - [x] **Phase 4 — Content pipeline** — articles migrated to Build Plan §10 data model; `format` + `published` + `read_time`; `renderArticleTile()` + tag-based hub filter ✅
 - [ ] **Phase 5 — Analytics** — PostHog event instrumentation
-- [-] **Offer Canon + site derivation** ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)) — single source of truth for offerings established (`offer-canon.md` + `offerings.json`, all 6 founder decisions locked, FAQ bank). **Next build:** derive `/what-we-do/` + offering pages from the data (Two Doors, kill OfferingTable, FAQ + FAQPage JSON-LD, drift-check).
+- [-] **Offer Canon + site derivation** ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)) — most of Phase 5 shipped 2026-06-14: `{{offering:…}}` token engine, **Two Doors** restored (home + `/what-we-do/`), OfferingTable/8-Week-Cycle/Fractional-Advisory killed, four offering pages reconciled + tokenised, Talks re-elevated (POA/inquiry-led), **Check #10** drift-guard. **Remaining:** the `/faq/` hub + FAQPage JSON-LD for cohort/company-enablement pages.
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 

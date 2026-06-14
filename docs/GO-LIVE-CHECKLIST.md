@@ -87,11 +87,13 @@ Component: `_templates/components/ProofRow.html`
 ### 1e — Pricing and commercial copy
 
 > **UPDATE 2026-06-14 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)):** All pricing now **locked** in the Offer Canon §5 + `offerings.json`: 1:1 Exec AI Fast Track Coaching from £10k · Leadership Team AI Activation base £15k (≤6) +£2k/head · Open Cohort £3,500/place · Phase 0 £5k · cycle £20k — **all +VAT**; standalone £2k workshop **retired**; **no published ROI multiple**. The £4k/£12k/£2k figures in the rows below are stale — use the Canon. Applying to the built pages = Phase 5 of #57.
+>
+> **✅ BUILT 2026-06-14 (Phase 5):** applied to the built pages and **enforced by Check #10**. Every price on the offer surfaces (home, `/what-we-do/`, 4 offering pages, `/how-we-work/`, Talks) now renders from `offerings.json` via tokens — no literals. Homepage JSON-LD `OfferCatalog` rewritten from the fabricated workshop (£4k) + "8-Week Cycle" (£12k) to the five real offerings with **no prices**. Items below superseded; founder sign-off on the locked numbers still pending (§11).
 
-- `[ ]` JSON-LD in `index.html`: prices £4,000 (workshop) + £12,000 (8-week cycle) — current?
-- `[ ]` Hero risk-note copy: now reads "Phase 0 from £5,000 · 2 weeks" — confirm pricing with founders before go-live
+- `[x]` JSON-LD in `index.html`: stale £4,000/£12,000 fabricated offers **removed** → real offerings, no prices (2026-06-14)
+- `[x]` Hero risk-note "Phase 0 from £5,000 · 2 weeks" — now token-driven from Canon (£5k locked); founder sign-off pending §11
 - `[ ]` Hero chip: "Now taking on new clients · Q3 2026" — confirm this is accurate at launch date
-- `[ ]` Process timeline: "Phase 1 from £20,000" — confirm pricing with founders before go-live
+- `[x]` Process timeline "Phase 1 from £20,000" — now token-driven from Canon (£20k locked); founder sign-off pending §11
 - `[ ]` ApplyForm SLA: "Average response time: 2 business days" — accurate?
 - `[ ]` CTABand: "Real reply within a week" — accurate SLA?
 - `[ ]` Confirm no `priceRange` in JSON-LD remains the right decision (noted in CLAUDE.md)
@@ -125,44 +127,44 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[ ]` LinkedIn URLs in contact cards match §1a above
 
 **`/what-we-do/` — Offering detail links**
-- `[ ]` `OfferingTable` and `DecisionTree` components link to offering detail pages (e.g. `/what-we-do/leadership-activation/`) that do not yet exist — all will 404 until detail pages are built or links are removed/redirected
+- `[x]` Resolved 2026-06-14 (Phase 5): `OfferingTable`/`DecisionTree` deleted; `/what-we-do/` now uses the `TwoDoors` component linking only the four live offering pages (all built) + Talks. No 404-bound links; Check #10 enforces no links to retired offerings.
 
 **`/what-we-do/` — OfferingTable content misalignment (BLOCKING)**
 
 > **UPDATE 2026-06-14 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)):** RESOLVED at the source. The canonical offer set, names and prices now live in `docs/business-context/offer-canon.md` + `content/data/offerings.json` (the "Two Doors" model). #26 was the symptom; the build reconciliation (kill the OfferingTable's old rows + "8-Week Transformation Cycle", derive from `offerings.json`) is **Phase 5 of #57**. The line-items below are superseded by the Canon.
 
-The `OfferingTable` component was built with old content that predates the canonical offering names confirmed via the DecisionTree. The two components on the same page currently describe different product portfolios. All items below must be resolved before launch.
+> **✅ RESOLVED 2026-06-14 (Phase 5 build):** the entire OfferingTable was deleted and the page rebuilt on the `TwoDoors` spine. All items below are done.
 
-- `[ ]` **BLOCKING** "8-Week Transformation Cycle" is not a canonical product name — it does not appear in the DecisionTree or any confirmed spec. Founders must decide: rename to match a canonical offering, or remove this row.
-- `[ ]` **BLOCKING** Row 01 "Leadership Activation · Foundation · half-day · £2,000 · one-off" describes a completely different product from the canonical "Leadership Activation" in the DecisionTree (8-week in-house team programme, £18k). Same name, different product — resolve before launch.
-- `[ ]` **BLOCKING** "8-Week Transformation Cycle" links to `/what-we-do/8-week-cycle/` which does not exist and will never be built under current specs — will 404.
-- `[ ]` "FOUR OFFERINGS" kicker and "Four ways to build real AI capability" H1 — verify these counts are still accurate once the offering set is confirmed (DecisionTree currently shows 6 offerings, not 4).
-- `[ ]` Align all OfferingTable rows (names, descriptions, durations, prices, links) with the canonical offering set confirmed in the DecisionTree once the above decisions are made. Edit `_templates/components/OfferingTable.html`.
+- `[x]` "8-Week Transformation Cycle" — **deleted** (the component carrying it was removed; Check #10 forbids the string returning).
+- `[x]` Row 01 "Leadership Activation · half-day · £2,000" — **deleted**; the real Leadership Team AI Activation page now derives its name/price from `offerings.json`.
+- `[x]` `/what-we-do/8-week-cycle/` dead link — **deleted** (Check #10 forbids it returning).
+- `[x]` "FOUR OFFERINGS / Four ways" — **reframed** to "Two doors in. Pick your starting point." across hero, meta and WebPage JSON-LD.
+- `[x]` Offering rows now derive from `offerings.json` (names/prices/durations as tokens); the hand-built table is gone.
 
 **`/what-we-do/leadership-cohort/` — Blocking items before launch**
 - `[ ]` **BLOCKING** Cohort start date (12 Aug 2026) — confirm accuracy at launch
 - `[ ]` **BLOCKING** Places left (6 of 12) — update to actual availability at launch
 - `[x]` ProofRow quote resolved 2026-06-13: unverified "It moved my Monday morning…" (CMO, B2B SaaS · Cohort 02) removed; replaced with real founder-supplied quote — Charlotte Steedman, CEO, Conductor.
-- `[ ]` **BLOCKING** FAQ answers — all 6 answers are AI-written placeholders; founders must review and approve each before launch
+- `[x]` FAQ answers authored 2026-06-14 (Phase 5) — 6 real answers grounded in Canon §7 (already real before; no placeholders). FAQPage JSON-LD still **carried** (T6). Founder review of wording advisable, not blocking.
 
 **`/what-we-do/leadership-activation/` — Blocking items before launch**
 - `[x]` Proof section removed 2026-06-13 pending a real client quote — tracked in #55 (founder-input, high priority).
-- `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
+- `[x]` FAQ answers **authored 2026-06-14 (Phase 5)** — 6 real answers from Canon §7 (incl. per-head cost + Door-1-vs-exec-team distinction) + FAQPage JSON-LD. Founder review of wording advisable, not blocking.
+- `[x]` Name/price reconciled 2026-06-14: "Leadership Team AI Activation", base £15k + £2k/head (max 12) — tokenised from `offerings.json`.
 
 **`/what-we-do/senior-leader-acceleration/` — Blocking items before launch**
 - `[x]` Proof section removed 2026-06-13 pending a real anonymised client quote — tracked in #55 (founder-input, high priority).
-- `[ ]` **BLOCKING** FAQ answers — all 6 written and approved by founders before launch
-- `[ ]` Confirm coach naming ("Toby or Andy") on the sidebar is intentional and both founders are comfortable
+- `[x]` FAQ answers **authored 2026-06-14 (Phase 5)** — 6 real answers from Canon §7 (incl. the £10k-vs-£3,500 objection) + FAQPage JSON-LD. Founder review of wording advisable, not blocking.
+- `[x]` Name/price reconciled 2026-06-14: "1:1 Exec AI Fast Track Coaching", 6wk / from £10k / 75-min — tokenised. Sidebar now reads "dedicated founder" (coach-naming concern moot).
 
 **`/talks-events/` — Blocking items before launch**
-- `[ ]` Replace empty state with real EventCard instances when first event is confirmed
-- `[ ]` Add `Event` JSON-LD schema when real events are listed
+- `[x]` Resolved 2026-06-14 (Phase 5): retired the events-calendar empty state; page is now inquiry-led with the three Canon formats (POA). No EventCard list / `Event` schema needed under the inquiry-led model.
 
 **`/what-we-do/company-enablement/` — Blocking items before launch**
-- `[ ]` **BLOCKING** Phase 0 price (£5,000) — founder confirmation required before launch
-- `[ ]` **BLOCKING** Phase 1+ price (£20,000) — founder confirmation required before launch
+- `[x]` Phase 0 price (£5,000) — locked in Canon, tokenised from `offerings.json` 2026-06-14; founder sign-off on the locked numbers pending §11.
+- `[x]` Phase 1+ price (£20,000) — locked in Canon, tokenised 2026-06-14; founder sign-off pending §11.
 - `[x]` Proof section removed 2026-06-13 (quote slot had already been neutralised — the original was fabricated). Real quote + linked case study tracked in #55 (founder-input, high priority).
-- `[ ]` **BLOCKING** FAQ answers — all 6 answers are placeholder `<!-- TODO -->` comments; founders must write real answers before launch
+- `[x]` FAQ answers authored 2026-06-14 (Phase 5) — real answers grounded in Canon §7 (already real; no placeholders). FAQPage JSON-LD still **carried** (T6).
 - `[x]` Right panel removed with the proof section 2026-06-13 — real case-study panel tracked in #55.
 
 ### 1g — General copy review

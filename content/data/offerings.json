@@ -2,8 +2,9 @@
   "_meta": {
     "purpose": "Machine-readable source of truth for AX offerings. The website derives names, prices, durations and one-liners from this file. Do not hardcode these values in templates — use the build to inject them.",
     "source_of_truth": "docs/business-context/offer-canon.md",
-    "version": "0.2-draft",
+    "version": "1.0",
     "last_updated": "2026-06-14",
+    "phase_5_note": "Site now derives from this file via {{offering:KEY.field}} tokens (Phase 5, #57). Display names renamed; URL slugs/keys deliberately kept unchanged (no redirects). Check #10 enforces no drift.",
     "status_values": ["live", "planned", "retired-for-v2"],
     "vat": "All prices quoted +VAT (exclusive) — UK B2B norm; VAT-registered clients reclaim it. One site-wide footnote covers international (B2B place-of-supply: non-UK businesses not charged UK VAT). Decided 2026-06-14.",
     "public_headline": "from £3,500 +VAT (the cohort place — lowest honest entry). Decided 2026-06-14.",
