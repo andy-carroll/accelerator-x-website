@@ -80,6 +80,7 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 3. **Write `.claude/session-notes.md`** — from the template; `session-end:write` blocks if `## Summary` is missing/placeholder.
 4. Run `npm run session-end:dry-run`, then `npm run session-end:write:yes`.
 5. Confirm the session log is in `.claude/sessions/`. Push only when policy + flags allow.
+6. **Offer** (optional, human-in-the-loop) to post a short **exec summary** (Shipped / Why it matters / Next + preview link) to Slack `#ax-business-building` — confirm before posting. Detail: `.claude/rules/session.md §Exec summary to Slack`.
 
 ## Next Session Priorities
 

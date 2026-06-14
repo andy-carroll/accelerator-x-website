@@ -162,6 +162,20 @@ The script consumes this file and deletes it. If no file exists, the log will co
 to fill it in manually. The `CLAUDE.md` "Last session" line is never overwritten if the agent has
 already set it for today — set it before running the close script for a meaningful description.
 
+### Exec summary to Slack (optional, human-in-the-loop)
+
+After the close script runs, **offer** (don't auto-send) to post a short exec summary to Slack so Toby sees the "tick of value" as it ships. Skip the offer only if the session shipped nothing notable.
+
+- **Channel:** `#ax-business-building` (`C0ACNB3RV1B`) — the business-momentum channel (see `docs/PRDs/notification-workflows-prd.md`).
+- **How:** the agent posts via the connected Slack tool **only on the user's say-so** — no webhook/code needed yet. Outward-facing → always confirm before posting.
+- **Level (keep it tight — an exec summary, not the session note):**
+  - **Shipped** — 2–4 plain bullets.
+  - **Why it matters** — one line.
+  - **Next** — 1–2 items.
+  - **Link** — branch preview + latest commit.
+- **Scope:** business-building work (this site + the AX Agent Hub). Same step belongs in the Agent Hub's protocol.
+- **Future optimisation (deferred):** automate from `scripts/session-end.js` → the existing n8n/Slack layer (PRD §3) so it fires without a prompt. Not now.
+
 ### Operating mode (pragmatic toggle)
 
 Set `operatingMode` in `.session-protocol.json` to switch behavior without editing scripts:
