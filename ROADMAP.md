@@ -89,8 +89,8 @@ transparent, anti-agency positioning.
       CTA block) for the weekly dispatch
 - [ ] **Behavior analytics rollout (PostHog)** — staged session replay + funnel diagnostics
       → `docs/posthog-behavior-insights-prd.md`
-- [ ] **Events page** — landing page for the 2–3x/year exclusive leadership away days
-- [ ] **Workshop sales path** — refine path-to-purchase for the £4k entry-point workshop
+- [ ] **Talks & Events** — now a defined offering in the Offer Canon (Keynote / Leadership Offsite / Hackathon, **price-on-application, inquiry-led**); `/talks-events/` exists — re-elevate + populate in Phase 5.
+- [x] ~~**Workshop sales path** (£4k entry-point)~~ — **superseded by the Offer Canon:** the standalone workshop is retired; the entry point is now the Open Cohort (from £3,500) / Phase 0 (from £5k). Path-to-purchase folds into Phase 5.
 - [ ] **World-class landing page architecture** — execute `docs/world-class-landing-pages-thesis.md`:
       Clarity Engine, diagnostic architecture, journey-based navigation, pricing psychology
       framework for £4k–£200k offerings, evidence-based video strategy.
