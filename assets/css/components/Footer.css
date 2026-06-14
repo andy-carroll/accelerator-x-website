@@ -6,32 +6,46 @@
 .ax-footer {
   background: var(--bg-darker);
   color: var(--fg-muted-on-dark);
-  padding-top: var(--space-16);
 }
 
-/* Inner grid ---------------------------------------------------------------- */
+/* Dispatch band — top of the footer, above the link columns. Centred to the
+   container; divider separates it from the columns below. */
+.ax-footer__dispatch {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (min-width: 640px) {
+  .ax-footer__dispatch { padding: 0 var(--gutter-tablet); }
+}
+
+@media (min-width: 1024px) {
+  .ax-footer__dispatch { padding: 0 var(--gutter-desktop); }
+}
+
+/* Inner grid — brand + nav columns ------------------------------------------ */
 .ax-footer__inner {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-10);
   max-width: var(--container-default);
   margin: 0 auto;
-  padding: 0 var(--gutter-mobile) var(--space-12);
+  padding: var(--space-12) var(--gutter-mobile);
 }
 
 @media (min-width: 640px) {
   .ax-footer__inner {
-    grid-template-columns: 1fr 1fr;
-    padding: 0 var(--gutter-tablet) var(--space-12);
+    grid-template-columns: 1.4fr 1fr;
+    padding: var(--space-12) var(--gutter-tablet);
   }
-  .ax-footer__newsletter { grid-column: 1 / -1; }
 }
 
 @media (min-width: 1024px) {
   .ax-footer__inner {
-    grid-template-columns: 1.4fr 1fr 1.6fr;
     gap: var(--space-12);
-    padding: 0 var(--gutter-desktop) var(--space-12);
+    padding: var(--space-16) var(--gutter-desktop) var(--space-12);
   }
 }
 
@@ -94,58 +108,8 @@
   gap: var(--space-2);
 }
 
-/* Newsletter column --------------------------------------------------------- */
-.ax-footer__newsletter-heading {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-semibold);
-  color: var(--fg-on-dark);
-}
-
-.ax-footer__newsletter-sub {
-  margin: 0 0 var(--space-4);
-  font-size: var(--text-sm);
-  color: var(--fg-muted-on-dark);
-  line-height: var(--lh-relaxed);
-}
-
-.ax-footer__newsletter-form {
-  display: flex;
-  gap: var(--space-2);
-  flex-wrap: wrap;
-}
-
-.ax-footer__newsletter-input {
-  flex: 1;
-  min-width: 0;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.15);
-  color: var(--fg-on-dark);
-}
-.ax-footer__newsletter-input::placeholder { color: rgba(255, 255, 255, 0.35); }
-.ax-footer__newsletter-input:focus {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--ax-pink);
-  box-shadow: var(--focus-ring-on-dark);
-}
-
-.ax-footer__newsletter-note {
-  margin: var(--space-3) 0 0;
-  font-size: var(--text-xs);
-  color: rgba(203, 213, 225, 0.5);
-}
-
-.ax-footer__status {
-  margin-top: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: var(--radius-md);
-  font-size: var(--text-sm);
-  color: var(--fg-muted-on-dark);
-}
-.ax-footer__status--error { background: rgba(239, 68, 68, 0.15); }
-.ax-footer__status p { margin: 0; color: inherit; }
+/* Newsletter signup now lives in the NewsletterSignup component (top-of-footer
+   band, .ax-footer__dispatch); dark-context styling is in NewsletterSignup.css. */
 
 /* Bottom bar ---------------------------------------------------------------- */
 .ax-footer__bottom {

@@ -119,42 +119,49 @@
   });
 
   // ── Newsletter signup ─────────────────────────────────────────────────────
-  // Covers: homepage footer, insights hub index, article nurture-trap.
-  // All instances use the same IDs: #newsletter-form, #newsletter-success, #newsletter-error.
+  // One handler for every NewsletterSignup instance (the footer band on all pages,
+  // plus an in-page band on content pages). Binds by class and resolves status nodes
+  // relative to each form, so a page can carry more than one with no duplicate IDs.
+  // The component uses the native `hidden` attribute for form/status visibility.
 
-  const newsletterForm    = document.getElementById('newsletter-form');
-  const newsletterSuccess = document.getElementById('newsletter-success');
-  const newsletterError   = document.getElementById('newsletter-error');
+  const setHidden = (el, hidden) => {
+    if (!el) return;
+    if (hidden) el.setAttribute('hidden', '');
+    else el.removeAttribute('hidden');
+  };
 
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
+  const newsletterForms = Array.from(document.querySelectorAll('form.js-newsletter-form'));
+
+  newsletterForms.forEach((form) => {
+    const scope   = form.closest('.ax-newsletter') || form.parentElement;
+    const success = scope ? scope.querySelector('.ax-newsletter__status--success') : null;
+    const error   = scope ? scope.querySelector('.ax-newsletter__status--error') : null;
+
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
-      if (isSubmitting.get(newsletterForm)) return;
-      isSubmitting.set(newsletterForm, true);
+      if (isSubmitting.get(form)) return;
 
-      const emailInput    = newsletterForm.querySelector('input[type="email"]');
+      const emailInput    = form.querySelector('input[type="email"]');
       const email         = emailInput ? emailInput.value.trim() : '';
-      const btn           = newsletterForm.querySelector('button[type="submit"]');
+      const btn           = form.querySelector('button[type="submit"]');
       const originalLabel = btn ? btn.textContent : '';
 
-      if (!email) {
-        isSubmitting.set(newsletterForm, false);
-        return;
-      }
+      if (!email) return; // let native required validation handle the empty case
 
-      clearError(newsletterError);
+      isSubmitting.set(form, true);
+      setHidden(error, true);
       setSubmitState(btn, { disabled: true, label: 'Subscribing…' });
 
       fetch('/.netlify/functions/newsletter-subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source: 'newsletter_form' }),
+        body: JSON.stringify({ email, source: form.dataset.newsletterSource || 'newsletter_form' }),
       })
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
-            newsletterForm.classList.add('hidden');
-            if (newsletterSuccess) newsletterSuccess.classList.remove('hidden');
+            setHidden(form, true);
+            setHidden(success, false);
           } else {
             throw new Error(data.error || 'Unknown error');
           }
@@ -162,11 +169,11 @@
         .catch((err) => {
           console.error('Newsletter form error:', err);
           setSubmitState(btn, { disabled: false, label: originalLabel });
-          showError(newsletterError, 'Something went wrong — please try again.');
+          setHidden(error, false);
         })
         .finally(() => {
-          isSubmitting.set(newsletterForm, false);
+          isSubmitting.set(form, false);
         });
     });
-  }
+  });
 })();

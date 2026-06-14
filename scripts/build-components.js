@@ -54,21 +54,35 @@ function renderComponent(name) {
 function resolveComponentTokens(html) {
   const registry = getRegistry();
   const TOKEN_PATTERN = /\{\{component:([A-Za-z0-9_-]+)\}\}/g;
+  const HAS_TOKEN = /\{\{component:[A-Za-z0-9_-]+\}\}/; // non-global: safe to reuse as a loop condition
+  const MAX_DEPTH = 6; // components may nest (e.g. Footer includes NewsletterSignup); cap guards against cycles
 
-  const missingComponents = [];
-  const resolved = html.replace(TOKEN_PATTERN, (match, name) => {
-    if (!registry[name]) {
-      missingComponents.push(name);
-      return match;
+  let resolved = html;
+  let depth = 0;
+  while (HAS_TOKEN.test(resolved)) {
+    if (depth >= MAX_DEPTH) {
+      throw new Error(
+        `Component nesting exceeded ${MAX_DEPTH} levels — likely a cycle (a component including itself, directly or transitively).`
+      );
     }
-    return fs.readFileSync(registry[name], 'utf8');
-  });
 
-  if (missingComponents.length > 0) {
-    const available = Object.keys(registry).join(', ') || '(none yet)';
-    throw new Error(
-      `Unknown component tokens: ${missingComponents.join(', ')}. Available: ${available}`
-    );
+    const missingComponents = [];
+    resolved = resolved.replace(TOKEN_PATTERN, (match, name) => {
+      if (!registry[name]) {
+        missingComponents.push(name);
+        return match;
+      }
+      return fs.readFileSync(registry[name], 'utf8');
+    });
+
+    if (missingComponents.length > 0) {
+      const available = Object.keys(registry).join(', ') || '(none yet)';
+      throw new Error(
+        `Unknown component tokens: ${missingComponents.join(', ')}. Available: ${available}`
+      );
+    }
+
+    depth++;
   }
 
   return resolved;

@@ -1,0 +1,109 @@
+/* =============================================================================
+   NewsletterSignup — the single weekly-dispatch signup
+   Markup: _templates/components/NewsletterSignup.html
+   Used: in-page on content pages (top third) + as a band at the top of the Footer.
+   Light by default; dark-context override applies inside the footer (.ax-footer__dispatch).
+   Field + submit share one height (--btn-lg-height) so they always align.
+   ============================================================================= */
+
+.ax-newsletter {
+  background: var(--bg-2);
+  border-top: 1px solid var(--border-1);
+  border-bottom: 1px solid var(--border-1);
+  padding: var(--space-12) 0;
+}
+
+.ax-newsletter__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) {
+  .ax-newsletter__inner {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+    gap: var(--space-12);
+    padding: 0 var(--gutter-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  .ax-newsletter__inner { padding: 0 var(--gutter-desktop); }
+}
+
+/* Copy ---------------------------------------------------------------------- */
+.ax-newsletter__heading {
+  margin: var(--space-2) 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.ax-newsletter__sub {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+  max-width: 52ch;
+}
+
+/* Form ---------------------------------------------------------------------- */
+.ax-newsletter__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.ax-newsletter__field {
+  flex: 1;
+  min-width: 220px;
+  display: block;
+}
+
+/* Match the input height to the large button so field + button align (fixes the
+   44px input vs 40/48px button mismatch across the old variants). */
+.ax-newsletter__input { height: var(--btn-lg-height); }
+
+.ax-newsletter__submit { flex-shrink: 0; }
+
+.ax-newsletter__note {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-sm);
+  color: var(--fg-4);
+}
+
+.ax-newsletter__status {
+  margin-top: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+}
+
+.ax-newsletter__status--error { background: rgba(239, 68, 68, 0.08); color: var(--ax-error); }
+.ax-newsletter__status p { margin: 0; color: inherit; }
+
+/* Mobile: full-width controls so the field + button stack cleanly. */
+@media (max-width: 539px) {
+  .ax-newsletter__submit { width: 100%; }
+}
+
+/* Dark context — the band at the top of the footer (navy). Input stays white for
+   contrast; only the copy flips to light. */
+.ax-footer__dispatch .ax-newsletter {
+  background: transparent;
+  border: none;
+  padding: var(--space-12) 0 var(--space-10);
+}
+
+.ax-footer__dispatch .ax-newsletter__heading { color: var(--fg-on-dark); }
+.ax-footer__dispatch .ax-newsletter__sub { color: var(--fg-muted-on-dark); }
+.ax-footer__dispatch .ax-newsletter__note { color: var(--fg-muted-on-dark); }
+.ax-footer__dispatch .ax-newsletter__inner { padding-inline: 0; }

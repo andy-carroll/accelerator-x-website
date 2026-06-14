@@ -1,4 +1,11 @@
 <footer class="ax-footer" role="contentinfo">
+
+  <!-- Weekly dispatch — band at the top of the footer, above the link columns.
+       Single source of truth: _templates/components/NewsletterSignup.html. -->
+  <div class="ax-footer__dispatch">
+    {{component:NewsletterSignup}}
+  </div>
+
   <div class="ax-footer__inner">
 
     <!-- Brand column -->
@@ -45,32 +52,6 @@
         </ul>
       </div>
     </nav>
-
-    <!-- Newsletter column -->
-    <div class="ax-footer__newsletter">
-      <p class="ax-footer__newsletter-heading">Get the weekly dispatch</p>
-      <p class="ax-footer__newsletter-sub">High-signal notes for leaders building real AI capability. No hype.</p>
-      <form class="ax-footer__newsletter-form" id="footer-newsletter-form" novalidate>
-        <label for="footer-newsletter-email" class="sr-only">Work email</label>
-        <input
-          type="email"
-          id="footer-newsletter-email"
-          name="email"
-          class="input ax-footer__newsletter-input"
-          placeholder="you@company.com"
-          required
-          autocomplete="email"
-        />
-        <button type="submit" class="btn btn--accent">Subscribe</button>
-      </form>
-      <p class="ax-footer__newsletter-note">One useful note each week. Unsubscribe anytime.</p>
-      <div id="footer-newsletter-success" class="ax-footer__status" hidden role="status" aria-live="polite">
-        <p>Thanks — you're subscribed. Welcome email on its way.</p>
-      </div>
-      <div id="footer-newsletter-error" class="ax-footer__status ax-footer__status--error" hidden role="alert">
-        <p>Something went wrong — please try again.</p>
-      </div>
-    </div>
 
   </div>
 

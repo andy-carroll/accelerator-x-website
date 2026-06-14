@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/assets/css/components/Buttons.css" />
     <link rel="stylesheet" href="/assets/css/components/Nav.css" />
     <link rel="stylesheet" href="/assets/css/components/Footer.css" />
+    <link rel="stylesheet" href="/assets/css/components/NewsletterSignup.css" />
     <link rel="stylesheet" href="/assets/css/components/ArticleTile.css" />
     <link rel="stylesheet" href="/assets/css/components/ProofRow.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -202,6 +203,46 @@
           </div>
         </div>
 
+        <!-- Weekly dispatch — in content flow (top third), well above the footer band -->
+        <!-- NewsletterSignup — single source of truth for the weekly-dispatch signup.
+     Used in-page on content pages (top third) AND as the band at the top of the footer
+     (all pages). Same markup both places; the footer wraps it so the dark-context CSS applies.
+     No id attributes by design: it can appear twice on one page. JS binds .js-newsletter-form
+     and finds the status nodes relative to each form (see assets/js/forms.js). Copy lives here only. -->
+<section class="ax-newsletter" aria-label="Subscribe to the weekly dispatch">
+  <div class="ax-newsletter__inner">
+    <div class="ax-newsletter__copy">
+      <span class="ax-kicker">Weekly dispatch</span>
+      <h2 class="ax-newsletter__heading">Stay sharp on AI.</h2>
+      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability — the hard-won lessons, not the hype. One email a week.</p>
+    </div>
+    <div class="ax-newsletter__form-wrap">
+      <form class="ax-newsletter__form js-newsletter-form" data-newsletter-source="site" novalidate>
+        <label class="ax-newsletter__field">
+          <span class="sr-only">Work email</span>
+          <input
+            type="email"
+            name="email"
+            class="input ax-newsletter__input"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+          />
+        </label>
+        <button type="submit" class="btn btn--accent btn--lg ax-newsletter__submit">Get the dispatch</button>
+      </form>
+      <p class="ax-newsletter__note">One useful note each week. Unsubscribe anytime.</p>
+      <div class="ax-newsletter__status ax-newsletter__status--success" hidden role="status" aria-live="polite">
+        <p>You're in. Welcome email on its way.</p>
+      </div>
+      <div class="ax-newsletter__status ax-newsletter__status--error" hidden role="alert">
+        <p>Something went wrong — please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
         <!-- Article Content -->
         <div class="prose prose-lg prose-navy max-w-none"><h2>Escaping the Sandbox</h2>
 <p>Everyone has a sandbox. Everyone has a designated &quot;innovation lab&quot; where cool AI prototypes are built, tested, and high-fived over.</p>
@@ -225,37 +266,6 @@
 <p>Once the embedded agent is saving time and the team trusts it, we expand. We take the blueprint, refine it based on real-world usage data, and deploy it to the next adjacent workflow or department. Success funds the next iteration.</p>
 <p>Stop building sandboxes. Start building engines.</p>
 </div>
-
-        <!-- Contextual Capture (The Nurture Trap) -->
-        <div class="nurture-trap my-16 hidden" data-cta="Get the complete technical blueprints for the 5-Stage Sequence when you subscribe to our implementation newsletter.">
-          <div
-            class="bg-navy text-background rounded-xl p-8 lg:p-12 relative overflow-hidden"
-          >
-            <!-- Abstract background element for brand flair -->
-            <div
-              class="absolute top-0 right-0 w-64 h-64 bg-primary opacity-20 rounded-full blur-3xl -mr-20 -mt-20"
-            ></div>
-
-            <div class="relative z-10 max-w-md">
-              <h3 class="font-display text-2xl font-bold mb-4">The AI Signal, Without The Noise.</h3>
-              <p class="text-background opacity-80 mb-6 leading-relaxed">Get the complete technical blueprints for the 5-Stage Sequence when you subscribe to our implementation newsletter.</p>
-
-              <form class="flex flex-wrap gap-2" id="newsletter-form">
-                <input type="email" name="email" required placeholder="Email address" class="flex-1 min-w-0 px-4 py-3 rounded-md bg-background border border-strong text-navy focus:outline-none focus:border-primary transition-colors" />
-                <button type="submit" class="btn btn-accent whitespace-nowrap w-full sm:w-auto">Join the dispatch</button>
-              </form>
-
-              <div id="newsletter-success" class="hidden mt-6 rounded-xl bg-background/10 p-4" role="status" aria-live="polite">
-                <p class="font-medium">Thanks — you’re subscribed.</p>
-                <p class="mt-1 text-sm opacity-80">Welcome email on its way.</p>
-              </div>
-              <div id="newsletter-error" class="hidden mt-6 rounded-xl bg-background/10 p-4" role="alert">
-                <p class="text-sm opacity-80">Something went wrong — please try again.</p>
-              </div>
-              <p class="text-xs text-background opacity-50 mt-4">No spam. Pure implementation frameworks.</p>
-            </div>
-          </div>
-        </div>
 
         
     <div class="article-share-panel" aria-label="Share this article">
@@ -297,6 +307,50 @@
     </main>
 
     <footer class="ax-footer" role="contentinfo">
+
+  <!-- Weekly dispatch — band at the top of the footer, above the link columns.
+       Single source of truth: _templates/components/NewsletterSignup.html. -->
+  <div class="ax-footer__dispatch">
+    <!-- NewsletterSignup — single source of truth for the weekly-dispatch signup.
+     Used in-page on content pages (top third) AND as the band at the top of the footer
+     (all pages). Same markup both places; the footer wraps it so the dark-context CSS applies.
+     No id attributes by design: it can appear twice on one page. JS binds .js-newsletter-form
+     and finds the status nodes relative to each form (see assets/js/forms.js). Copy lives here only. -->
+<section class="ax-newsletter" aria-label="Subscribe to the weekly dispatch">
+  <div class="ax-newsletter__inner">
+    <div class="ax-newsletter__copy">
+      <span class="ax-kicker">Weekly dispatch</span>
+      <h2 class="ax-newsletter__heading">Stay sharp on AI.</h2>
+      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability — the hard-won lessons, not the hype. One email a week.</p>
+    </div>
+    <div class="ax-newsletter__form-wrap">
+      <form class="ax-newsletter__form js-newsletter-form" data-newsletter-source="site" novalidate>
+        <label class="ax-newsletter__field">
+          <span class="sr-only">Work email</span>
+          <input
+            type="email"
+            name="email"
+            class="input ax-newsletter__input"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+          />
+        </label>
+        <button type="submit" class="btn btn--accent btn--lg ax-newsletter__submit">Get the dispatch</button>
+      </form>
+      <p class="ax-newsletter__note">One useful note each week. Unsubscribe anytime.</p>
+      <div class="ax-newsletter__status ax-newsletter__status--success" hidden role="status" aria-live="polite">
+        <p>You're in. Welcome email on its way.</p>
+      </div>
+      <div class="ax-newsletter__status ax-newsletter__status--error" hidden role="alert">
+        <p>Something went wrong — please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+
   <div class="ax-footer__inner">
 
     <!-- Brand column -->
@@ -343,32 +397,6 @@
         </ul>
       </div>
     </nav>
-
-    <!-- Newsletter column -->
-    <div class="ax-footer__newsletter">
-      <p class="ax-footer__newsletter-heading">Get the weekly dispatch</p>
-      <p class="ax-footer__newsletter-sub">High-signal notes for leaders building real AI capability. No hype.</p>
-      <form class="ax-footer__newsletter-form" id="footer-newsletter-form" novalidate>
-        <label for="footer-newsletter-email" class="sr-only">Work email</label>
-        <input
-          type="email"
-          id="footer-newsletter-email"
-          name="email"
-          class="input ax-footer__newsletter-input"
-          placeholder="you@company.com"
-          required
-          autocomplete="email"
-        />
-        <button type="submit" class="btn btn--accent">Subscribe</button>
-      </form>
-      <p class="ax-footer__newsletter-note">One useful note each week. Unsubscribe anytime.</p>
-      <div id="footer-newsletter-success" class="ax-footer__status" hidden role="status" aria-live="polite">
-        <p>Thanks — you're subscribed. Welcome email on its way.</p>
-      </div>
-      <div id="footer-newsletter-error" class="ax-footer__status ax-footer__status--error" hidden role="alert">
-        <p>Something went wrong — please try again.</p>
-      </div>
-    </div>
 
   </div>
 

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/assets/css/components/Buttons.css" />
     <link rel="stylesheet" href="/assets/css/components/Nav.css" />
     <link rel="stylesheet" href="/assets/css/components/Footer.css" />
+    <link rel="stylesheet" href="/assets/css/components/NewsletterSignup.css" />
     <link rel="stylesheet" href="/assets/css/components/ArticleTile.css" />
     <link rel="stylesheet" href="/assets/css/components/LogoStrip.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,6 +68,9 @@
         </div>
       </section>
 
+      <!-- Weekly dispatch — in content flow (top third), well above the footer band -->
+      {{component:NewsletterSignup}}
+
       <!-- Feed Matrix -->
       <section class="py-16 lg:py-24 px-4 bg-surface">
         <div class="mx-auto max-w-6xl">
@@ -79,38 +83,6 @@
           <div id="article-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-300">
             {{articlesList}}
           </div>
-        </div>
-      </section>
-
-      <!-- The Nurture Capture (Bottom Anchor) -->
-      <section class="bg-background py-20 px-4 border-t border-surface">
-        <div class="mx-auto max-w-3xl text-center">
-          <h2 class="font-display text-3xl lg:text-4xl font-bold text-navy mb-6">The AI signal, without the noise.</h2>
-          <p class="text-lg text-muted mb-8">Join 5,000+ Founders, Directors, and CTOs getting our weekly dispatch on real AI implementation.</p>
-          
-          <form id="newsletter-form" class="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-            <input type="email" name="email" required placeholder="Email address" class="flex-1 px-4 py-3 rounded-md border border-strong bg-background focus:outline-none focus:border-primary text-navy" />
-            <button type="submit" class="btn btn-primary whitespace-nowrap">Subscribe</button>
-          </form>
-          <p class="text-sm text-muted mt-4">One email a week. Unsubscribe anytime.</p>
-          <div id="newsletter-success" class="hidden mt-4 rounded-lg bg-surface p-4 max-w-md mx-auto" role="status" aria-live="polite">
-            <p class="font-medium text-navy">Thanks — you're subscribed.</p>
-            <p class="mt-1 text-sm text-muted">Welcome email on its way.</p>
-          </div>
-          <div id="newsletter-error" class="hidden mt-4 rounded-lg bg-surface p-4 max-w-md mx-auto" role="alert">
-            <p class="text-sm text-muted">Something went wrong — please try again.</p>
-          </div>
-
-          <!--
-          <div class="source-preference-card source-preference-card--compact mt-10 text-left">
-            <div>
-              <p class="source-preference-eyebrow">Want more of this?</p>
-              <h3 class="source-preference-title">Add Accelerator X as a preferred Google source.</h3>
-              <p class="source-preference-copy">If our content is useful, tell Google you want to see more from Accelerator X in future discovery surfaces.</p>
-            </div>
-            <a href="https://www.google.com/preferences/source?q=accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm whitespace-nowrap">Add on Google</a>
-          </div>
-          -->
         </div>
       </section>
 
