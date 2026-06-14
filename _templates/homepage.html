@@ -109,8 +109,7 @@
     <link rel="stylesheet" href="/assets/css/components/LogoStrip.css" />
     <link rel="stylesheet" href="/assets/css/components/ProofRow.css" />
     <link rel="stylesheet" href="/assets/css/components/PlanLayers.css" />
-    <link rel="stylesheet" href="/assets/css/components/OfferingTable.css" />
-    <link rel="stylesheet" href="/assets/css/components/OfferingCard.css" />
+    <link rel="stylesheet" href="/assets/css/components/TwoDoors.css" />
     <link rel="stylesheet" href="/assets/css/components/DeliverablesGrid.css" />
     <link rel="stylesheet" href="/assets/css/components/FitCheck.css" />
     <link rel="stylesheet" href="/assets/css/components/FAQList.css" />
@@ -118,7 +117,6 @@
     <link rel="stylesheet" href="/assets/css/components/ArticleTile.css" />
     <link rel="stylesheet" href="/assets/css/components/EventCard.css" />
     <link rel="stylesheet" href="/assets/css/components/FounderCard.css" />
-    <link rel="stylesheet" href="/assets/css/components/DecisionTree.css" />
     <link rel="stylesheet" href="/assets/css/components/QuizCTA.css" />
     <link rel="stylesheet" href="/assets/css/components/ScarcityCard.css" />
     <link rel="stylesheet" href="/assets/css/components/CohortList.css" />
@@ -255,27 +253,47 @@
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "AI Transformation Packages",
+            "name": "AI Transformation Offerings",
             "itemListElement": [
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "One-Day Discovery Workshop",
-                  "description": "Full-day leadership workshop with real discovery, prioritisation, and roadmap. Risk-free: if not valuable, you don't pay."
-                },
-                "price": "4000.00",
-                "priceCurrency": "GBP"
+                  "name": "{{offering:company-enablement.name}}",
+                  "description": "{{offering:company-enablement.one_liner}}"
+                }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "8-Week Transformation Cycle",
-                  "description": "Focused sprint with clear scope and measurable outcomes. Delivers 10x value on investment."
-                },
-                "price": "12000.00",
-                "priceCurrency": "GBP"
+                  "name": "{{offering:senior-leader-acceleration.name}}",
+                  "description": "{{offering:senior-leader-acceleration.one_liner}}"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "{{offering:leadership-activation.name}}",
+                  "description": "{{offering:leadership-activation.one_liner}}"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "{{offering:leadership-cohort.name}}",
+                  "description": "{{offering:leadership-cohort.one_liner}}"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "{{offering:talks-events.name}}",
+                  "description": "{{offering:talks-events.one_liner}}"
+                }
               }
             ]
           }
@@ -558,13 +576,13 @@
 
             <div class="ax-process__phase ax-process__phase--highlight reveal">
               <span class="ax-process__phase-label">Phase 0</span>
-              <p class="ax-process__phase-title">2&nbsp;weeks · from £5,000</p>
+              <p class="ax-process__phase-title">2&nbsp;weeks · from {{offering:company-enablement.phases.0.price_from_gbp}}</p>
               <p class="ax-process__phase-body">Two DOTS sessions + team activation + AI strategy playback. Risk-free: if it isn't valuable, you don't pay.</p>
             </div>
 
             <div class="ax-process__phase reveal reveal-delay-1">
               <span class="ax-process__phase-label">Phase 1</span>
-              <p class="ax-process__phase-title">8-week cycle · from £20,000</p>
+              <p class="ax-process__phase-title">8-week cycle · from {{offering:company-enablement.phases.1.price_from_gbp}}</p>
               <p class="ax-process__phase-body">Ship your first AI capability with your team. Train internal operators. Deliver measurable ROI.</p>
             </div>
 
@@ -582,10 +600,13 @@
 
           </div>
           <p class="ax-process__note">
-            For individual leaders and coaching cohorts — <a href="/what-we-do">see our full offering →</a>
+            That's one way in. There's a second — for individual leaders and teams.
           </p>
         </div>
       </section>
+
+      <!-- === TWO DOORS (the offer spine) === -->
+      {{component:TwoDoors}}
 
 
 {{homepageWho}}

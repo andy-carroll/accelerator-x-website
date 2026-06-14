@@ -6,8 +6,10 @@ const { SITE_CONFIG } = require('./site-config');
 
 const ROOT = path.resolve(__dirname, '..');
 const COMPONENTS_DIR = path.join(ROOT, '_templates/components');
+const OFFERINGS_PATH = path.join(ROOT, 'content/data/offerings.json');
 
 let _registry = null;
+let _offeringsIndex = null;
 
 function buildRegistry() {
   if (!fs.existsSync(COMPONENTS_DIR)) {
@@ -81,6 +83,64 @@ function resolveSiteTokens(html) {
   });
 }
 
+// ── Offering tokens ───────────────────────────────────────────────────────────
+// {{offering:<key>.<dot.path>}} resolves to a scalar value in content/data/offerings.json.
+// The offerings array is indexed by `key`. Numbers under a key ending in `_gbp`
+// render as £-prefixed, locale-grouped integers (10000 → "£10,000"). All other
+// scalars pass through verbatim. offerings.json is the single source of truth for
+// names/prices/durations — Check #10 forbids hardcoding these in templates.
+// Fail-fast on unknown key / unknown path / non-scalar path, matching resolveSiteTokens.
+
+function getOfferingsIndex() {
+  if (!_offeringsIndex) {
+    const data = JSON.parse(fs.readFileSync(OFFERINGS_PATH, 'utf8'));
+    _offeringsIndex = {};
+    for (const offering of data.offerings || []) {
+      _offeringsIndex[offering.key] = offering;
+    }
+  }
+  return _offeringsIndex;
+}
+
+function formatGbp(value) {
+  return '£' + Number(value).toLocaleString('en-GB');
+}
+
+function resolveOfferingTokens(html) {
+  const index = getOfferingsIndex();
+
+  return html.replace(/\{\{offering:([a-z0-9-]+)\.([A-Za-z0-9_.]+)\}\}/g, (match, key, dotPath) => {
+    const offering = index[key];
+    if (!offering) {
+      throw new Error(
+        `Unknown offering token: {{offering:${key}.${dotPath}}}. Available keys: ${Object.keys(index).join(', ')}`
+      );
+    }
+
+    const segments = dotPath.split('.');
+    let value = offering;
+    for (const segment of segments) {
+      if (value == null || typeof value !== 'object') {
+        throw new Error(`Offering token {{offering:${key}.${dotPath}}} — path stops at a non-object before '${segment}'.`);
+      }
+      value = value[segment];
+    }
+
+    if (value === undefined) {
+      throw new Error(`Offering token {{offering:${key}.${dotPath}}} — no value at that path in offerings.json.`);
+    }
+    if (value !== null && typeof value === 'object') {
+      throw new Error(`Offering token {{offering:${key}.${dotPath}}} resolves to a ${Array.isArray(value) ? 'array' : 'object'}, not a scalar. Tokens must point at a single value.`);
+    }
+
+    const lastSegment = segments[segments.length - 1];
+    if (/_gbp$/.test(lastSegment) && value !== null) {
+      return formatGbp(value);
+    }
+    return String(value);
+  });
+}
+
 function validateComponentTokens(html, context) {
   const TOKEN_PATTERN = /\{\{component:([A-Za-z0-9_-]+)\}\}/g;
   const registry = getRegistry();
@@ -105,5 +165,6 @@ module.exports = {
   renderComponent,
   resolveComponentTokens,
   resolveSiteTokens,
+  resolveOfferingTokens,
   validateComponentTokens,
 };

@@ -1,0 +1,119 @@
+<!-- TwoDoors — the spine of the offer (Offer Canon §3, recovered from home-b-v2.jsx "Two doors in")
+     Two entry points: Door 1 (your business) · Door 2 (yourself or your leadership team),
+     plus a tertiary Talks & Events callout. All names/prices come from offerings.json via
+     offering tokens — never hardcode them here (Check #10). Used on / and /what-we-do/. -->
+<section class="ax-two-doors" aria-labelledby="two-doors-heading">
+  <div class="ax-two-doors__inner">
+
+    <div class="ax-two-doors__intro">
+      <span class="ax-kicker">Two doors in</span>
+      <h2 class="ax-two-doors__heading" id="two-doors-heading">Pick your starting point.</h2>
+      <p class="ax-two-doors__sub">
+        The right way in depends on what you're trying to move — yourself, your leadership team,
+        or your whole business. These are starting points, not lanes you're locked into: many
+        clients run more than one at once. Start where it's clearest — add what helps.
+      </p>
+    </div>
+
+    <div class="ax-two-doors__grid">
+
+      <!-- Door 1 — For your business -->
+      <article class="ax-door ax-door--business">
+        <div class="ax-door__head">
+          <span class="ax-door__num" aria-hidden="true">01</span>
+          <span class="ax-door__label">For your business</span>
+        </div>
+        <h3 class="ax-door__title">{{offering:company-enablement.name}}</h3>
+        <p class="ax-door__pitch">
+          Move the whole organisation. Three workshops plus an AI strategy playback align
+          leadership, activate the team, and leave you a costed 90-day plan — then we ship
+          capability, cycle by cycle, as far as you want to go.
+        </p>
+        <ul class="ax-door__facts">
+          <li class="ax-door__fact">
+            <span class="ax-door__fact-label">Phase 0 · two weeks to clarity</span>
+            <span class="ax-door__fact-value">from {{offering:company-enablement.phases.0.price_from_gbp}}</span>
+          </li>
+          <li class="ax-door__fact">
+            <span class="ax-door__fact-label">Phase 1+ · eight-week cycles</span>
+            <span class="ax-door__fact-value">from {{offering:company-enablement.phases.1.price_from_gbp}}/cycle</span>
+          </li>
+        </ul>
+        <a href="/what-we-do/company-enablement/" class="ax-door__cta">
+          How a company moves with us <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <!-- Door 2 — For yourself or your leadership team -->
+      <article class="ax-door ax-door--individual">
+        <div class="ax-door__head">
+          <span class="ax-door__num" aria-hidden="true">02</span>
+          <span class="ax-door__label">For yourself or your leadership team</span>
+        </div>
+        <h3 class="ax-door__title">Leadership AI Coaching</h3>
+        <p class="ax-door__pitch">
+          One lane, three depths — same DOTS engine, run on your own, with your team behind
+          closed doors, or alongside peers from other companies. The fastest way to build
+          personal AI capability.
+        </p>
+        <ul class="ax-door__formats">
+          <li class="ax-door__format">
+            <a href="/what-we-do/senior-leader-acceleration/" class="ax-door__format-link">
+              <span class="ax-door__format-name">{{offering:senior-leader-acceleration.name}}</span>
+              <span class="ax-door__format-meta">On your own · 1:1 · from {{offering:senior-leader-acceleration.price_from_gbp}}</span>
+            </a>
+          </li>
+          <li class="ax-door__format">
+            <a href="/what-we-do/leadership-activation/" class="ax-door__format-link">
+              <span class="ax-door__format-name">{{offering:leadership-activation.name}}</span>
+              <span class="ax-door__format-meta">Your team, closed · from {{offering:leadership-activation.price_from_gbp}}</span>
+            </a>
+          </li>
+          <li class="ax-door__format">
+            <a href="/what-we-do/leadership-cohort/" class="ax-door__format-link">
+              <span class="ax-door__format-name">{{offering:leadership-cohort.name}}</span>
+              <span class="ax-door__format-meta">With peers · open cohort · from {{offering:leadership-cohort.price_from_gbp}}/place</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- Load-bearing routing sentence (Canon §7.5 #4) -->
+    <p class="ax-two-doors__distinction">
+      <strong>Both doors work with leaders — here's the difference.</strong>
+      Door 1 moves your <em>whole business</em>: leadership alignment is where it <em>starts</em>.
+      The closed exec-team coaching in Door 2 builds your <em>leadership team's own</em> AI capability:
+      your leaders are the <em>end</em>, not the on-ramp.
+    </p>
+
+    <!-- Tertiary callout — Talks & Events -->
+    <div class="ax-two-doors__tertiary">
+      <div class="ax-two-doors__tertiary-text">
+        <span class="ax-two-doors__tertiary-label">Need someone to lead a big AI moment?</span>
+        <span class="ax-two-doors__tertiary-name">{{offering:talks-events.name}}</span>
+        — keynotes, leadership offsites and hackathons. Move a room in an afternoon.
+      </div>
+      <a href="/talks-events/" class="ax-two-doors__tertiary-cta">Talks &amp; Events <span aria-hidden="true">→</span></a>
+    </div>
+
+    <!-- Helper: the quiz for anyone still unsure -->
+    <div class="ax-two-doors__quiz">
+      <span class="ax-two-doors__quiz-text">Not sure which door is yours?</span>
+      <a
+        href="{{site:QUIZ_URL}}"
+        class="ax-two-doors__quiz-cta"
+        rel="noopener noreferrer"
+        target="_blank"
+        data-posthog-event="quiz_outbound_clicked"
+        data-posthog-source="what-we-do"
+        data-posthog-placement="two-doors"
+      >
+        Take the 4-min assessment <span aria-hidden="true">↗</span>
+      </a>
+      <span class="ax-two-doors__quiz-note">Free · No email required</span>
+    </div>
+
+  </div>
+</section>

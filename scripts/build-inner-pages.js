@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { resolveComponentTokens, resolveSiteTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens, resolveOfferingTokens } = require('./build-components');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -37,7 +37,8 @@ function main() {
     }
 
     const source   = fs.readFileSync(templatePath, 'utf8');
-    const resolved = resolveSiteTokens(resolveComponentTokens(source));
+    // Order: component → offering → site, so component partials can carry offering tokens.
+    const resolved = resolveSiteTokens(resolveOfferingTokens(resolveComponentTokens(source)));
 
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });

@@ -109,8 +109,7 @@
     <link rel="stylesheet" href="/assets/css/components/LogoStrip.css" />
     <link rel="stylesheet" href="/assets/css/components/ProofRow.css" />
     <link rel="stylesheet" href="/assets/css/components/PlanLayers.css" />
-    <link rel="stylesheet" href="/assets/css/components/OfferingTable.css" />
-    <link rel="stylesheet" href="/assets/css/components/OfferingCard.css" />
+    <link rel="stylesheet" href="/assets/css/components/TwoDoors.css" />
     <link rel="stylesheet" href="/assets/css/components/DeliverablesGrid.css" />
     <link rel="stylesheet" href="/assets/css/components/FitCheck.css" />
     <link rel="stylesheet" href="/assets/css/components/FAQList.css" />
@@ -118,7 +117,6 @@
     <link rel="stylesheet" href="/assets/css/components/ArticleTile.css" />
     <link rel="stylesheet" href="/assets/css/components/EventCard.css" />
     <link rel="stylesheet" href="/assets/css/components/FounderCard.css" />
-    <link rel="stylesheet" href="/assets/css/components/DecisionTree.css" />
     <link rel="stylesheet" href="/assets/css/components/QuizCTA.css" />
     <link rel="stylesheet" href="/assets/css/components/ScarcityCard.css" />
     <link rel="stylesheet" href="/assets/css/components/CohortList.css" />
@@ -255,27 +253,47 @@
           },
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "AI Transformation Packages",
+            "name": "AI Transformation Offerings",
             "itemListElement": [
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "One-Day Discovery Workshop",
-                  "description": "Full-day leadership workshop with real discovery, prioritisation, and roadmap. Risk-free: if not valuable, you don't pay."
-                },
-                "price": "4000.00",
-                "priceCurrency": "GBP"
+                  "name": "Company Enablement",
+                  "description": "How a company moves with us — everyone starts at Phase 0."
+                }
               },
               {
                 "@type": "Offer",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "8-Week Transformation Cycle",
-                  "description": "Focused sprint with clear scope and measurable outcomes. Delivers 10x value on investment."
-                },
-                "price": "12000.00",
-                "priceCurrency": "GBP"
+                  "name": "1:1 Exec AI Fast Track Coaching",
+                  "description": "Take it off your plate — a bespoke 6-week 1:1 AI sprint with a founder."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Leadership Team AI Activation",
+                  "description": "A leadership team that moves together."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Open Cohort AI Bootcamp for Business Leaders",
+                  "description": "Eight weeks of AI in a room of your peers."
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Talks & Events",
+                  "description": "Move a room. In an afternoon."
+                }
               }
             ]
           }
@@ -644,10 +662,132 @@
 
           </div>
           <p class="ax-process__note">
-            For individual leaders and coaching cohorts — <a href="/what-we-do">see our full offering →</a>
+            That's one way in. There's a second — for individual leaders and teams.
           </p>
         </div>
       </section>
+
+      <!-- === TWO DOORS (the offer spine) === -->
+      <!-- TwoDoors — the spine of the offer (Offer Canon §3, recovered from home-b-v2.jsx "Two doors in")
+     Two entry points: Door 1 (your business) · Door 2 (yourself or your leadership team),
+     plus a tertiary Talks & Events callout. All names/prices come from offerings.json via
+     offering tokens — never hardcode them here (Check #10). Used on / and /what-we-do/. -->
+<section class="ax-two-doors" aria-labelledby="two-doors-heading">
+  <div class="ax-two-doors__inner">
+
+    <div class="ax-two-doors__intro">
+      <span class="ax-kicker">Two doors in</span>
+      <h2 class="ax-two-doors__heading" id="two-doors-heading">Pick your starting point.</h2>
+      <p class="ax-two-doors__sub">
+        The right way in depends on what you're trying to move — yourself, your leadership team,
+        or your whole business. These are starting points, not lanes you're locked into: many
+        clients run more than one at once. Start where it's clearest — add what helps.
+      </p>
+    </div>
+
+    <div class="ax-two-doors__grid">
+
+      <!-- Door 1 — For your business -->
+      <article class="ax-door ax-door--business">
+        <div class="ax-door__head">
+          <span class="ax-door__num" aria-hidden="true">01</span>
+          <span class="ax-door__label">For your business</span>
+        </div>
+        <h3 class="ax-door__title">Company Enablement</h3>
+        <p class="ax-door__pitch">
+          Move the whole organisation. Three workshops plus an AI strategy playback align
+          leadership, activate the team, and leave you a costed 90-day plan — then we ship
+          capability, cycle by cycle, as far as you want to go.
+        </p>
+        <ul class="ax-door__facts">
+          <li class="ax-door__fact">
+            <span class="ax-door__fact-label">Phase 0 · two weeks to clarity</span>
+            <span class="ax-door__fact-value">from £5,000</span>
+          </li>
+          <li class="ax-door__fact">
+            <span class="ax-door__fact-label">Phase 1+ · eight-week cycles</span>
+            <span class="ax-door__fact-value">from £20,000/cycle</span>
+          </li>
+        </ul>
+        <a href="/what-we-do/company-enablement/" class="ax-door__cta">
+          How a company moves with us <span aria-hidden="true">→</span>
+        </a>
+      </article>
+
+      <!-- Door 2 — For yourself or your leadership team -->
+      <article class="ax-door ax-door--individual">
+        <div class="ax-door__head">
+          <span class="ax-door__num" aria-hidden="true">02</span>
+          <span class="ax-door__label">For yourself or your leadership team</span>
+        </div>
+        <h3 class="ax-door__title">Leadership AI Coaching</h3>
+        <p class="ax-door__pitch">
+          One lane, three depths — same DOTS engine, run on your own, with your team behind
+          closed doors, or alongside peers from other companies. The fastest way to build
+          personal AI capability.
+        </p>
+        <ul class="ax-door__formats">
+          <li class="ax-door__format">
+            <a href="/what-we-do/senior-leader-acceleration/" class="ax-door__format-link">
+              <span class="ax-door__format-name">1:1 Exec AI Fast Track Coaching</span>
+              <span class="ax-door__format-meta">On your own · 1:1 · from £10,000</span>
+            </a>
+          </li>
+          <li class="ax-door__format">
+            <a href="/what-we-do/leadership-activation/" class="ax-door__format-link">
+              <span class="ax-door__format-name">Leadership Team AI Activation</span>
+              <span class="ax-door__format-meta">Your team, closed · from £15,000</span>
+            </a>
+          </li>
+          <li class="ax-door__format">
+            <a href="/what-we-do/leadership-cohort/" class="ax-door__format-link">
+              <span class="ax-door__format-name">Open Cohort AI Bootcamp for Business Leaders</span>
+              <span class="ax-door__format-meta">With peers · open cohort · from £3,500/place</span>
+            </a>
+          </li>
+        </ul>
+      </article>
+
+    </div>
+
+    <!-- Load-bearing routing sentence (Canon §7.5 #4) -->
+    <p class="ax-two-doors__distinction">
+      <strong>Both doors work with leaders — here's the difference.</strong>
+      Door 1 moves your <em>whole business</em>: leadership alignment is where it <em>starts</em>.
+      The closed exec-team coaching in Door 2 builds your <em>leadership team's own</em> AI capability:
+      your leaders are the <em>end</em>, not the on-ramp.
+    </p>
+
+    <!-- Tertiary callout — Talks & Events -->
+    <div class="ax-two-doors__tertiary">
+      <div class="ax-two-doors__tertiary-text">
+        <span class="ax-two-doors__tertiary-label">Need someone to lead a big AI moment?</span>
+        <span class="ax-two-doors__tertiary-name">Talks & Events</span>
+        — keynotes, leadership offsites and hackathons. Move a room in an afternoon.
+      </div>
+      <a href="/talks-events/" class="ax-two-doors__tertiary-cta">Talks &amp; Events <span aria-hidden="true">→</span></a>
+    </div>
+
+    <!-- Helper: the quiz for anyone still unsure -->
+    <div class="ax-two-doors__quiz">
+      <span class="ax-two-doors__quiz-text">Not sure which door is yours?</span>
+      <a
+        href="https://quiz.accelerator-x.ai"
+        class="ax-two-doors__quiz-cta"
+        rel="noopener noreferrer"
+        target="_blank"
+        data-posthog-event="quiz_outbound_clicked"
+        data-posthog-source="what-we-do"
+        data-posthog-placement="two-doors"
+      >
+        Take the 4-min assessment <span aria-hidden="true">↗</span>
+      </a>
+      <span class="ax-two-doors__quiz-note">Free · No email required</span>
+    </div>
+
+  </div>
+</section>
+
 
 
 <!-- FitCheck — right-fit / not-for-you honesty signal
@@ -701,70 +841,53 @@
           <h2 class="ax-testimonials__heading reveal">What our clients say.</h2>
           <div class="ax-testimonials__grid">
 <!-- TESTIMONIALS_COMPONENT_START -->
-          <!-- Testimonial 1 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
-            <div class="mb-4 flex justify-center">
-              <div class="stars-5" aria-hidden="true">
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
+
+            <!-- Testimonial 1 -->
+            <div class="ax-testimonial-card reveal">
+              <div class="ax-testimonial-card__stars" aria-hidden="true">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
               <span class="sr-only">5 out of 5 stars</span>
+              <p class="ax-testimonial-card__quote">
+                "Their combination of deep technical capability and organisation-wide coaching ability is unique. They've worked with leadership, product &amp; engineering, compliance, marketing, sales &amp; operations — spanning strategy to implementation. We have a fundamentally more capable business — not just new AI tools."
+              </p>
+              <div class="ax-testimonial-card__attribution">
+                <p class="ax-testimonial-card__name">Alastair Constance</p>
+                <p class="ax-testimonial-card__role">CEO, Mercury Global</p>
+              </div>
             </div>
-            <p class="flex-1 italic leading-relaxed text-body">
-              "Their combination of deep technical capability and organisation-wide coaching ability is unique. They&#39;ve worked with leadership, product &amp; engineering, compliance, marketing, sales &amp; operations - spanning strategy to implementation. We have a fundamentally more capable business - not just new AI tools."
-            </p>
-            <div class="mt-6">
-              <p class="font-bold text-navy">Alastair Constance</p>
-              <p class="text-sm text-muted">CEO, Mercury Global</p>
-            </div>
-          </div>
 
-          <!-- Testimonial 2 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
-            <div class="mb-4 flex justify-center">
-              <div class="stars-5" aria-hidden="true">
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
+            <!-- Testimonial 2 -->
+            <div class="ax-testimonial-card reveal reveal-delay-1">
+              <div class="ax-testimonial-card__stars" aria-hidden="true">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
               <span class="sr-only">5 out of 5 stars</span>
+              <p class="ax-testimonial-card__quote">
+                "They didn't arrive with pre-built automations or a product to sell. They took time to understand our business, gave our leadership team confidence, then got in the weeds with the rest of our team to make it real. We're already moving faster — and we know we're only just getting started."
+              </p>
+              <div class="ax-testimonial-card__attribution">
+                <p class="ax-testimonial-card__name">Mark Bennett</p>
+                <p class="ax-testimonial-card__role">CEO, W&nbsp;R Bennett Group</p>
+              </div>
             </div>
-            <p class="flex-1 italic leading-relaxed text-body">
-              "They didn&#39;t arrive with pre-built automations or a product to sell. They took time to understand our business, gave our leadership team confidence, then got in the weeds with the rest of our team to make it real. We&#39;re already moving faster - and we know we&#39;re only just getting started."
-            </p>
-            <div class="mt-6">
-              <p class="font-bold text-navy">Mark Bennett</p>
-              <p class="text-sm text-muted">CEO, W R Bennett Group / Premium Car Parks</p>
-            </div>
-          </div>
 
-          <!-- Testimonial 3 -->
-          <div class="card-hoverable flex flex-col rounded-xl bg-background p-8">
-            <div class="mb-4 flex justify-center">
-              <div class="stars-5" aria-hidden="true">
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
-                <span aria-hidden="true">★</span>
+            <!-- Testimonial 3 -->
+            <div class="ax-testimonial-card reveal reveal-delay-2">
+              <div class="ax-testimonial-card__stars" aria-hidden="true">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>
               <span class="sr-only">5 out of 5 stars</span>
+              <p class="ax-testimonial-card__quote">
+                "The Accelerator X team helped us see our business through a completely different lens. Their insight into what was possible, and what we should leave alone, was impressive. Within days we'd made meaningful changes to our business, unlocked new revenue streams and built the confidence to keep going."
+              </p>
+              <div class="ax-testimonial-card__attribution">
+                <p class="ax-testimonial-card__name">David Carry</p>
+                <p class="ax-testimonial-card__role">Founder &amp; CEO, Track Record Coaching</p>
+              </div>
             </div>
-            <p class="flex-1 italic leading-relaxed text-body">
-              "The Accelerator-X team helped us see our business through a completely different lens. Their insight into what was possible, and what we should leave alone, was impressive. Within days we&#39;d made meaningful changes to our business, unlocked new revenue streams and built the confidence to keep going."
-            </p>
-            <div class="mt-6">
-              <p class="font-bold text-navy">David Carry</p>
-              <p class="text-sm text-muted">Founder, CEO, Track Record Coaching</p>
-            </div>
-          </div>
 
-          <!-- TESTIMONIALS_COMPONENT_END -->
+<!-- TESTIMONIALS_COMPONENT_END -->
 
           </div>
         </div>

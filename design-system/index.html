@@ -17,8 +17,7 @@
   <link rel="stylesheet" href="../assets/css/components/LogoStrip.css">
   <link rel="stylesheet" href="../assets/css/components/ProofRow.css">
   <link rel="stylesheet" href="../assets/css/components/PlanLayers.css">
-  <link rel="stylesheet" href="../assets/css/components/OfferingTable.css">
-  <link rel="stylesheet" href="../assets/css/components/OfferingCard.css">
+  <link rel="stylesheet" href="../assets/css/components/TwoDoors.css">
   <link rel="stylesheet" href="../assets/css/components/DeliverablesGrid.css">
   <link rel="stylesheet" href="../assets/css/components/FitCheck.css">
   <link rel="stylesheet" href="../assets/css/components/FAQList.css">
@@ -26,7 +25,6 @@
   <link rel="stylesheet" href="../assets/css/components/ArticleTile.css">
   <link rel="stylesheet" href="../assets/css/components/EventCard.css">
   <link rel="stylesheet" href="../assets/css/components/FounderCard.css">
-  <link rel="stylesheet" href="../assets/css/components/DecisionTree.css">
   <link rel="stylesheet" href="../assets/css/components/QuizCTA.css">
   <link rel="stylesheet" href="../assets/css/components/ScarcityCard.css">
   <link rel="stylesheet" href="../assets/css/components/CohortList.css">
@@ -792,7 +790,7 @@
        ================================================================ -->
   <section class="ds-section" id="content">
     <h2 class="ds-section-title">Content Blocks</h2>
-    <p class="ds-section-subtitle">Wave C — LogoStrip, ProofRow, PlanLayers, OfferingTable, OfferingCard, DeliverablesGrid, FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard, DecisionTree.</p>
+    <p class="ds-section-subtitle">Wave C — LogoStrip, ProofRow, PlanLayers, TwoDoors, DeliverablesGrid, FitCheck, FAQList, CaseTile, ArticleTile, EventCard, FounderCard.</p>
     <div class="ds-subsection">
   <h3 class="ds-subsection-title">LogoStrip</h3>
   <p class="ds-component-meta">Quiet credential row · Home, About · <code>LogoStrip.css</code></p>
@@ -837,33 +835,9 @@
 </div>
 
 <div class="ds-subsection">
-  <h3 class="ds-subsection-title">OfferingTable</h3>
-  <p class="ds-component-meta">Comparison across all offerings · /what-we-do · <code>OfferingTable.css</code> + <code>OfferingCard.css</code></p>
-  <div class="ds-component-stub"><strong>OfferingTable</strong> — desktop grid / mobile card-stack. See <code>_templates/components/OfferingTable.html</code></div>
-</div>
-
-<div class="ds-subsection">
-  <h3 class="ds-subsection-title">OfferingCard</h3>
-  <p class="ds-component-meta">Single offering tile · Standalone or inside OfferingTable · <code>OfferingCard.css</code></p>
-  <div class="ax-offering-card" style="max-width:360px">
-    <div class="ax-offering-card__header">
-      <span class="ax-offering-card__kicker">Core</span>
-      <span class="ax-offering-card__badge">Popular</span>
-    </div>
-    <h3 class="ax-offering-card__title">8-Week Transformation Cycle</h3>
-    <p class="ax-offering-card__pitch">Focused sprint with measurable outcomes.</p>
-    <div class="ax-offering-card__meta">
-      <div class="ax-offering-card__meta-item">
-        <span class="ax-offering-card__meta-label">Duration</span>
-        <span class="ax-offering-card__meta-value">8 weeks</span>
-      </div>
-      <div class="ax-offering-card__meta-item">
-        <span class="ax-offering-card__meta-label">From</span>
-        <span class="ax-offering-card__meta-value">£12,000</span>
-      </div>
-    </div>
-    <a href="#" class="ax-offering-card__cta">See details <span aria-hidden="true">→</span></a>
-  </div>
+  <h3 class="ds-subsection-title">TwoDoors</h3>
+  <p class="ds-component-meta">The offer spine — two entry-point cards + tertiary callout · / and /what-we-do · <code>TwoDoors.css</code> · names/prices from <code>offerings.json</code> via <code>{{offering:…}}</code> tokens</p>
+  <div class="ds-component-stub"><strong>TwoDoors</strong> — replaced the legacy OfferingTable/OfferingCard/DecisionTree. See <code>_templates/components/TwoDoors.html</code></div>
 </div>
 
 <div class="ds-subsection">
@@ -918,12 +892,6 @@
   <h3 class="ds-subsection-title">FounderCard</h3>
   <p class="ds-component-meta">Founder profile tile · /about, home · <code>FounderCard.css</code></p>
   <div class="ds-component-stub"><strong>FounderCard</strong> — portrait placeholder swapped for real photo when available. See <code>_templates/components/FounderCard.html</code></div>
-</div>
-
-<div class="ds-subsection">
-  <h3 class="ds-subsection-title">DecisionTree</h3>
-  <p class="ds-component-meta">"Not sure which fits?" · /what-we-do, /contact · <code>DecisionTree.css</code> · Links to quiz.accelerator-x.ai</p>
-  <div class="ds-component-stub"><strong>DecisionTree</strong> — 4–6 row pattern, external quiz CTA. See <code>_templates/components/DecisionTree.html</code></div>
 </div>
 
   </section>
