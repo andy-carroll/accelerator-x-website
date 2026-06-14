@@ -140,10 +140,12 @@ In the design as a tertiary callout (£6k/mo) but **never built** (no page, no c
 
 **VAT (decided 2026-06-14):** all prices quoted **"+VAT"** (exclusive) — the UK B2B norm; VAT-registered clients reclaim it, so it's immaterial to the buyer. **One site-wide footnote** handles the international case (B2B place-of-supply: non-UK businesses are not charged UK VAT) — e.g. *"Prices exclude VAT. UK VAT added where applicable; international clients billed per place-of-supply rules."* No per-price VAT logic, no VAT-inclusive pricing.
 
-**Risk reversal / guarantee (decided 2026-06-14 — keep prominent; powerful trust signal):**
-- **Company Enablement / Phase 0:** a **full, no-questions money-back guarantee** if you don't find the **first session** (the 2.5–3hr senior-leadership-team DOTS workshop) comfortably in line with or exceeding expectations. Tell us on the day or within 48 hours — no hoops; we may just ask why. (That session is a full day of our time with prep, travel and facilitation — the guarantee is genuine, not theatre.)
-- **Coaching (all three formats):** **full money-back through your first two sessions** — quit before the third, no questions asked, money back.
-- Beyond the guarantee window: **no lock-in** — engagements run a cycle at a time; you decide if there's a next one.
+**Risk reversal / guarantee — our "no value, no payment" promise (decided 2026-06-14; clarified 2026-06-14 by Andy — lead with the principle, no caveats or legal-speak up front):**
+The core commitment, stated plainly: **we don't want to work with anyone who doesn't feel they've received far more value than they paid.** So across **everything we do — Company Enablement, and all coaching, training and activation/enablement programmes** — there's a genuine, no-questions / no-objections money-back option. (The only exception is one-off **Talks & Events / keynotes**, which this doesn't cover.)
+- **Company Enablement / Phase 0:** after your **first session**, *you* decide. If it isn't worth it, you pay nothing.
+- **Coaching (all three formats):** you get **two full sessions and the resources are yours to keep** — if it's not for you, cancel **before the third session** and get a **full refund**.
+- This is a real commitment, not theatre. Beyond it there's **no lock-in** — engagements run a cycle/format at a time; you decide if there's a next one.
+- **Presentation rule:** state the strong principle up front ("no value, no payment"); the simple mechanism (decide after session 1 / two sessions then cancel before the third) is the *how*, not a hedge. Do **not** front-load conditions like "within 48 hours" or "in line with expectations."
 
 **IP / data (decided 2026-06-14 — keep it light on the site, no NDA detail):** **what you build is yours.** Frameworks/tools we share are yours to use freely across your business and personal life — the only restriction is no reselling or running them as a competing service. 1:1 work is confidential. NDAs/DPAs handled directly with the client's team, not on the website.
 
