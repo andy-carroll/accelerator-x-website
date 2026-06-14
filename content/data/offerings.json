@@ -13,8 +13,9 @@
     "procurement": "No discounting (prices move up, not down). Can work within a required formal process (done before, incl. a global financial consulting firm); heavier process = more scope = higher price. Light touch on site.",
     "open_decisions": [
       "PROOF (HIGH — #1 ship-blocker): asset confirmed — all early clients (Alastair/Mercury Global, Mark/W R Bennett, David/Track Record, Charlotte/Conductor) + others willing to be reference calls. Near-term (Andy, coming weeks, #22/#55): capture 2-3 concrete before/after outcomes + 'references on request'; weave into offer narrative.",
-      "ROI multiple: RESOLVED 2026-06-14 — removed (unmeasured anecdote ~4 hires/£250k); near-term priority to measure + publish one real verified case.",
-      "Door 1 vs Door 2 Format B (HIGH): add a load-bearing routing sentence (copy / Phase 5)."
+      "ROI: reframed 2026-06-14 (v0.4) as the outcomes-first 'How to think about ROI' block (offer-canon §5.5) — 10x+ floor as a reasoning model anchored in the client's own numbers, NOT a delivered-result claim. Cross-site narrative element (prominent, referenced in several places). Real measured cases still to publish (#22/#55).",
+      "Door 1 vs Door 2 Format B (HIGH): add a load-bearing routing sentence (copy / Phase 5).",
+      "Differentiation / comparison content (near-term SEO/AEO, relates #43): invest in 'AX vs an AI automation agency' / 'AX vs a consultancy' comparison articles + offers-page prominence. Positioning block + 2 FAQs landed 2026-06-14 (offer-canon §1/§7); dedicated landing pages are NOT v1."
     ]
   },
   "doors": [
@@ -36,7 +37,7 @@
           "key": "phase-0",
           "name": "Phase 0",
           "tagline": "Two weeks to clarity.",
-          "format": "3 workshops + 1 playback",
+          "format": "3 workshops (Exec DOTS half-day; Team Activation 2.5hr in groups of ~20-25, max 30, multiple sessions for larger orgs; Team-level DOTS) + 1 strategy playback",
           "duration": "2 weeks",
           "price_from_gbp": 5000,
           "price_note": "from £5,000 (the floor; £5k-£9k typical); confirmed 2026-06-14",

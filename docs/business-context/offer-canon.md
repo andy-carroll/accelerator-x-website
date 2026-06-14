@@ -1,6 +1,6 @@
 # Accelerator X — Offer Canon
 
-> **Status: CANONICAL SOURCE OF TRUTH for what we offer.** Version 0.3 (draft) — 2026-06-14.
+> **Status: CANONICAL SOURCE OF TRUTH for what we offer.** Version 0.4 (draft) — 2026-06-14.
 > This document supersedes `ax-offering-architecture.md` and `ax-canonical-offer-strategy.md`.
 > The website **derives** from this and from its machine-readable companion `content/data/offerings.json`.
 > **Do not edit offering names, prices, durations, or descriptions on the website directly** — change them here, then in `offerings.json`, and let the build propagate.
@@ -21,6 +21,14 @@ Three promises carry the positioning (customer-tested language, from `landing-pa
 - **We build capability, not dependency.** The best outcome is that you outgrow us.
 - **We deliver results, not recommendations.** We do the work *with* you — we don't hand over a deck and disappear.
 - **We stay until the job is done.** One cycle or a year — no lock-in, no dragging it out.
+
+**What makes us different (and who we're not for).** We're a **rare combination — hands-on technologists, consultants, teachers and coaches.** We work the full span: north-star strategy (DOTS) → **systems design, architecture and implementation** → and the **human capability** to run it. That span is the line between us and the two things buyers compare us to:
+- **vs an AI automation agency** — they sell and drop in the tech (an n8n workflow, a bot) and leave; the capability — and the dependency — stays with *them*. We build the systems too, but we also build *your people's* capability, so the value compounds and isn't hostage to a vendor.
+- **vs a training company / traditional consultancy** — workshops, slides and recommendations, but no build. We go all the way into hands-on implementation.
+
+If you want a quick fix you don't have to engage with — something dropped in so you *don't* have to do the work — **we're honestly not your team.** Our value is **tech *and* capability, together.** (Don't over-index on "coaching" in the copy — the technologist/implementer half is just as real and is part of what's rare.)
+
+> *Near-term (SEO/AEO, relates [#43](https://github.com/andy-carroll/accelerator-x-website/issues/43)): turn this into discoverable **comparison content** — "AX vs an AI automation agency", "AX vs a consultancy" — a known search pattern. Not v1 dedicated landing pages; the FAQs below + this block are the start.*
 
 **Tagline candidates** (from the design + copy): *"A clear path from overwhelmed to operational."* · *"Partners who understand you."*
 
@@ -65,25 +73,26 @@ One lane, **three formats** (see §4.2): **1:1 / very small group · your exec t
 ### ↘ Tertiary callout — **Talks & Events**
 > *"I need someone to lead a big AI moment."* Keynotes, leadership offsites, hackathons. First-class, not buried.
 
-> **⚠️ DECISION (Andy+Toby):** The design also had an *"Already running AI internally? → Fractional AI Advisory (monthly)"* strip. **Ruled this session: dropped from v2** until it's a real, priced offering. Recorded in `offerings.json` as `status: retired-for-v2`.
+> **✅ DECIDED (Andy, 2026-06-14):** The design also had an *"Already running AI internally? → Fractional AI Advisory (monthly)"* strip. **Dropped from v2** until it's a real, priced offering. Recorded in `offerings.json` as `status: retired-for-v2`.
 
 ---
 
 ## 4. The offer set
 
-> Each offering below carries its **approved customer-facing language** (from the built detail pages, which the founders confirmed are the closest thing to the real offer). Prices marked 🔧 need reconciling — see §5.
+> Each offering below carries its **approved customer-facing language** (from the built detail pages, which the founders confirmed are the closest thing to the real offer). Prices are locked — see §5.
 
 ### 4.1 · Door 1 — Company Enablement *(flagship for businesses)*
 
 **Customer line:** *"How a company moves with us."* Two phases. The first aligns and activates in two weeks; the second ships capability, cycle by cycle, until you're self-sufficient. **Everyone starts with Phase 0.**
 
-**Phase 0 — "Two weeks to clarity."** 2 weeks · 3 workshops + 1 playback · **from £5,000** (the floor).
-1. **Executive DOTS** — half-day with your leadership team (Dream / Obstacles / Triage / Sequence).
-2. **Team activation** — wider function session (10–40 people); leadership decision becomes team adoption.
-3. **Strategy playback** — costed 90-day roadmap; Phase 1 scope agreed (or not).
-*You walk away with:* a 90-day roadmap, use cases evaluated, aligned leadership, an activated team. *"A roadmap you can defend."*
+**Phase 0 — "Two weeks to clarity."** 2 weeks · **3 workshops + 1 playback** · **from £5,000** (the floor). The flow:
+1. **Executive DOTS** — half-day with the leadership team. Produces a **tangible high-level roadmap** — vision, north star, key themes and opportunity focus areas (Dream / Obstacles / Triage / Sequence). This is the *boulder-to-rock* level of granularity.
+2. **Team Activation** — our foundational **2.5-hr** workshop for the wider team: shared operating model + mental model, enablement, and rapid practical upskilling. Run in groups of **~20–25 at a time (max 30)** — multiple sessions scale it to larger organisations (tens to a few hundred people; we don't put 200 in one room).
+3. **Team-level DOTS** — one level down, guided by the Exec DOTS: it takes those rocks down to **stones** (toward — not all the way to — grain-of-sand detail), focusing on specific functions / high-priority areas and sequencing them into the 90-day roadmap, tied to clear business metrics. Crucially it **draws the dotted line from executive steering to execution**, and **transfers ownership to the team with clarity, conviction and engagement** — the exec team has been heard and set the direction; the people who'll execute now own it. That's how you get shared ownership across the organisation, not a plan imposed from the top.
+4. **Strategy playback** — the costed, sequenced 90-day roadmap; Phase 1 scope agreed (or not).
+*You walk away with:* top-level direction + strategy + focus; a **costed 90-day roadmap tied to business metrics**; aligned leadership; **and a team levelled-up on how to execute** — so Phase 1+ becomes a collaboration on a **shared roadmap**, with our involvement dialled up or down. *"A roadmap you can defend."*
 
-**Phase 1+ Transformation Cycles — "Eight-week cycles. One capability at a time."** 8 weeks/cycle · **from £20,000/cycle** 🔧 *(dossier cites £20–25k — RECONCILE)*. Three streams every cycle: **People** ("train your operators"), **Process** ("change the rituals"), **Product** ("ship the thing"). Cycles chain: Cycle 01 → 02 → N → Advisory (when self-sufficient).
+**Phase 1+ Transformation Cycles — "Eight-week cycles. One capability at a time."** 8 weeks/cycle · **from £20,000/cycle**. Three streams every cycle: **People** ("train your operators"), **Process** ("change the rituals"), **Product** ("ship the thing"). Cycles chain: Cycle 01 → 02 → N → Advisory (when self-sufficient).
 🟡 FAQ-SEED: *"Can we skip Phase 0?"* · *"Can cycles run in parallel?"* · *"What's the '+' in Phase 1+?"*
 
 ### 4.2 · Door 2 — Leadership AI Coaching *(one lane, three formats)*
@@ -97,7 +106,7 @@ One lane, **three formats** (see §4.2): **1:1 / very small group · your exec t
 **Format A — 1:1 Exec AI Fast Track Coaching** *(name decided 2026-06-14; very-small-group on request. Built page is STALE — was "Senior Leader Acceleration", 12wk/£12k/90-min; update in Phase 5.)*
 *Elite, high-touch, fully bespoke.* **6 weeks** · weekly **75-min** private remote sessions + continuous async support (Slack/WhatsApp/Loom) · dedicated founder coach · **from £10,000 per individual** *(locked 2026-06-14; premium, scarce inventory; small-group variant possible)*.
 **The promise: we take things off your plate, not add something new to learn.** Begins with a rigorous async **audit** of your day-to-day to find the highest-ROI AI integration points (inbox triage, strategy synthesis, managing direct reports, strategic decision-making & comms). You build **proprietary workflows, custom instructions, and personal AI assistants** tuned to your leadership style and the company's tech stack — **at your pace, not a group's.** Confidential.
-🟡 FAQ-SEED: *"Why £8–10k 1:1 when a cohort place is £3k?"* → opportunity cost (a cohort fills 10–12 seats), plus bespoke + your-pace + done-with-you (answered in §7).
+🟡 FAQ-SEED: *"Why from £10k for 1:1 when a cohort place is £3.5k?"* → opportunity cost (a cohort fills 10–12 seats), plus bespoke + your-pace + done-with-you.
 
 **Format B — Leadership Team AI Activation** *(your exec team, closed, single company; name decided 2026-06-14, was "Leadership Activation")*
 *"A leadership team that moves together."* 8 weeks · bi-weekly half-days · on-site · up to 12 leaders from one organisation · **base £15,000 (up to 6 people) + £2,000 per person above 6, max 12 → range £15k–£27k** *(model decided 2026-06-14; built page stale at £18k flat / 5–10 people)*.
@@ -125,7 +134,7 @@ In the design as a tertiary callout (£6k/mo) but **never built** (no page, no c
 
 ## 5. Pricing — rules & the numbers to lock
 
-**Philosophy** (from `ax-canonical-offer-strategy.md` + dossier): value-first, then price. Quoted prices are **"the floor"** — they flex by business size, delivery complexity, travel/on-site, and scope. **No discount-led positioning.** **ROI — decided 2026-06-14: no published multiple.** We will **not** put "10x / £25k → £250k" on the site. It's unmeasured — it traces to one client saying we saved them ~4 hires (≈ £250k/yr), which is a great *anecdote* but not a measured metric, and baseless multiples cost credibility. Copy frames value as *how we measure it* (baseline → what moved → attribution), not a number. **Near-term priority: rigorously measure one real engagement and publish that.**
+**Philosophy** (from `ax-canonical-offer-strategy.md` + dossier): value-first, then price. Quoted prices are **"the floor"** — they flex by business size, delivery complexity, travel/on-site, and scope. **No discount-led positioning.** **ROI — outcomes-first (v0.4, 2026-06-14).** See **§5.5 "How to think about ROI"** — the canonical framing. In short: we're outcomes-focused and tie every engagement to defined results/targets; we work toward a **measurable 10x+ return within 12 months as a floor**, presented as a *reasoning model anchored in the client's own numbers* — **never** an unsubstantiated claim of a *delivered* multiple. Real measured cases still to be published (near-term).
 
 **VAT (decided 2026-06-14):** all prices quoted **"+VAT"** (exclusive) — the UK B2B norm; VAT-registered clients reclaim it, so it's immaterial to the buyer. **One site-wide footnote** handles the international case (B2B place-of-supply: non-UK businesses are not charged UK VAT) — e.g. *"Prices exclude VAT. UK VAT added where applicable; international clients billed per place-of-supply rules."* No per-price VAT logic, no VAT-inclusive pricing.
 
@@ -138,7 +147,9 @@ In the design as a tertiary callout (£6k/mo) but **never built** (no page, no c
 
 **Procurement / discounting (light touch):** we don't compete on discount — price reflects value and tends to move **up**, not down. We can work within a required formal process (done before, incl. a global financial consulting firm); a heavier process usually means more scope, which the price reflects. Don't over-explain this on the site.
 
-**🔧 RECONCILE — legacy sources disagree; founders must lock (#23):**
+**Making "yes" easy — no 12-month commitment (decided 2026-06-14 — a core part of the offer, surface it).** We deliberately **do not sell a 12-month programme**, and we won't drag you through proposal/finance-approval purgatory. (We've watched businesses spend *12 weeks and nine proposal drafts*, or *nine months of board decks*, just *talking* — it feels like progress but moves nothing.) The model is built to make yes easy and to remove downside: you commit to **one Phase 0**, then **8 weeks at a time**; you **never enter a cycle without full clarity on what it will deliver and its ROI**; and the money-back guarantee removes the risk of starting. We genuinely can't predict the number or scope of cycles before Phase 0 — it might be one or several, sometimes tapering to a small monthly advisory retainer (~£6k/mo). So we don't quote a fixed annual figure; we scope value **cycle by cycle**.
+
+**Pricing — locked 2026-06-14** (was a reconcile across legacy sources, #23):
 
 | Offering | Built page | Strategy/dossier | Canon working value | Status |
 |---|---|---|---|---|
@@ -148,11 +159,31 @@ In the design as a tertiary callout (£6k/mo) but **never built** (no page, no c
 | Company Enablement Phase 0 | £5,000 | £2k–£9k typical | **from £5,000** | ✅ Andy 2026-06-14 |
 | Phase 1+ cycle | £20,000 | £20–25k | **from £20,000/cycle** | ✅ Andy 2026-06-14 |
 | Half-day workshop ("from £2k") | — | £2k–£5k (design) | **RETIRED** | ✅ Andy 2026-06-14 — not listed |
-| Events | — | ~£10k (dossier) | TBC | ⚠️ confirm |
+| Events | — | ~£10k (dossier) | **Price on application** | ✅ Andy 2026-06-14 |
 
 **✅ DECIDED (Andy, 2026-06-14):** The standalone half-day workshop is **retired** — not a listed offering. Workshops live *inside* Phase 0 and Leadership Team AI Activation; standalone facilitated sessions are the Talks & Events **Leadership Offsite**; genuine one-offs are handled ad hoc on request. **Public headline price = "from £3,500 +VAT"** (the cohort place — the lowest honest entry, and a healthier anchor than £2k).
 
 ---
+
+## 5.5 How to think about ROI (outcomes-first)
+
+> **A key cross-site narrative element — not FAQ filler.** It deserves a prominent home (its own block/section) and should be **woven through the home page, `/what-we-do/`, pricing, and the offering pages** — the thread that makes the value undeniable. Tone: help the buyer reason in *their own* world; flip the question to *"can we afford not to?"*
+
+**We're outcomes-focused. Nothing matters if we're not delivering business results** — so we tie the AI opportunity roadmap and every piece of work to **clearly defined results and targets** (that's exactly what the Phase 0 roadmap is). We won't hand you a generic number; we build the model *with* you.
+
+**No two businesses are the same.** Structure differs, and what you measure differs. A **1% improvement to a critical function in a 2,000-person organisation can be worth millions in year one** — the same percentage means something entirely different in a smaller business. The point isn't our number; it's anchoring the calculation in *yours*.
+
+**The bar we work toward: a measurable 10x+ return within 12 months, as a floor** — often faster and higher. Where it shows up:
+
+- **Capacity you stop needing to hire for** — when the mundane work is handled, teams stop needing the next few headcount. *(One leader told us our work saved them around four hires — call it £200k+ a year — for a fraction of that.)*
+- **Top line** — better-fit customers, a tighter sales process, more value delivered per customer with less effort. A couple of points of conversion or revenue-per-customer compounds fast.
+- **A workforce multiplier** — if every person becomes even **1.5–2× more effective (the low end)**, what does your business do with that? Now picture a year where everyone is 2–5× the operator they were — without hiring.
+- **Enterprise value** — a demonstrably **AI-native operating model** (shared infrastructure, AI-enabled people) is a premium an investor or acquirer will pay for. Becoming AI-native re-rates the whole business.
+- **The compounding shift that's hard to price but easy to feel** — a leadership team perfectly in sync; a **shared "company brain" that's self-documenting and self-healing**; quality up, costs down, confusion down; and decisions **compressed from weeks to near-real-time**, because you're no longer waiting on a human to approve what should be approvable instantly.
+
+So the real question stops being *"can we afford to invest?"* and becomes **"can we afford *not* to?"** — and then we make it concrete, together, against targets we both sign up to.
+
+> **Honesty guardrail:** this is a *target + a way to reason*, plus honestly-attributed illustration — **not** a claim of measured past results. Keep it that way until real measured cases are published (in flight, #22/#55).
 
 ## 6. The method (the spine under every offering)
 
@@ -170,21 +201,24 @@ Five levels a client moves through (`ax-offering-architecture.md`): **1 Context 
 
 ## 7. FAQ / objection bank
 
-> **Generated by the 2026-06-14 multi-persona adversarial pass** (4 ideal-customer viewpoints → synthesis). Draft answers are grounded only in this Canon, in the AX voice (honest, anti-agency, *"great that you asked"*). **⚠️ = answer depends on an open founder decision** (pricing, proof, guarantee mechanics, naming, events) — do not publish until resolved.
+> **Generated by the 2026-06-14 multi-persona adversarial pass** (4 ideal-customer viewpoints → synthesis). Draft answers are grounded only in this Canon, in the AX voice (honest, anti-agency, *"great that you asked"*). **⚠️ = answer still depends on an open founder item** (real proof/case outcomes, founder pedigree on the About page, and the capacity/continuity story) — don't publish those until resolved. Pricing, guarantee, naming and events are now locked.
 > **Principle (Andy):** ~95% of questions are repeats — answer them on the page, *"great that you asked."* FAQs are **first-class across the site**, not buried. Add **FAQPage JSON-LD** so AI assistants extract them.
 
 ### Positioning / "is this real?" (homepage + /what-we-do)
 
+- **We've been talking about AI internally for months and still feel lost — can you actually get us moving?** — This is the exact thing we exist to fix. We've watched businesses spend 6–12 months in board decks and exec debates about AI — endless meetings that *feel* like progress but move nothing. Straight up: **you'll achieve more in the two weeks of Phase 0 with us than in the last 6–12 months of talking amongst yourselves.** What's that worth? Almost certainly more than the ~£5–8k Phase 0 costs — and if that first session doesn't clear the bar, it's free.
 - **Is this another agency sales funnel dressed up in nicer language?** — Healthy suspicion, and the only real answer is what we do rather than what we say. We're anti-agency by design: we do the work *with* you, not for you; what we build stays as your capability; and the explicit aim is that you outgrow us. Phase 0's roadmap is yours whether you continue or not — a strange thing to hand over if the goal were to trap you. Hold us to those three.
+- **How are you different from an AI automation agency that can build me a workflow in a couple of weeks?** — If you genuinely just want a bot or an n8n workflow dropped in and nothing else, an automation agency is faster and cheaper — and we'll tell you so. The difference: they sell you the tech and leave, so the capability (and the dependency) stays with *them*. We *do* build the systems — we're hands-on technologists who design, architect and implement — but we also build *your* team's capability, so it compounds and isn't hostage to a vendor. **Tech *and* capability, owned by you.**
+- **Are you a training/coaching outfit, or a consultancy?** — Both, and neither. We're a rare mix of **technologists, consultants, teachers and coaches** — we go from strategy (DOTS) right through to systems design, architecture and implementation, and we build your people's capability alongside. Most firms do one slice of that; doing the whole span is the point.
 - **Is this strategy-level work or just AI tool demos?** — Strategy-level. The spine of every engagement is **DOTS** — Dream, Obstacles, Triage, Sequence — that takes a leadership team from overwhelmed to a 90-day plan that survives contact with reality. Tools come in only in service of capability your people keep. Ask to see what an Executive DOTS session actually produces.
 - **⚠️ Who have you actually done this with? Can you show me named clients and outcomes, and could I speak to one?** — Great that you asked — first thing we'd want to know too. *[FOUNDER INPUT: real proof exists (Mark Bennett / Alastair Constance / David Carry / Charlotte Steedman) but is not yet woven into the offer narrative — see §7.5 #1.]* We won't invent clients to look bigger than we are; we'd rather show real work on a call and connect you with someone we've worked with. If proof is the thing standing between us, say so and we'll lead with it.
 - **⚠️ Who are you two? What have Toby and Andy actually built or run that earns the right to coach my exec team?** — Completely reasonable — never take AI direction from a self-appointed expert. Coaching is deliberately founder-led: your coach is Toby or Andy, not a junior. *[FOUNDER INPUT: needs real pedigree on About page — see §7.5 #1.]* If pedigree is the deciding factor, ask us directly.
 
 ### Pricing
 
-- **⚠️ Your prices all say "from." What's the actual number for me — and is it plus VAT?** — "From" shouldn't mean "unknowable." The floors are genuine: cohort from £3,500/place, Phase 0 from £5,000, cycles from £20,000 each. They flex with size, on-site/travel and scope — a 2-week Phase 0 for a 30-person firm and a 2,000-person one aren't the same job. Tell us the shape and we'll give a real figure. *[FOUNDER INPUT: lock VAT treatment + remaining numbers.]*
-- **What ROI can I expect, and how do you measure value?** — Honest answer: we don't put an ROI multiple on this page, because we haven't measured one rigorously enough to stand behind — and an unbacked number is exactly what we're allergic to. What we *will* do is agree up front how we measure value in your context — baseline, what changes, how it's attributed — so any number you take to your board is one you can defend. (Measuring and publishing a real, verified outcome is a priority we're actively working on.)
-- **⚠️ What's the realistic 12-month all-in cost for a company my size?** — Building blocks are public: Phase 0 from £5,000, then cycles from £20,000 each, chained only as far as you choose. We don't publish a fixed annual figure because the right number of cycles depends on what you're moving — but ask and we'll build a worked 12-month scenario with an upper bound you can take to finance.
+- **Your prices all say "from." What's the actual number for me — and is it plus VAT?** — "From" shouldn't mean "unknowable." The floors are genuine: cohort from £3,500/place, Phase 0 from £5,000, cycles from £20,000 each — all **+VAT** (UK businesses reclaim it; non-UK clients aren't charged UK VAT). They flex with size, on-site/travel and scope — a 2-week Phase 0 for a 30-person firm and a 2,000-person one aren't the same job. Tell us the shape and we'll give you a real figure.
+- **What ROI can I expect — and how should I think about it?** — The better question is usually *"can we afford **not** to?"* We're outcomes-focused: we tie the work to defined results and targets, and work toward a **measurable 10x+ return inside 12 months as a floor** — often faster and higher. Because no two businesses measure value the same way, we help you anchor it in *your* numbers rather than waving ours at you (a 1% lift to a critical function in a big org can be millions; capacity you stop hiring for; a workforce 1.5–5× more effective; even your valuation as you become AI-native). **See §5.5 "How to think about ROI" for the full picture.** We won't claim a number we haven't measured in your business.
+- **What's the realistic 12-month all-in cost for a company my size?** — Honestly, we can't know before Phase 0 — and that's the point. **You're not committing to a 12-month programme.** You commit to one Phase 0 (from £5,000), then **8 weeks at a time** — and you never start a cycle (from £20,000) without full clarity on what it delivers and its ROI. How many cycles depends on what we find: maybe one, maybe several, sometimes tapering to a small monthly advisory retainer (~£6,000/mo). We won't drag you through a 12-month budgeting debate or nine proposal drafts — the model exists precisely to escape that. If finance needs something to hold, we'll sketch an *illustrative* range with caveats; what we won't do is invent a fixed annual figure that fakes a certainty we don't have until we've done the work.
 
 ### Company Enablement (Door 1)
 
@@ -198,10 +232,10 @@ Five levels a client moves through (`ax-offering-architecture.md`): **1 Context 
 
 ### Leadership AI Coaching (Door 2)
 
-- **What's the real difference between the three coaching formats — and why pay £18k for the closed team when 5 cohort places cost less?** — Same engine, three depths. All run on DOTS; what changes is the room. Format A: one founder in your corner, 1:1. Format B: your own leadership team, closed, on-site, on your confidential context. Format C: you alongside vetted non-competing peers. The cohort is cheaper per place because you share the room; the closed format buys privacy, a session built entirely around your business, and a team-level artefact. Different jobs, not better-or-worse.
+- **What's the real difference between the three coaching formats — and why choose the closed team over sending people to the cohort?** — Same engine, three depths. All run on DOTS; what changes is the room. Format A: one founder in your corner, 1:1. Format B: your own leadership team, closed, on-site, working on your confidential context together. Format C: you alongside vetted non-competing peers. The open cohort is the lightest way in per person; the closed team buys privacy, a session built entirely around your business, and a team-level artefact your leaders own together. Different jobs, not better-or-worse.
 - **Is the open cohort a group from different companies, or somewhere I send my own team?** — A peer room: 12 vetted places, senior leaders from different non-competing companies. If you want your own team in a closed room, that's the exec-team format (B). On more than one person from your company, just ask — we vet for a good mix.
-- **I don't have 4 hours a week, and I'll miss sessions. Is this realistic for a busy CEO?** — Glad you raised it rather than bouncing. Cohort is ~4 hrs/week for 8 weeks; 1:1 is a weekly 90 min over a quarter — real commitment, deliberately, because capability doesn't stick from one afternoon. The work is built around your actual job, not bolted on top. On missed sessions, ask how we handle it for your format.
-- **⚠️ What does the closed exec-team programme cost for 8 leaders — flat fee or per head?** — Straight answer: floor is from £18,000, and we're finalising flat-fee vs base-plus-per-head. We won't quote a number we might revise. Give us your group size and we'll come back with a firm figure. *[FOUNDER INPUT: lock the model.]*
+- **I don't have 4 hours a week, and I'll miss sessions. Is this realistic for a busy CEO?** — Glad you raised it rather than bouncing. Cohort is ~4 hrs/week for 8 weeks; the 1:1 is 75 minutes a week over 6 weeks — real commitment, deliberately, because capability doesn't stick from one afternoon. The work is built around your actual job, not bolted on top. On missed sessions, ask how we handle it for your format.
+- **What does the closed exec-team programme (Leadership Team AI Activation) cost for, say, 8 leaders?** — It's a base plus per-head: **£15,000 for up to 6 people, then £2,000 per person above that, to a max of 12** — so 8 leaders is about £19,000 (all +VAT). Tell us your group size and we'll confirm the exact figure.
 
 ### Talks & Events
 
@@ -220,8 +254,8 @@ Five levels a client moves through (`ax-offering-architecture.md`): **1 Context 
 
 **🔴 HIGH**
 1. **Proof gap (#1 ship-blocker) — partly addressed 2026-06-14.** The offer asserts results with *zero* proof woven in — every persona called it a dealbreaker. **Asset confirmed:** all early clients (Alastair Constance/Mercury Global, Mark Bennett/W R Bennett Group, David Carry/Track Record Coaching, Charlotte Steedman/Conductor) **+ others are willing to be reference calls for serious prospects** (see [[verified-clients-and-pedigree]]). **Action (Andy prioritising over coming weeks, #22/#55):** capture 2–3 concrete before/after outcomes (e.g. Mark's £16k dispute resolved in a week — named or anonymised), weave them into the offer narrative + offering pages, and surface *"references available on request."* North star forbids fabrication — this is founder-content.
-2. ✅ **RESOLVED (Andy, 2026-06-14): remove the ROI multiple.** Not published until measured — it traces to one client's "saved ~4 hires ≈ £250k", which is unmeasured. Copy frames *how* we measure value, not a number. **Near-term priority: measure + publish one real verified outcome.**
-3. **Pricing visibly unsettled.** Multiple `from`/flex/🔧/⚠️ signals + internal contradictions (£5k floor vs "£2k–£9k typical"; £2k workshop vs £3,500 cohort entry). The wrong buyer reads negotiation leverage; the right buyer reads "undefendable to finance." **Action:** lock every number before ship; no 🔧/⚠️ reaches the public site; add a worked 12-month example with an upper bound; state VAT once.
+2. ✅ **RESOLVED → reframed (Andy, 2026-06-14, v0.4): outcomes-first ROI.** The bare unsupported multiple stays out; in its place a **standalone "How to think about ROI" block (§5.5)** — outcomes-focused, tied to defined targets, a **10x+ floor framed as a reasoning model anchored in the client's own numbers**, plus the qualitative "company brain" flywheel. Prominent + woven across the site, *not* buried in FAQ. Honesty held: a target + reasoning + honest illustration, never a measured-result claim; real cases still to publish (#22/#55).
+3. ✅ **RESOLVED (Andy, 2026-06-14): pricing locked.** All numbers set in §5 + `offerings.json` (cohort £3,500; 1:1 from £10k; Leadership Team AI Activation base £15k + £2k/head; Phase 0 £5k; cycle £20k; events POA; workshop retired); VAT stated once (+VAT). **Phase-5 reminder:** no 🔧/⚠️ may reach the public site. *Note:* we deliberately do **not** publish a fixed 12-month figure/upper bound (see §5 "Making yes easy") — finance gets an *illustrative* range with caveats, scoped cycle by cycle.
 4. **Door 1 vs Door 2 Format B confusable.** Both engage leadership, run DOTS, on-site, produce a 90-day plan. **Action:** one load-bearing routing sentence — Door 1 = move the whole business (leadership is the *start*); Format B = build the leadership team's own capability (leaders are the *end*).
 
 **🟡 MEDIUM** — 5. "Results not recommendations" vs Phase 0's roadmap deliverable (reconcile in copy: produced *with* you, owned by you). · 6. Framework overload (DOTS/Curve/CRISP/TSS) trips the "methodology theatre" alarm — lead with DOTS only at first contact, demote the rest behind "how it works." · 7. Disqualifiers are rhetoric, not structural — the cohort-place-vs-closed-team arbitrage is a real cheap-door loophole; explain the value gap, firm up prices. · 8. Generic hero ("We build human capability with AI systems") loses the 7-second scan — lead with the buyer's problem + proof. · 9. ✅ RESOLVED 2026-06-14: exit/guarantee (full money-back — Phase 0 first session / first two coaching sessions), data/IP ("what you build is yours", light touch), and procurement/discount all answered with founder rulings — see §5 + §7.
@@ -244,7 +278,10 @@ This document is the source of truth for the **offer structure and approved lang
 - **2026-06-14** · v0.2: ran the 4-persona adversarial pass; authored the FAQ/objection bank (§7) and the required-revisions list (§7.5). · Surfaced 4 HIGH gating findings (proof, ROI claim, pricing, Door-1-vs-Format-B confusion) + 22 FAQs. · Impacts: §7, §7.5; feeds #27 (FAQ), #22/#55 (proof), #23 (pricing).
 - **2026-06-14 (founder rulings, Andy)** · Decisions 1–2 locked: (a) the offer is a **stackable menu**, not either/or — clients run 2–4 in parallel; (b) coaching names = **1:1 Exec AI Fast Track Coaching · Leadership Team AI Activation · Open Cohort AI Bootcamp for Business Leaders** (Ronseal title + subtitle each); (c) 1:1 re-specced — 6 wks, 75-min remote, async, pre-work audit, bespoke systems, **from £10k**; (d) Leadership Team AI Activation = **base £15k (≤6) + £2k/head, max 12**; (e) cohort **£3,500/place**; (f) Phase 0 **from £5k**, Phase 1+ **from £20k/cycle**; (g) all prices **+VAT** (exclusive) + one international footnote. · Impacts §3, §4.2, §5, §7 + `offerings.json`. **Built coaching/exec pages now stale on duration/price — update in Phase 5.** · Still open: half-day workshop (Decision 3), public headline price, proof/ROI (4), guarantee/legal (5), events (6).
 - **2026-06-14 (founder rulings, Andy) — Decisions 3–6, v0.3:** (3) standalone half-day workshop **retired** (workshops live inside offerings / the Leadership Offsite); public headline = **"from £3,500 +VAT"**. (4) ROI multiple **removed** (unmeasured anecdote) — measure + publish a real case soon; **all early clients available as reference calls**. (5) **Full money-back guarantee** — Phase 0 first session / first two coaching sessions; IP = "what you build is yours" (light touch, no NDA detail on site); no discounting, can work within formal processes. (6) Talks & Events = three formats, **price-on-application**, inquiry-led. · **All six decisions resolved — Canon ready for a sign-off read.** Remaining open items are near-term proof work (#22/#55) + Phase-5 build (derive site, Door-1-vs-Format-B routing copy, FAQPage JSON-LD).
+- **2026-06-14 (Andy) — v0.4: ROI reframed, outcomes-first.** Replaced "no multiple" with a **standalone "How to think about ROI" (§5.5)** — outcomes-focused, tied to defined results/targets; **10x+ within 12 months as a floor**, framed as a reasoning model anchored in the client's own numbers (capacity / top-line / workforce-multiplier / enterprise-value + the self-healing "company brain" flywheel); flip to *"can you afford not to?"*. It's a **cross-site narrative element** (prominent, referenced in several places), not FAQ filler. Honesty held: a target + reasoning, never an unsubstantiated delivered-result claim; real measured cases still in flight. · Impacts §5, **§5.5 (new)**, §7, §7.5.
+- **2026-06-14 (Andy) — "make yes easy" / no 12-month commitment + Phase 0 flow correction.** (a) Added the commercial principle (§5): we don't sell a 12-month programme or run proposal/finance-approval purgatory; commit one Phase 0 then 8 weeks at a time, each cycle entered only with clarity on deliverable + ROI, downside removed by the guarantee, value scoped cycle-by-cycle (may taper to ~£6k/mo advisory). Reworked the "12-month cost" FAQ to match; added the "stuck talking about AI for months" objection-handler ("more in two weeks than the last 6–12 months — first session clears £5–8k or it's free"). (b) Corrected Phase 0 (§4.1) to the real flow — **3 workshops** (Exec DOTS → Team Activation [2.5hr, groups ~20–25, max 30, multiple sessions scale to larger orgs] → Team-level DOTS) **+ playback**; added the boulder→rock→stones granularity link and the **ownership-transfer** narrative (exec steers, team owns). · Impacts §4.1, §5, §7 + `offerings.json`.
+- **2026-06-14 (Andy) — differentiation vs automation agencies & consultancies.** Added "What makes us different (and who we're not for)" (§1) + two FAQs (§7): the **rare combination** (hands-on technologists + consultants + teachers + coaches), the full **span** (strategy → systems design/architecture/implementation → human capability), and the two contrasts (automation agency = tech-only, dependency stays with them; training/consultancy = no build). Explicit "not for quick-fix buyers"; deliberately *don't over-index on coaching* — the technologist/implementer half is equally real. Flagged **near-term comparison content** ("AX vs …") for SEO/AEO (#43) — not v1 dedicated pages. · Impacts §1, §7 + `offerings.json`.
 
 ---
 
-*End of document. v0.1 draft — Phases 2 of the Offer Canon work (#57). Open decisions in §3–§5 to be closed by Andy + Toby; FAQ bank in §7 to be authored in Phase 4.*
+*End of document. v0.4 — Offer Canon (#57). All six founder decisions closed, plus the ROI block, differentiation, and "make-yes-easy" additions; FAQ bank authored (§7). Remaining: real proof content (#22/#55), the capacity/continuity answer, and the Phase-5 site build (derive from `offerings.json`).*
