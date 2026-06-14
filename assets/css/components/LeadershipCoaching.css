@@ -1,14 +1,73 @@
 /* =============================================================================
    Leadership AI Coaching — Door 2 hub
    Markup: _templates/offerings/leadership-ai-coaching.html
-   Hub-and-spoke: hero → three depth cards (link down to the offerings) →
-   shared-engine band → CTA. Cards are full <a> with a clear arrow affordance.
+   Flow: hero → "not a course" why-block (navy) → three depth cards (the chooser)
+   → selection CTA. Cards are full <a> with a strong, obvious click affordance.
    ============================================================================= */
 
-/* --- Three depths -------------------------------------------------------- */
+/* --- "Not a course" / what-to-expect (navy punctuation) ------------------ */
+.ax-coaching-why {
+  padding: var(--space-16) 0;
+  background: var(--bg-dark);
+  color: var(--fg-on-dark);
+}
+
+.ax-coaching-why__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) { .ax-coaching-why__inner { padding: 0 var(--gutter-tablet); } }
+@media (min-width: 1024px) { .ax-coaching-why__inner { padding: 0 var(--gutter-desktop); } }
+
+.ax-coaching-why__header { margin-bottom: var(--space-10); max-width: 40ch; }
+
+.ax-coaching-why__heading {
+  margin: var(--space-3) 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-on-dark);
+}
+
+.ax-coaching-why__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 768px) { .ax-coaching-why__grid { grid-template-columns: repeat(2, 1fr); } }
+
+.ax-coaching-why__point-title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-on-dark);
+}
+
+.ax-coaching-why__point-body {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-muted-on-dark);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-coaching-why__method {
+  margin: var(--space-10) 0 0;
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: var(--text-base);
+  color: var(--fg-muted-on-dark);
+  line-height: var(--lh-relaxed);
+}
+
+/* --- Three depths (the chooser) ------------------------------------------ */
 .ax-depths {
   padding: var(--space-16) 0;
-  background: var(--bg-paper);
+  background: var(--bg-1);
 }
 
 .ax-depths__inner {
@@ -20,7 +79,7 @@
 @media (min-width: 768px) { .ax-depths__inner { padding: 0 var(--gutter-tablet); } }
 @media (min-width: 1024px) { .ax-depths__inner { padding: 0 var(--gutter-desktop); } }
 
-.ax-depths__header { margin-bottom: var(--space-10); max-width: 60ch; }
+.ax-depths__header { margin-bottom: var(--space-6); max-width: 60ch; }
 
 .ax-depths__heading {
   margin: var(--space-3) 0 var(--space-4);
@@ -38,6 +97,17 @@
   line-height: var(--lh-relaxed);
 }
 
+/* Guarantee reassurance, sits right above the cards to de-risk the click */
+.ax-depths__guarantee {
+  margin: 0 0 var(--space-8);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface-accent-subtle);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-sm);
+  color: var(--fg-1);
+}
+.ax-depths__guarantee strong { color: var(--fg-1); }
+
 .ax-depths__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -46,7 +116,13 @@
 
 @media (min-width: 768px) { .ax-depths__grid { grid-template-columns: repeat(3, 1fr); } }
 
-/* --- Depth card (whole card is the link) --------------------------------- */
+.ax-depths__refs {
+  margin: var(--space-8) 0 0;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+}
+
+/* --- Depth card (whole card is the link; strong affordance) -------------- */
 .ax-depth-card {
   display: flex;
   flex-direction: column;
@@ -55,6 +131,7 @@
   background: var(--bg-1);
   border: 1px solid var(--border-1);
   border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
   text-decoration: none;
   color: inherit;
   transition: border-color var(--dur-base) var(--ease-out),
@@ -63,9 +140,9 @@
 }
 
 .ax-depth-card:hover {
-  border-color: var(--border-2);
+  border-color: var(--action-accent);
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .ax-depth-card:focus-visible {
@@ -92,11 +169,19 @@
 
 .ax-depth-card__desc {
   margin: 0;
-  flex-grow: 1;
   font-size: var(--text-base);
   color: var(--fg-3);
   line-height: var(--lh-relaxed);
 }
+
+.ax-depth-card__outcome {
+  margin: 0;
+  flex-grow: 1;
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+}
+.ax-depth-card__outcome strong { color: var(--fg-1); font-weight: var(--fw-semibold); }
 
 .ax-depth-card__meta {
   font-size: var(--text-sm);
@@ -104,53 +189,51 @@
   color: var(--fg-1);
 }
 
+/* Button-styled CTA so it's unmistakably the click target */
 .ax-depth-card__cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--space-2);
-  margin-top: var(--space-1);
+  margin-top: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--action-accent);
+  color: var(--fg-on-dark);
+  border-radius: var(--radius-md);
   font-size: var(--text-sm);
   font-weight: var(--fw-semibold);
-  color: var(--action-accent);
 }
 
 .ax-depth-card__cta-arrow { transition: transform var(--dur-base) var(--ease-out); }
 .ax-depth-card:hover .ax-depth-card__cta-arrow { transform: translateX(3px); }
 
-/* --- Shared-engine band -------------------------------------------------- */
-.ax-coaching-shared {
-  padding: var(--space-16) 0;
-  background: var(--bg-dark);
-  color: var(--fg-on-dark);
+/* --- Selection CTA (champagne; routes to a fit conversation, not "apply") - */
+.ax-coaching-cta {
+  padding: var(--space-20) 0;
+  background: var(--bg-paper);
 }
 
-.ax-coaching-shared__inner {
+@media (min-width: 768px) { .ax-coaching-cta { padding: var(--space-24) 0; } }
+
+.ax-coaching-cta__inner {
   max-width: var(--container-tight);
   margin: 0 auto;
   padding: 0 var(--gutter-mobile);
   text-align: center;
 }
 
-.ax-coaching-shared__heading {
-  margin: var(--space-3) 0 var(--space-4);
+.ax-coaching-cta__heading {
+  margin: 0 0 var(--space-3);
   font-family: var(--font-display);
   font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
   font-weight: var(--fw-bold);
   line-height: var(--lh-snug);
-  color: var(--fg-on-dark);
+  color: var(--fg-1);
 }
 
-.ax-coaching-shared__body {
-  margin: 0 auto;
-  max-width: 60ch;
-  font-size: var(--text-lg);
-  color: var(--fg-muted-on-dark);
-  line-height: var(--lh-relaxed);
-}
-
-.ax-coaching-shared__guarantee {
-  margin: var(--space-6) 0 0;
+.ax-coaching-cta__sub {
+  margin: 0 auto var(--space-6);
+  max-width: 48ch;
   font-size: var(--text-base);
-  color: var(--fg-on-dark);
+  color: var(--fg-3);
 }
-.ax-coaching-shared__guarantee strong { color: var(--fg-on-dark); }
