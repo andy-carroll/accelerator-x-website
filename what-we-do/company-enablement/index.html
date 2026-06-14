@@ -77,6 +77,48 @@
     }
     </script>
 
+    <!-- FAQPage JSON-LD — mirrors the on-page FAQ (offer-canon.md §7) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://accelerator-x.ai/what-we-do/company-enablement/#faq",
+      "isPartOf": { "@id": "https://accelerator-x.ai/#website" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can we skip Phase 0?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Phase 0 is the diagnostic that makes everything else accurate. Without it, Phase 1 is built on assumptions. The two weeks are the fastest way to stop wasting time on the wrong things — and it's your lowest-risk way in. Every engagement starts here." }
+        },
+        {
+          "@type": "Question",
+          "name": "How firm is the Phase 0 price?",
+          "acceptedAnswer": { "@type": "Answer", "text": "£5,000 is the floor for a standard engagement — leadership team of up to 10, one site, no significant travel. For larger organisations, multi-site or international scope, the price reflects the complexity. We'll scope it precisely before you commit to anything. All prices +VAT." }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the '+' in Phase 1+?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The number of cycles is determined by your roadmap, not a pre-packaged scope. Some organisations need two cycles, some need six. The '+' means we run as many as your roadmap calls for — and stop when you're self-sufficient, not when a contract runs out." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we run cycles in parallel?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Not typically. Sequential cycles are the model by design — each one builds internal capability the next depends on. Running two at once splits founder attention and slows the people-development that makes the work stick. We'll tell you honestly if there's a case for parallel tracks." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who owns the IP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You do. Everything built during the engagement — the systems, the prompts, the workflows, the trained operators — belongs to you from day one. We leave nothing that requires us to keep the lights on." }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after the last cycle?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most clients taper to a light monthly advisory — senior judgement on tap, without a delivery team embedded. Some close out entirely: their internal operators are running it and they don't need us. Either outcome is a success, and we'll tell you which one we think you're heading toward before the final cycle begins." }
+        }
+      ]
+    }
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
   <body class="bg-background text-navy">
@@ -442,7 +484,7 @@
       </section>
 
       <!-- === FAQ === -->
-      <!-- GO-LIVE FLAG: All answers below need founder review and sign-off before launch -->
+      <!-- FAQ answers grounded in offer-canon.md §7 (AX voice). FAQPage JSON-LD mirrors these. -->
       <section class="ax-faq-list ax-faq-list--alt" aria-labelledby="faq-heading">
         <div class="ax-faq-list__inner">
 
@@ -530,7 +572,7 @@
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>Most clients move to our advisory arrangement — senior judgement available monthly, without a delivery team embedded. Some close out entirely: their internal operators are running it and they don't need us. Either outcome is a success. We'll tell you which one we think you're heading toward before the final cycle begins.</p>
+                  <p>Most clients taper to a light monthly advisory — senior judgement on tap, without a delivery team embedded. Some close out entirely: their internal operators are running it and they don't need us. Either outcome is a success, and we'll tell you which one we think you're heading toward before the final cycle begins.</p>
                 </div>
               </details>
             </li>
@@ -593,6 +635,7 @@
           <li><a href="/what-we-do/" class="ax-footer__link">What we do</a></li>
           <li><a href="/how-we-work/" class="ax-footer__link">How we work</a></li>
           <li><a href="/insights/" class="ax-footer__link">Insights</a></li>
+          <li><a href="/faq/" class="ax-footer__link">FAQ</a></li>
           <li><a href="https://quiz.accelerator-x.ai" class="ax-footer__link" target="_blank" rel="noopener noreferrer">AI readiness quiz ↗</a></li>
           <li><a href="/contact/" class="ax-footer__link">Apply to work with us</a></li>
         </ul>

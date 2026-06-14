@@ -78,6 +78,48 @@
     }
     </script>
 
+    <!-- FAQPage JSON-LD — mirrors the on-page FAQ (offer-canon.md §7) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://accelerator-x.ai/what-we-do/leadership-cohort/#faq",
+      "isPartOf": { "@id": "https://accelerator-x.ai/#website" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I don't have 4 hours a week.",
+          "acceptedAnswer": { "@type": "Answer", "text": "Then this isn't the right time. The 4 hours aren't negotiable — they're the minimum to keep pace with the cohort and show up for your peers. If your diary genuinely won't flex for 8 weeks, apply for the next cohort when the timing is better." }
+        },
+        {
+          "@type": "Question",
+          "name": "Will my company expense this?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Most cohort members expense this or put it through professional development budgets. At £3,500 it sits under many L&D thresholds without board approval. We can provide an invoice addressed to your company and a one-page brief on what the programme covers." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if a competitor of mine applies?",
+          "acceptedAnswer": { "@type": "Answer", "text": "We vet every application with this in mind. If we identify a conflict at application stage, we'll flag it with both parties before confirming either place. Once a cohort is confirmed, every member has signed off on the non-competing composition." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can my whole team join?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No — this is a director/function-owner programme designed for the person who owns the AI agenda, not their team. If you want AI capability across a whole team or organisation, our Company Enablement track is designed for that." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I miss a session?",
+          "acceptedAnswer": { "@type": "Answer", "text": "We ask you not to. Eight weeks, four hours — that's the commitment. If something unavoidable comes up, we'll share the session recording. But the peer value is live, and you can't replay a room." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a money-back guarantee?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — full money-back through your first two sessions: if it's not for you, tell us before the third and you owe nothing. There's also a pre-cohort interview with a founder before we confirm your place, so we only proceed if it's a genuine fit on both sides." }
+        }
+      ]
+    }
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
   <body class="bg-background text-navy">
@@ -407,7 +449,7 @@
       </section>
 
       <!-- === FAQ === -->
-      <!-- GO-LIVE FLAG: All answers below are AI-written placeholders — founders must review and approve each before launch -->
+      <!-- FAQ answers grounded in offer-canon.md §7 (AX voice). FAQPage JSON-LD mirrors these. -->
       <section class="ax-faq-list ax-faq-list--alt" aria-labelledby="faq-heading">
         <div class="ax-faq-list__inner">
 
@@ -495,7 +537,7 @@
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>There's a pre-cohort interview — a 1:1 with a founder before we confirm your place. If we don't think you're a good fit, or you don't think we're right for you, we say so before any money changes hands. Once confirmed, the commitment is real on both sides.</p>
+                  <p>Yes — full money-back through your first two sessions: if it's not for you, tell us before the third and you owe nothing. There's also a pre-cohort interview (a 1:1 with a founder) before we confirm your place, so we only proceed if it's a genuine fit on both sides.</p>
                 </div>
               </details>
             </li>
@@ -553,6 +595,7 @@
           <li><a href="/what-we-do/" class="ax-footer__link">What we do</a></li>
           <li><a href="/how-we-work/" class="ax-footer__link">How we work</a></li>
           <li><a href="/insights/" class="ax-footer__link">Insights</a></li>
+          <li><a href="/faq/" class="ax-footer__link">FAQ</a></li>
           <li><a href="https://quiz.accelerator-x.ai" class="ax-footer__link" target="_blank" rel="noopener noreferrer">AI readiness quiz ↗</a></li>
           <li><a href="/contact/" class="ax-footer__link">Apply to work with us</a></li>
         </ul>
