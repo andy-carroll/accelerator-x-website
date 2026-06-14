@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Leadership Activation | Accelerator X</title>
+    <title>{{offering:leadership-activation.name}} | Accelerator X</title>
     <meta name="description" content="Bring Accelerator X to your existing leadership team. Eight weeks, on-site, bi-weekly half-days. One shared AI operating model." />
     <link rel="canonical" href="https://accelerator-x.ai/what-we-do/leadership-activation/" />
     <meta name="robots" content="index, follow" />
@@ -45,15 +45,15 @@
     </noscript>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Leadership Activation | Accelerator X" />
+    <meta property="og:title" content="{{offering:leadership-activation.name}} | Accelerator X" />
     <meta property="og:description" content="Bring Accelerator X to your existing leadership team. Eight weeks, on-site, bi-weekly half-days. One shared AI operating model." />
     <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
-    <meta property="og:image:alt" content="Accelerator X — Leadership Activation" />
+    <meta property="og:image:alt" content="Accelerator X — Leadership Team AI Activation" />
     <meta property="og:url" content="https://accelerator-x.ai/what-we-do/leadership-activation/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Accelerator X" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Leadership Activation | Accelerator X" />
+    <meta name="twitter:title" content="{{offering:leadership-activation.name}} | Accelerator X" />
     <meta name="twitter:description" content="Bring Accelerator X to your existing leadership team. Eight weeks, on-site, bi-weekly half-days. One shared AI operating model." />
     <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
 
@@ -68,12 +68,54 @@
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": "https://accelerator-x.ai/what-we-do/leadership-activation/#service",
-      "name": "Leadership Activation",
-      "serviceType": "Leadership Activation",
+      "name": "{{offering:leadership-activation.name}}",
+      "serviceType": "Leadership AI coaching (exec team)",
       "description": "Bring Accelerator X to your existing leadership team. Eight weeks, on-site, bi-weekly half-days. One shared AI operating model.",
       "provider": { "@id": "https://accelerator-x.ai/#organization" },
       "url": "https://accelerator-x.ai/what-we-do/leadership-activation/",
       "isPartOf": { "@id": "https://accelerator-x.ai/#website" }
+    }
+    </script>
+
+    <!-- FAQPage JSON-LD — mirrors the on-page FAQ (offer-canon.md §7) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "@id": "https://accelerator-x.ai/what-we-do/leadership-activation/#faq",
+      "isPartOf": { "@id": "https://accelerator-x.ai/#website" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does this cost for, say, 8 leaders?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A base plus per-head: £15,000 for up to 6 people, then £2,000 per person above that, to a maximum of 12 — so 8 leaders is about £19,000, all +VAT. Tell us your group size and we'll confirm the exact figure." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from Company Enablement — both work with our leaders?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Company Enablement moves your whole business — it starts by aligning leadership but its job is to activate the wider team and ship capability across the org. This is narrower and deeper: it builds the AI capability of your leadership group itself. Company Enablement for org-wide change; this for upskilling your leaders specifically." }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between this and a one-off workshop?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A workshop is one good day; capability doesn't stick from one afternoon. This is eight weeks of bi-weekly half-days where your team applies DOTS to your real context and builds a shared way of working — you leave with a team-level artefact and aligned leadership. For a single high-impact session, that's our Talks & Events leadership offsite." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you tailor it to our business?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Entirely. We come to you, on-site, and the work runs on your real priorities and confidential context — not a generic curriculum. DOTS is the engine; what goes through it is your business." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if it's not working — is there a guarantee?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes: full money-back through your first two sessions — stop before the third and you owe nothing. Beyond that there is no lock-in." }
+        },
+        {
+          "@type": "Question",
+          "name": "What do we own at the end?",
+          "acceptedAnswer": { "@type": "Answer", "text": "One shared AI operating model, a team-level artefact your leaders built together, and aligned leadership that keeps moving without us. What you build is yours." }
+        }
+      ]
     }
     </script>
 
@@ -100,7 +142,7 @@
                   <a href="/what-we-do/" class="ax-page-hero__breadcrumb-link">What we do</a>
                 </li>
                 <li class="ax-page-hero__breadcrumb-item ax-page-hero__breadcrumb-item--current" aria-current="page">
-                  Leadership Activation
+                  {{offering:leadership-activation.name}}
                 </li>
               </ol>
             </nav>
@@ -139,21 +181,22 @@
               </div>
               <div class="ax-offering-hero__spec-row">
                 <dt>Group size</dt>
-                <dd>5–10 people</dd>
+                <dd>Up to 12 leaders</dd>
               </div>
               <div class="ax-offering-hero__spec-row">
                 <dt>From</dt>
-                <dd>£18,000 fixed-team</dd>
+                <dd>{{offering:leadership-activation.price_from_gbp}} +VAT</dd>
               </div>
               <div class="ax-offering-hero__spec-row">
                 <dt>Start date</dt>
                 <dd>Agreed on signing</dd>
               </div>
             </dl>
+            <p class="ax-offering-hero__card-pricing" data-pricing-note>Base {{offering:leadership-activation.price_from_gbp}} for up to 6 people, then {{offering:leadership-activation.price_per_head_gbp}} per person above 6, to a max of 12 (so a team of 8 is about £19,000). All +VAT.</p>
             <a href="/contact/" class="btn btn--accent btn--lg ax-offering-hero__cta">
               Apply to work with us <span aria-hidden="true">→</span>
             </a>
-            <p class="ax-offering-hero__card-note">Short pre-qualification form · we reply within a week · only good fits get a booking link.</p>
+            <p class="ax-offering-hero__card-note">Full money-back through your first two sessions. Short pre-qualification form · we reply within a week.</p>
           </aside>
 
         </div>
@@ -172,7 +215,7 @@
             <div class="ax-lc-peer-card">
               <span class="ax-lc-peer-card__eyebrow">The team</span>
               <h3 class="ax-lc-peer-card__heading">Your existing leadership team.</h3>
-              <p class="ax-lc-peer-card__body">5–10 leaders from the same organisation. One shared context, one shared outcome.</p>
+              <p class="ax-lc-peer-card__body">Up to 12 leaders from the same organisation. One shared context, one shared outcome.</p>
             </div>
 
             <div class="ax-lc-peer-card">
@@ -330,25 +373,25 @@
            Restore the section markup from git history when content lands. -->
 
       <!-- === FAQ === -->
-      <!-- GO-LIVE FLAG: All answers below are placeholder — founders must review and approve each before launch -->
+      <!-- Answers grounded in offer-canon.md §7 (AX voice). FAQPage JSON-LD mirrors these. -->
       <section class="ax-faq-list ax-faq-list--alt" aria-labelledby="faq-heading">
         <div class="ax-faq-list__inner">
 
           <span class="ax-kicker">Questions</span>
-          <h2 class="ax-faq-list__heading" id="faq-heading">The six questions leadership teams ask.</h2>
+          <h2 class="ax-faq-list__heading" id="faq-heading">The questions leadership teams ask.</h2>
 
           <ul class="ax-faq-list__items">
 
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">Can my CEO not attend every session?</span>
+                  <span class="ax-faq-item__question-text">What does this cost for, say, 8 leaders?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p data-pricing-note>It's a base plus per-head: {{offering:leadership-activation.price_from_gbp}} for up to 6 people, then £2,000 per person above that, to a maximum of 12 — so 8 leaders is about £19,000, all +VAT. Tell us your group size and we'll confirm the exact figure.</p>
                 </div>
               </details>
             </li>
@@ -356,13 +399,13 @@
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">What if we're a team of more than 10?</span>
+                  <span class="ax-faq-item__question-text">How is this different from Company Enablement — both work with our leaders?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p>The most common confusion, so thank you for naming it. Company Enablement moves your <em>whole business</em> — it starts by aligning leadership but its job is to activate the wider team and ship capability across the org, cycle by cycle. This is narrower and deeper: it builds the AI capability of your <em>leadership group itself</em>. Rule of thumb: Company Enablement for org-wide change; this for upskilling your leaders specifically.</p>
                 </div>
               </details>
             </li>
@@ -370,13 +413,13 @@
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">How do you tailor content to our industry?</span>
+                  <span class="ax-faq-item__question-text">What's the difference between this and a one-off workshop?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p>A workshop is one good day; capability doesn't stick from one afternoon. This is eight weeks of bi-weekly half-days where your team applies DOTS to your real context and builds a shared way of working — you leave with a team-level artefact and aligned leadership, not just notes. If you do want a single high-impact session, that's our Talks &amp; Events leadership offsite.</p>
                 </div>
               </details>
             </li>
@@ -384,13 +427,13 @@
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">What's the difference between this and a workshop?</span>
+                  <span class="ax-faq-item__question-text">How do you tailor it to our business?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p>Entirely. We come to you, on-site, and the work runs on your real priorities and confidential context — not a generic curriculum. DOTS is the engine; what goes through it is your business.</p>
                 </div>
               </details>
             </li>
@@ -398,13 +441,13 @@
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">Can we extend beyond 8 weeks?</span>
+                  <span class="ax-faq-item__question-text">What if it's not working — is there a guarantee?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p>Yes: full money-back through your first two sessions — stop before the third and you owe nothing. Beyond that there's no lock-in.</p>
                 </div>
               </details>
             </li>
@@ -418,7 +461,7 @@
                   </svg>
                 </summary>
                 <div class="ax-faq-item__answer">
-                  <p>[Answer to be written by founders]</p>
+                  <p>One shared AI operating model, a team-level artefact your leaders built together, and aligned leadership that keeps moving without us. What you build is yours.</p>
                 </div>
               </details>
             </li>

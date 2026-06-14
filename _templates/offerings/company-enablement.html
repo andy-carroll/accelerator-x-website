@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Company Enablement | Accelerator X</title>
+    <title>{{offering:company-enablement.name}} | Accelerator X</title>
     <meta name="description" content="Two phases. Phase 0 aligns and activates your leadership team in two weeks. Phase 1+ ships AI capability, cycle by cycle, until you're self-sufficient." />
     <link rel="canonical" href="https://accelerator-x.ai/what-we-do/company-enablement/" />
     <meta name="robots" content="index, follow" />
@@ -44,15 +44,16 @@
     </noscript>
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Company Enablement | Accelerator X" />
+    <meta property="og:title" content="{{offering:company-enablement.name}} | Accelerator X" />
     <meta property="og:description" content="Two phases. Phase 0 aligns and activates your leadership team in two weeks. Phase 1+ ships AI capability, cycle by cycle, until you're self-sufficient." />
     <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
     <meta property="og:image:alt" content="Accelerator X — Company Enablement" />
+    <!-- og:image:alt name kept literal (descriptive alt text, not a derived display name) -->
     <meta property="og:url" content="https://accelerator-x.ai/what-we-do/company-enablement/" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Accelerator X" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Company Enablement | Accelerator X" />
+    <meta name="twitter:title" content="{{offering:company-enablement.name}} | Accelerator X" />
     <meta name="twitter:description" content="Two phases. Phase 0 aligns and activates your leadership team in two weeks. Phase 1+ ships AI capability, cycle by cycle, until you're self-sufficient." />
     <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image-1200.webp" />
 
@@ -67,7 +68,7 @@
       "@context": "https://schema.org",
       "@type": "Service",
       "@id": "https://accelerator-x.ai/what-we-do/company-enablement/#service",
-      "name": "Company Enablement",
+      "name": "{{offering:company-enablement.name}}",
       "serviceType": "AI Capability Enablement",
       "description": "Two phases. Phase 0 aligns and activates your leadership team in two weeks. Phase 1+ ships AI capability, cycle by cycle, until you're self-sufficient.",
       "provider": { "@id": "https://accelerator-x.ai/#organization" },
@@ -99,7 +100,7 @@
                   <a href="/what-we-do/" class="ax-page-hero__breadcrumb-link">What we do</a>
                 </li>
                 <li class="ax-page-hero__breadcrumb-item ax-page-hero__breadcrumb-item--current" aria-current="page">
-                  Company Enablement
+                  {{offering:company-enablement.name}}
                 </li>
               </ol>
             </nav>
@@ -119,13 +120,13 @@
             <div class="ax-phase-arc" aria-label="Engagement phases overview">
               <div class="ax-phase-arc__panel ax-phase-arc__panel--cyan">
                 <span class="ax-phase-arc__eyebrow">Phase 0 · start here</span>
-                <p class="ax-phase-arc__spec">2 weeks · from £5k</p>
+                <p class="ax-phase-arc__spec">2 weeks · from {{offering:company-enablement.phases.0.price_from_gbp}}</p>
                 <p class="ax-phase-arc__detail">Align + activate + roadmap</p>
               </div>
               <div class="ax-phase-arc__arrow" aria-hidden="true">→</div>
               <div class="ax-phase-arc__panel">
                 <span class="ax-phase-arc__eyebrow">Phase 1+</span>
-                <p class="ax-phase-arc__spec">8-week cycles · from £20k</p>
+                <p class="ax-phase-arc__spec">8-week cycles · from {{offering:company-enablement.phases.1.price_from_gbp}}</p>
                 <p class="ax-phase-arc__detail">Build &amp; ship capability</p>
               </div>
             </div>
@@ -133,7 +134,6 @@
           </div>
 
           <!-- Sidebar investment card -->
-          <!-- GO-LIVE FLAG: Prices (£5,000 / £20,000) require founder confirmation before launch -->
           <aside class="ax-offering-hero__card" aria-label="Engagement details">
             <div class="ax-offering-hero__card-header">
               <span class="ax-offering-hero__card-label">Start with</span>
@@ -146,7 +146,7 @@
               </div>
               <div class="ax-offering-hero__spec-row">
                 <dt>From</dt>
-                <dd>£5,000</dd>
+                <dd>{{offering:company-enablement.phases.0.price_from_gbp}} +VAT</dd>
               </div>
               <div class="ax-offering-hero__spec-row">
                 <dt>Start date</dt>
@@ -406,7 +406,7 @@
             <li class="ax-faq-item">
               <details>
                 <summary class="ax-faq-item__question">
-                  <span class="ax-faq-item__question-text">How firm is the £5,000 price?</span>
+                  <span class="ax-faq-item__question-text">How firm is the {{offering:company-enablement.phases.0.price_from_gbp}} price?</span>
                   <svg class="ax-faq-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
@@ -488,7 +488,7 @@
         <div class="ax-ce-cta__inner">
           <span class="chip chip--cyan">Start here</span>
           <h2 class="ax-ce-cta__heading" id="ce-cta-heading">
-            Two weeks. £5,000. <span class="ax-accent">Worth it.</span>
+            Two weeks. {{offering:company-enablement.phases.0.price_from_gbp}}. <span class="ax-accent">Worth it.</span>
           </h2>
           <p class="ax-ce-cta__sub">
             Phase 0 is the most leveraged fortnight we run. Tell us where you are;

@@ -95,6 +95,7 @@
       "format": "bi-weekly half-days, on-site",
       "duration": "8 weeks",
       "price_from_gbp": 15000,
+      "price_per_head_gbp": 2000,
       "price_model": "base £15,000 up to 6 people; +£2,000 per person above 6; max 12 in the group (range £15k-£27k)",
       "price_note": "Decided 2026-06-14 (Andy). Built page is STALE (£18k flat, 5-10 people) — update in Phase 5.",
       "reconcile": false
