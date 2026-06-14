@@ -1,0 +1,156 @@
+/* =============================================================================
+   Leadership AI Coaching — Door 2 hub
+   Markup: _templates/offerings/leadership-ai-coaching.html
+   Hub-and-spoke: hero → three depth cards (link down to the offerings) →
+   shared-engine band → CTA. Cards are full <a> with a clear arrow affordance.
+   ============================================================================= */
+
+/* --- Three depths -------------------------------------------------------- */
+.ax-depths {
+  padding: var(--space-16) 0;
+  background: var(--bg-paper);
+}
+
+.ax-depths__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+
+@media (min-width: 768px) { .ax-depths__inner { padding: 0 var(--gutter-tablet); } }
+@media (min-width: 1024px) { .ax-depths__inner { padding: 0 var(--gutter-desktop); } }
+
+.ax-depths__header { margin-bottom: var(--space-10); max-width: 60ch; }
+
+.ax-depths__heading {
+  margin: var(--space-3) 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.ax-depths__sub {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-depths__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) { .ax-depths__grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* --- Depth card (whole card is the link) --------------------------------- */
+.ax-depth-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-xl);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+
+.ax-depth-card:hover {
+  border-color: var(--border-2);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.ax-depth-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.ax-depth-card__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--action-primary);
+}
+
+.ax-depth-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.ax-depth-card__desc {
+  margin: 0;
+  flex-grow: 1;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-depth-card__meta {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+}
+
+.ax-depth-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--action-accent);
+}
+
+.ax-depth-card__cta-arrow { transition: transform var(--dur-base) var(--ease-out); }
+.ax-depth-card:hover .ax-depth-card__cta-arrow { transform: translateX(3px); }
+
+/* --- Shared-engine band -------------------------------------------------- */
+.ax-coaching-shared {
+  padding: var(--space-16) 0;
+  background: var(--bg-dark);
+  color: var(--fg-on-dark);
+}
+
+.ax-coaching-shared__inner {
+  max-width: var(--container-tight);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  text-align: center;
+}
+
+.ax-coaching-shared__heading {
+  margin: var(--space-3) 0 var(--space-4);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-on-dark);
+}
+
+.ax-coaching-shared__body {
+  margin: 0 auto;
+  max-width: 60ch;
+  font-size: var(--text-lg);
+  color: var(--fg-muted-on-dark);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-coaching-shared__guarantee {
+  margin: var(--space-6) 0 0;
+  font-size: var(--text-base);
+  color: var(--fg-on-dark);
+}
+.ax-coaching-shared__guarantee strong { color: var(--fg-on-dark); }

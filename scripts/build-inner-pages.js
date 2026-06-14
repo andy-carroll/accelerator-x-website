@@ -12,6 +12,8 @@ const PAGES = [
   { template: '_templates/about.html',       output: 'about/index.html'       },
   { template: '_templates/contact.html',     output: 'contact/index.html'     },
   { template: '_templates/faq.html',          output: 'faq/index.html'         },
+  // Door 2 hub
+  { template: '_templates/offerings/leadership-ai-coaching.html',      output: 'what-we-do/leadership-ai-coaching/index.html'      },
   // Offering detail pages
   { template: '_templates/offerings/company-enablement.html',         output: 'what-we-do/company-enablement/index.html'         },
   { template: '_templates/offerings/leadership-cohort.html',          output: 'what-we-do/leadership-cohort/index.html'          },
