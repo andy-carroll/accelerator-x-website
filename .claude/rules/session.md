@@ -174,7 +174,8 @@ After the close script runs, **offer** (don't auto-send) to post a short exec su
   - **Next** — 1–2 items.
   - **Link** — branch preview + latest commit.
 - **Scope:** business-building work (this site + the AX Agent Hub). Same step belongs in the Agent Hub's protocol.
-- **Future optimisation (deferred):** automate from `scripts/session-end.js` → the existing n8n/Slack layer (PRD §3) so it fires without a prompt. Not now.
+- **Future optimisation (deferred):** if ever automated, do it simply (e.g. `session-end.js` posts directly via a Slack webhook) — **n8n is not needed for this** (Andy, 2026-06-14). Human-in-the-loop is the standard for now.
+- **Note (fix soon-ish, not repo-level):** this whole protocol — incl. this step — should live in the shared company session skill, not be re-authored per repo. See the operating-model thread (#50).
 
 ### Operating mode (pragmatic toggle)
 
