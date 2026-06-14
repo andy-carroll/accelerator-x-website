@@ -773,3 +773,56 @@
   font-size: var(--text-base);
   color: var(--fg-3);
 }
+
+/* =============================================================================
+   Talks & Events — three-format grid (markup: _templates/talks-events.html)
+   Inquiry-led, priced on application. Added Phase 5 (#57).
+   ============================================================================= */
+
+.ax-format-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin: var(--space-8) 0 var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .ax-format-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.ax-format-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-top: 3px solid var(--ax-amber);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.ax-format-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  color: var(--fg-1);
+}
+
+.ax-format-card__meta {
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--fg-4);
+}
+
+.ax-format-card__body {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-format-inquiry__cta { margin-top: var(--space-6); }
