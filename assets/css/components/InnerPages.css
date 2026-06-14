@@ -514,6 +514,7 @@
 
 .ax-origin-story {
   padding: var(--space-16) 0;
+  background: var(--bg-paper);
 }
 
 .ax-origin-story__inner {

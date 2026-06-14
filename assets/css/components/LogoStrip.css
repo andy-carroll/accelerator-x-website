@@ -97,3 +97,21 @@
 .ax-logo-strip__logo:hover {
   filter: grayscale(1) opacity(0.65);
 }
+
+/* =============================================================================
+   Feature variant — navy credibility band (e.g. high on the About page).
+   Page-level wrapper so the default (Home trust bar) instance stays light.
+   ============================================================================= */
+.ax-logo-strip-feature .ax-logo-strip {
+  background: var(--bg-dark);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ax-logo-strip-feature .ax-logo-strip__inner {
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.ax-logo-strip-feature .ax-logo-strip__label { color: var(--fg-muted-on-dark); }
+.ax-logo-strip-feature .ax-logo-strip__sep { background: rgba(255, 255, 255, 0.18); }
+.ax-logo-strip-feature .ax-logo-strip__item { color: var(--fg-on-dark); }
