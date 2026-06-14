@@ -111,7 +111,7 @@ Component: `_templates/components/ProofRow.html`
 Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17).
 
 **`/about/` — Origin story**
-- `[ ]` **BLOCKING** Origin story (3 paragraphs) is AI-written placeholder — Andy/Toby to replace with accurate narrative before launch
+- `[x]` Origin story replaced with founder-approved v1 copy (Andy, 2026-06-14) — corrected the AI-timeline error + softened the "only ever us" framing, aligned to offer-canon §6.5. No longer placeholder/blocking. Tighten post-launch with 2–3 concrete named AI builds per founder ([#24](https://github.com/andy-carroll/accelerator-x-website/issues/24)).
 - `[ ]` "Two operators. One partnership." heading — intentional?
 
 **`/how-we-work/` — Section copy**
@@ -409,7 +409,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 |---|---|---|
 | `/what-we-do/` | **Yes** — nav link | `[x]` Built ✅ |
 | `/how-we-work/` | **Yes** — nav link | `[x]` Built ✅ |
-| `/about/` | **Yes** — nav link | `[x]` Built ✅ (origin story placeholder — see §1h) |
+| `/about/` | **Yes** — nav link | `[x]` Built ✅ (origin story = founder-approved v1, 2026-06-14; tighten later #24) |
 | `/contact/` | **Yes** — CTABand destination | `[x]` Built ✅ |
 | `/privacy.html` | **Yes** — consent link | `[ ]` (may exist in v1) |
 | `/case-studies/` | No — ProofRow link commented out | `[ ]` |
