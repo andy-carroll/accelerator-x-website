@@ -21,7 +21,7 @@
 @media (min-width: 768px) { .ax-coaching-why__inner { padding: 0 var(--gutter-tablet); } }
 @media (min-width: 1024px) { .ax-coaching-why__inner { padding: 0 var(--gutter-desktop); } }
 
-.ax-coaching-why__header { margin-bottom: var(--space-10); max-width: 40ch; }
+.ax-coaching-why__header { margin-bottom: var(--space-10); }
 
 .ax-coaching-why__heading {
   margin: var(--space-3) 0 0;
@@ -30,6 +30,15 @@
   font-weight: var(--fw-bold);
   line-height: var(--lh-snug);
   color: var(--fg-on-dark);
+  text-wrap: balance;
+}
+
+/* Deterministic two-clause break on desktop (negations | the positive) so the
+   heading lands as two clean lines, never orphaning "Not" or "a". Below 1024
+   the line break is dropped and the heading wraps/balances naturally. */
+.ax-coaching-why__heading br { display: none; }
+@media (min-width: 1024px) {
+  .ax-coaching-why__heading br { display: inline; }
 }
 
 .ax-coaching-why__grid {
