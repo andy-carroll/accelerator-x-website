@@ -58,103 +58,12 @@
 }
 
 /* =============================================================================
-   2. PRINCIPLES LIST  (how-we-work)
-   ============================================================================= */
-
-.ax-principles {
-  padding: var(--space-16) 0;
-  background: var(--bg-2);
-  border-top: 1px solid var(--border-1);
-  border-bottom: 1px solid var(--border-1);
-}
-
-.ax-principles__inner {
-  max-width: var(--container-default);
-  margin: 0 auto;
-  padding: 0 var(--gutter-mobile);
-}
-
-@media (min-width: 768px) {
-  .ax-principles__inner { padding: 0 var(--gutter-tablet); }
-}
-@media (min-width: 1024px) {
-  .ax-principles__inner { padding: 0 var(--gutter-desktop); }
-}
-
-.ax-principles__header { margin-bottom: var(--space-10); }
-
-.ax-principles__heading {
-  margin: var(--space-3) 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
-  font-weight: var(--fw-bold);
-  line-height: var(--lh-snug);
-  letter-spacing: var(--tracking-snug);
-  color: var(--fg-1);
-  text-wrap: balance;
-}
-
-.ax-principles__list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  border-top: 1px solid var(--border-1);
-}
-
-@media (min-width: 768px) {
-  .ax-principles__list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.ax-principles__item {
-  display: flex;
-  gap: var(--space-6);
-  padding: var(--space-8) 0;
-  border-bottom: 1px solid var(--border-1);
-}
-
-@media (min-width: 768px) {
-  .ax-principles__item:nth-child(odd) {
-    padding-right: var(--space-8);
-    border-right: 1px solid var(--border-1);
-  }
-  .ax-principles__item:nth-child(even) {
-    padding-left: var(--space-8);
-    border-right: none;
-  }
-}
-
-.ax-principles__num {
-  flex-shrink: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--action-accent);
-  line-height: 1.8;
-  min-width: 2rem;
-}
-
-.ax-principles__title {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  font-weight: var(--fw-semibold);
-  color: var(--fg-1);
-}
-
-.ax-principles__body {
-  margin: 0;
-  font-size: var(--text-base);
-  color: var(--fg-3);
-  line-height: var(--lh-relaxed);
-}
-
-/* =============================================================================
-   3. APPROACH — FOUR MOVES  (how-we-work)
+   2. HOW WE SHOW UP — ethos cards  (how-we-work)
    ============================================================================= */
 
 .ax-approach {
   padding: var(--space-16) 0;
+  background: var(--bg-paper);
 }
 
 .ax-approach__inner {
@@ -322,97 +231,7 @@
 }
 
 /* =============================================================================
-   5. CONTRAST BLOCK — what we don't do  (how-we-work)
-   ============================================================================= */
-
-.ax-contrast {
-  padding: var(--space-16) 0;
-}
-
-.ax-contrast__inner {
-  max-width: var(--container-default);
-  margin: 0 auto;
-  padding: 0 var(--gutter-mobile);
-}
-
-@media (min-width: 768px) {
-  .ax-contrast__inner { padding: 0 var(--gutter-tablet); }
-}
-@media (min-width: 1024px) {
-  .ax-contrast__inner { padding: 0 var(--gutter-desktop); }
-}
-
-.ax-contrast__header { margin-bottom: var(--space-10); }
-
-.ax-contrast__heading {
-  margin: var(--space-3) 0 0;
-  font-family: var(--font-display);
-  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
-  font-weight: var(--fw-bold);
-  line-height: var(--lh-snug);
-  color: var(--fg-1);
-}
-
-.ax-contrast__grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-8);
-  border-top: 1px solid var(--border-1);
-  padding-top: var(--space-8);
-}
-
-@media (min-width: 768px) {
-  .ax-contrast__grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.ax-contrast__col-label {
-  font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: var(--fw-semibold);
-  margin-bottom: var(--space-4);
-}
-
-.ax-contrast__col--do .ax-contrast__col-label { color: var(--action-accent); }
-.ax-contrast__col--dont .ax-contrast__col-label { color: var(--fg-4); }
-
-.ax-contrast__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.ax-contrast__list-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  font-size: var(--text-base);
-  line-height: var(--lh-relaxed);
-}
-
-.ax-contrast__col--do .ax-contrast__list-item { color: var(--fg-2); }
-.ax-contrast__col--dont .ax-contrast__list-item { color: var(--fg-4); }
-
-.ax-contrast__list-item::before {
-  content: '';
-  flex-shrink: 0;
-  width: 1rem;
-  height: 1rem;
-  margin-top: 0.25rem;
-  border-radius: 50%;
-  background: var(--border-2);
-}
-
-.ax-contrast__col--do .ax-contrast__list-item::before {
-  background: var(--action-accent);
-}
-
-/* =============================================================================
-   6. PULL QUOTE  (how-we-work · homepage testimonials)
+   5. PULL QUOTE  (how-we-work · homepage testimonials)
    ============================================================================= */
 
 .ax-pull-quote {
