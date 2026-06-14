@@ -367,6 +367,97 @@ function checkNoHardcodedSiteUrls() {
   if (clean) pass('No hardcoded site-config URLs in templates');
 }
 
+// ── Check 10: Offerings derive from offerings.json (no drift) ─────────────────
+// Rule: content/data/offerings.json is the single source of truth for offering
+//   names/prices (offer-canon.md §8). Templates must inject them via {{offering:…}}
+//   tokens, never hardcode them. Modelled on Check 9.
+// Incident: the site defined the offer in three contradictory places (#26/#57) —
+//   a fabricated "8-Week Transformation Cycle", stale coaching prices, and a dead
+//   Fractional Advisory link all shipped. Phase 5 derived everything from the JSON;
+//   this check stops it drifting back.
+// Enforces:
+//   (a) No hardcoded £-prices in templates — use {{offering:…_gbp}} tokens.
+//       Exempt: design-system docs, HTML comments, JSON-LD answer text, and a
+//       single per-page pricing-detail element marked `data-pricing-note`
+//       (for per-head models / worked examples that aren't a single scalar).
+//   (b) No references to retired or never-built offerings (status retired-for-v2)
+//       or the killed legacy constructs.
+//   (c) Slug/template coherence — every live offering has a built template.
+
+function checkNoOfferingDrift() {
+  console.log('\n[10] Offerings derive from offerings.json (no hardcoded prices / dead offers)');
+
+  let clean = true;
+
+  // (a) No hardcoded £-prices on the canonical offer surfaces. These are the pages
+  //     Phase 5 derives from offerings.json. Deliberately NOT scanned: the funnel
+  //     page (_templates/programmes/ — its own conversion page with bespoke
+  //     early-bird pricing), competitor-comparison components (AlternativesGrid),
+  //     and proof components flagged separately (CaseTile/PricingBlock, #55).
+  const IN_OFFER_SURFACE = (file) =>
+    file.startsWith('_templates/offerings/') ||
+    file.startsWith('_templates/homepage') ||
+    file === '_templates/what-we-do.html' ||
+    file === '_templates/how-we-work.html' ||
+    file === '_templates/components/TwoDoors.html';
+
+  const PRICE_RE = /£\s?\d/;
+  for (const file of filesIn('_templates', '.html')) {
+    if (!IN_OFFER_SURFACE(file)) continue;
+    const lines = readFile(file).split('\n');
+    let inJsonLd = false;
+    let inComment = false;
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      // Track multi-line HTML comments and JSON-LD blocks (both may carry £ legitimately).
+      if (inComment) { if (line.includes('-->')) inComment = false; continue; }
+      if (/<!--/.test(line) && !line.includes('-->')) { inComment = true; continue; }
+      if (/^\s*<!--/.test(line)) continue;            // single-line comment
+      if (/<script[^>]*application\/ld\+json/.test(line)) inJsonLd = true;
+      if (inJsonLd) { if (line.includes('</script>')) inJsonLd = false; continue; }
+      if (line.includes('data-pricing-note')) continue; // designated pricing prose
+      if (PRICE_RE.test(line)) {
+        fail(`${file}:${i + 1} — hardcoded £-price. Use a {{offering:KEY.*_gbp}} token (or mark a single pricing-detail element data-pricing-note).`);
+        clean = false;
+      }
+    }
+  }
+
+  // (b) No references to retired / killed offerings.
+  const FORBIDDEN = [
+    { re: /fractional-advisory/,           label: 'Fractional AI Advisory (retired-for-v2)' },
+    { re: /8-week-cycle/,                   label: 'dead /8-week-cycle/ route' },
+    { re: /8-Week Transformation Cycle/i,   label: 'fabricated "8-Week Transformation Cycle"' },
+  ];
+  for (const file of filesIn('_templates', '.html')) {
+    if (file.includes('design-system')) continue;
+    const lines = readFile(file).split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (/^\s*<!--/.test(lines[i])) continue;
+      for (const { re, label } of FORBIDDEN) {
+        if (re.test(lines[i])) {
+          fail(`${file}:${i + 1} — reference to ${label}. Removed in Phase 5; do not reintroduce.`);
+          clean = false;
+        }
+      }
+    }
+  }
+
+  // (c) Slug/template coherence — every live offering with a /what-we-do/ slug has a built template.
+  const offerings = JSON.parse(readFile('content/data/offerings.json')).offerings || [];
+  for (const o of offerings) {
+    if (o.status !== 'live') continue;
+    if (!o.slug || !o.slug.startsWith('/what-we-do/')) continue;
+    const tpl = `_templates/offerings/${o.key}.html`;
+    if (!fs.existsSync(path.join(ROOT, tpl))) {
+      fail(`offerings.json — live offering '${o.key}' (${o.slug}) has no template at ${tpl}`);
+      clean = false;
+    }
+  }
+
+  if (clean) pass('Offerings derive from offerings.json — no hardcoded prices or dead offers');
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 function main() {
@@ -384,6 +475,7 @@ function main() {
   checkNoCssTokenDrift();
   checkBuiltHtml();
   checkNoHardcodedSiteUrls();
+  checkNoOfferingDrift();
 
   console.log('\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
