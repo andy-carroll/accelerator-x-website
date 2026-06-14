@@ -107,12 +107,28 @@ If HTTPS stops working: go to Netlify → Domain management → HTTPS → **"Ren
 
 ## Incident log
 
-### 2026-06-13 — ~2-day HTTPS outage
+### 2026-06-13 (part 2) — CORRECTION: the "outage" was an ISP filter, not DNS
 
-**What happened:** `accelerator-x.ai` went down on HTTPS around 2026-06-11. Root cause: the domain's nameservers had silently reverted to Hostinger's parking nameservers (`ns1/ns2.dns-parking.com`), which served a dead parking IP (`90.207.238.183`) for all web records. Email was unaffected (MX records were intact in the Hostinger zone). The web A records in Hostinger's zone were correct (`75.2.60.5`) but unreachable because the parking NS ignored the zone.
+**The site was never actually down.** A full diagnostic on 2026-06-13 proved `accelerator-x.ai` was serving `HTTP 200` from Netlify globally the whole time, with a valid SSL cert and correct DNS. The perceived outage was **Sky Broadband Shield** (Sky's content filter) DNS-blocking the domain *on Andy's home connection only*.
 
-**Why it happened:** unknown — the domain was active and not expired. Possibly a Hostinger account/plan state change caused the NS to revert.
+**Evidence:**
+- Global DNS (Cloudflare DoH) + direct HTTPS to the Netlify IPs (`63.176.8.218`, `35.157.26.135`) → `HTTP 200, server: Netlify`, cert valid. Those AWS-Frankfurt IPs **are** Netlify (current infra, not legacy `75.2.60.5`).
+- From the Sky connection: `http://` redirected to `block.isp.sky.com`; `https://` silently timed out (Sky can't MITM TLS, so it drops the connection → white screen). Confirmed working instantly on mobile data.
+- Reputation sweep all clean: Google Safe Browsing, Spamhaus DBL, SURBL, Spamhaus ZEN (IPs). Not on any industry blocklist — this was Sky's own proprietary heuristic (likely `.ai` TLD + recent NS change reading as "new/suspicious").
 
-**How it was fixed:** migrated to Netlify-managed DNS. Netlify DNS owns the zone; there is no Hostinger zone to revert to. This class of outage cannot recur.
+**This also corrects the 2026-06-11 entry below.** The IP `90.207.238.183` cited there as a "Hostinger parking IP" is in fact **`SKY-BROADBAND / Sky UK Limited`** (confirmed by whois — `netname: SKY-BROADBAND`). It is Sky's block-page server. So the original outage was very likely the *same* Sky filter, misdiagnosed as a nameserver reversion. The Netlify DNS migration was not wrong (it's a better setup and worth keeping), but it did not fix the outage — the filter lifting intermittently created the illusion that it had.
+
+**Resolution / actions:**
+- Cleared on Andy's account via Sky Broadband Shield settings (allow-list / protection level).
+- TODO: submit `accelerator-x.ai` to Sky as **miscategorised** from the block page → clears it at Sky's network level for all Sky customers, not just one account.
+- Site reputation confirmed healthy; email deliverability unaffected.
+
+**Lesson:** if the site is unreachable from one connection but resolves/serves fine globally (test with `dig @1.1.1.1` + `curl --resolve <domain>:443:<ip>`), suspect an **ISP/content filter before DNS**. A `.ai` domain on a consumer ISP with parental/security filtering is a known false-positive pattern.
+
+### 2026-06-11 — ~2-day HTTPS "outage" *(see correction above — root cause was the Sky filter, not this)*
+
+**What was believed at the time:** `accelerator-x.ai` went down on HTTPS around 2026-06-11. The theory was that the domain's nameservers had reverted to Hostinger's parking nameservers (`ns1/ns2.dns-parking.com`) serving a dead parking IP (`90.207.238.183`). **This IP was later confirmed to be Sky's block-page server, not Hostinger's** — so this diagnosis was wrong. Email was unaffected throughout.
+
+**How it was "fixed":** migrated to Netlify-managed DNS. This is a genuinely better setup (Netlify DNS owns the zone, nothing to revert to) and worth keeping — but it was not the actual fix for the outage.
 
 **Lesson:** with Netlify DNS, the nameservers are authoritative for everything. The Hostinger panel is registration-only. Do not make DNS changes in Hostinger.

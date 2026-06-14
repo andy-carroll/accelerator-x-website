@@ -1,0 +1,153 @@
+{
+  "_meta": {
+    "purpose": "Machine-readable source of truth for AX offerings. The website derives names, prices, durations and one-liners from this file. Do not hardcode these values in templates — use the build to inject them.",
+    "source_of_truth": "docs/business-context/offer-canon.md",
+    "version": "0.2-draft",
+    "last_updated": "2026-06-14",
+    "status_values": ["live", "planned", "retired-for-v2"],
+    "vat": "All prices quoted +VAT (exclusive) — UK B2B norm; VAT-registered clients reclaim it. One site-wide footnote covers international (B2B place-of-supply: non-UK businesses not charged UK VAT). Decided 2026-06-14.",
+    "public_headline": "from £3,500 +VAT (the cohort place — lowest honest entry). Decided 2026-06-14.",
+    "standalone_workshop": "RETIRED 2026-06-14 — not a listed offering. Workshops live inside Phase 0 + Leadership Team AI Activation; standalone facilitated sessions = the Talks & Events 'Leadership Offsite' format. One-offs handled ad hoc on request.",
+    "guarantee": "Phase 0: full no-questions money-back if the first session (2.5-3hr SLT DOTS workshop) isn't in line with/exceeding expectations (tell us on the day or within 48h). Coaching: full money-back through the first two sessions. Beyond that: no lock-in, cycle-by-cycle. Decided 2026-06-14 — keep prominent.",
+    "ip_and_data": "What the client builds is theirs. AX frameworks/tools shared are theirs to use freely in business/personal life, but not to resell or run as a competing service. 1:1 confidential. NDAs/DPAs handled directly, not detailed on the site. Decided 2026-06-14.",
+    "procurement": "No discounting (prices move up, not down). Can work within a required formal process (done before, incl. a global financial consulting firm); heavier process = more scope = higher price. Light touch on site.",
+    "open_decisions": [
+      "PROOF (HIGH — #1 ship-blocker): asset confirmed — all early clients (Alastair/Mercury Global, Mark/W R Bennett, David/Track Record, Charlotte/Conductor) + others willing to be reference calls. Near-term (Andy, coming weeks, #22/#55): capture 2-3 concrete before/after outcomes + 'references on request'; weave into offer narrative.",
+      "ROI multiple: RESOLVED 2026-06-14 — removed (unmeasured anecdote ~4 hires/£250k); near-term priority to measure + publish one real verified case.",
+      "Door 1 vs Door 2 Format B (HIGH): add a load-bearing routing sentence (copy / Phase 5)."
+    ]
+  },
+  "doors": [
+    { "key": "business", "label": "For your business", "intent": "My whole business needs to move", "lead_offering": "company-enablement" },
+    { "key": "individual", "label": "For yourself or your leadership team", "intent": "I want to upskill myself or my team", "lane": "leadership-coaching" }
+  ],
+  "offerings": [
+    {
+      "key": "company-enablement",
+      "door": "business",
+      "name": "Company Enablement",
+      "status": "live",
+      "flagship": true,
+      "slug": "/what-we-do/company-enablement/",
+      "audience": "A whole business / organisation that needs to move on AI.",
+      "one_liner": "How a company moves with us — everyone starts at Phase 0.",
+      "phases": [
+        {
+          "key": "phase-0",
+          "name": "Phase 0",
+          "tagline": "Two weeks to clarity.",
+          "format": "3 workshops + 1 playback",
+          "duration": "2 weeks",
+          "price_from_gbp": 5000,
+          "price_note": "from £5,000 (the floor; £5k-£9k typical); confirmed 2026-06-14",
+          "reconcile": false
+        },
+        {
+          "key": "phase-1-plus",
+          "name": "Phase 1+ Transformation Cycles",
+          "tagline": "Eight-week cycles. One capability at a time.",
+          "format": "sequential 8-week cycles (People / Process / Product)",
+          "duration": "8 weeks per cycle",
+          "price_from_gbp": 20000,
+          "price_note": "from £20,000 per cycle; confirmed 2026-06-14",
+          "reconcile": false
+        }
+      ]
+    },
+    {
+      "key": "senior-leader-acceleration",
+      "door": "individual",
+      "lane": "leadership-coaching",
+      "lane_format": "1:1 (very small group as an option)",
+      "name": "1:1 Exec AI Fast Track Coaching",
+      "name_subtitle": "A bespoke 6-week 1:1 sprint that takes AI work off your plate. (Very small group available on request.)",
+      "name_status": "decided-2026-06-14 (slug/key still /senior-leader-acceleration — rename in Phase 5)",
+      "status": "live",
+      "slug": "/what-we-do/senior-leader-acceleration/",
+      "audience": "A senior executive carrying AI alone (very small group as an option).",
+      "one_liner": "Take it off your plate — a bespoke 6-week 1:1 AI sprint with a founder.",
+      "positioning": "Elite, high-touch, fully bespoke. We take work off your plate rather than add something new to learn and do. Go at your pace, not a group's.",
+      "format": "6 x weekly 75-min private remote sessions + continuous async support (Slack/WhatsApp/Loom); dedicated founder coach",
+      "duration": "6 weeks",
+      "includes": [
+        "rigorous async pre-work audit of day-to-day ops to find highest-ROI AI integration (inbox triage, strategy synthesis, managing direct reports, strategic decision-making & comms)",
+        "bespoke proprietary workflows, custom instructions, and personal AI assistants tuned to the exec's leadership style + the company's tech stack",
+        "continuous async troubleshooting between sessions"
+      ],
+      "price_from_gbp": 10000,
+      "price_unit": "per individual",
+      "price_note": "Locked 'from £10,000' (Andy 2026-06-14); premium/scarce; small-group variant possible. Built page is STALE (12wk/£12k/90-min) — update in Phase 5.",
+      "reconcile": false
+    },
+    {
+      "key": "leadership-activation",
+      "door": "individual",
+      "lane": "leadership-coaching",
+      "lane_format": "exec team (closed, single company)",
+      "name": "Leadership Team AI Activation",
+      "name_subtitle": "Eight weeks with your leadership team, in-house, to one shared way of working with AI.",
+      "name_status": "decided-2026-06-14",
+      "status": "live",
+      "slug": "/what-we-do/leadership-activation/",
+      "audience": "An existing leadership team (up to 12) from one organisation.",
+      "one_liner": "A leadership team that moves together.",
+      "format": "bi-weekly half-days, on-site",
+      "duration": "8 weeks",
+      "price_from_gbp": 15000,
+      "price_model": "base £15,000 up to 6 people; +£2,000 per person above 6; max 12 in the group (range £15k-£27k)",
+      "price_note": "Decided 2026-06-14 (Andy). Built page is STALE (£18k flat, 5-10 people) — update in Phase 5.",
+      "reconcile": false
+    },
+    {
+      "key": "leadership-cohort",
+      "door": "individual",
+      "lane": "leadership-coaching",
+      "lane_format": "open cross-company cohort",
+      "name": "Open Cohort AI Bootcamp for Business Leaders",
+      "name_subtitle": "Eight weeks of AI in a room of non-competing peers — one shipped artefact.",
+      "name_status": "decided-2026-06-14",
+      "status": "live",
+      "flagship": true,
+      "slug": "/what-we-do/leadership-cohort/",
+      "audience": "Senior leaders from non-competing companies (12 places, vetted).",
+      "one_liner": "Eight weeks of AI in a room of your peers.",
+      "format": "~4 hrs/week; in-person + Zoom hybrid; 12 places, non-competing",
+      "duration": "8 weeks",
+      "price_from_gbp": 3500,
+      "price_unit": "per place",
+      "price_note": "confirmed correct by Andy 2026-06-13",
+      "reconcile": false
+    },
+    {
+      "key": "talks-events",
+      "door": null,
+      "placement": "tertiary-callout",
+      "name": "Talks & Events",
+      "status": "live",
+      "slug": "/talks-events/",
+      "audience": "Conferences, leadership offsites, senior partnerships.",
+      "one_liner": "Move a room. In an afternoon.",
+      "formats": [
+        { "name": "AI Keynote", "duration": "45–90 min", "audience_size": "up to 2,000" },
+        { "name": "Leadership Offsite", "duration": "half / full day", "audience_size": "10–40 leaders" },
+        { "name": "AI Hackathon", "duration": "4–8 hrs", "audience_size": "40–200" }
+      ],
+      "pricing": "POA",
+      "price_note": "Price on application — too situation-dependent for a number (e.g. £25k for two AI hackathon offsites + travel/accommodation). Inquiry-led, no events calendar. Confirmed 2026-06-14.",
+      "reconcile": false
+    },
+    {
+      "key": "fractional-advisory",
+      "door": null,
+      "name": "Fractional AI Advisory",
+      "status": "retired-for-v2",
+      "slug": null,
+      "audience": "Companies already running AI internally who need senior judgement on tap.",
+      "one_liner": "Senior judgement in the room, monthly.",
+      "price_from_gbp": 6000,
+      "price_unit": "per month",
+      "price_note": "Never built. Dropped from v2 routing 2026-06-13. Revisit post-launch.",
+      "reconcile": false
+    }
+  ]
+}

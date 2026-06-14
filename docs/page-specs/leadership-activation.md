@@ -1,3 +1,5 @@
+> ⚠️ **Offer facts superseded by [`offer-canon.md`](../business-context/offer-canon.md) (2026-06-14).** This offering is **renamed "Leadership Team AI Activation"** and re-priced to **base £15,000 (up to 6 people) + £2,000 per person above 6, max 12** (was "£18,000 fixed-team / 5–10 people" here). Price/group-size below are STALE — to be reconciled in Phase 5 (#57). Structure/section guidance still useful.
+
 # Page Spec: Leadership Activation
 
 **URL:** `/what-we-do/leadership-activation/`

@@ -1,3 +1,5 @@
+> ⚠️ **Offer facts superseded by [`offer-canon.md`](../business-context/offer-canon.md) (2026-06-14).** This offering is **renamed "1:1 Exec AI Fast Track Coaching"** and re-specced to **6 weeks · 75-min weekly · from £10,000** (was 12 weeks / £12,000 here). Name, duration and price below are STALE — to be reconciled in Phase 5 (#57). Structure/section guidance still useful.
+
 # Page Spec: Senior Leader Acceleration
 
 **URL:** `/what-we-do/senior-leader-acceleration/`

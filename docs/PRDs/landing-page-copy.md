@@ -1,3 +1,5 @@
+> ⚠️ **Pre-Canon draft (Feb 2026) — offer facts stale.** For current offer language/structure see [`offer-canon.md`](../business-context/offer-canon.md) (v0.3). Specifically superseded here: "one-day workshop" entry (now Phase 0, 2 weeks), "Starting at £4,000" (Phase 0 is from £5,000), "10x value" claim (**removed — do not use, unmeasured**), "£20,000–25,000 per cycle" (now "from £20,000"). Voice/positioning copy is still useful; prices and the ROI claim are not.
+
 # Accelerator X — Landing page copy
 
 *Version 1.0 — February 2026*

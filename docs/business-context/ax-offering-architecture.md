@@ -1,4 +1,8 @@
-
+> ⚠️ **ARCHIVED — superseded by [`offer-canon.md`](offer-canon.md) (2026-06-13).**
+> This v0.1 working doc is stale (it still contains the dropped "built and sold businesses" claim and a
+> Tier-1 workshop menu that was never built). Its still-valid content — the Capability Curve, DOTS,
+> delivery phases, the methodology spine — has been extracted into the Offer Canon.
+> Kept for history; do not edit or cite for current offerings. See #57.
 
 **ACCELERATOR-X**
 

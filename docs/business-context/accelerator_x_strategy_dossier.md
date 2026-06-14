@@ -1,3 +1,5 @@
+> ℹ️ **Historical / exploratory (Feb 2026).** Useful for ICP, positioning and narrative context, but **offer structure and pricing here are superseded** by [`offer-canon.md`](offer-canon.md) (v0.3, 2026-06-14). Do not cite this doc for current offerings, prices, the 10x ROI claim (removed), Fractional Advisory (dropped), or event pricing — the Canon wins.
+
 # Accelerator X: Vision and strategy discovery dossier
 
 *Version 1.0 — February 2026*

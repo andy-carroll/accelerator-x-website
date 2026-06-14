@@ -86,6 +86,8 @@ Component: `_templates/components/ProofRow.html`
 
 ### 1e — Pricing and commercial copy
 
+> **UPDATE 2026-06-14 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)):** All pricing now **locked** in the Offer Canon §5 + `offerings.json`: 1:1 Exec AI Fast Track Coaching from £10k · Leadership Team AI Activation base £15k (≤6) +£2k/head · Open Cohort £3,500/place · Phase 0 £5k · cycle £20k — **all +VAT**; standalone £2k workshop **retired**; **no published ROI multiple**. The £4k/£12k/£2k figures in the rows below are stale — use the Canon. Applying to the built pages = Phase 5 of #57.
+
 - `[ ]` JSON-LD in `index.html`: prices £4,000 (workshop) + £12,000 (8-week cycle) — current?
 - `[ ]` Hero risk-note copy: now reads "Phase 0 from £5,000 · 2 weeks" — confirm pricing with founders before go-live
 - `[ ]` Hero chip: "Now taking on new clients · Q3 2026" — confirm this is accurate at launch date
@@ -126,6 +128,8 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[ ]` `OfferingTable` and `DecisionTree` components link to offering detail pages (e.g. `/what-we-do/leadership-activation/`) that do not yet exist — all will 404 until detail pages are built or links are removed/redirected
 
 **`/what-we-do/` — OfferingTable content misalignment (BLOCKING)**
+
+> **UPDATE 2026-06-14 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)):** RESOLVED at the source. The canonical offer set, names and prices now live in `docs/business-context/offer-canon.md` + `content/data/offerings.json` (the "Two Doors" model). #26 was the symptom; the build reconciliation (kill the OfferingTable's old rows + "8-Week Transformation Cycle", derive from `offerings.json`) is **Phase 5 of #57**. The line-items below are superseded by the Canon.
 
 The `OfferingTable` component was built with old content that predates the canonical offering names confirmed via the DecisionTree. The two components on the same page currently describe different product portfolios. All items below must be resolved before launch.
 

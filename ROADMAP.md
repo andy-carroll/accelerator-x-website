@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-05-17 (Phase 4 complete — content pipeline migrated to Build Plan §10 data model)_
+_Last updated: 2026-06-14 (Offer Canon established — single source of truth for offerings; [#57](https://github.com/andy-carroll/accelerator-x-website/issues/57))_
 
 ---
 
@@ -13,6 +13,7 @@ _Last updated: 2026-05-17 (Phase 4 complete — content pipeline migrated to Bui
 **The Goal:** Attract, qualify, and convert the "Tuesday morning leader" — senior decision-makers
 tired of hype and ready for fundamental AI transformation — driving growth across our three-layer
 business model (Enablement, Strategic Access, Implementation).
+_The customer-facing expression of the offer is now the "Two Doors" model — canonical in `docs/business-context/offer-canon.md`._
 **The Approach:** "Slow is smooth, smooth is fast." Compounding, authority-building content and
 transparent, anti-agency positioning.
 
@@ -32,6 +33,7 @@ transparent, anti-agency positioning.
 - [x] **Phase 3 — Page Assembly** — all pages assembled ✅ (`/what-we-do`, `/how-we-work`, `/about`, `/contact`; homepage v2 inline sections done in prior session)
 - [x] **Phase 4 — Content pipeline** — articles migrated to Build Plan §10 data model; `format` + `published` + `read_time`; `renderArticleTile()` + tag-based hub filter ✅
 - [ ] **Phase 5 — Analytics** — PostHog event instrumentation
+- [-] **Offer Canon + site derivation** ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)) — single source of truth for offerings established (`offer-canon.md` + `offerings.json`, all 6 founder decisions locked, FAQ bank). **Next build:** derive `/what-we-do/` + offering pages from the data (Two Doors, kill OfferingTable, FAQ + FAQPage JSON-LD, drift-check).
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 
@@ -41,12 +43,7 @@ transparent, anti-agency positioning.
       3) Add real images and testimonials
       4) Fix UI/UX inconsistencies with homepage styling
       5) Ensure complete visual parity with design system
-- [ ] **P1: Navigation structure overhaul** — critical infrastructure fix to prevent hardcoded duplication:
-      1) Create reusable navigation component (single source of truth)
-      2) Eliminate hardcoded navigation in every page/template
-      3) Ensure consistent mobile hamburger behavior across all pages
-      4) Fix mobile nav ID inconsistencies permanently
-      5) Update all templates to use shared component
+- [x] **P1: Navigation structure overhaul** — shipped ([#33](https://github.com/andy-carroll/accelerator-x-website/issues/33), 2026-06-13): reusable `Nav.html` component (single source of truth), About added to nav, mobile drawer verified at 375px across all pages. (`aria-current` carried to #49's per-page variable mechanism.)
 - [x] **Share panel** — SVG icons (LinkedIn + X) + "Share" heading — fixed in prior session
 - [ ] **Hero imagery** — swap interim stills for final production photos; update alt text in
       `content/data/hero-media.config.json`. Run `npm run process:hero-images && npm run build`.

@@ -1,3 +1,8 @@
+> ⚠️ **ARCHIVED — superseded by [`offer-canon.md`](offer-canon.md) (2026-06-13).**
+> This doc is no longer the source of truth for the offer. Its still-valid strategic framing
+> (ICP + disqualifiers, pricing philosophy, governance format) has been extracted into the Offer Canon.
+> Kept for history; do not edit or cite for current offerings. See #57.
+
 # Accelerator X Canonical Offer Strategy
 
 *Version 1.0 — March 2026*  
