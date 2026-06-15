@@ -1,0 +1,56 @@
+/* =============================================================================
+   WhatWeDoTeaser — homepage offer teaser (three offer-cards → route onward)
+   Markup: _templates/components/WhatWeDoTeaser.html
+   Cards use the shared .ax-offer-card pattern (OfferCard.css).
+   ============================================================================= */
+
+.ax-wwd-teaser {
+  padding: var(--space-16) 0;
+  background: var(--bg-1);
+}
+
+@media (min-width: 768px) {
+  .ax-wwd-teaser { padding: var(--space-20) 0; }
+}
+
+.ax-wwd-teaser__inner {
+  max-width: var(--container-default);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+@media (min-width: 640px) { .ax-wwd-teaser__inner { padding: 0 var(--gutter-tablet); } }
+@media (min-width: 768px) { .ax-wwd-teaser__inner { padding: 0 var(--gutter-desktop); } }
+
+.ax-wwd-teaser__intro { max-width: 56ch; }
+
+.ax-wwd-teaser__heading {
+  margin: var(--space-2) 0 var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg-1);
+  text-wrap: balance;
+}
+
+.ax-wwd-teaser__sub {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-wwd-teaser__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) { .ax-wwd-teaser__grid { grid-template-columns: repeat(3, 1fr); } }
+
+.ax-wwd-teaser__cta { display: flex; }

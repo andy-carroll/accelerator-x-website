@@ -110,7 +110,8 @@
     <link rel="stylesheet" href="/assets/css/components/LogoStrip.css" />
     <link rel="stylesheet" href="/assets/css/components/ProofRow.css" />
     <link rel="stylesheet" href="/assets/css/components/PlanLayers.css" />
-    <link rel="stylesheet" href="/assets/css/components/TwoDoors.css" />
+    <link rel="stylesheet" href="/assets/css/components/OfferCard.css" />
+    <link rel="stylesheet" href="/assets/css/components/WhatWeDoTeaser.css" />
     <link rel="stylesheet" href="/assets/css/components/DeliverablesGrid.css" />
     <link rel="stylesheet" href="/assets/css/components/FitCheck.css" />
     <link rel="stylesheet" href="/assets/css/components/FAQList.css" />
@@ -669,104 +670,57 @@
       </section>
 
       <!-- === TWO DOORS (the offer spine) === -->
-      <!-- TwoDoors — the spine of the offer (Offer Canon §3, recovered from home-b-v2.jsx "Two doors in")
-     Two entry points: Door 1 (your business) · Door 2 (yourself or your leadership team),
-     plus a tertiary Talks & Events callout. All names/prices come from offerings.json via
-     offering tokens — never hardcode them here (Check #10). Used on / and /what-we-do/. -->
-<section class="ax-two-doors" aria-labelledby="two-doors-heading">
-  <div class="ax-two-doors__inner">
+      <!-- WhatWeDoTeaser — homepage-only teaser for the offer. Teases the breadth as
+     three clickable offer-cards (business / leaders / talks) and routes to the
+     full chooser on /what-we-do/. The homepage doesn't make people decide; it
+     shows the shape and sends them on. Prices via offering tokens (Check #10). -->
+<section class="ax-wwd-teaser" aria-labelledby="wwd-teaser-heading">
+  <div class="ax-wwd-teaser__inner">
 
-    <div class="ax-two-doors__intro">
-      <span class="ax-kicker">Two doors in</span>
-      <h2 class="ax-two-doors__heading" id="two-doors-heading">Pick your starting point.</h2>
-      <p class="ax-two-doors__sub">
-        The right way in depends on what you're trying to move — yourself, your leadership team,
-        or your whole business. These are starting points, not lanes you're locked into: many
-        clients run more than one at once. Start where it's clearest — add what helps.
+    <div class="ax-wwd-teaser__intro">
+      <span class="ax-kicker">What we do</span>
+      <h2 class="ax-wwd-teaser__heading" id="wwd-teaser-heading">Three ways in — pick where you want to start.</h2>
+      <p class="ax-wwd-teaser__sub">
+        Whether it's your whole business, you and your leadership team, or a room you need to move in
+        an afternoon — there's a way in. Here's the shape of it.
       </p>
     </div>
 
-    <div class="ax-two-doors__grid">
+    <div class="ax-wwd-teaser__grid">
 
-      <!-- Door 1 — For your business -->
-      <article class="ax-door ax-door--business">
-        <div class="ax-door__head">
-          <span class="ax-door__num" aria-hidden="true">01</span>
-          <span class="ax-door__label">For your business</span>
-        </div>
-        <h3 class="ax-door__title">Company Enablement</h3>
-        <p class="ax-door__pitch">
-          Move the whole organisation. Three workshops plus an AI strategy playback align
-          leadership, activate the team, and leave you a costed 90-day plan — then we ship
-          capability, cycle by cycle, as far as you want to go.
+      <a href="/what-we-do/company-enablement/" class="ax-offer-card ax-offer-card--cyan">
+        <span class="ax-offer-card__eyebrow">For your business</span>
+        <h3 class="ax-offer-card__name">Move your whole business</h3>
+        <p class="ax-offer-card__desc">
+          Align your leadership, activate your team, and ship real AI capability cycle by cycle —
+          until your people can run it without us.
         </p>
-        <ul class="ax-door__facts">
-          <li class="ax-door__fact">
-            <span class="ax-door__fact-label">Phase 0 · two weeks to clarity</span>
-            <span class="ax-door__fact-value">from £5,000</span>
-          </li>
-          <li class="ax-door__fact">
-            <span class="ax-door__fact-label">Phase 1+ · eight-week cycles</span>
-            <span class="ax-door__fact-value">from £20,000/cycle</span>
-          </li>
-        </ul>
-        <a href="/what-we-do/company-enablement/" class="ax-door__cta">
-          How a company moves with us <span aria-hidden="true">→</span>
-        </a>
-      </article>
+        <span class="ax-offer-card__cta">Company enablement <span class="ax-offer-card__cta-arrow" aria-hidden="true">→</span></span>
+      </a>
 
-      <!-- Door 2 — For yourself or your leadership team -->
-      <article class="ax-door ax-door--individual">
-        <div class="ax-door__head">
-          <span class="ax-door__num" aria-hidden="true">02</span>
-          <span class="ax-door__label">For yourself or your leadership team</span>
-        </div>
-        <h3 class="ax-door__title">Leadership AI Coaching</h3>
-        <p class="ax-door__pitch">
-          One lane, three depths — same DOTS engine, run on your own, with your team behind
-          closed doors, or alongside peers from other companies. The fastest way to build
-          personal AI capability.
+      <a href="/what-we-do/leadership-ai-coaching/" class="ax-offer-card ax-offer-card--pink">
+        <span class="ax-offer-card__eyebrow">For you &amp; your leaders</span>
+        <h3 class="ax-offer-card__name">Build capability in you and your leaders</h3>
+        <p class="ax-offer-card__desc">
+          Hands-on AI coaching that takes work off your plate — on your own, with your leadership team,
+          or alongside peers from other companies.
         </p>
-        <ul class="ax-door__formats">
-          <li class="ax-door__format">
-            <a href="/what-we-do/senior-leader-acceleration/" class="ax-door__format-link">
-              <span class="ax-door__format-name">1:1 Exec AI Fast Track Coaching</span>
-              <span class="ax-door__format-meta">On your own · 1:1 · from £10,000</span>
-            </a>
-          </li>
-          <li class="ax-door__format">
-            <a href="/what-we-do/leadership-activation/" class="ax-door__format-link">
-              <span class="ax-door__format-name">Leadership Team AI Activation</span>
-              <span class="ax-door__format-meta">Your team, closed · from £15,000</span>
-            </a>
-          </li>
-          <li class="ax-door__format">
-            <a href="/what-we-do/leadership-cohort/" class="ax-door__format-link">
-              <span class="ax-door__format-name">Open Cohort AI Bootcamp for Business Leaders</span>
-              <span class="ax-door__format-meta">With peers · open cohort · from £3,500/place</span>
-            </a>
-          </li>
-        </ul>
-      </article>
+        <span class="ax-offer-card__cta">Leadership AI coaching <span class="ax-offer-card__cta-arrow" aria-hidden="true">→</span></span>
+      </a>
+
+      <a href="/talks-events/" class="ax-offer-card ax-offer-card--amber">
+        <span class="ax-offer-card__eyebrow">For a room</span>
+        <h3 class="ax-offer-card__name">Talks &amp; events</h3>
+        <p class="ax-offer-card__desc">
+          Keynotes, leadership offsites and hands-on hackathons. Move a room in an afternoon.
+        </p>
+        <span class="ax-offer-card__cta">Talks &amp; events <span class="ax-offer-card__cta-arrow" aria-hidden="true">→</span></span>
+      </a>
 
     </div>
 
-    <!-- Load-bearing routing sentence (Canon §7.5 #4) -->
-    <p class="ax-two-doors__distinction">
-      <strong>Both doors work with leaders — here's the difference.</strong>
-      Door 1 moves your <em>whole business</em>: leadership alignment is where it <em>starts</em>.
-      The closed exec-team coaching in Door 2 builds your <em>leadership team's own</em> AI capability:
-      your leaders are the <em>end</em>, not the on-ramp.
-    </p>
-
-    <!-- Tertiary callout — Talks & Events -->
-    <div class="ax-two-doors__tertiary">
-      <div class="ax-two-doors__tertiary-text">
-        <span class="ax-two-doors__tertiary-label">Need someone to lead a big AI moment?</span>
-        <span class="ax-two-doors__tertiary-name">Talks & Events</span>
-        — keynotes, leadership offsites and hackathons. Move a room in an afternoon.
-      </div>
-      <a href="/talks-events/" class="ax-two-doors__tertiary-cta">Talks &amp; Events <span aria-hidden="true">→</span></a>
+    <div class="ax-wwd-teaser__cta">
+      <a href="/what-we-do/" class="btn btn--primary btn--lg">Explore what we do <span aria-hidden="true">→</span></a>
     </div>
 
   </div>

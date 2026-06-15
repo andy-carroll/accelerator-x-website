@@ -1,0 +1,121 @@
+/* =============================================================================
+   OfferCard — the shared clickable "choose an offering" card.
+   One pattern across: the Leadership AI Coaching hub (three depths), the
+   Two Doors chooser (What We Do), and the homepage "What we do" teaser.
+   Whole card is a link; button-styled CTA + hover lift make the click obvious.
+   Accent modifiers (--cyan/--pink/--amber) add per-card personality.
+   ============================================================================= */
+
+.ax-offer-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--bg-1);
+  border: 1px solid var(--border-1);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+
+.ax-offer-card:hover {
+  border-color: var(--action-accent);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+}
+
+.ax-offer-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.ax-offer-card__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--action-primary);
+}
+
+.ax-offer-card__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-snug);
+  color: var(--fg-1);
+}
+
+.ax-offer-card__desc {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--fg-3);
+  line-height: var(--lh-relaxed);
+}
+
+.ax-offer-card__outcome {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+}
+.ax-offer-card__outcome strong { color: var(--fg-1); font-weight: var(--fw-semibold); }
+
+/* Facts list (e.g. Door 1's phase prices) ---------------------------------- */
+.ax-offer-card__facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.ax-offer-card__fact {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--border-1);
+}
+.ax-offer-card__fact:last-child { border-bottom: none; padding-bottom: 0; }
+
+.ax-offer-card__fact-label { font-size: var(--text-sm); color: var(--fg-3); }
+.ax-offer-card__fact-value { font-size: var(--text-sm); font-weight: var(--fw-semibold); color: var(--fg-1); white-space: nowrap; }
+
+.ax-offer-card__meta {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--fg-1);
+}
+
+/* Button-styled CTA — pushed to the card foot so CTAs align across a row */
+.ax-offer-card__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding: var(--space-3) var(--space-5);
+  background: var(--action-accent);
+  color: var(--fg-on-dark);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.ax-offer-card__cta-arrow { transition: transform var(--dur-base) var(--ease-out); }
+.ax-offer-card:hover .ax-offer-card__cta-arrow { transform: translateX(3px); }
+
+/* Accent modifiers — tinted top edge + eyebrow colour for personality ------ */
+.ax-offer-card--cyan  { border-top: 3px solid var(--ax-cyan); }
+.ax-offer-card--pink  { border-top: 3px solid var(--ax-pink); }
+.ax-offer-card--amber { border-top: 3px solid var(--ax-amber); }
+
+.ax-offer-card--cyan  .ax-offer-card__eyebrow { color: var(--ax-cyan); }
+.ax-offer-card--pink  .ax-offer-card__eyebrow { color: var(--ax-pink); }
+.ax-offer-card--amber .ax-offer-card__eyebrow { color: var(--ax-amber); }

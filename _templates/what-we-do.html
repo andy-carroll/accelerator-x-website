@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="/assets/css/components/NewsletterSignup.css" />
     <link rel="stylesheet" href="/assets/css/components/PageHero.css" />
     <link rel="stylesheet" href="/assets/css/components/CTABand.css" />
+    <link rel="stylesheet" href="/assets/css/components/OfferCard.css" />
     <link rel="stylesheet" href="/assets/css/components/TwoDoors.css" />
     <link rel="stylesheet" href="/assets/css/components/InnerPages.css" />
 
@@ -107,6 +108,39 @@
 
       <!-- === TWO DOORS (the offer spine) === -->
       {{component:TwoDoors}}
+
+      <!-- === TALKS & EVENTS (separate panel — not a third door) === -->
+      <section class="ax-talks-panel" aria-labelledby="talks-heading">
+        <div class="ax-talks-panel__inner">
+          <div class="ax-talks-panel__card">
+            <div class="ax-talks-panel__intro">
+              <span class="ax-talks-panel__kicker">Also</span>
+              <h2 class="ax-talks-panel__heading" id="talks-heading">{{offering:talks-events.name}}</h2>
+              <p class="ax-talks-panel__sub">
+                {{offering:talks-events.one_liner}} Keynotes, leadership offsites and hands-on hackathons —
+                high-impact AI moments, priced on application.
+              </p>
+            </div>
+            <div class="ax-talks-panel__aside">
+              <ul class="ax-talks-panel__formats">
+                <li class="ax-talks-panel__format">
+                  <span class="ax-talks-panel__format-name">{{offering:talks-events.formats.0.name}}</span>
+                  <span class="ax-talks-panel__format-meta">{{offering:talks-events.formats.0.duration}} · {{offering:talks-events.formats.0.audience_size}}</span>
+                </li>
+                <li class="ax-talks-panel__format">
+                  <span class="ax-talks-panel__format-name">{{offering:talks-events.formats.1.name}}</span>
+                  <span class="ax-talks-panel__format-meta">{{offering:talks-events.formats.1.duration}} · {{offering:talks-events.formats.1.audience_size}}</span>
+                </li>
+                <li class="ax-talks-panel__format">
+                  <span class="ax-talks-panel__format-name">{{offering:talks-events.formats.2.name}}</span>
+                  <span class="ax-talks-panel__format-meta">{{offering:talks-events.formats.2.duration}} · {{offering:talks-events.formats.2.audience_size}}</span>
+                </li>
+              </ul>
+              <a href="/talks-events/" class="btn btn--outline">See talks &amp; events <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- === CTA BAND === -->
       {{component:CTABand}}
