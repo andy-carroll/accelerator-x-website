@@ -8,7 +8,7 @@ name: Doc Freshness
 
 on:
   push:
-    branches: [main, 'rebuild/**']
+    branches: [main]
 
 jobs:
   changelog-updated:
