@@ -561,16 +561,23 @@
         </div>
       </section>
 
-      <!-- === HOW IT WORKS === -->
+      <!-- === THREE WAYS IN (the offer spine) === -->
+      <!-- Routes first: show the three ways in before any single path's detail. -->
+      {{component:WhatWeDoTeaser}}
+
+      <!-- === HOW IT WORKS (company path, in brief) === -->
+      <!-- Scoped to the company/flagship path only — the in-depth version lives on
+           /what-we-do/company-enablement/. Sits after the teaser so the routing
+           comes before the detail of one path. -->
       <section id="process" class="ax-process" aria-labelledby="process-heading">
         <div class="ax-process__inner">
           <div class="ax-process__header">
-            <span class="ax-kicker">How it works</span>
+            <span class="ax-kicker">For your business · how it works</span>
             <h2 class="ax-process__heading reveal" id="process-heading">
               Phase 0 hands you a roadmap. <em>Phase&nbsp;1+ ships&nbsp;it.</em>
             </h2>
             <p class="ax-process__sub reveal reveal-delay-1">
-              Every engagement starts with Phase 0 — two weeks that align your leadership team and deliver a costed 90-day plan. Whether you continue with us or not.
+              The first way in, in brief: every company engagement starts with Phase 0 — two weeks that align your leadership team and deliver a costed 90-day plan. Whether you continue with us or not.
             </p>
           </div>
 
@@ -602,13 +609,10 @@
 
           </div>
           <p class="ax-process__note">
-            That's one way in. There's a second — for individual leaders and teams.
+            That's the company path in brief. <a href="/what-we-do/company-enablement/">See how a full company engagement works →</a>
           </p>
         </div>
       </section>
-
-      <!-- === TWO DOORS (the offer spine) === -->
-      {{component:WhatWeDoTeaser}}
 
 
 {{homepageWho}}
