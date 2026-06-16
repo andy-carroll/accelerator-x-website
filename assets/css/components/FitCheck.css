@@ -89,6 +89,22 @@
   margin: 0 0 var(--space-5);
 }
 
+/* Icons — masked SVGs so they centre perfectly in the circle (text glyphs
+   never do). Per-column custom props drive both the heading badge and the
+   list markers: green check for "yes", soft slate minus for "no".
+   Mask shape only — colour comes from --fc-color (token), so no hardcoded hex. */
+.ax-fit-check__col--yes {
+  --fc-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+  --fc-color: var(--ax-green);
+  --fc-bg: var(--surface-green-subtle);
+}
+
+.ax-fit-check__col--no {
+  --fc-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E");
+  --fc-color: var(--ax-slate-medium);
+  --fc-bg: var(--surface-muted-subtle);
+}
+
 .ax-fit-check__col-heading-icon {
   width: 1.25rem;
   height: 1.25rem;
@@ -97,18 +113,16 @@
   justify-content: center;
   border-radius: var(--radius-full);
   flex-shrink: 0;
-  font-size: var(--text-xs);
-  font-weight: var(--fw-bold);
+  background: var(--fc-bg);
 }
 
-.ax-fit-check__col--yes .ax-fit-check__col-heading-icon {
-  background: var(--surface-green-subtle);
-  color: var(--ax-green);
-}
-
-.ax-fit-check__col--no .ax-fit-check__col-heading-icon {
-  background: var(--surface-muted-subtle);
-  color: var(--fg-3);
+.ax-fit-check__col-heading-icon::before {
+  content: '';
+  width: 0.75rem;
+  height: 0.75rem;
+  background-color: var(--fc-color);
+  -webkit-mask: var(--fc-icon) center / contain no-repeat;
+  mask: var(--fc-icon) center / contain no-repeat;
 }
 
 /* List ---------------------------------------------------------------------- */
@@ -122,26 +136,31 @@
 }
 
 .ax-fit-check__item {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
+  position: relative;
+  padding-left: calc(1.25rem + var(--space-2));
   font-size: var(--text-sm);
   color: var(--fg-2);
   line-height: var(--lh-relaxed);
 }
 
-.ax-fit-check__col--yes .ax-fit-check__item::before {
-  content: '✓';
-  flex-shrink: 0;
-  font-size: var(--text-xs);
-  font-weight: var(--fw-bold);
-  color: var(--ax-green);
+/* Marker badge (circle) + centred masked icon, pinned to the first line. */
+.ax-fit-check__item::before,
+.ax-fit-check__item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
-.ax-fit-check__col--no .ax-fit-check__item::before {
-  content: '✕';
-  flex-shrink: 0;
-  font-size: var(--text-xs);
-  font-weight: var(--fw-bold);
-  color: var(--fg-4);
+.ax-fit-check__item::before {
+  border-radius: var(--radius-full);
+  background: var(--fc-bg);
+}
+
+.ax-fit-check__item::after {
+  background-color: var(--fc-color);
+  -webkit-mask: var(--fc-icon) center / 0.75rem no-repeat;
+  mask: var(--fc-icon) center / 0.75rem no-repeat;
 }
