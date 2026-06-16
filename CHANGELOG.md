@@ -12,6 +12,8 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Changed
 
+- **Homepage section reorder + FitCheck copy rewrite** (2026-06-16): two copy/IA fixes surfaced in Andy's live review. (1) **Section reorder** — `WhatWeDoTeaser` (Three ways in) moved _before_ the Phase 0→Advisory timeline so routing precedes the detail of a single path; timeline kicker reframed to "For your business · how it works" and closing note replaced stale "there's a second way in" with a link through to `/what-we-do/company-enablement/`. (2) **FitCheck rewrite** — right side leads with the "you know AI needs to happen but don't have a clear path" person; left side removes the snarky "sign-off from six people" and the inaccurate "regulated environment" disqualifier (AX works heavily in regulated industries — tracked in [#66](https://github.com/andy-carroll/accelerator-x-website/issues/66)) and replaces them with three honest structural/values mismatches including a new headcount-vs-enablement item. Build + all 10 checks green.
+
 - **Home/What-We-Do IA split + Two Doors rebuild + Talks panel** (2026-06-15, [#64](https://github.com/andy-carroll/accelerator-x-website/issues/64)): the identical `TwoDoors` ran on both home and `/what-we-do/`, making What We Do a dead-end. Split into **homepage = teaser/router, What We Do = decision page**, on a new **shared clickable-card pattern**:
   - **New `OfferCard.css`** — one `.ax-offer-card` (full-`<a>`, eyebrow/name/desc/facts/meta, button CTA, hover-lift + shadow, focus ring) with cyan/pink/amber accent modifiers. The hub migrated onto it (`ax-depth-card` → `ax-offer-card`; card rules removed from `LeadershipCoaching.css`) so all "choose an offering" cards share one pattern — no drift.
   - **TwoDoors rebuilt** (What-We-Do only) → two accented offer-cards linking to their hubs (Door 1 cyan → `/what-we-do/company-enablement/`; Door 2 pink → `/what-we-do/leadership-ai-coaching/`). Deleted Door 2's three sub-links (now on the hub), the "Both doors work with leaders" distinction callout (its point now lives in the door copy — Canon §7.5), the Talks tertiary callout, and the component's intro (the page hero already carries "Two doors in / Pick your starting point" — was a duplicate heading).
@@ -567,7 +569,7 @@ _Project started: February 2026_
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260615-013228
-- Updated: 2026-06-15T00:32:29.593Z
+- Session ID: 20260616-195058
+- Updated: 2026-06-16T18:50:59.480Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
