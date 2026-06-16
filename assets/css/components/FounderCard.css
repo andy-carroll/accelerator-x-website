@@ -110,6 +110,7 @@
 
 /* Track record -------------------------------------------------------------- */
 .ax-founder-card__track {
+  margin-top: auto;   /* pin to the card bottom so both cards' track sections align regardless of bio length */
   padding-top: var(--space-5);
   border-top: 1px solid var(--border-1);
 }
