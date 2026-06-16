@@ -88,14 +88,19 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 ## Next Session Priorities
 
 > **North star (Andy, 2026-06-08): ship a *working, honest* v2 soon — zero clangers.** Fabricated content is the #1 unacceptable clanger.
+> **Mandate (Andy, 2026-06-16): get v2 LIVE — even if imperfect. Ship over polish.** Work the [🚀 v2 Launch Board (#77)](https://github.com/andy-carroll/accelerator-x-website/issues/77) — the single ship checklist.
 
-1. **Human walkthrough of the v2 surfaces on the Netlify preview (desktop + 375px)** — homepage (reordered sections + new FitCheck), `/what-we-do/` door cards + Talks panel, `/what-we-do/leadership-ai-coaching/`, `/how-we-work/`, `/about/`. The deep-scroll screenshots have been coming back blank locally — eyes-on at https://rebuild-v2--accelerator-x.netlify.app is the only reliable check. Review the column-height asymmetry in FitCheck at mobile (3 vs 4 items) flagged by the independent code review.
+**MVP = honest + functional + reachable.** Three hard blockers: (1) nothing fabricated; (2) money path works (forms submit, lead capture → Airtable, consent GNG-1 lands, newsletter); (3) nothing dead-ends (every button/CTA/link resolves). Plus the flip (privacy live, prod env vars, tag v1, swap branch).
 
-2. **Carries (all small):** (a) **#63** — point How We Work coaching signpost at the new hub; (b) decide **#65** site-wide "it's just us / no associates" → founder-led + specialist-complemented softening; (c) **#61** contact-page quiz copy (needs Andy's facts); (d) **#66** regulated industries narrative — weave into Why Us / company-enablement.
+**Working model:** batch tickets, not one-per-snag. Don't open/close a session per item — line up B1–B6, walk each slice (desktop + 375px), snag → fix → "Ready for production" → next. Bank value as each signs off.
 
-3. **PostHog ([#38](https://github.com/andy-carroll/accelerator-x-website/issues/38)) + Forms E2E ([#36](https://github.com/andy-carroll/accelerator-x-website/issues/36))** — next key builds once Andy is happy with the product surface.
+**The 10 batch tickets (under "v2 Cutover" milestone, `launch-batch` label):**
+- **B1** [#76](https://github.com/andy-carroll/accelerator-x-website/issues/76) Homepage · **B2** [#67](https://github.com/andy-carroll/accelerator-x-website/issues/67) Door 1 (What We Do + Company Enablement) · **B3** [#68](https://github.com/andy-carroll/accelerator-x-website/issues/68) Door 2 (coaching hub + 3 pages) · **B4** [#69](https://github.com/andy-carroll/accelerator-x-website/issues/69) How We Work + About · **B5** [#70](https://github.com/andy-carroll/accelerator-x-website/issues/70) Contact + FAQ + Talks · **B6** [#71](https://github.com/andy-carroll/accelerator-x-website/issues/71) Global furniture
+- Gates: **B7** [#72](https://github.com/andy-carroll/accelerator-x-website/issues/72) Forms E2E + GNG-1 (⛔ NO-GO if consent write fails) · **B8** [#73](https://github.com/andy-carroll/accelerator-x-website/issues/73) Core meta + no-404 crawl · **B9** [#74](https://github.com/andy-carroll/accelerator-x-website/issues/74) PostHog (back IN scope per Andy) · **B10** [#75](https://github.com/andy-carroll/accelerator-x-website/issues/75) Cutover + founder sign-off (the flip)
 
-4. **Proof + measurement ([#55](https://github.com/andy-carroll/accelerator-x-website/issues/55)) — the #1 ship-blocker.** 2–3 real measured client outcomes; named outcomes upgrade the "references on request" lines.
+**Deferred — ships WITHOUT (`post-launch` label):** named client proof (#55) · deep SEO/AEO (#40, #43) · /case-studies/ (#46) · dead v1 CSS + hub transition (#44) · FitCheck componentise (#49) · Door 2 follow-ups (#64) · cohort funnel (#30, separate surface). 38 granular issues were absorbed/closed into the batch tickets on 2026-06-16 — the board is the source of truth now.
+
+**Start here:** preview walkthrough is now B1–B6. Eyes-on at https://rebuild-v2--accelerator-x.netlify.app (deep-scroll screenshots come back blank locally).
 
 5. **SEO/AEO depth** — company-enablement page hub-level keyword treatment (Door 1 equivalent of the coaching hub). **Admin:** confirm Hostinger auto-renewal ON; spot-confirm HTTPS on a non-Sky connection.
 
