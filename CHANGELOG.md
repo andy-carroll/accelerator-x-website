@@ -10,6 +10,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
 
+### Fixed
+
+- **Company Enablement Phase Arc: unreadable detail text on the cyan card** (2026-06-20, B2): the `.ax-phase-arc__detail` row ("Align + activate + roadmap") inherited the base `opacity: 0.85`, which on the bright cyan panel (`#088ABF`, ~3.9:1 with full white) dropped it below legible. Added a cyan-panel override giving it full white at `opacity: 1` — parity with the eyebrow, which already had that override. CSS-only (`assets/css/components/CompanyEnablement.css`); `ax-phase-arc` is used only on this page, and no inline opacity styles exist in any template.
+
 ### Changed
 
 - **Company Enablement: weave in the regulated-industries differentiator** (2026-06-20, B2/#66): the regulated-industries narrative (a founder-flagged live differentiator — responsible AI enablement in regulated environments) was absent from all of Door 1. Added it as a "Right fit if you…" bullet on the Company Enablement FitCheck (`_templates/offerings/company-enablement.html`) — names sectors (legal, PE, manufacturing), no client names, on-voice ("adopted deliberately and accountably, not recklessly"). Wording is Andy's to tweak live. B2 Door 1 walkthrough otherwise clean (no token leaks, all links resolve, no console errors, no 375px page overflow, prices token-driven, no dead offers).

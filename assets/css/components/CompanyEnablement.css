@@ -138,6 +138,13 @@
   color: var(--fg-3);
 }
 
+/* On cyan, the base 0.85 opacity drops faded white below legible contrast (#088ABF
+   is already only ~3.9:1 with full white). Match the eyebrow's full-white override. */
+.ax-phase-arc__panel--cyan .ax-phase-arc__detail {
+  color: var(--ax-white);
+  opacity: 1;
+}
+
 .ax-phase-arc__arrow {
   font-size: var(--text-2xl);
   color: var(--fg-4);
