@@ -1,6 +1,6 @@
 name: Doc Freshness
 
-# Enforces the Definition of Done from AI-RULES.md §7:
+# Enforces the Definition of Done from .claude/rules/standards.md:
 # If code files change, CHANGELOG.md must also be updated in the same push.
 #
 # Covers: scripts/, _templates/, netlify/, assets/js/, styles.css, index.html
@@ -62,7 +62,7 @@ jobs:
             echo "❌ CHANGELOG.md was not updated."
             echo ""
             echo "Code files changed in this push but CHANGELOG.md was not touched."
-            echo "Per AI-RULES.md §7 (Definition of Done), every meaningful code change"
+            echo "Per .claude/rules/standards.md (Definition of Done), every meaningful code change"
             echo "requires a CHANGELOG.md entry under [Unreleased]."
             echo ""
             echo "Add an entry and push again."

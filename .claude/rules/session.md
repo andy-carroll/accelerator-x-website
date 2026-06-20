@@ -13,7 +13,7 @@ Every session runs one turn of the same loop. This is the spine the rest of this
 2. **Measurable outcome** — state, before building, what "done" looks like for this session: which issue(s) close, what becomes visible on the preview. If you can't name the outcome, the scope is wrong.
 3. **Build** — do the work. Update CHANGELOG/docs inline as it lands (see Continuous Documentation).
 4. **Test** — verify against the outcome. Build + check green; for anything user-visible, verify on the **Netlify preview**, not just localhost.
-5. **Deploy** — push `rebuild/v2` so the branch preview reflects the work. Every session ends in a deploy (preview at minimum) — no long-lived unshipped work.
+5. **Deploy** — push the working branch (per `.session-protocol.json` → `git.workingBranch`) so its preview reflects the work. Every session ends in a deploy (preview at minimum) — no long-lived unshipped work.
 6. **Monitor** — confirm the deployed change is live and correct; note anything to watch next session.
 
 **The close-gate (non-negotiable):** a session cannot close unless its work is **tracked** (a GitHub issue exists and is updated/closed) AND **shipped** (pushed to the preview) — or **explicitly carried** (written into session-notes + Next Session Priorities with the reason). "Done but unpushed" and "done but untracked" both mean the session is not finished.
@@ -99,7 +99,7 @@ Before touching any script or file, work through this checklist silently and act
 
 **Tracking + shipping (the close-gate)**
 - Every piece of work done this session maps to a GitHub issue under the "v2 Cutover" milestone — updated or closed. Work with no issue: create one, or carry it explicitly.
-- `rebuild/v2` is pushed; the branch preview reflects this session's work. If nothing shippable was produced, that is itself the carry — say so in session-notes and why.
+- The working branch is pushed; its preview reflects this session's work. If nothing shippable was produced, that is itself the carry — say so in session-notes and why.
 - Anything not finished is written into session-notes + "Next Session Priorities" with the reason. Nothing left "done but unpushed" or "done but untracked."
 
 **Session notes**

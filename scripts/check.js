@@ -3,7 +3,7 @@
 
 // scripts/check.js — codebase standards enforcement
 //
-// Runs a targeted battery of checks derived from AI-RULES.md §Philosophy.
+// Runs a targeted battery of checks derived from .claude/rules/standards.md.
 // Every check here exists because a real violation occurred or was identified
 // as a plausible failure mode for this specific codebase.
 //
@@ -48,7 +48,7 @@ function filesIn(relDir, ext) {
 }
 
 // ── Check 1: No inline <script> blocks in templates ───────────────────────────
-// Rule: AI-RULES.md §3 "No inline scripts"
+// Rule: .claude/rules/standards.md "No inline scripts"
 // Incident: inline newsletter handler in _templates/article.html competed with
 //   forms.js, silently swallowed events, and took hours to diagnose.
 
@@ -71,7 +71,7 @@ function checkNoInlineScripts() {
 }
 
 // ── Check 2: No hardcoded secrets in Netlify functions ────────────────────────
-// Rule: AI-RULES.md §Philosophy "We never hardcode secrets"
+// Rule: .claude/rules/standards.md "We never hardcode secrets"
 // Incident: SLACK_WEBHOOK_URL hardcoded in lead-capture.js and
 //   newsletter-subscribe.js — exposed in public GitHub repo for weeks.
 
@@ -97,7 +97,7 @@ function checkNoHardcodedSecrets() {
 }
 
 // ── Check 3: No unsubstituted build tokens in generated article HTML ──────────
-// Rule: AI-RULES.md §Philosophy — the build is the contract
+// Rule: .claude/rules/standards.md — the build is the contract
 // Rationale: if a {{token}} appears in built output, the build silently produced
 //   a broken page. This catches missed token substitution before it reaches prod.
 
@@ -125,7 +125,7 @@ function checkNoUnsubstitutedTokens() {
 }
 
 // ── Check 4: All <script src="..."> references in templates + index.html exist ─
-// Rule: AI-RULES.md §Philosophy — dead references must not exist
+// Rule: .claude/rules/standards.md — dead references must not exist
 // Rationale: a missing JS file 404s silently in production. Catches the case
 //   where a script is referenced before it is created, or after it is moved.
 
@@ -158,7 +158,7 @@ function checkScriptReferencesExist() {
 }
 
 // ── Check 5: CHANGELOG has content under [Unreleased] ────────────────────────
-// Rule: AI-RULES.md §7 Definition of Done — CHANGELOG always updated
+// Rule: .claude/rules/standards.md (completion gates) — CHANGELOG always updated
 // This is a warning (not a failure) — there are legitimate moments when
 //   [Unreleased] is empty (e.g. immediately after cutting a release).
 
@@ -184,9 +184,9 @@ function checkChangelogHasContent() {
   }
 }
 
-// ── Check 6: Every "We never" rule in AI-RULES.md is classified ──────────────
-// Rule: AI-RULES.md §Philosophy — a rule without enforcement is a wish, not a rule.
-// How it works: every bullet under "### We never" must have an inline HTML comment
+// ── Check 6: Every "We never" rule in .claude/rules/standards.md is classified ─
+// Rule: .claude/rules/standards.md §We never — a rule without enforcement is a wish.
+// How it works: every bullet under "## We never" must have an inline HTML comment
 //   on the same or following line containing either:
 //     <!-- check: <location> -->       — automated, enforced at <location>
 //     <!-- not-automatable: <reason> --> — deliberately not automated, reason stated
@@ -195,14 +195,14 @@ function checkChangelogHasContent() {
 // of done for any new rule.
 
 function checkWeNeverRulesAreClassified() {
-  console.log('\n[6] Every "We never" rule in AI-RULES.md is classified');
+  console.log('\n[6] Every "We never" rule in .claude/rules/standards.md is classified');
 
-  const content = readFile('AI-RULES.md');
+  const content = readFile('.claude/rules/standards.md');
 
   // Extract the "We never" section
-  const section = content.match(/### We never([\s\S]*?)(?=\n###|\n##|$)/);
+  const section = content.match(/#+ We never([\s\S]*?)(?=\n#+ |$)/);
   if (!section) {
-    warn('AI-RULES.md — could not find "### We never" section');
+    warn('.claude/rules/standards.md — could not find "We never" section');
     return;
   }
 
@@ -222,7 +222,7 @@ function checkWeNeverRulesAreClassified() {
 
     if (!hasCheck && !hasNotAutomatable) {
       const rule = lines[i].trim().slice(0, 80);
-      fail(`AI-RULES.md — unclassified "We never" rule: ${rule}`);
+      fail(`.claude/rules/standards.md — unclassified "We never" rule: ${rule}`);
       fail(`  Add <!-- check: <location> --> or <!-- not-automatable: <reason> --> to classify it`);
       clean = false;
     }
@@ -232,7 +232,7 @@ function checkWeNeverRulesAreClassified() {
 }
 
 // ── Check 7: No hardcoded hex colours outside CSS design token definitions ─────
-// Rule: AI-RULES.md §Philosophy "We never use hardcoded colour values outside
+// Rule: .claude/rules/standards.md "We never use hardcoded colour values outside
 //   CSS design token definitions"
 // Incident: three hex colours found in styles.css outside :root — gradient,
 //   hero background, and testimonial star colour — all bypassing the token system.
@@ -281,7 +281,7 @@ function checkNoCssTokenDrift() {
 }
 
 // ── Check 8: HTML validation on build output ──────────────────────────────────
-// Rule: AI-RULES.md §Philosophy — build output must be structurally valid
+// Rule: .claude/rules/standards.md — build output must be structurally valid
 // Rationale: malformed HTML ships silently. Catches build script regressions
 //   before they reach production. Zero dependencies — regex-based spot checks
 //   for the most impactful classes of error.
@@ -326,7 +326,7 @@ function checkBuiltHtml() {
 }
 
 // ── Check 9: No hardcoded LinkedIn or site-config URLs in templates ───────────
-// Rule: AI-RULES.md §Philosophy — site-wide URLs must use {{site:KEY}} tokens
+// Rule: .claude/rules/standards.md — site-wide URLs must use {{site:KEY}} tokens
 // Rationale: LinkedIn profile/company URLs and external tool URLs (quiz etc.)
 //   must live in scripts/site-config.js. Hardcoding them causes silent drift
 //   when URLs change. We ran into this with founder profiles. Comments are
@@ -463,7 +463,7 @@ function checkNoOfferingDrift() {
 function main() {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
   console.log('  Accelerator X — Standards Check');
-  console.log('  AI-RULES.md §Philosophy enforcement');
+  console.log('  .claude/rules/standards.md enforcement');
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
   checkNoInlineScripts();

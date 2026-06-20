@@ -9,7 +9,13 @@
       "feat/*",
       "rebuild/*"
     ],
-    "defaultPushRemote": "origin"
+    "defaultPushRemote": "origin",
+    "workingBranch": "rebuild/v2",
+    "productionBranch": "main"
+  },
+  "deployment": {
+    "previewUrl": "https://rebuild-v2--accelerator-x.netlify.app",
+    "productionUrl": "https://accelerator-x.ai"
   },
   "sessionStart": {
     "staleDaysThreshold": 7,
@@ -23,8 +29,7 @@
       "CLAUDE.md",
       "ROADMAP.md",
       "README.md",
-      "CHANGELOG.md",
-      "AI-RULES.md"
+      "CHANGELOG.md"
     ],
     "sessionProtocolBlock": {
       "startMarker": "<!-- SESSION_PROTOCOL:START -->",
@@ -53,6 +58,7 @@
     "commitMessageTemplate": "docs(session): {date} session wrap",
     "allowedChangedPathPatterns": [
       ".claude/rules/session.md",
+      ".claude/rules/standards.md",
       "claude/rules/session.md",
       ".claude/sessions/*.md",
       "package.json",
@@ -70,7 +76,6 @@
       "ROADMAP.md",
       ".session-protocol.json",
       "CLAUDE.md",
-      "AI-RULES.md",
       "docs/*.md",
       "tailwind.config.js",
       "scripts/tailwind.input.css",

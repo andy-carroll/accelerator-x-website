@@ -165,6 +165,7 @@ if (unknown.length > 0) {
 }
 
 const warnings = [];
+const notes = [];
 const errors = [];
 const operations = [];
 const profilePath = path.join('.session-protocol.json');
@@ -251,10 +252,16 @@ if (gitStatus.ok && gitStatus.stdout) {
   gitState.clean = gitState.uncommitted.length === 0;
 }
 
-const unpushed = run(`git log ${profile.git.defaultPushRemote}/main..HEAD --oneline`);
+// Commits ahead of the production branch. On the working branch (the full-cutover
+// branch) being ahead of production is the expected, intended state — not a dirty
+// tree — so it never counts toward "not clean". See .session-protocol.json git.workingBranch.
+const productionBranch = profile.git.productionBranch || 'main';
+const onWorkingBranch = currentBranch === (profile.git.workingBranch || null);
+const unpushed = run(`git log ${profile.git.defaultPushRemote}/${productionBranch}..HEAD --oneline`);
 if (unpushed.ok && unpushed.stdout) {
   gitState.unpushed = unpushed.stdout.split('\n').filter(Boolean).length;
-  if (gitState.unpushed > 0) gitState.clean = false;
+  gitState.aheadIsExpected = onWorkingBranch && gitState.unpushed > 0;
+  if (gitState.unpushed > 0 && !gitState.aheadIsExpected) gitState.clean = false;
 }
 
 const lastCommits = run('git log --oneline -3');
@@ -263,7 +270,13 @@ if (lastCommits.ok && lastCommits.stdout) {
 }
 
 if (!gitState.clean) {
-  warnings.push(`Working tree not clean (${gitState.uncommitted.length} uncommitted, ${gitState.unpushed} unpushed).`);
+  // When ahead-of-production is expected (working branch), don't report it as "unpushed"
+  // in the warning — the note below explains it. Only genuine unpushed-elsewhere counts.
+  const reportedUnpushed = gitState.aheadIsExpected ? 0 : gitState.unpushed;
+  warnings.push(`Working tree not clean (${gitState.uncommitted.length} uncommitted, ${reportedUnpushed} unpushed).`);
+}
+if (gitState.aheadIsExpected) {
+  notes.push(`${gitState.unpushed} commits ahead of ${productionBranch} — expected on the working branch (full cutover); not a problem.`);
 }
 
 const airtableEnabled = args.airtable || Boolean(profile.airtable?.enabledByDefault);
@@ -317,6 +330,7 @@ const output = {
   git: gitState,
   airtable: airtableStatus,
   warnings,
+  notes,
   errors: allErrors,
   nextActions: [
     'Confirm focus with user before task execution.',
@@ -330,11 +344,16 @@ if (args.json) {
   console.log(`\n## Session Brief — ${today}\n`);
   console.log(`**Branch:** ${currentBranch}`);
   console.log(`**Last session:** ${output.lastSession}`);
-  console.log(`**Git state:** ${gitState.clean ? '✅ Clean' : `⚠️ ${gitState.uncommitted.length} uncommitted, ${gitState.unpushed} unpushed`}`);
+  console.log(`**Git state:** ${gitState.clean ? '✅ Clean' : `⚠️ ${gitState.uncommitted.length} uncommitted, ${gitState.aheadIsExpected ? 0 : gitState.unpushed} unpushed`}`);
 
   if (warnings.length > 0) {
     console.log('\n⚠️  Warnings:');
     warnings.forEach(w => console.log(`- ${w}`));
+  }
+
+  if (notes.length > 0) {
+    console.log('\nℹ️  Notes:');
+    notes.forEach(n => console.log(`- ${n}`));
   }
 
   if (allErrors.length > 0) {

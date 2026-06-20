@@ -174,7 +174,7 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[ ]` Three differentiator cards — still accurate and intentional?
 - `[ ]` Process section copy — 3-step description — accurate?
 - `[ ]` FitCheck "Right fit if / Probably not for you if" lists — accurate and intentional?
-- `[ ]` Inline code comments across all templates and components — does reading each file give a future agent full clarity without hunting in separate docs? (see AI-RULES.md §2)
+- `[ ]` Inline code comments across all templates and components — does reading each file give a future agent full clarity without hunting in separate docs? (see `.claude/rules/standards.md`)
 
 ---
 

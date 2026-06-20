@@ -77,7 +77,7 @@ transparent, anti-agency positioning.
 - [ ] **Introduce first autonomous agent** — scoped to a specific, safe, repeatable task
       (e.g. content publishing, lead enrichment, or session-end hygiene). Use Claude Agent SDK
       with worktree isolation. Migrate git policy to feature branches at this point (see
-      `AI-RULES.md §5`).
+      `CLAUDE.md` Decisions — git workflow).
 - [ ] **Agent capacity planning** — identify the 3–5 highest-leverage tasks where autonomous
       agents would 10x throughput without introducing risk.
 
@@ -154,12 +154,12 @@ enough that manual protocol overhead becomes measurable.
 - [x] Content Hub (`/insights`) — Markdown → static HTML pipeline
 - [x] Design system established (`docs/design-system.md`)
 - [x] Image pipeline (`scripts/img-process.sh` + `scripts/img-audit.sh`)
-- [x] AI instruction architecture (`AI-RULES.md` + thin adapters)
-- [x] Direct-to-main git policy formalised; DoD added to `AI-RULES.md`
+- [x] AI instruction architecture (consolidated 2026-06-20 onto `CLAUDE.md` + `.claude/rules/`)
+- [x] Direct-to-main git policy formalised; DoD now in `.claude/rules/standards.md`
 - [x] Three-layer automated enforcement: `scripts/check.js` (8 checks) + `.githooks/pre-commit` (committed) + GitHub Actions CI — 2026-03-22
 - [x] `.env.example` — all 5 required env vars documented — 2026-03-22
 - [x] CSS design token drift check (check 7) + HTML validation check (check 8) — 2026-03-22
-- [x] Philosophy section in `AI-RULES.md` — "We move fast by not making messes" + self-classifying "We never" rules — 2026-03-22
+- [x] Philosophy + self-classifying "We never" rules ("We move fast by not making messes") — now in `.claude/rules/standards.md` — 2026-03-22
 - [x] Repo made public — no secrets in codebase; credentials in Netlify env vars — 2026-03-22
 - [x] GitHub branch protection on `main` — 3 required status checks (Build, Standards, CHANGELOG) — 2026-03-22
 - [x] `llms.txt` + AI agent Easter eggs (index.html, robots.txt, AGENTS.md) — 2026-03-22

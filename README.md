@@ -201,7 +201,7 @@ Concretely, that means:
 
 - **Standards enforced by automation, not memory** — `scripts/check.js` runs 8 checks
   on every commit. A violation is caught locally, not in production six months later.
-- **Every decision recorded at the point of decision** — `CHANGELOG.md`, `AI-RULES.md`,
+- **Every decision recorded at the point of decision** — `CHANGELOG.md`, `CLAUDE.md`,
   session logs in `.claude/sessions/`. The codebase explains itself; no verbal handoff required.
 - **Session hygiene as a first-class concern** — every session starts with a structured
   brief and ends with an atomic close. The cockpit (`CLAUDE.md`) is always current.
@@ -217,15 +217,17 @@ This is the thought and care we bring to client engagements. The repo is the pro
 
 ### Decision
 
-Single-source, tool-agnostic instruction system:
+Single-source instruction system:
 
-- **Canonical rules:** `AI-RULES.md` ← always wins
-- **Thin adapters:** `AGENTS.md` (Codex/OpenAI agents), `CLAUDE.md` (Claude Code)
+- **Canonical operating doc:** `CLAUDE.md` (project state, decisions, next steps)
+- **Enforced standards:** `.claude/rules/standards.md` (what `npm run check` + CI verify)
+- **Session protocol:** `.claude/rules/session.md`
+- **Thin pointer for other tools:** `AGENTS.md`
 
 ### Operating rule
 
-Update `AI-RULES.md` first when workflow or policy changes. Adapters stay minimal
-and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
+Update `CLAUDE.md` (or the relevant `.claude/rules/` file) when workflow or policy changes;
+`AGENTS.md` stays a minimal pointer.
 
 ---
 
@@ -236,7 +238,8 @@ and referential. If an adapter conflicts with `AI-RULES.md`, `AI-RULES.md` wins.
 | `ROADMAP.md` | Strategic priorities — Now / Next / Later |
 | `docs/go-live-checklist.md` | Colour-coded launch checklist (live site) |
 | `CHANGELOG.md` | Version history — updated on every meaningful change |
-| `AI-RULES.md` | Agent operating rules + Definition of Done |
+| `CLAUDE.md` | Canonical operating doc — state, decisions, next steps |
+| `.claude/rules/standards.md` | Enforced engineering standards (check.js + CI) |
 | `docs/landing-page-spec.md` | Landing page phased delivery spec |
 | `docs/content-hub-plan.md` | Content Hub architecture |
 | `docs/design-system.md` | Typography, colour tokens, image standards |

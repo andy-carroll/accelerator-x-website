@@ -14,7 +14,7 @@
 //   2. Use {{site:YOUR_KEY}} in templates — never paste the raw value.
 //   3. Run `npm run build`.
 //
-// AI-RULES.md §Philosophy: "We never hardcode site-wide values that are defined
+// .claude/rules/standards.md: "We never hardcode site-wide values that are defined
 // here — use {{site:KEY}} tokens instead."
 // ─────────────────────────────────────────────────────────────────────────────
 

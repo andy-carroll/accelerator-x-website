@@ -7,6 +7,6 @@
 # script in package.json, which runs after every `npm install`.
 #
 # See scripts/check.js for the full check list and the real incident
-# behind each rule. See AI-RULES.md §Philosophy for the principles.
+# behind each rule. See .claude/rules/standards.md for the principles.
 
 npm run check
