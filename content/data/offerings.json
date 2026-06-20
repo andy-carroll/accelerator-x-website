@@ -78,7 +78,7 @@
       ],
       "price_from_gbp": 10000,
       "price_unit": "per individual",
-      "price_note": "Locked 'from £10,000' (Andy 2026-06-14); premium/scarce; small-group variant possible. Built page is STALE (12wk/£12k/90-min) — update in Phase 5.",
+      "price_note": "Locked 'from £10,000' (Andy 2026-06-14); premium/scarce; small-group variant possible. Page reconciled to canon (6wk/£10k/75-min) 2026-06-20.",
       "reconcile": false
     },
     {
@@ -98,7 +98,7 @@
       "price_from_gbp": 15000,
       "price_per_head_gbp": 2000,
       "price_model": "base £15,000 up to 6 people; +£2,000 per person above 6; max 12 in the group (range £15k-£27k)",
-      "price_note": "Decided 2026-06-14 (Andy). Built page is STALE (£18k flat, 5-10 people) — update in Phase 5.",
+      "price_note": "Decided 2026-06-14 (Andy). Page reconciled to canon (base £15k ≤6 +£2k/head, max 12) 2026-06-20.",
       "reconcile": false
     },
     {

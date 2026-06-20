@@ -12,6 +12,7 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Fixed
 
+- **Door 2 offerings.json: clear false "Built page is STALE" notes** (2026-06-20, B3): the `price_note` for `senior-leader-acceleration` and `leadership-activation` still warned their built pages were stale (12wk/£12k/90-min; £18k flat, 5-10 people) "update in Phase 5" — but the templates + built pages were already reconciled to canon (6wk/£10k/75-min; base £15k ≤6 +£2k/head, max 12). Cleared the dead/misleading notes so they can't send a future agent chasing a non-existent fix. Metadata only — no rendered output changes (build confirms pages unchanged). B3 walkthrough otherwise clean across all 4 pages: links resolve, no console errors, no 375px overflow, prices match canon, guarantee on every page.
 - **Company Enablement Phase Arc: unreadable detail text on the cyan card** (2026-06-20, B2): the `.ax-phase-arc__detail` row ("Align + activate + roadmap") inherited the base `opacity: 0.85`, which on the bright cyan panel (`#088ABF`, ~3.9:1 with full white) dropped it below legible. Added a cyan-panel override giving it full white at `opacity: 1` — parity with the eyebrow, which already had that override. CSS-only (`assets/css/components/CompanyEnablement.css`); `ax-phase-arc` is used only on this page, and no inline opacity styles exist in any template.
 
 ### Changed
