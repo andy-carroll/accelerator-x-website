@@ -91,8 +91,9 @@
               color    var(--dur-base) var(--ease-out);
 }
 
-/* Rotate icon when open */
-.ax-faq-item[open] .ax-faq-item__icon {
+/* Rotate the + into an × when open. The [open] attribute lands on <details>,
+   not on the .ax-faq-item <li> — target the details element directly. */
+.ax-faq-item details[open] .ax-faq-item__icon {
   transform: rotate(45deg);
   color: var(--action-primary);
 }
