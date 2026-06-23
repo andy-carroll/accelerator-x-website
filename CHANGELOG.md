@@ -10,6 +10,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
 
+### Changed
+
+- **Leadership Team AI Activation: reprice to £14k base (up to 8) + Door 2 hub anchor** (2026-06-24, B2/B3): Andy repriced Activation from base £15k/≤6 to **base £14,000 up to 8 people** (+£2,000/head for 9–12, max 12) — making **£1,750/person at 8** the lowest per-person entry across Door 2. Updated `offerings.json` (`price_from_gbp` 15000→14000, new `price_per_person_from_gbp: 1750`, model + note) and all three activation-page spots (hero card-pricing, FAQ answer, FAQPage JSON-LD) — replacing the stale "up to 6 / above 6 / ~£19,000 for 8" wording. Re-anchored the What We Do hub TwoDoors Door 2 card from "from £3,500/place" (cohort) to **"from £1,750/person in a team programme"** (token-driven), since the team is now the genuinely cheapest per-person way in. All price strings token-derived; Check #10 green.
+
 ### Fixed
 
 - **FAQ accordion: the +/× icon never changed on open/close (global)** (2026-06-20, B3): the open-state rule was `.ax-faq-item[open] .ax-faq-item__icon`, but the `open` attribute lands on the child `<details>`, not the `.ax-faq-item` `<li>` — so it never matched and the `+` stayed put. Corrected the selector to `.ax-faq-item details[open] …`; the `+` now rotates 45° into a `×` with the existing transition + colour shift. One shared component (`FAQList.css` + native `<details>`), so this fixes every FAQ on the site — offering pages, `/faq/` hub, homepage.
