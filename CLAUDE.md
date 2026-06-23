@@ -22,7 +22,7 @@
 - Build plan: `docs/design_handoff_website_rebuild/README.md` · design system: `…/design-system/DESIGN.md` · wireframes: `…/wireframes/`
 - Built through Phase 2 Wave D + Phase 3 page assembly (4 inner pages live: `/what-we-do`, `/how-we-work`, `/about`, `/contact`). Component-level detail in `CHANGELOG.md` + `.claude/sessions/`.
 
-**Last session:** 2026-06-20 — Retired AI-RULES.md (357 lines, stale/contradictory) — rehomed its only enforced content into new `.claude/rules/standards.md`, repointed check.js Check 6, made CLAUDE.md + `.claude/rules/` the single source; single-sourced the branch/deploy fact into `.session-protocol.json` to kill a cutover staleness class; fixed the unpushed-warning false alarm at source. All 10 checks green, committed.
+**Last session:** 2026-06-23 — Walked Door 1 (B2/#67) and Door 2 (B3/#68) on the preview, fixing snags as found; re-architected the About page IA (B4/#69); and repriced Leadership Team AI Activation to £14k/≤8 across data, pages, hub card, and the prose canon. All committed + pushed; build + 10 checks green.
 
 **Earlier (2026-06-14):** Phase 5 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57), closed) — site now derives offer names/prices from the Offer Canon via `{{offering:KEY.field}}` tokens, with a drift-guard (Check #10); Two Doors spine restored; fabricated content removed; `/faq/` hub + FAQPage JSON-LD; newsletter signup consolidated to one component; "no value, no payment" guarantee reconciled. Full detail: `CHANGELOG.md` + `.claude/sessions/`.
 
