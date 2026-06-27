@@ -16,6 +16,17 @@
 
   const isSubmitting = new WeakMap();
 
+  // Analytics — fire-and-forget. PostHog is init-deferred (see analytics.js) and its
+  // snippet queues capture() calls before init, so guarding on existence is enough.
+  // Never pass PII (name/email/company) in properties — only non-identifying context.
+  const track = (event, props = {}) => {
+    try {
+      if (window.posthog && typeof window.posthog.capture === 'function') {
+        window.posthog.capture(event, props);
+      }
+    } catch (_) { /* analytics must never break a form */ }
+  };
+
   const setSubmitState = (btn, { disabled, label }) => {
     if (!btn) return;
     btn.disabled = disabled;
@@ -42,6 +53,15 @@
   leadForms.forEach((leadForm) => {
     const leadSuccess = document.getElementById(leadForm.dataset.successId || 'form-success');
     const leadError = document.getElementById(leadForm.dataset.errorId || 'form-error');
+    const leadSource = leadForm.dataset.source || 'apply_form';
+
+    // Funnel step: apply_form_start — fires once when the user first engages the form.
+    let started = false;
+    leadForm.addEventListener('focusin', () => {
+      if (started) return;
+      started = true;
+      track('apply_form_start', { location: leadSource });
+    }, { once: false });
 
     const normaliseWebsite = () => {
       const f = leadForm.querySelector('input[name="website"]');
@@ -105,6 +125,12 @@
         .then((res) => res.json())
         .then((data) => {
           if (data.error) throw new Error(data.error);
+          // Conversion event — non-PII context only (timeline/interest/source).
+          track('apply_form_submit', {
+            timeline: payload.timeline || '',
+            interest: payload.interest || '',
+            location: leadSource
+          });
           showLeadSuccess();
         })
         .catch((err) => {
@@ -160,6 +186,7 @@
         .then((res) => res.json())
         .then((data) => {
           if (data.success) {
+            track('newsletter_subscribe', { location: form.dataset.newsletterSource || 'newsletter_form' });
             setHidden(form, true);
             setHidden(success, false);
           } else {

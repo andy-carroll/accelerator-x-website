@@ -12,6 +12,17 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
 
 ### Added
 
+- **B9 — PostHog conversion instrumentation** (2026-06-27, #74): the site loaded PostHog on
+  every page but fired no custom events — launching blind on conversions. Added the MVP funnel +
+  conversion events in `assets/js/forms.js` via a guarded `track()` helper (fire-and-forget;
+  tolerates PostHog's deferred init since the snippet queues `capture()` calls): **`apply_form_start`**
+  (first focus in the apply form), **`apply_form_submit`** (on successful submission), and
+  **`newsletter_subscribe`** (on successful signup). Properties carry **non-identifying context only**
+  (`timeline`, `interest`, `location`) — no name/email/company. Verified all three fire in-browser
+  on the preview with no console errors and no PII. Gives the landing (`$pageview`) → `apply_form_start`
+  → `apply_form_submit` funnel. **Still open for B9:** `cta_click` tracking (needs a CTA selector/attr
+  strategy across templates) and the cookie/consent posture decision — both flagged on #74.
+
 - **Agent access to Netlify, PostHog + Vercel, documented** (2026-06-27): wired the deploy/analytics
   systems so the agent can drive the v2 cutover autonomously, following the official Netlify
   ["Set up Claude Code for Netlify"](https://docs.netlify.com/build/build-with-ai/agent-setup-guides/set-up-claude-code-for-netlify/)
