@@ -201,7 +201,7 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[ ]` All footer nav links resolve to built pages
 - `[ ]` LinkedIn company page URL correct
 - `[ ]` Privacy policy → `/privacy.html` exists and is current
-- `[ ]` Newsletter form in footer submits correctly
+- `[x]` Newsletter form in footer submits correctly — verified 2026-06-27 (B7): newsletter → Brevo list #9 confirmed after reactivating the Brevo key (see note below)
 
 ### 2c — CTAs throughout
 
@@ -225,18 +225,20 @@ Test each form with a real submission on the Netlify preview URL (not localhost)
 
 Target: `/.netlify/functions/lead-capture`
 
-- `[ ]` Submits without JS errors
-- `[ ]` Success state displays correctly
-- `[ ]` Honeypot invisible; not submitted
-- `[ ]` All required fields block submission if empty
-- `[ ]` Consent checkbox required — cannot submit without it
-- `[ ]` **Brevo:** contact added to list #9
-- `[ ]` **Slack:** `#website-leads` notification fires
-- `[ ]` **Email:** Brevo welcome automation triggers for new contact
+- `[x]` Submits without JS errors — verified 2026-06-27 (B7)
+- `[x]` Success state displays correctly — verified (B7)
+- `[x]` Honeypot invisible; not submitted — function checks `_honeypot` (B7)
+- `[x]` All required fields block submission if empty — function guards; checkbox `required` (B7)
+- `[x]` Consent checkbox required — cannot submit without it — `required` on the input (B7)
+- `[x]` **Slack:** `#website-leads` notification fires — verified (B7, confirmed by Andy)
+- `[ ]` **Email:** Brevo welcome automation triggers for new contact (not tested — ApplyForm writes to Airtable, not Brevo; this line applies to the newsletter path)
+- _Note: ApplyForm → Airtable + Slack (not Brevo). Brevo is the **newsletter** path — verified separately above._
+
+> ⚠️ **Brevo key finding (2026-06-27, B7):** the `BREVO_API_KEY` was found **deactivated** — newsletter signups were silently not reaching Brevo (the function fails-soft, so Slack still fired and users saw success). Reactivated + verified writing to list #9. **Pre-launch action:** scan Slack `#website-leads` for any newsletter signups received while the key was down and add those real subscribers to Brevo manually. Hardening (alert on Brevo write failure) tracked as a spawned task.
 
 #### TEST CASE GNG-1 — Consent capture writes to Airtable (go/no-go)
 
-> **Status:** schema in place 2026-06-08 ([#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)) — fields created; end-to-end write **not yet tested**. Run before production cutover.
+> **Status:** ✅ **PASSED 2026-06-27** (B7/#72) — end-to-end verified on the preview: test application submitted, row landed in Prospects with `Consent Given=true` + ISO `Consent Timestamp`, Slack fired, test row deleted. Schema was in place 2026-06-08 ([#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)).
 > **Why this is go/no-go:** consent is a GDPR record. If the write silently drops, we are capturing leads without a defensible consent trail. A pass here is mandatory to go live.
 
 **Setup**
