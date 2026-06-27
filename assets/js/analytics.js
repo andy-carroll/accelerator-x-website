@@ -70,6 +70,10 @@ const initPostHog = () => {
     autocapture: false,
     disable_session_recording: true,
     disable_surveys: true,
+    // Cookieless: memory-only persistence means no cookies/localStorage, so no consent
+    // banner is required (Andy, 2026-06-27). Trade-off: no cross-page/-session user
+    // stitching — aggregate event counts and same-page funnels still work.
+    persistence: "memory",
   });
 };
 
@@ -86,3 +90,25 @@ interactionEvents.forEach((eventName) => {
 });
 
 window.setTimeout(initPostHogOnce, 15000);
+
+// ── cta_click ──────────────────────────────────────────────────────────────
+// Delegated listener for primary CTAs (the shared .btn class) and any element
+// explicitly tagged with data-cta. Captures { label, location } — no PII.
+// A CTA click is itself an interaction, so PostHog will have initialised (and
+// the snippet queues capture() either way).
+const ctaLabel = (el) => {
+  const tagged = el.closest("[data-cta]");
+  if (tagged && tagged.getAttribute("data-cta")) return tagged.getAttribute("data-cta").trim();
+  // Fall back to visible text, stripped of decorative arrows/whitespace.
+  return (el.textContent || "").replace(/[→↗➔»]/g, "").replace(/\s+/g, " ").trim().slice(0, 80);
+};
+
+document.addEventListener("click", (e) => {
+  const cta = e.target.closest("a.btn, button.btn, [data-cta]");
+  if (!cta) return;
+  try {
+    if (window.posthog && typeof window.posthog.capture === "function") {
+      window.posthog.capture("cta_click", { label: ctaLabel(cta), location: window.location.pathname });
+    }
+  } catch (_) { /* analytics must never break a click */ }
+}, { passive: true });

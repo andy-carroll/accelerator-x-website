@@ -20,8 +20,12 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   **`newsletter_subscribe`** (on successful signup). Properties carry **non-identifying context only**
   (`timeline`, `interest`, `location`) — no name/email/company. Verified all three fire in-browser
   on the preview with no console errors and no PII. Gives the landing (`$pageview`) → `apply_form_start`
-  → `apply_form_submit` funnel. **Still open for B9:** `cta_click` tracking (needs a CTA selector/attr
-  strategy across templates) and the cookie/consent posture decision — both flagged on #74.
+  → `apply_form_submit` funnel. Then added **`cta_click`** as a delegated listener on the shared
+  `.btn` CTA class (+ any `[data-cta]`), capturing `{label, location}` with no template edits —
+  verified firing in-browser. And set PostHog to **cookieless** (`persistence: "memory"`, Andy's
+  call 2026-06-27) so no consent banner is required; trade-off is no cross-page/-session user
+  stitching (aggregate counts + same-page funnels unaffected). All B9 MVP events now live + verified;
+  no console errors, no PII. B9 instrumentation complete.
 
 - **Agent access to Netlify, PostHog + Vercel, documented** (2026-06-27): wired the deploy/analytics
   systems so the agent can drive the v2 cutover autonomously, following the official Netlify
