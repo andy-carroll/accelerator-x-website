@@ -134,8 +134,15 @@ Hosts the AI-readiness quiz (separate Next.js app, **not in this repo**).
 ## Brevo (email / newsletter)
 
 - **Wiring:** newsletter forms bypass Netlify Forms → `/.netlify/functions/newsletter-subscribe`
-  → Brevo API direct. Credentials in Netlify env vars. List #9. Sender
+  → Brevo API direct. Credentials in Netlify env vars. **List #9 = "Main AX Newsletter".** Sender
   `newsletter@mail.accelerator-x.ai` (authenticated domain).
+- **API key:** `BREVO_API_KEY` (Netlify env). No IP restriction. ⚠️ Was found **deactivated** on
+  2026-06-27 (Brevo: "API Key is not enabled") — newsletter signups were silently failing to reach
+  Brevo (the function fails-soft, so Slack still fired and users saw success). Reactivated; verified
+  writing to list #9. If it ever shows "not enabled" again, reactivate in Brevo → Settings → SMTP &
+  API → API Keys.
+- **Fails-soft caveat:** the function swallows Brevo errors so a dead key won't surface to users —
+  scan Slack `#website-leads` to recover any signups missed during an outage.
 - **Docs:** https://developers.brevo.com/
 
 ---
