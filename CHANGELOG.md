@@ -10,6 +10,21 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
 
+### Added
+
+- **Agent access to Netlify, PostHog + Vercel, documented** (2026-06-27): wired the deploy/analytics
+  systems so the agent can drive the v2 cutover autonomously, following the official Netlify
+  ["Set up Claude Code for Netlify"](https://docs.netlify.com/build/build-with-ai/agent-setup-guides/set-up-claude-code-for-netlify/)
+  guide. Netlify remote MCP server (`netlify-mcp.netlify.app/mcp`, promoted to **user scope** so it
+  travels to all repos), Netlify CLI (`26.1.0`, logged in + linked to `Andy-Main`/`accelerator-x`),
+  and Netlify agent skills (`.claude/skills/netlify-*`). PostHog MCP added via the wizard + `/mcp`
+  auth (EU region; key stays out of the repo). Vercel MCP connector (account-level) verified;
+  Vercel CLI (`54.14.5`) installed. New `docs/tech-architecture/integrations-and-access.md`
+  documents every connection, the account-level vs per-repo scope model, the one-time human-auth
+  checklist, and links to each official source doc. No secrets in repo (per
+  `.claude/rules/standards.md`); the only in-code key remains the public PostHog browser key in
+  `analytics.js`.
+
 ### Changed
 
 - **Leadership Team AI Activation: reprice to £14k base (up to 8) + Door 2 hub anchor** (2026-06-24, B2/B3): Andy repriced Activation from base £15k/≤6 to **base £14,000 up to 8 people** (+£2,000/head for 9–12, max 12) — making **£1,750/person at 8** the lowest per-person entry across Door 2. Updated `offerings.json` (`price_from_gbp` 15000→14000, new `price_per_person_from_gbp: 1750`, model + note) and all three activation-page spots (hero card-pricing, FAQ answer, FAQPage JSON-LD) — replacing the stale "up to 6 / above 6 / ~£19,000 for 8" wording. Re-anchored the What We Do hub TwoDoors Door 2 card from "from £3,500/place" (cohort) to **"from £1,750/person in a team programme"** (token-driven), since the team is now the genuinely cheapest per-person way in. Reconciled the prose Offer Canon (`docs/business-context/offer-canon.md`) — §4.2, §5 price table, §7 FAQ + a dated decision-log entry — so it doesn't drift from `offerings.json`. All price strings token-derived; Check #10 green. **Open:** the public headline price (canon §5, currently "from £3,500") may want revisiting now that £1,750/person exists — flagged in the canon, left for Andy.

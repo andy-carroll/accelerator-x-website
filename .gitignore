@@ -10,6 +10,9 @@
 # Local AI tool settings
 .claude/settings.local.json
 .claude/launch.json
+# Vendored agent skills (local tooling — reinstall via `npx skills add`; see docs/tech-architecture/integrations-and-access.md)
+.claude/skills/
+skills-lock.json
 
 # Brand assets (keep locally, don't commit large binaries)
 docs/Accelerator-X-brand-pack.pdf
@@ -19,3 +22,6 @@ assets/images/src/
 
 # Dependencies
 node_modules/
+
+# Netlify CLI local state / config (never commit — may hold tokens)
+.netlify/
