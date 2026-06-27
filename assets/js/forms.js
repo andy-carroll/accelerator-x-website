@@ -126,6 +126,8 @@
         .then((data) => {
           if (data.error) throw new Error(data.error);
           // Conversion event — non-PII context only (timeline/interest/source).
+          // NB: timeline + interest are select-dropdown values, so safe to send. If either
+          // ever becomes a free-text field, drop it here — never send free-text (PII risk).
           track('apply_form_submit', {
             timeline: payload.timeline || '',
             interest: payload.interest || '',
