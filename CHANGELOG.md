@@ -25,7 +25,8 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   verified firing in-browser. And set PostHog to **cookieless** (`persistence: "memory"`, Andy's
   call 2026-06-27) so no consent banner is required; trade-off is no cross-page/-session user
   stitching (aggregate counts + same-page funnels unaffected). All B9 MVP events now live + verified;
-  no console errors, no PII. B9 instrumentation complete.
+  no console errors, no PII. **Ingestion confirmed in the production PostHog project** via HogQL
+  (test `cta_click` + `apply_form_start` events landed). B9 instrumentation complete.
 
 - **Agent access to Netlify, PostHog + Vercel, documented** (2026-06-27): wired the deploy/analytics
   systems so the agent can drive the v2 cutover autonomously, following the official Netlify

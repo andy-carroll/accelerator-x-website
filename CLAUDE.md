@@ -22,7 +22,9 @@
 - Build plan: `docs/design_handoff_website_rebuild/README.md` · design system: `…/design-system/DESIGN.md` · wireframes: `…/wireframes/`
 - Built through Phase 2 Wave D + Phase 3 page assembly (4 inner pages live: `/what-we-do`, `/how-we-work`, `/about`, `/contact`). Component-level detail in `CHANGELOG.md` + `.claude/sessions/`.
 
-**Last session:** 2026-06-23 — Walked Door 1 (B2/#67) and Door 2 (B3/#68) on the preview, fixing snags as found; re-architected the About page IA (B4/#69); and repriced Leadership Team AI Activation to £14k/≤8 across data, pages, hub card, and the prose canon. All committed + pushed; build + 10 checks green.
+**Last session:** 2026-06-27 — Set up + documented full autonomous agent access to the stack (Netlify CLI+MCP user-scoped, PostHog MCP, Vercel MCP, Airtable MCP, GitHub) → `docs/tech-architecture/integrations-and-access.md`. Then cleared three launch gates: **B7** (forms E2E + GNG-1 consent — the ⛔ NO-GO — verified live: consent row lands in Airtable, Slack fires), **B8** (no-404 crawl clean + core meta complete; privacy/terms found v1-legacy → routed to B6/#71), **B9** (PostHog conversion instrumentation built + cookieless: apply_form_start/submit, newsletter_subscribe, cta_click — ingestion confirmed in prod project). All committed + pushed; build + 10 checks green.
+
+**Earlier (2026-06-23):** Walked Door 1 (B2/#67) and Door 2 (B3/#68) on the preview, fixing snags; re-architected the About page IA (B4/#69); repriced Leadership Team AI Activation to £14k/≤8 across data, pages, hub card, prose canon.
 
 **Earlier (2026-06-14):** Phase 5 ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57), closed) — site now derives offer names/prices from the Offer Canon via `{{offering:KEY.field}}` tokens, with a drift-guard (Check #10); Two Doors spine restored; fabricated content removed; `/faq/` hub + FAQPage JSON-LD; newsletter signup consolidated to one component; "no value, no payment" guarantee reconciled. Full detail: `CHANGELOG.md` + `.claude/sessions/`.
 
