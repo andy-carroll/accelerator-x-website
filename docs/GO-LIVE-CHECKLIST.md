@@ -364,6 +364,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` `og:image:alt` present and descriptive
 - `[ ]` All OG tags accurate on every page
 - `[ ]` Twitter card tags correct
+- `[ ]` `insights/index.html` — add `og:image` + `twitter:card` (built via `build-hub.js`; minor shareability gap flagged in B8/#73, non-blocking)
 - `[ ]` LinkedIn Post Inspector: no "No author found" errors (may need cache clear)
 
 ### 6e — AEO specific
@@ -380,6 +381,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 - `[ ]` **Hub filter — no transition on card show/hide.** Cards jump instantly when a pathway tile is clicked (`display: none/''`). Add a CSS opacity/visibility transition before go-live; the abrupt jump is jarring against the smooth-scroll behaviour already in place.
 - `[~]` **Content pipeline — `excerpt` / `subtitle` split deferred.** Phase 4 uses a single `excerpt` field for both OG meta and tile display copy. Before the Claude draft skill goes live (Build Plan §10 Phase 3), decide whether to split into separate fields. The draft skill can generate both at zero extra cost; doing it earlier means manually rewriting copy for every article. Revisit at draft-skill build time, not before go-live.
+- `[ ]` **Dead redirect `/quiz/aireadiness` (502 → placeholder)** — nothing links to it and it's identical on live `main`; clean up (or point at a real target) at cutover. Flagged in B8/#73 no-404 crawl.
 - `[ ]` `npm run build` passes — zero errors or warnings
 - `[ ]` `npm run check` — all 8 checks green
 - `[ ]` No unsubstituted `{{tokens}}` in built HTML
