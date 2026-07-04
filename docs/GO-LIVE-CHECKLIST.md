@@ -234,11 +234,13 @@ Target: `/.netlify/functions/lead-capture`
 - `[ ]` **Email:** Brevo welcome automation triggers for new contact (not tested — ApplyForm writes to Airtable, not Brevo; this line applies to the newsletter path)
 - _Note: ApplyForm → Airtable + Slack (not Brevo). Brevo is the **newsletter** path — verified separately above._
 
-> ⚠️ **Brevo key finding (2026-06-27, B7):** the `BREVO_API_KEY` was found **deactivated** — newsletter signups were silently not reaching Brevo (the function fails-soft, so Slack still fired and users saw success). Reactivated + verified writing to list #9. **Pre-launch action:** scan Slack `#website-leads` for any newsletter signups received while the key was down and add those real subscribers to Brevo manually. Hardening (alert on Brevo write failure) tracked as a spawned task.
+> ⚠️ **Brevo key finding (2026-06-27, B7):** the `BREVO_API_KEY` was found **deactivated** — newsletter signups were silently not reaching Brevo (the function fails-soft, so Slack still fired and users saw success). Reactivated + verified writing to list #9. **Pre-launch action:** scan Slack `#website-leads` for any newsletter signups received while the key was down and add those real subscribers to Brevo manually. **Hardening shipped 2026-07-04 (#78):** a distinct Slack alert now fires whenever a Brevo write fails or is skipped, so a dead key can't hide again.
+>
+> ⚠️ **Action needed (Andy):** the 2026-07-04 hardening E2E re-verification created one more test contact in Brevo list #9 — `hardening-test-delete-me@accelerator-x.ai`. The Brevo API key is IP-restricted to Netlify so it can't be cleaned up from outside; please remove it from the Brevo UI (same pattern as the 2026-06-27 `b7-newsletter-test-delete@accelerator-x.ai` cleanup).
 
 #### TEST CASE GNG-1 — Consent capture writes to Airtable (go/no-go)
 
-> **Status:** ✅ **PASSED 2026-06-27** (B7/#72) — end-to-end verified on the preview: test application submitted, row landed in Prospects with `Consent Given=true` + ISO `Consent Timestamp`, Slack fired, test row deleted. Schema was in place 2026-06-08 ([#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)).
+> **Status:** ✅ **PASSED 2026-06-27** (B7/#72) — end-to-end verified on the preview: test application submitted, row landed in Prospects with `Consent Given=true` + ISO `Consent Timestamp`, Slack fired, test row deleted. Schema was in place 2026-06-08 ([#32](https://github.com/andy-carroll/accelerator-x-website/issues/32)). **Re-verified 2026-07-04** after the hardening batch (#78, escaping/size-guards/GNG-1 failure alert added to the function): re-ran the same test, row landed correctly with `Consent Given=true` + ISO timestamp, test row deleted from Airtable immediately.
 > **Why this is go/no-go:** consent is a GDPR record. If the write silently drops, we are capturing leads without a defensible consent trail. A pass here is mandatory to go live.
 
 **Setup**
