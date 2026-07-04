@@ -33,9 +33,20 @@ exports.handler = async (event, context) => {
     return { statusCode: 204, headers, body: '' };
   }
 
+  // Reject oversized payloads before parsing
+  if (event.body && event.body.length > 10_000) {
+    return { statusCode: 413, headers, body: JSON.stringify({ error: 'Payload too large' }) };
+  }
+
+  let body;
   try {
     // Parse form data - accept both direct JSON and Netlify webhook format
-    const body = JSON.parse(event.body);
+    body = JSON.parse(event.body);
+  } catch (parseError) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
+  }
+
+  try {
     const data = body.payload?.data || body;
 
     // Honeypot / spam check
@@ -49,25 +60,29 @@ exports.handler = async (event, context) => {
       return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'different form' }) };
     }
 
-    const safeTrim = (val = '') => String(val).trim();
+    const safeTrim = (val = '', maxLen = Infinity) => String(val).trim().slice(0, maxLen);
 
     // Normalize website: prepend https:// if missing
     const normalizeWebsite = (val = '') => {
-      const v = safeTrim(val);
+      const v = safeTrim(val, 320);
       if (!v) return '';
       if (/^https?:\/\//i.test(v)) return v;
       return `https://${v}`;
     };
 
-    const name = safeTrim(data.name);
-    const email = safeTrim(data.email);
-    const company = safeTrim(data.company);
+    // Slack mrkdwn treats &, <, > as markup — escape before interpolating user input
+    // (https://api.slack.com/reference/surfaces/formatting#escaping)
+    const escapeSlack = (val = '') => String(val).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    const name = safeTrim(data.name, 200);
+    const email = safeTrim(data.email, 320);
+    const company = safeTrim(data.company, 200);
     const website = normalizeWebsite(data.website);
-    const role = safeTrim(data.role);
+    const role = safeTrim(data.role, 200);
     const timelineRaw = safeTrim(data.timeline);
-    const message = safeTrim(data.message || '');
-    const interest = safeTrim(data.interest || '');
-    const source = safeTrim(data.source || '');
+    const message = safeTrim(data.message || '', 2000);
+    const interest = safeTrim(data.interest || '', 200);
+    const source = safeTrim(data.source || '', 200);
     const consentGiven = data.consent_given === true;
     const consentTimestamp = safeTrim(data.consent_timestamp || new Date().toISOString());
 
@@ -106,12 +121,12 @@ exports.handler = async (event, context) => {
         {
           type: 'section',
           fields: [
-            { type: 'mrkdwn', text: `*Name:*\n${name || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Email:*\n${email || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Company:*\n${company || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Website:*\n${website || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Role:*\n${role || 'N/A'}` },
-            { type: 'mrkdwn', text: `*Timeline:*\n${timeline}` }
+            { type: 'mrkdwn', text: `*Name:*\n${escapeSlack(name) || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Email:*\n${escapeSlack(email) || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Company:*\n${escapeSlack(company) || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Website:*\n${escapeSlack(website) || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Role:*\n${escapeSlack(role) || 'N/A'}` },
+            { type: 'mrkdwn', text: `*Timeline:*\n${escapeSlack(timeline)}` }
           ]
         }
       ]
@@ -121,19 +136,19 @@ exports.handler = async (event, context) => {
       slackMessage.blocks.push({
         type: 'section',
         fields: [
-          { type: 'mrkdwn', text: `*Interest:*\n${interest || 'Not specified'}` },
-          { type: 'mrkdwn', text: `*Source:*\n${source || 'Website'}` }
+          { type: 'mrkdwn', text: `*Interest:*\n${escapeSlack(interest) || 'Not specified'}` },
+          { type: 'mrkdwn', text: `*Source:*\n${escapeSlack(source) || 'Website'}` }
         ]
       });
     }
-    
+
     // Add message block if present
     if (message) {
       slackMessage.blocks.push({
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Message:*\n>${message.replace(/\n/g, '\n>')}`
+          text: `*Message:*\n>${escapeSlack(message).replace(/\n/g, '\n>')}`
         }
       });
     }
@@ -213,11 +228,26 @@ exports.handler = async (event, context) => {
       } catch (airtableError) {
         airtableStatus = 'failed';
         console.error('Airtable insert error:', airtableError.message);
+
+        // GNG-1 is the go/no-go consent-capture gate — a silent Airtable failure here
+        // means we accepted a lead without a defensible consent record. Alert loudly
+        // (distinct message) rather than let the fails-soft 200 mask it.
+        try {
+          await fetch(SLACK_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: `⚠️ CONSENT WRITE FAILED — lead from ${escapeSlack(email) || 'unknown'} saved to Slack only. Airtable insert errored: ${escapeSlack(airtableError.message)}. GNG-1 path degraded — check Airtable manually.`
+            })
+          });
+        } catch (alertError) {
+          console.error('GNG-1 failure alert Slack post error:', alertError.message);
+        }
       }
     } else {
       console.warn('Airtable env vars missing; skipping Airtable insert');
     }
-    
+
     return {
       statusCode: 200,
       headers,

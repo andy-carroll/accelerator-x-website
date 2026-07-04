@@ -25,9 +25,20 @@ exports.handler = async (event) => {
     return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
+  // Reject oversized payloads before parsing
+  if (event.body && event.body.length > 10_000) {
+    return { statusCode: 413, headers, body: JSON.stringify({ error: 'Payload too large' }) };
+  }
+
+  let body;
   try {
-    const body = JSON.parse(event.body || '{}');
-    const email = String(body.email || '').trim().toLowerCase();
+    body = JSON.parse(event.body || '{}');
+  } catch (parseError) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
+  }
+
+  try {
+    const email = String(body.email || '').trim().toLowerCase().slice(0, 320);
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Valid email required' }) };
@@ -38,10 +49,15 @@ exports.handler = async (event) => {
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     }
 
-    const source = String(body.source || 'newsletter').trim();
+    const source = String(body.source || 'newsletter').trim().slice(0, 100);
     const BREVO_API_KEY = process.env.BREVO_API_KEY;
 
     // --- Brevo: add contact to list #9 ---
+    // Tracked distinctly from the user-facing response: a dead/missing key must never
+    // look identical to a real subscribe (2026-06-27 incident — a deactivated key
+    // silently dropped signups for days because this branch returned success:true
+    // with no alert).
+    let brevoStatus = 'skipped';
     if (BREVO_API_KEY) {
       try {
         const brevoRes = await fetch('https://api.brevo.com/v3/contacts', {
@@ -57,16 +73,18 @@ exports.handler = async (event) => {
           })
         });
 
-        if (!brevoRes.ok) {
-          const text = await brevoRes.text();
+        if (brevoRes.ok || brevoRes.status === 204) {
           // 204 = contact already exists in Brevo — not an error
-          if (brevoRes.status !== 204) {
-            console.error('Brevo error:', brevoRes.status, text);
-          }
+          brevoStatus = 'created';
+        } else {
+          const text = await brevoRes.text();
+          console.error('Brevo error:', brevoRes.status, text);
+          brevoStatus = 'failed';
         }
       } catch (err) {
         // Log but don't fail — Slack notification still fires
         console.error('Brevo fetch error:', err.message);
+        brevoStatus = 'failed';
       }
     } else {
       console.warn('BREVO_API_KEY not set — skipping Brevo insert');
@@ -103,9 +121,26 @@ exports.handler = async (event) => {
       } catch (err) {
         console.error('Slack notify error:', err.message);
       }
+
+      // Distinct alert on Brevo failure/skip — same fails-soft shape as the lead-capture
+      // GNG-1 alert, so a dead key is noticed immediately instead of silently dropping
+      // subscribers.
+      if (brevoStatus === 'failed' || brevoStatus === 'skipped') {
+        try {
+          await fetch(SLACK_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              text: `⚠️ Brevo write ${brevoStatus.toUpperCase()} for ${email} — subscriber NOT in list #9, add manually.`
+            })
+          });
+        } catch (alertErr) {
+          console.error('Brevo failure alert Slack post error:', alertErr.message);
+        }
+      }
     }
 
-    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true, brevo: brevoStatus }) };
 
   } catch (err) {
     console.error('newsletter-subscribe error:', err.message);
