@@ -36,27 +36,27 @@
     Strict-Transport-Security = "max-age=31536000"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-hashes' 'sha256-1jAmyYXcRq6zFldLe/GCgIDJBiOONdXjTLgEFMDnDSM=' https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'"
 
-# Caching — filenames are NOT fingerprinted, so CSS/JS must revalidate on every use:
-# HTML is cached ≤300s and references unversioned assets, so any positive max-age on
-# CSS/JS creates a window where fresh HTML pairs with stale styles/scripts. Netlify
-# ETags make must-revalidate a cheap 304. (Was: 1-year immutable — a live staleness
-# bug; fixed 2026-07-04, #78.)
-[[headers]]
-  for = "/**/*.@(css|js)"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-# Images change rarely; tolerate a day of staleness, serve stale while revalidating
-[[headers]]
-  for = "/**/*.@(png|jpg|jpeg|gif|svg|webp|avif|ico)"
-  [headers.values]
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
-
-# Fonts are content-stable binaries, never edited in place — safe to pin
-[[headers]]
-  for = "/**/*.@(woff|woff2)"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# Caching — deliberately NO custom Cache-Control for css/js/images/fonts.
+#
+# This repo's filenames are not fingerprinted, so we previously hand-set
+# `max-age=31536000, immutable` on all static assets — a real bug: a deploy could
+# leave returning visitors on stale CSS/JS for up to a year (found 2026-07-04, #78).
+# The first fix attempt replaced it with three custom tiers (css/js must-revalidate,
+# images swr, fonts immutable) using `/**/*.@(ext1|ext2)` extglob-style globs — but
+# Netlify's header path matcher does not support that syntax, so none of the three
+# rules actually matched anything (confirmed live: HTML, JS, fonts, and images all
+# returned the identical, unrelated fallback value). The custom rules were dead code
+# that happened to look like it was working.
+#
+# The correct fix is simpler: remove the custom override entirely. Netlify's own
+# documented default for static assets already does the safe thing with no
+# configuration — CDN-level caching for 1 year, auto-invalidated on every deploy,
+# with the browser tier always set to `max-age=0, must-revalidate` (see the
+# netlify-caching skill / Netlify docs). That is exactly the staleness-safe behaviour
+# we were trying to hand-roll, and it's deploy-aware in a way a static max-age can't
+# be. Only add a custom Cache-Control here again for genuinely fingerprinted assets
+# (e.g. `/assets/*.<hash>.css`) — verify any header `for` glob against a live deploy
+# (`curl -sI <url>`) before trusting it; extglob alternation is not supported.
 
 # Keep HTML short-lived to pick up updates
 [[headers]]
