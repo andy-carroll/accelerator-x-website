@@ -42,15 +42,15 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 
 - **Tracker:** the ["v2 Cutover" milestone](https://github.com/andy-carroll/accelerator-x-website/milestone/1) is the source of truth for work; `docs/GO-LIVE-CHECKLIST.md` holds the forensic line-item detail each issue links back to.
 - **Two work-streams:** `founder-input` (Andy/Toby supply or decide) vs `build` (engineering). `blocking` marks the critical path.
-- **The critical path is founder content, not engineering** — 9 of 14 blocking issues are `founder-input`. Keystone: **[#26 offering portfolio decision](https://github.com/andy-carroll/accelerator-x-website/issues/26)** — `/what-we-do/` shows two components describing different product line-ups; much detail-page work depends on resolving it first.
+- **The founder-content critical path is largely cleared (2026-07-03).** The old keystone (#26 offering portfolio) and the whole raft of content sub-issues (#18–#28, #61, #65, #66) are all **closed** — testimonials, proof, FAQ, pricing, origin story, bios, pedigree resolved. What remains is **not more content gathering** but Andy/Toby's holistic **"Ready for production" sign-off walk of each B-ticket** (B1–B6). The only still-open `blocking`-labelled issue is #30 (cohort funnel), which is itself a **deferred separate surface** (see Deferred list) — its `blocking` label contradicts the plan and should be dropped.
 
 ---
 
 ## Next (do in this order)
 
-1. **Drive founder-input** — get [#26](https://github.com/andy-carroll/accelerator-x-website/issues/26) decided; gather testimonials, proof quotes, FAQ answers, pricing sign-off, origin story. These gate the cutover.
-2. **Run build issues in parallel** — Airtable consent fields (#32), nav overhaul (#33), forms E2E on preview (#36), PostHog analytics (#38). No founder dependency.
-3. **Sequence + ship slices** — agree slice order; keep the branch preview current every session.
+1. **Founder sign-off walk of B1–B6** — the content sub-issues are closed; what's left is Andy/Toby walking each page for the holistic honesty-gate "Ready for production". Engineering can pre-clear the **functional half** of each B-ticket first (see B1/#76 — functional walk PASSED 2026-07-03) so the founder walk is content-only.
+2. **B10 (#75) — the flip** — once B1–B6 sign off: tag old `main` as `v1-archive`, prod env vars confirmed, swap `main` → v2. Gates B7/B8/B9 are all closed.
+3. **Everything else is `post-launch`** — SEO/AEO (#40, #43), proof upgrade (#55), FitCheck componentise (#49), privacy/case-studies (#46), dead CSS (#44), cohort surface (#30, #64). Do not let these block the flip.
 
 ---
 
