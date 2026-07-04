@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 const { marked } = require('marked');
-const { resolveComponentTokens, resolveSiteTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens, resolveArticleTokens } = require('./build-components');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, '../content/articles');
@@ -265,7 +265,11 @@ async function build() {
     const { data: frontmatter, content } = matter(rawContent);
     const slug = frontmatter.slug || file.replace('.md', '');
     const authorProfile = resolveAuthorProfile(frontmatter.author, authors);
-    
+    if (frontmatter.author && !authorProfile) {
+      const available = authors.map((a) => a.name).join(', ') || '(none loaded)';
+      console.warn(`  ⚠️  Author "${frontmatter.author}" not found in authors.json (${file}). Available: ${available}`);
+    }
+
     console.log(`- Building: ${frontmatter.title || file}`);
 
     // Validate OG description length (LinkedIn/Facebook minimum = 100 chars)
@@ -280,38 +284,35 @@ async function build() {
     // Load fresh template for every article
     let articleHtml = loadTemplate('article.html');
 
-    // Safe replace function handling undefined tokens
-    const safeReplace = (token, val) => {
-      // Create a global regex for the token
-      const regex = new RegExp(`{{${token}}}`, 'g');
-      // If a value exists, inject it. Otherwise, inject empty string so the raw token isn't visible.
-      articleHtml = articleHtml.replace(regex, val || '');
+    const articleTokens = {
+      title: frontmatter.title,
+      author: frontmatter.author,
+      published: frontmatter.published,
+      format: frontmatter.format || 'article',
+      category: frontmatter.tags?.[0] || '',
+      read_time: computeReadTime(content),
+      excerpt: frontmatter.excerpt,
+      slug,
+      site_url: siteUrl,
+      content: htmlContent,
+      author_meta: renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.published),
+      article_date: renderArticleDate(frontmatter.published),
+      share_panel: renderSharePanel({ ...frontmatter, slug }, siteUrl),
+      og_image: `${siteUrl}/assets/images/og-image-1200.png`,
+      og_url: `${siteUrl}/insights/articles/${slug}.html`,
+      author_linkedin: authorProfile ? authorProfile.linkedin || frontmatter.author : frontmatter.author,
+      // Dynamic conversion tokens (10/10 UX elements) — optional, empty allowed
+      bluf: frontmatter.bluf,
+      lead_magnet_cta: frontmatter.lead_magnet_cta,
+      next_article_url: frontmatter.next_article_url,
+      next_article_title: frontmatter.next_article_title,
     };
-    
-    // Inject Standard Tokens
-    safeReplace('title', frontmatter.title);
-    safeReplace('author', frontmatter.author);
-    safeReplace('published', frontmatter.published);
-    safeReplace('format', frontmatter.format || 'article');
-    safeReplace('category', frontmatter.tags?.[0] || '');
-    safeReplace('read_time', computeReadTime(content));
-    safeReplace('excerpt', frontmatter.excerpt);
-    safeReplace('slug', slug);
-    safeReplace('site_url', siteUrl);
-    safeReplace('content', htmlContent);
-    safeReplace('author_meta', renderAuthorMeta(frontmatter.author, authorProfile, frontmatter.published));
-    safeReplace('article_date', renderArticleDate(frontmatter.published));
-    safeReplace('share_panel', renderSharePanel({ ...frontmatter, slug }, siteUrl));
-    safeReplace('og_image', `${siteUrl}/assets/images/og-image-1200.png`);
-    safeReplace('og_url', `${siteUrl}/insights/articles/${slug}.html`);
-    safeReplace('author_linkedin', authorProfile ? authorProfile.linkedin || frontmatter.author : frontmatter.author);
-    
-    // Inject Dynamic Conversion Tokens (10/10 UX elements)
-    safeReplace('bluf', frontmatter.bluf);
-    safeReplace('lead_magnet_cta', frontmatter.lead_magnet_cta);
-    safeReplace('next_article_url', frontmatter.next_article_url);
-    safeReplace('next_article_title', frontmatter.next_article_title);
-      
+
+    articleHtml = resolveArticleTokens(articleHtml, articleTokens, {
+      required: ['title', 'author', 'published', 'excerpt', 'content', 'slug', 'site_url'],
+      context: `Article "${frontmatter.title || file}"`,
+    });
+
     // Save to /insights/articles/[slug].html
     const outPath = path.join(OUTPUT_DIR, 'articles', `${slug}.html`);
     fs.writeFileSync(outPath, resolveSiteTokens(resolveComponentTokens(articleHtml)));

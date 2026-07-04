@@ -155,6 +155,40 @@ function resolveOfferingTokens(html) {
   });
 }
 
+// ── Article tokens ────────────────────────────────────────────────────────────
+// Bare {{name}} tokens used by build-hub.js for per-article values (title, author,
+// content, etc.). Matches only colon-free identifiers, so {{component:X}} /
+// {{site:KEY}} / {{offering:key.path}} tokens in the same template pass through
+// untouched for their own resolvers. Unlike those resolvers, an *unknown* bare
+// token is left as-is (it may belong to a resolver that runs later in the chain);
+// but any token in `required` that resolves to empty/undefined throws — this
+// closes the silent-empty-string gap build-hub.js's old safeReplace() had, where
+// a typo'd or missing frontmatter field shipped an invisible blank instead of
+// failing the build.
+function resolveArticleTokens(html, tokens, { required = [], context } = {}) {
+  const TOKEN_PATTERN = /\{\{([A-Za-z_][A-Za-z0-9_]*)\}\}/g;
+  const missingRequired = [];
+
+  const resolved = html.replace(TOKEN_PATTERN, (match, key) => {
+    if (!(key in tokens)) {
+      return match;
+    }
+    const value = tokens[key];
+    if (required.includes(key) && (value === undefined || value === null || value === '')) {
+      missingRequired.push(key);
+    }
+    return value === undefined || value === null ? '' : String(value);
+  });
+
+  if (missingRequired.length > 0) {
+    throw new Error(
+      `${context || 'Article'} is missing required token value(s): ${missingRequired.join(', ')}`
+    );
+  }
+
+  return resolved;
+}
+
 function validateComponentTokens(html, context) {
   const TOKEN_PATTERN = /\{\{component:([A-Za-z0-9_-]+)\}\}/g;
   const registry = getRegistry();
@@ -180,5 +214,6 @@ module.exports = {
   resolveComponentTokens,
   resolveSiteTokens,
   resolveOfferingTokens,
+  resolveArticleTokens,
   validateComponentTokens,
 };
