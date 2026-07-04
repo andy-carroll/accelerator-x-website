@@ -41,6 +41,10 @@ _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 con
   `.claude/rules/standards.md`); the only in-code key remains the public PostHog browser key in
   `analytics.js`.
 
+### Fixed
+
+- **Mobile nav drawer: focus never returned to the hamburger on Escape-close** (2026-07-04, #78, WCAG 2.4.3): pressing Escape closed the drawer but left keyboard/screen-reader focus stranded — the previous handler called `closeMenu()` unconditionally on every Escape press anywhere on the page. Now guards on `aria-expanded === 'true'` (so an unrelated Escape press elsewhere doesn't steal focus) and calls `toggle.focus()` after closing. Verified in-browser: opening the drawer and pressing Escape returns focus to the hamburger; pressing Escape while the drawer is already closed leaves an unrelated focused element untouched.
+
 ### Added
 
 - **build-hub.js: fail-fast article tokens (kill the silent-empty-string gap)** (2026-07-04, #78): article pages were built via a hand-rolled `safeReplace()` that injected an empty string for any undefined frontmatter value — unlike every other token resolver in the build (`resolveSiteTokens`/`resolveOfferingTokens`/`resolveComponentTokens`), which throw on an unknown/missing value. A typo'd or missing required frontmatter field (title, author, published, excerpt, content, slug, site_url) would ship an invisible blank instead of failing the build. Added `resolveArticleTokens()` to `scripts/build-components.js` (matches only colon-free `{{name}}` tokens, so `{{component:X}}`/`{{site:KEY}}`/`{{offering:key.path}}` in the same template pass through for their own resolvers) and swapped it in for the per-token `safeReplace` calls in `build-hub.js`. Also added an author-mismatch warning (frontmatter names an author not found in `authors.json` → console warning listing available authors, was previously silent). Verified byte-identical build output (same SHA-256 across all 6 built articles before/after) and confirmed the throw path fires correctly in isolation.
