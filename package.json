@@ -17,6 +17,7 @@
     "build": "npm run build:css && npm run build:homepage && node scripts/build-testimonials.js && npm run build:hero-media && node scripts/build-hub.js && node scripts/build-footer.js && npm run build:design-system && npm run build:inner-pages",
     "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
+    "test": "node --test tests/functions/lead-capture.test.js tests/functions/newsletter-subscribe.test.js",
     "test:site": "node scripts/test-site.js",
     "test:session-protocols": "node scripts/test-session-protocols.js",
     "skills:sync": "node scripts/skills-sync.js",

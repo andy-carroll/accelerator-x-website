@@ -3,7 +3,8 @@ name: Standards
 # Enforces .claude/rules/standards.md on every push to main and rebuild/* branches.
 # Two jobs, both required:
 #   build   — npm run build must exit 0 (no broken artefacts reach Netlify)
-#   check   — npm run check must exit 0 (no standards violations in the codebase)
+#   check   — npm run check + npm test must exit 0 (standards violations + money-path
+#             unit test regressions both block)
 #
 # These run in parallel. Either failure blocks the push from being considered clean.
 # The doc-freshness.yml workflow enforces CHANGELOG + ROADMAP update requirements.
@@ -56,6 +57,9 @@ jobs:
 
       - name: Run standards check
         run: npm run check
+
+      - name: Run unit tests
+        run: npm test
 
       - name: Dependency security audit
         # Fails on high or critical vulnerabilities only — avoids noise from
