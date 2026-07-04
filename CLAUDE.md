@@ -48,7 +48,7 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 
 ## Next (do in this order)
 
-1. **Founder sign-off walk of B1–B6** — the content sub-issues are closed; what's left is Andy/Toby walking each page for the holistic honesty-gate "Ready for production". Engineering can pre-clear the **functional half** of each B-ticket first (see B1/#76 — functional walk PASSED 2026-07-03) so the founder walk is content-only.
+1. **Founder sign-off walk of B1–B6 — content only; functional halves all PASS (2026-07-03).** Engineering has walked every B-ticket page (desktop + 375px): one h1, no token leaks, valid JSON-LD, all internal links 200, no console errors, no image 404s, no 375px overflow, mobile nav works. Per-ticket functional-PASS notes on #76/#67/#68/#69/#70/#71; consolidated sweep on #77. **All that remains before the flip is Andy/Toby's holistic honesty-gate "Ready for production" walk of the content** on each page — the functional half is done.
 2. **B10 (#75) — the flip** — once B1–B6 sign off: tag old `main` as `v1-archive`, prod env vars confirmed, swap `main` → v2. Gates B7/B8/B9 are all closed.
 3. **Everything else is `post-launch`** — SEO/AEO (#40, #43), proof upgrade (#55), FitCheck componentise (#49), privacy/case-studies (#46), dead CSS (#44), cohort surface (#30, #64). Do not let these block the flip.
 
