@@ -11,17 +11,50 @@
 [functions]
   directory = "netlify/functions"
 
-# Headers for security and performance
+# Security headers — defined ONLY here (never in the cache blocks below: overlapping
+# Netlify header rules emit duplicate headers, which is undefined behaviour).
+#
+# CSP notes (2026-07-04 hardening, #78):
+# - script-src hash authorises the one inline handler used site-wide:
+#   onload="this.onload=null;this.rel='stylesheet'" (Google Fonts async-load trick,
+#   byte-identical across all 34 pages — recompute the hash if that string ever changes:
+#   printf %s "<handler>" | openssl dgst -sha256 -binary | base64).
+# - eu-assets.i.posthog.com serves the PostHog loader + lazy chunks; eu.i.posthog.com
+#   receives event/flag POSTs (connect-src).
+# - style-src fonts.googleapis.com also covers the Figtree @import inside
+#   tokens.css / tailwind.generated.css; 'unsafe-inline' covers inline style="" attrs.
+# - img-src data: is required — CSS mask-image data-URIs (FitCheck, FormInputs) are
+#   governed by img-src.
+# - HSTS deliberately has no includeSubDomains (quiz/mail subdomains) and no preload
+#   (irreversible); both can be added later as one-word edits.
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-hashes' 'sha256-1jAmyYXcRq6zFldLe/GCgIDJBiOONdXjTLgEFMDnDSM=' https://eu-assets.i.posthog.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://eu.i.posthog.com https://eu-assets.i.posthog.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'"
 
-# Cache static assets aggressively (immutable by filename)
+# Caching — filenames are NOT fingerprinted, so CSS/JS must revalidate on every use:
+# HTML is cached ≤300s and references unversioned assets, so any positive max-age on
+# CSS/JS creates a window where fresh HTML pairs with stale styles/scripts. Netlify
+# ETags make must-revalidate a cheap 304. (Was: 1-year immutable — a live staleness
+# bug; fixed 2026-07-04, #78.)
 [[headers]]
-  for = "/**/*.@(css|js|png|jpg|jpeg|gif|svg|webp|ico|woff|woff2)"
+  for = "/**/*.@(css|js)"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Images change rarely; tolerate a day of staleness, serve stale while revalidating
+[[headers]]
+  for = "/**/*.@(png|jpg|jpeg|gif|svg|webp|avif|ico)"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
+
+# Fonts are content-stable binaries, never edited in place — safe to pin
+[[headers]]
+  for = "/**/*.@(woff|woff2)"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -31,26 +64,7 @@
   [headers.values]
     Cache-Control = "public, max-age=300"
 
-# ── ScoreKit quiz deployments ─────────────────────────────────────────────────
-# Each quiz is a separate Vercel project proxied under /quiz/<slug>.
-# status = 200 means Netlify rewrites the request (browser URL stays the same).
-# force = true ensures this rule fires even if a matching file exists locally.
-#
-# To add a new quiz:
-# 1. Deploy a new Vercel project with NEXT_PUBLIC_BASE_PATH=/quiz/<slug>
-# 2. Copy this block, update `from` and `to` with the new slug + Vercel URL
-# ─────────────────────────────────────────────────────────────────────────────
-
-# AI Readiness Assessment — Accelerator-X
-# Replace YOUR_VERCEL_DEPLOYMENT_URL with the actual .vercel.app URL after deploying
-[[redirects]]
-  from = "/quiz/aireadiness"
-  to = "https://YOUR_VERCEL_DEPLOYMENT_URL/quiz/aireadiness"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/quiz/aireadiness/*"
-  to = "https://YOUR_VERCEL_DEPLOYMENT_URL/quiz/aireadiness/:splat"
-  status = 200
-  force = true
+# Quiz proxying (removed 2026-07-04, #78): the /quiz/aireadiness redirect blocks shipped
+# with a literal YOUR_VERCEL_DEPLOYMENT_URL placeholder (502s; nothing linked to it —
+# B8/#73 crawl). Re-add per docs/tech-architecture/dns-hosting.md when a quiz surface
+# is actually deployed behind a path proxy.
