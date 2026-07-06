@@ -137,10 +137,29 @@ function parseClaudeState(claudeContent) {
   // Fall back to ## Next (do in this order) extracting bold titles only.
   const sessionPrioritiesMatch = claudeContent.match(/## Next Session Priorities\n([\s\S]*?)(?=\n## |$)/i);
   if (sessionPrioritiesMatch) {
-    nextPriorities = sessionPrioritiesMatch[1]
+    const sectionContent = sessionPrioritiesMatch[1].trim();
+    const numberedItems = sectionContent
       .split(/\n(?=\s*\d+\.)/)
       .map(item => item.trim())
       .filter(item => item && /^\d+\./.test(item));
+
+    if (numberedItems.length > 0) {
+      nextPriorities = numberedItems;
+    } else if (sectionContent) {
+      // Section exists but isn't a numbered list (this file has settled into free-form
+      // status prose instead) — fall back to paragraph blocks so it's still surfaced
+      // rather than silently dropped to the "Define priorities" fallback.
+      const paragraphs = sectionContent
+        .split(/\n{2,}/)
+        .map(p => p.trim())
+        .filter(Boolean);
+      // Surface the actionable "Start here" paragraph first if one exists, since that's
+      // the convention this section has converged on for the actual next action.
+      const startHereIdx = paragraphs.findIndex(p => /^\*\*Start here/i.test(p));
+      nextPriorities = startHereIdx > 0
+        ? [paragraphs[startHereIdx], ...paragraphs.slice(0, startHereIdx), ...paragraphs.slice(startHereIdx + 1)]
+        : paragraphs;
+    }
   } else {
     const nextMatch = claudeContent.match(/## Next[^\n]*\n\n?((?:\d+\.\s*\*\*[^*]+\*\*[^\n]*(?:\n\s+→[^\n]*)*\n?)+)/i);
     if (nextMatch) {
