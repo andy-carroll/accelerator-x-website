@@ -10,7 +10,13 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 _Active track: `rebuild/v2` — full visual + structural rebuild. `main` is live and untouched._
 _Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
 
+### Fixed
+
+- **session-start.js: "Next Session Priorities" silently fell back to a placeholder** — found while verifying "will the next session-start pick up today's handoff?": the parser only extracted `## Next Session Priorities` content when formatted as a numbered list; CLAUDE.md's section has long since settled into free-form status prose (confirmed pre-existing via git history), so the regex returned nothing and session-start showed "Define priorities in CLAUDE.md" instead of anything real. Falls back to paragraph-block splitting when no numbered items are found, and promotes a `**Start here` paragraph to the front when present. Verified live via `npm run session-start`.
+
 ### Added
+
+- **Opened #82 — reconcile this repo's native session protocol scripts with the `ax-skill-ops` portable skills.** Investigating the above fix surfaced that this repo's bespoke `.session-protocol.json` + `scripts/session-start.js`/`session-end.js` system predates and now duplicates, with an incompatible schema, the portable `ax-skill-ops:session-start`/`session-end` skills — which are missing at least one real capability (an independent fresh-eyes review gate before merge; this repo's own protocol is agent self-review) and lack at least one this repo needed (the `structural_docs` config key that would have forced the architecture-review scorecard below to be written, instead of depending on being asked). Filed as a child of the operating-model umbrella (#50) rather than patched further — session-protocol tooling shouldn't be in flux mid-cutover, and #50's own guardrail says local repo patches aren't the right channel for this class of fix.
 
 - **Preserved the 2026-07-04 architecture-review scorecard as a doc, not just a chat answer** (`docs/tech-architecture/architecture-review-2026-07-04.md`): the six-dimension before/after scorecard (7.0 → ~8.0–8.2/10) and the prioritised "what's left to reach 8.5–9" list only existed in conversation — a real gap surfaced when asked "is anything worth preserving before archiving this session?". Session-close protocols (both this repo's native one and the generic portable version) have a designed slot for structural decisions but no forcing function that recognises "a review/scorecard with standalone value" as belonging there — noted as a meta-finding in the doc itself for whenever the protocol is next revised.
 
