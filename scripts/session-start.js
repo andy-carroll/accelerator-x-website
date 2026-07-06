@@ -91,7 +91,11 @@ function loadRecentSessions(sessionDir, count = 3) {
         ? `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
         : file.replace('session-', '').replace('.md', '');
 
-      const decisionsMatch = content.match(/## Decisions \/ Findings\n+([\s\S]*?)(?=\n## |$)/i);
+      // Capture up to the log's next fixed section (## Next Session Priorities), not the
+      // next h2: session-notes content embedded in older logs carries its own h2 headings
+      // (## Summary, ## Decisions, …), which used to terminate the capture after the first
+      // sub-block — the brief silently dropped Decisions/Deferred/State-changes detail (#82).
+      const decisionsMatch = content.match(/## Decisions \/ Findings\n+([\s\S]*?)(?=\n## Next Session Priorities|$)/i);
       const decisions = decisionsMatch ? decisionsMatch[1].trim() : null;
 
       // Skip logs with unfilled placeholders

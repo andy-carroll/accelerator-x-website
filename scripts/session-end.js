@@ -131,7 +131,12 @@ function recentCommits(n = 8) {
 
 function loadSessionNotes(notesPath) {
   if (!fs.existsSync(notesPath)) return null;
-  return fs.readFileSync(notesPath, 'utf8').trim();
+  const raw = fs.readFileSync(notesPath, 'utf8').trim();
+  // Demote the notes' own h2 headings (## Summary, ## Decisions, …) one level so they
+  // nest under the log's "## Decisions / Findings" section instead of terminating it —
+  // session-start.js extracts that section up to the next h2, so un-demoted notes meant
+  // only the first sub-block (Summary) ever surfaced in the next session's brief (#82).
+  return raw.replace(/^## /gm, '### ');
 }
 
 function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeContent, notesPath }) {
