@@ -3,6 +3,17 @@
 > **Design principle:** Fast enough to actually happen. Session end must take < 10 minutes.
 > The cockpit is `CLAUDE.md`. Everything here is detail behind that file.
 
+> **Layering (decided in #82, 2026-07-06):** the portable `ax-skill-ops` `/session-start` /
+> `/session-end` skills carry the cross-repo protocol **practice** (orient → work → verify →
+> independent review → handoff → land → stakeholder summary); this file plus the native
+> `npm run session-start` / `session-end` scripts are this repo's **deterministic enforcement
+> layer** for that practice — hard gates (branch policy, quality commands, summary + review
+> evidence, staged-path allowlist) that an LLM-followed skill can't guarantee. "Repos hold
+> parameters, skills hold practice" (#50). The skills' adapter is the `## Session protocol —
+> repo config` block in `CLAUDE.md` — keep it in sync with `.session-protocol.json`. Handoff
+> notes are written **only** by `session-end:write` (one gated format); a skill-driven close
+> must invoke the npm scripts, never hand-write a note into `.claude/sessions/`.
+
 ---
 
 ## THE SESSION LOOP (SDLC)
@@ -105,7 +116,21 @@ Before touching any script or file, work through this checklist silently and act
 **Session notes**
 - Write `.claude/session-notes.md` with: decisions made, things deferred (and why), key findings, anything a cold-start agent would need that isn't in CLAUDE.md.
 
-Only once all findings are addressed and `.claude/session-notes.md` exists: proceed to script.
+Only once all findings are addressed and `.claude/session-notes.md` exists: proceed to the review.
+
+### Step 1 — Independent fresh-eyes review (mandatory, gates the close)
+
+A reviewer that did **not** write this session's code reviews the **cumulative diff** — from the
+previous session's close (or the session's first commit) to HEAD. A self-review does not count.
+
+1. Run `/code-review` (or a fresh-context subagent) over the session's diff.
+2. **Blocking** findings (correctness, security, broken behaviour): fix now, before closing —
+   then re-run build/check/tests.
+3. **Non-blocking** findings: raise as GitHub issues, or record under Deferred in session-notes.
+4. Record the outcome in `.claude/session-notes.md` under `## Review` — e.g. "Clean — no blocking
+   findings", "2 blocking fixed: …; 1 follow-up raised as #NN", or "Skipped — docs-only session,
+   no reviewable code diff". `session-end:write` **blocks** if this section is missing or still
+   the placeholder: the agent performs the review, the script enforces the evidence.
 
 ### Choose session-end mode
 
@@ -136,8 +161,10 @@ npm run session-end:write:yes
 Write mode performs:
 
 1. Enforce branch policy from `.session-protocol.json`
-2. Run required quality gate(s)
-3. Generate session log in `.claude/sessions/` — auto-populated with recent git commits and Next Session Priorities from CLAUDE.md
+2. Run required quality gate(s), plus the evidence gates: `## Summary` and `## Review` must be
+   present and non-placeholder in `.claude/session-notes.md`
+3. Generate session log in `.claude/sessions/` — auto-populated with recent git commits, the
+   review outcome, and Next Session Priorities from CLAUDE.md
 4. Consume `.claude/session-notes.md` into the log (if present), then delete it
 5. Preserve any same-day "Last session" line already written in CLAUDE.md — does not overwrite
 6. Ensure CLAUDE.md has "Next Session Priorities" block
@@ -198,6 +225,7 @@ Set `operatingMode` in `.session-protocol.json` to switch behavior without editi
 - Every session runs the loop: scope → measurable outcome → build → test → deploy → monitor
 - A session cannot close unless its work is **tracked** (GitHub issue) and **shipped** (preview push) — or **explicitly carried** with a reason
 - Session start brief is mandatory before any work
+- A session cannot close without an **independent** fresh-eyes review of its cumulative diff recorded under `## Review` in session-notes — `session-end:write` blocks otherwise
 - Session end requires explicit mode selection; write actions are never implicit
 - `CLAUDE.md` is the contract between sessions — if it's wrong, everything downstream is wrong
 - A missing or stale session log means the previous session did not close correctly — flag it

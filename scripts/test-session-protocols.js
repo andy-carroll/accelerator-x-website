@@ -4,6 +4,9 @@ const {
   SESSION_BLOCK_END,
   matchesAnyPattern,
   resolveProfileOperatingMode,
+  extractNotesSection,
+  extractSessionSummary,
+  extractReviewResult,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 } = require('./session-protocol-utils');
@@ -93,8 +96,64 @@ function testResolveProfileOperatingMode() {
   assert.ok(invalid.error, 'invalid mode override shape should return error');
 }
 
+function testExtractNotesSection() {
+  const notes = '## Summary\nShipped the thing.\n\n## Review\n<!-- guidance -->\nClean — no blocking findings.\nOne nit fixed inline.\n\n## Decisions\n- Decided X.\n';
+  assert.strictEqual(
+    extractNotesSection(notes, 'Review'),
+    'Clean — no blocking findings.\nOne nit fixed inline.',
+    'section body should be captured up to the next h2, with HTML comments stripped'
+  );
+  assert.strictEqual(extractNotesSection(notes, 'Deferred'), null, 'missing section should return null');
+  assert.strictEqual(
+    extractNotesSection('## Review\n<!-- only guidance, never filled in -->\n', 'Review'),
+    null,
+    'a section that is only template comments should count as empty'
+  );
+  assert.strictEqual(extractNotesSection('', 'Review'), null, 'empty content should return null');
+}
+
+function testExtractSessionSummary() {
+  assert.strictEqual(
+    extractSessionSummary('## Summary\nBuilt the funnel page; 3 blockers logged.\n\n## Review\nClean.\n'),
+    'Built the funnel page; 3 blockers logged.',
+    'real summary line should be extracted'
+  );
+  assert.strictEqual(
+    extractSessionSummary('## Summary\n_One sentence: what was shipped._\n'),
+    null,
+    'italic template placeholder should be rejected'
+  );
+  assert.strictEqual(extractSessionSummary('no summary heading here'), null, 'missing heading should return null');
+}
+
+function testExtractReviewResult() {
+  assert.strictEqual(
+    extractReviewResult('## Summary\nDid work.\n\n## Review\nClean — /code-review found no blocking findings.\n\n## Decisions\n- X\n'),
+    'Clean — /code-review found no blocking findings.',
+    'recorded review outcome should be extracted'
+  );
+  assert.strictEqual(
+    extractReviewResult('## Review\nSkipped — docs-only session, no reviewable code diff.\n'),
+    'Skipped — docs-only session, no reviewable code diff.',
+    'an honest skip with a reason should count as recorded evidence'
+  );
+  assert.strictEqual(
+    extractReviewResult('## Summary\nDid work.\n\n## Review\n_Run the independent review, then record its outcome here._\n'),
+    null,
+    'untouched template placeholder should be rejected'
+  );
+  assert.strictEqual(
+    extractReviewResult('## Summary\nDid work.\n\n## Decisions\n- X\n'),
+    null,
+    'notes without a Review section should be rejected'
+  );
+}
+
 function runAllTests() {
   testMatchesAnyPattern();
+  testExtractNotesSection();
+  testExtractSessionSummary();
+  testExtractReviewResult();
   testEnsureNextSessionBlock();
   testUpsertSessionProtocolBlock();
   testResolveProfileOperatingMode();

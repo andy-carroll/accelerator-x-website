@@ -4,6 +4,8 @@ const path = require('path');
 const {
   matchesAnyPattern,
   resolveProfileOperatingMode,
+  extractSessionSummary,
+  extractReviewResult,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 } = require('./session-protocol-utils');
@@ -85,17 +87,6 @@ function formatDate(date) {
   return date.toISOString().split('T')[0];
 }
 
-function extractSessionSummary(notesPath) {
-  if (!fs.existsSync(notesPath)) return null;
-  const content = fs.readFileSync(notesPath, 'utf8');
-  const match = content.match(/^##\s+Summary\s*\n+([^#\n].+)/im);
-  if (!match) return null;
-  const summary = match[1].trim();
-  // Reject unfilled template placeholders
-  if (!summary || summary.startsWith('_') || summary.startsWith('-')) return null;
-  return summary;
-}
-
 function upsertClaudeLastSession(content, date, fallbackSummary) {
   // If the agent already wrote a "Last session:" line for today, preserve it.
   const existing = content.match(/\*\*Last session:\*\*\s*(\d{4}-\d{2}-\d{2})\s*—\s*(.+)/i);
@@ -139,7 +130,7 @@ function loadSessionNotes(notesPath) {
   return raw.replace(/^## /gm, '### ');
 }
 
-function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeContent, notesPath }) {
+function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeContent, notesPath, reviewResult }) {
   const priorities = extractNextSessionPriorities(claudeContent);
   const commits = recentCommits(8);
   const notes = loadSessionNotes(notesPath);
@@ -162,6 +153,7 @@ function buildSessionLog({ branch, headHash, date, isoDate, airtable, claudeCont
     `- **Branch:** ${branch}`,
     `- **Git commit:** ${headHash}`,
     `- **Quality gates:** ✅ passed`,
+    `- **Fresh-eyes review:** ${reviewResult ? reviewResult.split('\n')[0] : '_not recorded_'}`,
     `- **Airtable updates:** ${airtable ? 'requested (placeholder)' : 'skipped'}`,
     '',
     '## Recent commits this session',
@@ -418,11 +410,13 @@ if (writeModeEnabled) {
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
   const notesPath = path.join('.claude', 'session-notes.md');
 
+  const notesContent = fs.existsSync(notesPath) ? fs.readFileSync(notesPath, 'utf8') : '';
+
   // Require a real session summary before writing anything.
   // Create .claude/session-notes.md from .claude/session-notes-template.md and fill in ## Summary.
-  const sessionSummary = extractSessionSummary(notesPath);
+  const sessionSummary = extractSessionSummary(notesContent);
   if (!sessionSummary) {
-    const hint = fs.existsSync(notesPath)
+    const hint = notesContent
       ? 'session-notes.md exists but ## Summary is missing or still a placeholder.'
       : 'session-notes.md not found.';
     const summaryError = `${hint} Copy .claude/session-notes-template.md → .claude/session-notes.md, fill in ## Summary with a one-line description of what was done, then rerun.`;
@@ -432,6 +426,19 @@ if (writeModeEnabled) {
     process.exit(EXIT.QUALITY_GATE_FAILURE);
   }
 
+  // Fresh-eyes review gate (#82): the independent review itself is an agent-level step
+  // the script can't run, so it enforces the evidence instead — a close cannot be
+  // written unless the notes record the review outcome under ## Review.
+  const reviewResult = extractReviewResult(notesContent);
+  if (!reviewResult) {
+    const reviewError = 'session-notes.md has no recorded review outcome under ## Review. Run an INDEPENDENT fresh-eyes review of this session\'s cumulative diff (/code-review or a fresh-context subagent — not a self-review), fix any blocking findings, record the outcome under ## Review, then rerun. Sessions with no reviewable diff record "Skipped — <reason>".';
+    errors.push(reviewError);
+    const earlyOutput = { status: 'error', mode, branch, operations, warnings, errors, nextActions: ['Run the independent review, record its outcome in session-notes.md ## Review, then rerun session-end:write.'] };
+    if (args.json) { console.log(JSON.stringify(earlyOutput, null, 2)); } else { console.error('❌ Session-end aborted: no fresh-eyes review recorded.'); errors.forEach(e => console.error(`- ${e}`)); }
+    process.exit(EXIT.QUALITY_GATE_FAILURE);
+  }
+  operations.push({ step: 'review_gate', status: 'ok', detail: reviewResult.split('\n')[0] });
+
   const logContent = buildSessionLog({
     branch,
     headHash,
@@ -440,6 +447,7 @@ if (writeModeEnabled) {
     airtable: args.airtable,
     claudeContent,
     notesPath,
+    reviewResult,
   });
   fs.writeFileSync(logPath, logContent);
   operations.push({ step: 'session_log', status: 'written', detail: logPath });

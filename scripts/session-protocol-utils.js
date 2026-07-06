@@ -69,6 +69,41 @@ function resolveProfileOperatingMode(profile) {
   };
 }
 
+// ── Session-notes parsing ─────────────────────────────────────────────────────
+// .claude/session-notes.md is the agent-authored input session-end consumes. The
+// write-gates that read it (summary required, review evidence required) live on
+// these pure content parsers so they stay unit-testable (test-session-protocols.js).
+
+function extractNotesSection(content, heading) {
+  if (!content) return null;
+  const headingMatch = content.match(new RegExp(`^##\\s+${heading}\\s*\\n`, 'im'));
+  if (!headingMatch) return null;
+  const rest = content.slice(headingMatch.index + headingMatch[0].length);
+  const nextHeading = rest.search(/\n##\s/);
+  const raw = nextHeading === -1 ? rest : rest.slice(0, nextHeading);
+  // Template guidance ships as HTML comments inside each section — evidence is
+  // what remains once they're stripped, so an untouched section can't pass a gate.
+  const body = raw.replace(/<!--[\s\S]*?-->/g, '').trim();
+  return body || null;
+}
+
+function extractSessionSummary(content) {
+  const match = (content || '').match(/^##\s+Summary\s*\n+([^#\n].+)/im);
+  if (!match) return null;
+  const summary = match[1].trim();
+  // Reject unfilled template placeholders
+  if (!summary || summary.startsWith('_') || summary.startsWith('-')) return null;
+  return summary;
+}
+
+function extractReviewResult(content) {
+  const body = extractNotesSection(content, 'Review');
+  // The italic placeholder means the independent review never ran (or wasn't
+  // recorded). An honest "Skipped — <reason>" is acceptable evidence; silence is not.
+  if (!body || body.startsWith('_')) return null;
+  return body;
+}
+
 function ensureNextSessionBlock(content) {
   if (/## Next Session Priorities/.test(content)) {
     return { content, changed: false };
@@ -116,6 +151,9 @@ module.exports = {
   patternToRegExp,
   matchesAnyPattern,
   resolveProfileOperatingMode,
+  extractNotesSection,
+  extractSessionSummary,
+  extractReviewResult,
   ensureNextSessionBlock,
   upsertSessionProtocolBlock
 };
