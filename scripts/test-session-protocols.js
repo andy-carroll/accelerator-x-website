@@ -109,6 +109,16 @@ function testExtractNotesSection() {
     null,
     'a section that is only template comments should count as empty'
   );
+  assert.strictEqual(
+    extractNotesSection('## Review\n<!-- truncated template with no closing marker\n', 'Review'),
+    null,
+    'an unterminated template comment should not count as evidence'
+  );
+  assert.strictEqual(
+    extractNotesSection('## C++ (notes)\nbody text\n', 'C++ (notes)'),
+    'body text',
+    'headings containing regex metacharacters should match literally, not throw'
+  );
   assert.strictEqual(extractNotesSection('', 'Review'), null, 'empty content should return null');
 }
 
@@ -141,6 +151,11 @@ function testExtractReviewResult() {
     extractReviewResult('## Summary\nDid work.\n\n## Review\n_Run the independent review, then record its outcome here._\n'),
     null,
     'untouched template placeholder should be rejected'
+  );
+  assert.strictEqual(
+    extractReviewResult('## Review\n_Run the independent review, then record its outcome here._\nClean — reviewed, 0 blocking findings.\n'),
+    'Clean — reviewed, 0 blocking findings.',
+    'a real outcome appended below a leftover placeholder line should still count'
   );
   assert.strictEqual(
     extractReviewResult('## Summary\nDid work.\n\n## Decisions\n- X\n'),

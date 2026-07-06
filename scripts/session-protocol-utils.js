@@ -76,14 +76,18 @@ function resolveProfileOperatingMode(profile) {
 
 function extractNotesSection(content, heading) {
   if (!content) return null;
-  const headingMatch = content.match(new RegExp(`^##\\s+${heading}\\s*\\n`, 'im'));
+  const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const headingMatch = content.match(new RegExp(`^##\\s+${escapedHeading}\\s*\\n`, 'im'));
   if (!headingMatch) return null;
   const rest = content.slice(headingMatch.index + headingMatch[0].length);
+  // Known limitation: an h2-looking line inside a fenced code block terminates the
+  // section early — acceptable for a presence gate, same trade-off as loadSessionNotes.
   const nextHeading = rest.search(/\n##\s/);
   const raw = nextHeading === -1 ? rest : rest.slice(0, nextHeading);
-  // Template guidance ships as HTML comments inside each section — evidence is
-  // what remains once they're stripped, so an untouched section can't pass a gate.
-  const body = raw.replace(/<!--[\s\S]*?-->/g, '').trim();
+  // Template guidance ships as HTML comments inside each section — evidence is what
+  // remains once they're stripped (unterminated comments too, so a truncated template
+  // can't silently satisfy a gate).
+  const body = raw.replace(/<!--[\s\S]*?-->/g, '').replace(/<!--[\s\S]*$/, '').trim();
   return body || null;
 }
 
@@ -98,10 +102,16 @@ function extractSessionSummary(content) {
 
 function extractReviewResult(content) {
   const body = extractNotesSection(content, 'Review');
-  // The italic placeholder means the independent review never ran (or wasn't
-  // recorded). An honest "Skipped — <reason>" is acceptable evidence; silence is not.
-  if (!body || body.startsWith('_')) return null;
-  return body;
+  if (!body) return null;
+  // Placeholder lines (fully underscore-italicised) don't count as evidence, wherever
+  // they sit — agents sometimes append the real outcome below the placeholder instead
+  // of replacing it. An honest "Skipped — <reason>" is acceptable evidence; silence is not.
+  const result = body
+    .split('\n')
+    .filter(line => !/^_.*_$/.test(line.trim()))
+    .join('\n')
+    .trim();
+  return result || null;
 }
 
 function ensureNextSessionBlock(content) {

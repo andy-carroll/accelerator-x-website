@@ -72,6 +72,11 @@ transparent, anti-agency positioning.
       (`.agent-skills-profile.json`), sync utility (`scripts/skills-sync.js`), npm scripts
       (`skills:sync`, `skills:sync:force`), and operations runbook
       (`docs/agent-skills-shared-ops.md`).
+- [x] **Session protocol layering + review gate (Phase 2)** — decided in
+      [#82](https://github.com/andy-carroll/accelerator-x-website/issues/82) (2026-07-06): the
+      portable `ax-skill-ops` skills carry the cross-repo practice; the native scripts stay as
+      this repo's deterministic enforcement layer. `session-end:write` now blocks without a
+      recorded independent fresh-eyes review outcome (`## Review` in session-notes.md).
 - [ ] **Design agent permission + capability framework** — define what agents can do
       autonomously vs. what requires human approval. Document in `docs/agent-fleet.md`.
 - [ ] **Introduce first autonomous agent** — scoped to a specific, safe, repeatable task

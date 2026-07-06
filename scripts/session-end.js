@@ -245,6 +245,17 @@ function isAllowedArtifact(filePath) {
   return BUILD_ARTIFACT_PREFIXES.some(prefix => filePath.startsWith(prefix));
 }
 
+function abortWrite({ json, mode, branch, operations, warnings, errors, headline, nextActions }) {
+  const output = { status: 'error', mode, branch, operations, warnings, errors, nextActions };
+  if (json) {
+    console.log(JSON.stringify(output, null, 2));
+  } else {
+    console.error(headline);
+    errors.forEach(item => console.error(`- ${item}`));
+  }
+  process.exit(EXIT.QUALITY_GATE_FAILURE);
+}
+
 const { args, unknown } = parseArgs(process.argv.slice(2));
 if (unknown.length > 0) {
   console.error(`Unknown flag(s): ${unknown.join(', ')}`);
@@ -303,6 +314,49 @@ const sessionBlockMarkers = {
   startMarker: profile.docs?.sessionProtocolBlock?.startMarker,
   endMarker: profile.docs?.sessionProtocolBlock?.endMarker
 };
+
+// Evidence gates (#82): cheap session-notes checks run in every mode, BEFORE the
+// confirmation prompt and the expensive quality commands — write mode blocks (fail
+// fast), plan/dry-run warn, so the mandated dry-run actually simulates what write
+// mode will enforce.
+const notesPath = path.join('.claude', 'session-notes.md');
+const notesExists = fs.existsSync(notesPath);
+const notesContent = notesExists ? fs.readFileSync(notesPath, 'utf8') : '';
+const sessionSummary = extractSessionSummary(notesContent);
+const reviewResult = extractReviewResult(notesContent);
+const summaryHint = notesExists
+  ? 'session-notes.md exists but ## Summary is missing or still a placeholder.'
+  : 'session-notes.md not found.';
+const summaryError = `${summaryHint} Copy .claude/session-notes-template.md → .claude/session-notes.md, fill in ## Summary with a one-line description of what was done, then rerun.`;
+const reviewError = 'session-notes.md has no recorded review outcome under ## Review. Run an INDEPENDENT fresh-eyes review of this session\'s cumulative diff (/code-review or a fresh-context subagent — not a self-review), fix any blocking findings, record the outcome under ## Review, then rerun. Sessions with no reviewable diff record "Skipped — <reason>".';
+
+if (writeModeEnabled) {
+  if (!sessionSummary) {
+    errors.push(summaryError);
+    abortWrite({
+      json: args.json, mode, branch, operations, warnings, errors,
+      headline: '❌ Session-end aborted: no session summary.',
+      nextActions: ['Write session-notes.md with a real ## Summary line, then rerun session-end:write.']
+    });
+  }
+  if (!reviewResult) {
+    errors.push(reviewError);
+    abortWrite({
+      json: args.json, mode, branch, operations, warnings, errors,
+      headline: '❌ Session-end aborted: no fresh-eyes review recorded.',
+      nextActions: ['Run the independent review, record its outcome in session-notes.md ## Review, then rerun session-end:write.']
+    });
+  }
+  operations.push({ step: 'evidence_gates', status: 'ok', detail: `review: ${reviewResult.split('\n')[0]}` });
+} else {
+  if (!sessionSummary) warnings.push(`Evidence gate (write mode will block): ${summaryError}`);
+  if (!reviewResult) warnings.push(`Evidence gate (write mode will block): ${reviewError}`);
+  operations.push({
+    step: 'evidence_gates',
+    status: (!sessionSummary || !reviewResult) ? 'warning' : 'ok',
+    detail: (!sessionSummary || !reviewResult) ? 'missing evidence — see warnings' : 'summary + review recorded'
+  });
+}
 
 if (mode !== 'dry-run') {
   if (writeModeEnabled && !args.yes) {
@@ -408,36 +462,6 @@ if (writeModeEnabled) {
 
   const claudePath = 'CLAUDE.md';
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
-  const notesPath = path.join('.claude', 'session-notes.md');
-
-  const notesContent = fs.existsSync(notesPath) ? fs.readFileSync(notesPath, 'utf8') : '';
-
-  // Require a real session summary before writing anything.
-  // Create .claude/session-notes.md from .claude/session-notes-template.md and fill in ## Summary.
-  const sessionSummary = extractSessionSummary(notesContent);
-  if (!sessionSummary) {
-    const hint = notesContent
-      ? 'session-notes.md exists but ## Summary is missing or still a placeholder.'
-      : 'session-notes.md not found.';
-    const summaryError = `${hint} Copy .claude/session-notes-template.md → .claude/session-notes.md, fill in ## Summary with a one-line description of what was done, then rerun.`;
-    errors.push(summaryError);
-    const earlyOutput = { status: 'error', mode, branch, operations, warnings, errors, nextActions: ['Write session-notes.md with a real ## Summary line, then rerun session-end:write.'] };
-    if (args.json) { console.log(JSON.stringify(earlyOutput, null, 2)); } else { console.error('❌ Session-end aborted: no session summary.'); errors.forEach(e => console.error(`- ${e}`)); }
-    process.exit(EXIT.QUALITY_GATE_FAILURE);
-  }
-
-  // Fresh-eyes review gate (#82): the independent review itself is an agent-level step
-  // the script can't run, so it enforces the evidence instead — a close cannot be
-  // written unless the notes record the review outcome under ## Review.
-  const reviewResult = extractReviewResult(notesContent);
-  if (!reviewResult) {
-    const reviewError = 'session-notes.md has no recorded review outcome under ## Review. Run an INDEPENDENT fresh-eyes review of this session\'s cumulative diff (/code-review or a fresh-context subagent — not a self-review), fix any blocking findings, record the outcome under ## Review, then rerun. Sessions with no reviewable diff record "Skipped — <reason>".';
-    errors.push(reviewError);
-    const earlyOutput = { status: 'error', mode, branch, operations, warnings, errors, nextActions: ['Run the independent review, record its outcome in session-notes.md ## Review, then rerun session-end:write.'] };
-    if (args.json) { console.log(JSON.stringify(earlyOutput, null, 2)); } else { console.error('❌ Session-end aborted: no fresh-eyes review recorded.'); errors.forEach(e => console.error(`- ${e}`)); }
-    process.exit(EXIT.QUALITY_GATE_FAILURE);
-  }
-  operations.push({ step: 'review_gate', status: 'ok', detail: reviewResult.split('\n')[0] });
 
   const logContent = buildSessionLog({
     branch,
