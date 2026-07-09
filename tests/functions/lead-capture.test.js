@@ -7,8 +7,11 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('node:path');
+const fs = require('node:fs');
 
 const MODULE_PATH = path.join(__dirname, '..', '..', 'netlify', 'functions', 'lead-capture.js');
+const OFFERINGS_PATH = path.join(__dirname, '..', '..', 'content', 'data', 'offerings.json');
+const APPLYFORM_PATH = path.join(__dirname, '..', '..', '_templates', 'components', 'ApplyForm.html');
 
 const ENV_KEYS = ['SLACK_WEBHOOK_URL', 'AIRTABLE_TOKEN', 'AIRTABLE_BASE_ID', 'AIRTABLE_TABLE'];
 
@@ -197,6 +200,56 @@ test('unrecognised interest slug falls back to showing the raw value, not a blan
       assert.equal(res.statusCode, 200);
       const slackCall = global.fetch.calls.find((c) => c.url.includes('hooks.slack.test'));
       assert.ok(JSON.stringify(slackCall.body).includes('some-future-offering'));
+    }
+  );
+});
+
+// Drift guard: the function's interestLabels map hardcodes offering display names, which
+// Check #10 does NOT scan (it only covers _templates/). This test is the guard instead —
+// it parses the interest slugs the ApplyForm actually offers and asserts each renders its
+// offerings.json name through the function, so form ⇄ function ⇄ offer-canon can't silently desync.
+test('every ApplyForm interest slug maps to its offerings.json name via the function (no silent label drift)', async () => {
+  const offerings = JSON.parse(fs.readFileSync(OFFERINGS_PATH, 'utf8')).offerings;
+  const applyForm = fs.readFileSync(APPLYFORM_PATH, 'utf8');
+  const slugs = [...applyForm.matchAll(/name="interest"\s+value="([^"]+)"/g)].map((m) => m[1]);
+  assert.ok(slugs.length >= 2, 'expected to find interest radio values in ApplyForm.html');
+
+  for (const slug of slugs) {
+    if (slug === 'just-exploring') continue; // not an offering — has its own literal label
+    const offering = offerings.find((o) => o.key === slug);
+    assert.ok(offering, `ApplyForm offers interest "${slug}" but offerings.json has no matching key`);
+
+    await withEnv({ SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead' }, async (mod) => {
+      global.fetch = makeFetchStub([{ match: 'hooks.slack.test', status: 200 }]);
+      await mod.handler(makeEvent({ ...VALID_FIELDS, interest: slug }));
+      const slackCall = global.fetch.calls.find((c) => c.url.includes('hooks.slack.test'));
+      assert.ok(
+        JSON.stringify(slackCall.body).includes(offering.name),
+        `interest "${slug}" should render offerings.json name "${offering.name}" — the function's interestLabels map has drifted from the canon`
+      );
+    });
+  }
+});
+
+test('missing interest with a source present falls back to "Not specified" and still captures the lead', async () => {
+  await withEnv(
+    {
+      SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead',
+      AIRTABLE_TOKEN: 'tok',
+      AIRTABLE_BASE_ID: 'appTest',
+      AIRTABLE_TABLE: 'Prospects',
+    },
+    async (mod) => {
+      global.fetch = makeFetchStub([
+        { match: 'hooks.slack.test', status: 200 },
+        { match: 'api.airtable.com', status: 200 },
+      ]);
+      // VALID_FIELDS carries no `interest`; add a source so the interest/source block renders.
+      const res = await mod.handler(makeEvent({ ...VALID_FIELDS, source: 'homepage-hero' }));
+      assert.equal(res.statusCode, 200);
+      assert.equal(JSON.parse(res.body).airtable, 'created', 'a lead without interest must still be captured, not rejected');
+      const slackCall = global.fetch.calls.find((c) => c.url.includes('hooks.slack.test'));
+      assert.ok(JSON.stringify(slackCall.body).includes('Not specified'));
     }
   );
 });

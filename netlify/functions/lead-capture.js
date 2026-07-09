@@ -106,9 +106,13 @@ exports.handler = async (event, context) => {
     };
     const timeline = timelineLabels[timelineRaw] || timelineRaw || 'Not specified';
 
-    // Mirrors the four live offerings in content/data/offerings.json (Check #10's source
-    // of truth) + "just exploring". Cosmetic Slack label only — if an offering is renamed,
-    // this map goes stale but degrades to showing the raw slug, not a wrong name.
+    // Mirrors the live offering keys/names in content/data/offerings.json + "just-exploring".
+    // Intentionally hardcoded (not require()'d from the JSON) to keep this GNG-1 money path
+    // free of a file-load failure mode for what is only a cosmetic Slack/Airtable label.
+    // Drift is guarded instead by a CI test (tests/functions/lead-capture.test.js) that fails
+    // if these fall out of sync with offerings.json. Fallback behaviour: an unknown KEY shows
+    // the raw slug; a key whose NAME changed in the JSON (but not here) would show the stale
+    // name until the test catches it — which is why the test, not runtime coupling, is the guard.
     const interestLabels = {
       'company-enablement': 'Company Enablement',
       'leadership-activation': 'Leadership Team AI Activation',
