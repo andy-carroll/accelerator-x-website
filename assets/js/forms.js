@@ -109,7 +109,7 @@
         website: formData.get('website'),
         role: formData.get('role'),
         timeline: formData.get('timeline'),
-        message: formData.get('message') || '',
+        problem: formData.get('problem') || '',
         interest: formData.get('interest') || leadForm.dataset.interest || '',
         source: formData.get('source') || leadForm.dataset.source || '',
         _honeypot: formData.get('_honeypot') || '',

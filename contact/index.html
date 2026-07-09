@@ -159,7 +159,7 @@
       <!-- === APPLICATION FORM === -->
       <div class="ax-contact-layout">
         <div class="ax-contact-layout__inner">
-          <!-- ApplyForm — 3-section application form.
+          <!-- ApplyForm — 2-section application form.
      Hooks into [data-lead-form] handler in assets/js/forms.js.
      Submission target: /.netlify/functions/lead-capture
      Required Airtable fields (must exist before going live):
@@ -210,31 +210,36 @@
       </div>
     </div>
 
-    <!-- ── Section 2: The business ───────────────────── -->
+    <!-- ── Section 2: The work ───────────────────────── -->
     <div class="ax-apply-form__section">
       <h3 class="ax-apply-form__section-heading">
         <span class="ax-apply-form__section-num" aria-hidden="true">2</span>
-        The business
-      </h3>
-      <div class="ax-apply-form__fields">
-        <div class="field">
-          <label class="field-label" for="apply-message">About your business</label>
-          <textarea id="apply-message" name="message" class="textarea" rows="5" placeholder="Tell us about your business — the sector you work in, the scale of the organisation, and where you are with AI. This is entirely optional, share as much or as little as you'd like."></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- ── Section 3: The work ───────────────────────── -->
-    <div class="ax-apply-form__section">
-      <h3 class="ax-apply-form__section-heading">
-        <span class="ax-apply-form__section-num" aria-hidden="true">3</span>
         The work
       </h3>
       <div class="ax-apply-form__fields">
         <div class="field">
-          <label class="field-label" for="apply-interest">What does your business offer? <span class="required" aria-hidden="true">*</span></label>
-          <input id="apply-interest" type="text" name="interest" class="input" placeholder="e.g. management consulting, executive coaching, technology advisory" required aria-required="true">
+          <label class="field-label" for="apply-problem">What's the main thing you're trying to solve?</label>
+          <input id="apply-problem" type="text" name="problem" class="input" placeholder="e.g. leadership doesn't know where to start with AI">
         </div>
+        <fieldset class="ax-apply-form__fieldset">
+          <legend class="field-label">Which best fits? <span class="required" aria-hidden="true">*</span></legend>
+          <div class="ax-apply-form__chip-group">
+            <input type="radio" id="interest-company" name="interest" value="company-enablement" class="chip-radio" required>
+            <label for="interest-company" class="chip">Company Enablement</label>
+
+            <input type="radio" id="interest-leadership" name="interest" value="leadership-activation" class="chip-radio">
+            <label for="interest-leadership" class="chip">Leadership Team AI Activation</label>
+
+            <input type="radio" id="interest-1to1" name="interest" value="senior-leader-acceleration" class="chip-radio">
+            <label for="interest-1to1" class="chip">1:1 Exec AI Fast Track Coaching</label>
+
+            <input type="radio" id="interest-cohort" name="interest" value="leadership-cohort" class="chip-radio">
+            <label for="interest-cohort" class="chip">Open Cohort AI Bootcamp for Business Leaders</label>
+
+            <input type="radio" id="interest-exploring" name="interest" value="just-exploring" class="chip-radio">
+            <label for="interest-exploring" class="chip">Just exploring</label>
+          </div>
+        </fieldset>
         <fieldset class="ax-apply-form__fieldset">
           <legend class="field-label">When are you looking to start? <span class="required" aria-hidden="true">*</span></legend>
           <div class="ax-apply-form__chip-group">
@@ -363,7 +368,7 @@
     <div class="ax-newsletter__copy">
       <span class="ax-kicker">Weekly dispatch</span>
       <h2 class="ax-newsletter__heading">Stay sharp on AI.</h2>
-      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability — the hard-won lessons, not the hype. One email a week.</p>
+      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability: the hard-won lessons, not the hype. One email a week.</p>
     </div>
     <div class="ax-newsletter__form-wrap">
       <form class="ax-newsletter__form js-newsletter-form" data-newsletter-source="site" novalidate>
@@ -385,7 +390,7 @@
         <p>You're in. Welcome email on its way.</p>
       </div>
       <div class="ax-newsletter__status ax-newsletter__status--error" hidden role="alert">
-        <p>Something went wrong — please try again.</p>
+        <p>Something went wrong, please try again.</p>
       </div>
     </div>
   </div>

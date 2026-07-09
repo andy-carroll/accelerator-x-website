@@ -152,6 +152,55 @@ test('valid submission: Slack message is escaped and Airtable carries the GNG-1 
   );
 });
 
+test('service-interest slug is mapped to a readable label in Slack + Airtable Notes; problem text flows into Notes and its own Slack block', async () => {
+  await withEnv(
+    {
+      SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead',
+      AIRTABLE_TOKEN: 'tok',
+      AIRTABLE_BASE_ID: 'appTest',
+      AIRTABLE_TABLE: 'Prospects',
+    },
+    async (mod) => {
+      const fetchStub = makeFetchStub([
+        { match: 'hooks.slack.test', status: 200 },
+        { match: 'api.airtable.com', status: 200 },
+      ]);
+      global.fetch = fetchStub;
+
+      const fields = {
+        ...VALID_FIELDS,
+        interest: 'leadership-activation',
+        problem: 'Our leadership team has no shared AI vocabulary',
+      };
+      const res = await mod.handler(makeEvent(fields));
+      assert.equal(res.statusCode, 200);
+
+      const slackCall = fetchStub.calls.find((c) => c.url.includes('hooks.slack.test'));
+      const slackText = JSON.stringify(slackCall.body);
+      assert.ok(slackText.includes('Leadership Team AI Activation'), 'raw slug must be mapped to its display name');
+      assert.ok(slackText.includes('Trying to solve'));
+      assert.ok(slackText.includes('no shared AI vocabulary'));
+
+      const airtableCall = fetchStub.calls.find((c) => c.url.includes('api.airtable.com'));
+      assert.ok(airtableCall.body.fields.Notes.includes('Service interest: Leadership Team AI Activation'));
+      assert.ok(airtableCall.body.fields.Notes.includes('Trying to solve: Our leadership team has no shared AI vocabulary'));
+    }
+  );
+});
+
+test('unrecognised interest slug falls back to showing the raw value, not a blank or thrown error', async () => {
+  await withEnv(
+    { SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead' },
+    async (mod) => {
+      global.fetch = makeFetchStub([{ match: 'hooks.slack.test', status: 200 }]);
+      const res = await mod.handler(makeEvent({ ...VALID_FIELDS, interest: 'some-future-offering' }));
+      assert.equal(res.statusCode, 200);
+      const slackCall = global.fetch.calls.find((c) => c.url.includes('hooks.slack.test'));
+      assert.ok(JSON.stringify(slackCall.body).includes('some-future-offering'));
+    }
+  );
+});
+
 test('Airtable write failure fires a distinct GNG-1 alert and still returns success:true (fails-soft)', async () => {
   await withEnv(
     {

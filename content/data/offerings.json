@@ -32,7 +32,7 @@
       "flagship": true,
       "slug": "/what-we-do/company-enablement/",
       "audience": "A whole business / organisation that needs to move on AI.",
-      "one_liner": "How a company moves with us — everyone starts at Phase 0.",
+      "one_liner": "How a company moves with us: everyone starts at Phase 0.",
       "phases": [
         {
           "key": "phase-0",
@@ -67,7 +67,7 @@
       "status": "live",
       "slug": "/what-we-do/senior-leader-acceleration/",
       "audience": "A senior executive carrying AI alone (very small group as an option).",
-      "one_liner": "Take it off your plate — a bespoke 6-week 1:1 AI sprint with a founder.",
+      "one_liner": "Take it off your plate: a bespoke 6-week 1:1 AI sprint with a founder.",
       "positioning": "Elite, high-touch, fully bespoke. We take work off your plate rather than add something new to learn and do. Go at your pace, not a group's.",
       "format": "6 x weekly 75-min private remote sessions + continuous async support (Slack/WhatsApp/Loom); dedicated founder coach",
       "duration": "6 weeks",

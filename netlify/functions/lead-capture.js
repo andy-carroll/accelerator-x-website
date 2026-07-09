@@ -80,8 +80,8 @@ exports.handler = async (event, context) => {
     const website = normalizeWebsite(data.website);
     const role = safeTrim(data.role, 200);
     const timelineRaw = safeTrim(data.timeline);
-    const message = safeTrim(data.message || '', 2000);
-    const interest = safeTrim(data.interest || '', 200);
+    const problem = safeTrim(data.problem || '', 500);
+    const interestRaw = safeTrim(data.interest || '', 200);
     const source = safeTrim(data.source || '', 200);
     const consentGiven = data.consent_given === true;
     const consentTimestamp = safeTrim(data.consent_timestamp || new Date().toISOString());
@@ -105,7 +105,19 @@ exports.handler = async (event, context) => {
       'exploring': 'Just exploring'
     };
     const timeline = timelineLabels[timelineRaw] || timelineRaw || 'Not specified';
-    
+
+    // Mirrors the four live offerings in content/data/offerings.json (Check #10's source
+    // of truth) + "just exploring". Cosmetic Slack label only — if an offering is renamed,
+    // this map goes stale but degrades to showing the raw slug, not a wrong name.
+    const interestLabels = {
+      'company-enablement': 'Company Enablement',
+      'leadership-activation': 'Leadership Team AI Activation',
+      'senior-leader-acceleration': '1:1 Exec AI Fast Track Coaching',
+      'leadership-cohort': 'Open Cohort AI Bootcamp for Business Leaders',
+      'just-exploring': 'Just exploring'
+    };
+    const interest = interestLabels[interestRaw] || interestRaw || 'Not specified';
+
     // Build Slack Block Kit message
     const slackMessage = {
       text: 'New Accelerator X Application',
@@ -132,23 +144,23 @@ exports.handler = async (event, context) => {
       ]
     };
 
-    if (interest || source) {
+    if (interestRaw || source) {
       slackMessage.blocks.push({
         type: 'section',
         fields: [
-          { type: 'mrkdwn', text: `*Interest:*\n${escapeSlack(interest) || 'Not specified'}` },
+          { type: 'mrkdwn', text: `*Service interest:*\n${escapeSlack(interest)}` },
           { type: 'mrkdwn', text: `*Source:*\n${escapeSlack(source) || 'Website'}` }
         ]
       });
     }
 
-    // Add message block if present
-    if (message) {
+    // Add problem block if present
+    if (problem) {
       slackMessage.blocks.push({
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: `*Message:*\n>${escapeSlack(message).replace(/\n/g, '\n>')}`
+          text: `*Trying to solve:*\n>${escapeSlack(problem).replace(/\n/g, '\n>')}`
         }
       });
     }
@@ -200,9 +212,9 @@ exports.handler = async (event, context) => {
           'Primary Contact Role': role,
           Timeline: timeline,
           Notes: [
-            interest ? `Interest: ${interest}` : '',
+            interestRaw ? `Service interest: ${interest}` : '',
             source ? `Source detail: ${source}` : '',
-            message || ''
+            problem ? `Trying to solve: ${problem}` : ''
           ].filter(Boolean).join('\n\n'),
           Source: 'Accelerator-X Website',
           'Consent Given': consentGiven,
