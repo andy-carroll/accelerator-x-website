@@ -142,9 +142,11 @@ Placeholder and unverified copy introduced in Phase 3 page assembly (2026-05-17)
 - `[x]` Offering rows now derive from `offerings.json` (names/prices/durations as tokens); the hand-built table is gone.
 
 **`/what-we-do/leadership-cohort/` — Blocking items before launch**
-- `[ ]` **BLOCKING** Cohort start date (12 Aug 2026) — confirm accuracy at launch
-- `[ ]` **BLOCKING** Places left (6 of 12) — update to actual availability at launch
-- `[x]` ProofRow quote resolved 2026-06-13: unverified "It moved my Monday morning…" (CMO, B2B SaaS · Cohort 02) removed; replaced with real founder-supplied quote — Charlotte Steedman, CEO, Conductor.
+- `[x]` **Cohort start date** — resolved 2026-07-11 (B3 walk, Andy): the hardcoded "12 Aug 2026" was a placeholder; real target is late July / early Aug 2026, exact date TBC. Softened to a target window ("Late July / Aug 2026" / "Next cohort, summer 2026"). `[ ]` **Remaining go-live task:** swap the window for the firm date once Andy locks it.
+- `[x]` **Places left** — resolved 2026-07-11 (B3 walk, Andy): the hardcoded "6 of 12" was an unmaintained scarcity claim (same failure mode as B1's retired hero chip); softened to "Limited places" (no count to babysit).
+- `[x]` **Cohort number** — fixed 2026-07-11 (B3 walk, Andy): page said "Cohort 04" but the next paid intake is C3 (C0 was free, C1 done, C2 mid-flight, C3 next) — an overclaim of track record. Dropped the sequence number from public copy entirely (also future-proofs against the diversifying cohort structures — see note below).
+- `[ ]` **Post-launch (parked 2026-07-11, Andy):** AX is diversifying beyond one cohort type — an advanced follow-on for C1/C2 completers, plus more structures to come. Deliberately parked for the v2 flip (not built; modelling a multi-cohort portfolio is real scope). Track under the cohort-funnel issue (#30).
+- `[x]` ProofRow quote resolved 2026-06-13: unverified "It moved my Monday morning…" (CMO, B2B SaaS · Cohort 02) removed; replaced with real founder-supplied quote — Charlotte Steedman, CEO, Conductor. `[ ]` **Flagged 2026-07-11 (B3 walk):** the quote is real + generic ("working with the Accelerator X team") but sits on the cohort page; Charlotte wasn't a cohort participant, so ideally swap for a real cohort-participant quote when one lands (tracked with named-proof #55) — not blocking.
 - `[x]` FAQ answers authored 2026-06-14 (Phase 5) — 6 real answers grounded in Canon §7 (already real before; no placeholders). FAQPage JSON-LD still **carried** (T6). Founder review of wording advisable, not blocking.
 
 **`/what-we-do/leadership-activation/` — Blocking items before launch**
