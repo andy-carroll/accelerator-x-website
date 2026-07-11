@@ -74,12 +74,20 @@ function resolveProfileOperatingMode(profile) {
 // write-gates that read it (summary required, review evidence required) live on
 // these pure content parsers so they stay unit-testable (test-session-protocols.js).
 
+function normalizeNewlines(content) {
+  // CRLF/CR → LF up front, so a Windows-authored notes file can't leave a trailing \r on
+  // the first line — which would otherwise surface as a stray carriage return in the
+  // session-log "Fresh-eyes review:" header (`reviewResult.split('\n')[0]`) (#83).
+  return content.replace(/\r\n?/g, '\n');
+}
+
 function extractNotesSection(content, heading) {
   if (!content) return null;
+  const normalized = normalizeNewlines(content);
   const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const headingMatch = content.match(new RegExp(`^##\\s+${escapedHeading}\\s*\\n`, 'im'));
+  const headingMatch = normalized.match(new RegExp(`^##\\s+${escapedHeading}\\s*\\n`, 'im'));
   if (!headingMatch) return null;
-  const rest = content.slice(headingMatch.index + headingMatch[0].length);
+  const rest = normalized.slice(headingMatch.index + headingMatch[0].length);
   // Known limitation: an h2-looking line inside a fenced code block terminates the
   // section early — acceptable for a presence gate, same trade-off as loadSessionNotes.
   const nextHeading = rest.search(/\n##\s/);
@@ -92,7 +100,7 @@ function extractNotesSection(content, heading) {
 }
 
 function extractSessionSummary(content) {
-  const match = (content || '').match(/^##\s+Summary\s*\n+([^#\n].+)/im);
+  const match = normalizeNewlines(content || '').match(/^##\s+Summary\s*\n+([^#\n].+)/im);
   if (!match) return null;
   const summary = match[1].trim();
   // Reject unfilled template placeholders

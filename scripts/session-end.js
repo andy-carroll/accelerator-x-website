@@ -245,7 +245,7 @@ function isAllowedArtifact(filePath) {
   return BUILD_ARTIFACT_PREFIXES.some(prefix => filePath.startsWith(prefix));
 }
 
-function abortWrite({ json, mode, branch, operations, warnings, errors, headline, nextActions }) {
+function abortWrite({ json, mode, branch, operations, warnings, errors, headline, nextActions, exitCode }) {
   const output = { status: 'error', mode, branch, operations, warnings, errors, nextActions };
   if (json) {
     console.log(JSON.stringify(output, null, 2));
@@ -253,7 +253,7 @@ function abortWrite({ json, mode, branch, operations, warnings, errors, headline
     console.error(headline);
     errors.forEach(item => console.error(`- ${item}`));
   }
-  process.exit(EXIT.QUALITY_GATE_FAILURE);
+  process.exit(exitCode || EXIT.QUALITY_GATE_FAILURE);
 }
 
 const { args, unknown } = parseArgs(process.argv.slice(2));
@@ -403,24 +403,11 @@ if (writeModeEnabled) {
 }
 
 if (writeModeEnabled && qualityGateFailed) {
-  const output = {
-    status: 'error',
-    mode,
-    branch,
-    operations,
-    warnings,
-    errors,
+  abortWrite({
+    json: args.json, mode, branch, operations, warnings, errors,
+    headline: '❌ Session-end aborted due to quality gate failure.',
     nextActions: ['Fix quality gate failures, then rerun session-end with --confirm-write.']
-  };
-
-  if (args.json) {
-    console.log(JSON.stringify(output, null, 2));
-  } else {
-    console.error('❌ Session-end aborted due to quality gate failure.');
-    errors.forEach(item => console.error(`- ${item}`));
-  }
-
-  process.exit(EXIT.QUALITY_GATE_FAILURE);
+  });
 }
 
 // Stale priorities check — runs in all modes; blocks write, warns in plan/dry-run
@@ -433,22 +420,11 @@ if (fs.existsSync('CLAUDE.md')) {
     operations.push({ step: 'priorities_freshness', status: writeModeEnabled ? 'error' : 'warning', detail });
     if (writeModeEnabled) {
       errors.push(staleMsg);
-      const output = {
-        status: 'error',
-        mode,
-        branch,
-        operations,
-        warnings,
-        errors,
+      abortWrite({
+        json: args.json, mode, branch, operations, warnings, errors,
+        headline: '❌ Session-end aborted: stale Next Session Priorities detected.',
         nextActions: ['Update CLAUDE.md ## Next Session Priorities to reflect current work state, then rerun session-end.']
-      };
-      if (args.json) {
-        console.log(JSON.stringify(output, null, 2));
-      } else {
-        console.error('❌ Session-end aborted: stale Next Session Priorities detected.');
-        errors.forEach(item => console.error(`- ${item}`));
-      }
-      process.exit(EXIT.QUALITY_GATE_FAILURE);
+      });
     } else {
       warnings.push(staleMsg);
     }
@@ -459,6 +435,32 @@ if (fs.existsSync('CLAUDE.md')) {
 
 if (writeModeEnabled) {
   if (!fs.existsSync(logDir)) fs.mkdirSync(logDir, { recursive: true });
+
+  const isAllowedChangedPath = filePath => (
+    plannedManagedFiles.has(filePath)
+    || filePath === logPath
+    || isAllowedArtifact(filePath)
+    || matchesAnyPattern(filePath, allowedChangedPathPatterns)
+  );
+
+  // Staged-path allowlist gate — runs BEFORE any destructive write (the session-notes
+  // deletion and the log/CLAUDE.md writes below). It previously ran *after* the notes
+  // file had already been consumed, so an out-of-scope changed file aborted the close
+  // AND silently destroyed the agent's unsaved notes (#83, hit live on 2026-07-09).
+  // session-notes.md itself is excluded: it is this script's input — consumed into the
+  // log, never committed — so its presence must not trip its own scope gate.
+  const preWriteBlocked = collectChangedPaths()
+    .filter(filePath => filePath !== notesPath)
+    .filter(filePath => !isAllowedChangedPath(filePath));
+  if (preWriteBlocked.length > 0) {
+    errors.push(`Unexpected changed files outside protocol scope: ${preWriteBlocked.join(', ')}`);
+    abortWrite({
+      json: args.json, mode, branch, operations, warnings, errors,
+      headline: '❌ Session-end aborted due to unexpected changed files.',
+      nextActions: ['Review changed files and update protocol profile scope if intended.'],
+      exitCode: EXIT.POLICY_VIOLATION
+    });
+  }
 
   const claudePath = 'CLAUDE.md';
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
@@ -517,40 +519,10 @@ if (writeModeEnabled) {
     operations.push({ step: 'airtable', status: 'warning', detail: 'placeholder only' });
   }
 
-  const changedPaths = collectChangedPaths();
-  const isAllowedByPattern = filePath => matchesAnyPattern(filePath, allowedChangedPathPatterns);
-  const allowedPaths = changedPaths.filter(filePath => (
-    plannedManagedFiles.has(filePath)
-    || filePath === logPath
-    || isAllowedArtifact(filePath)
-    || isAllowedByPattern(filePath)
-  ));
-  const blockedPaths = changedPaths.filter(filePath => !(
-    plannedManagedFiles.has(filePath)
-    || filePath === logPath
-    || isAllowedArtifact(filePath)
-    || isAllowedByPattern(filePath)
-  ));
-
-  if (blockedPaths.length > 0) {
-    errors.push(`Unexpected changed files outside protocol scope: ${blockedPaths.join(', ')}`);
-    const output = {
-      status: 'error',
-      mode,
-      branch,
-      operations,
-      warnings,
-      errors,
-      nextActions: ['Review changed files and update protocol profile scope if intended.']
-    };
-    if (args.json) {
-      console.log(JSON.stringify(output, null, 2));
-    } else {
-      console.error('❌ Session-end aborted due to unexpected changed files.');
-      errors.forEach(item => console.error(`- ${item}`));
-    }
-    process.exit(EXIT.POLICY_VIOLATION);
-  }
+  // Stage the session-end outputs. Scope was already enforced by the pre-write gate
+  // above; everything this script writes (log, managed docs, markers) is allowlisted by
+  // construction, so we only need the allowed set for staging here — no second gate.
+  const allowedPaths = collectChangedPaths().filter(isAllowedChangedPath);
 
   if (allowedPaths.length > 0) {
     const addResult = run(`git add ${allowedPaths.map(shellQuote).join(' ')}`);

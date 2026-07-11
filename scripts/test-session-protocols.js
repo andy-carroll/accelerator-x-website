@@ -164,11 +164,50 @@ function testExtractReviewResult() {
   );
 }
 
+function testExtractorEdgeCases() {
+  // CRLF input: \r is stripped up front, so neither extractor leaks a trailing
+  // carriage return into the session-log header line (#83 decision: strip, not pin).
+  const crlf = '## Summary\r\nDid the work.\r\n\r\n## Review\r\nClean — line one.\r\nLine two.\r\n';
+  assert.strictEqual(extractSessionSummary(crlf), 'Did the work.', 'CRLF summary should normalise to a clean line');
+  const crlfReview = extractReviewResult(crlf);
+  assert.strictEqual(crlfReview, 'Clean — line one.\nLine two.', 'CRLF review body should normalise to LF');
+  assert.ok(!crlfReview.includes('\r'), 'no carriage return should survive into the review result');
+
+  // h3-only heading is not an h2 section.
+  assert.strictEqual(extractNotesSection('### Review\nbody\n', 'Review'), null, 'an h3 "### Review" should not match the h2 gate');
+  assert.strictEqual(extractReviewResult('### Review\nbody\n'), null, 'extractReviewResult should ignore an h3-only Review');
+
+  // Near-miss heading must not match a longer title.
+  assert.strictEqual(extractNotesSection('## Review notes\nbody\n', 'Review'), null, '"## Review notes" should not match the "Review" heading');
+
+  // Last section with no trailing newline at EOF.
+  assert.strictEqual(
+    extractReviewResult('## Summary\nDid it.\n\n## Review\nClean, no findings'),
+    'Clean, no findings',
+    'a Review section that is the last block with no trailing newline should still be captured'
+  );
+
+  // h3 sub-headings inside a section do not terminate it (loadSessionNotes demotes h2→h3).
+  assert.strictEqual(
+    extractNotesSection('## Review\nOutcome.\n### Sub-point\nMore.\n\n## Decisions\n- x\n', 'Review'),
+    'Outcome.\n### Sub-point\nMore.',
+    'an embedded h3 should stay inside the section, not end it'
+  );
+
+  // Duplicate headings: first occurrence wins.
+  assert.strictEqual(
+    extractNotesSection('## Review\nFirst outcome.\n\n## Review\nSecond outcome.\n', 'Review'),
+    'First outcome.',
+    'a duplicated section heading should resolve to the first occurrence'
+  );
+}
+
 function runAllTests() {
   testMatchesAnyPattern();
   testExtractNotesSection();
   testExtractSessionSummary();
   testExtractReviewResult();
+  testExtractorEdgeCases();
   testEnsureNextSessionBlock();
   testUpsertSessionProtocolBlock();
   testResolveProfileOperatingMode();
