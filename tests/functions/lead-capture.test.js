@@ -151,6 +151,13 @@ test('valid submission: Slack message is escaped and Airtable carries the GNG-1 
       assert.equal(airtableCall.body.fields['Consent Given'], true);
       assert.equal(airtableCall.body.fields['Consent Timestamp'], '2026-07-04T00:00:00.000Z');
       assert.equal(airtableCall.body.fields.Email, 'jane@example.com');
+      // Must match the Prospects table's "Source" single-select option EXACTLY (Airtable
+      // rejects any non-matching string as an attempt to create a new option, which this
+      // token lacks permission to do — caught live in production at the 2026-07-14 B10
+      // cutover: the code said "Accelerator-X Website", Airtable's option is "Accelerator X
+      // Website" (no hyphen), and the mismatch was invisible to this suite's mocked fetch
+      // since a stub returns 200 regardless of payload content).
+      assert.equal(airtableCall.body.fields.Source, 'Accelerator X Website');
     }
   );
 });

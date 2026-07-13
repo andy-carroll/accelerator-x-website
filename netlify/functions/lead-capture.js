@@ -220,7 +220,7 @@ exports.handler = async (event, context) => {
             source ? `Source detail: ${source}` : '',
             problem ? `Trying to solve: ${problem}` : ''
           ].filter(Boolean).join('\n\n'),
-          Source: 'Accelerator-X Website',
+          Source: 'Accelerator X Website',
           'Consent Given': consentGiven,
           'Consent Timestamp': consentTimestamp
         }
