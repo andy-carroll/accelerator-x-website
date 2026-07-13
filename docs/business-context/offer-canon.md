@@ -1,6 +1,6 @@
 # Accelerator X — Offer Canon
 
-> **Status: CANONICAL SOURCE OF TRUTH for what we offer.** Version 0.5 (draft) — 2026-06-14.
+> **Status: CANONICAL SOURCE OF TRUTH for what we offer.** Version 0.6 — 2026-07-13.
 > This document supersedes `ax-offering-architecture.md` and `ax-canonical-offer-strategy.md`.
 > The website **derives** from this and from its machine-readable companion `content/data/offerings.json`.
 > **Do not edit offering names, prices, durations, or descriptions on the website directly** — change them here, then in `offerings.json`, and let the build propagate.

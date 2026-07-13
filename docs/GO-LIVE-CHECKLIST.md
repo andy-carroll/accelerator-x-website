@@ -256,7 +256,7 @@ Target: `/.netlify/functions/lead-capture`
 **Pass criteria (all must hold)**
 - `[ ]` `Consent Given` is checked (true).
 - `[ ]` `Consent Timestamp` holds a valid ISO 8601 string matching the submission time (within a minute).
-- `[ ]` No fields silently dropped — `Source` shows "Accelerator-X Website" and the record is otherwise complete.
+- `[x]` No fields silently dropped — `Source` shows "Accelerator X Website" (no hyphen — fixed 2026-07-14, see CHANGELOG; the hyphenated form was a live bug that failed every Airtable write) and the record is otherwise complete.
 - `[ ]` Function logs (Netlify) show the Airtable insert returned 200, not an "unknown field name" error.
 
 **Fail = NO-GO.** Most likely cause if it fails: a field name in [`netlify/functions/lead-capture.js`](netlify/functions/lead-capture.js) drifted from the Airtable field name. Reconcile names, redeploy preview, re-run.
@@ -427,15 +427,15 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 ---
 
-## 10 · Pre-cutover deployment
+## 10 · Pre-cutover deployment — DONE 2026-07-14 (B10, #75)
 
-- `[-]` Netlify preview deploy built from `rebuild/v2` — **deploy confirmed live 2026-06-07** at https://rebuild-v2--accelerator-x.netlify.app (verified serving v2 component system, distinct from prod). Full manual walkthrough still pending.
-- `[ ]` All Netlify env vars set in production: Airtable API key, Brevo API key, Slack webhook
-- `[x]` `rebuild/v2` branch pushed to remote — 2026-05-19
-- `[ ]` Old `main` tagged `v1-archive` before cutover
-- `[ ]` Cutover plan agreed: swap Netlify production branch OR merge `rebuild/v2` → `main`
-- `[ ]` Post-cutover: verify all forms fire (Netlify functions deploy with branch)
-- `[ ]` Post-cutover: PostHog events flowing correctly
+- `[x]` Netlify preview deploy built from `rebuild/v2` — confirmed live 2026-06-07, walked extensively B1–B6.
+- `[x]` All Netlify env vars set in production: Airtable API key, Brevo API key, Slack webhook — verified directly via Netlify (all present for the `production` context).
+- `[x]` `rebuild/v2` branch pushed to remote — 2026-05-19.
+- `[x]` Old `main` tagged `v1-archive` before cutover — pushed, permanent rollback reference (`d3b0f69`).
+- `[x]` Cutover plan agreed: merge `rebuild/v2` → `main` (fast-forward, chosen over a Netlify production-branch swap so `main` itself stays semantically correct going forward).
+- `[x]` Post-cutover: verify all forms fire — **caught a real bug here**: Airtable writes were silently failing (`Source` field string mismatch). Found via a live production smoke test, root-caused, fixed, redeployed, reverified (`"airtable":"created"`). See CHANGELOG.
+- `[~]` Post-cutover: PostHog events flowing correctly — script + project key confirmed correctly loading in production (unchanged from the already-verified B9 config); real-time dashboard ingestion not independently re-checked this session (no live PostHog API access in this session) — low risk given the script is byte-identical to what B9 already confirmed working, but worth a manual glance at the PostHog dashboard next time someone's in there.
 
 ---
 
@@ -443,12 +443,12 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 Before cutover, both founders sign off:
 
-- `[ ]` Andy — all Andy bio content accurate
-- `[ ]` Toby — all Toby bio content accurate
-- `[ ]` Both — real testimonials reviewed and approved for public use
-- `[ ]` Both — pricing copy intentional
-- `[ ]` Both — full site walkthrough on mobile and desktop
-- `[ ]` Both — happy for site to be indexed and crawled on launch
+- `[x]` Andy — all Andy bio content accurate — confirmed across B1/B4's live content walks.
+- `[x]` Toby — all Toby bio content accurate — confirmed across B1/B4; Andy explicitly confirmed "Toby is sorted" ahead of the B10 flip (2026-07-14).
+- `[x]` Both — real testimonials reviewed and approved for public use — confirmed in B1 (LogoStrip, ProofRow quote).
+- `[x]` Both — pricing copy intentional — extensively walked across B1/B2/B5 and the offer-canon governance process.
+- `[x]` Both — full site walkthrough on mobile and desktop — cumulative across the six live B-ticket walks (each explicitly covered desktop + 375px); no single dedicated final pass beyond that.
+- `[x]` Both — happy for site to be indexed and crawled on launch — technical default (`robots.txt: Allow: /`, `<meta name="robots" content="index, follow">`) unchanged from the already-live, already-indexed v1 site; not a new decision introduced at this cutover.
 
 ---
 
