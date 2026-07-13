@@ -121,8 +121,6 @@ v2 ships as **one full cutover, not piecemeal** — it is a coherent system (sha
 
 **From B5 (2026-07-13):** `info@accelerator-x.ai` Google Group — fixed (Who-can-post setting + missing SPF record, both resolved and verified live). Only remaining follow-up: Toby mirror Andy's Gmail safety-net filter on his own mailbox — not a blocker. Site-wide reply-time promise reconciled to "1 business day" everywhere (was 3-way inconsistent — see CHANGELOG).
 
-**Admin still open:** confirm Hostinger auto-renewal ON; spot-confirm HTTPS on a non-Sky connection; remove the `hardening-test-delete-me@accelerator-x.ai` test contact from Brevo list #9 (flagged in `docs/GO-LIVE-CHECKLIST.md`).
-
 > **Operating-model thread (Andy, 2026-06-11):** this repo is now the **reference implementation** for a cross-repo operating model — proactive batch planning → swarm-ready tickets → parallel agentic execution, eventually extracted to portable skills. Umbrella: [#50](https://github.com/andy-carroll/accelerator-x-website/issues/50) (children: #51 batch-health check, #52 plan-batch ceremony, #53 CI on `rebuild/*` ✅, #54 swarm pilot, #82 protocol reconciliation ✅ 2026-07-06). Not in the v2 Cutover milestone — infrastructure, not a ship blocker. The v2 ship remains priority one; protocol decisions here should be designed for export.
 
 ---

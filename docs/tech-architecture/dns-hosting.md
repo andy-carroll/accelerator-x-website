@@ -24,7 +24,7 @@
 - **Registrar:** Hostinger
 - **Registrant account:** `tobiashenry1986@gmail.com` (Toby's)
 - **Expiry:** 2028-01-26
-- **Auto-renewal:** was OFF as of 2026-06-13 — **turn this on**
+- **Auto-renewal:** ON, confirmed by Andy 2026-07-13 (was off as of 2026-06-13)
 - The domain registration at Hostinger is now purely administrative (billing/ownership). **Do not touch DNS settings in Hostinger** — DNS is managed entirely by Netlify.
 
 ---

@@ -238,7 +238,7 @@ Target: `/.netlify/functions/lead-capture`
 
 > ⚠️ **Brevo key finding (2026-06-27, B7):** the `BREVO_API_KEY` was found **deactivated** — newsletter signups were silently not reaching Brevo (the function fails-soft, so Slack still fired and users saw success). Reactivated + verified writing to list #9. **Pre-launch action:** scan Slack `#website-leads` for any newsletter signups received while the key was down and add those real subscribers to Brevo manually. **Hardening shipped 2026-07-04 (#78):** a distinct Slack alert now fires whenever a Brevo write fails or is skipped, so a dead key can't hide again.
 >
-> ⚠️ **Action needed (Andy):** the 2026-07-04 hardening E2E re-verification created one more test contact in Brevo list #9 — `hardening-test-delete-me@accelerator-x.ai`. The Brevo API key is IP-restricted to Netlify so it can't be cleaned up from outside; please remove it from the Brevo UI (same pattern as the 2026-06-27 `b7-newsletter-test-delete@accelerator-x.ai` cleanup).
+> ✅ **Resolved 2026-07-13 (Andy):** the 2026-07-04 hardening E2E re-verification's test contact — `hardening-test-delete-me@accelerator-x.ai` — removed from Brevo list #9 via the Brevo UI (same pattern as the 2026-06-27 `b7-newsletter-test-delete@accelerator-x.ai` cleanup).
 
 #### TEST CASE GNG-1 — Consent capture writes to Airtable (go/no-go)
 

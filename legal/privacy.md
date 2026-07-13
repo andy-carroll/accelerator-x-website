@@ -70,7 +70,7 @@ You can manage cookies through your browser settings. Please note that disabling
 
 If you subscribe to our newsletter or request updates, we may send you emails about insights, frameworks, events, or services relevant to Accelerator X.
 
-You can unsubscribe at any time using the link in our emails or by contacting us at `hello@accelerator-x.ai`.
+You can unsubscribe at any time using the link in our emails or by contacting us at `info@accelerator-x.ai`.
 
 ## 8. Sharing your personal data
 
@@ -134,4 +134,4 @@ If you have questions about this Privacy Policy or want to make a privacy reques
 
 **Accelerator X Ltd**  
 Company number: `16974247`  
-Email: `support@accelerator-x.ai`
+Email: `info@accelerator-x.ai`

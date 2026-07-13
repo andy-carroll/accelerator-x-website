@@ -84,4 +84,4 @@ If you have questions about these Terms, contact:
 
 **Accelerator X Ltd**  
 Company number: `16974247`  
-Email: `hello@accelerator-x.ai`
+Email: `info@accelerator-x.ai`
