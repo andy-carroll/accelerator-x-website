@@ -665,7 +665,7 @@
   <div class="ax-cta-band__inner">
     <h2 id="cta-band-heading" class="sr-only">Apply to work with us</h2>
     <a href="/contact/" class="btn btn--accent btn--lg ax-cta-band__btn">Apply to work with us</a>
-    <p class="ax-cta-band__sub">Short form. Real reply within a week.</p>
+    <p class="ax-cta-band__sub">Short form. Real reply within 1 business day.</p>
   </div>
 </section>
 
@@ -853,8 +853,8 @@
 
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">FAQList</h3>
-  <p class="ds-component-meta">Accordion Q&amp;A · Offering pages, About · <code>FAQList.css</code></p>
-  <div class="ds-component-stub"><strong>FAQList</strong> — see <code>_templates/components/FAQList.html</code></div>
+  <p class="ds-component-meta">Accordion Q&amp;A pattern · FAQ, offering pages · <code>FAQList.css</code></p>
+  <div class="ds-component-stub"><strong>FAQList</strong> — a CSS pattern (<code>.ax-faq-list</code>), not a shared component file. Each page hand-rolls its own Q&amp;A markup against these styles (see <code>faq.html</code> or any offering page).</div>
 </div>
 
 <div class="ds-subsection">
@@ -889,8 +889,8 @@
 
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">FounderCard</h3>
-  <p class="ds-component-meta">Founder profile tile · /about, home · <code>FounderCard.css</code></p>
-  <div class="ds-component-stub"><strong>FounderCard</strong> — portrait placeholder swapped for real photo when available. See <code>_templates/components/FounderCard.html</code></div>
+  <p class="ds-component-meta">Founder profile tile · /about, home, cohort funnel · <code>FounderCard.css</code></p>
+  <div class="ds-component-stub"><strong>FounderCard</strong> — a CSS pattern (<code>.ax-founder-card</code>), not a shared component file. Each page hand-rolls its own name + portrait + bio + track-record markup (see <code>about.html</code> or <code>homepage-about.html</code>). No role/title tag — both founders show as "Co-founder" only.</div>
 </div>
 
   </section>
@@ -1177,7 +1177,7 @@
 
       <p id="apply-error" class="field-helper field-helper--error hidden" role="alert" aria-live="assertive"></p>
 
-      <p class="ax-apply-form__sla">Average response time: 2 business days</p>
+      <p class="ax-apply-form__sla">Average response time: 1 business day</p>
 
       <button type="submit" class="btn btn--primary btn--lg ax-apply-form__submit">
         Submit application
@@ -1190,8 +1190,8 @@
     <span class="material-symbols-outlined ax-apply-form__success-icon" aria-hidden="true">check_circle</span>
     <h3 class="ax-apply-form__success-heading">Application received.</h3>
     <p class="ax-apply-form__success-body">
-      We'll be in touch within 2 business days. In the meantime, feel free to email us at
-      <a href="mailto:{{site:HELLO_EMAIL}}">{{site:HELLO_EMAIL}}</a>.
+      We'll be in touch within 1 business day. In the meantime, feel free to email us at
+      <a href="mailto:{{site:INFO_EMAIL}}">{{site:INFO_EMAIL}}</a>.
     </p>
   </div>
 

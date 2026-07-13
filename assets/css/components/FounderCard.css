@@ -1,7 +1,9 @@
 /* =============================================================================
-   FounderCard — founder profile tile: photo · name · role · bio · track record
-   Markup: _templates/components/FounderCard.html
-   Used on: /about, home About snippet
+   FounderCard — founder profile tile: photo · name · bio · track record
+   Pattern only — no shared markup file. Each page hand-rolls its own
+   .ax-founder-card structure (see about.html, homepage-about.html,
+   programmes/leadership-cohort.html).
+   Used on: /about, home About snippet, /programmes/leadership-cohort
    ============================================================================= */
 
 .ax-founder-card {
@@ -65,11 +67,6 @@
   line-height: var(--lh-snug);
   letter-spacing: var(--tracking-snug);
   color: var(--fg-1);
-}
-
-.ax-founder-card__role {
-  font-size: var(--text-sm);
-  color: var(--fg-3);
 }
 
 /* Social links */

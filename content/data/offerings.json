@@ -3,7 +3,7 @@
     "purpose": "Machine-readable source of truth for AX offerings. The website derives names, prices, durations and one-liners from this file. Do not hardcode these values in templates — use the build to inject them.",
     "source_of_truth": "docs/business-context/offer-canon.md",
     "version": "1.0",
-    "last_updated": "2026-06-14",
+    "last_updated": "2026-07-13",
     "phase_5_note": "Site now derives from this file via {{offering:KEY.field}} tokens (Phase 5, #57). Display names renamed; URL slugs/keys deliberately kept unchanged (no redirects). Check #10 enforces no drift.",
     "status_values": ["live", "planned", "retired-for-v2"],
     "vat": "All prices quoted +VAT (exclusive) — UK B2B norm; VAT-registered clients reclaim it. One site-wide footnote covers international (B2B place-of-supply: non-UK businesses not charged UK VAT). Decided 2026-06-14.",
@@ -14,7 +14,7 @@
     "procurement": "No discounting (prices move up, not down). Can work within a required formal process (done before, incl. a global financial consulting firm); heavier process = more scope = higher price. Light touch on site.",
     "open_decisions": [
       "PROOF (HIGH — #1 ship-blocker): asset confirmed — all early clients (Alastair/Mercury Global, Mark/W R Bennett, David/Track Record, Charlotte/Conductor) + others willing to be reference calls. Near-term (Andy, coming weeks, #22/#55): capture 2-3 concrete before/after outcomes + 'references on request'; weave into offer narrative.",
-      "ROI: reframed 2026-06-14 (v0.4) as the outcomes-first 'How to think about ROI' block (offer-canon §5.5) — 10x+ floor as a reasoning model anchored in the client's own numbers, NOT a delivered-result claim. Cross-site narrative element (prominent, referenced in several places). Real measured cases still to publish (#22/#55).",
+      "ROI: reframed 2026-06-14 (v0.4) as the outcomes-first 'How to think about ROI' block (offer-canon §5.5); the 10x+/12-month floor figure itself was retired 2026-07-13 (v0.6) — it sat next to 'we won't claim a number we haven't measured', an internal contradiction. Current framing: 'a return that dwarfs the fee', anchored in the client's own numbers, no fixed multiple/timeframe. Cross-site narrative element (prominent, referenced in several places). Real measured cases still to publish (#22/#55).",
       "Door 1 vs Door 2 Format B (HIGH): add a load-bearing routing sentence (copy / Phase 5).",
       "Differentiation / comparison content (near-term SEO/AEO, relates #43): invest in 'AX vs an AI automation agency' / 'AX vs a consultancy' comparison articles + offers-page prominence. Positioning block + 2 FAQs landed 2026-06-14 (offer-canon §1/§7); dedicated landing pages are NOT v1."
     ]

@@ -2615,8 +2615,9 @@ a:not(.btn):hover { color: var(--action-accent); }
 /* ── source: components/FAQList.css ── */
 /* =============================================================================
    FAQList — numbered Q&A list, per-offering content
-   Markup: _templates/components/FAQList.html
-   Used on: Offering details, VSL, About
+   Pattern only — no shared markup file. Each page hand-rolls its own
+   .ax-faq-list / .ax-faq-item structure (see faq.html, offering pages).
+   Used on: FAQ, offering details, About
    Mobile: accordion (collapsed by default). Desktop: open-by-default for scan.
    ============================================================================= */
 
@@ -3159,9 +3160,11 @@ a:not(.btn):hover { color: var(--action-accent); }
 
 /* ── source: components/FounderCard.css ── */
 /* =============================================================================
-   FounderCard — founder profile tile: photo · name · role · bio · track record
-   Markup: _templates/components/FounderCard.html
-   Used on: /about, home About snippet
+   FounderCard — founder profile tile: photo · name · bio · track record
+   Pattern only — no shared markup file. Each page hand-rolls its own
+   .ax-founder-card structure (see about.html, homepage-about.html,
+   programmes/leadership-cohort.html).
+   Used on: /about, home About snippet, /programmes/leadership-cohort
    ============================================================================= */
 
 .ax-founder-card {
@@ -3225,11 +3228,6 @@ a:not(.btn):hover { color: var(--action-accent); }
   line-height: var(--lh-snug);
   letter-spacing: var(--tracking-snug);
   color: var(--fg-1);
-}
-
-.ax-founder-card__role {
-  font-size: var(--text-sm);
-  color: var(--fg-3);
 }
 
 /* Social links */
@@ -6604,6 +6602,22 @@ a:not(.btn):hover { color: var(--action-accent); }
   line-height: var(--lh-relaxed);
 }
 
+.ax-contact-direct__email {
+  display: inline-block;
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--action-primary);
+  text-decoration: none;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.ax-contact-direct__email:hover {
+  color: var(--action-primary-hover);
+  text-decoration: underline;
+}
+
 .ax-contact-direct__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -6622,18 +6636,11 @@ a:not(.btn):hover { color: var(--action-accent); }
 }
 
 .ax-contact-card__name {
-  margin: 0 0 var(--space-1);
+  margin: 0 0 var(--space-4);
   font-family: var(--font-display);
   font-size: var(--text-lg);
   font-weight: var(--fw-semibold);
   color: var(--fg-1);
-}
-
-.ax-contact-card__role {
-  display: block;
-  font-size: var(--text-sm);
-  color: var(--fg-3);
-  margin-bottom: var(--space-4);
 }
 
 .ax-contact-card__links {

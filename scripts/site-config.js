@@ -26,10 +26,8 @@ const SITE_CONFIG = {
   // Company LinkedIn
   COMPANY_LINKEDIN: 'https://www.linkedin.com/company/accelerator-x-uk/',
 
-  // Founder email addresses
-  ANDY_EMAIL:       'andy@accelerator-x.ai',
-  TOBY_EMAIL:       'toby@accelerator-x.ai',
-  HELLO_EMAIL:      'hello@accelerator-x.ai',
+  // General contact address (role inbox — preferred public-facing contact)
+  INFO_EMAIL:       'info@accelerator-x.ai',
 
   // External tools
   QUIZ_URL:         'https://quiz.accelerator-x.ai',

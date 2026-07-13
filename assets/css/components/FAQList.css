@@ -1,7 +1,8 @@
 /* =============================================================================
    FAQList — numbered Q&A list, per-offering content
-   Markup: _templates/components/FAQList.html
-   Used on: Offering details, VSL, About
+   Pattern only — no shared markup file. Each page hand-rolls its own
+   .ax-faq-list / .ax-faq-item structure (see faq.html, offering pages).
+   Used on: FAQ, offering details, About
    Mobile: accordion (collapsed by default). Desktop: open-by-default for scan.
    ============================================================================= */
 
