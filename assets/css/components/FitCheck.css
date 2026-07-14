@@ -48,6 +48,14 @@
   text-wrap: balance;
 }
 
+.ax-fit-check__sub {
+  margin: 0 0 var(--space-8);
+  font-size: var(--text-lg);
+  color: var(--fg-2);
+  line-height: var(--lh-relaxed);
+  max-width: 60ch;
+}
+
 /* Columns ------------------------------------------------------------------- */
 .ax-fit-check__cols {
   display: grid;
