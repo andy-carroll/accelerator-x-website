@@ -230,7 +230,7 @@ Target: `/.netlify/functions/lead-capture`
 - `[x]` Submits without JS errors — verified 2026-06-27 (B7)
 - `[x]` Success state displays correctly — verified (B7)
 - `[x]` Honeypot invisible; not submitted — function checks `_honeypot` (B7)
-- `[x]` All required fields block submission if empty — function guards; checkbox `required` (B7)
+- `[x]` All required fields block submission if empty — **B7's original check was incomplete**: it verified the server-side function guard + that `required` was present in the markup, but never an actual live-browser empty submission — which would have caught that `novalidate` + a missing `checkValidity()` call in `forms.js` made every `required` attribute decorative. Found 2026-07-14 (Andy), fixed + verified end-to-end in-browser (#88, see CHANGELOG): empty submit now blocks client-side with no request fired; a fully-completed submission still passes and submits correctly.
 - `[x]` Consent checkbox required — cannot submit without it — `required` on the input (B7)
 - `[x]` **Slack:** `#website-leads` notification fires — verified (B7, confirmed by Andy)
 - `[ ]` **Email:** Brevo welcome automation triggers for new contact (not tested — ApplyForm writes to Airtable, not Brevo; this line applies to the newsletter path)
