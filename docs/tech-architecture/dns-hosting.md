@@ -107,6 +107,16 @@ If HTTPS stops working: go to Netlify → Domain management → HTTPS → **"Ren
 
 ## Incident log
 
+### 2026-07-14 — "prod is fucked" was NordVPN's Threat Protection, not the site
+
+**Minutes after the B10 cutover flip, Andy's laptop rendered the live site as broken and unstyled** (no CSS, duplicated nav, unfamiliar old copy) and a NordVPN browser-extension warning flagged `accelerator-x.ai` as "Unsafe — Phishing". Loaded perfectly on mobile data on the same home WiFi. Turning off the VPN connection itself didn't fix it; **pausing NordVPN's separate "Threat Protection" feature did** — confirmed via NordVPN's own activity log showing `https://accelerator-x.ai` — Malicious website — Blocked.
+
+**The site itself was never broken.** `curl` from an independent sandbox throughout the incident consistently returned `HTTP 200` with correct, current v2 content (matching what was actually deployed) — the broken rendering Andy saw was NordVPN's extension intercepting and replacing the page client-side, not anything the origin served.
+
+**This is the same failure class as the 2026-06-13 Sky Broadband Shield incident below** — a third-party security/content-filtering product heuristically misflagging the domain (again plausibly `.ai` TLD + a relatively recent DNS/nameserver history reading as "new/suspicious"), not a real compromise or outage. Two independent vendors (Sky, NordVPN) have now false-flagged this exact domain the same way.
+
+**Lesson (extending the one below):** when a **specific person** reports the live site as broken/unsafe while it verifies clean from an independent check, suspect a **client-side security product** (ISP content filter, VPN threat-protection, antivirus browser extension) before suspecting the site, DNS, or hosting. Ask what security software/extensions are active before deep-diagnosing the origin. Not yet actioned: submitting `accelerator-x.ai` to NordVPN as miscategorised (same idea as the still-open Sky TODO above) — worth doing if this recurs for another visitor.
+
 ### 2026-06-13 (part 2) — CORRECTION: the "outage" was an ISP filter, not DNS
 
 **The site was never actually down.** A full diagnostic on 2026-06-13 proved `accelerator-x.ai` was serving `HTTP 200` from Netlify globally the whole time, with a valid SSL cert and correct DNS. The perceived outage was **Sky Broadband Shield** (Sky's content filter) DNS-blocking the domain *on Andy's home connection only*.
