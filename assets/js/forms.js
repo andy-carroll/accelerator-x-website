@@ -91,9 +91,20 @@
     leadForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (isSubmitting.get(leadForm)) return;
-      isSubmitting.set(leadForm, true);
 
+      // Form carries `novalidate` (suppresses the browser's implicit validate-on-submit)
+      // so custom JS controls exactly when validation runs — but nothing ever called it,
+      // so every `required` attribute in the markup was decorative. Must run after
+      // normaliseWebsite() so a bare domain ("acme.com") gets its https:// prefix before
+      // the type="url" constraint checks it, not before.
       normaliseWebsite();
+
+      if (!leadForm.checkValidity()) {
+        leadForm.reportValidity();
+        return;
+      }
+
+      isSubmitting.set(leadForm, true);
       clearError(leadError);
 
       const btn          = leadForm.querySelector('button[type="submit"]');
