@@ -8,8 +8,8 @@ excerpt: "Almost everyone is using AI. Almost nobody feels confident using it. T
 slug: "the-hard-truth-about-ai-in-the-workplace"
 bluf: "AI adoption is stalling because most people are using it like a smarter search engine. The fix isn’t more tools or automation — it’s building the skills, confidence, and habits that make the tools worth having."
 lead_magnet_cta: "We build systems like this every week. Join 5,000+ Founders and CTOs receiving the Accelerator X dispatch."
-next_article_url: "/insights/articles/the-implementation-gap.html"
-next_article_title: "The Implementation Gap: Why AI Pilots Stall"
+next_article_url: "/insights/articles/why-ai-strategy-is-the-wrong-question.html"
+next_article_title: "Why 'What's Your AI Strategy?' Is the Wrong Question"
 ---
 
 ## The hard truth
