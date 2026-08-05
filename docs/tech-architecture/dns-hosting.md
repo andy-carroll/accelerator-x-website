@@ -107,6 +107,20 @@ If HTTPS stops working: go to Netlify → Domain management → HTTPS → **"Ren
 
 ## Incident log
 
+### 2026-08-05 — NordVPN Threat Protection blocked `quiz.accelerator-x.ai` — third occurrence of the same failure class
+
+**Andy hit a NordVPN "Threat Protection Pro" block screen** ("We blocked this website for your protection because it's a known phishing site") clicking through to `quiz.accelerator-x.ai` — the first time this failure class has hit the quiz subdomain specifically, rather than the apex domain (the 2026-06-13 and 2026-07-14 incidents below).
+
+**Checked independently before assuming the same cause applied, since the quiz runs on separate infrastructure (Vercel, not Netlify) from the two prior incidents:**
+- SSL: valid Let's Encrypt cert, correct `CN=quiz.accelerator-x.ai`, not expired (expires 2026-10-13).
+- Headers: clean Vercel/Next.js response — `HTTP/2 200`, `strict-transport-security` present, `server: Vercel`, `x-vercel-cache: HIT` with an `age` header showing **this exact response has been served unchanged for ~18 days** — not the signature of a freshly-compromised or altered page.
+- Content: fetched directly and read in full — the real "Is your organisation ready for AI?" landing page, no injected scripts, no credential-harvesting form, no unexpected redirects. Matches what it's supposed to be.
+- No public security-researcher writeups or news coverage of this domain found via web search — not itself proof of anything, but a mild signal against "known, actively-discussed phishing domain."
+
+**Not independently confirmed:** whether Google Safe Browsing itself (not just NordVPN's own proprietary list) flags this domain — that would matter far more, since it would warn Chrome users broadly, not just NordVPN's userbase. Both the sandboxed browser tooling and a plain fetch were blocked/unable to render `transparencyreport.google.com`'s query result for this session. **Needs a founder check**, unrestricted: `transparencyreport.google.com/safe-browsing/search?url=quiz.accelerator-x.ai` or virustotal.com.
+
+**This is very likely the same failure class as the two incidents below** (`.ai` TLD + relatively young DNS/hosting history reading as "new/suspicious" to heuristic classifiers) — now a third occurrence, and the first to hit a specific subdomain rather than the apex. **The "not yet actioned" item from 2026-07-14's entry (submit to NordVPN as miscategorised) was deferred as "worth doing if this recurs" — it has now recurred a third time.** Submitting `quiz.accelerator-x.ai` (and, if still live, `accelerator-x.ai`) to NordVPN's miscategorisation report is now overdue, not optional. This needs Andy — it's a form submission, not something to action without him.
+
 ### 2026-07-14 — "prod is fucked" was NordVPN's Threat Protection, not the site
 
 **Minutes after the B10 cutover flip, Andy's laptop rendered the live site as broken and unstyled** (no CSS, duplicated nav, unfamiliar old copy) and a NordVPN browser-extension warning flagged `accelerator-x.ai` as "Unsafe — Phishing". Loaded perfectly on mobile data on the same home WiFi. Turning off the VPN connection itself didn't fix it; **pausing NordVPN's separate "Threat Protection" feature did** — confirmed via NordVPN's own activity log showing `https://accelerator-x.ai` — Malicious website — Blocked.
