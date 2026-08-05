@@ -257,7 +257,7 @@ Update `CLAUDE.md` (or the relevant `.claude/rules/` file) when workflow or poli
 <!-- Session 20260329-180314 logged -->
 
 <!-- SESSION_PROTOCOL:START -->
-- Session ID: 20260715-010600
-- Updated: 2026-07-15T00:06:02.580Z
+- Session ID: 20260805-095458
+- Updated: 2026-08-05T08:55:01.157Z
 - Mode: write
 <!-- SESSION_PROTOCOL:END -->
