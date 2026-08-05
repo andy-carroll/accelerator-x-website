@@ -312,7 +312,10 @@ async function build() {
       og_image: `${siteUrl}/assets/images/og-image-1200.png`,
       og_url: `${siteUrl}/insights/articles/${slug}.html`,
       author_linkedin: authorProfile ? authorProfile.linkedin || frontmatter.author : frontmatter.author,
-      // Dynamic conversion tokens (10/10 UX elements) — optional, empty allowed
+      // Dynamic conversion tokens (10/10 UX elements) — lead_magnet_cta is required
+      // (it renders a real CTA card as of #94; an empty value silently shipped a
+      // blank pitch, and the token-substitution gate couldn't catch that). The
+      // others remain optional, empty allowed.
       bluf: frontmatter.bluf,
       lead_magnet_cta: frontmatter.lead_magnet_cta,
       next_article_url: frontmatter.next_article_url,
@@ -321,7 +324,7 @@ async function build() {
     };
 
     articleHtml = resolveArticleTokens(articleHtml, articleTokens, {
-      required: ['title', 'author', 'published', 'excerpt', 'content', 'slug', 'site_url'],
+      required: ['title', 'author', 'published', 'excerpt', 'content', 'slug', 'site_url', 'lead_magnet_cta'],
       context: `Article "${frontmatter.title || file}"`,
     });
 
