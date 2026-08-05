@@ -151,4 +151,4 @@ The window is open. It won't stay open indefinitely.
 
 ---
 
-*Accelerator-X partners with mid-sized businesses to build lasting AI capability. We work with leadership teams who know AI matters but want to do it properly — not quickly.*
+*Accelerator X partners with mid-sized businesses to build lasting AI capability. We work with leadership teams who know AI matters but want to do it properly — not quickly.*

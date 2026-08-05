@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is prompt engineering dead?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not exactly. But the version of it that got sold hard over the last two or three years, the idea that carefully chosen wording is a specialist skill worth building a training programme around, is fading fast, and it should. Prompt engineering mattered when models were weak and easily confused. It matters far less now that they aren't, and it's already being replaced by a different kind of skill: knowing what an AI system needs access to, not what to type into it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What was prompt engineering actually solving for?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It was compensating for models that got confused easily, lost the thread of an instruction halfway through, and needed heavy scaffolding to produce anything usable. The clever wording worked because it patched a real weakness in the model, not because certain phrases carry some inherent power."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't clever wording matter as much anymore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the models themselves got much better at parsing plainly worded, slightly messy human intent and filling in the reasonable gaps, so the tricks that used to change the outcome mostly stopped mattering. A blunt, direct instruction now gets you most of the way to a good result far more often than it used to."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What actually determines whether an AI system is useful now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Whether it has access to the real information and tools the task needs, not how well the instruction is worded. A plain, ordinary request against a system properly connected to your actual business data will beat a beautifully crafted prompt pointed at a system with none of that access, every time."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

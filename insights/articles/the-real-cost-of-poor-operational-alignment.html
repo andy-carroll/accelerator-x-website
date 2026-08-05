@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the cost of poor operational alignment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The cost of poor operational alignment is never a single figure. It is two separate ledgers, one visible and routinely budgeted for, one invisible and almost never costed, and in every business I have worked with, the second ledger turns out to be the larger of the two."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do teams lose alignment in the first place?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Teams lose alignment because the three things that ought to sit together, what was promised, what people spend their day doing, and how the business measures success, actually live in three separate places that rarely speak to one another."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the direct costs of poor alignment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The direct costs are the ones you would expect: the last-minute scramble to save a commitment nobody was tracking properly, the dropped ball that turns into an apology email, and worst of all, leadership hearing about a slipping delivery from the client's side of the table rather than from their own systems, when it could still have been managed quietly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the indirect costs, and why do they matter more?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The indirect costs never arrive as a single event, which is exactly why they never get costed: good people quietly disengaging because they can no longer answer why their work matters commercially, leadership burning real hours every week reconstructing a picture of the business that should already be visible to them, and decisions being made later, and worse, because the information needed to make them well was scattered across someone's inbox and someone else's head."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

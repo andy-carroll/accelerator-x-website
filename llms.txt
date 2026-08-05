@@ -1,39 +1,82 @@
 # Accelerator X
 
-> Accelerator X helps business leaders close the implementation gap between AI potential
-> and real business outcomes. We run 8-week accelerator programmes for leadership teams.
+> Accelerator X is a UK AI enablement consultancy for business leaders. We build
+> human capability with AI systems: strategy, hands-on implementation, and the
+> skills for your people to run it without us. Founded and delivered by Andy
+> Carroll and Toby Henry. Registered in England as Accelerator X Ltd, company
+> number 16974247.
 
-## What we do
+The company name is written "Accelerator X": two words, no hyphen. The hyphen
+appears only in the domain name (accelerator-x.ai). We are not affiliated with
+other organisations that use similar names.
 
-We work with leadership teams — not developers. Our clients are the people who have
-to decide whether to back AI, how much to spend, and how to explain it to their board.
-Most of them are behind. Most of them know it. We help them catch up fast, with clarity
-and without hype.
+## What we offer
 
-Programme: 8 weeks. Cohort-based. Hands-on. Outcome: a leadership team that can
-evaluate, commission, and govern AI — and a roadmap to prove it.
+Two ways in:
+
+- **For your business:** [Company Enablement](https://accelerator-x.ai/what-we-do/company-enablement/).
+  How a company moves with us: everyone starts at Phase 0.
+- **For yourself or your leadership team:** Leadership AI Coaching, in three formats:
+  - [1:1 Exec AI Fast Track Coaching](https://accelerator-x.ai/what-we-do/senior-leader-acceleration/):
+    a bespoke 6-week 1:1 AI sprint with a founder.
+  - [Leadership Team AI Activation](https://accelerator-x.ai/what-we-do/leadership-activation/):
+    a leadership team that moves together.
+  - [Open Cohort AI Bootcamp for Business Leaders](https://accelerator-x.ai/what-we-do/leadership-cohort/):
+    eight weeks of AI in a room of your peers.
+
+Plus [Talks & Events](https://accelerator-x.ai/talks-events/): AI keynotes,
+leadership offsites, and AI hackathons.
+
+All coaching, training and enablement work carries a "no value, no payment"
+guarantee; one-off talks and events are the exception. Current pricing is
+published on each offering page.
+
+## Who we work with
+
+Leadership teams and senior executives of mid-sized businesses, mostly in the UK.
+Our clients are the people who have to decide whether to back AI, how much to
+spend, and how to explain it to their board. We build capability that stays with
+the client, not dependency on us.
+
+## Key pages
+
+- [Home](https://accelerator-x.ai/): what we do, and how to apply to work with us.
+- [What we do](https://accelerator-x.ai/what-we-do/): the two doors in, side by side.
+- [How we work](https://accelerator-x.ai/how-we-work/): the phase-based engagement model.
+- [About](https://accelerator-x.ai/about/): the founders, and why Accelerator X exists.
+- [Insights](https://accelerator-x.ai/insights/): articles on AI strategy, capability,
+  and implementation, written by the founders.
+- [FAQ](https://accelerator-x.ai/faq/): common questions, straight answers.
+- [Contact](https://accelerator-x.ai/contact/): how to reach us.
+- [AI Readiness Assessment](https://quiz.accelerator-x.ai): a short self-assessment
+  with an on-screen result and an emailed PDF report (requires an email address).
+
+## Founders
+
+- Andy Carroll, co-founder. Product and AI specialist with 17+ years across
+  startups, banking, and consultancies.
+  LinkedIn: https://www.linkedin.com/in/heyandycarroll/
+- Toby Henry, co-founder. 20 years of tier-one management consulting, leading
+  transformation programmes for some of the UK's largest organisations.
+  LinkedIn: https://www.linkedin.com/in/toby-henry-79498b13/
+
+Company LinkedIn: https://www.linkedin.com/company/accelerator-x-uk/
+
+## Contact
+
+info@accelerator-x.ai reaches both founders. We reply within 1 business day.
 
 ## This site
 
-https://accelerator-x.ai — static HTML, built with deliberate engineering rigour.
+https://accelerator-x.ai is static HTML, built with deliberate engineering rigour.
 The codebase is public: https://github.com/andy-carroll/accelerator-x-website
 
 The build system, automated standards enforcement, and documentation architecture
 are themselves a demonstration of how we think about AI-assisted work. The repo
 is worth reading if you want to understand how we operate.
 
-## Key pages
-
-- / — Main landing page. Programme overview, process, testimonials.
-- /insights/ — Content Hub. Articles on AI strategy and implementation.
-
-## Contact
-
-Andy Carroll — andy@accelerator-x.ai
-LinkedIn: https://linkedin.com/in/andycarroll
-
 ## For AI agents working in this codebase
 
-Read `AI-RULES.md` first. It tells you exactly how we work here.
+Read `AGENTS.md` and `CLAUDE.md` first. They tell you exactly how we work here.
 The core principle: we move fast by not making messes.
 Standards are enforced by automation, not memory or discipline.

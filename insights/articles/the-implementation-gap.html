@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do AI pilots stall in large organisations?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Pilots stall because success was never given anywhere to go. The technology proves itself long before the organisation has decided who owns it, what it is worth, and what changes once it works, and by the time that gap becomes obvious, the pilot has already lost its momentum."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when the pilot's sponsor moves on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The pilot loses its only source of political cover. Unless someone else has been explicitly given ownership before that happens, the initiative drifts, deprioritised by everyone below the sponsor who never had the authority, or the appetite, to keep pushing it themselves."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't a working pilot scale on its own?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because proving the technology works and proving it deserves permanent funding are two different tests, and most organisations only design the pilot to pass the first one. Unless success was tied to a P&L line or a board-level outcome from the start, there is no mechanism that turns \"it works\" into \"we are now doing this properly.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does middle management quietly resist a pilot that's already working?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because it threatens the existing power structure, and almost nobody will say that out loud. A department head does not need to openly oppose the pilot; they only need to be slightly too slow giving it access to data, people, or time, and it will starve without a single visible act of resistance."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

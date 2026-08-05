@@ -336,10 +336,10 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` `meta description` accurate, unique, and ≤160 chars on every page
 - `[ ]` `<h1>` — exactly one per page, contains primary keyword
 - `[ ]` Heading hierarchy logical (h1 → h2 → h3, no skips)
-- `[ ]` `canonical` URL set correctly on every page
+- `[x]` `canonical` URL set correctly on every page — closed 2026-08-05 (#81): `privacy.html`/`terms.html` were the only pages without one (added); insights index canonicalised `/insights/index.html` → `/insights/` to stop contradicting the sitemap; all other pages verified present + correct
 - `[ ]` `robots.txt` — not blocking crawlers; correct disallow rules
-- `[ ]` `sitemap.xml` generated, accurate, and submitted to Google Search Console
-- `[ ]` `llms.txt` — content accurate and up to date (for AI crawlers)
+- `[~]` `sitemap.xml` generated, accurate, and submitted to Google Search Console — generated + accurate as of 2026-08-05 (#81: 20 → 29 URLs, the five offering pages / `/faq/` / cohort funnel were missing; offering URLs now derive from `offerings.json`; `lastmod` git-honest). **GSC submission = Andy, founder access, still open**
+- `[x]` `llms.txt` — content accurate and up to date (for AI crawlers) — rewritten for v2 2026-08-05 (#81/#43): was still describing the v1 single-programme site with a stale `andy@` contact and wrong LinkedIn URL
 - `[ ]` No broken internal links (run a crawl tool on Netlify preview)
 - `[ ]` Page speed: Lighthouse ≥95 mobile / ≥98 desktop (target from ROADMAP)
 - `[ ]` Core Web Vitals: LCP, CLS, INP all green
@@ -354,11 +354,11 @@ Target: `/.netlify/functions/newsletter-subscribe`
 
 ### 6c — Structured data (JSON-LD)
 
-- `[ ]` Organization schema: name, URL, logo, description, founders, sameAs (LinkedIn) — all accurate
+- `[x]` Organization schema: name, URL, logo, description, founders, sameAs (LinkedIn) — all accurate — enriched 2026-08-05 (#81): `sameAs` + Companies House record (16974247, verified live); founders' `Person` entities + LinkedIn `sameAs` via site tokens
 - `[ ]` WebSite schema: correct
 - `[ ]` ProfessionalService schema: serviceType, areaServed, pricing — all accurate and current
 - `[ ]` WebPage schema on homepage — correct
-- `[ ]` FAQPage schema added to FAQ sections (when live) — AI systems extract Q&A pairs directly
+- `[~]` FAQPage schema added to FAQ sections (when live) — AI systems extract Q&A pairs directly — FAQ hub + all four offering pages already carried it (B3/B5-verified); articles now auto-derive it from their question-led H2s at build time, 2026-08-05 (#43, 8 of 14 qualify — the 6 statement-H2 articles are the remaining editorial gap, tracked on #43)
 - `[ ]` BreadcrumbList schema on inner pages
 - `[ ]` Person schema for each founder (if /about page warrants it)
 - `[ ]` Validate all schemas at schema.org validator and Google Rich Results Test
@@ -369,15 +369,15 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` `og:image:alt` present and descriptive
 - `[ ]` All OG tags accurate on every page
 - `[ ]` Twitter card tags correct
-- `[ ]` `insights/index.html` — add `og:image` + `twitter:card` (built via `build-hub.js`; minor shareability gap flagged in B8/#73, non-blocking)
+- `[x]` `insights/index.html` — add `og:image` + `twitter:card` (built via `build-hub.js`; minor shareability gap flagged in B8/#73, non-blocking) — done 2026-08-05 (#40), plus `og:url`, canonical fix, de-jargoned title, convention-length meta description, and an editorial intro paragraph (the page had almost no indexable prose)
 - `[ ]` LinkedIn Post Inspector: no "No author found" errors (may need cache clear)
 
 ### 6e — AEO specific
 
-- `[ ]` `llms.txt` at root — comprehensive, structured, accurate
+- `[x]` `llms.txt` at root — comprehensive, structured, accurate — rewritten for v2 2026-08-05 (#81/#43): Two Doors + canonical offering names/links from `offerings.json`, guarantee (with the Talks & Events exception), founders + correct LinkedIn URLs, `info@`, company number, explicit brand-spelling note; no prices (each offering page carries current pricing)
 - `[ ]` Key facts (who we are, what we do, pricing range, process) appear as clear prose in the body of the page — not only in metadata
 - `[ ]` FAQ content uses natural question phrasing that matches how people ask AI assistants
-- `[ ]` Company name, founders' names, and service names consistent across all pages and structured data
+- `[~]` Company name, founders' names, and service names consistent across all pages and structured data — site-side closed 2026-08-05 (#81: the two live "Accelerator-X" hyphenations fixed at source — article 006 footer, testimonial quote). **Still hyphenated at account level, Andy to fix: quiz subdomain `<title>` ("AI Readiness Assessment | Accelerator-X", separate deployment) and Brevo sender name ("Accelerator-X Team")**
 - `[ ]` `<!-- FOR AI SYSTEMS -->` comment in homepage HTML is accurate (currently in index.html `<head>`)
 
 ---

@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why do exec teams block AI adoption?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Almost never on purpose, and almost never with a clear no. An exec team blocks AI adoption by agreeing to it in the room, then quietly failing to give it the calendar space, the authority or the admission of past mistakes it actually needs in order to work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does an exec's diary reveal that a steering committee vote didn't?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The vote tells you what a leader is willing to say in front of their peers. The diary tells you what they are actually willing to give up for it, and those are frequently two different answers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do function heads insist their department is different?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because it is a respectable way to avoid admitting the process needs to change, and because it is often partly true, which is exactly what makes it so effective."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why doesn't a group endorsement create real commitment?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because a room full of nodding heads lets every individual leader shelter inside the collective yes, without any one of them ever having to say what they personally will do differently."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

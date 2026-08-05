@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does an AI transformation actually look like from the inside?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It looks far messier than any case study makes it sound: old systems still half-running, new ones still half-trusted, and real people caught in between. I know this because for the first time in twenty years, the mess is mine rather than a client's."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does the same failure keep showing up in every transformation I have run?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because agreeing something and building a dependable route from that agreement to finished work are two different achievements, and almost no organisation, mine now included, has ever properly built the second one."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does AI transformation actually work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, in the specific places where you can point at a mechanism actually running inside a real, trading business under real constraints, rather than describe it on a slide. Everywhere else, the honest answer is \"not yet, and we are finding out.\""
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is actually hard about running real people through this?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The technology is close to the easy part. The hard part is that every process you rebuild belongs to somebody, and that person's working week, sometimes their sense of what their job even is, shifts underneath them while you are doing it."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

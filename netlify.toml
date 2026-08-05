@@ -64,7 +64,23 @@
   [headers.values]
     Cache-Control = "public, max-age=300"
 
-# Quiz proxying (removed 2026-07-04, #78): the /quiz/aireadiness redirect blocks shipped
-# with a literal YOUR_VERCEL_DEPLOYMENT_URL placeholder (502s; nothing linked to it —
-# B8/#73 crawl). Re-add per docs/tech-architecture/dns-hosting.md when a quiz surface
-# is actually deployed behind a path proxy.
+# Quiz path 301s (#81): the quiz lives on its own subdomain (site-config.js QUIZ_URL);
+# nothing on the site links to /quiz/* any more, but the path was published
+# historically (the pre-#78 proxy config), so old or bookmarked inbound links should
+# resolve to the live quiz rather than 404. The subdomain serves the assessment at
+# its root — deep paths like /quiz/aireadiness no longer exist there (verified live
+# 2026-08-05), so every /quiz path collapses to the root. This supersedes the
+# unmerged claude/crazy-shirley-540e0d branch, whose 301s targeted that now-dead
+# deep path. (The #78 removal note this replaces covered the same paths as broken
+# status-200 proxies to a placeholder host.)
+[[redirects]]
+  from = "/quiz"
+  to = "https://quiz.accelerator-x.ai/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/quiz/*"
+  to = "https://quiz.accelerator-x.ai/"
+  status = 301
+  force = true

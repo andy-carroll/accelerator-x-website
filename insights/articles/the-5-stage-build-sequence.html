@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a pilot-to-production AI framework?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A pilot-to-production AI framework is the set of organisational checkpoints, not technical ones, that decide whether a working AI pilot becomes a durable part of how a business runs. Most pilots that quietly die were never killed by the model. They failed a test nobody had written down."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the pilot actually work on your real, messy data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if it was tested against the data your business actually produces, not a curated sample built to make the demo land well. A pilot proven on clean data has proven almost nothing about the business it now has to survive inside."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who owns this once the initial excitement fades?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It needs one named person whose job is measurably different if the pilot succeeds or fails, not a committee and not \"IT will look after it.\" Committees are accountable for nothing in particular, which in practice means nothing at all."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it fit into the systems and habits people already use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only if using it is easier than not using it, from inside the tools people already have open all day. Anything that requires a new login, a separate platform, or a parallel step is asking to be the first thing dropped the moment the week gets busy."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

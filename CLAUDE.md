@@ -22,7 +22,9 @@
 - Build plan: `docs/design_handoff_website_rebuild/README.md` · design system: `…/design-system/DESIGN.md` · wireframes: `…/wireframes/`
 - Built through Phase 2 Wave D + Phase 3 page assembly (4 inner pages live: `/what-we-do`, `/how-we-work`, `/about`, `/contact`). Component-level detail in `CHANGELOG.md` + `.claude/sessions/`.
 
-**Last session:** 2026-07-15 — Fixed a live money-path bug (Apply form accepted fully empty submissions, #88) and rebalanced Company Enablement's lopsided fit-check list (#90) — both shipped straight to `main`; imagery gap (#89) and a stray unmerged branch flagged, not actioned.
+**Last session:** 2026-08-05 — SEO indexation batch (#81 + the session-executable parts of #40/#43, folded into the content push per Andy's 2026-08-05 approval): sitemap coverage fixed (20 → 29 URLs — all five offering pages, `/faq/` and the cohort funnel page were missing entirely; offering URLs now derive from `offerings.json`; `lastmod` now git-honest instead of "today on every build"), FAQPage JSON-LD auto-derived from question-led H2s onto 8 of 14 articles (new `scripts/hub-utils.js` + 13 unit tests), insights-index canonical/title/description/intro fixed, Organization JSON-LD enriched (Companies House + founder `sameAs`), `llms.txt` rewritten for v2 (was still describing the v1 single-programme site), two live "Accelerator-X" hyphenations fixed at source, `/quiz/*` 301s restored (supersedes stray branch `claude/crazy-shirley-540e0d`, whose target is now a 404). **Founder actions flagged on #81: verify the domain in Google Search Console, submit `sitemap.xml`, request indexing (~10 min) — the technical fixes stay dark without it.**
+
+**Earlier (2026-07-21, cloud sessions):** Content batch #93 — 8 new insights articles + quality refresh of the 5 weak originals (closing a 4.5-month publishing gap) — and the canonical tracking plan doc (#92). Both landed via PRs; see CHANGELOG.
 
 **Earlier (2026-07-14, early):** Post-flip scare resolved: what looked like a broken production site immediately after the B10 cutover was NordVPN's own Threat Protection browser extension false-flagging accelerator-x.ai as malicious — the same failure class as June's Sky Broadband Shield incident. Site was never actually broken; documented in the DNS/hosting incident log.
 
@@ -63,11 +65,11 @@ v2 shipped as **one full cutover, not piecemeal** — `main` was fast-forwarded 
 
 ## Next (post-launch)
 
-1. **Monitor.** Watch `#website-leads` for a day or two to confirm the Airtable fix holds under real traffic (not just the smoke test) and that nothing else regressed in the flip.
+1. **Andy: Google Search Console (~10 min, the highest-leverage indexation step).** Verify `accelerator-x.ai` as a property (DNS TXT via Netlify DNS, or HTML-file upload), submit `sitemap.xml`, request indexing on `/`, `/what-we-do/`, `/insights/`. Everything technical on #81 shipped 2026-08-05 — without GSC the site stays invisible on its own name. Also account-level, same issue: quiz subdomain still titles itself "Accelerator-X" (separate deployment), Brevo sender name is "Accelerator-X Team".
 2. **Toby** should mirror Andy's Gmail safety-net filter for `info@accelerator-x.ai` on his own mailbox (per-mailbox, not domain-wide — logged in go-live checklist §4, not a blocker).
 3. **The deferred em-dash pass** (title-separator convention — `<title>`/`og:title`/`twitter:title`/JSON-LD names sitewide) is still queued; Andy's call on timing now that the flip itself is done.
-4. **Everything else is `post-launch`**, already tracked and not urgent: legal-page v2 reconciliation (#87), SEO/AEO (#40, #43), proof upgrade (#55), FitCheck componentise (#49), privacy/case-studies (#46), dead CSS (#44), cohort surface (#30, #64), real photography to replace the 4 stock hero images (#89, waiting on Andy), stale reply-time promise on the orphaned `cohort.html` (#91).
-5. **Stray branch to look at:** `claude/crazy-shirley-540e0d` (local + remote) carries one unmerged commit ("fix(netlify): replace placeholder quiz proxy with 301 to live subdomain") with no open PR — found during a 2026-07-14 git audit, left untouched pending Andy's call on whether it's abandoned or forgotten work.
+4. **Everything else is `post-launch`**, already tracked and not urgent: legal-page v2 reconciliation (#87), the remaining SEO/AEO depth (#40, #43 — the indexation-hygiene layer shipped 2026-08-05; what's left is editorial: FAQ blocks for the 6 statement-H2 articles, comparison content, keyword strategy), proof upgrade (#55), FitCheck componentise (#49), privacy/case-studies (#46), dead CSS (#44), cohort surface (#30, #64), real photography to replace the 4 stock hero images (#89, waiting on Andy), stale reply-time promise on the orphaned `cohort.html` (#91).
+5. **Stray branch — now safe to delete (Andy's call):** `claude/crazy-shirley-540e0d`'s one unmerged commit (quiz 301s) was superseded 2026-08-05 — the same redirects landed via #81 with a corrected target (the branch's deep-path target now 404s on the quiz subdomain). Nothing of value remains on the branch.
 
 ---
 

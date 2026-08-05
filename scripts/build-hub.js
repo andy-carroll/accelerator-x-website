@@ -1,12 +1,15 @@
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 const { resolveComponentTokens, resolveSiteTokens, resolveArticleTokens } = require('./build-components');
+const { extractFaqPairs, renderFaqJsonLd } = require('./hub-utils');
 
 // Configuration
 const CONTENT_DIR = path.join(__dirname, '../content/articles');
 const AUTHORS_PATH = path.join(__dirname, '../content/data/authors.json');
+const OFFERINGS_PATH = path.join(__dirname, '../content/data/offerings.json');
 const OUTPUT_DIR = path.join(__dirname, '../insights');
 const TEMPLATES_DIR = path.join(__dirname, '../_templates');
 
@@ -280,7 +283,15 @@ async function build() {
     
     // Convert markdown to HTML
     const htmlContent = marked.parse(content);
-    
+
+    // FAQPage JSON-LD (#43): derived from the article's own question-led H2s +
+    // the answer prose directly below them, so the schema can never drift from
+    // the visible content. Articles without question H2s simply get no block.
+    const faqPairs = extractFaqPairs(content);
+    if (faqPairs.length > 0) {
+      console.log(`  ↳ FAQPage JSON-LD: ${faqPairs.length} Q&A pair(s)`);
+    }
+
     // Load fresh template for every article
     let articleHtml = loadTemplate('article.html');
 
@@ -306,6 +317,7 @@ async function build() {
       lead_magnet_cta: frontmatter.lead_magnet_cta,
       next_article_url: frontmatter.next_article_url,
       next_article_title: frontmatter.next_article_title,
+      faq_jsonld: renderFaqJsonLd(faqPairs),
     };
 
     articleHtml = resolveArticleTokens(articleHtml, articleTokens, {
@@ -349,6 +361,54 @@ async function build() {
 }
 
 /**
+ * Load the URL paths of live offerings from offerings.json, so new offering
+ * pages join the sitemap automatically instead of drifting out of it (the
+ * five service-line pages were entirely missing from the sitemap until
+ * 2026-08-05, #81 — the exact drift this derivation prevents).
+ * @returns {string[]} Site-relative paths (e.g. '/what-we-do/company-enablement/')
+ */
+function loadLiveOfferingPaths() {
+  try {
+    const { offerings = [] } = JSON.parse(fs.readFileSync(OFFERINGS_PATH, 'utf-8'));
+    return offerings
+      .filter((o) => o.status === 'live' && typeof o.slug === 'string' && o.slug.startsWith('/'))
+      .map((o) => o.slug);
+  } catch (error) {
+    console.warn(`⚠️ Could not read offerings for sitemap (${error.message}). Offering pages will be missing from sitemap.xml.`);
+    return [];
+  }
+}
+
+/**
+ * Resolve an honest <lastmod> for a built page: the date of the last commit
+ * that touched the file. The previous behaviour stamped every static URL with
+ * the build date, which claimed "changed today" on every build — a signal
+ * search engines learn to ignore. Files with uncommitted changes (or when git
+ * is unavailable) fall back to today, which is then accurate.
+ * @param {string} relPath - Repo-relative path of the built page
+ * @param {string} repoRoot - Absolute repo root
+ * @param {string} fallback - ISO date used when no git date is resolvable
+ * @returns {string} ISO date (YYYY-MM-DD)
+ */
+function resolveLastmod(relPath, repoRoot, fallback) {
+  try {
+    const gitOpts = { cwd: repoRoot, stdio: ['ignore', 'pipe', 'ignore'] };
+    const dirty = execSync(`git status --porcelain -- "${relPath}"`, gitOpts).toString().trim();
+    if (dirty) return fallback;
+    const committed = execSync(`git log -1 --format=%cs -- "${relPath}"`, gitOpts).toString().trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(committed) ? committed : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+// Map a site-relative URL path to the built file that backs it.
+function pathToFile(urlPath) {
+  if (urlPath === '/') return 'index.html';
+  return urlPath.endsWith('/') ? `${urlPath.slice(1)}index.html` : urlPath.slice(1);
+}
+
+/**
  * Generate and write sitemap.xml to the repo root.
  * @param {Object[]} articles - Array of article metadata objects with slug and date
  * @param {string} siteUrl - Canonical site URL (no trailing slash)
@@ -358,20 +418,37 @@ function generateSitemap(articles, siteUrl) {
   const REPO_ROOT = path.join(__dirname, '..');
   const today = new Date().toISOString().split('T')[0];
 
-  const staticPages = [
-    { loc: `${siteUrl}/`, changefreq: 'weekly', priority: '1.0', lastmod: today },
-    { loc: `${siteUrl}/what-we-do/`, changefreq: 'monthly', priority: '0.9', lastmod: today },
-    { loc: `${siteUrl}/how-we-work/`, changefreq: 'monthly', priority: '0.9', lastmod: today },
-    { loc: `${siteUrl}/about/`, changefreq: 'monthly', priority: '0.8', lastmod: today },
-    { loc: `${siteUrl}/contact/`, changefreq: 'monthly', priority: '0.8', lastmod: today },
-    { loc: `${siteUrl}/insights/`, changefreq: 'weekly', priority: '0.8', lastmod: today },
+  const staticPaths = [
+    { path: '/', changefreq: 'weekly', priority: '1.0' },
+    { path: '/what-we-do/', changefreq: 'monthly', priority: '0.9' },
+    { path: '/how-we-work/', changefreq: 'monthly', priority: '0.9' },
+    ...loadLiveOfferingPaths().map((p) => ({ path: p, changefreq: 'monthly', priority: '0.8' })),
+    { path: '/about/', changefreq: 'monthly', priority: '0.8' },
+    { path: '/contact/', changefreq: 'monthly', priority: '0.8' },
+    { path: '/insights/', changefreq: 'weekly', priority: '0.8' },
+    { path: '/faq/', changefreq: 'monthly', priority: '0.6' },
+    // Cohort funnel page — public conversion page, deliberately indexable
+    { path: '/programmes/leadership-cohort/', changefreq: 'monthly', priority: '0.6' },
+    { path: '/privacy.html', changefreq: 'yearly', priority: '0.3' },
+    { path: '/terms.html', changefreq: 'yearly', priority: '0.3' },
   ];
 
+  const staticPages = staticPaths.map(({ path: urlPath, changefreq, priority }) => ({
+    loc: `${siteUrl}${urlPath}`,
+    changefreq,
+    priority,
+    lastmod: resolveLastmod(pathToFile(urlPath), REPO_ROOT, today),
+  }));
+
+  // Fallback is today, not frontmatter `published`: a dirty article file was just
+  // (re)written by this build, so "changed today" is the accurate claim — the #93
+  // quality refresh rewrote five articles while lastmod kept asserting their
+  // original publish dates, which is the stale-lastmod failure #40 flagged.
   const articlePages = articles.map(article => ({
     loc: `${siteUrl}/insights/articles/${article.slug}.html`,
     changefreq: 'monthly',
     priority: '0.7',
-    lastmod: article.published ? String(article.published).slice(0, 10) : today,
+    lastmod: resolveLastmod(`insights/articles/${article.slug}.html`, REPO_ROOT, today),
   }));
 
   const allPages = [...staticPages, ...articlePages];

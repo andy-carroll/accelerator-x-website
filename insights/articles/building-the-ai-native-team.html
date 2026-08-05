@@ -71,6 +71,50 @@
     }
     </script>
 
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why does hiring an AI team so often fail to change anything?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the person you hire brings real AI expertise but none of the years of embedded knowledge about how this specific business actually works, so they end up building something technically impressive that solves the wrong problem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What does an AI specialist genuinely not know on day one?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "They don't know which process quietly breaks under pressure, what the informal workarounds are, or who in the building actually makes the exceptions work, and no amount of AI expertise substitutes for that."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to the people who already hold that knowledge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most of the time, they get quietly bypassed. Hiring a separate AI team signals, whether anyone intends it or not, that the people who actually understand the business aren't the ones trusted to lead its next stage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Upskilling vs hiring for AI: which one actually builds capability that lasts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hiring buys you a point solution and someone who can leave and take the context they built with them. Upskilling builds compounding capability inside people who already have years of business context and a reason to stay, which is the harder path but the one that actually holds."
+      }
+    }
+  ]
+}
+    </script>
+
     <script defer src="/assets/js/analytics.js"></script>
   </head>
 

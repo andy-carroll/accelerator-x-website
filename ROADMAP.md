@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-06-14 (Phase 5 build — site now derives from the Offer Canon; Two Doors restored, offering pages reconciled, Check #10 drift-guard; [#57](https://github.com/andy-carroll/accelerator-x-website/issues/57))_
+_Last updated: 2026-08-05 (SEO indexation groundwork shipped — sitemap coverage, article FAQPage JSON-LD, entity enrichment, llms.txt v2; [#81](https://github.com/andy-carroll/accelerator-x-website/issues/81). NOTE: the v2 Cutover shipped 2026-07-14 — the NOW sprint below predates it and needs a full reconciliation pass, tracked in session notes.)_
 
 ---
 
@@ -37,6 +37,7 @@ transparent, anti-agency positioning.
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 
+- [-] **P0: Indexation** ([#81](https://github.com/andy-carroll/accelerator-x-website/issues/81)) — technical half shipped 2026-08-05 (full sitemap coverage, canonicals everywhere, article FAQPage JSON-LD, Organization/Person entity enrichment, llms.txt v2, brand-string consistency, quiz 301s). **Remaining: Andy verifies the domain in Google Search Console + submits `sitemap.xml` (~10 min, founder access) — the site stays invisible on its own name until this happens.**
 - [-] **P1: Cohort page completion** — current cohort.html is incomplete draft requiring substantial revisions:
       1) Content refinement and copy adjustments
       2) Add actual video (replace VSL placeholder)
