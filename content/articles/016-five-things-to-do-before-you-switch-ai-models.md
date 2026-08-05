@@ -1,6 +1,6 @@
 ---
 title: "Five things to do before you switch AI models"
-published: "2026-08-07"
+published: "2026-08-01"
 author: "Andy Carroll"
 format: "article"
 tags: ["Tooling"]

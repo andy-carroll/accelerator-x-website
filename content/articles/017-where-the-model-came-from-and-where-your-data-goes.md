@@ -1,6 +1,6 @@
 ---
 title: "Where the model came from and where your data goes are two different questions"
-published: "2026-08-09"
+published: "2026-08-03"
 author: "Toby Henry"
 format: "article"
 tags: ["Strategy"]

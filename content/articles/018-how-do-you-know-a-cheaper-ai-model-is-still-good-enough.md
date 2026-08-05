@@ -1,6 +1,6 @@
 ---
 title: "How do you know a cheaper AI model is still good enough?"
-published: "2026-08-11"
+published: "2026-08-04"
 author: "Andy Carroll"
 format: "article"
 tags: ["Tooling"]

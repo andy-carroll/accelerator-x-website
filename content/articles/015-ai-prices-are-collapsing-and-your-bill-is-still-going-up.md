@@ -1,6 +1,6 @@
 ---
 title: "AI prices are collapsing and your bill is still going up"
-published: "2026-08-05"
+published: "2026-07-30"
 author: "Andy Carroll"
 format: "article"
 tags: ["Strategy"]
