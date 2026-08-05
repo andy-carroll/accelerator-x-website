@@ -18,7 +18,12 @@ jobs:
     name: Build passes
     runs-on: ubuntu-latest
     steps:
+      # Full history: sitemap <lastmod> resolves from each page's last commit date
+      # (scripts/build-hub.js resolveLastmod) — a shallow clone would rebuild the
+      # sitemap with wrong dates and break the committed==buildable property here.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:

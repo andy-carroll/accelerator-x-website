@@ -338,7 +338,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` Heading hierarchy logical (h1 → h2 → h3, no skips)
 - `[x]` `canonical` URL set correctly on every page — closed 2026-08-05 (#81): `privacy.html`/`terms.html` were the only pages without one (added); insights index canonicalised `/insights/index.html` → `/insights/` to stop contradicting the sitemap; all other pages verified present + correct
 - `[ ]` `robots.txt` — not blocking crawlers; correct disallow rules
-- `[~]` `sitemap.xml` generated, accurate, and submitted to Google Search Console — generated + accurate as of 2026-08-05 (#81: 20 → 29 URLs, the five offering pages / `/faq/` / cohort funnel were missing; offering URLs now derive from `offerings.json`; `lastmod` git-honest). **GSC submission = Andy, founder access, still open**
+- `[~]` `sitemap.xml` generated, accurate, and submitted to Google Search Console — generated + accurate as of 2026-08-05 (#81: 20 → 30 URLs, the five offering pages / coaching lane hub / `/faq/` / cohort funnel were missing; offering URLs now derive from `offerings.json`; `lastmod` git-honest). **GSC submission = Andy, founder access, still open**
 - `[x]` `llms.txt` — content accurate and up to date (for AI crawlers) — rewritten for v2 2026-08-05 (#81/#43): was still describing the v1 single-programme site with a stale `andy@` contact and wrong LinkedIn URL
 - `[ ]` No broken internal links (run a crawl tool on Netlify preview)
 - `[ ]` Page speed: Lighthouse ≥95 mobile / ≥98 desktop (target from ROADMAP)
@@ -377,7 +377,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[x]` `llms.txt` at root — comprehensive, structured, accurate — rewritten for v2 2026-08-05 (#81/#43): Two Doors + canonical offering names/links from `offerings.json`, guarantee (with the Talks & Events exception), founders + correct LinkedIn URLs, `info@`, company number, explicit brand-spelling note; no prices (each offering page carries current pricing)
 - `[ ]` Key facts (who we are, what we do, pricing range, process) appear as clear prose in the body of the page — not only in metadata
 - `[ ]` FAQ content uses natural question phrasing that matches how people ask AI assistants
-- `[~]` Company name, founders' names, and service names consistent across all pages and structured data — site-side closed 2026-08-05 (#81: the two live "Accelerator-X" hyphenations fixed at source — article 006 footer, testimonial quote). **Still hyphenated at account level, Andy to fix: quiz subdomain `<title>` ("AI Readiness Assessment | Accelerator-X", separate deployment) and Brevo sender name ("Accelerator-X Team")**
+- `[~]` Company name, founders' names, and service names consistent across all pages and structured data — site-side closed 2026-08-05 (#81: the two live "Accelerator-X" hyphenations fixed at source — article 006 footer, David Carry testimonial quote). **Still hyphenated at account level, Andy to fix: quiz subdomain `<title>` ("AI Readiness Assessment | Accelerator-X", separate deployment) and Brevo sender name ("Accelerator-X Team")**
 - `[ ]` `<!-- FOR AI SYSTEMS -->` comment in homepage HTML is accurate (currently in index.html `<head>`)
 
 ---

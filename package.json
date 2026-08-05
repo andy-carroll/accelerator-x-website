@@ -15,7 +15,7 @@
     "build:design-system": "node scripts/build-design-system.js",
     "process:hero-images": "bash scripts/process-hero-images.sh",
     "build:inner-pages": "node scripts/build-inner-pages.js",
-    "build": "npm run build:css && npm run build:css-bundle && npm run build:homepage && node scripts/build-testimonials.js && npm run build:hero-media && node scripts/build-hub.js && node scripts/build-footer.js && npm run build:design-system && npm run build:inner-pages",
+    "build": "npm run build:css && npm run build:css-bundle && npm run build:homepage && node scripts/build-testimonials.js && npm run build:hero-media && node scripts/build-footer.js && npm run build:design-system && npm run build:inner-pages && node scripts/build-hub.js",
     "prepare": "git config core.hooksPath .githooks",
     "check": "node scripts/check.js",
     "test": "node --test tests/functions/lead-capture.test.js tests/functions/newsletter-subscribe.test.js tests/build/hub-utils.test.js && npm run test:session-protocols",

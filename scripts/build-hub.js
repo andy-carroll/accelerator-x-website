@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const matter = require('gray-matter');
 const { marked } = require('marked');
 const { resolveComponentTokens, resolveSiteTokens, resolveArticleTokens } = require('./build-components');
@@ -393,9 +393,11 @@ function loadLiveOfferingPaths() {
 function resolveLastmod(relPath, repoRoot, fallback) {
   try {
     const gitOpts = { cwd: repoRoot, stdio: ['ignore', 'pipe', 'ignore'] };
-    const dirty = execSync(`git status --porcelain -- "${relPath}"`, gitOpts).toString().trim();
+    // execFileSync (not execSync): paths come from offerings.json/article slugs —
+    // repo-controlled, but arg-array invocation removes the shell-injection class.
+    const dirty = execFileSync('git', ['status', '--porcelain', '--', relPath], gitOpts).toString().trim();
     if (dirty) return fallback;
-    const committed = execSync(`git log -1 --format=%cs -- "${relPath}"`, gitOpts).toString().trim();
+    const committed = execFileSync('git', ['log', '-1', '--format=%cs', '--', relPath], gitOpts).toString().trim();
     return /^\d{4}-\d{2}-\d{2}$/.test(committed) ? committed : fallback;
   } catch {
     return fallback;
@@ -423,6 +425,10 @@ function generateSitemap(articles, siteUrl) {
     { path: '/what-we-do/', changefreq: 'monthly', priority: '0.9' },
     { path: '/how-we-work/', changefreq: 'monthly', priority: '0.9' },
     ...loadLiveOfferingPaths().map((p) => ({ path: p, changefreq: 'monthly', priority: '0.8' })),
+    // Door 2 lane hub — a real indexable money page, but not an offering, so it
+    // can't derive from offerings.json (doors carry no slug). Caught missing by
+    // the 2026-08-05 fresh-eyes review after the offerings-only derivation landed.
+    { path: '/what-we-do/leadership-ai-coaching/', changefreq: 'monthly', priority: '0.8' },
     { path: '/about/', changefreq: 'monthly', priority: '0.8' },
     { path: '/contact/', changefreq: 'monthly', priority: '0.8' },
     { path: '/insights/', changefreq: 'weekly', priority: '0.8' },
