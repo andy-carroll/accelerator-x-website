@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Five things to do before you switch AI models | Accelerator X Insights</title>
+    <meta name="description" content="Most teams respond to a rising AI bill by shopping for a cheaper model. Five boring changes come first: they need no new vendor and no new risk, and most of the saving is already sitting in your own configuration." />
+
+    <link
+      rel="canonical"
+      href="https://accelerator-x.ai/insights/articles/five-things-to-do-before-you-switch-ai-models.html"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/icons/AX-icon.png" sizes="any" />
+    <link rel="shortcut icon" type="image/png" href="/assets/icons/AX-icon.png" />
+
+    <!-- Fonts & Styles -->
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos-Bold.woff2" crossorigin />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/assets/css/bundle.generated.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" /></noscript>
+
+    <!-- Open Graph SEO -->
+    <meta property="og:title" content="Five things to do before you switch AI models" />
+    <meta property="og:description" content="Most teams respond to a rising AI bill by shopping for a cheaper model. Five boring changes come first: they need no new vendor and no new risk, and most of the saving is already sitting in your own configuration." />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Accelerator X" />
+    <meta property="og:url" content="https://accelerator-x.ai/insights/articles/five-things-to-do-before-you-switch-ai-models.html" />
+    <meta property="og:image" content="https://accelerator-x.ai/assets/images/og-image-1200.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="article:author" content="https://www.linkedin.com/in/heyandycarroll/" />
+    <meta property="article:published_time" content="2026-08-07" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://accelerator-x.ai/assets/images/og-image-1200.png" />
+
+    <!-- Article structured data — used by LinkedIn, Google, and other scrapers -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Five things to do before you switch AI models",
+      "description": "Most teams respond to a rising AI bill by shopping for a cheaper model. Five boring changes come first: they need no new vendor and no new risk, and most of the saving is already sitting in your own configuration.",
+      "image": "https://accelerator-x.ai/assets/images/og-image-1200.png",
+      "datePublished": "2026-08-07",
+      "url": "https://accelerator-x.ai/insights/articles/five-things-to-do-before-you-switch-ai-models.html",
+      "author": {
+        "@type": "Person",
+        "name": "Andy Carroll",
+        "url": "https://www.linkedin.com/in/heyandycarroll/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Accelerator X",
+        "url": "https://accelerator-x.ai",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://accelerator-x.ai/assets/icons/AX-icon.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://accelerator-x.ai/insights/articles/five-things-to-do-before-you-switch-ai-models.html"
+      }
+    }
+    </script>
+
+    <!-- FAQPage structured data — built from this article's own question-led H2s
+         and their answer prose (scripts/hub-utils.js), so it cannot drift from
+         the visible content. Empty for articles without question H2s. -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is prompt caching and why does it come first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prompt caching means your provider stores the parts of a prompt that repeat between requests, your system instructions, your policy documents, your reference material, and bills them at a fraction of list price when they are reused. On current published pricing at the major providers, a cached read costs about a tenth of the normal input price, in exchange for a premium of about a quarter the first time the content is written to the cache."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What should decide where an AI task runs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Two questions, and neither of them is price. First, stakes: what does a wrong answer cost? Second, sensitivity: whose data does the task touch, and what boundary must that data stay inside? Price gets a vote only after both of those questions have answered."
+      }
+    }
+  ]
+}
+    </script>
+
+    <script defer src="/assets/js/analytics.js"></script>
+  </head>
+
+  <body class="bg-surface text-navy min-h-screen flex flex-col">
+    <a href="#main-content" class="ax-skip-link">Skip to main content</a>
+
+<header class="ax-nav" role="banner">
+  <div class="ax-nav__bar">
+
+    <a href="/" class="ax-nav__logo" aria-label="Accelerator X home">
+      <img
+        src="/assets/brand/logos/AcceleratorX.svg"
+        alt="Accelerator X"
+        class="ax-nav__logo-img"
+        width="224"
+        height="38"
+        loading="eager"
+        decoding="async"
+      />
+    </a>
+
+    <nav class="ax-nav__links" aria-label="Main navigation">
+      <a href="/what-we-do/" class="ax-nav__link">What we do</a>
+      <a href="/how-we-work/" class="ax-nav__link">How we work</a>
+      <a href="/about/" class="ax-nav__link">About</a>
+      <a href="/insights/" class="ax-nav__link">Insights</a>
+      <a href="https://quiz.accelerator-x.ai" class="ax-nav__link" target="_blank" rel="noopener noreferrer">
+        Quiz
+        <svg class="ax-nav__ext-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+          <path d="M3.5 2h6.5v6.5M9.5 2.5L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </nav>
+
+    <div class="ax-nav__actions">
+      <a href="/contact/" class="btn btn--accent btn--sm ax-nav__cta">Apply to work with us</a>
+
+      <button
+        type="button"
+        class="ax-nav__hamburger"
+        data-mobile-nav-toggle
+        aria-expanded="false"
+        aria-controls="ax-mobile-nav"
+        aria-label="Open navigation menu"
+      >
+        <span class="ax-nav__bar-line" aria-hidden="true"></span>
+        <span class="ax-nav__bar-line" aria-hidden="true"></span>
+        <span class="ax-nav__bar-line" aria-hidden="true"></span>
+      </button>
+    </div>
+
+  </div>
+
+  <div id="ax-mobile-nav" class="ax-nav__drawer hidden" aria-label="Mobile navigation">
+    <nav class="ax-nav__drawer-links">
+      <a href="/what-we-do/" class="ax-nav__drawer-link">What we do</a>
+      <a href="/how-we-work/" class="ax-nav__drawer-link">How we work</a>
+      <a href="/about/" class="ax-nav__drawer-link">About</a>
+      <a href="/insights/" class="ax-nav__drawer-link">Insights</a>
+      <a href="https://quiz.accelerator-x.ai" class="ax-nav__drawer-link" target="_blank" rel="noopener noreferrer">AI readiness quiz ↗</a>
+    </nav>
+    <div class="ax-nav__drawer-cta">
+      <a href="/contact/" class="btn btn--accent" style="width:100%;justify-content:center">Apply to work with us</a>
+    </div>
+  </div>
+</header>
+
+
+    <main id="main-content" class="flex-grow">
+      <article class="mx-auto max-w-[70ch] px-4 py-12 lg:py-20">
+        <a href="/insights/" class="mb-8 inline-flex items-center gap-1 text-sm font-medium text-muted transition-colors hover:text-primary">
+          <span class="material-symbols-outlined text-sm">arrow_back</span> Back to Hub
+        </a>
+        <!-- Article Header -->
+        <header class="mb-12">
+          <span
+            class="text-sm font-bold uppercase tracking-wider text-primary mb-4 block"
+            >Tooling</span
+          >
+          <h1
+            class="font-display text-4xl font-bold leading-tight lg:text-5xl mb-6"
+          >
+            Five things to do before you switch AI models
+          </h1>
+
+          <p class="article-date-meta">7 August 2026</p>
+
+          
+    <div class="article-author-card border-b border-surface pb-8">
+      <div class="article-author-card__inner">
+        <picture class="article-author-card__picture">
+          <source type="image/webp" srcset="/assets/images/andy-black-t-400.webp 400w, /assets/images/andy-black-t-800.webp 800w" sizes="56px" />
+          <img src="/assets/images/andy-black-t-400.jpg" srcset="/assets/images/andy-black-t-400.jpg 400w, /assets/images/andy-black-t-800.jpg 800w" sizes="56px" alt="Andy Carroll" width="56" height="56" loading="lazy" decoding="async" class="article-author-card__image" />
+        </picture>
+        <div class="article-author-card__body">
+          <div class="article-author-card__header">
+            <div>
+              <p class="article-author-card__name">Andy Carroll</p>
+              <p class="article-author-card__role">Co-founder</p>
+            </div>
+          </div>
+          <p class="article-author-card__bio">Andy is a product and AI specialist with 17+ years across startups, banking, and consultancies.</p>
+        </div>
+      </div>
+    </div>
+  
+        </header>
+
+        <!-- The BLUF Box (Bottom Line Up Front) -->
+        <!-- article-init.js reveals this if data-bluf is non-empty after build substitution -->
+        <div class="bluf-container mb-12 hidden" data-bluf="Most teams reach for a cheaper AI model while most of the saving is still sitting in their own configuration. Five changes, none of which needs a new vendor or a new risk conversation, come first. And the two questions that actually decide where work should run, stakes and sensitivity, are not about price at all.">
+          <div
+            class="bg-surface-2 border-l-4 border-primary p-6 lg:p-8 rounded-r-xl"
+          >
+            <div class="flex items-center gap-2 mb-3">
+              <span class="material-symbols-outlined text-primary">bolt</span>
+              <h2 class="font-display font-bold text-navy text-lg m-0">
+                Executive Summary
+              </h2>
+            </div>
+            <p class="text-navy font-medium leading-relaxed m-0">Most teams reach for a cheaper AI model while most of the saving is still sitting in their own configuration. Five changes, none of which needs a new vendor or a new risk conversation, come first. And the two questions that actually decide where work should run, stakes and sensitivity, are not about price at all.</p>
+          </div>
+        </div>
+
+        <!-- Weekly dispatch — in content flow (top third), well above the footer band -->
+        <!-- NewsletterSignup — single source of truth for the weekly-dispatch signup.
+     Used in-page on content pages (top third) AND as the band at the top of the footer
+     (all pages). Same markup both places; the footer wraps it so the dark-context CSS applies.
+     No id attributes by design: it can appear twice on one page. JS binds .js-newsletter-form
+     and finds the status nodes relative to each form (see assets/js/forms.js). Copy lives here only. -->
+<section class="ax-newsletter" aria-label="Subscribe to the weekly dispatch">
+  <div class="ax-newsletter__inner">
+    <div class="ax-newsletter__copy">
+      <span class="ax-kicker">Weekly dispatch</span>
+      <h2 class="ax-newsletter__heading">Stay sharp on AI.</h2>
+      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability: the hard-won lessons, not the hype. One email a week.</p>
+    </div>
+    <div class="ax-newsletter__form-wrap">
+      <form class="ax-newsletter__form js-newsletter-form" data-newsletter-source="site" novalidate>
+        <label class="ax-newsletter__field">
+          <span class="sr-only">Work email</span>
+          <input
+            type="email"
+            name="email"
+            class="input ax-newsletter__input"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+          />
+        </label>
+        <button type="submit" class="btn btn--accent btn--lg ax-newsletter__submit">Get the dispatch</button>
+      </form>
+      <p class="ax-newsletter__note">One useful note each week. Unsubscribe anytime.</p>
+      <div class="ax-newsletter__status ax-newsletter__status--success" hidden role="status" aria-live="polite">
+        <p>You're in. Welcome email on its way.</p>
+      </div>
+      <div class="ax-newsletter__status ax-newsletter__status--error" hidden role="alert">
+        <p>Something went wrong, please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+        <!-- Article Content -->
+        <div class="prose prose-lg prose-navy max-w-none"><h2>The cheaper model is the last move, not the first</h2>
+<p>There is a predictable moment in every serious AI rollout: partway through the first full quarter of real usage, the bill crosses a line, finance asks what happened, and somebody gets sent off to find a cheaper model. It feels like the responsible response. It is usually the wrong first move.</p>
+<p>I wrote recently about <a href="/insights/articles/ai-prices-are-collapsing-and-your-bill-is-still-going-up.html">why the bill behaves like this</a>: unit prices are collapsing, but agent-era systems work continuously rather than only when asked, so consumption grows faster than prices fall and total spend climbs anyway. The natural follow-up is what to do about it, and the market&#39;s default answer is a procurement answer. Switch to something cheaper.</p>
+<p>Switching is a real decision with real costs. A new vendor means new data terms for your lawyers, new failure modes for your engineers, and quality differences that only show up in production. It is also almost always premature, because a first integration nearly always ships with none of the boring savings switched on. Nobody notices at pilot scale, where the bill is a rounding error. The habits that were harmless at fifty requests a day are expensive at fifty thousand.</p>
+<p>Worked through in order, on published prices alone, the five changes below take somewhere between 50 and 80 percent off a bill that runs everything at frontier list prices. The exact figure depends on the shape of your workload, not on any cleverness in the buying. They need no new vendor, no new trust decision, and no rebuild.</p>
+<p>They are also a useful test of anyone advising you. If someone is pitching GPU clusters or exotic model routing while your integration does not yet have prompt caching turned on, they are selling exoticism, not engineering.</p>
+<hr>
+<h2>What is prompt caching and why does it come first?</h2>
+<p>Prompt caching means your provider stores the parts of a prompt that repeat between requests, your system instructions, your policy documents, your reference material, and bills them at a fraction of list price when they are reused. On current published pricing at the major providers, a cached read costs about a tenth of the normal input price, in exchange for a premium of about a quarter the first time the content is written to the cache.</p>
+<p>That matters because almost every production AI system sends the same context over and over. An assistant that answers customer emails carries the same tone guide, the same product catalogue and the same escalation rules on every single request, thousands of times a day. Without caching, you pay full price for every repeat. It is the equivalent of couriering the full staff handbook along with every one-line memo.</p>
+<p>It comes first because it is the cheapest work on the list: hours of configuration, not weeks of engineering. The test for your technical lead this week is a single question. What is our cache hit rate? If nobody can answer it, that is the finding, and the saving compounds on every request from the day it is fixed.</p>
+<hr>
+<h2>Batch the work that can wait</h2>
+<p>Every major provider now runs a batch endpoint: submit work that can tolerate waiting, typically up to a day, and pay half the list price for exactly the same model and exactly the same quality.</p>
+<p>This lever gets more valuable every quarter, because the fastest-growing part of most AI bills is not a human waiting for an answer. It is scheduled work. Overnight report drafts, weekly digests, monitoring sweeps, data enrichment, backfills. None of it needs a response in four seconds, and all of it is billed at interactive prices unless someone deliberately moves it.</p>
+<p>This is off-peak electricity, sitting in the public price list, waiting to be claimed. The exercise: list every scheduled or background AI job you run, and mark the ones whose output nobody reads within the hour. Those are batch candidates, and moving them is usually a small code change rather than a redesign.</p>
+<hr>
+<h2>Right-size inside the ladder you already trust</h2>
+<p>Every serious provider sells a ladder of models, not a single product: a frontier model for genuinely hard reasoning, a mid-tier for everyday work, and a small, fast one for mechanical steps. The spread on list price inside a single vendor&#39;s ladder is around five times. At Anthropic, the provider we run our own agent fleet on, as I write, the top of the ladder costs $5 per million input tokens and $25 per million output. The bottom costs $1 and $5.</p>
+<p>What makes this lever different from switching vendors is what it leaves intact: the same data terms, the same security review, the same integration, the same account. You are not adding a company to your risk register. You are declining to send the most expensive model in the building to do the filing.</p>
+<p>Most real workloads decompose the same way once you look: a few steps that carry judgement, and a long tail of mechanical ones. Extracting fields, reformatting, routing, classifying, summarising. The mechanical tail rarely needs frontier capability, and it is usually most of the volume.</p>
+<p>One caveat, and we will not soften it: a downgrade is a claim about quality, and claims about quality get tested, not assumed. Move a task down the ladder only behind a test that proves the smaller model still does the job, and leave that test running afterwards as a tripwire. Anything else is guessing with your output.</p>
+<hr>
+<h2>Most of your context is dead weight</h2>
+<p>Every token you send costs money, and most integrations send far too many. System prompts grow by accretion: every incident adds a paragraph, and nobody ever deletes one. Whole documents get pasted in where a retrieved extract would do. Conversation histories get replayed in full when a running summary would carry the same meaning at a twentieth of the length.</p>
+<p>Context discipline is the plainest item on an already unsexy list, and it is pure arithmetic: the saving is exactly linear in what you remove. It is also the only lever here that improves quality while it cuts cost. In our experience, a short, sharp instruction gets followed more reliably than the same instruction buried under an inch of attachments.</p>
+<p>The check takes an afternoon and it is brutal. Read your longest system prompt and ask, for each paragraph, what would break if it were deleted. If nobody can answer, delete it. Then look at what gets attached by default, and replace the document dumps with retrieval of the two pages that actually matter.</p>
+<hr>
+<h2>Match the thinking to the stakes</h2>
+<p>Modern models can be told how hard to think. Reasoning effort is now a setting: turn it up and the model deliberates in more depth, at more cost and more latency; turn it down and it answers quickly. Most integrations set it once, high, for everything, and never look at it again.</p>
+<p>That default is expensive in a very specific way. It pays for a week of deliberation on questions that needed a yes by lunchtime. Deep effort is worth every penny on the analysis that ends up in front of a client. It is waste on triage, formatting and routine classification.</p>
+<p>The fix is an effort budget per job type rather than one global setting. Deep for the decisions that matter, shallow for the mechanical steps. It is a small configuration change, not a rebuild, and on reasoning-heavy workloads the difference is material.</p>
+<hr>
+<h2>What should decide where an AI task runs?</h2>
+<p>Two questions, and neither of them is price. First, stakes: what does a wrong answer cost? Second, sensitivity: whose data does the task touch, and what boundary must that data stay inside? Price gets a vote only after both of those questions have answered.</p>
+<p>Everything above this line saves money without moving any work anywhere. But sooner or later somebody will propose moving work: to a cheaper vendor, a cheaper class of model, or infrastructure you control. Those conversations go wrong when they start with the price tag, because price is the only consideration in the room that cannot see risk.</p>
+<figure>
+<svg viewBox="0 0 760 322" width="100%" role="img" aria-label="Flow diagram in three stages. Stage one: every task, with the questions what is the work, how often does it run, and who acts on the output. Stage two: two questions, stakes meaning what does a wrong answer cost, and sensitivity meaning whose data does it touch. Stage three: a tier, not a model, shown as a four-band ladder ordered by control of your data, from budget model APIs at the bottom, through frontier vendor API and frontier in your cloud, to your own infrastructure at the top. A closing note reads: price never chooses the tier, it only chooses within one." font-family="'DM Sans','Inter',system-ui,sans-serif">
+  <text x="20" y="24" font-size="13" font-weight="600" letter-spacing="2" fill="#64748B">PLACEMENT: TWO QUESTIONS BEFORE ANY PRICE</text>
+  <rect x="20" y="32" width="32" height="3" fill="#E93F8E"/>
+  <rect x="20" y="56" width="188" height="218" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="36" y="88" font-size="16" font-weight="700" fill="#1B2A4A">1 &#183; Every task</text>
+  <text x="36" y="118" font-size="13" fill="#475569">What is the work?</text>
+  <text x="36" y="138" font-size="13" fill="#475569">How often does it run?</text>
+  <text x="36" y="158" font-size="13" fill="#475569">Who acts on the output?</text>
+  <text x="36" y="236" font-size="13" font-style="italic" fill="#64748B">a task inventory,</text>
+  <text x="36" y="254" font-size="13" font-style="italic" fill="#64748B">not a token count</text>
+  <line x1="214" y1="165" x2="238" y2="165" stroke="#64748B" stroke-width="2"/>
+  <polygon points="238,158 238,172 250,165" fill="#64748B"/>
+  <rect x="252" y="56" width="232" height="218" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="268" y="88" font-size="16" font-weight="700" fill="#1B2A4A">2 &#183; Two questions</text>
+  <rect x="268" y="104" width="200" height="72" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="269" y="110" width="3" height="60" fill="#E93F8E"/>
+  <text x="284" y="128" font-size="14" font-weight="700" fill="#1B2A4A">Stakes</text>
+  <text x="284" y="148" font-size="13" fill="#475569">what does a wrong</text>
+  <text x="284" y="166" font-size="13" fill="#475569">answer cost?</text>
+  <rect x="268" y="188" width="200" height="72" rx="6" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <rect x="269" y="194" width="3" height="60" fill="#E93F8E"/>
+  <text x="284" y="212" font-size="14" font-weight="700" fill="#1B2A4A">Sensitivity</text>
+  <text x="284" y="232" font-size="13" fill="#475569">whose data does it</text>
+  <text x="284" y="250" font-size="13" fill="#475569">touch?</text>
+  <line x1="490" y1="165" x2="514" y2="165" stroke="#64748B" stroke-width="2"/>
+  <polygon points="514,158 514,172 526,165" fill="#64748B"/>
+  <rect x="528" y="56" width="212" height="218" rx="10" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.5"/>
+  <text x="544" y="88" font-size="16" font-weight="700" fill="#1B2A4A">3 &#183; A tier, not a model</text>
+  <rect x="544" y="104" width="180" height="32" rx="5" fill="#1B2A4A"/>
+  <text x="554" y="125" font-size="13" fill="#FFFFFF">4 &#183; your infrastructure</text>
+  <rect x="544" y="143" width="180" height="32" rx="5" fill="#F0F9FF"/>
+  <text x="554" y="164" font-size="13" fill="#1B2A4A">3 &#183; frontier, your cloud</text>
+  <rect x="544" y="182" width="180" height="32" rx="5" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+  <text x="554" y="203" font-size="13" fill="#1B2A4A">2 &#183; frontier vendor API</text>
+  <rect x="544" y="221" width="180" height="32" rx="5" fill="#F1F5F9"/>
+  <text x="554" y="242" font-size="13" fill="#1B2A4A">1 &#183; budget model APIs</text>
+  <text x="544" y="266" font-size="13" fill="#64748B">&#8593; more control of your data</text>
+  <text x="380" y="306" text-anchor="middle" font-size="14" font-weight="600" fill="#1B2A4A">Price never chooses the tier. It only chooses within one.</text>
+</svg>
+<figcaption>Stakes and sensitivity assign every task to a tier, and the tiers are ordered by how much control you keep over your data. Price picks the model within a tier. A task never moves down the ladder to save money.</figcaption>
+</figure>
+
+<p>Here is the pattern from our own fleet. One of our agents does finance work. The steps where it proposes entries in the accounts are decision-bearing: one wrong figure that slips past a tired reviewer costs more than a year of token savings on that path, so those steps run on the most capable tier regardless of price. The same agent&#39;s diary checks and formatting steps are mechanical and low blast radius, and they are fair game for the cheapest model that passes the tests. Same agent, two placements, decided by stakes rather than by the price list.</p>
+<p>Sensitivity works the same way. A task that drafts marketing copy from public information can run almost anywhere. A task that reads your client contracts has a boundary question to answer before any price question, and for some classes of data the honest answer is that the work should not leave infrastructure you control at any price. Where a model came from and where your data goes are two different questions, and they deserve better than to be settled by a discount.</p>
+<p>So the order of operations: harvest the five boring savings first, because they require no new trust decisions at all. Then put every task through the two questions, and let stakes and sensitivity, not the price list, decide where the work belongs. This is the order we hold our own agent fleet to, and it is why we instrument what each of our agents costs per task rather than admiring the total on the invoice.</p>
+<p>If you want somewhere to start this week: pull your ten most expensive workloads from your provider dashboard and write three things next to each one. Does its context repeat? Could it wait an hour? What would a wrong answer cost? That single exercise will do more for next year&#39;s bill than any model announcement, because it is the beginning of an architecture, and the bill was never really about the models.</p>
+</div>
+
+        
+    <div class="article-share-panel" aria-label="Share this article">
+      <p class="article-share-panel__label">Share</p>
+      <div class="article-share-panel__icons">
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Faccelerator-x.ai%2Finsights%2Farticles%2Ffive-things-to-do-before-you-switch-ai-models.html" target="_blank" rel="noopener noreferrer" class="article-share-panel__link" aria-label="Share on LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://x.com/intent/post?url=https%3A%2F%2Faccelerator-x.ai%2Finsights%2Farticles%2Ffive-things-to-do-before-you-switch-ai-models.html&text=Five%20things%20to%20do%20before%20you%20switch%20AI%20models" target="_blank" rel="noopener noreferrer" class="article-share-panel__link" aria-label="Share on X"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+  
+
+        <!--
+        <div class="source-preference-card source-preference-card--compact my-12">
+          <div>
+            <p class="source-preference-eyebrow">Rate the signal?</p>
+            <h3 class="source-preference-title">Add Accelerator X as a preferred source on Google.</h3>
+            <p class="source-preference-copy">If this piece was useful, you can tell Google you want to see more from Accelerator X. The link opens source preferences in a new tab.</p>
+          </div>
+          <a href="https://www.google.com/preferences/source?q=accelerator-x.ai" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm whitespace-nowrap">Add on Google</a>
+        </div>
+        -->
+      </article>
+
+      <!-- Infinite Momentum Footer -->
+      <div
+        class="momentum-footer bg-background border-t border-surface py-16 hidden"
+        data-next="/insights/articles/where-the-model-came-from-and-where-your-data-goes.html"
+      >
+        <div class="mx-auto max-w-[70ch] px-4 text-center">
+          <h4 class="text-sm font-bold uppercase tracking-wider text-muted mb-4">The Next Step</h4>
+          <a href="/insights/articles/where-the-model-came-from-and-where-your-data-goes.html" class="block">
+            <h3 class="font-display text-2xl lg:text-3xl font-bold text-navy transition-colors">Where the model came from and where your data goes are two different questions</h3>
+            <span class="inline-flex items-center gap-1 mt-6 text-primary font-medium transition-all">
+              Read Framework <span class="material-symbols-outlined text-lg">arrow_forward</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="ax-footer" role="contentinfo">
+
+  <!-- Weekly dispatch — band at the top of the footer, above the link columns.
+       Single source of truth: _templates/components/NewsletterSignup.html. -->
+  <div class="ax-footer__dispatch">
+    <!-- NewsletterSignup — single source of truth for the weekly-dispatch signup.
+     Used in-page on content pages (top third) AND as the band at the top of the footer
+     (all pages). Same markup both places; the footer wraps it so the dark-context CSS applies.
+     No id attributes by design: it can appear twice on one page. JS binds .js-newsletter-form
+     and finds the status nodes relative to each form (see assets/js/forms.js). Copy lives here only. -->
+<section class="ax-newsletter" aria-label="Subscribe to the weekly dispatch">
+  <div class="ax-newsletter__inner">
+    <div class="ax-newsletter__copy">
+      <span class="ax-kicker">Weekly dispatch</span>
+      <h2 class="ax-newsletter__heading">Stay sharp on AI.</h2>
+      <p class="ax-newsletter__sub">The weekly dispatch for founders, directors and CTOs building real AI capability: the hard-won lessons, not the hype. One email a week.</p>
+    </div>
+    <div class="ax-newsletter__form-wrap">
+      <form class="ax-newsletter__form js-newsletter-form" data-newsletter-source="site" novalidate>
+        <label class="ax-newsletter__field">
+          <span class="sr-only">Work email</span>
+          <input
+            type="email"
+            name="email"
+            class="input ax-newsletter__input"
+            placeholder="you@company.com"
+            required
+            autocomplete="email"
+          />
+        </label>
+        <button type="submit" class="btn btn--accent btn--lg ax-newsletter__submit">Get the dispatch</button>
+      </form>
+      <p class="ax-newsletter__note">One useful note each week. Unsubscribe anytime.</p>
+      <div class="ax-newsletter__status ax-newsletter__status--success" hidden role="status" aria-live="polite">
+        <p>You're in. Welcome email on its way.</p>
+      </div>
+      <div class="ax-newsletter__status ax-newsletter__status--error" hidden role="alert">
+        <p>Something went wrong, please try again.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </div>
+
+  <div class="ax-footer__inner">
+
+    <!-- Brand column -->
+    <div class="ax-footer__brand">
+      <a href="/" class="ax-footer__logo-link" aria-label="Accelerator X home">
+        <img
+          src="/assets/brand/logos/AcceleratorX-white.svg"
+          alt="Accelerator X"
+          class="ax-footer__logo"
+          width="180"
+          height="30"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
+      <p class="ax-footer__tagline">Practical frameworks for leaders building real AI capability.</p>
+      <p class="ax-footer__reg">Accelerator X Ltd · Company No. 16974247</p>
+    </div>
+
+    <!-- Navigation column -->
+    <nav class="ax-footer__nav" aria-label="Footer navigation">
+      <div class="ax-footer__nav-group">
+        <p class="ax-footer__nav-heading">Explore</p>
+        <ul class="ax-footer__nav-list">
+          <li><a href="/what-we-do/" class="ax-footer__link">What we do</a></li>
+          <li><a href="/how-we-work/" class="ax-footer__link">How we work</a></li>
+          <li><a href="/insights/" class="ax-footer__link">Insights</a></li>
+          <li><a href="/faq/" class="ax-footer__link">FAQ</a></li>
+          <li><a href="https://quiz.accelerator-x.ai" class="ax-footer__link" target="_blank" rel="noopener noreferrer">AI readiness quiz ↗</a></li>
+          <li><a href="/contact/" class="ax-footer__link">Apply to work with us</a></li>
+        </ul>
+      </div>
+      <div class="ax-footer__nav-group">
+        <p class="ax-footer__nav-heading">Connect</p>
+        <ul class="ax-footer__nav-list">
+          <li>
+            <a href="https://www.linkedin.com/company/accelerator-x-uk/" class="ax-footer__link ax-footer__link--social" target="_blank" rel="noopener noreferrer" aria-label="Accelerator X on LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+              LinkedIn
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+  <div class="ax-footer__bottom">
+    <div class="ax-footer__legal">
+      <a href="/privacy.html" class="ax-footer__legal-link">Privacy</a>
+      <a href="/terms.html" class="ax-footer__legal-link">Terms</a>
+    </div>
+    <p class="ax-footer__copyright">© 2026 Accelerator X. All rights reserved.</p>
+  </div>
+</footer>
+
+
+    <script defer src="/assets/js/nav.js"></script>
+    <script defer src="/assets/js/article-init.js"></script>
+    <script src="/assets/js/forms.js" defer></script>
+  </body>
+</html>

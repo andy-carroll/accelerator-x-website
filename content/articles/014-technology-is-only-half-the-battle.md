@@ -8,8 +8,8 @@ excerpt: "Buying the tool without changing the work is one failure. Running the 
 slug: "technology-is-only-half-the-battle"
 bluf: "Most AI disappointment isn't a technology failure or a people failure. It's a sequencing failure: the tool and the change in how people work were never built as one piece of work with one owner."
 lead_magnet_cta: "We build systems like this every week. Join 5,000+ Founders and CTOs receiving the Accelerator X dispatch."
-next_article_url: "/insights/articles/the-end-of-prompt-engineering.html"
-next_article_title: "The End of Prompt Engineering"
+next_article_url: "/insights/articles/ai-prices-are-collapsing-and-your-bill-is-still-going-up.html"
+next_article_title: "AI prices are collapsing and your bill is still going up"
 ---
 
 ## Two failures, same week
