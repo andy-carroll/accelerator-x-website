@@ -6,7 +6,17 @@ name: Doc Freshness
 # Covers: scripts/, _templates/, netlify/, assets/js/, styles.css, index.html
 # Excludes: docs-only changes, content/articles/ (managed separately)
 
+# Runs on BOTH events, deliberately:
+#   pull_request — this is where it gates. It is a required status check on main,
+#     and a required check that only ever runs on push can never report on a PR,
+#     so every PR into main sat permanently BLOCKED with no action the author
+#     could take (#100). Only an admin override got anything through, which meant
+#     the rule was never actually enforced at the point it was supposed to be.
+#   push — kept as the backstop for anything reaching main another way (admin
+#     merge, direct push).
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
 
@@ -19,18 +29,28 @@ jobs:
         with:
           fetch-depth: 0   # full history — the diff covers the whole push range, not just the last commit
 
-      - name: Determine diff base for this push
+      - name: Determine diff base
         id: diff_base
         run: |
-          # Diff the whole push (before..after) so multi-commit pushes are judged as a unit:
-          # a CHANGELOG entry in any commit of the push satisfies the check.
-          # Fall back to HEAD~1 when 'before' is unavailable (new branch or force push).
-          BASE="${{ github.event.before }}"
-          if [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
-            BASE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+          # Both events judge a whole unit of work, not a single commit: a CHANGELOG
+          # entry anywhere in the PR (or the push) satisfies the check.
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # merge-base, not base.sha directly: on a pull_request event the checkout
+            # is the MERGE commit, so its history already contains the base branch.
+            # Diffing from base.sha would then attribute every commit that landed on
+            # main since the PR opened to this PR — a CHANGELOG entry from someone
+            # else's merge would satisfy the check for a PR that never wrote one.
+            BASE=$(git merge-base "${{ github.event.pull_request.base.sha }}" HEAD)
+          else
+            # Diff the whole push (before..after). Fall back to HEAD~1 when 'before'
+            # is unavailable (new branch or force push).
+            BASE="${{ github.event.before }}"
+            if [ "$BASE" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+              BASE=$(git rev-parse HEAD~1 2>/dev/null || echo "")
+            fi
           fi
           echo "base=$BASE" >> $GITHUB_OUTPUT
-          echo "Diffing against base: ${BASE:-<repo root — single-commit history>}"
+          echo "Event: ${{ github.event_name }} — diffing against base: ${BASE:-<repo root — single-commit history>}"
 
       - name: Check if code files changed
         id: code_changed
