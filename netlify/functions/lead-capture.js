@@ -81,7 +81,13 @@ exports.handler = async (event, context) => {
     const role = safeTrim(data.role, 200);
     const timelineRaw = safeTrim(data.timeline);
     const problem = safeTrim(data.problem || '', 500);
-    const interestRaw = safeTrim(data.interest || '', 200);
+    // Service interest is MULTI-select as of 2026-08-09 — the form may send a single
+    // string (current) or an array (once the redesign lands). Accept both so the
+    // function does not need to ship in lockstep with the form.
+    const interestRawList = (Array.isArray(data.interest) ? data.interest : [data.interest || ''])
+      .map((v) => safeTrim(v, 200))
+      .filter(Boolean);
+    const interestRaw = interestRawList.join(',');
     const source = safeTrim(data.source || '', 200);
     const consentGiven = data.consent_given === true;
     const consentTimestamp = safeTrim(data.consent_timestamp || new Date().toISOString());
@@ -120,7 +126,24 @@ exports.handler = async (event, context) => {
       'leadership-cohort': 'Open Cohort AI Bootcamp for Business Leaders',
       'just-exploring': 'Just exploring'
     };
-    const interest = interestLabels[interestRaw] || interestRaw || 'Not specified';
+    const interestList = interestRawList.map((key) => interestLabels[key] || key);
+    const interest = interestList.join(', ') || 'Not specified';
+
+    // Airtable single/multi-selects reject any value not already a choice (422
+    // UNKNOWN_FIELD_NAME's sibling, INVALID_MULTIPLE_CHOICE_OPTIONS). An unrecognised
+    // form value must therefore degrade to "not written" rather than fail the whole
+    // record — the lead matters more than the label. Notes keeps the raw value either
+    // way, so nothing is lost.
+    const TIMELINE_CHOICES = new Set(Object.values(timelineLabels).concat('Not specified'));
+    const INTEREST_CHOICES = new Set(Object.values(interestLabels).concat('Not specified'));
+    const timelineForAirtable = TIMELINE_CHOICES.has(timeline) ? timeline : null;
+    const interestForAirtable = interestList.filter((v) => INTEREST_CHOICES.has(v));
+    const unmappedSelects = [
+      TIMELINE_CHOICES.has(timeline) ? '' : `Timeline (unmapped): ${timeline}`,
+      interestList.length !== interestForAirtable.length
+        ? `Service interest (unmapped): ${interestList.filter((v) => !INTEREST_CHOICES.has(v)).join(', ')}`
+        : ''
+    ].filter(Boolean);
 
     // Build Slack Block Kit message
     const slackMessage = {
@@ -214,11 +237,12 @@ exports.handler = async (event, context) => {
           Company: company,
           Website: website,
           'Primary Contact Role': role,
-          Timeline: timeline,
+          ...(timelineForAirtable ? { Timeline: timelineForAirtable } : {}),
+          ...(interestForAirtable.length ? { 'Service Interest': interestForAirtable } : {}),
           Notes: [
-            interestRaw ? `Service interest: ${interest}` : '',
             source ? `Source detail: ${source}` : '',
-            problem ? `Trying to solve: ${problem}` : ''
+            problem ? `Trying to solve: ${problem}` : '',
+            ...unmappedSelects
           ].filter(Boolean).join('\n\n'),
           Source: 'Accelerator X Website',
           'Consent Given': consentGiven,
