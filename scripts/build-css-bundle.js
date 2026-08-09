@@ -1,5 +1,16 @@
 'use strict';
 
+// `npm run build` runs build:css (Tailwind CLI) and this script LAST, after every
+// HTML-generation step (build-homepage, build-testimonials, build-hero-media,
+// build-footer, build-design-system, build-inner-pages, build-hub). Tailwind's
+// content scan only sees whatever HTML is on disk at the moment it runs — if CSS
+// built BEFORE HTML generation, any class introduced only by generated (not
+// source-template) markup would be invisible until the *next* build, silently
+// committing CSS that's one generation stale. Investigated 2026-08-05 after a
+// report of "non-deterministic" CSS builds — the real cause was this ordering
+// (repro'd as a `.grow`/`.transform` utility missing from committed CSS that a
+// fresh build restored); the tool itself was deterministic run-to-run.
+//
 // Concatenates tailwind.generated.css + tokens.css + every component CSS file into a
 // single assets/css/bundle.generated.css, so pages load ~4 stylesheets instead of
 // 14-24. See #78 for the architecture-review finding this addresses.
