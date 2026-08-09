@@ -192,8 +192,104 @@ test('service-interest slug is mapped to a readable label in Slack + Airtable No
       assert.ok(slackText.includes('no shared AI vocabulary'));
 
       const airtableCall = fetchStub.calls.find((c) => c.url.includes('api.airtable.com'));
-      assert.ok(airtableCall.body.fields.Notes.includes('Service interest: Leadership Team AI Activation'));
+      // Service interest is a real multipleSelects field as of 2026-08-09, not prose in
+      // Notes — that was the whole point of adding it. Notes keeps only the answers that
+      // have no structured home.
+      assert.deepEqual(airtableCall.body.fields['Service Interest'], ['Leadership Team AI Activation']);
+      assert.ok(!airtableCall.body.fields.Notes.includes('Service interest:'));
       assert.ok(airtableCall.body.fields.Notes.includes('Trying to solve: Our leadership team has no shared AI vocabulary'));
+    }
+  );
+});
+
+test('multiple service interests are written as an array (form may send string or array)', async () => {
+  await withEnv(
+    {
+      SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead',
+      AIRTABLE_TOKEN: 'tok',
+      AIRTABLE_BASE_ID: 'appTest',
+      AIRTABLE_TABLE: 'Accounts',
+    },
+    async (mod) => {
+      const fetchStub = makeFetchStub([
+        { match: 'hooks.slack.test', status: 200 },
+        { match: 'api.airtable.com', status: 200 },
+      ]);
+      global.fetch = fetchStub;
+
+      const res = await mod.handler(
+        makeEvent({ ...VALID_FIELDS, interest: ['company-enablement', 'leadership-activation'] })
+      );
+      assert.equal(res.statusCode, 200);
+
+      const airtableCall = fetchStub.calls.find((c) => c.url.includes('api.airtable.com'));
+      assert.deepEqual(airtableCall.body.fields['Service Interest'], [
+        'Company Enablement',
+        'Leadership Team AI Activation',
+      ]);
+
+      const slackText = JSON.stringify(fetchStub.calls.find((c) => c.url.includes('hooks.slack.test')).body);
+      assert.ok(slackText.includes('Company Enablement'));
+      assert.ok(slackText.includes('Leadership Team AI Activation'));
+    }
+  );
+});
+
+test('an unmapped select value degrades to Notes rather than 422-ing the whole record', async () => {
+  await withEnv(
+    {
+      SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead',
+      AIRTABLE_TOKEN: 'tok',
+      AIRTABLE_BASE_ID: 'appTest',
+      AIRTABLE_TABLE: 'Accounts',
+    },
+    async (mod) => {
+      const fetchStub = makeFetchStub([
+        { match: 'hooks.slack.test', status: 200 },
+        { match: 'api.airtable.com', status: 200 },
+      ]);
+      global.fetch = fetchStub;
+
+      // Airtable rejects any select value that is not already a choice. A form option
+      // added without adding the Airtable choice must cost us the label, never the lead.
+      const res = await mod.handler(
+        makeEvent({ ...VALID_FIELDS, interest: 'some-new-offering-nobody-added', timeline: 'next-decade' })
+      );
+      assert.equal(res.statusCode, 200);
+
+      const fields = fetchStub.calls.find((c) => c.url.includes('api.airtable.com')).body.fields;
+      assert.ok(!('Service Interest' in fields), 'unmapped interest must be omitted, not sent');
+      assert.ok(!('Timeline' in fields), 'unmapped timeline must be omitted, not sent');
+      assert.ok(fields.Notes.includes('Service interest (unmapped): some-new-offering-nobody-added'));
+      assert.ok(fields.Notes.includes('Timeline (unmapped): next-decade'));
+      assert.equal(fields['Primary Contact Name'], VALID_FIELDS.name, 'the lead itself must still be written');
+    }
+  );
+});
+
+test('consent is written as structured fields — the GDPR record, not prose', async () => {
+  await withEnv(
+    {
+      SLACK_WEBHOOK_URL: 'https://hooks.slack.test/lead',
+      AIRTABLE_TOKEN: 'tok',
+      AIRTABLE_BASE_ID: 'appTest',
+      AIRTABLE_TABLE: 'Accounts',
+    },
+    async (mod) => {
+      const fetchStub = makeFetchStub([
+        { match: 'hooks.slack.test', status: 200 },
+        { match: 'api.airtable.com', status: 200 },
+      ]);
+      global.fetch = fetchStub;
+
+      await mod.handler(
+        makeEvent({ ...VALID_FIELDS, consent_given: true, consent_timestamp: '2026-08-09T20:25:50.924Z' })
+      );
+
+      const fields = fetchStub.calls.find((c) => c.url.includes('api.airtable.com')).body.fields;
+      assert.equal(fields['Consent Given'], true);
+      assert.equal(fields['Consent Timestamp'], '2026-08-09T20:25:50.924Z');
+      assert.equal(fields['Primary Contact Role'], VALID_FIELDS.role);
     }
   );
 });
