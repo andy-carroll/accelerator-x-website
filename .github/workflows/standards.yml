@@ -8,8 +8,18 @@ name: Standards
 #
 # These run in parallel. Either failure blocks the push from being considered clean.
 # The doc-freshness.yml workflow enforces CHANGELOG + ROADMAP update requirements.
+#
+# pull_request added 2026-08-09 (#100). Both jobs are REQUIRED status checks on
+# main, but with only a push trigger they never reported on a PR — so a PR into
+# main could not satisfy them and sat permanently BLOCKED. This looked like it
+# worked only because the long-lived rebuild/v2 branch matches 'rebuild/**': its
+# push statuses attached to any PR opened from it, by coincidence rather than
+# design. A PR from any other branch got nothing. Retiring rebuild/v2 would have
+# silently exposed this for every future PR.
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main, 'rebuild/**']
 
