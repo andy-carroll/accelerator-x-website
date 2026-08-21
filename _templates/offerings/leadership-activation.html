@@ -9,8 +9,10 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Fonts -->
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/Aptos-Bold.woff2" crossorigin />
+    <!-- Figtree loads via <link> so the fetch runs parallel to the CSS bundle (a bundle @import
+         would serialise it behind the full bundle download). The old Aptos preloads are gone:
+         no selector uses the Aptos face, so they were dead highest-priority bytes (2026-08-21). -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;900&display=swap" />
 
     <!-- Styles -->
     <link rel="stylesheet" href="/styles.css" />
