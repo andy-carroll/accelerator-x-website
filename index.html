@@ -80,15 +80,24 @@
     -->
     <meta name="robots" content="index, follow" />
     
-    <!--
-      PERFORMANCE: FONT PRELOADS
-      Self-hosted Aptos — aligns with Accelerator Solutions brand.
-      Preloading the two most-used weights (400 regular + 700 bold) ensures
-      above-the-fold text renders with the correct font on first paint.
-      Remaining weights (600 semibold + italics) load without blocking.
-    -->
-    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos-Bold.woff2" crossorigin />
+    <!-- Figtree loads via <link> so the fetch runs parallel to the CSS bundle (a bundle @import
+         would serialise it behind the full bundle download). The old Aptos preloads are gone:
+         no selector uses the Aptos face, so they were dead highest-priority bytes (2026-08-21). -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;900&display=swap" />
+
+    <!-- The first hero slide is the LCP element; preloading it stops the browser burying it
+         behind head-discovered resources. build-hero-media.js regenerates the tag between
+         these markers from the live library — never hand-edit the URL here. -->
+    <!-- HERO_MEDIA_PRELOAD_START -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      imagesrcset="/assets/hero/generated/ax-workshop-01-480.webp 480w, /assets/hero/generated/ax-workshop-01-768.webp 768w, /assets/hero/generated/ax-workshop-01-1200.webp 1200w"
+      imagesizes="(min-width: 1024px) 42vw, 100vw"
+      fetchpriority="high"
+    />
+    <!-- HERO_MEDIA_PRELOAD_END -->
 
     <!-- 
       DESIGN SYSTEM CSS
@@ -102,6 +111,20 @@
     -->
     <link rel="stylesheet" href="./styles.css" />
     <link rel="stylesheet" href="/assets/css/bundle.generated.css" />
+
+    <!-- .reveal keeps content at opacity:0 until deferred main.js adds is-visible — without
+         this override the hero H1, subhead and CTAs never paint when JS is blocked or fails
+         (this site has been script-blocked in the wild twice: NordVPN and Sky Broadband
+         Shield false-flags). The no-inline-script rule covers script blocks only; a
+         noscript style override is the sanctioned escape hatch. -->
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      </style>
+    </noscript>
 
     <!-- 
       MATERIAL SYMBOLS (Google Icons)
@@ -452,6 +475,7 @@
                         width="5355"
                         height="4016"
                         loading="eager"
+                        fetchpriority="high"
                         decoding="async"
                         class="hero-media-slide__image"
                       />
