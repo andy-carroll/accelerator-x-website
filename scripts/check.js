@@ -47,6 +47,40 @@ function filesIn(relDir, ext) {
   return results;
 }
 
+// Every HTML file npm run build generates — the surface Checks #3 and #8 scan.
+// Deliberately excluded (legacy v1 orphans, reconciliation tracked separately):
+//   cohort.html  — still on the v1 nav + build-footer.js marker pattern (#91)
+//   privacy.html / terms.html — v1 legal pages awaiting v2 reconciliation (#87)
+// They predate the token/component system and would fail checks written for v2
+// output; extending coverage to them belongs to their own tracked rebuilds.
+const BUILT_HTML_DIRS = [
+  'about',
+  'contact',
+  'design-system',
+  'faq',
+  'how-we-work',
+  'insights',
+  'programmes',
+  'talks-events',
+  'what-we-do',
+];
+
+function builtHtmlFiles() {
+  const files = ['index.html'];
+  for (const dir of BUILT_HTML_DIRS) {
+    files.push(...filesIn(dir, '.html'));
+  }
+  return files;
+}
+
+// Commented-out markup never renders, so tokens/ids/imgs inside it aren't real
+// violations (e.g. ProofRow's parked case-tile variant, held in a comment until
+// #55 lands a real case study). Blanking rather than deleting keeps reported
+// line numbers pointing at the actual file.
+function stripHtmlComments(content) {
+  return content.replace(/<!--[\s\S]*?-->/g, (comment) => comment.replace(/[^\n]/g, ''));
+}
+
 // ── Check 1: No inline <script> blocks in templates ───────────────────────────
 // Rule: .claude/rules/standards.md "No inline scripts"
 // Incident: inline newsletter handler in _templates/article.html competed with
@@ -96,17 +130,20 @@ function checkNoHardcodedSecrets() {
   if (clean) pass('No hardcoded secrets found in functions');
 }
 
-// ── Check 3: No unsubstituted build tokens in generated article HTML ──────────
+// ── Check 3: No unsubstituted build tokens in generated HTML ──────────────────
 // Rule: .claude/rules/standards.md — the build is the contract
 // Rationale: if a {{token}} appears in built output, the build silently produced
 //   a broken page. This catches missed token substitution before it reaches prod.
+// Incident: design-system/index.html shipped live with {{site:QUIZ_URL}} hrefs
+//   (build-design-system.js only ran resolveComponentTokens) while this check —
+//   then scoped to insights/articles/ only — passed clean. Now scans all built HTML.
 
 function checkNoUnsubstitutedTokens() {
-  console.log('\n[3] No unsubstituted {{tokens}} in built article HTML');
+  console.log('\n[3] No unsubstituted {{tokens}} in built HTML');
 
   let clean = true;
-  for (const file of filesIn('insights/articles', '.html')) {
-    const content = readFile(file);
+  for (const file of builtHtmlFiles()) {
+    const content = stripHtmlComments(readFile(file));
     // Find any {{ not inside a <script type="application/ld+json"> block
     // Simple check: just flag any {{ appearance — tokens should never survive the build
     const lines = content.split('\n');
@@ -121,7 +158,7 @@ function checkNoUnsubstitutedTokens() {
       clean = false;
     }
   }
-  if (clean) pass('All build tokens substituted in article HTML');
+  if (clean) pass('All build tokens substituted in built HTML');
 }
 
 // ── Check 4: All <script src="..."> references in templates + index.html exist ─
@@ -286,17 +323,22 @@ function checkNoCssTokenDrift() {
 //   before they reach production. Zero dependencies — regex-based spot checks
 //   for the most impactful classes of error.
 // Checks: <img> without alt (a11y + SEO critical), duplicate id= values per file
+// Scope: all built HTML — this check was scoped to insights/articles/ only until
+//   the design-system token incident (Check #3) showed the other ~15 built pages
+//   were shipping unvalidated.
 
 function checkBuiltHtml() {
   console.log('\n[8] Built HTML validation (alt attributes, duplicate IDs)');
 
   const IMG_NO_ALT  = /<img(?![^>]*\balt=)[^>]*>/gi;
-  const ID_ATTR     = /\bid="([^"]+)"/g;
+  // Lookbehind excludes data-*-id="…" attributes — \b alone treats the hyphen in
+  // data-error-id="apply-error" as a boundary and miscounts it as a second id.
+  const ID_ATTR     = /(?<![-\w])id="([^"]+)"/g;
 
   let clean = true;
 
-  for (const file of filesIn('insights/articles', '.html')) {
-    const content = readFile(file);
+  for (const file of builtHtmlFiles()) {
+    const content = stripHtmlComments(readFile(file));
 
     // Check 8a: <img> tags missing alt attribute
     const imgViolations = [...content.matchAll(IMG_NO_ALT)];
