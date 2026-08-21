@@ -5,7 +5,7 @@
   // All form submissions on the site go through this file.
   // No inline scripts. No exceptions.
   //
-  // Lead capture  (#lead-form)         → POST /.netlify/functions/submission-created
+  // Lead capture  (#lead-form)         → POST /.netlify/functions/lead-capture
   //                                    → Airtable + Slack #website-leads
   //
   // Newsletter    (#newsletter-form)   → POST /.netlify/functions/newsletter-subscribe

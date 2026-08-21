@@ -1,6 +1,6 @@
-// Netlify Function: submission-created
-// Triggered by: Netlify Forms webhook on every form submission
-// Handles: lead-capture-form only → Slack #website-leads + Airtable CRM
+// Netlify Function: lead-capture
+// Triggered by: direct same-origin JSON POST from the apply form (assets/js/forms.js)
+// Handles: lead applications → Airtable CRM (consent-stamped) + Slack #website-leads
 // NOT responsible for: newsletter signups (handled by newsletter-subscribe.js directly)
 // Env vars required: SLACK_WEBHOOK_URL, AIRTABLE_TOKEN, AIRTABLE_BASE_ID, AIRTABLE_TABLE
 
@@ -332,7 +332,7 @@ exports.handler = async (event, context) => {
     };
 
   } catch (error) {
-    console.error('submission-created error:', error.message);
+    console.error('lead-capture error:', error.message);
     // Internal detail (raw Slack/Airtable error strings) stays in the function logs —
     // this is an unauthenticated endpoint, so the caller gets only a generic message
     // (matching newsletter-subscribe.js).
