@@ -7,14 +7,19 @@
       "main",
       "agent/*",
       "feat/*",
-      "rebuild/*"
+      "fix/*",
+      "batch/*",
+      "docs/*",
+      "issue-*",
+      "claude/*",
+      "proposal/*"
     ],
     "defaultPushRemote": "origin",
-    "workingBranch": "rebuild/v2",
+    "workingBranch": "main",
     "productionBranch": "main"
   },
   "deployment": {
-    "previewUrl": "https://rebuild-v2--accelerator-x.netlify.app",
+    "previewUrl": "https://accelerator-x.ai",
     "productionUrl": "https://accelerator-x.ai"
   },
   "sessionStart": {
