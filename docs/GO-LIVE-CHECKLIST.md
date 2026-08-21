@@ -338,7 +338,7 @@ Target: `/.netlify/functions/newsletter-subscribe`
 - `[ ]` Heading hierarchy logical (h1 → h2 → h3, no skips)
 - `[x]` `canonical` URL set correctly on every page — closed 2026-08-05 (#81): `privacy.html`/`terms.html` were the only pages without one (added); insights index canonicalised `/insights/index.html` → `/insights/` to stop contradicting the sitemap; all other pages verified present + correct
 - `[ ]` `robots.txt` — not blocking crawlers; correct disallow rules
-- `[~]` `sitemap.xml` generated, accurate, and submitted to Google Search Console — generated + accurate as of 2026-08-05 (#81: 20 → 30 URLs, the five offering pages / coaching lane hub / `/faq/` / cohort funnel were missing; offering URLs now derive from `offerings.json`; `lastmod` git-honest). **GSC submission = Andy, founder access, still open**
+- `[~]` `sitemap.xml` generated, accurate, and submitted to Google Search Console — generated + accurate as of 2026-08-05 (#81: 20 → 30 URLs, the five offering pages / coaching lane hub / `/faq/` / cohort funnel were missing; offering URLs now derive from `offerings.json`; `lastmod` git-honest). **GSC submission = Andy, founder access, still open — but no longer urgent: the 2026-08-21 review verified the site is indexed and ranks #1 for its own name in live search; GSC is now for coverage/query data, not indexation rescue**
 - `[x]` `llms.txt` — content accurate and up to date (for AI crawlers) — rewritten for v2 2026-08-05 (#81/#43): was still describing the v1 single-programme site with a stale `andy@` contact and wrong LinkedIn URL
 - `[ ]` No broken internal links (run a crawl tool on Netlify preview)
 - `[ ]` Page speed: Lighthouse ≥95 mobile / ≥98 desktop (target from ROADMAP)
