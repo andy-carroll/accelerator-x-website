@@ -21,8 +21,10 @@
 #   printf %s "<handler>" | openssl dgst -sha256 -binary | base64).
 # - eu-assets.i.posthog.com serves the PostHog loader + lazy chunks; eu.i.posthog.com
 #   receives event/flag POSTs (connect-src).
-# - style-src fonts.googleapis.com also covers the Figtree @import inside
-#   tokens.css / tailwind.generated.css; 'unsafe-inline' covers inline style="" attrs.
+# - style-src fonts.googleapis.com also covers the Figtree stylesheet <link> in every
+#   page head (moved out of the CSS bundle's @import 2026-08-21 — the import serialised
+#   the font fetch behind the whole bundle); 'unsafe-inline' covers inline style=""
+#   attrs and the <noscript><style> reveal fallback.
 # - img-src data: is required — CSS mask-image data-URIs (FitCheck, FormInputs) are
 #   governed by img-src.
 # - HSTS deliberately has no includeSubDomains (quiz/mail subdomains) and no preload
@@ -57,12 +59,14 @@
 # be. Only add a custom Cache-Control here again for genuinely fingerprinted assets
 # (e.g. `/assets/*.<hash>.css`) — verify any header `for` glob against a live deploy
 # (`curl -sI <url>`) before trusting it; extglob alternation is not supported.
-
-# Keep HTML short-lived to pick up updates
-[[headers]]
-  for = "/*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=300"
+#
+# HTML gets the same default, on purpose. A `for = "/*.html"` max-age=300 rule sat here
+# until 2026-08-21, but every primary page is served at an extensionless pretty URL
+# (/, /what-we-do/, /insights/), which `/*.html` never matches — verified live: `/`
+# returned the default `max-age=0, must-revalidate` while only legacy .html-suffixed
+# paths got the 300s. Same failure shape as the extglob bug above: a rule that looks
+# like policy but matches almost nothing. The default is also the safer value (no
+# 5-minute stale window after a deploy), so the rule was removed rather than extended.
 
 # Quiz path 301s (#81): the quiz lives on its own subdomain (site-config.js QUIZ_URL);
 # nothing on the site links to /quiz/* any more, but the path was published
