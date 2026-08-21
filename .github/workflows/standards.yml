@@ -1,27 +1,30 @@
 name: Standards
 
-# Enforces .claude/rules/standards.md on every push to main and rebuild/* branches.
+# Enforces .claude/rules/standards.md on every PR into main and push to main.
 # Two jobs, both required:
-#   build   — npm run build must exit 0 (no broken artefacts reach Netlify)
+#   build   — npm run build must exit 0 AND leave the tree clean (committed
+#             artefacts must be byte-identical to a fresh build — the structural
+#             property the "pre-built artefacts committed" deploy model rests on)
 #   check   — npm run check + npm test must exit 0 (standards violations + money-path
 #             unit test regressions both block)
 #
 # These run in parallel. Either failure blocks the push from being considered clean.
 # The doc-freshness.yml workflow enforces CHANGELOG + ROADMAP update requirements.
+# Dependency auditing lives in dependency-audit.yml (#107): an advisory published
+# against the world is not a property of the change under review, so it no longer
+# sits on the merge gate.
 #
 # pull_request added 2026-08-09 (#100). Both jobs are REQUIRED status checks on
 # main, but with only a push trigger they never reported on a PR — so a PR into
-# main could not satisfy them and sat permanently BLOCKED. This looked like it
-# worked only because the long-lived rebuild/v2 branch matches 'rebuild/**': its
-# push statuses attached to any PR opened from it, by coincidence rather than
-# design. A PR from any other branch got nothing. Retiring rebuild/v2 would have
-# silently exposed this for every future PR.
+# main could not satisfy them and sat permanently BLOCKED. The 'rebuild/**' push
+# trigger was removed 2026-08-21: the branch was retired in the org move and the
+# dead trigger misdescribed the working model.
 
 on:
   pull_request:
     branches: [main]
   push:
-    branches: [main, 'rebuild/**']
+    branches: [main]
 
 jobs:
   build:
@@ -53,11 +56,26 @@ jobs:
           test -f assets/css/tailwind.generated.css || (echo "❌ tailwind.generated.css missing" && exit 1)
           echo "✅ Build artefacts present"
 
+      - name: Committed artefacts match a fresh build
+        # The deploy model serves the repo as-is with no Netlify build, so a PR
+        # that edits templates/scripts without committing the rebuilt output would
+        # otherwise ship stale pages silently. Requires the fetch-depth: 0 checkout
+        # above — a shallow clone rebuilds the sitemap with wrong <lastmod> dates
+        # and would false-positive this diff.
+        run: |
+          git diff --exit-code || (echo "❌ Committed artefacts are stale — run 'npm run build' and commit the result" && exit 1)
+          echo "✅ Committed artefacts are byte-identical to a fresh build"
+
   check:
     name: Standards check passes
     runs-on: ubuntu-latest
     steps:
+      # Full history for the same reason as the build job: this job runs
+      # npm run build, and scripts/build-hub.js resolves sitemap <lastmod>
+      # from per-file git history.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v4
         with:
@@ -75,8 +93,3 @@ jobs:
 
       - name: Run unit tests
         run: npm test
-
-      - name: Dependency security audit
-        # Fails on high or critical vulnerabilities only — avoids noise from
-        # low/moderate issues in dev dependencies. See .claude/rules/standards.md.
-        run: npm audit --audit-level=high

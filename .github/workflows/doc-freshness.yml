@@ -35,12 +35,15 @@ jobs:
           # Both events judge a whole unit of work, not a single commit: a CHANGELOG
           # entry anywhere in the PR (or the push) satisfies the check.
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            # merge-base, not base.sha directly: on a pull_request event the checkout
-            # is the MERGE commit, so its history already contains the base branch.
-            # Diffing from base.sha would then attribute every commit that landed on
-            # main since the PR opened to this PR — a CHANGELOG entry from someone
-            # else's merge would satisfy the check for a PR that never wrote one.
-            BASE=$(git merge-base "${{ github.event.pull_request.base.sha }}" HEAD)
+            # HEAD is the refs/pull/N/merge commit; its FIRST PARENT is the current
+            # tip of the base branch at merge-simulation time. Diffing from HEAD^1
+            # therefore isolates exactly this PR's changes.
+            # NOT merge-base(base.sha, HEAD): base.sha can lag the real base tip,
+            # and since it is always an ancestor of the merge commit, merge-base
+            # just returns base.sha — a no-op that attributed every commit landed
+            # on main since to this PR, so someone else's CHANGELOG entry could
+            # satisfy the check for a PR that never wrote one (#105).
+            BASE=$(git rev-parse HEAD^1)
           else
             # Diff the whole push (before..after). Fall back to HEAD~1 when 'before'
             # is unavailable (new branch or force push).
