@@ -107,7 +107,7 @@ transparent, anti-agency positioning.
 - [ ] Shared layout ownership cleanup — resolve footer/navigation single-source-of-truth across homepage,
       Insights, and other templates now that homepage shell/fragment architecture is in place
 - [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
-- [x] Add automated tests for Netlify functions — 36 `node:test` cases now cover `lead-capture` (which replaced `submission-created`) + `newsletter-subscribe`, wired into CI (2026-07-04 → 2026-08-10)
+- [x] Add automated tests for Netlify functions — `lead-capture` (which replaced `submission-created`) + `newsletter-subscribe` now have a dedicated incident-derived `node:test` suite wired into CI, grown further by the 2026-08-21 hardening batch (full suite: 44 cases)
 
 ### Session protocol hardening backlog (deferred, trigger-based)
 
