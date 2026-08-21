@@ -62,9 +62,26 @@ jobs:
         # otherwise ship stale pages silently. Requires the fetch-depth: 0 checkout
         # above — a shallow clone rebuilds the sitemap with wrong <lastmod> dates
         # and would false-positive this diff.
+        #
+        # <lastmod> lines are excluded from the diff (-I): sitemap dates derive
+        # from each page's last COMMITTER date (build-hub.js resolveLastmod), and
+        # this repo squash-merges — a squash re-dates every touched page to merge
+        # day, so a next-day merge would make this required check go red on main
+        # and on every subsequent PR until someone hand-committed a rebuilt
+        # sitemap. That is world-state gating unrelated changes, the exact
+        # failure class #107 removed from this job. Structural sitemap drift
+        # (URLs added/removed) still fails; only date drift is tolerated.
+        # Untracked output is checked separately — `git diff` alone would pass a
+        # brand-new built page that was never committed.
         run: |
-          git diff --exit-code || (echo "❌ Committed artefacts are stale — run 'npm run build' and commit the result" && exit 1)
-          echo "✅ Committed artefacts are byte-identical to a fresh build"
+          git diff -I '<lastmod>' --exit-code || (echo "❌ Committed artefacts are stale — run 'npm run build' and commit the result" && exit 1)
+          UNTRACKED=$(git ls-files --others --exclude-standard)
+          if [ -n "$UNTRACKED" ]; then
+            echo "❌ Fresh build produced files that are not committed:"
+            echo "$UNTRACKED"
+            exit 1
+          fi
+          echo "✅ Committed artefacts match a fresh build (lastmod-tolerant)"
 
   check:
     name: Standards check passes
