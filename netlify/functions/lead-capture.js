@@ -16,21 +16,15 @@ const AIRTABLE_API_URL = AIRTABLE_BASE_ID && AIRTABLE_TABLE
   : null;
 
 exports.handler = async (event, context) => {
+  // No CORS headers by design: forms.js posts same-origin, so no preflight ever fires.
+  // The previous 'Access-Control-Allow-Origin: *' advertised a cross-origin contract
+  // whose OPTIONS handler was unreachable anyway (the 405 guard ran first) — dropping
+  // both locks the endpoint to same-origin use instead of half-promising more.
+  const headers = { 'Content-Type': 'application/json' };
+
   // Only accept POST requests
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
-  // CORS headers for direct browser POSTs
-  const headers = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json'
-  };
-
-  // Handle CORS preflight
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers, body: '' };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
 
   // Reject oversized payloads before parsing
@@ -90,7 +84,19 @@ exports.handler = async (event, context) => {
     const interestRaw = interestRawList.join(',');
     const source = safeTrim(data.source || '', 200);
     const consentGiven = data.consent_given === true;
-    const consentTimestamp = safeTrim(data.consent_timestamp || new Date().toISOString());
+    // Airtable's Consent Timestamp is a dateTime field — an unparseable value 422s the
+    // ENTIRE record (#106, the same failure class #95 fixed, on the GDPR field #95
+    // existed to protect). The endpoint accepts direct unauthenticated POSTs, so treat
+    // the client value as hostile: anything that isn't clean ISO-8601 falls back to
+    // server time (a defensible consent timestamp — the request just arrived) and the
+    // rejected raw value is preserved in Notes rather than costing the lead.
+    const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/;
+    const consentTimestampRaw = safeTrim(data.consent_timestamp || '', 64);
+    const consentTimestampRejected = Boolean(consentTimestampRaw)
+      && !(ISO_TIMESTAMP.test(consentTimestampRaw) && !Number.isNaN(Date.parse(consentTimestampRaw)));
+    const consentTimestamp = consentTimestampRaw && !consentTimestampRejected
+      ? consentTimestampRaw
+      : new Date().toISOString();
 
     // Required fields guard
     if (!name || !email || !company || !website || !role) {
@@ -242,7 +248,8 @@ exports.handler = async (event, context) => {
           Notes: [
             source ? `Source detail: ${source}` : '',
             problem ? `Trying to solve: ${problem}` : '',
-            ...unmappedSelects
+            ...unmappedSelects,
+            consentTimestampRejected ? `Consent timestamp (rejected, server time used): ${consentTimestampRaw}` : ''
           ].filter(Boolean).join('\n\n'),
           Source: 'Accelerator X Website',
           'Consent Given': consentGiven,
@@ -251,18 +258,48 @@ exports.handler = async (event, context) => {
       };
 
       try {
-        const airtableResponse = await fetch(AIRTABLE_API_URL, {
+        const postToAirtable = (payload) => fetch(AIRTABLE_API_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${AIRTABLE_TOKEN}`
           },
-          body: JSON.stringify(airtablePayload)
+          body: JSON.stringify(payload)
         });
+
+        let airtableResponse = await postToAirtable(airtablePayload);
 
         if (!airtableResponse.ok) {
           const text = await airtableResponse.text();
-          throw new Error(`Airtable error: ${airtableResponse.status} ${text}`);
+          // The mapped-choices guard above only covers values THIS function doesn't
+          // know. The likelier drift runs the other way (#106): a value the function
+          // knows but Airtable doesn't — a new offering whose Service Interest choice
+          // hasn't been added yet passes the guard and 422s the whole record. The PAT
+          // deliberately lacks typecast/schema rights, so recover reactively instead:
+          // strip the rejected select field(s) into Notes and retry once — select
+          // drift in either direction costs a label, never the lead.
+          if (airtableResponse.status === 422 && /INVALID_MULTIPLE_CHOICE_OPTIONS|select option/i.test(text)) {
+            const sentSelects = ['Timeline', 'Service Interest', 'Source'].filter((f) => f in airtablePayload.fields);
+            const named = sentSelects.filter((f) =>
+              [].concat(airtablePayload.fields[f]).some((v) => text.includes(v)));
+            const retryFields = { ...airtablePayload.fields };
+            // If the 422 body names none of the values we sent, strip every select —
+            // over-stripping into Notes is recoverable; a second 422 is not.
+            const rejectedNotes = (named.length ? named : sentSelects).map((f) => {
+              const value = [].concat(retryFields[f]).join(', ');
+              delete retryFields[f];
+              return `${f} (Airtable rejected the choice, kept here): ${value}`;
+            });
+            retryFields.Notes = [retryFields.Notes, ...rejectedNotes].filter(Boolean).join('\n\n');
+            console.warn('Airtable rejected a select choice — retrying without:', rejectedNotes.join(' | '));
+            airtableResponse = await postToAirtable({ fields: retryFields });
+            if (!airtableResponse.ok) {
+              const retryText = await airtableResponse.text();
+              throw new Error(`Airtable error after select retry: ${airtableResponse.status} ${retryText} (first attempt: 422 ${text})`);
+            }
+          } else {
+            throw new Error(`Airtable error: ${airtableResponse.status} ${text}`);
+          }
         }
         airtableStatus = 'created';
       } catch (airtableError) {
@@ -296,10 +333,13 @@ exports.handler = async (event, context) => {
 
   } catch (error) {
     console.error('submission-created error:', error.message);
+    // Internal detail (raw Slack/Airtable error strings) stays in the function logs —
+    // this is an unauthenticated endpoint, so the caller gets only a generic message
+    // (matching newsletter-subscribe.js).
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: error.message })
+      body: JSON.stringify({ error: 'Server error' })
     };
   }
 };
