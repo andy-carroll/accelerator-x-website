@@ -109,6 +109,14 @@ exports.handler = async (event, context) => {
       return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'invalid website' }) };
     }
 
+    // Same hostile-input posture as the timestamp/website checks above — this endpoint
+    // accepts direct unauthenticated POSTs, so email format isn't guaranteed by the
+    // client's type="email" input. Mirrors newsletter-subscribe.js's validation.
+    const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!EMAIL_PATTERN.test(email)) {
+      return { statusCode: 200, headers, body: JSON.stringify({ skipped: 'invalid email' }) };
+    }
+
     // Format timeline for readability
     const timelineLabels = {
       'immediately': 'Immediately',

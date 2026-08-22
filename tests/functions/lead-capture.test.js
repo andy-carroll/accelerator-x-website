@@ -100,6 +100,15 @@ test('missing required fields are skipped', async () => {
   });
 });
 
+test('malformed email is skipped — the endpoint accepts unauthenticated POSTs, format is not guaranteed', async () => {
+  await withEnv({}, async (mod) => {
+    global.fetch = makeFetchStub([]);
+    const res = await mod.handler(makeEvent({ ...VALID_FIELDS, email: 'not-an-email' }));
+    assert.equal(res.statusCode, 200);
+    assert.deepEqual(JSON.parse(res.body), { skipped: 'invalid email' });
+  });
+});
+
 test('oversized payload is rejected with 413 before parsing', async () => {
   await withEnv({}, async (mod) => {
     global.fetch = makeFetchStub([]);
