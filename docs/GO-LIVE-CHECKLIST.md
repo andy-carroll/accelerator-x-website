@@ -458,6 +458,14 @@ This page is a live conversion surface separate from the main site cutover.
 It can go live independently once all blocking items below are resolved.
 Source template: `_templates/programmes/leadership-cohort.html`
 
+> **Contained 2026-08-22 (#108):** none of the blockers below were resolved,
+> but exposure is now much lower — the page is `noindex, follow` (out of
+> search circulation) and the unapproved £16,000/Mark story has been removed
+> entirely (from this page, `PricingBlock.html`, and the deleted `cohort.html`)
+> rather than left unapproved and live. The price (£2,950 vs £3,500 canon) and
+> the "4 seats remaining" count are still wrong — deliberately not touched,
+> since fixing them wasn't the decision made; they remain blocking below.
+
 | Item | Blocking go-live? | Status |
 |---|---|---|
 | Mark's exact quote — verbatim, approved for publication | **Yes** | `[ ]` |
