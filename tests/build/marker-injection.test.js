@@ -53,16 +53,28 @@ test('throws when the end marker appears before the start marker', () => {
   );
 });
 
-test('onMissing "warn" returns the original content unchanged and reports injected:false', () => {
+test('onMissing "warn" returns the original content unchanged, reports injected:false, and actually warns', () => {
   const content = 'no markers here';
-  const { content: result, injected } = injectMarked(content, {
-    startMarker: '<!-- START -->',
-    endMarker: '<!-- END -->',
-    replacement: 'x',
-    onMissing: 'warn',
-  });
+  const warnings = [];
+  const originalWarn = console.warn;
+  console.warn = (message) => warnings.push(message);
+  let result;
+  let injected;
+  try {
+    ({ content: result, injected } = injectMarked(content, {
+      startMarker: '<!-- START -->',
+      endMarker: '<!-- END -->',
+      replacement: 'x',
+      onMissing: 'warn',
+    }));
+  } finally {
+    console.warn = originalWarn;
+  }
   assert.equal(injected, false);
   assert.equal(result, content);
+  assert.equal(warnings.length, 1);
+  assert.match(warnings[0], /<!-- START -->/);
+  assert.match(warnings[0], /<!-- END -->/);
 });
 
 test('context is included in the thrown error message when provided', () => {

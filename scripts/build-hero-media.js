@@ -182,7 +182,7 @@ function main() {
       startMarker: preloadStartMarker,
       endMarker: preloadEndMarker,
       replacement: `\n${preloadHtml}\n    `,
-      onMissing: 'throw', // already confirmed present above
+      onMissing: 'throw', // presence already confirmed above; injectMarked's own order check still guards start-before-end
       context: 'index.html',
     }).content;
   }
