@@ -1,4 +1,9 @@
-@import "../assets/css/tokens.css";
+/* tokens.css is deliberately NOT @imported here: it already rides in the bundle as
+   its own member (build-css-bundle.js concatenates it AFTER this file's output, so
+   its element rules keep winning their specificity ties against preflight's resets).
+   Importing it here too shipped every token/base/button rule twice per page — found
+   in the 2026-08-21 review. cohort.html, the one page still loading
+   tailwind.generated.css directly, links tokens.css itself. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

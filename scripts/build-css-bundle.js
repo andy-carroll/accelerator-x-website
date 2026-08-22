@@ -27,8 +27,10 @@
 // is ever reported.
 //
 // @import must be hoisted to the top of the bundle (mid-file @import is silently
-// ignored by browsers) and deduped — tokens.css and tailwind.generated.css both
-// @import the same Figtree URL today.
+// ignored by browsers) and deduped. No source file carries one today (the Figtree
+// @import moved to a per-page head <link> in the 2026-08-21 perf batch, so the
+// font CSS fetch no longer queues behind the whole bundle), but the hoist/dedupe
+// machinery stays — it is what makes a future stray @import fail safe, not silent.
 
 const fs = require('fs');
 const path = require('path');

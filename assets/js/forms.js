@@ -148,7 +148,10 @@
         })
         .catch((err) => {
           console.error('Lead form error:', err);
-          showError(leadError, 'There was an error submitting your application. Please try again or email us at hello@accelerator-x.ai');
+          // info@ is the consolidated public contact route (B5, 2026-07-13) — hello@ exists
+          // but is unmonitored as a published channel. The {{site:INFO_EMAIL}} token can't
+          // reach here: token resolution runs on templates only, not assets/js.
+          showError(leadError, 'There was an error submitting your application. Please try again or email us at info@accelerator-x.ai');
           setSubmitState(btn, { disabled: false, label: originalLabel });
         })
         .finally(() => {

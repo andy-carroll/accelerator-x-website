@@ -72,11 +72,40 @@ function buildSlideHtml(entry, sizes, isFirst) {
     `                        width="${escapeHtml(entry.width)}"`,
     `                        height="${escapeHtml(entry.height)}"`,
     `                        loading="${loading}"`,
+    // The first slide is the LCP element — without an explicit priority the browser
+    // ranks a 42vw image below head-discovered resources until layout proves otherwise.
+    ...(isFirst ? ['                        fetchpriority="high"'] : []),
     '                        decoding="async"',
     '                        class="hero-media-slide__image"',
     '                      />',
     '                    </picture>',
     '                  </figure>',
+  ].join('\n');
+}
+
+// Head preload for the first (LCP) slide, kept in lockstep with the slide markup by
+// regenerating both from the same library entry. imagesrcset/imagesizes mirror the
+// slide's webp <source> exactly so the preload matches the resource the browser will
+// pick; there is deliberately NO href fallback — a browser too old for imagesrcset
+// would preload a fixed size it may never render (double download), whereas skipping
+// the hint entirely is harmless.
+function buildPreloadHtml(entry, sizes) {
+  const variants = Array.isArray(entry && entry.variants) ? entry.variants : [];
+  if (!entry || !entry.basePath || variants.length === 0) return '';
+
+  const webpSrcset = variants.map((width) => `${entry.basePath}-${width}.webp ${width}w`).join(', ');
+
+  return [
+    '    <!-- HERO_MEDIA_PRELOAD_START -->',
+    '    <link',
+    '      rel="preload"',
+    '      as="image"',
+    '      type="image/webp"',
+    `      imagesrcset="${escapeHtml(webpSrcset)}"`,
+    `      imagesizes="${escapeHtml(sizes)}"`,
+    '      fetchpriority="high"',
+    '    />',
+    '    <!-- HERO_MEDIA_PRELOAD_END -->',
   ].join('\n');
 }
 
@@ -140,7 +169,20 @@ function main() {
   const before = indexHtml.slice(0, startIdx);
   const after = indexHtml.slice(endIdx + endMarker.length);
   const replacement = buildHeroMarkup(config, library);
-  const output = `${before}${replacement}${after}`;
+  let output = `${before}${replacement}${after}`;
+
+  const preloadStartMarker = '    <!-- HERO_MEDIA_PRELOAD_START -->';
+  const preloadEndMarker = '    <!-- HERO_MEDIA_PRELOAD_END -->';
+  const preloadStartIdx = output.indexOf(preloadStartMarker);
+  const preloadEndIdx = output.indexOf(preloadEndMarker);
+  const firstEntry = library.filter((entry) => entry && entry.active !== false)[0];
+  const preloadHtml = buildPreloadHtml(firstEntry, config.sizes);
+
+  if (preloadStartIdx === -1 || preloadEndIdx === -1 || preloadEndIdx <= preloadStartIdx) {
+    console.warn('⚠️ Could not locate hero preload markers in index.html. Skipping LCP preload.');
+  } else if (preloadHtml) {
+    output = output.slice(0, preloadStartIdx) + preloadHtml + output.slice(preloadEndIdx + preloadEndMarker.length);
+  }
 
   fs.writeFileSync(INDEX_HTML_PATH, output);
   const renderedCount = library

@@ -42,13 +42,31 @@
     <link rel="canonical" href="https://accelerator-x.ai/cohort.html" />
     <meta name="robots" content="index, follow" />
     
-    <!-- Font preloads -->
-    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos.woff2" crossorigin />
-    <link rel="preload" as="font" type="font/woff2" href="./assets/fonts/Aptos-Bold.woff2" crossorigin />
+    <!-- Figtree loads via <link> so the fetch runs parallel to the CSS (a CSS @import
+         would serialise it behind the importing stylesheet's download). The old Aptos
+         preloads are gone: no selector uses the Aptos face, so they were dead
+         highest-priority bytes (2026-08-21). -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;900&display=swap" />
 
-    <!-- Design system CSS -->
+    <!-- Design system CSS. tokens.css is linked explicitly (before Tailwind, matching the
+         cascade position it had when tailwind.generated.css inlined it) — this v1 page is
+         the one page that doesn't load bundle.generated.css, where tokens ride along. -->
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="/assets/css/tokens.css" />
     <link rel="stylesheet" href="/assets/css/tailwind.generated.css" />
+
+    <!-- .reveal keeps content at opacity:0 until deferred main.js adds is-visible — without
+         this override the hero copy never paints when JS is blocked or fails (this site has
+         been script-blocked in the wild twice: NordVPN and Sky Broadband Shield false-flags).
+         The no-inline-script rule covers script blocks only. -->
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      </style>
+    </noscript>
 
     <!-- Material Symbols -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />

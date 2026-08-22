@@ -7,8 +7,11 @@
    See DESIGN.md for principles. See tokens.json for interop.
    =========================================================================== */
 
-/* Figtree — display headlines only. Falls back to system stack if blocked. */
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@500;600;700;900&display=swap");
+/* Figtree (display headlines) is loaded via a <link> in every page head, NOT
+   @imported here: an @import discovered inside the CSS bundle serialises the
+   font-CSS fetch behind the entire bundle download+parse, where a head <link>
+   starts it in parallel (2026-08-21 review). Falls back to system stack if
+   blocked. Self-hosting remains the eventual fix — see CLAUDE.md known issues. */
 
 :root {
   /* ==========================================================================
