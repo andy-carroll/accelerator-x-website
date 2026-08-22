@@ -69,7 +69,7 @@ info@accelerator-x.ai reaches both founders. We reply within 1 business day.
 ## This site
 
 https://accelerator-x.ai is static HTML, built with deliberate engineering rigour.
-The codebase is public: https://github.com/andy-carroll/accelerator-x-website
+The codebase is public: https://github.com/acc-x/accelerator-x-website
 
 The build system, automated standards enforcement, and documentation architecture
 are themselves a demonstration of how we think about AI-assisted work. The repo

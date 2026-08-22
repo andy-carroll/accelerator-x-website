@@ -3,7 +3,7 @@
 _This is a living document. It connects our high-level business strategy with daily execution.
 It operates on a "Now, Next, Later" horizon to maintain momentum without administrative drag._
 
-_Last updated: 2026-08-05 (SEO indexation groundwork shipped — sitemap coverage, article FAQPage JSON-LD, entity enrichment, llms.txt v2; [#81](https://github.com/andy-carroll/accelerator-x-website/issues/81). NOTE: the v2 Cutover shipped 2026-07-14 — the NOW sprint below predates it and needs a full reconciliation pass, tracked in session notes.)_
+_Last updated: 2026-08-21 (reconciliation pass from the [2026-08-21 architecture review](docs/tech-architecture/architecture-review-2026-08-21.md): the v2 Cutover shipped 2026-07-14; stale NOW items below marked done or reframed to post-launch reality. The repo now lives at `acc-x/accelerator-x-website`.)_
 
 ---
 
@@ -32,18 +32,13 @@ transparent, anti-agency positioning.
   - [x] Wave D — Interactive: QuizCTA · ScarcityCard · CohortList · ApplyForm — gate passed ✅
 - [x] **Phase 3 — Page Assembly** — all pages assembled ✅ (`/what-we-do`, `/how-we-work`, `/about`, `/contact`; homepage v2 inline sections done in prior session)
 - [x] **Phase 4 — Content pipeline** — articles migrated to Build Plan §10 data model; `format` + `published` + `read_time`; `renderArticleTile()` + tag-based hub filter ✅
-- [ ] **Phase 5 — Analytics** — PostHog event instrumentation
-- [-] **Offer Canon + site derivation** ([#57](https://github.com/andy-carroll/accelerator-x-website/issues/57)) — most of Phase 5 shipped 2026-06-14: `{{offering:…}}` token engine, **Two Doors** restored (home + `/what-we-do/`), OfferingTable/8-Week-Cycle/Fractional-Advisory killed, four offering pages reconciled + tokenised, Talks re-elevated (POA/inquiry-led), **Check #10** drift-guard. **Remaining:** the `/faq/` hub + FAQPage JSON-LD for cohort/company-enablement pages.
+- [x] **Phase 5 — Analytics** — PostHog conversion instrumentation shipped cookieless, ingestion confirmed in prod (B9, [#74](https://github.com/acc-x/accelerator-x-website/issues/74), 2026-06-27)
+- [x] **Offer Canon + site derivation** ([#57](https://github.com/acc-x/accelerator-x-website/issues/57), closed 2026-06-14): `{{offering:…}}` token engine, **Two Doors** restored, four offering pages reconciled + tokenised, **Check #10** drift-guard, `/faq/` hub + FAQPage JSON-LD.
 
 ### Post-Launch Polish (site is live — real visitors landing now)
 
-- [-] **P0: Indexation** ([#81](https://github.com/andy-carroll/accelerator-x-website/issues/81)) — technical half shipped 2026-08-05 (full sitemap coverage, canonicals everywhere, article FAQPage JSON-LD, Organization/Person entity enrichment, llms.txt v2, brand-string consistency, quiz 301s). **Remaining: Andy verifies the domain in Google Search Console + submits `sitemap.xml` (~10 min, founder access) — the site stays invisible on its own name until this happens.**
-- [-] **P1: Cohort page completion** — current cohort.html is incomplete draft requiring substantial revisions:
-      1) Content refinement and copy adjustments
-      2) Add actual video (replace VSL placeholder)
-      3) Add real images and testimonials
-      4) Fix UI/UX inconsistencies with homepage styling
-      5) Ensure complete visual parity with design system
+- [-] **P0 → hygiene: Indexation** ([#81](https://github.com/acc-x/accelerator-x-website/issues/81)) — technical half shipped 2026-08-05; **the 2026-08-21 review re-tested live search: the site now ranks #1 for its own name**, so the old "invisible until GSC" framing is stale. Remaining: Andy verifies GSC (~10 min) for coverage/query data — worth doing, no longer an emergency.
+- [ ] **P1: Cohort surfaces honesty fix** — the 2026-08-21 review found the two cohort pages are the site's worst live content-honesty liabilities: orphaned v1 `cohort.html` (April 2026 dates, £2,000 off-canon price, indexable) and `/programmes/leadership-cohort/` (live with all its GO-LIVE-CHECKLIST §12 blockers unchecked, £2,950 off-canon, "4 seats remaining" unmaintained). Needs Andy's keep/kill/reconcile call; the canonical `/what-we-do/leadership-cohort/` intake window "Late July / Aug 2026" also goes false 2026-09-01.
 - [x] **P1: Navigation structure overhaul** — shipped ([#33](https://github.com/andy-carroll/accelerator-x-website/issues/33), 2026-06-13): reusable `Nav.html` component (single source of truth), About added to nav, mobile drawer verified at 375px across all pages. (`aria-current` carried to #49's per-page variable mechanism.)
 - [x] **Share panel** — SVG icons (LinkedIn + X) + "Share" heading — fixed in prior session
 - [ ] **Hero imagery** — swap interim stills for final production photos; update alt text in
@@ -112,7 +107,7 @@ transparent, anti-agency positioning.
 - [ ] Shared layout ownership cleanup — resolve footer/navigation single-source-of-truth across homepage,
       Insights, and other templates now that homepage shell/fragment architecture is in place
 - [x] Extract hub filter script (inline in `_templates/index.html`) → `assets/js/hub-filter.js` — 2026-03-22
-- [ ] Add automated tests for Netlify functions (`submission-created`, `newsletter-subscribe`)
+- [x] Add automated tests for Netlify functions — `lead-capture` (which replaced `submission-created`) + `newsletter-subscribe` now have a dedicated incident-derived `node:test` suite wired into CI, grown further by the 2026-08-21 hardening batch (full suite: 44 cases)
 
 ### Session protocol hardening backlog (deferred, trigger-based)
 

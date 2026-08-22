@@ -16,6 +16,8 @@ rendering. Every page is pre-built HTML served directly from the repo root via N
   capture, Netlify Functions, SEO/JSON-LD — shipped Mar 2026
 - **Phase 3 (Growth):** Lighthouse optimisation, Brevo automation sequences, autonomous
   AI agent fleet, events page, workshop sales path — _in progress_
+- **v2 rebuild:** full visual + structural rebuild from design handoff — shipped as a single
+  cutover 14 Jul 2026 (B10, #75). The old site is preserved at tag `v1-archive`.
 
 ---
 
@@ -23,13 +25,13 @@ rendering. Every page is pre-built HTML served directly from the repo root via N
 
 | Layer | What |
 |---|---|
-| Landing page | Static HTML + Tailwind CSS (CDN) + `styles.css` design tokens |
+| Pages | Static HTML from component templates + compiled Tailwind (CLI → committed bundle) + `assets/css/` design tokens |
 | Content Hub | Markdown → static HTML via `scripts/build-hub.js` |
 | Testimonials | JSON → HTML via `scripts/build-testimonials.js` |
 | Hero media | Config-driven cycling via `scripts/build-hero-media.js` |
-| Email capture | Netlify Forms → `netlify/functions/submission-created.js` → Brevo list #9 |
-| Analytics | PostHog (`assets/js/analytics.js`) — landing page + all Hub pages |
-| Deploy notifications | Netlify → n8n → Slack `#ax-operations` |
+| Newsletter capture | Direct JSON POST → `netlify/functions/newsletter-subscribe.js` → Brevo list #9 + Slack `#website-leads` |
+| Lead applications | Apply form POST → `netlify/functions/lead-capture.js` → Airtable CRM + Slack `#website-leads` |
+| Analytics | PostHog (`assets/js/analytics.js`) — cookieless, all pages |
 | Hosting | Netlify — auto-deploys from `main`; pre-built artefacts committed |
 
 **Why no framework:** Zero framework = instantaneous loads, perfect Lighthouse baseline,
@@ -179,8 +181,8 @@ Configured in `assets/js/analytics.js` — included on all pages via templates.
 Newsletter signups flow: direct JSON POST → `newsletter-subscribe` function → Brevo API (list #9)
 + Slack `#website-leads` notification. Netlify Forms bypassed — no 100/month limit.
 
-Lead applications flow: Netlify Form → `submission-created` function → Slack `#website-leads`
-+ Airtable CRM.
+Lead applications flow: apply form → direct JSON POST → `lead-capture` function → Airtable CRM
+(consent-stamped) + Slack `#website-leads`.
 
 ---
 
@@ -199,7 +201,7 @@ new agent — or a new human — need to know to work here without a briefing?
 
 Concretely, that means:
 
-- **Standards enforced by automation, not memory** — `scripts/check.js` runs 8 checks
+- **Standards enforced by automation, not memory** — `scripts/check.js` runs 10 checks
   on every commit. A violation is caught locally, not in production six months later.
 - **Every decision recorded at the point of decision** — `CHANGELOG.md`, `CLAUDE.md`,
   session logs in `.claude/sessions/`. The codebase explains itself; no verbal handoff required.
@@ -236,17 +238,17 @@ Update `CLAUDE.md` (or the relevant `.claude/rules/` file) when workflow or poli
 | Document | Purpose |
 |---|---|
 | `ROADMAP.md` | Strategic priorities — Now / Next / Later |
-| `docs/go-live-checklist.md` | Colour-coded launch checklist (live site) |
+| `docs/GO-LIVE-CHECKLIST.md` | Launch checklist — line-item go-live audit record |
 | `CHANGELOG.md` | Version history — updated on every meaningful change |
 | `CLAUDE.md` | Canonical operating doc — state, decisions, next steps |
 | `.claude/rules/standards.md` | Enforced engineering standards (check.js + CI) |
-| `docs/landing-page-spec.md` | Landing page phased delivery spec |
-| `docs/content-hub-plan.md` | Content Hub architecture |
-| `docs/design-system.md` | Typography, colour tokens, image standards |
+| `docs/business-context/offer-canon.md` | Source of truth for every customer-facing claim |
+| `docs/design_handoff_website_rebuild/design-system/DESIGN.md` | v2 design system |
+| `docs/tech-architecture/` | Architecture reviews, DNS/hosting, integrations & access |
 | `docs/agent-skills-shared-ops.md` | Shared skills sync model across repos |
-| `docs/notification-workflows-prd.md` | Netlify + Slack notification architecture |
-| `docs/posthog-behavior-insights-prd.md` | Behaviour analytics rollout plan |
-| `docs/PRD-hero-media-library.md` | Hero media library system |
+| `docs/PRDs/notification-workflows-prd.md` | Netlify + Slack notification architecture |
+| `docs/PRDs/posthog-behavior-insights-prd.md` | Behaviour analytics rollout plan |
+| `docs/PRDs/PRD-hero-media-library.md` | Hero media library system |
 
 <!-- Session 20260322-211525 logged -->
 
