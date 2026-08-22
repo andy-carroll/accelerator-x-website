@@ -7,8 +7,11 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
-_v2 cutover complete 2026-07-14 (B10, #75) — `main` now serves v2 in production. `rebuild/v2` remains the working branch._
-_Phase 3 Page Assembly complete — all 4 inner pages assembled; homepage v2 conversion done_
+_v2 cutover complete 2026-07-14 (B10, #75) — `main` serves v2 in production. Since the ~2026-08-10 org move to `acc-x`: `main` is the only long-lived branch; work lands via short-lived branches → PRs._
+
+### Changed
+
+- **Operating model reconciled to post-org-move reality — merging this PR is the ratification** (2026-08-21, from the review's highest-priority governance finding): the repo was transferred to the `acc-x` org (~2026-08-10) and `rebuild/v2` deleted from the remote, but the repo's own operating contract still described the old world — `.session-protocol.json` enforced pushing a branch that no longer exists (its preview URL 404s), CLAUDE.md's locked decision said "Direct commits to `main` — no PRs" while the last three changes all landed via PRs, and the session scripts' branch allowlist blocked the `claude/*`/`issue-*` branch names work actually happens on (this review session was itself blocked by `npm run session-start` at its first command). Updated: `.session-protocol.json` (workingBranch → `main`, real branch patterns, preview URL), CLAUDE.md (Decisions — the "no PRs" decision's own trigger condition, "until a second collaborator joins", was met by agents, so this supersedes rather than reverses it; git state line; cutover section historical note; session-config block). A CLAUDE.md header line still naming `rebuild/v2` the working branch was also corrected.
 
 ### Added
 
