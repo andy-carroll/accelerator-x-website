@@ -21,13 +21,26 @@ function readSessionLock() {
   }
 }
 
+// A second session-start call within this window of the last one is treated as the
+// same real session re-orienting (e.g. `npm run session-start` followed by the
+// `:json` variant, or an agent re-running the mandatory start step after a restart),
+// not a genuinely concurrent second session — it refreshes the lock without
+// incrementing. Wide enough to cover routine re-orientation, narrow enough that two
+// independently-started sessions on the same tree essentially never land inside it
+// by coincidence.
+const SESSION_LOCK_DEDUP_WINDOW_MS = 5 * 60 * 1000;
+
 // Called by session-start.js. Returns the lock state after acquiring, so the caller
 // can warn when openCount > 1.
 function acquireSessionLock(startedAt = new Date().toISOString()) {
   const existing = readSessionLock();
-  const lock = existing
-    ? { openCount: existing.openCount + 1, firstStartedAt: existing.firstStartedAt, lastStartedAt: startedAt }
-    : { openCount: 1, firstStartedAt: startedAt, lastStartedAt: startedAt };
+  const isRepeatCall = existing
+    && (new Date(startedAt).getTime() - new Date(existing.lastStartedAt).getTime()) < SESSION_LOCK_DEDUP_WINDOW_MS;
+  const lock = !existing
+    ? { openCount: 1, firstStartedAt: startedAt, lastStartedAt: startedAt }
+    : isRepeatCall
+      ? { ...existing, lastStartedAt: startedAt }
+      : { openCount: existing.openCount + 1, firstStartedAt: existing.firstStartedAt, lastStartedAt: startedAt };
   const dir = path.dirname(SESSION_LOCK_PATH);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(SESSION_LOCK_PATH, JSON.stringify(lock, null, 2));

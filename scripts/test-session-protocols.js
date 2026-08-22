@@ -233,6 +233,17 @@ function testSessionLock() {
 
     // Releasing with no lock present should be a no-op, not throw.
     releaseSessionLock();
+
+    // A second acquire within the dedup window is the same real session re-orienting
+    // (e.g. session-start then session-start:json) — must not inflate openCount, or
+    // an ordinary single-session pattern would falsely trip the concurrency guard.
+    const burstFirst = acquireSessionLock('2026-08-22T10:00:00.000Z');
+    assert.strictEqual(burstFirst.openCount, 1, 'first acquire of a burst should open at count 1');
+    const burstSecond = acquireSessionLock('2026-08-22T10:00:30.000Z'); // 30s later
+    assert.strictEqual(burstSecond.openCount, 1, 'a repeat acquire within the dedup window should not increment');
+    assert.strictEqual(burstSecond.lastStartedAt, '2026-08-22T10:00:30.000Z', 'lastStartedAt should still refresh on a deduped acquire');
+    releaseSessionLock();
+    assert.strictEqual(fs.existsSync(SESSION_LOCK_PATH), false, 'a single-count lock should be removed by one release even after a deduped re-acquire');
   } finally {
     if (fs.existsSync(SESSION_LOCK_PATH)) fs.unlinkSync(SESSION_LOCK_PATH);
     if (preExisting !== null) fs.writeFileSync(SESSION_LOCK_PATH, preExisting);
