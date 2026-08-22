@@ -468,9 +468,9 @@ Source template: `_templates/programmes/leadership-cohort.html`
 
 | Item | Blocking go-live? | Status |
 |---|---|---|
-| Mark's exact quote — verbatim, approved for publication | **Yes** | `[ ]` |
-| Mark's consent to be named publicly as "Mark, Group CEO, W R Bennett Group" | **Yes** | `[ ]` |
-| "£16,000 legal dispute" figure — confirmed accurate and approved for use in marketing | **Yes** | `[ ]` |
+| ~~Mark's exact quote — verbatim, approved for publication~~ | No | `[~]` **Moot 2026-08-22 (#108):** the quote/story was removed from the page entirely rather than approved — see #108's containment note above. |
+| ~~Mark's consent to be named publicly as "Mark, Group CEO, W R Bennett Group"~~ | No | `[~]` **Moot 2026-08-22 (#108):** no longer referenced on the page. |
+| ~~"£16,000 legal dispute" figure — confirmed accurate and approved for use in marketing~~ | No | `[~]` **Moot 2026-08-22 (#108):** figure removed, not approved. |
 | H1 headline — confirmed by founders (current draft: "The AI bootcamp built for leaders who run real businesses.") | **Yes** | `[ ]` |
 | Meta description — 155-char outcome-first copy written and confirmed | **Yes** | `[ ]` |
 | "4 seats remaining" — who owns this number and how/when it gets updated | **Yes** | `[ ]` |
