@@ -88,3 +88,12 @@
   to = "https://quiz.accelerator-x.ai/"
   status = 301
   force = true
+
+# cohort.html (v1 orphan) removed and redirected #108: it was serving
+# four-months-stale dates and an off-canon price. Its content lives, current
+# and accurate, at /what-we-do/leadership-cohort/.
+[[redirects]]
+  from = "/cohort.html"
+  to = "/what-we-do/leadership-cohort/"
+  status = 301
+  force = true

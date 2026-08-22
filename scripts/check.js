@@ -49,7 +49,6 @@ function filesIn(relDir, ext) {
 
 // Every HTML file npm run build generates — the surface Checks #3 and #8 scan.
 // Deliberately excluded (legacy v1 orphans, reconciliation tracked separately):
-//   cohort.html  — still on the v1 nav + build-footer.js marker pattern (#91)
 //   privacy.html / terms.html — v1 legal pages awaiting v2 reconciliation (#87)
 // They predate the token/component system and would fail checks written for v2
 // output; extending coverage to them belongs to their own tracked rebuilds.

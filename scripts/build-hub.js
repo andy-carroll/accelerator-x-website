@@ -436,8 +436,10 @@ function generateSitemap(articles, siteUrl) {
     { path: '/contact/', changefreq: 'monthly', priority: '0.8' },
     { path: '/insights/', changefreq: 'weekly', priority: '0.8' },
     { path: '/faq/', changefreq: 'monthly', priority: '0.6' },
-    // Cohort funnel page — public conversion page, deliberately indexable
-    { path: '/programmes/leadership-cohort/', changefreq: 'monthly', priority: '0.6' },
+    // /programmes/leadership-cohort/ removed from the sitemap #108 (2026-08-22):
+    // the page is noindexed pending GO-LIVE-CHECKLIST §12 sign-off — listing a
+    // noindexed URL in the sitemap is a contradictory signal to crawlers.
+    // Re-add once §12 clears and the meta tag flips back to index, follow.
     { path: '/privacy.html', changefreq: 'yearly', priority: '0.3' },
     { path: '/terms.html', changefreq: 'yearly', priority: '0.3' },
   ];
