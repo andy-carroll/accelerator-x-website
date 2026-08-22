@@ -5,7 +5,7 @@
   // All form submissions on the site go through this file.
   // No inline scripts. No exceptions.
   //
-  // Lead capture  (#lead-form)         → POST /.netlify/functions/submission-created
+  // Lead capture  (#lead-form)         → POST /.netlify/functions/lead-capture
   //                                    → Airtable + Slack #website-leads
   //
   // Newsletter    (#newsletter-form)   → POST /.netlify/functions/newsletter-subscribe
@@ -180,12 +180,20 @@
       e.preventDefault();
       if (isSubmitting.get(form)) return;
 
+      // Every NewsletterSignup instance carries `novalidate` (same rationale as the
+      // lead form above), so `required` + type="email" never ran on their own — an
+      // empty or malformed email dead-ended the submit silently: no bubble, no status
+      // node, nothing. Same fix as the lead form: run the native constraint check
+      // explicitly before doing anything else.
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       const emailInput    = form.querySelector('input[type="email"]');
       const email         = emailInput ? emailInput.value.trim() : '';
       const btn           = form.querySelector('button[type="submit"]');
       const originalLabel = btn ? btn.textContent : '';
-
-      if (!email) return; // let native required validation handle the empty case
 
       isSubmitting.set(form, true);
       setHidden(error, true);
