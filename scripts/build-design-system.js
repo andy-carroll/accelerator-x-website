@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { resolveComponentTokens } = require('./build-components');
+const { resolveComponentTokens, resolveSiteTokens, resolveOfferingTokens } = require('./build-components');
 
 const ROOT = path.resolve(__dirname, '..');
 const SHELL_PATH = path.join(ROOT, '_templates/design-system.html');
@@ -42,7 +42,12 @@ function main() {
     source = source.replace(token, partial);
   }
 
-  source = resolveComponentTokens(source);
+  // Chain all three resolvers, matching build-homepage.js/build-inner-pages.js —
+  // rendered components carry live {{site:…}}/{{offering:…}} tokens, and this page
+  // ships publicly, so unresolved tokens become broken hrefs. Token syntax shown
+  // as documentation in section partials is entity-escaped ({ → &#123;) so it
+  // survives resolution as visible text.
+  source = resolveSiteTokens(resolveOfferingTokens(resolveComponentTokens(source)));
 
   const existing = fs.existsSync(OUTPUT_PATH) ? fs.readFileSync(OUTPUT_PATH, 'utf8') : '';
 

@@ -43,7 +43,10 @@
 
 <div class="ds-subsection">
   <h3 class="ds-subsection-title">TwoDoors</h3>
-  <p class="ds-component-meta">The offer spine — two entry-point cards + tertiary callout · / and /what-we-do · <code>TwoDoors.css</code> · names/prices from <code>offerings.json</code> via <code>{{offering:…}}</code> tokens</p>
+  <!-- Token syntax below is documentation display, not a live token: braces are
+       entity-escaped so it survives the build's token resolvers and check.js's
+       unsubstituted-token gate, while still rendering as {{offering:…}}. -->
+  <p class="ds-component-meta">The offer spine — two entry-point cards + tertiary callout · / and /what-we-do · <code>TwoDoors.css</code> · names/prices from <code>offerings.json</code> via <code>&#123;&#123;offering:…&#125;&#125;</code> tokens</p>
   <div class="ds-component-stub"><strong>TwoDoors</strong> — replaced the legacy OfferingTable/OfferingCard/DecisionTree. See <code>_templates/components/TwoDoors.html</code></div>
 </div>
 
