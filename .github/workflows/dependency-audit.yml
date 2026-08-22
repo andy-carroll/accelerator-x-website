@@ -1,0 +1,71 @@
+name: Dependency Audit
+
+# npm audit, moved OFF the merge gate (#107). "Is this repo's dependency tree
+# currently clean?" and "is this change safe to merge?" are different questions —
+# an advisory published against an existing dependency used to fail every open
+# PR simultaneously, with no change any author could make to their own branch
+# (it happened live: nanoid GHSA-2v37-7h3g-55p8, 2026-08-21).
+#
+# So the audit now runs:
+#   - weekly on a schedule, opening/updating a GitHub issue on failure so a
+#     human reliably sees it without it blocking unrelated work
+#   - on any PR or push that actually changes the dependency tree (path-filtered,
+#     and NOT a required status check — signal, not gate)
+#   - on demand via workflow_dispatch
+
+on:
+  schedule:
+    # Monday 06:00 UTC — before the working week's sessions start
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - package.json
+      - package-lock.json
+  push:
+    branches: [main]
+    paths:
+      - package.json
+      - package-lock.json
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  audit:
+    name: npm audit (high+)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Dependency security audit
+        id: audit
+        # Fails on high or critical vulnerabilities only — avoids noise from
+        # low/moderate issues in dev dependencies.
+        run: npm audit --audit-level=high
+
+      - name: Open or update tracking issue on scheduled failure
+        # Only the scheduled run files an issue — PR/push failures are visible
+        # in their own run context already.
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="[deps] Scheduled dependency audit is failing"
+          BODY="The weekly \`npm audit --audit-level=high\` run failed on $(date -u +%Y-%m-%d). See the run log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}. Usually fixable with \`npm audit fix\` + a fresh build to confirm zero artefact diff."
+          EXISTING=$(gh issue list --state open --search "in:title [deps] Scheduled dependency audit is failing" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "$TITLE" --body "$BODY"
+          fi
