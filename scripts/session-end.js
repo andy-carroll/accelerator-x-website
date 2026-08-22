@@ -7,7 +7,9 @@ const {
   extractSessionSummary,
   extractReviewResult,
   ensureNextSessionBlock,
-  upsertSessionProtocolBlock
+  upsertSessionProtocolBlock,
+  readSessionLock,
+  releaseSessionLock
 } = require('./session-protocol-utils');
 
 const EXIT = {
@@ -462,6 +464,13 @@ if (writeModeEnabled) {
     });
   }
 
+  // Paths this invocation itself writes — safe to stage even under the concurrency
+  // guard below, since they're this session's own close artefacts by construction,
+  // not another session's in-progress edits (#85 fix-of-the-fix: the first version of
+  // this guard only staged pre-staged files, so a concurrency-detected close silently
+  // produced no commit at all of its own session log / CLAUDE.md update).
+  const selfWrittenPaths = [logPath];
+
   const claudePath = 'CLAUDE.md';
   const claudeContent = fs.readFileSync(claudePath, 'utf8');
 
@@ -489,6 +498,7 @@ if (writeModeEnabled) {
   if (claudeUpdate.changed || claudeUpdate.content !== claudeContent) {
     fs.writeFileSync(claudePath, claudeUpdate.content);
     operations.push({ step: 'claude_priorities', status: 'updated' });
+    selfWrittenPaths.push(claudePath);
   } else {
     operations.push({ step: 'claude_priorities', status: 'unchanged' });
   }
@@ -509,6 +519,7 @@ if (writeModeEnabled) {
     if (blockUpdate.changed) {
       fs.writeFileSync(file, blockUpdate.content);
       operations.push({ step: 'doc_marker', file, status: 'updated' });
+      selfWrittenPaths.push(file);
     } else {
       operations.push({ step: 'doc_marker', file, status: 'unchanged' });
     }
@@ -522,7 +533,46 @@ if (writeModeEnabled) {
   // Stage the session-end outputs. Scope was already enforced by the pre-write gate
   // above; everything this script writes (log, managed docs, markers) is allowlisted by
   // construction, so we only need the allowed set for staging here — no second gate.
-  const allowedPaths = collectChangedPaths().filter(isAllowedChangedPath);
+  //
+  // #85: blindly staging every allowlisted dirty file assumes this is the only session
+  // working this tree. If another session-start ran without an intervening session-end
+  // (sessionLock.openCount > 1), that assumption doesn't hold — a concurrent session's
+  // in-progress, allowlisted edits would get swept into this commit. In that case, fall
+  // back to committing only what's already explicitly staged (git add'd by the operator
+  // or agent for this session specifically) rather than auto-discovering everything dirty.
+  const sessionLock = readSessionLock();
+  const concurrentSessionDetected = Boolean(sessionLock && sessionLock.openCount > 1);
+  let allowedPaths;
+  if (concurrentSessionDetected) {
+    const alreadyStaged = run('git diff --cached --name-only');
+    const stagedPaths = alreadyStaged.ok && alreadyStaged.stdout
+      ? alreadyStaged.stdout.split('\n').filter(Boolean)
+      : [];
+    const disallowedStaged = stagedPaths.filter(filePath => !isAllowedChangedPath(filePath));
+    if (disallowedStaged.length > 0) {
+      errors.push(`Staged files outside protocol scope while a concurrent session is open: ${disallowedStaged.join(', ')}`);
+      abortWrite({
+        json: args.json, mode, branch, operations, warnings, errors,
+        headline: '❌ Session-end aborted: out-of-scope files staged during a concurrent session.',
+        nextActions: ['Unstage the listed files or update protocol profile scope, then rerun.'],
+        exitCode: EXIT.POLICY_VIOLATION
+      });
+    }
+    // Union with selfWrittenPaths, not just stagedPaths: this run's own session log /
+    // CLAUDE.md / doc-marker writes can never have been pre-staged (they didn't exist
+    // in that form until the writes above), but they're this session's own close
+    // artefacts, not a concurrent session's work — excluding them would silently produce
+    // a close with no session log committed at all.
+    allowedPaths = Array.from(new Set([...stagedPaths, ...selfWrittenPaths.filter(fs.existsSync)]));
+    const leftUnstaged = collectChangedPaths()
+      .filter(isAllowedChangedPath)
+      .filter(filePath => !allowedPaths.includes(filePath));
+    warnings.push(`Concurrent session detected (${sessionLock.openCount} unclosed session-starts since ${sessionLock.firstStartedAt}) — committing only this run's own outputs plus already-staged files, not auto-discovering every allowlisted dirty file.${leftUnstaged.length > 0 ? ` Left unstaged, NOT committed: ${leftUnstaged.join(', ')}. Stage your own files explicitly with 'git add <path>' and rerun if they belong to this session.` : ''}`);
+    operations.push({ step: 'concurrency_guard', status: 'warning', detail: `openCount=${sessionLock.openCount}` });
+  } else {
+    allowedPaths = collectChangedPaths().filter(isAllowedChangedPath);
+    operations.push({ step: 'concurrency_guard', status: 'ok', detail: 'no concurrent session detected' });
+  }
 
   if (allowedPaths.length > 0) {
     const addResult = run(`git add ${allowedPaths.map(shellQuote).join(' ')}`);
@@ -553,6 +603,10 @@ if (writeModeEnabled) {
   if (!staged.ok || !staged.stdout) {
     warnings.push('No staged changes detected; skipping commit and push.');
     operations.push({ step: 'git_commit', status: 'skipped', detail: 'no staged changes' });
+    // Nothing to commit, but the close itself completed — release now rather than
+    // falling through to the (dead in this branch) release call below.
+    releaseSessionLock();
+    operations.push({ step: 'session_lock', status: 'released' });
   } else {
     const commitTemplate = profile.sessionEnd?.commitMessageTemplate || 'docs(session): {date} session wrap';
     const commitMessage = commitTemplate.replace('{date}', today);
@@ -564,6 +618,15 @@ if (writeModeEnabled) {
       process.exit(EXIT.CRITICAL_FAILURE);
     }
     operations.push({ step: 'git_commit', status: 'ok', detail: commitMessage });
+
+    // Release on successful commit, not after push: the commit is what makes this
+    // session's work durable locally. A later push failure is a network/remote
+    // problem, not evidence the session didn't close — gating the release on push
+    // too meant a push failure left the lock stuck open with no CLI way to clear it,
+    // since session-notes.md (consumed above) is already gone by the time a retry
+    // would need it to pass the evidence gate again.
+    releaseSessionLock();
+    operations.push({ step: 'session_lock', status: 'released' });
 
     if (args.yes && profile.sessionEnd?.autoPushAllowed !== false) {
       const pushResult = run(`git push ${shellQuote(profile.git.defaultPushRemote || 'origin')} ${shellQuote(branch)}`);
