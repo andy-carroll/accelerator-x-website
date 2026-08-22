@@ -53,7 +53,7 @@
 **Build:** ✅ passing | **Git:** repo lives at `acc-x/accelerator-x-website` (org transfer, ~2026-08-10); `main` is the only long-lived remote branch — `rebuild/v2` was retired in the move (its preview URL now 404s); PR branches are short-lived and deleted on merge. Work lands via **short-lived branches → PRs into `main`** behind 3 required checks. | **Deployed:** `main` live at https://accelerator-x.ai — **v2, since 2026-07-14 (B10).** Old v1 tagged `v1-archive`.
 <!-- Branch/deploy facts (working branch, production branch, preview URL) are single-sourced in `.session-protocol.json`. The literal names above are this session's snapshot only — at cutover, edit the config + this line. -->
 
-**Known issues (rebuild):** Figtree via Google Fonts CDN (render-blocking; self-host later) · `cohort.html` still on v1 nav + `build-footer.js` marker pattern (replace when cohort page rebuilt).
+**Known issues (rebuild):** Figtree via Google Fonts CDN (render-blocking; self-host later).
 **Known issues (live):** ~~HTTPS down~~ — resolved: was a Sky Broadband Shield false-positive, site healthy globally (see DNS doc incident log) · LinkedIn Post Inspector "No author found" (likely cache, low priority) · hero imagery still interim stills.
 
 ---

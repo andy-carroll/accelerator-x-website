@@ -1,7 +1,6 @@
 module.exports = {
   content: [
     './index.html',
-    './cohort.html',
     './privacy.html',
     './terms.html',
     './newsletter-thanks.html',

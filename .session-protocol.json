@@ -92,7 +92,6 @@
       "content/data/*.json",
       "scripts/build-inner-pages.js",
       "scripts/build-homepage.js",
-      "scripts/build-footer.js",
       "scripts/build-hero-media.js",
       "scripts/build-testimonials.js",
       "what-we-do/index.html",
