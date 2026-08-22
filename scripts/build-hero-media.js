@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const { injectMarked } = require('./lib/marker-injection');
+const { writeFileAtomic } = require('./lib/atomic-write');
 
 const INDEX_HTML_PATH = path.join(__dirname, '../index.html');
 const CONFIG_PATH = path.join(__dirname, '../content/data/hero-media.config.json');
@@ -96,7 +98,6 @@ function buildPreloadHtml(entry, sizes) {
   const webpSrcset = variants.map((width) => `${entry.basePath}-${width}.webp ${width}w`).join(', ');
 
   return [
-    '    <!-- HERO_MEDIA_PRELOAD_START -->',
     '    <link',
     '      rel="preload"',
     '      as="image"',
@@ -105,7 +106,6 @@ function buildPreloadHtml(entry, sizes) {
     `      imagesizes="${escapeHtml(sizes)}"`,
     '      fetchpriority="high"',
     '    />',
-    '    <!-- HERO_MEDIA_PRELOAD_END -->',
   ].join('\n');
 }
 
@@ -120,7 +120,6 @@ function buildHeroMarkup(config, library) {
     .join('\n\n');
 
   return [
-    '            <!-- HERO_MEDIA_LIBRARY_START -->',
     '            <div class="hero-media-frame">',
     `              <div class="hero-media-stage hero-media-library" aria-label="Accelerator X hero media" data-hero-library data-hero-interval="${escapeHtml(config.intervalMs || 6500)}">`,
     `                <div class="hero-media-badge">${(Array.isArray(config.badge) ? config.badge : [config.badge]).filter(Boolean).map(t => `<span class="hero-media-pill">${escapeHtml(t)}</span>`).join('')}</div>`,
@@ -133,7 +132,6 @@ function buildHeroMarkup(config, library) {
     '                </div>',
     '              </div>',
     '            </div>',
-    '            <!-- HERO_MEDIA_LIBRARY_END -->',
   ].join('\n');
 }
 
@@ -156,35 +154,40 @@ function main() {
   }
 
   const indexHtml = fs.readFileSync(INDEX_HTML_PATH, 'utf8');
-  const startMarker = '            <!-- HERO_MEDIA_LIBRARY_START -->';
-  const endMarker = '            <!-- HERO_MEDIA_LIBRARY_END -->';
-  const startIdx = indexHtml.indexOf(startMarker);
-  const endIdx = indexHtml.indexOf(endMarker);
 
-  if (startIdx === -1 || endIdx === -1 || endIdx <= startIdx) {
-    console.warn('⚠️ Could not locate hero media markers in index.html. Skipping.');
-    return;
-  }
+  const libraryResult = injectMarked(indexHtml, {
+    startMarker: '<!-- HERO_MEDIA_LIBRARY_START -->',
+    endMarker: '<!-- HERO_MEDIA_LIBRARY_END -->',
+    replacement: `\n${buildHeroMarkup(config, library)}\n            `,
+    onMissing: 'warn',
+    context: 'index.html',
+  });
 
-  const before = indexHtml.slice(0, startIdx);
-  const after = indexHtml.slice(endIdx + endMarker.length);
-  const replacement = buildHeroMarkup(config, library);
-  let output = `${before}${replacement}${after}`;
+  if (!libraryResult.injected) return;
 
-  const preloadStartMarker = '    <!-- HERO_MEDIA_PRELOAD_START -->';
-  const preloadEndMarker = '    <!-- HERO_MEDIA_PRELOAD_END -->';
-  const preloadStartIdx = output.indexOf(preloadStartMarker);
-  const preloadEndIdx = output.indexOf(preloadEndMarker);
+  let output = libraryResult.content;
+
   const firstEntry = library.filter((entry) => entry && entry.active !== false)[0];
   const preloadHtml = buildPreloadHtml(firstEntry, config.sizes);
+  const preloadStartMarker = '<!-- HERO_MEDIA_PRELOAD_START -->';
+  const preloadEndMarker = '<!-- HERO_MEDIA_PRELOAD_END -->';
 
-  if (preloadStartIdx === -1 || preloadEndIdx === -1 || preloadEndIdx <= preloadStartIdx) {
-    console.warn('⚠️ Could not locate hero preload markers in index.html. Skipping LCP preload.');
+  if (!output.includes(preloadStartMarker) || !output.includes(preloadEndMarker)) {
+    console.warn(`⚠️  Could not locate "${preloadStartMarker}" / "${preloadEndMarker}" markers in index.html. Skipping LCP preload.`);
   } else if (preloadHtml) {
-    output = output.slice(0, preloadStartIdx) + preloadHtml + output.slice(preloadEndIdx + preloadEndMarker.length);
+    // No active hero entry (preloadHtml falsy) with markers present is a
+    // deliberate no-op, same as before this consolidation — leave whatever's
+    // currently between the markers untouched rather than blanking it.
+    output = injectMarked(output, {
+      startMarker: preloadStartMarker,
+      endMarker: preloadEndMarker,
+      replacement: `\n${preloadHtml}\n    `,
+      onMissing: 'throw', // already confirmed present above
+      context: 'index.html',
+    }).content;
   }
 
-  fs.writeFileSync(INDEX_HTML_PATH, output);
+  writeFileAtomic(INDEX_HTML_PATH, output);
   const renderedCount = library
     .filter((entry) => entry && entry.active !== false)
     .slice(0, Number.isFinite(Number(config.maxSlides)) ? Number(config.maxSlides) : 5)

@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+const { injectMarked } = require('./lib/marker-injection');
+const { writeFileAtomic } = require('./lib/atomic-write');
 
 const TESTIMONIALS_PATH = path.join(__dirname, '../content/data/testimonials.json');
 const INDEX_HTML_PATH = path.join(__dirname, '../index.html');
@@ -72,16 +74,6 @@ function main() {
 
   const indexHtml = fs.readFileSync(INDEX_HTML_PATH, 'utf-8');
 
-  const startIdx = indexHtml.indexOf(START_MARKER);
-  const endIdx = indexHtml.indexOf(END_MARKER);
-
-  if (startIdx === -1 || endIdx === -1 || endIdx <= startIdx) {
-    throw new Error('Could not locate TESTIMONIALS_COMPONENT_START/END markers in index.html.');
-  }
-
-  const before = indexHtml.slice(0, startIdx + START_MARKER.length);
-  const after = indexHtml.slice(endIdx);
-
   const indent = '          ';
 
   const parts = [];
@@ -97,10 +89,16 @@ function main() {
     parts.push('');
   }
 
-  const replacement = parts.join('\n');
+  const replacement = `${parts.join('\n')}\n          `;
 
-  const outHtml = `${before}${replacement}\n          ${after}`;
-  fs.writeFileSync(INDEX_HTML_PATH, outHtml);
+  const { content: outHtml } = injectMarked(indexHtml, {
+    startMarker: START_MARKER,
+    endMarker: END_MARKER,
+    replacement,
+    onMissing: 'throw',
+    context: 'index.html',
+  });
+  writeFileAtomic(INDEX_HTML_PATH, outHtml);
 
   console.log(`✅ Testimonials injected into index.html (${testimonials.length} items)`);
 }
