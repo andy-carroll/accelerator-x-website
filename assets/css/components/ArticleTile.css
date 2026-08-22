@@ -20,12 +20,20 @@
   display: flex;
   flex-direction: column;
   transition: box-shadow var(--dur-base) var(--ease-out),
-              transform  var(--dur-base) var(--ease-out);
+              transform  var(--dur-base) var(--ease-out),
+              opacity    var(--dur-base) var(--ease-out);
 }
 
 .ax-article-tile:hover {
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
+}
+
+/* Hub filter (assets/js/hub-filter.js) fades a card out before removing it from
+   layout with display:none, rather than snapping it away instantly. */
+.ax-article-tile--hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Cover --------------------------------------------------------------------- */
