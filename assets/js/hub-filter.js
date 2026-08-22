@@ -13,6 +13,42 @@
 
     if (!tiles.length || !feedTitle) return; // not on the hub page
 
+    // Fade a card out before removing it from layout, instead of snapping it away.
+    // Showing it again removes the hidden class immediately (display must be reset
+    // first — a display:none element can't transition); hiding it only sets
+    // display:none once the opacity fade is done. transitionend is the normal
+    // trigger for that, but a fallback timer backs it up — the fade duration is
+    // fixed (ArticleTile.css's .ax-article-tile transition uses --dur-base, 200ms
+    // in tokens.css), and transitionend has known gaps (e.g. it won't fire if the
+    // property never actually changed, such as when a card is hidden while its tab
+    // is backgrounded and the browser pauses the transition before it starts).
+    // finalizeHide() is idempotent and shared by both paths so a real transitionend
+    // and the fallback firing for the same card is harmless.
+    const HIDE_FALLBACK_MS = 250;
+
+    function finalizeHide(card) {
+      if (card.classList.contains('ax-article-tile--hidden')) {
+        card.style.display = 'none';
+      }
+    }
+
+    function setCardVisible(card, visible) {
+      if (visible) {
+        card.style.display = '';
+        void card.offsetWidth; // force reflow so the removed class transitions
+        card.classList.remove('ax-article-tile--hidden');
+      } else {
+        card.classList.add('ax-article-tile--hidden');
+        setTimeout(() => finalizeHide(card), HIDE_FALLBACK_MS);
+      }
+    }
+
+    cards.forEach(card => {
+      card.addEventListener('transitionend', (e) => {
+        if (e.propertyName === 'opacity') finalizeHide(card);
+      });
+    });
+
     function filterContent(tagId) {
       // Update active tile states
       tiles.forEach(tile => {
@@ -26,7 +62,7 @@
       // Show/hide cards
       cards.forEach(card => {
         const visible = tagId === 'all' || card.getAttribute('data-tag') === tagId;
-        card.style.display = visible ? '' : 'none';
+        setCardVisible(card, visible);
       });
 
       // Update feed heading and show-all button

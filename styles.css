@@ -197,11 +197,6 @@
   transition-duration: 0.8s;
 }
 
-.hero-shell {
-  display: grid;
-  gap: var(--space-10);
-}
-
 .hero-copy {
   min-width: 0;
 }
@@ -398,10 +393,6 @@
     height: 32px;
   }
 
-  .hero-shell {
-    gap: var(--space-8);
-  }
-
   .hero-proof-row {
     margin-top: var(--space-6);
   }
@@ -455,12 +446,6 @@
 }
 
 @media (min-width: 1024px) {
-  .hero-shell {
-    align-items: center;
-    grid-template-columns: minmax(0, 1fr) minmax(420px, 560px);
-    gap: var(--space-12);
-  }
-
   .hero-proof-row {
     justify-content: flex-start;
   }
@@ -820,57 +805,6 @@ a {
     0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* ----------------------------------------
-   Differentiator cards with overlapping illustrations
-   ---------------------------------------- */
-.diff-card {
-  position: relative;
-  overflow: visible;
-  padding-top: 5rem; /* space for illustration overlap inside card */
-}
-
-/* On mobile, stacked cards need extra top margin to clear the
-   illustration of the card above (96px × 66% overhang ≈ 64px).
-   Reset to 0 at desktop where cards sit side-by-side in a grid. */
-.diff-card + .diff-card {
-  margin-top: 4rem;
-}
-
-@media (min-width: 1024px) {
-  .diff-card + .diff-card {
-    margin-top: 0;
-  }
-}
-
-.diff-card-illustration {
-  position: absolute;
-  top: 0;
-  left: var(--space-8);
-  transform: translateY(-66%); /* 2/3 above card top edge */
-  width: 96px;
-  height: 96px;
-  border-radius: var(--radius-lg);
-  object-fit: cover;
-}
-
-/* Navy border for illustrations with white/transparent backgrounds */
-.diff-card-illustration--bordered {
-  border: 3px solid var(--color-navy);
-}
-
-.diff-card h3 {
-  margin-top: var(--space-6); /* breathing room below illustration */
-  font-size: 1.75rem; /* between text-2xl and text-3xl */
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: -0.05em; /* tighter tracking to match brand pack */
-}
-
-.diff-card p {
-  color: var(--color-body);
-  letter-spacing: -0.01em;
-}
-
 /* Testimonial stars */
 .stars-5 {
   display: inline-flex;
@@ -1135,110 +1069,16 @@ a {
   }
 }
 
-/* 
-   GLASSMORPHIC CARD STYLING
-   Semi-transparent background with backdrop blur creates depth
-   Fallback: solid white for browsers without backdrop-filter support
-*/
-.process-card {
-  position: relative;
-  border-radius: var(--radius-2xl); /* 24px */
-  padding: var(--space-12) var(--space-8) var(--space-10); /* extra top for overlapping indicator */
-  overflow: visible; /* allow step indicator to escape card bounds */
-}
-
-/* Per-card pastel backgrounds */
-.process-card--primary {
-  background-color: var(--color-primary-light);
-}
-.process-card--purple {
-  background-color: var(--color-purple-light);
-}
-.process-card--accent {
-  background-color: var(--color-accent-light);
-}
-
-/* 
-   BACKGROUND NUMBER
-   Large decorative number in top-right corner
-   Purely visual (pointer-events: none) — doesn't interfere with interaction
-   5% opacity ensures it doesn't compete with content
-*/
-.process-card::before {
-  content: attr(data-step);
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  font-size: 120px;
-  font-weight: 700;
-  color: var(--color-navy);
-  opacity: 0.05;
-  line-height: 1;
-  pointer-events: none;
-  font-family: var(--font-display);
-}
-
-/*
-   STEP INDICATOR
-   64px circle overlapping card top edge with white halo
-   Positioned inside cards — simple, works on all screen sizes
-*/
-.step-indicator {
-  position: absolute;
-  top: 0;
-  left: var(--space-8);
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 64px;
-  height: 64px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 400;
-  font-size: 28px;
-  box-shadow: 0 0 0 6px white;
-}
-
-/* Per-card step indicator colours */
-.process-card--purple .step-indicator {
-  background: var(--color-purple);
-}
-.process-card--accent .step-indicator {
-  background: var(--color-accent);
-}
-
-/* Process card heading typography — big, bold, tight */
-.process-card h3 {
-  font-size: 2.25rem;
-  line-height: 1;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-}
-
 /*
    ACCENT HIGHLIGHTS
-   Bold coloured key verbs — per-card colours
-   Card 1 (primary): teal, Card 2 (purple): purple, Card 3 (accent): pink
+   Bold coloured key verbs
 */
 .accent {
   color: var(--color-accent);
   font-weight: inherit;
 }
 
-.process-card--primary .accent {
-  color: var(--color-primary);
-}
-.process-card--purple .accent {
-  color: var(--color-purple);
-}
-.process-card--accent .accent {
-  color: var(--color-accent);
-}
-
-/* 
+/*
    PRICE BADGE
    Teal pill-style badge for pricing information
    Inline-block allows natural text flow
@@ -1284,52 +1124,6 @@ a {
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   opacity: 0.7;
   pointer-events: none;
-}
-
-/*
-   SCROLL-TRIGGERED ANIMATIONS
-   Cards fade in and slide up when section enters viewport
-   Staggered delays create cascading effect
-*/
-
-/* Card entrance animation - initial hidden state */
-.process-card {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.4s ease-out,
-    transform 0.4s ease-out;
-}
-
-/* Card visible state - triggered by Intersection Observer */
-.process-card.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Staggered delays for cascading effect */
-.process-card:nth-child(1) {
-  transition-delay: 0s;
-}
-
-.process-card:nth-child(2) {
-  transition-delay: 0.1s;
-}
-
-.process-card:nth-child(3) {
-  transition-delay: 0.2s;
-}
-
-/*
-   ACCESSIBILITY: REDUCED MOTION
-   Respects user preference for reduced motion
-   Disables all animations and shows final state immediately
-*/
-@media (prefers-reduced-motion: reduce) {
-  .process-card {
-    transition: none;
-    animation: none;
-  }
 }
 
 /* ----------------------------------------
@@ -1437,68 +1231,6 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .different-underline path {
-    transition: none;
-    stroke-dashoffset: 0;
-  }
-}
-
-/* ----------------------------------------
-   TESTIMONIALS HEADLINE HAND-DRAWN CIRCLE
-   Slower animation (1.5s) with 0.4s delay
-   ---------------------------------------- */
-
-.testimonials-headline {
-  position: relative;
-  display: block;
-}
-
-.testimonials-circle {
-  position: relative;
-  display: inline-block;
-}
-
-.testimonials-circle svg {
-  position: absolute;
-  left: -30px;
-  top: -24px;
-  width: calc(100% + 60px);
-  height: 92px;
-  pointer-events: none;
-  overflow: visible;
-}
-
-.testimonials-circle path {
-  stroke: var(--color-primary);
-  stroke-width: 5;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 106 1000;
-  stroke-dashoffset: 106;
-  transition: stroke-dashoffset 1.5s ease-out;
-}
-
-.testimonials-headline.visible .testimonials-circle path {
-  stroke-dashoffset: 0;
-  transition-delay: 0.4s;
-}
-
-@media (max-width: 639px) {
-  .testimonials-circle svg {
-    left: -22px;
-    width: calc(100% + 44px);
-    height: 84px;
-    top: -22px;
-  }
-
-  .testimonials-circle path {
-    stroke-dasharray: 106 1000;
-    stroke-dashoffset: 106;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-circle path {
     transition: none;
     stroke-dashoffset: 0;
   }
