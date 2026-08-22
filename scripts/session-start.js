@@ -1,7 +1,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-const { matchesAnyPattern, resolveProfileOperatingMode } = require('./session-protocol-utils');
+const { matchesAnyPattern, resolveProfileOperatingMode, acquireSessionLock } = require('./session-protocol-utils');
 
 const EXIT = {
   SUCCESS: 0,
@@ -326,6 +326,15 @@ const recentSessions = loadRecentSessions(sessionDir, 3);
 
 if (claudeState.blockingIssues.length > 0) {
   warnings.push(...claudeState.blockingIssues);
+}
+
+// #85: a second session-start on this tree without an intervening session-end means
+// another session's work is (or was) concurrently in progress here — session-end's
+// blanket auto-staging isn't safe to assume in that case. Surfacing it here, at the
+// point the second session opens, is the earliest place either session can know.
+const sessionLock = acquireSessionLock();
+if (sessionLock.openCount > 1) {
+  warnings.push(`${sessionLock.openCount} session-starts are open on this tree with no intervening session-end (since ${sessionLock.firstStartedAt}) — this looks like a concurrent session or a previous close that didn't complete. session-end:write will refuse to auto-stage every allowlisted dirty file while this holds; commit your own work by explicit path, or close the other session first.`);
 }
 
 const allErrors = errors.slice();

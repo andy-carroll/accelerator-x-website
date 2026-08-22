@@ -7,7 +7,9 @@ const {
   extractSessionSummary,
   extractReviewResult,
   ensureNextSessionBlock,
-  upsertSessionProtocolBlock
+  upsertSessionProtocolBlock,
+  readSessionLock,
+  releaseSessionLock
 } = require('./session-protocol-utils');
 
 const EXIT = {
@@ -522,7 +524,41 @@ if (writeModeEnabled) {
   // Stage the session-end outputs. Scope was already enforced by the pre-write gate
   // above; everything this script writes (log, managed docs, markers) is allowlisted by
   // construction, so we only need the allowed set for staging here — no second gate.
-  const allowedPaths = collectChangedPaths().filter(isAllowedChangedPath);
+  //
+  // #85: blindly staging every allowlisted dirty file assumes this is the only session
+  // working this tree. If another session-start ran without an intervening session-end
+  // (sessionLock.openCount > 1), that assumption doesn't hold — a concurrent session's
+  // in-progress, allowlisted edits would get swept into this commit. In that case, fall
+  // back to committing only what's already explicitly staged (git add'd by the operator
+  // or agent for this session specifically) rather than auto-discovering everything dirty.
+  const sessionLock = readSessionLock();
+  const concurrentSessionDetected = Boolean(sessionLock && sessionLock.openCount > 1);
+  let allowedPaths;
+  if (concurrentSessionDetected) {
+    const alreadyStaged = run('git diff --cached --name-only');
+    const stagedPaths = alreadyStaged.ok && alreadyStaged.stdout
+      ? alreadyStaged.stdout.split('\n').filter(Boolean)
+      : [];
+    const disallowedStaged = stagedPaths.filter(filePath => !isAllowedChangedPath(filePath));
+    if (disallowedStaged.length > 0) {
+      errors.push(`Staged files outside protocol scope while a concurrent session is open: ${disallowedStaged.join(', ')}`);
+      abortWrite({
+        json: args.json, mode, branch, operations, warnings, errors,
+        headline: '❌ Session-end aborted: out-of-scope files staged during a concurrent session.',
+        nextActions: ['Unstage the listed files or update protocol profile scope, then rerun.'],
+        exitCode: EXIT.POLICY_VIOLATION
+      });
+    }
+    allowedPaths = stagedPaths;
+    const leftUnstaged = collectChangedPaths()
+      .filter(isAllowedChangedPath)
+      .filter(filePath => !stagedPaths.includes(filePath));
+    warnings.push(`Concurrent session detected (${sessionLock.openCount} unclosed session-starts since ${sessionLock.firstStartedAt}) — committing only already-staged files, not auto-discovering every allowlisted dirty file.${leftUnstaged.length > 0 ? ` Left unstaged, NOT committed: ${leftUnstaged.join(', ')}. Stage your own files explicitly with 'git add <path>' and rerun if they belong to this session.` : ''}`);
+    operations.push({ step: 'concurrency_guard', status: 'warning', detail: `openCount=${sessionLock.openCount}` });
+  } else {
+    allowedPaths = collectChangedPaths().filter(isAllowedChangedPath);
+    operations.push({ step: 'concurrency_guard', status: 'ok', detail: 'no concurrent session detected' });
+  }
 
   if (allowedPaths.length > 0) {
     const addResult = run(`git add ${allowedPaths.map(shellQuote).join(' ')}`);
@@ -579,6 +615,12 @@ if (writeModeEnabled) {
       warnings.push('Push skipped by policy. Use --yes and set sessionEnd.autoPushAllowed=true to enable.');
     }
   }
+
+  // This session is closing successfully — relinquish its lock slot regardless of
+  // whether it had anything to commit. Any earlier abortWrite()/process.exit() above
+  // skips this, correctly: a session that didn't actually close keeps holding its slot.
+  releaseSessionLock();
+  operations.push({ step: 'session_lock', status: 'released' });
 }
 
 if (mode === 'dry-run') {

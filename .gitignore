@@ -10,6 +10,8 @@
 # Local AI tool settings
 .claude/settings.local.json
 .claude/launch.json
+# Session-open lock (#85) — ephemeral concurrency marker, session-start/session-end manage it
+.claude/.session.lock
 # Vendored agent skills (local tooling — reinstall via `npx skills add`; see docs/tech-architecture/integrations-and-access.md)
 .claude/skills/
 skills-lock.json
