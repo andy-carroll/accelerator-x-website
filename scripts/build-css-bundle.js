@@ -1,7 +1,7 @@
 'use strict';
 
 // `npm run build` runs build:css (Tailwind CLI) and this script LAST, after every
-// HTML-generation step (build-homepage, build-testimonials, build-hero-media,
+// HTML-generation step (build-homepage, build-hero-media,
 // build-footer, build-design-system, build-inner-pages, build-hub). Tailwind's
 // content scan only sees whatever HTML is on disk at the moment it runs — if CSS
 // built BEFORE HTML generation, any class introduced only by generated (not

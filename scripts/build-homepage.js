@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const { resolveComponentTokens, resolveSiteTokens, resolveOfferingTokens } = require('./build-components');
+const { loadTestimonials, buildTestimonialsHtml } = require('./lib/testimonials');
 
 const ROOT = path.resolve(__dirname, '..');
 const SOURCE_PATH = path.join(ROOT, '_templates/homepage.html');
 const ABOUT_PARTIAL_PATH = path.join(ROOT, '_templates/homepage-about.html');
 const APPLY_PARTIAL_PATH = path.join(ROOT, '_templates/homepage-apply.html');
 const WHO_PARTIAL_PATH = path.join(ROOT, '_templates/homepage-who.html');
-const TESTIMONIALS_PARTIAL_PATH = path.join(ROOT, '_templates/homepage-testimonials.html');
 const TRUST_PARTIAL_PATH = path.join(ROOT, '_templates/homepage-trust.html');
 const OUTPUT_PATH = path.join(ROOT, 'index.html');
 const ABOUT_TOKEN = '{{homepageAbout}}';
@@ -29,13 +29,16 @@ function main() {
   const aboutPartial = readRequiredFile(ABOUT_PARTIAL_PATH, 'Homepage about partial');
   const applyPartial = readRequiredFile(APPLY_PARTIAL_PATH, 'Homepage apply partial');
   const whoPartial = readRequiredFile(WHO_PARTIAL_PATH, 'Homepage who partial');
-  const testimonialsPartial = readRequiredFile(TESTIMONIALS_PARTIAL_PATH, 'Homepage testimonials partial');
+  // Testimonials are generated from content/data/testimonials.json, not injected
+  // from a static partial — the v1 flow kept both and a second script clobbered
+  // the partial's v2 markup on every build (#130). One source, one writer.
+  const testimonialsHtml = buildTestimonialsHtml(loadTestimonials());
   const trustPartial = readRequiredFile(TRUST_PARTIAL_PATH, 'Homepage trust partial');
 
   const withAbout = sourceTemplate.replace(ABOUT_TOKEN, aboutPartial);
   const withApply = withAbout.replace(APPLY_TOKEN, applyPartial);
   const withWho = withApply.replace(WHO_TOKEN, whoPartial);
-  const withTestimonials = withWho.replace(TESTIMONIALS_TOKEN, testimonialsPartial);
+  const withTestimonials = withWho.replace(TESTIMONIALS_TOKEN, testimonialsHtml);
   const withTrust = withTestimonials.replace(TRUST_TOKEN, trustPartial);
   // Order: component → offering → site, so component partials can carry offering tokens.
   const source = resolveSiteTokens(resolveOfferingTokens(resolveComponentTokens(withTrust)));

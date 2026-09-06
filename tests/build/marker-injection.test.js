@@ -1,8 +1,10 @@
 'use strict';
 
 // Unit coverage for scripts/lib/marker-injection.js — the shared splicing utility
-// build-testimonials.js and build-hero-media.js consolidated onto (#79), replacing
-// two hand-rolled indexOf/slice implementations that had diverged on missing-marker
+// build-hero-media.js now uses (build-testimonials.js was its other original
+// consumer until #130 removed it in favour of token injection; the lib and this
+// suite stay because the splicing pattern itself is still live). Replaces the
+// hand-rolled indexOf/slice implementations that had diverged on missing-marker
 // behaviour (one threw, one warned-and-skipped).
 
 const test = require('node:test');

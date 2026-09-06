@@ -11,6 +11,11 @@
 // indentation is a caller-owned formatting decision, not a property of the
 // current file state).
 //
+// build-testimonials.js (the second original consumer) was removed by #130 in
+// favour of token injection from scripts/lib/testimonials.js — the two-source
+// marker flow is exactly what let v1 markup clobber the v2 partial every build.
+// build-hero-media.js remains the live consumer.
+//
 // Markers are always preserved in the output. `replacement` is spliced in
 // directly between them — start marker included in `before`, end marker
 // included in `after` — so callers must include whatever leading whitespace or

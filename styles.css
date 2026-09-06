@@ -104,7 +104,6 @@
   /* Semantic colors */
   --color-success: #22c55e;
   --color-error: #ef4444;
-  --color-star: #f5c542; /* Testimonial star rating gold */
 
   /* Typography — Aptos (self-hosted, aligns with Accelerator Solutions brand) */
   --font-display:
@@ -803,16 +802,6 @@ a {
   box-shadow:
     0 4px 8px rgba(0, 0, 0, 0.04),
     0 12px 24px rgba(0, 0, 0, 0.08);
-}
-
-/* Testimonial stars */
-.stars-5 {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-star);
-  opacity: 0.9;
 }
 
 /* Legal pages layout */
