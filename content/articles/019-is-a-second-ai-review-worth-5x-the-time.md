@@ -156,8 +156,10 @@ No. The reviewer only needs the plan and the success criteria, never the underly
 
 ## Higher-leverage people, not just faster output
 
-None of this makes anyone faster at typing or building. What it does is stop the wrong thing from being built quickly, which is a different kind of leverage.
+None of this makes anyone faster at typing or building. What it does is stop the wrong thing from being built quickly, which is a different kind of leverage entirely.
 
-This is what it actually means to make people higher-leverage with AI: not that they produce more, but that what they produce is more often the right thing, checked before it costs anything to be wrong. That's a habit, not a tool, and it costs nothing to start using today.
+For as long as producing things was expensive, effort was the scarce resource, so more of it was almost always worth paying for. AI just made producing things cheap. What's scarce now is judgment: deciding what's actually worth building, and catching what's wrong with it before any of it costs anything.
 
-If you want a straight read on where your organisation actually stands with AI beyond this one habit, our free readiness scorecard takes five minutes and gives you a personalised result, not a sales pitch.
+Producing the right thing more often, checked before it costs anything to be wrong. That's what making people higher-leverage with AI actually means.
+
+This piece is proof of it. Its own plan failed its first review, and got better because of it, before a single paragraph of the finished argument existed.
