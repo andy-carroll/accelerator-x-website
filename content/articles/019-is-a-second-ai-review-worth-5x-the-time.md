@@ -128,9 +128,9 @@ Independent means the reviewer has no stake in the plan being good, no part in w
 
 Here's the exact instruction that does both, worth copying as-is:
 
-<div class="bg-surface-2 border-l-4 border-primary rounded-r-xl p-6 lg:p-8 my-8">
-<p class="ax-kicker ax-kicker--accent">Copy this prompt</p>
-<p class="font-mono text-navy leading-relaxed m-0">Perform an independent, adversarial review of this plan. You have no stake in it being good. Find every way it fails, every gap, everything that would only surface once we're already building it. Don't soften it. Only pass it if it earns one.</p>
+<div class="bg-surface-2 border-l-4 border-primary rounded-r-xl p-6 lg:p-8" style="margin:2rem 0;">
+<p class="ax-kicker ax-kicker--accent" style="margin:0 0 0.75rem;">Copy this prompt</p>
+<p class="font-mono text-navy leading-relaxed" style="margin:0;">Perform an independent, adversarial review of this plan. You have no stake in it being good. Find every way it fails, every gap, everything that would only surface once we're already building it. Don't soften it. Only pass it if it earns one.</p>
 </div>
 
 Worth being honest about the limit here. A fresh chat with no shared history is still the same underlying model that might have written the plan in the first place, not a genuine stranger. Removing the shared context and the prior confidence removes most of the bias that would otherwise make a reviewer agreeable toward its own earlier work. It doesn't remove all of it. That's still worth doing, and it's still better than asking the same conversation that wrote the plan whether the plan is good.
@@ -147,7 +147,7 @@ Below is exactly how to run this without any special tooling.
 
 ## Do I need special software to run one?
 
-No special software. Open a brand-new chat in Claude, not a reply in an existing conversation and not inside a shared project that carries context. Paste in only the plan and what success looks like, nothing about how it was made or who made it. Ask it neutrally, "here's a plan for X," not "here's my plan," so it has no reason to be generous toward it.
+No special software. Open a brand-new chat with whichever AI assistant you already use, not a reply in an existing conversation and not inside a shared project that carries context. Paste in only the plan and what success looks like, nothing about how it was made or who made it. Ask it neutrally, "here's a plan for X," not "here's my plan," so it has no reason to be generous toward it.
 
 ---
 
