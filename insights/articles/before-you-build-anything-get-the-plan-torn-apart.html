@@ -319,16 +319,16 @@
 </li>
 </ol>
 <figure>
-<svg viewBox="0 0 900 430" width="100%" role="img" aria-label="Diagram of a seven-step sequence for building anything: Outcome, Strategy, Plan, an independent adversarial review, Revise, Execute, and a second independent adversarial review, ending in Ship. A dashed arrow loops back from Revise to Plan, labelled only if materially changed. The background is split into two equal zones: cheap to change on the left, covering the early steps, and expensive to change on the right, covering Execute and the final review, showing that the same mistake costs more the later it is caught.">
-<rect x="0" y="0" width="900" height="430" fill="#FFFFFF"/>
-<rect x="0" y="60" width="450" height="330" fill="#EFFAFC"/>
-<rect x="450" y="60" width="450" height="330" fill="#FDF1F7"/>
+<svg viewBox="0 0 1010 430" width="100%" role="img" aria-label="Diagram of a seven-step sequence for building anything: Outcome, Strategy, Plan, an independent adversarial review, Revise, Execute, and a second independent adversarial review, ending in a labelled Ship box. A dashed arrow loops back from Revise to Plan, labelled only if materially changed. The background is split into two equal zones: cheap to change on the left, covering the early steps, and expensive to change on the right, covering Execute and the final review, showing that the same mistake costs more the later it is caught.">
+<rect x="0" y="0" width="1010" height="430" fill="#FFFFFF"/>
+<rect x="0" y="60" width="505" height="330" fill="#EFFAFC"/>
+<rect x="505" y="60" width="505" height="330" fill="#FDF1F7"/>
 <g font-family="'DM Sans','Inter',system-ui,sans-serif">
 <text x="40" y="30" font-size="13" font-weight="700" letter-spacing="1.2" fill="#475569">A SEVEN-STEP SEQUENCE, FOR ANYTHING YOU BUILD</text>
-<text x="860" y="30" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
-<text x="225" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#088ABF">CHEAP TO CHANGE</text>
-<text x="675" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#E93F8E">EXPENSIVE TO CHANGE</text>
-<line x1="70" y1="230" x2="810" y2="230" stroke="#CBD5E1" stroke-width="2"/>
+<text x="970" y="30" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
+<text x="252" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#088ABF">CHEAP TO CHANGE</text>
+<text x="757" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#E93F8E">EXPENSIVE TO CHANGE</text>
+<line x1="70" y1="230" x2="855" y2="230" stroke="#CBD5E1" stroke-width="2"/>
 <path d="M 530 195 C 530 118, 300 118, 300 195" fill="none" stroke="#088ABF" stroke-width="2" stroke-dasharray="4 5"/>
 <polygon points="300,195 293,181 309,183" fill="#088ABF"/>
 <circle cx="530" cy="195" r="3.5" fill="#088ABF"/>
@@ -364,8 +364,9 @@
 <text x="762" y="217" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">INDEPENDENT,</text>
 <text x="762" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">ADVERSARIAL</text>
 <text x="762" y="247" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">REVIEW</text>
-<polygon points="848,230 838,225 838,235" fill="#1B2A4A"/>
-<text x="852" y="234" font-size="13" font-weight="700" fill="#1B2A4A">SHIP</text>
+<polygon points="855,230 845,225 845,235" fill="#64748B"/>
+<rect x="870" y="195" width="90" height="70" rx="10" fill="#1B2A4A"/>
+<text x="915" y="238" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">SHIP</text>
 </g>
 </svg>
 <figcaption>The habit has one conditional loop, from Revise back to Plan, and ends at two review gates: one before anything is built, one after. Everything before the first review is cheap to change. Everything from Execute onward is expensive. The whole point of the habit is to do the reviewing while you're still on the cheap side.</figcaption>
@@ -374,7 +375,12 @@
 <hr>
 <h2>Independent and adversarial, defined.</h2>
 <p>Independent means the reviewer has no stake in the plan being good, no part in writing it, and no context on how or why any choice was made. Adversarial means the reviewer is actively trying to find a way the plan fails, not confirming that it looks fine.</p>
-<p>Here&#39;s the exact instruction that does both: &quot;Perform an independent, adversarial review of this plan. You have no stake in it being good. Find every way it fails, every gap, everything that would only surface once we&#39;re already building it. Don&#39;t soften it. Only pass it if it earns one.&quot;</p>
+<p>Here&#39;s the exact instruction that does both, worth copying as-is:</p>
+<div class="bg-surface-2 border-l-4 border-primary rounded-r-xl p-6 lg:p-8 my-8">
+<p class="ax-kicker ax-kicker--accent">Copy this prompt</p>
+<p class="font-mono text-navy leading-relaxed m-0">Perform an independent, adversarial review of this plan. You have no stake in it being good. Find every way it fails, every gap, everything that would only surface once we're already building it. Don't soften it. Only pass it if it earns one.</p>
+</div>
+
 <p>Worth being honest about the limit here. A fresh chat with no shared history is still the same underlying model that might have written the plan in the first place, not a genuine stranger. Removing the shared context and the prior confidence removes most of the bias that would otherwise make a reviewer agreeable toward its own earlier work. It doesn&#39;t remove all of it. That&#39;s still worth doing, and it&#39;s still better than asking the same conversation that wrote the plan whether the plan is good.</p>
 <p>A colleague can do this too, if they&#39;re genuinely uninvolved and have the time. The advantage of an AI reviewer is that it&#39;s always available, free to ask, and comes back in seconds rather than whenever your colleague gets to it.</p>
 <p>Two things are worth watching either way. A clean review, one that finds nothing, is a real result, not a reason to keep asking until it finds something.</p>
