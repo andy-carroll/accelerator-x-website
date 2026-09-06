@@ -52,19 +52,19 @@ Instead, catching it cost about twenty-five extra minutes, once, before any of t
 
 The same habit applies to anything you build, not just an article. It has seven steps.
 
-**Outcome.** One sentence: what does success actually look like, and for whom. For this article, the outcome was a CFO or CEO reader believing that plan-review is worth twenty-five minutes.
+1. **Outcome.** One sentence: what does success actually look like, and for whom. For this article, the outcome was a CFO or CEO reader believing that plan-review is worth twenty-five minutes.
 
-**Strategy.** The big picture only, no task list yet: given what you're actually trying to do and what you can realistically do about it, what's the play.
+2. **Strategy.** The big picture only, no task list yet: given what you're actually trying to do and what you can realistically do about it, what's the play.
 
-**Plan.** The strategy made concrete: what will actually get done, in what order, and who owns each part.
+3. **Plan.** The strategy made concrete: what will actually get done, in what order, and who owns each part.
 
-**Independent, adversarial review.** Before you build anything from the plan, someone with no stake in it being good tries to find every way it fails.
+4. **Independent, adversarial review.** Before you build anything from the plan, someone with no stake in it being good tries to find every way it fails.
 
-**Revise.** Fix what the review found. Only send it back for another review if the plan changed in a real way, not for every small edit.
+5. **Revise.** Fix what the review found. Only send it back for another review if the plan changed in a real way, not for every small edit.
 
-**Execute.** Build the thing.
+6. **Execute.** Build the thing.
 
-**Independent, adversarial review, again.** The same discipline, this time on the finished thing: does it actually do what the plan said it would, and if not, why. If the answer is no, you fix it before it reaches anyone, the same as any other finding. That's the whole point of doing this before it ships, not after.
+7. **Independent, adversarial review, again.** The same discipline, this time on the finished thing: does it actually do what the plan said it would, and if not, why. If the answer is no, you fix it before it reaches anyone, the same as any other finding. That's the whole point of doing this before it ships, not after.
 
 <figure>
 <svg viewBox="0 0 900 430" width="100%" role="img" aria-label="Diagram of a seven-step sequence for building anything: Outcome, Strategy, Plan, an independent adversarial review, Revise, Execute, and a second independent adversarial review, ending in Ship. A dashed arrow loops back from Revise to Plan, labelled only if materially changed. The background is split into two equal zones: cheap to change on the left, covering the early steps, and expensive to change on the right, covering Execute and the final review, showing that the same mistake costs more the later it is caught.">
