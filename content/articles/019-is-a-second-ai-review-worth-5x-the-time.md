@@ -1,126 +1,172 @@
 ---
-title: "Is a Second AI Review Worth 5x the Time? We Ran the Experiment."
-published: "2026-09-05"
+title: "Before You Build Anything, Get the Plan Torn Apart"
+published: "2026-09-06"
 author: "Andy Carroll"
 format: "article"
-tags: ["Tooling", "Operations"]
-excerpt: "Skipping independent review looks like the obvious saving, until you count what a confidently wrong build costs once it ships. We measured the real trade-off: 4.9x the time, a 90%-vs-73% score gap, and what shipping that gap would have cost."
-slug: "is-a-second-ai-review-worth-5x-the-time"
-bluf: "We measured the real cost of independent AI review against skipping it: a 4.9x time cost, a 90%-vs-73% score gap, and what shipping that gap actually costs."
+tags: ["Frameworks", "Operations"]
+excerpt: "Most effort goes into building. Almost none goes into checking whether the plan behind it is actually right. We tore apart the plan for this very article before writing a word of it, and here's the seven-step habit that came out of what it caught."
+slug: "before-you-build-anything-get-the-plan-torn-apart"
+bluf: "Reviewing a plan before you build anything is one of the highest-leverage habits available: a bad plan is cheap to fix, a bad build is expensive to fix. Here's the seven-step habit, the exact prompt that runs it, and how to do it with nothing but a fresh AI chat."
 lead_magnet_cta: "Want a straight answer on where your organisation actually stands with AI? Our free readiness scorecard takes five minutes and gives you a personalised result, not a sales pitch."
 next_article_url: "/insights/articles/how-do-you-know-a-cheaper-ai-model-is-still-good-enough.html"
 next_article_title: "How do you know a cheaper AI model is still good enough?"
 ---
 
-## The number that ends the conversation
+## The plan for this article failed its own review
 
-Ask that question out loud in most planning meetings, and the number alone ends the conversation: five times longer, no further questions asked.
+I sat down to write the plan for this article. Not the article itself: the argument, the structure, the point I wanted to make. First pass took about five minutes.
 
-We tested it properly, on a real piece of work: running an independent review took 4.9 times longer than building it solo. That's the real number, and the reaction to it is always the same: that sounds expensive.
+Then I opened a brand-new chat, no shared history with the one that wrote the plan, and pasted in only the plan itself. I asked for an independent, adversarial review: find every way this fails, don't soften it.
 
-It's the wrong comparison. It's worth working out why, because the same mistake is easy to make anywhere you're deciding whether a second pair of eyes earns its keep.
+It found a real problem. The plan was leaning on a score comparison from a finished project as its hook, the kind of stat that sounds impressive and proves nothing about what actually mattered. The real mechanism worth teaching had happened earlier: the plan itself had just been reviewed, before anything was built. The hook was measuring the wrong thing.
 
----
+I revised. Whole cycle, plan to review to fix: about thirty minutes, against five for the first pass.
 
-## The number everyone reacts to
+That is why this article does not open with a stat. It opens with what just happened to it.
 
-We ran a real internal build two ways. One AI agent built it solo: wrote the plan, built the thing, done. The other added one step before any of that: a separate reviewer, with no part in the build, pressure-tested the plan first, then a revision, then the build itself.
-
-The solo build took 3.5 minutes of agent time. The reviewed build took 17.2. That's the 4.9x. On its own, all it says is that being careful takes longer.
+The stakes here are small. It's a blog post. But the same five minutes and thirty minutes apply whether what you're reviewing is a blog post, a hiring plan, a pricing change, a system migration, or a client proposal. The mechanism doesn't care what you're building. It only cares whether you checked the plan before you built it.
 
 ---
 
-## What the extra time actually bought
+## Most effort goes into building. Almost none goes into deciding what's worth building.
 
-Here's where it stops being straightforward. We scored both outputs against the same bar every piece of work in our library has to clear before it ships: 24 out of 30, an 80% pass mark. A reviewer blind to which version had the extra step scored both.
+Most people, most of the time, skip straight to building. You want to get something done, so you start doing it: writing the email, building the feature, drafting the proposal. Checking whether the underlying plan is actually right feels like a delay, so it gets skipped.
 
-The solo build marked itself 90%. The independent reviewer put it at 73%: a fail, against the exact gate that decides whether anything we build reaches a client, and not a rounding difference.
+AI has made this instinct more dangerous, not less. It's now trivial to produce something that looks finished fast: a competent-sounding draft, a plausible-looking build, a slide deck that reads well. The speed doesn't tell you whether the thing being produced is the right thing. It only tells you how quickly you can produce the wrong thing too.
 
-It had quietly excluded the exact case the tool most needed to handle, and it had no fallback for a piece of information arriving incomplete, in a document meant to go in front of a client. The reviewed version scored 97%, from both sides.
+This is what "fix the system, not the output" actually means in practice. Patching a mediocre draft by hand, the way I just did with this article's own first plan, only fixes that one draft. Reviewing the plan before you build fixes every draft that follows from it.
 
 ---
 
-## The dangerous score isn't the one that failed
+## The cheapest place to catch a mistake is the one everyone skips
 
-A 73% you know about is a manageable problem. The expensive version is the 90% that should have been a 73%: confident, plausible, and wrong in a way nobody had any reason to go looking for.
+Change is cheap before anything is built on top of it, and it gets more expensive the more depends on it. This isn't a new idea. Catching a flaw in a plan costs you a rewrite of a paragraph. Catching the same flaw after it has shipped costs you the rebuild, and everything that happened in between.
 
-That's exactly what happened here. Seventeen points of daylight opened up between what the solo build believed about itself and what was actually true, and nothing in its process was built to close that gap before it shipped.
+Here's what the expensive version would have looked like for this article. If the flawed plan had gone straight to a full draft, it would have published with a hook that proved nothing. Readers would have reacted to the wrong argument. Fixing it afterward would have meant a public correction, a rewritten piece, and whatever it cost the people who had already read and shared the wrong version.
+
+Instead, catching it cost about twenty-five extra minutes, once, before any of that happened. That's the whole trade: twenty-five minutes now, or a larger, harder-to-measure cost later, paid by more people, in public.
+
+---
+
+## A seven-step habit, for anything you build
+
+The same habit applies to anything you build, not just an article. It has seven steps.
+
+**Outcome.** One sentence: what does success actually look like, and for whom. For this article, the outcome was a CFO or CEO reader believing that plan-review is worth twenty-five minutes.
+
+**Strategy.** The big picture only, no task list yet: given what you're actually trying to do and what you can realistically do about it, what's the play.
+
+**Plan.** The strategy made concrete: what will actually get done, in what order, and who owns each part.
+
+**Independent, adversarial review.** Before you build anything from the plan, someone with no stake in it being good tries to find every way it fails.
+
+**Revise.** Fix what the review found. Only send it back for another review if the plan changed in a real way, not for every small edit.
+
+**Execute.** Build the thing.
+
+**Independent, adversarial review, again.** The same discipline, this time on the finished thing: does it actually do what the plan said it would, and if not, why. If the answer is no, you fix it before it reaches anyone, the same as any other finding. That's the whole point of doing this before it ships, not after.
 
 <figure>
-<svg viewBox="0 0 760 400" width="100%" role="img" aria-label="Stylised line chart showing two costs against how many times a piece of AI-built work runs. The cost of independent review is a single flat step near the start and stays low and constant. The cost of an unreviewed defect starts lower but climbs steadily with every run, then jumps sharply at the point the defect is finally discovered and the work has to be rebuilt.">
-<rect x="0" y="0" width="760" height="400" fill="#FFFFFF"/>
+<svg viewBox="0 0 900 430" width="100%" role="img" aria-label="Diagram of a seven-step sequence for building anything: Outcome, Strategy, Plan, an independent adversarial review, Revise, Execute, and a second independent adversarial review, ending in Ship. A dashed arrow loops back from Revise to Plan, labelled only if materially changed. The background is split into two equal zones: cheap to change on the left, covering the early steps, and expensive to change on the right, covering Execute and the final review, showing that the same mistake costs more the later it is caught.">
+<rect x="0" y="0" width="900" height="430" fill="#FFFFFF"/>
+<rect x="0" y="60" width="450" height="330" fill="#EFFAFC"/>
+<rect x="450" y="60" width="450" height="330" fill="#FDF1F7"/>
 <g font-family="'DM Sans','Inter',system-ui,sans-serif">
-<text x="70" y="24" font-size="13" font-weight="700" letter-spacing="1.2" fill="#475569">COST AGAINST HOW MANY TIMES THIS RUNS</text>
-<text x="620" y="24" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
-<line x1="70" y1="110" x2="620" y2="110" stroke="#E2E8F0" stroke-width="1"/>
-<line x1="70" y1="190" x2="620" y2="190" stroke="#E2E8F0" stroke-width="1"/>
-<line x1="70" y1="270" x2="620" y2="270" stroke="#E2E8F0" stroke-width="1"/>
-<line x1="70" y1="50" x2="70" y2="340" stroke="#E2E8F0" stroke-width="2"/>
-<line x1="70" y1="340" x2="620" y2="340" stroke="#E2E8F0" stroke-width="2"/>
-<path d="M 70 300 L 130 246 L 620 246" fill="none" stroke="#088ABF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="620" cy="246" r="4.5" fill="#088ABF"/>
-<text x="632" y="250" font-size="13" font-weight="600" fill="#475569">cost of review</text>
-<text x="632" y="266" font-size="12" fill="#64748B">(paid once, up front)</text>
-<path d="M 70 320 C 220 300, 340 260, 420 210 C 440 197, 455 187, 468 178" fill="none" stroke="#E93F8E" stroke-width="3" stroke-linecap="round"/>
-<line x1="468" y1="178" x2="468" y2="70" stroke="#E93F8E" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
-<path d="M 468 70 L 620 46" fill="none" stroke="#E93F8E" stroke-width="3" stroke-linecap="round"/>
-<circle cx="468" cy="178" r="4" fill="#E93F8E"/>
-<circle cx="620" cy="46" r="4.5" fill="#E93F8E"/>
-<text x="632" y="50" font-size="13" font-weight="600" fill="#475569">cost of an unreviewed defect</text>
-<text x="474" y="120" font-size="12" font-weight="600" fill="#E93F8E">defect found &#8594; rebuild</text>
-<text x="70" y="364" font-size="13" fill="#64748B">1st run</text>
-<text x="345" y="364" text-anchor="middle" font-size="13" fill="#64748B">10th run</text>
-<text x="620" y="364" text-anchor="end" font-size="13" fill="#64748B">50th run</text>
-<text x="-210" y="26" transform="rotate(-90)" text-anchor="middle" font-size="13" fill="#64748B">cumulative cost</text>
+<text x="40" y="30" font-size="13" font-weight="700" letter-spacing="1.2" fill="#475569">A SEVEN-STEP SEQUENCE, FOR ANYTHING YOU BUILD</text>
+<text x="860" y="30" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
+<text x="225" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#088ABF">CHEAP TO CHANGE</text>
+<text x="675" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#E93F8E">EXPENSIVE TO CHANGE</text>
+<line x1="70" y1="230" x2="810" y2="230" stroke="#CBD5E1" stroke-width="2"/>
+<path d="M 530 195 C 530 118, 300 118, 300 195" fill="none" stroke="#088ABF" stroke-width="2" stroke-dasharray="4 5"/>
+<polygon points="300,195 293,181 309,183" fill="#088ABF"/>
+<circle cx="530" cy="195" r="3.5" fill="#088ABF"/>
+<text x="415" y="132" text-anchor="middle" font-size="11" font-style="italic" fill="#475569">only if materially changed</text>
+<rect x="25" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="70" y="228" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">OUTCOME</text>
+<text x="70" y="245" text-anchor="middle" font-size="10" fill="#64748B">what success</text>
+<text x="70" y="257" text-anchor="middle" font-size="10" fill="#64748B">looks like</text>
+<polygon points="138,230 128,225 128,235" fill="#64748B"/>
+<rect x="140" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="185" y="228" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">STRATEGY</text>
+<text x="185" y="245" text-anchor="middle" font-size="10" fill="#64748B">the big</text>
+<text x="185" y="257" text-anchor="middle" font-size="10" fill="#64748B">picture</text>
+<polygon points="253,230 243,225 243,235" fill="#64748B"/>
+<rect x="255" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="300" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">PLAN</text>
+<text x="300" y="251" text-anchor="middle" font-size="10" fill="#64748B">made concrete</text>
+<polygon points="368,230 358,225 358,235" fill="#64748B"/>
+<rect x="370" y="190" width="95" height="80" rx="10" fill="#FCE3F1" stroke="#E93F8E" stroke-width="2.5"/>
+<text x="417" y="217" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">INDEPENDENT,</text>
+<text x="417" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">ADVERSARIAL</text>
+<text x="417" y="247" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">REVIEW</text>
+<polygon points="483,230 473,225 473,235" fill="#64748B"/>
+<rect x="485" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="530" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">REVISE</text>
+<text x="530" y="251" text-anchor="middle" font-size="10" fill="#64748B">fix what it found</text>
+<polygon points="598,230 588,225 588,235" fill="#64748B"/>
+<rect x="600" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="645" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">EXECUTE</text>
+<text x="645" y="251" text-anchor="middle" font-size="10" fill="#64748B">build the thing</text>
+<polygon points="713,230 703,225 703,235" fill="#64748B"/>
+<rect x="715" y="190" width="95" height="80" rx="10" fill="#FCE3F1" stroke="#E93F8E" stroke-width="2.5"/>
+<text x="762" y="217" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">INDEPENDENT,</text>
+<text x="762" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">ADVERSARIAL</text>
+<text x="762" y="247" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">REVIEW</text>
+<polygon points="848,230 838,225 838,235" fill="#1B2A4A"/>
+<text x="852" y="234" font-size="13" font-weight="700" fill="#1B2A4A">SHIP</text>
 </g>
 </svg>
-<figcaption>Review is a flat, one-off cost paid before the first run. An unreviewed defect's cost rises with every run it goes unnoticed, then jumps hard the day it's finally found and the work has to be rebuilt. The crossover point, not the sticker price, is the number that matters.</figcaption>
+<figcaption>The habit has one conditional loop, from Revise back to Plan, and ends at two review gates: one before anything is built, one after. Everything before the first review is cheap to change. Everything from Execute onward is expensive. The whole point of the habit is to do the reviewing while you're still on the cheap side.</figcaption>
 </figure>
 
 ---
 
-## You're paying one bill twice, not once
+## Independent and adversarial, defined.
 
-The 4.9x is a build-time cost, paid once. Whatever you built with it then runs: once, ten times, or every day your team touches it.
+Independent means the reviewer has no stake in the plan being good, no part in writing it, and no context on how or why any choice was made. Adversarial means the reviewer is actively trying to find a way the plan fails, not confirming that it looks fine.
 
-Run it twice and the review barely registers against the difference. Run it fifty times a week for a team that actually relies on it, and the comparison stops making sense in the review's favour. The review cost stayed fixed. Every unreviewed run past the first was exposure nobody checked for.
+Here's the exact instruction that does both: "Perform an independent, adversarial review of this plan. You have no stake in it being good. Find every way it fails, every gap, everything that would only surface once we're already building it. Don't soften it. Only pass it if it earns one."
 
-We only ran the build once, not fifty times, so this part is reasoning rather than a measured result, but the direction is clear enough without measuring it.
+Worth being honest about the limit here. A fresh chat with no shared history is still the same underlying model that might have written the plan in the first place, not a genuine stranger. Removing the shared context and the prior confidence removes most of the bias that would otherwise make a reviewer agreeable toward its own earlier work. It doesn't remove all of it. That's still worth doing, and it's still better than asking the same conversation that wrote the plan whether the plan is good.
 
-The more a team depends on something, the more a hidden defect in it costs, and the review's price doesn't move to reflect that at all.
+A colleague can do this too, if they're genuinely uninvolved and have the time. The advantage of an AI reviewer is that it's always available, free to ask, and comes back in seconds rather than whenever your colleague gets to it.
 
----
+Two things are worth watching either way. A clean review, one that finds nothing, is a real result, not a reason to keep asking until it finds something.
 
-## The bill that actually adds up
+And a review that raises a concern deserves the same scrutiny the plan itself just got: check the finding against what the plan actually needs to achieve, not against how confident the reviewer sounds. The habit is the same discipline in both directions.
 
-Catching a 73%-quality build at review costs you the review. Catching it after it's been running for a month costs you the review you skipped, every output it already produced under a false 90%, whatever that cost the people who trusted those outputs, and the rebuild itself.
-
-The rebuild is never actually cheaper for having been deferred, only later.
-
-This is what getting more capable with the same people actually looks like day to day: catching the confidently wrong version before it reaches anyone, rather than finding out about it the expensive way.
+Below is exactly how to run this without any special tooling.
 
 ---
 
-## Start with one question
+## Do I need special software to run one?
 
-You don't need a policy for when to add a second reviewer. You need one question, asked honestly before you skip it: how many times will this run, and what does a wrong answer cost the people who see the output?
-
-If either answer is "more than a handful" or "more than I'd be comfortable explaining," the review has already paid for itself, before the second run.
+No special software. Open a brand-new chat in Claude, not a reply in an existing conversation and not inside a shared project that carries context. Paste in only the plan and what success looks like, nothing about how it was made or who made it. Ask it neutrally, "here's a plan for X," not "here's my plan," so it has no reason to be generous toward it.
 
 ---
 
-## Does every AI-built thing need independent review?
+## Is it safe to paste a real plan into an AI chat?
 
-No, and we don't apply it uniformly ourselves. A thin, low-risk build doesn't need the premium this cost us. The review's value scales with how much rides on the output, not a blanket rule.
-
----
-
-## How do you stop the second reviewer just agreeing with the first?
-
-Independence has to be structural, not a request. Ours was blind to which version it was scoring, and used the same rubric throughout. The comparison only means something if the reviewer has no reason to be generous to either side.
+Not if it's genuinely sensitive. Don't paste unreleased financials, personal data, or live contract terms into a general-purpose chat without checking your own data-handling policy first. Most plans worth reviewing this way, a project structure, a campaign shape, a process redesign, don't contain anything sensitive to begin with. If yours does, that's a reason to check your policy, not a reason to skip the review.
 
 ---
 
-## Why 24 out of 30, not just a percentage?
+## Isn't this just extra, slower process?
 
-Because the total isn't the whole test. The score is built from six categories, each marked out of 5, and every one has to clear a minimum on its own: no category below 3, whatever the total adds up to. A high overall percentage can still fail if a single category is weak enough. 24/30 is shorthand for both conditions at once: high enough overall, and nowhere quietly weak.
+It costs roughly twenty to thirty minutes, once. That's the whole price, and it's cheaper than the rebuild it's protecting against. It isn't a new layer of ongoing process sitting on top of everything else. It's one bounded step, done before the expensive part starts, not a habit of checking and re-checking forever.
+
+---
+
+## Do I need AI expertise to do this?
+
+No. The reviewer only needs the plan and the success criteria, never the underlying tooling or the domain expertise behind it. That's exactly why a fresh, uninformed chat works: it isn't judging whether you know what you're doing, only whether the plan itself holds up against what it's supposed to achieve.
+
+---
+
+## Higher-leverage people, not just faster output
+
+None of this makes anyone faster at typing or building. What it does is stop the wrong thing from being built quickly, which is a different kind of leverage.
+
+This is what it actually means to make people higher-leverage with AI: not that they produce more, but that what they produce is more often the right thing, checked before it costs anything to be wrong. That's a habit, not a tool, and it costs nothing to start using today.
+
+If you want a straight read on where your organisation actually stands with AI beyond this one habit, our free readiness scorecard takes five minutes and gives you a personalised result, not a sales pitch.
