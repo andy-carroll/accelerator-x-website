@@ -163,3 +163,5 @@ For as long as producing things was expensive, effort was the scarce resource, s
 Producing the right thing more often, checked before it costs anything to be wrong. That's what making people higher-leverage with AI actually means.
 
 This piece is proof of it. Its own plan failed its first review, and got better because of it, before a single paragraph of the finished argument existed.
+
+Whatever you're building next already has a plan, even if it's only in your head. The only real question left is whether anyone's torn it apart yet.
