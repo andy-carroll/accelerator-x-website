@@ -299,6 +299,40 @@
 <p>Change is cheap before anything is built on top of it, and it gets more expensive the more depends on it. This isn&#39;t a new idea. Catching a flaw in a plan costs you a rewrite of a paragraph. Catching the same flaw after it has shipped costs you the rebuild, and everything that happened in between.</p>
 <p>Here&#39;s what the expensive version would have looked like for this article. If the flawed plan had gone straight to a full draft, it would have published with a hook that proved nothing. Readers would have reacted to the wrong argument. Fixing it afterward would have meant a public correction, a rewritten piece, and whatever it cost the people who had already read and shared the wrong version.</p>
 <p>Instead, catching it cost about twenty-five extra minutes, once, before any of that happened. That&#39;s the whole trade: twenty-five minutes now, or a larger, harder-to-measure cost later, paid by more people, in public.</p>
+<p>Add it up and the whole review cycle took five or six times as long as writing a draft and moving on. Depending on the task, and how many passes the review needs, that multiple can run higher.</p>
+<p>Said like that, it sounds expensive. Most of us are conditioned to flinch at exactly that kind of number, something costing five times more looks like a bad trade on its face.</p>
+<p>It isn&#39;t. Twenty-five minutes, paid once, bought exactly what the last two paragraphs described: not paying that same mistake&#39;s cost quietly, again and again, and not paying far more than twenty-five minutes the day it finally got found.</p>
+<figure>
+<svg viewBox="0 0 760 400" width="100%" role="img" aria-label="Stylised line chart showing two costs over how long you keep building on a plan. The cost of an independent, adversarial review is a single flat step, paid once, near the start. The cost of skipping that review starts lower but climbs the longer the flawed plan keeps getting built on, then jumps sharply at the point the mistake is finally discovered and has to be rebuilt.">
+<rect x="0" y="0" width="760" height="400" fill="#FFFFFF"/>
+<g font-family="'DM Sans','Inter',system-ui,sans-serif">
+<text x="70" y="24" font-size="13" font-weight="700" letter-spacing="1.2" fill="#475569">COST OVER HOW LONG YOU KEEP BUILDING ON IT</text>
+<text x="620" y="24" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
+<line x1="70" y1="110" x2="620" y2="110" stroke="#E2E8F0" stroke-width="1"/>
+<line x1="70" y1="190" x2="620" y2="190" stroke="#E2E8F0" stroke-width="1"/>
+<line x1="70" y1="270" x2="620" y2="270" stroke="#E2E8F0" stroke-width="1"/>
+<line x1="70" y1="50" x2="70" y2="340" stroke="#E2E8F0" stroke-width="2"/>
+<line x1="70" y1="340" x2="620" y2="340" stroke="#E2E8F0" stroke-width="2"/>
+<path d="M 70 300 L 130 246 L 620 246" fill="none" stroke="#088ABF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="620" cy="246" r="4.5" fill="#088ABF"/>
+<text x="632" y="250" font-size="13" font-weight="600" fill="#475569">cost of the review</text>
+<text x="632" y="266" font-size="12" fill="#64748B">(paid once, up front)</text>
+<path d="M 70 320 C 220 300, 340 260, 420 210 C 440 197, 455 187, 468 178" fill="none" stroke="#E93F8E" stroke-width="3" stroke-linecap="round"/>
+<line x1="468" y1="178" x2="468" y2="70" stroke="#E93F8E" stroke-width="3" stroke-dasharray="2 6" stroke-linecap="round"/>
+<path d="M 468 70 L 620 46" fill="none" stroke="#E93F8E" stroke-width="3" stroke-linecap="round"/>
+<circle cx="468" cy="178" r="4" fill="#E93F8E"/>
+<circle cx="620" cy="46" r="4.5" fill="#E93F8E"/>
+<text x="632" y="50" font-size="13" font-weight="600" fill="#475569">cost of skipping it</text>
+<text x="474" y="120" font-size="12" font-weight="600" fill="#E93F8E">mistake found → rebuild</text>
+<text x="70" y="364" font-size="13" fill="#64748B">day one</text>
+<text x="345" y="364" text-anchor="middle" font-size="13" fill="#64748B">weeks in</text>
+<text x="620" y="364" text-anchor="end" font-size="13" fill="#64748B">months in</text>
+<text x="-210" y="26" transform="rotate(-90)" text-anchor="middle" font-size="13" fill="#64748B">cumulative cost</text>
+</g>
+</svg>
+<figcaption>The review is a flat, one-off cost paid up front. Skipping it looks cheaper at first, but the cost of building on a flawed plan keeps climbing the longer it goes uncaught, then jumps hard the day the mistake is finally found and has to be rebuilt. Fix the plan, or fix the system that produced it. Either beats fixing the output after the fact.</figcaption>
+</figure>
+
 <hr>
 <h2>A seven-step habit, for anything you build</h2>
 <p>The same habit applies to anything you build, not just an article. It has seven steps.</p>
@@ -318,60 +352,6 @@
 <li><p><strong>Independent, adversarial review, again.</strong> The same discipline, this time on the finished thing: does it actually do what the plan said it would, and if not, why. If the answer is no, you fix it before it reaches anyone, the same as any other finding. That&#39;s the whole point of doing this before it ships, not after.</p>
 </li>
 </ol>
-<figure>
-<svg viewBox="0 0 1010 430" width="100%" role="img" aria-label="Diagram of a seven-step sequence for building anything: Outcome, Strategy, Plan, an independent adversarial review, Revise, Execute, and a second independent adversarial review, ending in a labelled Ship box. A dashed arrow loops back from Revise to Plan, labelled only if materially changed. The background is split into two equal zones: cheap to change on the left, covering the early steps, and expensive to change on the right, covering Execute and the final review, showing that the same mistake costs more the later it is caught.">
-<rect x="0" y="0" width="1010" height="430" fill="#FFFFFF"/>
-<rect x="0" y="60" width="505" height="330" fill="#EFFAFC"/>
-<rect x="505" y="60" width="505" height="330" fill="#FDF1F7"/>
-<g font-family="'DM Sans','Inter',system-ui,sans-serif">
-<text x="40" y="30" font-size="13" font-weight="700" letter-spacing="1.2" fill="#475569">A SEVEN-STEP SEQUENCE, FOR ANYTHING YOU BUILD</text>
-<text x="970" y="30" text-anchor="end" font-size="13" fill="#64748B">stylised, not measured data</text>
-<text x="252" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#088ABF">CHEAP TO CHANGE</text>
-<text x="757" y="82" text-anchor="middle" font-size="13" font-weight="700" fill="#E93F8E">EXPENSIVE TO CHANGE</text>
-<line x1="70" y1="230" x2="855" y2="230" stroke="#CBD5E1" stroke-width="2"/>
-<path d="M 530 195 C 530 118, 300 118, 300 195" fill="none" stroke="#088ABF" stroke-width="2" stroke-dasharray="4 5"/>
-<polygon points="300,195 293,181 309,183" fill="#088ABF"/>
-<circle cx="530" cy="195" r="3.5" fill="#088ABF"/>
-<text x="415" y="132" text-anchor="middle" font-size="11" font-style="italic" fill="#475569">only if materially changed</text>
-<rect x="25" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-<text x="70" y="228" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">OUTCOME</text>
-<text x="70" y="245" text-anchor="middle" font-size="10" fill="#64748B">what success</text>
-<text x="70" y="257" text-anchor="middle" font-size="10" fill="#64748B">looks like</text>
-<polygon points="138,230 128,225 128,235" fill="#64748B"/>
-<rect x="140" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-<text x="185" y="228" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">STRATEGY</text>
-<text x="185" y="245" text-anchor="middle" font-size="10" fill="#64748B">the big</text>
-<text x="185" y="257" text-anchor="middle" font-size="10" fill="#64748B">picture</text>
-<polygon points="253,230 243,225 243,235" fill="#64748B"/>
-<rect x="255" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-<text x="300" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">PLAN</text>
-<text x="300" y="251" text-anchor="middle" font-size="10" fill="#64748B">made concrete</text>
-<polygon points="368,230 358,225 358,235" fill="#64748B"/>
-<rect x="370" y="190" width="95" height="80" rx="10" fill="#FCE3F1" stroke="#E93F8E" stroke-width="2.5"/>
-<text x="417" y="217" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">INDEPENDENT,</text>
-<text x="417" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">ADVERSARIAL</text>
-<text x="417" y="247" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">REVIEW</text>
-<polygon points="483,230 473,225 473,235" fill="#64748B"/>
-<rect x="485" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-<text x="530" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">REVISE</text>
-<text x="530" y="251" text-anchor="middle" font-size="10" fill="#64748B">fix what it found</text>
-<polygon points="598,230 588,225 588,235" fill="#64748B"/>
-<rect x="600" y="195" width="90" height="70" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
-<text x="645" y="233" text-anchor="middle" font-size="12" font-weight="700" fill="#1B2A4A">EXECUTE</text>
-<text x="645" y="251" text-anchor="middle" font-size="10" fill="#64748B">build the thing</text>
-<polygon points="713,230 703,225 703,235" fill="#64748B"/>
-<rect x="715" y="190" width="95" height="80" rx="10" fill="#FCE3F1" stroke="#E93F8E" stroke-width="2.5"/>
-<text x="762" y="217" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">INDEPENDENT,</text>
-<text x="762" y="232" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">ADVERSARIAL</text>
-<text x="762" y="247" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9D174D">REVIEW</text>
-<polygon points="855,230 845,225 845,235" fill="#64748B"/>
-<rect x="870" y="195" width="90" height="70" rx="10" fill="#1B2A4A"/>
-<text x="915" y="238" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">SHIP</text>
-</g>
-</svg>
-<figcaption>The habit has one conditional loop, from Revise back to Plan, and ends at two review gates: one before anything is built, one after. Everything before the first review is cheap to change. Everything from Execute onward is expensive. The whole point of the habit is to do the reviewing while you're still on the cheap side.</figcaption>
-</figure>
-
 <hr>
 <h2>Independent and adversarial, defined.</h2>
 <p>Independent means the reviewer has no stake in the plan being good, no part in writing it, and no context on how or why any choice was made. Adversarial means the reviewer is actively trying to find a way the plan fails, not confirming that it looks fine.</p>
